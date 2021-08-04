@@ -3,16 +3,23 @@ import { MainStoreContext } from "../../../../contextStore/MainStoreContext";
 
 const { covidBlocks, covidInfo } = require('./CovidInfo.module.scss');
 
+interface CovidDataProvider {
+   _id: string;
+   description: string;
+   actualRiskNumber: number;
+   __v: number;
+}
+
 /**
  * Komponent strony głównej informujący o aktualnym poziomie zagrożenia epidemiologicznego na terenie
  * Politechniki Śląskiej. Dane są pobierane z głównego stora.
  */
-export default function CovidInfo() {
+const CovidInfo = () => {
 
    const { dataFetchFromServer } = useContext<any>(MainStoreContext);
    const { covidData } = dataFetchFromServer;
 
-   const generateCovidInfos = covidData.map((info: any) => {
+   const generateCovidInfos = covidData.map((info: CovidDataProvider) => {
       return (
          <div
             className = {covidBlocks}
@@ -36,3 +43,5 @@ export default function CovidInfo() {
       </div>
    );
 }
+
+export default CovidInfo;
