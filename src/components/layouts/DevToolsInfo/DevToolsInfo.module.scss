@@ -1,0 +1,42 @@
+@import './../../../styles/_variables';
+
+aside.reactDevInfo {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: $lightLightGrayBgc;
+  margin: 80px 0 60px 0;
+  padding: 40px 0;
+  .devInfoContainer {
+    display: flex;
+    width: $widthVertical;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.4;
+    color: $headersH3;
+    .reactLogo, .nodeJsLogo {
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      .reactIcon, .nodeJsIcon {
+        font-size: 5rem;
+        color: $mainLogosBgc;
+      }
+    }
+    .reactTextContent {
+      padding-left: 30px;
+      span {
+        display: inline;
+      }
+      p strong, p a {
+        font-weight: 500;
+        text-decoration: none;
+        color: $mainLogosBgc;
+        transition: .2s;
+      }
+      a:hover {
+        color: $yellowDefColor;
+      }
+    }
+  }
+}
