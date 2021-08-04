@@ -1,0 +1,106 @@
+@import './../../../styles/_variables';
+
+.externalLinkIcon {
+  font-size: .8rem;
+  transform: translateY(-3px);
+  margin-left: 8px;
+}
+
+h3.footerHeaders {
+  font-weight: 500;
+  color: $footerHeaders;
+  margin-bottom: 15px;
+  height: 30px;
+  width: 100%;
+}
+
+footer.footerWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: $lightLightGrayBgc;
+  font-size: 1rem;
+  .footerContainer {
+    display: flex;
+    justify-content: space-between;
+    width: $widthVertical;
+    margin: 60px 0;
+    .footerRouterContex {
+      display: flex;
+      flex-wrap: wrap;
+      .linksPages, .revelarPages {
+        font-size: 1.1rem;
+        padding-right: 170px;
+        ul {
+          list-style-type: none;
+          li a {
+            color: $footerContent;
+            line-height: 1.8;
+            font-weight: 300;
+            text-decoration: none;
+            transition: .2s;
+            &:hover {
+              color: $mainLogosBgc;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+      .asideOtherElements {
+        flex-basis: 100%;
+        margin-right: 80px;
+        .asideSeparator {
+          height: 1px;
+          background-color: $grayBgc;
+        }
+        .disclaimerBlock {
+          padding-top: 20px;
+          color: $footerContent;
+        }
+        .adminPanelRoute {
+          display: block;
+          margin-top: 50px;
+          color: $footerHeaders;
+        }
+      }
+    }
+    .formContainer {
+      display: flex;
+      min-width: 360px;
+      flex-direction: column;
+    }
+  }
+}
+
+.copyrightSectionContainer {
+  flex-basis: 100%;
+  background-color: #ffffff;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  .copyrightSectionWrapper {
+    width: 100%;
+    max-width: 1900px;
+    display: flex;
+    justify-content: space-between;
+    .copyIcons, .copyAuthor, .copyCookies {
+      color: $footerContent;
+      flex-basis: 100%;
+      text-align: center;
+      a {
+        font-weight: 500;
+        color: $footerHeaders;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    .cookiesIcon {
+      margin: 0 10px;
+    }
+    .copyAuthor span:nth-last-of-type(1) {
+      padding-left: 10px;
+    }
+  }
+}
