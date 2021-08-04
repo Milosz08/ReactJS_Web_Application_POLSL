@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+}
+
+html, body, button, input, select, option, textarea {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
