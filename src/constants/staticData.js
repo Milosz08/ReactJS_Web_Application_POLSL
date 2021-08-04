@@ -45,6 +45,25 @@ const CONSTANT_DATA = {
          description: 'Pod tym linkiem znajdziesz pomoce do nauki obejmujące autorskie materiały z zajęć.',
       },
    ],
+
+   FOOTER_OPTIONS: [
+      {
+         name: 'Błąd na stronie',
+         value: 'pageError',
+      },
+      {
+         name: 'Modyfikacja Planu Zajęć',
+         value: 'sheduleModify',
+      },
+      {
+         name: 'Modyfikacja/dodanie ważnego terminu',
+         value: 'calendarNewDate',
+      },
+      {
+         name: 'Inny, niewymieniony wyżej',
+         value: 'default',
+      },
+   ],
 };
 
 export default CONSTANT_DATA;
