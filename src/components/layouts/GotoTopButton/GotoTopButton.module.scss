@@ -1,0 +1,28 @@
+@import './../../../styles/_variables';
+@import './../../../styles/_mixins';
+
+.gotoTopWrapper {
+  position: fixed;
+  z-index: 999;
+  bottom: 50px;
+  right: 50px;
+  background-color: $mainLogosBgc;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: .4s;
+  outline: none;
+  border: none;
+  transform: scale(0);
+  &::before {
+    @include arrowNavigate(1em, -135deg, 1.7em, $whiteColor);
+    margin-top: 2px;
+  }
+  &:hover {
+    bottom: 56px;
+  }
+  &.showGotoButton {
+    transform: scale(1);
+  }
+}
