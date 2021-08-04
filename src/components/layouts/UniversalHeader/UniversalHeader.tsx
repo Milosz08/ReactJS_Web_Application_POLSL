@@ -4,10 +4,11 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const { universalHeader, universalHeaderIcon, universalHeaderButton } = require('./UniversalHeader.module.scss');
 
-interface UniversalHeaderProps {
+interface PropsProvider {
    iconP : IconProp;
+   content: string;
    ifCloseButtonVisible : boolean;
-   setCloseButton : () => void;
+   setCloseButton? : () => void;
 }
 
 /**
@@ -15,10 +16,11 @@ interface UniversalHeaderProps {
  * przyciskiem zamknięcia (dla okien typu modal).
  *
  * @param iconP - tablica z dwoma parametrami typu string opisującymi ikonę
+ * @param content - zawartość tekstowa nagłówka
  * @param ifCloseButtonVisible - wartość boolean, wskazująca czy header powinien posiadać przycisk zamknięcia
  * @param setCloseButton - funkcja przekazywana do obsługi przycisku zamykania modala
  */
-export default function UniversalHeader({ iconP, ifCloseButtonVisible, setCloseButton } : UniversalHeaderProps) {
+const UniversalHeader: React.FC<PropsProvider> = ({ iconP, content, ifCloseButtonVisible, setCloseButton}) => {
    return (
       <header className = {universalHeader}>
          <h3>
@@ -26,7 +28,7 @@ export default function UniversalHeader({ iconP, ifCloseButtonVisible, setCloseB
                icon = {iconP}
                className = {universalHeaderIcon}
             />
-            Pliki Cookies
+            {content}
             <aside/>
             {ifCloseButtonVisible && <button
                className = {universalHeaderButton}
@@ -38,3 +40,5 @@ export default function UniversalHeader({ iconP, ifCloseButtonVisible, setCloseB
       </header>
    );
 }
+
+export default UniversalHeader;
