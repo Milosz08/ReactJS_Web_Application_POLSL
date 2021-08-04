@@ -1,0 +1,243 @@
+@import './../../../styles/_variables';
+@import './../../../styles/_mixins';
+
+.searchSubjectWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 40px 0;
+}
+
+label[for = 'searchSubject']  {
+  position: relative;
+  width: 350px;
+  input[type = 'text'] {
+    @include imputField(50px, 12px);
+  }
+  button {
+    @include clearInputField();
+  }
+}
+
+.subjectsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  button.subjectTile {
+    display: flex;
+    align-items: center;
+    line-height: 1.3;
+    border: none;
+    outline: none;
+    width: ($widthVertical - 100px) / 3;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-align: left;
+    min-height: 80px;
+    background-color: $lightGrayBgc;
+    color: $headersH3;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    .subjectIconWrapper {
+      color: $mainLogosBgc;
+      margin-left: 20px;
+      .subjectsIcon {
+        font-size: 1.6rem;
+        transition: .2s;
+      }
+    }
+    .subjectTitle {
+      margin: 0 20px 0 30px;
+      flex-grow: 1;
+      transition: .2s;
+    }
+    .subjectInfoBlock {
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 0 solid transparent;
+      border-bottom: 80px solid $mainLogosBgc;
+      transform: translate(100px);
+      transition: .3s;
+      &.activeBtn {
+        transform: translateX(0);
+      }
+    }
+    &:hover .subjectsIcon, &:hover .subjectTitle {
+      transform: translateX(10px);
+    }
+  }
+}
+
+.subEnd { color: $goodColor; }
+.subNotEnd { color: $importantColor; }
+
+.subInfoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: $lightLightGrayBgc;
+  .subInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: $widthVertical - 180px;
+    min-height: 600px;
+    margin: 40px;
+    padding: 40px 80px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 0 #bdbdbd;
+    background-color: #ffffff;
+    position: relative;
+    div {
+      width: 100%;
+    }
+  }
+}
+
+.animFlexContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  header {
+    @include asideText();
+  }
+  h2 {
+    font-size: 3rem;
+    font-weight: 500;
+    color: $mainLogosBgc;
+    margin: 15px 0 35px 0;
+  }
+  .subDep {
+    @include asideText();
+    span {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .subStatusInfo {
+    font-size: 1.5rem;
+    color: $mainLogosBgc;
+    font-weight: 500;
+    text-align: center;
+    p span {
+      display: inline;
+      text-transform: uppercase;
+    }
+    p:nth-child(1) span {
+      text-transform: uppercase;
+    }
+    p:nth-child(2) span {
+      font-weight: 600;
+    }
+  }
+  .classesPlatformsInfo {
+    font-size: 1.2rem;
+    color: $mainLogosBgc;
+    font-weight: 500;
+    margin: 30px 0;
+    line-height: 1.3;
+    span {
+      display: block;
+      text-align: center;
+      strong {
+        color: $yellowDefColor;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+aside.separator {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  color: $darkGray;
+  margin: 40px 0;
+  width: 80%;
+  span {
+    width: 50%;
+    height: 1px;
+    background-color: $darkGray;
+  }
+  .subjectsIcon {
+    margin: 0 15px;
+  }
+}
+
+.navButtons {
+  font-size: 1.1rem;
+  line-height: 1;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin-top: 30px;
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 13px 15px;
+    border-radius: 7px;
+    transition: .2s;
+    &:hover {
+      box-shadow: 0 0 5px 0 #878787;
+    }
+  }
+  a.pzeLinks {
+    background-color: $mainLogosBgc;
+  }
+  a.subjectsDoIt {
+    background-color: $yellowDefColor;
+  }
+}
+
+.subInfoContainer button {
+  position: relative;
+  z-index: 2;
+  justify-content: center;
+  border: 1px solid $darkGray;
+  background-color: transparent;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  transition: .4s;
+  cursor: pointer;
+  &:nth-of-type(1) {
+    &::before {
+      @include arrowNavigate(1em, 135deg, 18px, $darkGray);
+    }
+    &:hover {
+      transform: translateX(-5px);
+    }
+  }
+  &:nth-of-type(2) {
+    &::before {
+      @include arrowNavigate(1em, -45deg, 13px, $darkGray);
+    }
+    &:hover {
+      transform: translateX(5px);
+    }
+  }
+}
+
+.emptySubjectField {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 80px 0;
+  font-weight: 500;
+  color: $mainLogosBgc;
+  .emptyIcon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+}
+
+.messageoutEnter { position: absolute; opacity: 0; }
+.messageoutEnterActive { opacity: 1; transition: all 500ms ease-in-out; }
+.messageoutExit { opacity: 1; transition: all 500ms ease-in-out; }
+.messageoutExitActive { opacity: 0; transition: all 500ms ease-in-out; }
