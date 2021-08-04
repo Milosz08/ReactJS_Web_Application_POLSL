@@ -1,0 +1,11 @@
+@import './../../../styles/_variables';
+
+.dataLastUpdate {
+  display: flex;
+  justify-content: flex-end;
+  p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: $mainLogosBgc;
+  }
+}
