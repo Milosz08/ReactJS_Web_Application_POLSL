@@ -2,7 +2,7 @@
  * Interfejs typów obiektów przechwytywanych z bazy danych. Interfejs eksportowany do głównego stora
  * (MainStoreContext) przechowującego w obiekcie wszystkie pobrane dane z API
  */
-export interface MainStoreStateProvider {
+interface MainStoreStateProvider {
    covidData: Array<{
       _id: string,
       description: string,
@@ -24,7 +24,8 @@ export interface MainStoreStateProvider {
       semesters: Array<string>,
       departments: Array<string>,
       icon: Array<string>,
-      classesPlatform: Array<{
+      ifEnd: boolean;
+      classesPlatforms: Array<{
          type: string,
          place: string,
          link: string
@@ -56,3 +57,5 @@ export interface MainStoreStateProvider {
       }>
    }>;
 }
+
+export default MainStoreStateProvider;
