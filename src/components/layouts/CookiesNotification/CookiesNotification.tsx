@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { CookiesObjectsContext } from '../../../contextStore/CookiesObjectsProvider';
 
-import UniversalHeader from "../../additionalComponents/UniversalHeader/UniversalHeader";
+import UniversalHeader from "../UniversalHeader/UniversalHeader";
 
 import cookieExpires from '../../../constants/cookieExpires';
 import COOKIES_OBJECT from '../../../constants/allCookies';
@@ -17,11 +17,11 @@ const {
 const COOKIE_ID = uuidv4();
 
 /**
- * Komponent funkcyjny odpowiadający za wyświetlanie powiadomienia o używaniu przez aplikację plików Cookies.
+ * Komponent odpowiadający za wyświetlanie powiadomienia o używaniu przez aplikację plików Cookies.
  * Komponent korzysta z kontekstu przechowującego metody dostępu do plików Cookie. Komponent tworzy nowy
  * plik cookie po zaakceptowaniu warunków. Modal nie jest wyświetlany, jeśli plik Cookie istnieje.
  */
-export default function CookiesNotification() {
+const CookiesNotification = () => {
 
    const { cookie, setCookie } = useContext(CookiesObjectsContext)
    const ifCookieNotExist = cookie.__cookieNotification === undefined ? showCookiePopup : '';
@@ -40,6 +40,7 @@ export default function CookiesNotification() {
          <div className = {cookiesNotifPopupContainer}>
             <UniversalHeader
                iconP = {['fas', 'cookie-bite']}
+               content = 'Pliki Cookies'
                ifCloseButtonVisible = {true}
                setCloseButton = {handleCookieButtons}
             />
@@ -67,3 +68,5 @@ export default function CookiesNotification() {
       </div>
    );
 }
+
+export default CookiesNotification;
