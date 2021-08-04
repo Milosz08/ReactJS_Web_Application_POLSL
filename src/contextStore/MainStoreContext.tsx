@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axiosInstance from "../helpers/request";
-import { MainStoreStateProvider } from "./MainStoreStateProvider";
+import MainStoreStateProvider from "./MainStoreStateProvider";
 
 export const MainStoreContext = createContext<any>(null);
 
@@ -14,7 +14,7 @@ interface PropsProvider {
  *
  * @param children - wszystkie węzły dziedziczące zawartość stora.
  */
-export default function MainStoreProvider({ children } : PropsProvider) {
+const MainStoreProvider: React.FC<PropsProvider> = ({ children } : PropsProvider) => {
 
    const [ dataFetchFromServer, setDataFetchFromServer ] = useState<MainStoreStateProvider>({
       covidData: [], footerForms: [], subjectsData: [], sheduleSubjects: [], calendarRecords: []
@@ -47,3 +47,5 @@ export default function MainStoreProvider({ children } : PropsProvider) {
       </MainStoreContext.Provider>
    );
 }
+
+export default MainStoreProvider;
