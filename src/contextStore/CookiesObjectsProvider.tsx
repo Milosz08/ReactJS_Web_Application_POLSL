@@ -5,7 +5,7 @@ import COOKIES_OBJECT from "../constants/allCookies";
 
 export const CookiesObjectsContext = createContext<any>(null);
 
-interface CookiesObjectsProviderProps {
+interface PropsProvider {
   children: React.ReactNode;
 }
 
@@ -14,9 +14,9 @@ interface CookiesObjectsProviderProps {
  * są: globalny obiekt cookie oraz dwie metody: setCookie(), do stworzenia nowego obiektu Cookie oraz analogiczna
  * removeCookie() do usuwania wskazanego obiektu cookie.
  *
- * @param children - wszystkie węzły wirtualnego drzewa DOM React objęte Providerem
+ * @param children { React.ReactNode } - wszystkie węzły wirtualnego drzewa DOM React objęte Providerem
  */
-export default function CookiesObjectsProvider({ children } : CookiesObjectsProviderProps) {
+const CookiesObjectsProvider: React.FC<PropsProvider> = ({ children } : PropsProvider) => {
 
    const {
       cookiesPopup, adminSession, credentialsLevel, userSession, groupSelection, engGroupSelection
@@ -32,3 +32,5 @@ export default function CookiesObjectsProvider({ children } : CookiesObjectsProv
       </CookiesObjectsContext.Provider>
    );
 }
+
+export default CookiesObjectsProvider;
