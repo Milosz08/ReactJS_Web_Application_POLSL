@@ -1,0 +1,67 @@
+@import './../../../styles/_variables';
+@import './../../../styles/_mixins';
+
+header.topSiteHeader {
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  &.stickyHeader {
+    position: fixed;
+  }
+}
+
+.topNavBar {
+  display: flex;
+  justify-content: center;
+  background-color: $topNavbarColor;
+  .topNavBarLinks {
+    display: flex;
+    justify-content: space-around;
+    width: $widthVertical;
+    padding: 8px 0 11px 0;
+    a {
+      color: $whiteColor;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: .2s;
+      &:hover {
+        color: $topNavbarHover;
+      }
+    }
+  }
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: center;
+  height: 120px;
+  background-color: $mainLogosBgc;
+  .mainHeader {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: $widthVertical;
+    padding: 16px 0;
+    img {
+      height: 100%;
+    }
+    &.ifHeaderIsOnCookies {
+      justify-content: center;
+    }
+  }
+}
+
+.siteImportantInfo {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  background-color: $importantColor;
+  color: $whiteColor;
+  font-size: 1.2rem;
+  padding: 8px 0 10px 0;
+  text-align: center;
+  &.siteImportantInfoHide {
+    display: none;
+  }
+}
