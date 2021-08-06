@@ -5,7 +5,7 @@ interface PropsProvider {
    children: React.ReactNode;
 }
 
-export const SheduleContext = createContext<any>(null);
+export const ScheduleContext = createContext<any>(null);
 
 /**
  * Store przechowujący kontekst stanów odnoszących się do zarządzania planem zajęć (wybór grupy zwykłej,
@@ -13,7 +13,7 @@ export const SheduleContext = createContext<any>(null);
  *
  * @param children { React.ReactNode } - wszystkie węzły dziedziczące zawartość stora.
  */
-const SheduleProvider: React.FC<PropsProvider> = ({ children }) => {
+const ScheduleProvider: React.FC<PropsProvider> = ({ children }) => {
 
    const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
 
@@ -22,7 +22,7 @@ const SheduleProvider: React.FC<PropsProvider> = ({ children }) => {
    const [ inputField, setInputField ] = useState<string>('');
 
    return (
-      <SheduleContext.Provider
+      <ScheduleContext.Provider
          value = {{
             groupSelected, setGroupSelected,
             engSelected, setEngSelected,
@@ -30,8 +30,8 @@ const SheduleProvider: React.FC<PropsProvider> = ({ children }) => {
          }}
       >
          {children}
-      </SheduleContext.Provider>
+      </ScheduleContext.Provider>
    );
 }
 
-export default SheduleProvider;
+export default ScheduleProvider;

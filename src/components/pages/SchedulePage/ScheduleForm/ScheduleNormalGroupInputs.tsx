@@ -1,19 +1,19 @@
 import React, { useContext } from 'react';
 import classnames from "classnames";
 
-import { SheduleContext } from '../../../../contextStore/SheduleProvider';
+import { ScheduleContext } from '../../../../contextStore/ScheduleProvider';
 import GROUPS_STATIC from '../../../../constants/allGroups';
 
-const { groupRadio, customRadio, radioInputContainer, activeRadio } = require('./SheduleForm.module.scss');
+const { groupRadio, customRadio, radioInputContainer, activeRadio } = require('./ScheduleForm.module.scss');
 
 /**
  * Komponent generujący radio inputy do wyboru grupy ogólnej. Dane pobierane z kontekstu i
  * statycznych plików JS.
  */
-const SheduleNormalGroupInputs = () => {
+const ScheduleNormalGroupInputs = () => {
 
    const { NORMAL_GROUPS } = GROUPS_STATIC;
-   const { groupSelected, setGroupSelected } = useContext<any>(SheduleContext);
+   const { groupSelected, setGroupSelected } = useContext<any>(ScheduleContext);
 
    const generateInputStructure = NORMAL_GROUPS.map(object => {
       const activeRadioClass = groupSelected === object.text ? classnames(radioInputContainer, activeRadio)
@@ -44,4 +44,4 @@ const SheduleNormalGroupInputs = () => {
    );
 }
 
-export default SheduleNormalGroupInputs;
+export default ScheduleNormalGroupInputs;

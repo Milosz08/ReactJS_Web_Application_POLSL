@@ -1,19 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { v4 as uuidv4 } from 'uuid';
+import classnames from "classnames";
 
 import ExpandedPanel from './ExpandedPanel';
 
 import { ActualDateContext } from '../../../contextStore/ActualDateProvider';
 import { MainStoreContext } from '../../../contextStore/MainStoreContext';
-import { SheduleContext } from '../../../contextStore/SheduleProvider';
+import { ScheduleContext } from '../../../contextStore/ScheduleProvider';
 
 import GROUPS_STATIC from '../../../constants/allGroups';
 
 const {
-   sheduleSection, dayOfWeekCSS, active, sheduleTile, subjectType, subjectImportant, endLineOfSection,
+   scheduleSection, dayOfWeekCSS, active, scheduleTile, subjectType, subjectImportant, endLineOfSection,
    separator, subjectIcon, disactiveTile, subjectActive
-} = require('./SheduleSections.module.scss');
+} = require('./ScheduleSections.module.scss');
 
 interface PropsProvider {
    dayOfWeek: string;
@@ -39,11 +40,11 @@ interface SheduleSubjectsProvider {
  *
  * @param dayOfWeek { string } - aktualny dzień tygodnia.
  */
-const SheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
+const ScheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
 
    const { date } = useContext(ActualDateContext);
    const { sheduleSubjects, subjectsData } = useContext<any>(MainStoreContext);
-   const { groupSelected, engSelected, inputField } = useContext<any>(SheduleContext);
+   const { groupSelected, engSelected, inputField } = useContext<any>(ScheduleContext);
 
    const [ filteredArray, setFilteredArray ] = useState<Array<SheduleSubjectsProvider>>([]);
 
@@ -101,7 +102,7 @@ const SheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
 
       return (
          filterOneSubject[0] &&
-         <div className = {`${sheduleTile} ${activeHour} ${searchActive}`} key = {uuidv4()}>
+         <div className = {classnames(scheduleTile, activeHour, searchActive)} key = {uuidv4()}>
             <p className = {subjectType}>{tile.type}</p>
             <h2 className = {subjectImportant}>{tile.title}</h2>
             <div className = {separator}>
@@ -122,7 +123,7 @@ const SheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
    });
 
    return (
-      <div className = {sheduleSection}>
+      <div className = {scheduleSection}>
          <header className = {`${dayOfWeekCSS} ${ifActive}`}>
             {dayOfWeek}
          </header>
@@ -132,4 +133,4 @@ const SheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
    );
 }
 
-export default SheduleSections;
+export default ScheduleSections;

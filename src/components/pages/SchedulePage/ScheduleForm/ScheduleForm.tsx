@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 
-import { SheduleContext } from '../../../../contextStore/SheduleProvider';
+import { ScheduleContext } from '../../../../contextStore/ScheduleProvider';
 import { CookiesObjectsContext } from '../../../../contextStore/CookiesObjectsProvider';
 
-import SheduleNormalGroupInputs from './SheduleNormalGroupInputs';
-import SheduleEngInputs from './SheduleEngInputs';
+import ScheduleNormalGroupInputs from './ScheduleNormalGroupInputs';
+import ScheduleEngInputs from './ScheduleEngInputs';
 
 import COOKIES_OBJECT from '../../../../constants/allCookies';
 import GROUPS_STATIC from '../../../../constants/allGroups';
@@ -17,7 +17,7 @@ const { sheduleBlocks } = require('./../../../layouts/Navigation/Navigation.modu
 const {
    sheduleForm, backgroundImage, formContentWrapper, sheduleSubmit, saveSheduleChoices, saveChoice, resetChoice,
    gotoShedule
-} = require('./SheduleForm.module.scss');
+} = require('./ScheduleForm.module.scss');
 
 interface PropsProvider {
    executeScroll: () => void;
@@ -31,12 +31,12 @@ interface PropsProvider {
  * @param executeScroll { () => void } - funkcja przekazywana w propsach, przy każdym zapisaniu stanu w pliku Cookie
  *                                       przenosi na szczyt strony (pozycja 0,0) - reset animacji.
  */
-const SheduleForm: React.FC<PropsProvider> = ({ executeScroll }) => {
+const ScheduleForm: React.FC<PropsProvider> = ({ executeScroll }) => {
 
    const { groupSelection, engGroupSelection } = COOKIES_OBJECT;
    const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
 
-   const { groupSelected, setGroupSelected, engSelected, setEngSelected } = useContext<any>(SheduleContext);
+   const { groupSelected, setGroupSelected, engSelected, setEngSelected } = useContext<any>(ScheduleContext);
    const { cookie, setCookie, removeCookie } = useContext<any>(CookiesObjectsContext);
 
    const createRememberCookie = (dataEncrypt: string, cookieName: string): void => {
@@ -88,8 +88,8 @@ const SheduleForm: React.FC<PropsProvider> = ({ executeScroll }) => {
                className = {backgroundImage}
             />
             <form className = {sheduleForm} onSubmit = {handleFormSubmit}>
-               <SheduleNormalGroupInputs/>
-               <SheduleEngInputs/>
+               <ScheduleNormalGroupInputs/>
+               <ScheduleEngInputs/>
                <div className = {sheduleSubmit}>
                   <button className = {saveChoice}>
                      Zapisz mój wybór
@@ -121,4 +121,4 @@ const SheduleForm: React.FC<PropsProvider> = ({ executeScroll }) => {
    );
 }
 
-export default SheduleForm;
+export default ScheduleForm;

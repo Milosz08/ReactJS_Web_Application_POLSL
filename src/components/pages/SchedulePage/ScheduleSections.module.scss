@@ -1,7 +1,7 @@
 @import './../../../styles/_variables';
 @import './../../../styles/_mixins';
 
-.sheduleSection {
+.scheduleSection {
   width: 20%;
   margin: 0 10px;
   header.dayOfWeekCSS {
@@ -22,7 +22,7 @@
   }
 }
 
-.sheduleTile {
+.scheduleTile {
   display: flex;
   flex-direction: column;
   justify-content: center;

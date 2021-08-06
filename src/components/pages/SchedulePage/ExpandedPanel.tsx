@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 const {
    expandInfo, infoIcon, rotateIcon, expandContainer, expandedInfo, expandActive, expandedLinks
-} = require('./SheduleSections.module.scss');
+} = require('./ScheduleSections.module.scss');
 
 interface PropsProvider {
    tile: any;

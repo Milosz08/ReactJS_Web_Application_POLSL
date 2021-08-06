@@ -2,22 +2,22 @@ import React, { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import ActualDateProvider from '../../../contextStore/ActualDateProvider';
-import SheduleProvider from "../../../contextStore/SheduleProvider";
+import ScheduleProvider from "../../../contextStore/ScheduleProvider";
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
-import SheduleForm from './SheduleForm/SheduleForm';
-import SheduleSections from './SheduleSections';
-import SearchSubject from './SheduleHeader/SearchSubject';
-import AdditionalTools from './SheduleHeader/AdditionalTools';
+import ScheduleForm from './ScheduleForm/ScheduleForm';
+import ScheduleSections from './ScheduleSections';
+import SearchSubject from './ScheduleHeader/SearchSubject';
+import AdditionalTools from './ScheduleHeader/AdditionalTools';
 import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
-import ActualDateInfo from './SheduleHeader/ActualDateInfo';
+import ActualDateInfo from './ScheduleHeader/ActualDateInfo';
 
 const {
-   sheduleContainer, sheduleWrapper, sheduleDaysContainer, sheduleDaysWrapper
-} = require('./SheduleSections.module.scss');
-const { sheduleRender } = require('./../../layouts/Navigation/Navigation.module.scss');
+   scheduleContainer, scheduleWrapper, scheduleDaysContainer, scheduleDaysWrapper
+} = require('./SchedulePage.module.scss');
+const { scheduleRender } = require('./../../layouts/Navigation/Navigation.module.scss');
 
 const STATIC_DAYS = [
    'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek',
@@ -27,7 +27,7 @@ const STATIC_DAYS = [
  * Komponent renderujący podstronę z planem zajęć (standardowe komponenty, formularz na podstawie którego generowany
  * jest plan, siatka z planem zajęć oraz dodatkowe narzędzia do planu - generacja dokumentu pdf).
  */
-const ShedulePage = () => {
+const SchedulePage = () => {
 
    const executeScrollRef = useRef<any>(null);
 
@@ -35,19 +35,19 @@ const ShedulePage = () => {
       executeScrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
    }
 
-   const generateDaysStructure = STATIC_DAYS.map(day => <SheduleSections key = {uuidv4()} dayOfWeek = {day}/>);
+   const generateDaysStructure = STATIC_DAYS.map(day => <ScheduleSections key = {uuidv4()} dayOfWeek = {day}/>);
 
    return (
-      <SheduleProvider>
+      <ScheduleProvider>
          <CookiesNotification/>
          <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive = {true}/>
-         <div className = {sheduleContainer}>
+         <div className = {scheduleContainer}>
             <ActualDateProvider>
-               <div className = {sheduleWrapper}>
-                  <SheduleForm executeScroll = {executeScroll}/>
+               <div className = {scheduleWrapper}>
+                  <ScheduleForm executeScroll = {executeScroll}/>
                   <section 
-                     className = {sheduleRender}
+                     className = {scheduleRender}
                      ref = {executeScrollRef}
                   >
                      <UniversalHeader
@@ -59,16 +59,16 @@ const ShedulePage = () => {
                   </section>
                   <SearchSubject/>
                </div>
-               <div className = {sheduleDaysContainer}>
-                  <div className = {sheduleDaysWrapper}>
+               <div className = {scheduleDaysContainer}>
+                  <div className = {scheduleDaysWrapper}>
                      {generateDaysStructure}
                   </div>
                </div>
             </ActualDateProvider>
             <AdditionalTools/>
          </div>
-      </SheduleProvider>
+      </ScheduleProvider>
    );
 }
 
-export default ShedulePage;
+export default SchedulePage;

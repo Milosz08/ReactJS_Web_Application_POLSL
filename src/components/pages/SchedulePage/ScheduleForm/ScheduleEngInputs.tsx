@@ -2,18 +2,18 @@ import React, { useContext } from 'react';
 import classnames from 'classnames';
 
 import GROUPS_STATIC from '../../../../constants/allGroups';
-import { SheduleContext } from '../../../../contextStore/SheduleProvider';
+import { ScheduleContext } from '../../../../contextStore/ScheduleProvider';
 
-const { englishRadio, customRadio, radioInputContainer, activeRadio  } = require('./SheduleForm.module.scss');
+const { englishRadio, customRadio, radioInputContainer, activeRadio  } = require('./ScheduleForm.module.scss');
 
 /**
  * Komponent generujący radio inputy do wyboru grupy z angielskiego. Dane pobierane z kontekstu i
  * statycznych plików JS.
  */
-const SheduleEngInputs = () => {
+const ScheduleEngInputs = () => {
 
    const { ENG_GROUPS } = GROUPS_STATIC;
-   const { engSelected, setEngSelected } = useContext<any>(SheduleContext);
+   const { engSelected, setEngSelected } = useContext<any>(ScheduleContext);
 
    const generateInputStructure = ENG_GROUPS.map((record: string) => {
       const activeRadioInput = engSelected === record
@@ -44,4 +44,4 @@ const SheduleEngInputs = () => {
    );
 }
 
-export default SheduleEngInputs;
+export default ScheduleEngInputs;

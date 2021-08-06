@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { SheduleContext } from '../../../../contextStore/SheduleProvider';
+import { SheduleContext } from '../../../../contextStore/ScheduleProvider';
 
 const { searchSubjectWrapper, removeInputField } = require('./../../../layouts/Subjects/SearchSubject.module.scss');
 

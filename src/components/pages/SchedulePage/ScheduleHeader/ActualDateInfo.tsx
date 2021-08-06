@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
 import { ActualDateContext } from '../../../../contextStore/ActualDateProvider';
-import { SheduleContext } from '../../../../contextStore/SheduleProvider';
+import { ScheduleContext } from '../../../../contextStore/ScheduleProvider';
 
-const { dateInfoContainer } = require('./../ShedulePage.module.scss');
+const { dateInfoContainer } = require('../SchedulePage.module.scss');
 
 /**
  * Komponent generujący sekcję informacyjną ponad siatką zajęć. Informuje ona o aktualnym wyborze grup na planie
@@ -12,7 +12,7 @@ const { dateInfoContainer } = require('./../ShedulePage.module.scss');
 const ActualDateInfo = () => {
 
    const { date } = useContext<any>(ActualDateContext);
-   const { groupSelected, engSelected } = useContext<any>(SheduleContext);
+   const { groupSelected, engSelected } = useContext<any>(ScheduleContext);
 
    return (
       <div className = {dateInfoContainer}>
