@@ -14,7 +14,7 @@ interface PropsProvider {
  *
  * @param children - wszystkie węzły dziedziczące zawartość stora.
  */
-const MainStoreProvider: React.FC<PropsProvider> = ({ children } : PropsProvider) => {
+const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
 
    const [ dataFetchFromServer, setDataFetchFromServer ] = useState<MainStoreStateProvider>({
       covidData: [], footerForms: [], subjectsData: [], sheduleSubjects: [], calendarRecords: []
