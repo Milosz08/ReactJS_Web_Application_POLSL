@@ -1,0 +1,210 @@
+@import './../../../styles/_variables';
+@import './../../../styles/_mixins';
+
+.react-calendar {
+  background-color: #ffffff;
+  border: 2px solid $borderGray;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 40px 0;
+}
+
+.react-calendar__month-view__days button,
+.react-calendar__year-view__months button,
+.react-calendar__decade-view__years button,
+.react-calendar__century-view__decades button {
+  line-height: .7;
+  font-size: 1.5rem;
+  font-weight: 400;
+  min-height: 90px;
+  &.react-calendar__tile {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #ffffff;
+    background-color: $calendarBgc;
+    border-radius: 10px;
+    outline: none;
+    padding: 15px;
+    abbr {
+      line-height: .7;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: $headersH3;
+    }
+  }
+  &.react-calendar__tile--now {
+    background-color: $yellowDefColor;
+    abbr {
+      color: #ffffff;
+    }
+  }
+  &.react-calendar__month-view__days__day--weekend abbr {
+    color: $importantColor;
+  }
+  &.react-calendar__month-view__days__day--neighboringMonth {
+    background-color: $calendarPrev;
+    cursor: pointer;
+  }
+  &.react-calendar__tile--now.react-calendar__month-view__days__day--neighboringMonth {
+    background-color: $yellowDefColor;
+  }
+  &.react-calendar__tile--hasActive abbr {
+    color: #ffffff;
+  }
+  p {
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    text-align: left;
+    padding: 30px 0 0 0;
+    font-weight: 500;
+    word-break: keep-all;
+    width: 100%;
+    &::after {
+      position: absolute;
+      content: '';
+      bottom: 7px;
+      left: 0;
+      width: 40px;
+      height: 4px;
+      border-radius: 10px;
+    }
+    &.low {
+      color: $goodColor;
+      &::after {
+        background-color: $goodColor;
+      }
+    }
+    &.medium {
+      color: $yellowHover;
+      &::after {
+        background-color: $yellowHover;
+      }
+    }
+    &.high {
+      color: $importantColor;
+      &::after {
+        background-color: $importantColor;
+      }
+    }
+  }
+}
+
+.react-calendar__month-view__days button.react-calendar__tile--now p.medium {
+  color: #ffffff;
+  &::after {
+    background-color: #ffffff;
+  }
+}
+
+.react-calendar__year-view__months button,
+.react-calendar__decade-view__years button,
+.react-calendar__century-view__decades button {
+  cursor: pointer;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  line-height: 1;
+  .react-calendar__month-view__weekdays__weekday {
+    padding: 10px 0 14px 0;
+    border: 3px solid #ffffff;
+    border-radius: 10px;
+    background-color: $mainLogosBgc;
+    color: #ffffff;
+    abbr {
+      text-decoration: none;
+    }
+  }
+}
+
+.react-calendar__year-view__months button,
+.react-calendar__decade-view__years button,
+.react-calendar__century-view__decades button {
+  display: flex;
+  justify-content: center;
+  text-transform: capitalize;
+  color: $headersH3;
+  &.react-calendar__tile--now {
+    background-color: $mainLogosBgc;
+    color: #ffffff;
+  }
+  abbr {
+    font-weight: 600;
+  }
+}
+
+.react-calendar__navigation {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  .react-calendar__navigation__label {
+    @include defaultButton();
+    font-size: 1.4rem;
+    text-transform: capitalize;
+    padding: 8px 0;
+    max-width: 300px;
+    margin: 0 30px;
+  }
+  .react-calendar__navigation__prev2-button,
+  .react-calendar__navigation__prev-button,
+  .react-calendar__navigation__next2-button,
+  .react-calendar__navigation__next-button {
+    @include defaultButtonReset();
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid $darkGray;
+    margin: 0 20px;
+    transition: .2s;
+  }
+
+  .react-calendar__navigation__prev-button {
+    &::before {
+      @include arrowNavigate(.9em, 135deg, 17px, $darkGray);
+    }
+  }
+
+  .react-calendar__navigation__next-button {
+    &::before {
+      @include arrowNavigate(.9em, -45deg, 11px, $darkGray);
+    }
+  }
+
+  .react-calendar__navigation__prev2-button {
+    &::before {
+      @include arrowNavigate(.9em, 135deg, 13px, $darkGray);
+    }
+    &::after {
+      @include arrowNavigate(.9em, 135deg, 13px, $darkGray);
+      left: 10px;
+    }
+  }
+
+  .react-calendar__navigation__next2-button {
+    &::before {
+      @include arrowNavigate(.9em, -45deg, 6px, $darkGray);
+    }
+    &::after {
+      @include arrowNavigate(.9em, -45deg, 6px, $darkGray);
+      left: 10px;
+    }
+  }
+
+  .react-calendar__navigation__prev2-button:hover,
+  .react-calendar__navigation__prev-button:hover {
+    transform: translateX(-5px);
+  }
+  .react-calendar__navigation__next2-button:hover,
+  .react-calendar__navigation__next-button:hover {
+    transform: translateX(5px);
+  }
+  button:disabled {
+    background-color: $darkGray;
+    color: $topNavbarHover;
+    cursor: not-allowed;
+  }
+}

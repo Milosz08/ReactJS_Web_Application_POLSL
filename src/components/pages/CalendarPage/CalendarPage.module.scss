@@ -1,0 +1,77 @@
+@import './../../../styles/_variables';
+@import './../../../styles/_mixins';
+
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .calendarWrapper {
+    position: relative;
+    margin-top: 230px;
+    display: flex;
+    flex-direction: column;
+    width: $widthVertical;
+  }
+}
+
+.navigationArrows {
+  color: $darkGray;
+  font-size: 1.2rem;
+}
+
+p span.hourStart {
+  display: block;
+  font-weight: 600;
+  padding-top: 10px;
+  color: $headersH3;
+  text-align: right;
+}
+
+.underInfo {
+  @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Sterowanie');
+  color: $headersH3;
+}
+
+.mobileInfo {
+  @include borderWithPseudElementInfo($importantColor, #ffffff, 1.2rem, 500, 'Kalendarz na Urządzeniach Mobilnych');
+  color: $importantColor;
+}
+
+.legendInfo {
+  @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Legenda');
+  color: $headersH3;
+  span {
+    display: inline;
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: 400;
+    margin-right: 6px;
+    padding: 3px 10px 5px 10px;
+  }
+  ul {
+    list-style-type: none;
+    margin-left: -20px;
+    & > li {
+      margin: 15px 0;
+      &:nth-child(1) span {
+        background-color: $goodColor;
+      }
+      &:nth-child(2) span {
+        background-color: $yellowDefColor;
+      }
+      &:nth-child(3) span {
+        background-color: $importantColor;
+      }
+    }
+  }
+}
+
+.underInfo, .mobileInfo, .legendInfo {
+  font-size: 1.2rem;
+  margin: 50px 0;
+  font-weight: 500;
+}
+
+.legendInfo {
+  margin: 50px 0 0;
+}
