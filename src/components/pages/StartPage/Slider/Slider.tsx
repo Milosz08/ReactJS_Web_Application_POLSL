@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import SliderButtons from "./SliderButtons";
-import SliderDots from "./SliderDots";
+import SliderButtons from './SliderButtons';
+import SliderDots from './SliderDots';
 
 const {
    bannerContainer, centerSection, mainTitle, bannerNavigate, colorGrade, sliderComp
@@ -71,7 +71,7 @@ const Slider: React.FC<PropsProvider> = ({ autoPlay, duration }) => {
       <div className = {bannerContainer}>
          <div className = {centerSection}>
             <div className = {mainTitle}>
-               <h2>Informatyka</h2>
+               <h2>informatyka</h2>
                <h3>Wydział Elektryczy, Politechnika Śląska.</h3>
                <h4>Rocznik 2020/2021.</h4>
             </div>
