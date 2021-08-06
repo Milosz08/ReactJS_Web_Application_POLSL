@@ -1,0 +1,138 @@
+@import './../../../styles/_variables';
+@import './../../../styles/_mixins';
+
+.sheduleSection {
+  width: 20%;
+  margin: 0 10px;
+  header.dayOfWeekCSS {
+    display: flex;
+    padding: 30px 0;
+    background-color: $mainLogosBgc;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    line-height: 1;
+    font-size: 1.7rem;
+    font-weight: 400;
+    border-radius: 10px;
+    &.active {
+      background-color: $yellowDefColor;
+    }
+  }
+}
+
+.sheduleTile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 13px 0;
+  padding: 15px;
+  background-color: #fff;
+  border: 2px solid $borderGray;
+  border-radius: 10px;
+  p.subjectType {
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: $darkGray;
+  }
+  h2.subjectImportant {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px 20px;
+    color: $headersH3;
+  }
+  &.subjectActive {
+    border-color: $yellowDefColor;
+  }
+  &.disactiveTile {
+    opacity: .4;
+    filter: grayscale(1);
+  }
+}
+
+.endLineOfSection {
+  width: 100%;
+  height: 10px;
+  border-radius: 10px;
+  background-color: $mainLogosBgc;
+  &.active {
+    background-color: $yellowDefColor;
+  }
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: $darkGray;
+  margin: 10px 0;
+  .subjectIcon {
+    margin: 0 10px;
+    font-size: .9rem;
+  }
+  span {
+    background-color: $darkGray;
+    flex-grow: 1;
+    height: 1px;
+    width: 100%
+  }
+}
+
+button.expandInfo {
+  @include defaultButtonReset();
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+  .infoIcon {
+    font-size: 1.3rem;
+    color: $headersH3;
+    transition: .2s;
+    transform: rotate(0);
+    transform-origin: center;
+    &.rotateIcon {
+      transform: rotate(180deg);
+    }
+  }
+  &:hover .infoIcon {
+    color: $yellowDefColor;
+  }
+}
+
+.expandContainer {
+  overflow-y: hidden;
+  margin: 10px 0;
+  max-height: 300px;
+  transition: .5s;
+  text-align: center;
+  &.expandActive {
+    max-height: 0;
+    margin: 0;
+  }
+  p.expandedInfo {
+    font-size: 1.1rem;
+    color: $headersH3;
+    margin: 10px 0 30px 0;
+    font-weight: 500;
+    strong {
+      color: $yellowDefColor;
+      font-weight: 500;
+    }
+    span {
+      text-transform: capitalize;
+    }
+  }
+  .expandedLinks {
+    @include defaultButton();
+    margin: 15px 10px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    width: auto;
+    &:nth-last-child(1) {
+      background-color: $yellowDefColor;
+      margin-bottom: 0;
+    }
+  }
+}

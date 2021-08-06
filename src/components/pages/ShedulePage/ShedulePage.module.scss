@@ -1,0 +1,43 @@
+@import './../../../styles/_variables';
+
+.sheduleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .sheduleWrapper {
+    position: relative;
+    margin-top: 230px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.dateInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+  font-size: 1.2rem;
+  span {
+    color: $grayBgc;
+    strong {
+      font-weight: 500;
+      color: $mainLogosBgc;
+    }
+  }
+}
+
+.sheduleDaysContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: $lightLightGrayBgc;
+  margin-bottom: 30px;
+  .sheduleDaysWrapper {
+    display: flex;
+    margin: 30px 0;
+    width: 80%;
+    max-width: 1600px;
+    min-width: $widthVertical;
+  }
+}
