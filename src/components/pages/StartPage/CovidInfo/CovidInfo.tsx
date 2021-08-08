@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { MainStoreContext } from "../../../../contextStore/MainStoreContext";
 
-const { covidBlocks, covidInfo } = require('./CovidInfo.module.scss');
+const { covidBlocks, covidInfo, covidInfoBlocks, statusInfo } = require('./CovidInfo.module.scss');
 
 interface CovidDataProvider {
    _id: string;
@@ -33,13 +33,15 @@ const CovidInfo = () => {
 
    return (
       <div className = {covidInfo}>
-         <div>Status zabezpieczeń<br/>COVID-19</div>
+         <div className = {statusInfo}>Status zabezpieczeń COVID-19</div>
          <a
             href = 'https://covid.polsl.pl/'
             target = '_blank'
             rel = 'noreferrer'
          >więcej informacji</a>
-         {generateCovidInfos}
+         <div className = {covidInfoBlocks}>
+            {generateCovidInfos}
+         </div>
       </div>
    );
 }

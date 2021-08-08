@@ -14,13 +14,17 @@ aside.reactDevInfo {
     font-weight: 300;
     line-height: 1.4;
     color: $headersH3;
-    .reactLogo, .nodeJsLogo {
+    .devInfoIconsContainer {
       display: flex;
-      align-items: center;
-      padding: 0 15px;
-      .reactIcon, .nodeJsIcon {
-        font-size: 5rem;
-        color: $mainLogosBgc;
+      justify-content: center;
+      .reactLogo, .nodeJsLogo {
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        .reactIcon, .nodeJsIcon {
+          font-size: 5rem;
+          color: $mainLogosBgc;
+        }
       }
     }
     .reactTextContent {
@@ -36,6 +40,25 @@ aside.reactDevInfo {
       }
       a:hover {
         color: $yellowDefColor;
+      }
+    }
+  }
+}
+
+//////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  aside.reactDevInfo {
+    .devInfoContainer {
+      flex-direction: column;
+      width: 100%;
+      margin: 0 30px;
+      .devInfoIconsContainer {
+        margin-bottom: 40px;
+      }
+      .reactTextContent {
+        text-align: justify;
+        padding-left: 0;
       }
     }
   }

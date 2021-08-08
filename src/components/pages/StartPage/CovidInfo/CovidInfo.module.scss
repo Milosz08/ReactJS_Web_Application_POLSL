@@ -15,23 +15,55 @@
     padding: 15px 20px;
     color: $topNavbarColor;
   }
-  div:nth-child(1) {
+  .statusInfo {
     font-size: 2rem;
     font-weight: 500;
     min-width: 300px;
   }
-  div.covidBlocks {
-    flex-grow: 1;
+  .covidInfoBlocks {
     display: flex;
-    align-items: center;
-    font-size: .9rem;
-    span:nth-child(1) {
-      padding: 0 20px;
+    .covidBlocks {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      font-size: .9rem;
+      font-weight: 400;
+      span:nth-child(1) {
+        padding: 0 20px;
+      }
+      span:nth-child(2) {
+        padding: 0 10px;
+        font-size: 2.5rem;
+        font-weight: 500;
+      }
     }
-    span:nth-child(2) {
-      padding: 0 10px;
-      font-size: 2.5rem;
-      font-weight: 500;
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .covidInfo {
+    flex-direction: column;
+    max-width: 900px;
+    padding: 10px 0;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  .covidInfo {
+    max-width: calc(100% - 60px);
+    margin: 0 30px;
+  }
+}
+
+@media only screen and (max-width: 843px) {
+  .covidInfo {
+    .covidInfoBlocks {
+      flex-direction: column;
+    }
+    .statusInfo {
+      max-width: 300px;
     }
   }
 }
