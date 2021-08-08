@@ -9,10 +9,12 @@ import CookiesOuterServices from './CookiesPolicyComponents/CookiesOuterServices
 import CookiesTurnOff from './CookiesPolicyComponents/CookiesTurnOff';
 
 import STATIC_STRUCTURE from '../../../constants/cookiesPolicyContent';
+import UniversalHeader from "../../layouts/UniversalHeader/UniversalHeader";
 
 const { cookieSectionsContent } = require('./../../layouts/Navigation/Navigation.module.scss');
 const {
-   cookiesInfoContainer, cookiesInfoWrapper, sectionSign, cookiesSections, cookiesList, sectionDecorationSign
+   cookiesInfoContainer, cookiesInfoWrapper, sectionSign, cookiesSections, cookiesList, sectionDecorationSign,
+   cookieContent
 } = require('./CookiesPolicyPage.module.scss');
 
 /**
@@ -83,6 +85,17 @@ const CookiesPolicy = () => {
                <CookiesOuterServices/>
                {generateNonListStructureDOM}
                <CookiesTurnOff/>
+               <UniversalHeader
+                  iconP = {['fas', 'user-lock']}
+                  content = 'Bezpieczeństwo Aplikacji'
+                  ifCloseButtonVisible = {false}
+               />
+               <div className = {cookieContent}>
+                  Wrażliwe dane wpisywane do formularzy (hasła, tokeny), dane wysyłane do administratorów i moderatorów
+                  strony w formularzach przez Użytkowników oraz wrażliwe dane w bazie danych przechowywane są po
+                  wcześniejszym zaszyfrowaniu. Aplikacja używa jednego z najbardziej niezawodnych
+                  algorytmów kryptograficznych wraz każdorazowo generowanym sekretnym kluczem.
+               </div>
                <div className = {sectionDecorationSign}>&#167;</div>
             </div>
          </div>
