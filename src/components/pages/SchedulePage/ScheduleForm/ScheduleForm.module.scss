@@ -105,15 +105,11 @@ form.sheduleForm {
 form.sheduleForm {
   .groupRadio {
     flex-basis: 10%;
-    @include borderWithPseudElementInfo(
-                    $headersH3, #ffffff, 1.2rem, 500, 'Wybierz swoją grupę główną'
-    );
+    @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Wybierz swoją grupę główną');
   }
   .englishRadio {
     flex-basis: 46%;
-    @include borderWithPseudElementInfo(
-                    $headersH3, #ffffff, 1.2rem, 500, 'Wybierz swoją grupę językową'
-    );
+    @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Wybierz swoją grupę językową');
   }
 }
 
@@ -146,4 +142,34 @@ form.sheduleForm {
   );
   margin-bottom: 50px;
   padding: 30px 30px;
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .formContentWrapper {
+    img {
+      display: none;
+    }
+  }
+  form.sheduleForm {
+    flex-direction: column;
+    margin: 20px 0;
+    width: 100%;
+    .groupRadio, .englishRadio {
+      margin: 25px 0;
+    }
+  }
+  .sheduleSubmit {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    button.saveChoice, button.resetChoice, button.gotoShedule {
+      margin: 10px;
+    }
+  }
+  .saveSheduleChoices {
+    max-width: 100%;
+    margin: 0;
+  }
 }

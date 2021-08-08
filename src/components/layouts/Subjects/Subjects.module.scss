@@ -28,7 +28,6 @@ label[for = 'searchSubject']  {
     align-items: center;
     line-height: 1.3;
     border: none;
-    outline: none;
     width: ($widthVertical - 100px) / 3;
     font-size: 1.3rem;
     font-weight: 500;
@@ -79,6 +78,7 @@ label[for = 'searchSubject']  {
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin: 40px 0;
   background-color: $lightLightGrayBgc;
   .subInfo {
     display: flex;
@@ -111,6 +111,7 @@ label[for = 'searchSubject']  {
     font-weight: 500;
     color: $mainLogosBgc;
     margin: 15px 0 35px 0;
+    text-align: center;
   }
   .subDep {
     @include asideText();
@@ -194,18 +195,24 @@ aside.separator {
   }
 }
 
-.subInfoContainer button {
-  position: relative;
-  z-index: 2;
-  justify-content: center;
-  border: 1px solid $darkGray;
-  background-color: transparent;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  transition: .4s;
-  cursor: pointer;
-  &:nth-of-type(1) {
+.subInfoContainer {
+  .prevButtonContainer, .nextButtonContainer {
+    display: flex;
+    justify-content: center;
+    button {
+      position: relative;
+      z-index: 2;
+      justify-content: center;
+      border: 1px solid $darkGray;
+      background-color: transparent;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      transition: .4s;
+      cursor: pointer;
+    }
+  }
+  .prevButtonContainer button {
     &::before {
       @include arrowNavigate(1em, 135deg, 18px, $darkGray);
     }
@@ -213,7 +220,7 @@ aside.separator {
       transform: translateX(-5px);
     }
   }
-  &:nth-of-type(2) {
+  .nextButtonContainer button {
     &::before {
       @include arrowNavigate(1em, -45deg, 13px, $darkGray);
     }
@@ -231,6 +238,7 @@ aside.separator {
   margin: 80px 0;
   font-weight: 500;
   color: $mainLogosBgc;
+  text-align: center;
   .emptyIcon {
     font-size: 3rem;
     margin-bottom: 20px;
@@ -241,3 +249,79 @@ aside.separator {
 .messageoutEnterActive { opacity: 1; transition: all 500ms ease-in-out; }
 .messageoutExit { opacity: 1; transition: all 500ms ease-in-out; }
 .messageoutExitActive { opacity: 0; transition: all 500ms ease-in-out; }
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .subjectsWrapper {
+    justify-content: center;
+    button.subjectTile {
+      margin: 10px 20px;
+    }
+  }
+  .subInfoContainer {
+    flex-wrap: wrap;
+    justify-content: center;
+    .subInfo {
+      order: -1;
+      margin: 40px 30px;
+      width: calc(100% - 60px);
+      padding: 30px 20px;
+    }
+    .prevButtonContainer, .nextButtonContainer {
+      flex-basis: 40%;
+      margin-bottom: 30px;
+    }
+    .prevButtonContainer {
+      justify-content: flex-end;
+      margin-right: 20px;
+    }
+    .nextButtonContainer {
+      justify-content: flex-start;
+      margin-left: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 772px) {
+  .navButtons {
+    flex-wrap: wrap;
+    a {
+      margin: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 715px) {
+  .animFlexContainer {
+    h2 {
+      font-size: 2.1rem;
+    }
+    header, .subDep {
+      font-size: 1rem;
+    }
+    .subStatusInfo {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .subjectsWrapper {
+    button.subjectTile {
+      margin: 10px 0;
+      font-size: 1.1rem;
+      .subjectTitle {
+        margin: 0 0 0 30px;
+      }
+    }
+  }
+  .searchSubjectWrapper {
+    width: calc(100% - 60px);
+    margin: 0 30px;
+  }
+  label[for = 'searchSubject']  {
+    width: 100%;
+  }
+}
+

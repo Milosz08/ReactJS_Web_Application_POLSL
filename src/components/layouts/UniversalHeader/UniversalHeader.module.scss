@@ -1,6 +1,8 @@
 @import '../../../styles/variables';
 
 .universalHeader {
+  width: 100%;
+  margin: 30px 0;
   h3 {
     display: flex;
     justify-content: center;
@@ -8,7 +10,7 @@
     font-size: 2rem;
     color: $headersH3;
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1;
   }
   .universalHeaderIcon {
     font-size: 1.2rem;
@@ -19,7 +21,7 @@
     flex-grow: 1;
     height: 1px;
     background-color: $grayBgc;
-    margin: 0 20px;
+    margin-left: 30px;
   }
 }
 
@@ -49,6 +51,20 @@
       background-color: $grayBgc;
       transform-origin: center;
       transform: rotate(90deg);
+    }
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .universalHeader {
+    width: 100%;
+    h3 {
+      justify-content: flex-start;
+    }
+    aside {
+      display: none;
     }
   }
 }

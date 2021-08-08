@@ -20,7 +20,7 @@ section.navInline ul {
 }
 
 .navBlocks, .subjBlocks, .subjInfos, .cookiesInfoHeader,
-.cookieSectionsContent, .sheduleBlocks, .sheduleRender, .universalHeader {
+.cookieSectionsContent, .sheduleBlocks, .scheduleRender, .universalHeader {
   width: $widthVertical;
   margin: 0 auto;
   h3 {
@@ -30,7 +30,7 @@ section.navInline ul {
     font-size: 2rem;
     color: $headersH3;
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1;
     margin: 30px 0 20px 0;
     .fasIcon {
       font-size: 1.2rem;
@@ -107,6 +107,34 @@ section.navInline ul {
       @include arrowNavigate(.5em, -45deg, 0, $whiteColor);
       border-right-width: 2px;
       border-bottom-width: 2px;
+    }
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .navBlocks, .scheduleRender, .universalHeader, .subjInfos, .sheduleBlocks {
+    width: calc(100% - 60px);
+    margin: 0 30px;
+    h3 {
+      justify-content: flex-start;
+    }
+  }
+  .navBlocks {
+    ul {
+      justify-content: space-around;
+      li {
+        flex-basis: 45%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 641px) {
+  .navBlocks {
+    ul > li {
+      flex-basis: 80%;
     }
   }
 }

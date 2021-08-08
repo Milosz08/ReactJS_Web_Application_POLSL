@@ -48,18 +48,19 @@ footer.footerWrapper {
       }
       .asideOtherElements {
         flex-basis: 100%;
-        margin-right: 80px;
+        margin: 60px 100px 0 0;
         .asideSeparator {
           height: 1px;
           background-color: $grayBgc;
         }
         .disclaimerBlock {
+          text-align: justify;
           padding-top: 20px;
           color: $footerContent;
         }
         .adminPanelRoute {
           display: block;
-          margin-top: 50px;
+          margin-top: 30px;
           color: $footerHeaders;
         }
       }
@@ -101,6 +102,79 @@ footer.footerWrapper {
     }
     .copyAuthor span:nth-last-of-type(1) {
       padding-left: 10px;
+    }
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  footer.footerWrapper {
+    .footerContainer {
+      margin: 60px 30px;
+      width: calc(100% - 60px);
+      .footerRouterContex {
+        justify-content: space-around;
+        .linksPages, .revelarPages {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+  .copyrightSectionContainer {
+    padding: 20px 0;
+    .copyrightSectionWrapper {
+      flex-wrap: wrap;
+      justify-content: center;
+      .copyIcons, .copyAuthor, .copyCookies {
+        flex-basis: 50%;
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 966px) {
+  footer.footerWrapper {
+    .footerContainer {
+      flex-direction: column;
+      .footerRouterContex {
+        padding-bottom: 40px;
+      }
+      .formContainer {
+        margin-top: 30px;
+        min-width: 100%;
+      }
+      .footerRouterContex {
+        .asideOtherElements {
+          margin: 60px 0 0 0;
+        }
+      }
+    }
+  }
+  .copyrightSectionContainer {
+    padding: 20px 0;
+    .copyrightSectionWrapper {
+      flex-wrap: wrap;
+      .copyIcons, .copyAuthor, .copyCookies {
+        flex-basis: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  footer.footerWrapper {
+    .footerContainer {
+      .footerRouterContex {
+        justify-content: center;
+        .linksPages, .revelarPages {
+          flex-basis: 100%;
+        }
+        .revelarPages {
+          margin-top: 50px;
+        }
+      }
     }
   }
 }
