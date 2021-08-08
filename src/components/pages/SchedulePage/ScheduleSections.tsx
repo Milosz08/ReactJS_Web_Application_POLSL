@@ -42,20 +42,21 @@ interface SheduleSubjectsProvider {
  */
 const ScheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
 
-   const { date } = useContext(ActualDateContext);
-   const { sheduleSubjects, subjectsData } = useContext<any>(MainStoreContext);
+   const { date } = useContext<any>(ActualDateContext);
+   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
    const { groupSelected, engSelected, inputField } = useContext<any>(ScheduleContext);
 
-   const [ filteredArray, setFilteredArray ] = useState<Array<SheduleSubjectsProvider>>([]);
+   const [ filteredArray, setFilteredArray ] = useState<any>([]);
 
-   const { dayString } = date;
+   const { dayStr } = date;
+   const { sheduleSubjects } = dataFetchFromServer;
    const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
 
-   const ifActive: string = dayString.toLocaleLowerCase() === dayOfWeek.toLocaleLowerCase() ? active : '';
+   const ifActive: string = dayStr.toLocaleLowerCase() === dayOfWeek.toLocaleLowerCase() ? active : '';
 
    useEffect(() => {
       const returFilteredArray = (engGroup: string, normalGroup: string): Array<SheduleSubjectsProvider> => (
-         sheduleSubjects.find((object: SheduleSubjectsProvider) => (
+         sheduleSubjects.filter((object: SheduleSubjectsProvider) => (
             object.group === engGroup || object.group === normalGroup || object.group === 'all'
          )
       ));
@@ -85,14 +86,14 @@ const ScheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
       parseInt(prevH.start.replace(':', '')) - parseInt(secH.start.replace(':', ''))
    ));
 
-   const generateOneColumnOfTile = filteredSubjects.map(tile => {
+   const generateOneColumnOfTile = filteredSubjects.map((tile: any) => {
       const title = tile.title.toLowerCase();
       const startHour = parseInt(tile.start.replace(':', ''));
       const endHour = parseInt(tile.end.replace(':', ''));
       const tileDay = tile.day.toLocaleLowerCase();
-      const actualDay = date.dayString.toLocaleLowerCase();
+      const actualDay = date.dayStr.toLocaleLowerCase();
 
-      const filterOneSubject = subjectsData.filter((subject: SheduleSubjectsProvider) => (
+      const filterOneSubject = dataFetchFromServer.subjectsData.filter((subject: SheduleSubjectsProvider) => (
          subject.title.toLocaleLowerCase() === title
       ));
 
