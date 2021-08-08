@@ -1,8 +1,9 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Dispatch, Fragment, SetStateAction, useContext, useState } from 'react';
 import Calendar from 'react-calendar';
 import { v4 as uuidv4 } from 'uuid';
 
 import { MainStoreContext } from '../../../contextStore/MainStoreContext';
+
 import './CalendarStyles.scss';
 
 const { messageInit, hourStart } = require('./CalendarPage.module.scss');
@@ -23,10 +24,15 @@ interface CalendarProvider {
    }>
 }
 
+interface PropsProvider {
+   setOpenModal: Dispatch<SetStateAction<any>>;
+   setDate: Dispatch<SetStateAction<Date>>;
+}
+
 /**
  * Generacja i dodatkowa implementacja kalendarza. Pobiera dane z globalnego stora (kontekstu).
  */
-const CalendarStructure = () => {
+const CalendarStructure: React.FC<PropsProvider> = ({ setOpenModal, setDate }) => {
 
    const { dataFetchFromServer } = useContext<any>(MainStoreContext);
    const [ value, onChange ] = useState<Date>(new Date());
@@ -41,13 +47,21 @@ const CalendarStructure = () => {
                item.items.sort((a, b) => (
                   parseInt(a.start.replace(':', '')) - parseInt(b.start.replace(':', ''))
                )).map(prop => (
-                  <p key = {uuidv4()} className = {prop.importantLevel}>
-                     <span className = {messageInit}>{prop.message}</span>
-                     <span className = {hourStart}>{prop.start}</span>
-                  </p>
+                  <Fragment>
+                     <p key = {uuidv4()} className = {prop.importantLevel}>
+                        <span className = {messageInit}>{prop.message}</span>
+                        <span className = {hourStart}>{prop.start}</span>
+                     </p>
+                     <span className = {prop.importantLevel}/>
+                  </Fragment>
                ))
             ) : null
       ));
+   }
+
+   const handleClickDay = (value: Date) => {
+      setOpenModal(true);
+      setDate(value);
    }
 
    return (
@@ -55,6 +69,7 @@ const CalendarStructure = () => {
          tileContent = {supplementsTiles}
          value = {value}
          onChange = {onChange}
+         onClickDay = {(value: Date) => handleClickDay(value)}
          locale = 'pl-PL'
          prevLabel = {<span/>}
          prev2Label = {<Fragment><span/><span/></Fragment>}

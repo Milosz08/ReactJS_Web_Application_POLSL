@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react';
+import React, {Fragment, useContext, useState} from 'react';
+import classnames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../layouts/Header/Header';
@@ -6,14 +8,62 @@ import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 import UniversalHeader from "../../layouts/UniversalHeader/UniversalHeader";
 import CalendarStructure from './CalendarStructure';
 import DataLastUpdate from '../../layouts/DataLastUpdate/DataLastUpdate';
+import getSingleDateObjects from "../../../constants/getSingleDateObjects";
+import {MainStoreContext} from "../../../contextStore/MainStoreContext";
 
-const { calendarContainer, calendarWrapper, underInfo, mobileInfo, legendInfo } = require('./CalendarPage.module.scss');
+const {
+   calendarContainer, calendarWrapper, underInfo, mobileInfo, legendInfo, calendarStructureAndModal, dateInfoModal,
+   closeModal, modalActive, oneCalendarTask, taskMessage, taskHour, noActivities, emptyIcon, low, medium, high
+} = require('./CalendarPage.module.scss');
 const { universalHeader } = require('./../../layouts/Navigation/Navigation.module.scss');
 
 /**
  * Komponent generujący podstronę z kalendarzem studenta.
  */
 const CalendarPage = () => {
+
+   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
+
+   const [ openModal, setOpenModal ] = useState<boolean>(false);
+   const [ date, setDate ] = useState<Date>(new Date());
+
+   const toggleModalVisible = openModal ? classnames(dateInfoModal, modalActive) : dateInfoModal;
+   const { day, month } = getSingleDateObjects(date);
+   const { calendarRecords } = dataFetchFromServer;
+
+   const generateTasksPerDay = () => {
+      const selectClass = (value: string) => {
+         switch(value) {
+            case 'low': return low;
+            case 'medium': return medium;
+            case 'high': return high;
+         }
+      }
+
+      const filteredRecord = calendarRecords.find((record: any) => (
+         record.day === date.getDate() && record.month === date.getMonth() && record.year === date.getFullYear()
+      ));
+      if(filteredRecord !== undefined) {
+         return (
+           filteredRecord.items.map((item: any) => (
+             <div className = {classnames(oneCalendarTask, selectClass(item.importantLevel))} key = {item.message}>
+                <h2 className = {taskMessage}>{item.message}</h2>
+                <span className = {classnames(taskHour, selectClass(item.importantLevel))}>Start: {item.start}</span>
+             </div>
+           ))
+         );
+      } else {
+         return (
+            <div className = {noActivities}>
+               <FontAwesomeIcon
+                  icon = {['fas', 'exclamation-circle']}
+                  className = {emptyIcon}
+               />
+               Brak aktywności
+            </div>
+         );
+      }
+   }
    return (
       <Fragment>
          <CookiesNotification/>
@@ -38,7 +88,19 @@ const CalendarPage = () => {
                      kryją się pod poszczególnymi dniami tygonia, kliknik w kafelek, aby otworzyć Modal.
                   </p>
                </section>
-               <CalendarStructure/>
+               <div className = {calendarStructureAndModal}>
+                  <div className = {toggleModalVisible}>
+                     <h2>Aktywności</h2>
+                     <span>w dniu: {day}/{month}/{date.getFullYear()}</span>
+                     {generateTasksPerDay()}
+                     <button
+                        className = {closeModal}
+                        onClick = {() => setOpenModal(false)}
+                        title = 'Zamknij okno'
+                     />
+                  </div>
+                  <CalendarStructure setOpenModal = {setOpenModal} setDate = {setDate}/>
+               </div>
                <DataLastUpdate
                   dataID = {process.env.REACT_APP_CALENDAR_ID}
                   content = 'kalendarza'

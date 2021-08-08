@@ -3,10 +3,6 @@
 
 .react-calendar {
   background-color: #ffffff;
-  border: 2px solid $borderGray;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 40px 0;
 }
 
 .react-calendar__month-view__days button,
@@ -88,6 +84,26 @@
       }
     }
   }
+  span.low, span.medium, span.high {
+    display: none;
+    margin-top: 5px;
+    width: 100%;
+    max-width: 40px;
+    height: 6px;
+    border-radius: 10px;
+    &:nth-of-type(1) {
+      margin-top: 15px;
+    }
+    &.low {
+      background-color: $goodColor;
+    }
+    &.medium {
+      background-color: $yellowHover;
+    }
+    &.high {
+      background-color: $importantColor;
+    }
+  }
 }
 
 .react-calendar__month-view__days button.react-calendar__tile--now p.medium {
@@ -95,12 +111,6 @@
   &::after {
     background-color: #ffffff;
   }
-}
-
-.react-calendar__year-view__months button,
-.react-calendar__decade-view__years button,
-.react-calendar__century-view__decades button {
-  cursor: pointer;
 }
 
 .react-calendar__month-view__weekdays {
@@ -127,6 +137,7 @@
   justify-content: center;
   text-transform: capitalize;
   color: $headersH3;
+  cursor: pointer;
   &.react-calendar__tile--now {
     background-color: $mainLogosBgc;
     color: #ffffff;
@@ -206,5 +217,85 @@
     background-color: $darkGray;
     color: $topNavbarHover;
     cursor: not-allowed;
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .react-calendar__month-view__days button,
+  .react-calendar__year-view__months button,
+  .react-calendar__decade-view__years button,
+  .react-calendar__century-view__decades button {
+    min-height: 60px;
+  }
+}
+
+@media only screen and (max-width: 970px) {
+  .react-calendar__month-view__days button,
+  .react-calendar__year-view__months button,
+  .react-calendar__decade-view__years button,
+  .react-calendar__century-view__decades button {
+    p {
+      display: none;
+    }
+    span.low, span.medium, span.high {
+      display: block;
+    }
+  }
+}
+
+@media only screen and (max-width: 756px) {
+  .react-calendar__navigation {
+    flex-wrap: wrap;
+    .react-calendar__navigation__label {
+      order: 1;
+    }
+    .react-calendar__navigation__prev2-button,
+    .react-calendar__navigation__prev-button,
+    .react-calendar__navigation__next2-button,
+    .react-calendar__navigation__next-button {
+      margin-bottom: 30px;
+    }
+    .react-calendar__navigation__prev2-button:hover,
+    .react-calendar__navigation__prev-button:hover {
+      transform: translateX(0);
+    }
+    .react-calendar__navigation__next2-button:hover,
+    .react-calendar__navigation__next-button:hover {
+      transform: translateX(0);
+    }
+  }
+  .react-calendar__month-view__weekdays {
+    font-size: .9rem;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .react-calendar__year-view__months button.react-calendar__year-view__months__month abbr,
+  .react-calendar__decade-view__years button.react-calendar__decade-view__years__year,
+  .react-calendar__century-view__decades button.react-calendar__century-view__decades__decade {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .react-calendar__navigation {
+    margin-top: 0;
+    .react-calendar__navigation__prev2-button,
+    .react-calendar__navigation__prev-button,
+    .react-calendar__navigation__next2-button,
+    .react-calendar__navigation__next-button {
+      margin: 20px 10px;
+    }
+  }
+  .react-calendar__month-view__days button,
+  .react-calendar__year-view__months button,
+  .react-calendar__decade-view__years button,
+  .react-calendar__century-view__decades button {
+    &.react-calendar__tile {
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
