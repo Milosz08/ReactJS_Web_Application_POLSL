@@ -8,7 +8,7 @@ const SubjectsPassPage = () => {
    return (
       <Fragment>
          <CookiesNotification/>
-         <Header ifHeaderHasRedBar = {false}/>
+         <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive={true}/>
       </Fragment>
    );
