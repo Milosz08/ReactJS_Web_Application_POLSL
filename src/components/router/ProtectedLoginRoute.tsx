@@ -22,14 +22,23 @@ interface PropsProvider {
 const ProtectedLoginRoute: React.FC<PropsProvider | any> = ({
    auth, setAuth, handleCookie, redirectPath, component: Component, ...rest
 }) => {
+
+   const renderPathStructure = (props: any) => {
+      if(auth) {
+         return (
+            <Component {...props} setAuth = {setAuth} handleCookie = {handleCookie}/>
+         );
+      } else {
+         return (
+            <Redirect to = {redirectPath}/>
+         );
+      }
+   }
+
    return (
       <Route
          {...rest}
-         render = {props => auth ? (
-            <Component {...props} setAuth = {setAuth} handleCookie = {handleCookie} />
-         ) : (
-            <Redirect to = {redirectPath}/>
-         )}
+         render = {(props: any) => renderPathStructure(props)}
       />
    );
 }
