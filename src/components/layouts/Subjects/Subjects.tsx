@@ -22,7 +22,7 @@ export interface SubjectsProvider {
    __v: number
 }
 
-const { sheduleRender } = require('./../../layouts/Navigation/Navigation.module.scss');
+const { scheduleRender } = require('./../../layouts/Navigation/Navigation.module.scss');
 
 /**
  * Komponent generujący sekcję przedmiotów na głównej stronie. W jej skład wchodzi: wyszukiwarka, lista
@@ -45,7 +45,7 @@ const Subjects = () => {
 
    return (
       <Fragment>
-         <section className = {sheduleRender}>
+         <section className = {scheduleRender}>
             <UniversalHeader
                iconP = {['fas', 'chalkboard']}
                content = 'Przedmioty'
