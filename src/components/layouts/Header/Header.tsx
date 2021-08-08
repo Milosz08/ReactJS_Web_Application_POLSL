@@ -4,10 +4,11 @@ import classnames from "classnames";
 
 import CONSTANT_DATA from '../../../constants/staticData';
 import Navigation from "../Navigation/Navigation";
+import HamburgerMenu from "./HamburgerMenu";
 
 const {
    topNavBar, topNavBarLinks, headerContainer, mainHeader, siteImportantInfo, stickyHeader, topSiteHeader,
-   ifHeaderIsOnCookies, siteImportantInfoHide
+   ifHeaderIsOnCookies, siteImportantInfoHide, navigationRouter, headerHideClass
 } = require('./Header.module.scss');
 
 interface PropsProvider {
@@ -27,30 +28,53 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
    const topHeaderHeightRef = useRef<HTMLElement | null>(null);
 
    const [ offset, setOffset ] = useState<number>(0);
+   const [ width, setWidth ] = useState<number>(window.innerWidth);
    const [ menuSticky, setMenuSticky ] = useState<boolean>(false);
+
    const [ elmHeight, setElmHeight ] = useState<number>(0);
+   const [ headerHide, setHeaderHide ] = useState<boolean>(false);
+
+   const [ activeHamburger, setActiveHamburger ] = useState<boolean>(false);
 
    useEffect(() => {
+      let prevScrollpos = window.pageYOffset;
       const handleScroll = () => {
-         if(topHeaderHeightRef.current != null) {
+         if(topHeaderHeightRef.current != null && width > 1250) {
             if(offset > topHeaderHeightRef.current.offsetHeight) {
                setMenuSticky(true);
             } else {
                setMenuSticky(false);
             }
-            setOffset(window.pageYOffset);
+         } else if(topHeaderHeightRef.current != null && width < 1250) {
+            if(offset > 200 && !activeHamburger) {
+               const currentScrollPos = window.pageYOffset;
+               if(prevScrollpos > currentScrollPos) {
+                  setHeaderHide(false);
+               } else {
+                  setHeaderHide(true);
+               }
+               prevScrollpos = currentScrollPos;
+            }
+            setMenuSticky(true);
          }
+         setOffset(window.pageYOffset);
       }
-      if(topHeaderHeightRef.current != null) {
+      if(topHeaderHeightRef.current != null && width > 1250) {
          setElmHeight(topHeaderHeightRef.current.offsetHeight)
       }
       if(offset === 0) {
          setMenuSticky(false);
       }
 
+      const handleResize = () => setWidth(window.innerWidth);
+
       window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
-   }, [offset]);
+      window.addEventListener('resize', handleResize);
+      return () => {
+         window.removeEventListener('scroll', handleScroll);
+         window.removeEventListener('resize', handleResize);
+      };
+   }, [activeHamburger, offset, width]);
 
    const topNavbarElm = TOP_NAVBAR_ELMS.map(singleLink => (
       <a
@@ -64,14 +88,15 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
    ));
 
    const toggleMenuStickyClasses = menuSticky ? classnames(topSiteHeader, stickyHeader) : topSiteHeader;
-   const toggleMainHeaderClasses = ifHeaderHasRedBar ? classnames(mainHeader, ifHeaderHasRedBar) : ifHeaderIsOnCookies;
-   const toggleSiteInfoClasses = ifHeaderHasRedBar
-      ? classnames(siteImportantInfo, siteImportantInfoHide) : siteImportantInfoHide;
+   const hideHeaderBar = headerHide && width < 1250 ? headerHideClass : '';
+   const toggleMainHeaderClasses = !ifHeaderHasRedBar ? classnames(mainHeader, ifHeaderIsOnCookies) : mainHeader;
+   const toggleSiteInfoClasses = !ifHeaderHasRedBar
+      ? classnames(siteImportantInfo, siteImportantInfoHide) : siteImportantInfo;
 
    return (
       <header
-         className = {toggleMenuStickyClasses}
-         style = {menuSticky ? {top: `-${elmHeight}px`} : {}}
+         className = {classnames(toggleMenuStickyClasses, hideHeaderBar)}
+         style = {width > 1250 ? (menuSticky ? {top: `-${elmHeight}px`} : { }) : { }}
       >
          <nav
             className = {topNavBar}
@@ -83,7 +108,7 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
          </nav>
          <div
             className = {headerContainer}
-            style = {{ height: `${offset > elmHeight ? 80 : (120 - offset)}px` }}
+            style = {width > 1250 ? ({ height: `${offset > elmHeight ? 80 : (120 - offset)}px` }) : { height: 90 }}
          >
             <div className = {toggleMainHeaderClasses}>
                <NavLink to = '/'>
@@ -92,7 +117,13 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
                      alt = 'banerLogo'
                   />
                </NavLink>
-               {!ifHeaderHasRedBar && <Navigation ifHeader = {true}/>}
+               <div className = {navigationRouter}>
+                  {ifHeaderHasRedBar && <Navigation ifHeader = {true}/>}
+               </div>
+               <HamburgerMenu
+                  activeHamburger = {activeHamburger}
+                  setActiveHamburger = {setActiveHamburger}
+               />
             </div>
          </div>
          <div
