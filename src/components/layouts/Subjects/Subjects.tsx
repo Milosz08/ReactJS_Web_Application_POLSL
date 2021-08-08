@@ -22,6 +22,8 @@ export interface SubjectsProvider {
    __v: number
 }
 
+const { sheduleRender } = require('./../../layouts/Navigation/Navigation.module.scss');
+
 /**
  * Komponent generujący sekcję przedmiotów na głównej stronie. W jej skład wchodzi: wyszukiwarka, lista
  * przedmiotów oraz okno ze szczegółowymi informacjami na temat przedmiotu.
@@ -43,7 +45,7 @@ const Subjects = () => {
 
    return (
       <Fragment>
-         <section>
+         <section className = {sheduleRender}>
             <UniversalHeader
                iconP = {['fas', 'chalkboard']}
                content = 'Przedmioty'
@@ -60,6 +62,11 @@ const Subjects = () => {
                dataID = {process.env.REACT_APP_SUBJECTS_ID}
                content = 'przedmiotów'
                withoutText = {false}
+            />
+            <UniversalHeader
+               iconP = {['fas', 'university']}
+               content = 'Szczegółowe informacje'
+               ifCloseButtonVisible = {false}
             />
          </section>
          <SubjectInfo
