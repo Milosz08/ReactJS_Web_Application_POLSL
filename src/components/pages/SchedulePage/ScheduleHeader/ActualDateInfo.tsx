@@ -22,8 +22,8 @@ const ActualDateInfo = () => {
          </span>
          <span>
          Dzisiaj jest
-            <strong> {date.dayString}</strong>,
-            <strong> {date.day} {date.monthString} {date.yearInt} </strong>
+            <strong> {date.dayStr}</strong>,
+            <strong> {date.day} {date.monthStr} {date.year} </strong>
          roku.
          </span>
       </div>
