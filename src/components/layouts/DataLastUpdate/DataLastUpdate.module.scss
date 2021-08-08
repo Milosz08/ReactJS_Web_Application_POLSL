@@ -3,7 +3,7 @@
 .dataLastUpdate {
   display: flex;
   justify-content: flex-end;
-  margin: 30px 0 60px 0;
+  margin: 30px 0 40px 0;
   p {
     font-size: 1.2rem;
     font-weight: 500;
@@ -13,10 +13,11 @@
 
 ////////////////////////////////////////////////////
 
-@media only screen and (max-width: 890px) {
+@media only screen and (max-width: 1250px) {
   .dataLastUpdate {
     justify-content: center;
     p {
+      margin: 0 30px;
       font-size: 1.2rem;
     }
   }
