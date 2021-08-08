@@ -58,6 +58,7 @@ form.sheduleForm {
           border: solid $yellowDefColor;
           border-width: 0 3px 3px 0;
           transform: rotate(45deg) scale(0);
+          transition: .2s;
         }
       }
       &.activeRadio {
@@ -137,9 +138,7 @@ form.sheduleForm {
   font-size: 1.2rem;
   font-weight: 500;
   color: $importantColor;
-  @include borderWithPseudElementInfo(
-                  $importantColor, #ffffff, 1.2rem, 500, 'Uwaga'
-  );
+  @include borderWithPseudElementInfo($importantColor, #ffffff, 1.2rem, 500, 'Uwaga');
   margin-bottom: 50px;
   padding: 30px 30px;
 }
@@ -157,6 +156,7 @@ form.sheduleForm {
     margin: 20px 0;
     width: 100%;
     .groupRadio, .englishRadio {
+      width: 100%;
       margin: 25px 0;
     }
   }
