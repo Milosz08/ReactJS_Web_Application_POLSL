@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
 const AdminCmsMainPanel = () => {
    return (
@@ -6,4 +7,4 @@ const AdminCmsMainPanel = () => {
    );
 }
 
-export default AdminCmsMainPanel;
+export default withRouter(AdminCmsMainPanel);

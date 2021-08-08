@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import axiosInstance from '../../../../helpers/request';
 import { AES, enc } from 'crypto-js';
 import { v4 as uuidv4 } from 'uuid';
+import classnames from "classnames";
 
 import CookiesNotification from "../../../layouts/CookiesNotification/CookiesNotification";
 import Header from "../../../layouts/Header/Header";
@@ -12,7 +13,7 @@ import AdminCmsLoginInputs from "./AdminCmsLoginInputs";
 
 const {
    adminLoginWrapper, adminLoginContainer, adminCredentials, onSubmitCSS, infoAboutToken, poweredBy,
-   authenticationHeader
+   authenticationHeader, hideFormOnClick, adminAsyncWrapper, showAsync, infiniteLoad, infiniteUse
 } = require('./AdminCmsLogin.module.scss');
 
 const COOKIE_ID = uuidv4();
@@ -57,6 +58,8 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
    const [ visible, setVisible ] = useState<{ password: boolean, token: boolean }>({ password: false, token: false });
    const [ credentialsHash, setCredentialsHash ] = useState<Array<HashProvider>>([]);
 
+   const [ hideAuth, setHideAuth ] = useState<boolean>(false);
+
    const checkAuthentication = (): { loginBool: boolean, passwordBool: boolean, tokenBool: boolean } => {
       let loginBool = false, passwordBool = false, tokenBool = false;
       let decryptArray: Array<string> = [];
@@ -93,9 +96,10 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
       e.preventDefault();
       const { loginBool, passwordBool, tokenBool } = checkAuthentication();
       if(!loginBool && !passwordBool && !tokenBool) {
-         setAuth(true);
+         setHideAuth(true);
+         setTimeout(() => { setAuth(true); }, 2000);
          setCredentialsHash([]);
-         handleCookie(COOKIES_OBJECT.adminSession, COOKIE_ID, { path: '/', sameSite: 'strict' });
+         setTimeout(() => { handleCookie(COOKIES_OBJECT.adminSession, COOKIE_ID, { path: '/', sameSite: 'strict' }) }, 2000);
          setCredentials({ login: '', password: '', token: '' });
       } else {
          setErrors({ login: loginBool, password: passwordBool, token: tokenBool });
@@ -121,13 +125,28 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
       fetchData();
    }, []);
 
+   const toggleClasses = hideAuth ? classnames(adminLoginWrapper, hideFormOnClick) : adminLoginWrapper;
+   const showAsyncElement = hideAuth ? classnames(adminAsyncWrapper, showAsync) : adminAsyncWrapper;
+
    return (
       <Fragment>
          <CookiesNotification/>
          <Header ifHeaderHasRedBar = {false}/>
          <CurrentURLpath ifImportatHeaderActive = {false}/>
          <div className = {adminLoginContainer}>
-            <div className = {adminLoginWrapper}>
+            <div className = {showAsyncElement}>
+               <svg className = {infiniteLoad} viewBox = '-2000 -1000 4000 2000'>
+                  <path id = 'inf' d = 'M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z'/>
+                  <use
+                     className = {infiniteUse}
+                     xlinkHref = '#inf'
+                     strokeDasharray = '1570 5143'
+                     strokeDashoffset = '6713px'
+                  />
+               </svg>
+               Logowanie do systemu...
+            </div>
+            <div className = {toggleClasses}>
                <h3 className = {authenticationHeader}>Logowanie do systemu CMS</h3>
                <form className = {adminCredentials} onSubmit = {handleOnSubmit}>
                   <AdminCmsLoginInputs
