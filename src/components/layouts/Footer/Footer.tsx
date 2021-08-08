@@ -61,19 +61,18 @@ const Footer = () => {
                   <ul>{generateReveal}</ul>
                </div>
                <div className = {asideOtherElements}>
-                  <div className = {asideSeparator}>
-                     <div className = {disclaimerBlock}>
-                        Strona nie jest powiązania ani zarządzana przez Politechnikę Śląską. Strona służy jedynie w
-                        celach informacyjnych dla studentów kierunku Informatyka na wydziale Elektrycznym,
-                        rozpoczętym w roku 2020.
-                     </div>
-                     <NavLink
-                        to = {'/logowanie-do-panelu-administratora'}
-                        className = {adminPanelRoute}
-                     >
-                        Logowanie do Panelu Administratora
-                     </NavLink>
+                  <div className = {asideSeparator}/>
+                  <div className = {disclaimerBlock}>
+                     Strona nie jest powiązania ani zarządzana przez Politechnikę Śląską. Strona służy jedynie w
+                     celach informacyjnych dla studentów kierunku Informatyka na wydziale Elektrycznym,
+                     rozpoczętym w roku akademickim 2020/2021.
                   </div>
+                  <NavLink
+                     to = {'/logowanie-do-panelu-administratora'}
+                     className = {adminPanelRoute}
+                  >
+                     Logowanie do Panelu Administratora
+                  </NavLink>
                </div>
             </div>
             <div className = {formContainer}>

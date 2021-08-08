@@ -2,7 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const {
-   devInfoContainer, nodeJsIcon, nodeJsLogo, reactDevInfo, reactIcon, reactLogo, reactTextContent
+   devInfoContainer, nodeJsIcon, nodeJsLogo, reactDevInfo, reactIcon, reactLogo, reactTextContent,
+   devInfoIconsContainer
 } = require('./DevToolsInfo.module.scss');
 const { externalLinkIcon } = require('./../Footer/Footer.module.scss');
 
@@ -14,17 +15,19 @@ const DevToolsInfo = () => {
    return (
       <aside className = {reactDevInfo}>
          <div className = {devInfoContainer}>
-            <div className = {reactLogo}>
-               <FontAwesomeIcon
-                  icon = {['fab', 'react']}
-                  className = {reactIcon}
-               />
-            </div>
-            <div className = {nodeJsLogo}>
-               <FontAwesomeIcon
-                  icon = {['fab', 'node-js']}
-                  className = {nodeJsIcon}
-               />
+            <div className = {devInfoIconsContainer}>
+               <div className = {reactLogo}>
+                  <FontAwesomeIcon
+                     icon = {['fab', 'react']}
+                     className = {reactIcon}
+                  />
+               </div>
+               <div className = {nodeJsLogo}>
+                  <FontAwesomeIcon
+                     icon = {['fab', 'node-js']}
+                     className = {nodeJsIcon}
+                  />
+               </div>
             </div>
             <div className = {reactTextContent}>
                <p>
