@@ -26,3 +26,15 @@
     transform: scale(1);
   }
 }
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .gotoTopWrapper {
+    bottom: 20px;
+    right: 20px;
+    &:hover {
+      bottom: 26px;
+    }
+  }
+}

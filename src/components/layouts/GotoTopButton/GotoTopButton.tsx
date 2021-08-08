@@ -15,9 +15,9 @@ const GotoTopButton = () => {
    useEffect(() => {
       const handleOnScroll = () => {
          if(offset > 200) {
-            setShowGoto(false);
-         } else {
             setShowGoto(true);
+         } else {
+            setShowGoto(false);
          }
          setOffset(window.pageYOffset);
       }
