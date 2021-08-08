@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { SheduleContext } from '../../../../contextStore/ScheduleProvider';
+import { ScheduleContext } from '../../../../contextStore/ScheduleProvider';
 
-const { searchSubjectWrapper, removeInputField } = require('./../../../layouts/Subjects/SearchSubject.module.scss');
+const { searchSubjectWrapper, removeInputField } = require('./../../../layouts/Subjects/Subjects.module.scss');
 
 /**
  * Komponent generujący pole wyszukiwania przedmiotów na planie. Wartości inputów pobierane z kontekstu.
  */
 const SearchSubject = () => {
 
-   const { inputField, setInputField } = useContext<any>(SheduleContext);
+   const { inputField, setInputField } = useContext<any>(ScheduleContext);
 
    return (
       <aside className = {searchSubjectWrapper}>
