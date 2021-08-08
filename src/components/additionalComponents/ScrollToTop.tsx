@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
 interface ScrollToTopProps {
@@ -9,7 +9,7 @@ interface ScrollToTopProps {
  * Funkcja wymuszająca pozycję scrolla na pozycji 0 po każdym routingu (przejścia na nową ścieżkę adresu.
  * @param history - zapamiętany adres w polu wyszukiwania przeglądarki
  */
-function ScrollToTop({ history } : ScrollToTopProps) {
+const ScrollToTop: React.FC<ScrollToTopProps> = ({ history }) => {
 
    useEffect(() => {
       const unlisten = history.listen(() => window.scrollTo(0, 0));
