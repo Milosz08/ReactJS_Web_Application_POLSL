@@ -28,8 +28,10 @@ interface CalendarProvider {
  */
 const CalendarStructure = () => {
 
-   const { calendarRecords } = useContext<any>(MainStoreContext);
+   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
    const [ value, onChange ] = useState<Date>(new Date());
+
+   const { calendarRecords } = dataFetchFromServer;
 
    const supplementsTiles = ({ date, view }: SupplementsTilesProvider): any => {
       return calendarRecords.map((item: CalendarProvider) => (
