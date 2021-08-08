@@ -12,7 +12,7 @@ interface PropsProvider {
  * Główny store pobierający i przechowujący niewrażliwe dane z serwera (komunikacja przy wykorzystaniu API z
  * backendu). Dziedziczą go wszystkie węzły aplikacji (store globalny).
  *
- * @param children - wszystkie węzły dziedziczące zawartość stora.
+ * @param children { React.ReactNode } - wszystkie węzły dziedziczące zawartość stora.
  */
 const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
 
@@ -28,12 +28,22 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
          const subjectShedule = await axiosInstance.get('/subject-shedule');
          const calendarRecord = await axiosInstance.get('/calendar-record');
 
+         const covidDataFetch = JSON.parse(covidData.request.response);
+         const footerFormFetch = JSON.parse(footerForm.request.response);
+         const subjectsDataFetch = JSON.parse(subjectsData.request.response);
+         const sheduleSubjectsFetch = JSON.parse(subjectShedule.request.response);
+         const calendarRecordsFetch = JSON.parse(calendarRecord.request.response);
+
+         subjectsDataFetch.sort((a: any, b: any) => a.title.localeCompare(b.title));
+         calendarRecordsFetch
+            .sort((a: any, b: any) => a.day - b.day)
+            .sort((a: any, b: any) => a.month - b.month)
+            .sort((a: any, b: any) => a.year - b.year);
+
          setDataFetchFromServer({
-            covidData: JSON.parse(covidData.request.response),
-            footerForms: JSON.parse(footerForm.request.response),
-            subjectsData: JSON.parse(subjectsData.request.response),
-            sheduleSubjects: JSON.parse(subjectShedule.request.response),
-            calendarRecords: JSON.parse(calendarRecord.request.response)
+            covidData: covidDataFetch, footerForms: footerFormFetch,
+            subjectsData: subjectsDataFetch, sheduleSubjects: sheduleSubjectsFetch,
+            calendarRecords: calendarRecordsFetch
          });
       }
       getAllData();
