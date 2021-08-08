@@ -49,7 +49,7 @@ const ActualDateProvider: React.FC<PropsProvider> = ({ children }) => {
       counting(); //pierwsze wywołanie
       const interval = setInterval(counting, 1000 * 60 * 10); //refresh co 10 minut
       return () => clearInterval(interval);
-   });
+   }, [DAYS, MONTHS]);
 
    return (
       <ActualDateContext.Provider
