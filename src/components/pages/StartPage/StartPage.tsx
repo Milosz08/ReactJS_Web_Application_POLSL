@@ -15,11 +15,11 @@ const StartPage = () => {
    return (
       <Fragment>
          <CookiesNotification/>
-         <Header ifHeaderHasRedBar = {false}/>
+         <Header ifHeaderHasRedBar = {true}/>
          <Slider autoPlay = {true} duration={5}/>
          <CovidInfo/>
          <CountDown/>
-         <Navigation ifHeader={false}/>
+         <Navigation ifHeader = {false}/>
          <Subjects/>
       </Fragment>
    );
