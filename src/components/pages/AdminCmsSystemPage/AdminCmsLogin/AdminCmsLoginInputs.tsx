@@ -27,7 +27,7 @@ const AdminCmsLoginInputs: React.FC<PropsProvider> = ({
    credentials, setCredentials, errors, setErrors, visible, setVisible,
 }) => {
 
-   const handleChangeInput = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+   const handleChangeInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
       switch(target.placeholder.toLocaleLowerCase()) {
          case 'login':
             setCredentials({ ...credentials, login: target.value });
@@ -43,6 +43,22 @@ const AdminCmsLoginInputs: React.FC<PropsProvider> = ({
             break;
          default:
             throw new Error('Unexpected target placeholder token');
+      }
+   }
+
+   const setVisibleInputs = (id: string): void => {
+      switch(id) {
+         case 'password':
+            if(credentials.password !== '') {
+               setVisible((prevState: any) => ({ ...setVisible, password: !prevState.password }))
+            }
+            break;
+         case 'token':
+            if(credentials.token !== '') {
+               setVisible((prevState: any) => ({ ...setVisible, token: !prevState.token }))
+            }
+            break;
+         default: throw new Error('Unexpected input visibility button id');
       }
    }
 
@@ -68,7 +84,7 @@ const AdminCmsLoginInputs: React.FC<PropsProvider> = ({
             <button
                className = {showProtectedField}
                type = 'button'
-               onClick = {() => setVisible((prevState: any) => ({ ...setVisible, password: !prevState.password }))}
+               onClick = {() => setVisibleInputs('password')}
             >
                <FontAwesomeIcon
                   icon = {['fas', `${visible.password ? 'eye-slash' : 'eye'}`]}
@@ -87,7 +103,7 @@ const AdminCmsLoginInputs: React.FC<PropsProvider> = ({
             <button
                className = {showProtectedField}
                type = 'button'
-               onClick = {() => setVisible((prevState: any) => ({ ...setVisible, token: !prevState.token }))}
+               onClick = {() => setVisibleInputs('token')}
             >
                <FontAwesomeIcon
                   icon = {['fas', `${visible.token ? 'eye-slash' : 'eye'}`]}
