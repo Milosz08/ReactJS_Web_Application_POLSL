@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import CONSTANT_DATA from '../../../constants/staticData';
+import UniversalHeader from "../UniversalHeader/UniversalHeader";
 
-const { navInline, navBlocks, arrowGoto, fasIcon } = require('./Navigation.module.scss');
+const { navInline, navBlocks, arrowGoto } = require('./Navigation.module.scss');
 
 interface PropsProvider {
    ifHeader: boolean;
@@ -46,14 +46,11 @@ const Navigation: React.FC<PropsProvider > = ({ ifHeader }) => {
    return (
       <section className = {classToggle}>
          { !ifHeader &&
-         <h3>
-            <FontAwesomeIcon
-               icon = {['fas', 'location-arrow']}
-               className = {fasIcon}
-            />
-            Główna Nawigacja
-            <aside/>
-         </h3>
+         <UniversalHeader
+            iconP = {['fas', 'location-arrow']}
+            content = 'Główna Nawigacja'
+            ifCloseButtonVisible = {false}
+         />
          }
          <ul>
             {navigationElements}
