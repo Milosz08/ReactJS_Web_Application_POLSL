@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 
-const { countDownContainer, countDownWrapper, dateFont } = require('./CountDown.module.scss');
+const { countDownContainer, countDownWrapper, dateFont, mobileDateFont } = require('./CountDown.module.scss');
 
 const EXP_TIME = new Date('2021-10-01 10:00:00').getTime(); //koniec odliczania
 
@@ -55,6 +55,9 @@ const CountDown = () => {
                <span><strong>{date.hours}</strong> godzin, </span>
                <span><strong>{date.minutes}</strong> minut, </span>
                <span><strong>{date.seconds}</strong> sekund </span>
+            </div>
+            <div className = {mobileDateFont}>
+               <span>{date.days}:{date.hours}:{date.minutes}:{date.seconds}</span>
             </div>
          </div>
       </div>

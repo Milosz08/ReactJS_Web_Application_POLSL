@@ -25,8 +25,10 @@
         color: $mainLogosBgc;
       }
     }
-    .dateFont {
+    .dateFont, .mobileDateFont {
       font-family: 'Roboto Mono', monospace;
+    }
+    .dateFont {
       display: flex;
       font-size: 2.5rem;
       font-stretch: condensed;
@@ -39,6 +41,52 @@
           font-weight: 500;
           color: $yellowDefColor;
         }
+      }
+    }
+    .mobileDateFont {
+      display: none;
+      padding: 25px 0;
+      span {
+        font-size: 2.5rem;
+        font-weight: 500;
+        color: $mainLogosBgc;
+      }
+    }
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .countDownContainer {
+    .countDownWrapper {
+      margin: 50px 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1022px) {
+  .countDownContainer {
+    .countDownWrapper {
+      .dateFont {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 843px) {
+  .countDownContainer {
+    .countDownWrapper {
+      .dateFont {
+        display: none;
+      }
+      .mobileDateFont {
+        display: block;
+      }
+      h2 {
+        font-size: 1.1rem;
+        top: -13px;
       }
     }
   }
