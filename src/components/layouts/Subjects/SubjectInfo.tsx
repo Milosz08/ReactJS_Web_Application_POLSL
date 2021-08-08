@@ -1,15 +1,14 @@
-import React, { Dispatch, Fragment, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import SubjectLayout from './SubjectLayout';
-import UniversalHeader from "../UniversalHeader/UniversalHeader";
 
 import { SubjectsProvider } from "./Subjects";
 
 const {
    subInfoContainer, subInfo,  animFlexContainer, emptySubjectField, emptyIcon, messageoutEnter,
-   messageoutEnterActive, messageoutExit, messageoutExitActive
+   messageoutEnterActive, messageoutExit, messageoutExitActive, prevButtonContainer, nextButtonContainer
 } = require('./Subjects.module.scss');
 
 interface PropsProvider {
@@ -65,35 +64,32 @@ const SubjectInfo: React.FC<PropsProvider> = ({ subjectID, filteredArray, state,
    const generateNextButton = filteredArray.length > 1 ? <button onClick = {handleNextClick}/> : null;
 
    return (
-      <Fragment>
-         <UniversalHeader
-            iconP = {['fas', 'university']}
-            content = 'Szczegółowe informacje'
-            ifCloseButtonVisible = {false}
-         />
-         <div className = {subInfoContainer}>
+      <div className = {subInfoContainer}>
+         <div className = {prevButtonContainer}>
             {generatePrevButton}
-            <div className = {subInfo}>
-               <TransitionGroup>
-                  <CSSTransition
-                     key = {subjectID}
-                     timeout = {50}
-                     classNames = {{
-                        enterActive: messageoutEnter,
-                        enterDone: messageoutEnterActive,
-                        exitActive: messageoutExit,
-                        exitDone: messageoutExitActive,
-                     }}
-                  >
-                     <div className = {animFlexContainer}>
-                        {ifSubjectArrayIsEmpty}
-                     </div>
-                  </CSSTransition>
-               </TransitionGroup>
-            </div>
+         </div>
+         <div className = {subInfo}>
+            <TransitionGroup>
+               <CSSTransition
+                  key = {subjectID}
+                  timeout = {50}
+                  classNames = {{
+                     enterActive: messageoutEnter,
+                     enterDone: messageoutEnterActive,
+                     exitActive: messageoutExit,
+                     exitDone: messageoutExitActive,
+                  }}
+               >
+                  <div className = {animFlexContainer}>
+                     {ifSubjectArrayIsEmpty}
+                  </div>
+               </CSSTransition>
+            </TransitionGroup>
+         </div>
+         <div className = {nextButtonContainer}>
             {generateNextButton}
          </div>
-      </Fragment>
+      </div>
    );
 }
 
