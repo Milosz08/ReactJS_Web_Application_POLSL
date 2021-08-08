@@ -70,7 +70,6 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
-  outline: none;
 }
 
 @mixin borderWithPseudElementInfo($color, $titleBgc, $fontSize, $fontWeight, $content) {
