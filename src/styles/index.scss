@@ -8,3 +8,8 @@
 html, body, button, input, select, option, textarea {
   font-family: 'Barlow Semi Condensed', sans-serif;
 }
+
+.stopTransitions * {
+  animation: none !important;
+  transition: none !important;
+}
