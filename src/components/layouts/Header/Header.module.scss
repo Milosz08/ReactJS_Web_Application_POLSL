@@ -179,7 +179,7 @@ header.topSiteHeader {
 @media only screen and (max-width: 1250px) {
   .headerContainer {
     height: 60px;
-    .mainHeader {
+    .mainHeader, .mainHeader.ifHeaderIsOnCookies {
       margin: 0 30px;
       justify-content: space-between;
     }
@@ -200,7 +200,7 @@ header.topSiteHeader {
 
 @media only screen and (max-width: 500px) {
   .headerContainer {
-    .mainHeader {
+    .mainHeader, .mainHeader.ifHeaderIsOnCookies {
       margin: 0 20px;
     }
   }
