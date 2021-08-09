@@ -1,0 +1,46 @@
+@import './../../../../styles/_variables';
+@import './../../../../styles/_mixins';
+
+.cmsSystemContainer {
+  display: flex;
+  width: $widthVertical;
+  min-height: 500px;
+  margin: 20px 0;
+  nav.cmsNavigation {
+    transform: translateX(2px);
+    button {
+      @include defaultButtonReset();
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $borderGray;
+      color: $footerContent;
+      border: 2px solid $borderGray;
+      border-radius: 10px 0 0 10px;
+      width: 65px;
+      height: 65px;
+      font-size: 1.3rem;
+      &:not(:nth-child(1)) {
+        margin: 5px 0;
+      }
+      &.activeSection {
+        border-right: 0;
+        background-color: #ffffff;
+        color: $mainLogosBgc;
+      }
+    }
+  }
+  .cmsContent {
+    border-radius: 0 10px 10px 10px;
+    border: 2px solid $borderGray;
+    flex-grow: 1;
+  }
+}
+
+.logoutButton {
+  @include defaultButtonReset();
+  margin-left: 40px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: $headersH3;
+}
