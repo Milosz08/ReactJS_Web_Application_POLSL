@@ -1,0 +1,244 @@
+@import './../../../../../../styles/_variables';
+@import './../../../../../../styles/_mixins';
+
+.modalAddWrapper {
+  width: 1000px;
+}
+
+.signleInputsContainer {
+  display: flex;
+  .titleContainer, .iconContainer {
+    position: relative;
+    border-radius: 10px;
+    flex-grow: 1;
+    margin: 15px;
+    input[type = 'text'] {
+      @include imputField(50px, 10px);
+      width: 100%;
+      font-size: 1.1rem;
+      &::placeholder {
+        color: $borderGray;
+        font-weight: 400;
+      }
+      &:focus {
+        border-color: $mainLogosBgc;
+      }
+      &.someError {
+        border: 2px solid $importantColor;
+        &::placeholder {
+          color: $importantColor;
+        }
+      }
+    }
+    button {
+      @include clearInputField();
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.multipleInputsContainer {
+  display: flex;
+  .checkFieldsLeft, .departmentsContainer {
+    @include borderContainer();
+    &.someError {
+      border-color: $importantColor;
+      &::after {
+        color: $importantColor;
+        font-weight: 600;
+      }
+    }
+  }
+  .departmentsContainer {
+    display: flex;
+    flex-direction: column;
+    .inputContainer {
+      position: relative;
+      margin: 5px 10px;
+      input[type = 'text'] {
+        @include imputField(50px, 10px);
+        font-size: 1.1rem;
+      }
+      button {
+        @include clearInputField();
+        font-size: 1.2rem;
+      }
+    }
+    button.addNewDepartment {
+      @include defaultButtonReset();
+      border: 2px dashed $mainLogosBgc;
+      border-radius: 10px;
+      padding: 7px 0 10px 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 5px 10px;
+      color: $mainLogosBgc;
+    }
+
+    &::after {
+      content: 'odbywany na wydziałach';
+    }
+  }
+}
+
+.typeAndPlatformContainer {
+  @include borderContainer();
+  display: flex;
+  flex-direction: column;
+  &::after {
+    content: 'linki do zajęć';
+  }
+  .oneTypeContainer {
+    display: flex;
+    position: relative;
+    margin: 5px 0;
+    select, input {
+      @include imputField(50px, 10px);
+      color: $mainLogosBgc;
+      font-size: 1.1rem;
+      margin: 0 10px;
+      flex-grow: 10;
+      width: auto;
+    }
+    .selectContainer {
+      position: relative;
+      select {
+        flex-grow: 1;
+        cursor: pointer;
+        appearance: none;
+        &::-ms-expand {
+          display: none;
+        }
+      }
+      .selectArrowIcon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 23px;
+      }
+    }
+    button {
+      @include clearInputField();
+      right: 0;
+      font-size: 1.2rem;
+      margin: 0 10px;
+      .removeInputField {
+        color: $mainLogosBgc;
+      }
+    }
+  }
+  button.addNewPZEmodule {
+    @include defaultButtonReset();
+    border: 2px dashed $mainLogosBgc;
+    border-radius: 10px;
+    padding: 7px 0 10px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 5px 10px;
+    color: $mainLogosBgc;
+  }
+  &.someError {
+    border-color: $importantColor;
+    &::after {
+      color: $importantColor;
+      font-weight: 600;
+    }
+  }
+}
+
+.checkboxContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px 0 20px 0;
+  .singleCheckboxField {
+    display: flex;
+    align-items: center;
+    flex-basis: 30%;
+    cursor: pointer;
+    color: $headersH3;
+    font-weight: 500;
+    label {
+      font-size: 1.2rem;
+      text-transform: capitalize;
+      cursor: pointer;
+    }
+    input[type = 'checkbox'] {
+      @include inputCheckbox($mainLogosBgc);
+      margin: -3px;
+    }
+    .checkmark {
+      @include checkmark();
+      &.errorSomeInput {
+        @include errorInputForm();
+      }
+    }
+  }
+}
+
+.radioContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.singleRadio {
+  position: relative;
+  display: flex;
+  align-items: center;
+  label {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    color: $headersH3;
+    font-weight: 500;
+  }
+  input[type = 'radio'] {
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    &:checked ~ .radiomark::after {
+      transition: .2s;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
+.radiomark {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 1px solid $footerContent;
+  border-radius: 50%;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    background-color: $mainLogosBgc;
+    transition: .2s;
+  }
+}
+
+.formModalButtons {
+  display: flex;
+  justify-content: space-around;
+  button {
+    @include defaultButton();
+    max-width: 250px;
+    &.subjectFormSend {
+      background-color: $yellowDefColor;
+    }
+  }
+}
