@@ -21,6 +21,59 @@
   background-color: #ffffff;
 }
 
+header.cookiesHeader {
+  h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: $headersH3;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .cookieSeparatorIcon {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    color: $yellowDefColor;
+  }
+  aside {
+    flex-grow: 1;
+    height: 1px;
+    background-color: $grayBgc;
+    margin: 0 20px;
+  }
+}
+
+button.cookiesClosePopup, button.messageModalCloseButton {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  span {
+    position: absolute;
+    right: 0;
+    width: 70%;
+    height: 2px;
+    background-color: $grayBgc;
+    transform: rotate(45deg);
+    &::after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      left: 0;
+      background-color: $grayBgc;
+      transform-origin: center;
+      transform: rotate(90deg);
+    }
+  }
+}
+
 section.cookiesMainContent {
   margin: 40px 0;
   font-size: 1.2rem;
