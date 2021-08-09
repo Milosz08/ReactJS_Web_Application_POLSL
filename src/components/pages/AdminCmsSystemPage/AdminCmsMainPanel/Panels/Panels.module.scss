@@ -1,0 +1,158 @@
+@import './../../../../../styles/_variables';
+@import './../../../../../styles/_mixins';
+
+.panelContainer {
+  display: none;
+  justify-content: flex-start;
+  height: 100%;
+  &.panelActive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h2 {
+    margin: 40px 0;
+    font-weight: 500;
+    color: $mainLogosBgc;
+  }
+}
+
+label.insertDataInputField {
+  div {
+    position: relative;
+    input[type = 'text'] {
+      @include imputField(15px, 12px);
+      width: 350px;
+      border: 2px solid $borderGray;
+    }
+    button {
+      @include defaultButtonReset();
+      position: absolute;
+      top: 50%;
+      right: 5px;
+      transform: translateY(-50%);
+      height: 50px;
+      width: 50px;
+      font-size: 1.3rem;
+      color: $mainLogosBgc;
+    }
+  }
+}
+
+.panelContainer ul {
+  width: calc(100% - 40px);
+  margin: 20px;
+  & > li {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1;
+    text-align: left;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: 1px solid $borderGray;
+    border-radius: 10px;
+    margin: 9px 0;
+    font-weight: 500;
+    color: $mainLogosBgc;
+    span.listNumber, span.sortById {
+      width: 60px;
+      color: $darkGray;
+    }
+    span.sortById, span.sortByDate, span.sortByImportant, span.sortByCount {
+      color: $footerHeaders;
+    }
+    span.listTitle, span.listDate, span.sortByName, span.sortByDate {
+      flex-grow: 1;
+    }
+    span.subjectSemesters, span.sortBySem, span.sortByCount, span.listCount {
+      width: 250px;
+    }
+    span.subjectStatus, span.sortByEnd, span.listImportant {
+      width: 200px;
+      color: $importantColor;
+      &.subjectEnd {
+        color: $goodColor;
+      }
+    }
+    span.typeOfMessageCSS {
+      width: 400px;
+    }
+    span.sortByType {
+      width: 510px;
+    }
+
+    span.sortByEnd, span.sortByImportant {
+      width: 310px;
+      color: $footerHeaders;
+    }
+    button.modifyElement, button.deleteElement {
+      @include defaultButtonReset();
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      width: 35px;
+      height: 35px;
+      margin-left: 20px;
+      font-size: 1.2rem;
+      &.modifyElement {
+        color: $mainLogosBgc;
+      }
+      &.deleteElement {
+        color: $importantColor;
+      }
+    }
+    &.listSorting {
+      border: none;
+      font-size: 1rem;
+      color: $footerHeaders;
+      text-transform: uppercase;
+      .angleIcon {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.listImportant {
+  display: flex;
+  .importantDot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin-right: 10px;
+    &.lowLevel {
+      background-color: $goodColor;
+    }
+    &.mediumLevel {
+      background-color: $yellowDefColor;
+    }
+    &.highLevel {
+      background-color: $importantColor;
+    }
+  }
+}
+
+button.addNewRecord {
+  @include defaultButtonReset();
+  border: 2px dashed $mainLogosBgc;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px 0 13px 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: $mainLogosBgc;
+}
+
+.recordsNotExist {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  color: $mainLogosBgc;
+  margin: 50px 0;
+  .infoIcon {
+    font-size: 2.2rem;
+  }
+}
