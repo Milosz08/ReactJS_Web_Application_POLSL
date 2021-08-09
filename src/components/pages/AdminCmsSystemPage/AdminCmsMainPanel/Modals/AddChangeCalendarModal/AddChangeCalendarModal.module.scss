@@ -1,0 +1,160 @@
+@import './../../../../../../styles/_variables';
+@import './../../../../../../styles/_mixins';
+
+.newChangeEntrie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timePicker, .calendarPicker {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  font-size: 1.4rem;
+  color: $mainLogosBgc;
+}
+
+.timePicker {
+  font-size: 1.1rem;
+}
+
+.dateInputsContainer {
+  margin: 20px 0;
+  max-width: 250px;
+  position: relative;
+  input[type = 'date'] {
+    @include imputField(0, 10px);
+    @include resetPickersInputs();
+    appearance: none;
+    &.someError {
+      border-color: $importantColor;
+      color: $importantColor;
+    }
+  }
+}
+
+.addEntrieModule {
+  @include borderContainer();
+  width: 100%;
+  padding: 20px;
+  transition: .2s;
+  &::after {
+    content: 'wpisy do kalendarza';
+  }
+  &.someError {
+    border-color: $importantColor;
+    color: $importantColor;
+    &::after {
+      color: $importantColor;
+      font-weight: 600;
+    }
+  }
+}
+
+.messageModuleContainer {
+  width: 100%;
+  .timeAndImportant {
+    display: flex;
+    justify-content: space-around;
+    .importantsRadio {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-basis: 40%;
+    }
+    .inputTime {
+      display: flex;
+      align-items: center;
+      position: relative;
+      flex-basis: 30%;
+      label {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: $mainLogosBgc;
+        margin-right: 30px;
+      }
+      input[type = 'time'] {
+        @include imputField(0, 7px);
+        @include resetPickersInputs();
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.radioImportants {
+  &:nth-child(1) div::after {
+    background-color: $goodColor;
+  }
+  &:nth-child(2) div::after {
+    background-color: $yellowDefColor;
+  }
+  &:nth-child(3) div::after {
+    background-color: $importantColor;
+  }
+}
+
+.messageAndExitField {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+  .messageTextfield {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+    textarea {
+      @include imputField(0, 10px);
+      padding-right: 15px;
+      font-size: 1.1rem;
+      position: relative;
+      resize: none;
+    }
+    .quantityChars {
+      position: absolute;
+      width: 50px;
+      bottom: 10px;
+      right: 0;
+      color: $darkGray;
+    }
+  }
+
+  button {
+    @include defaultButtonReset();
+    margin: 0 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+    color: $mainLogosBgc;
+  }
+}
+
+.addEntrieModule button.addNewEntrie {
+  @include defaultButtonReset();
+  width: 100%;
+  border: 2px dashed $mainLogosBgc;
+  border-radius: 10px;
+  padding: 7px 0 10px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: $mainLogosBgc;
+}
+
+.formCalendarButtons {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  button {
+    @include defaultButton();
+    width: 200px;
+  }
+  .subjectFormSend {
+    background-color: $yellowDefColor;
+  }
+}
