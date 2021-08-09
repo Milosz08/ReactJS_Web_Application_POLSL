@@ -51,7 +51,9 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
    
    return (
       <MainStoreContext.Provider
-         value = {{ dataFetchFromServer, setDataFetchFromServer }}
+         value = {{
+            dataFetchFromServer, setDataFetchFromServer
+         }}
       >
          {children}
       </MainStoreContext.Provider>
