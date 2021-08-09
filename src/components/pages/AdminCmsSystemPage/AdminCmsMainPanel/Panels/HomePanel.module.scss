@@ -1,0 +1,136 @@
+@import './../../../../../styles/_variables';
+@import './../../../../../styles/_mixins';
+
+.mainInfoContainer {
+  @include borderWithPseudElementInfo($grayBgc, #ffffff, 1.1rem, 400, 'GŁÓWNE INFORMACJE');
+  width: calc(100% - 80px);
+  height: 100%;
+  margin: 40px 40px 0 40px;
+  padding-top: 20px;
+  &::before {
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  span.separator {
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin-bottom: 10px;
+    background-color: $grayBgc;
+  }
+  h4, p {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: $mainLogosBgc;
+    padding: 10px 0;
+    line-height: 1;
+    strong {
+      color: $yellowDefColor;
+      font-weight: 500;
+    }
+  }
+  p {
+    font-size: 1.1rem;
+    padding: 5px 0;
+    strong {
+      color: $mainLogosBgc;
+      font-weight: 600;
+    }
+  }
+}
+
+.changeCredentials {
+  @include borderWithPseudElementInfo($borderGray, #ffffff, 1.1rem, 400, 'ZMIANA POŚWIADCZEŃ');
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: calc(100% - 80px);
+  height: 100%;
+  margin: 40px;
+  padding: 20px 0;
+  .changeCredentialsForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: $mainLogosBgc;
+      margin: 20px 0;
+    }
+    .loginField, .inputNewAdminToken, .confirmViaAdminPasswordField, .passwordField {
+      position: relative;
+      input {
+        @include imputField(50px, 10px);
+        font-size: 1.1rem;
+        width: 300px;
+        margin: 5px 0;
+        &.errorValue {
+          border-color: $importantColor;
+          &::placeholder {
+            color: $importantColor;
+          }
+        }
+        &.blockedInputs {
+          pointer-events: none;
+          opacity: .6;
+        }
+      }
+      button.showProtectedField {
+        @include defaultButtonReset();
+        position: absolute;
+        height: 100%;
+        width: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 5px;
+        .visibleIcon {
+          font-size: 1rem;
+          color: $darkGray;
+        }
+      }
+    }
+    p {
+      margin: 20px 0 10px 0;
+      max-width: 300px;
+      color: $mainLogosBgc;
+      font-weight: 500;
+    }
+    button.submitForm {
+      @include defaultButton();
+      width: 200px;
+      margin: 20px 0;
+    }
+  }
+  &::before {
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &.disable {
+    border: 2px solid $importantColor;
+    &::before {
+      color: $importantColor;
+      font-weight: 500;
+    }
+    .changeCredentialsForm {
+      filter: grayscale(.6);
+      opacity: .5;
+      input {
+        pointer-events: none;
+      }
+      button:disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+  p.disabledInfo {
+    flex-basis: 100%;
+    text-align: center;
+    color: $importantColor;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin: 10px 80px;
+  }
+}

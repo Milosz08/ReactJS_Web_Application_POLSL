@@ -1,0 +1,56 @@
+@import './../../../../../styles/_variables';
+@import './../../../../../styles/_mixins';
+
+.covidPanelsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  section {
+    width: 350px;
+    height: 130px;
+    border: 2px dashed $mainLogosBgc;
+    border-radius: 10px;
+    margin: 20px;
+    .sectionWrapper {
+      display: flex;
+      align-items: center;
+      border: 8px solid #ffffff;
+      background: $covidInfoBgc;
+      border-radius: 16px;
+      height: 100%;
+      padding: 20px;
+      h3 {
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+      select {
+        width: 90px;
+        font-weight: 500;
+        padding: 8px 5px;
+        margin: 0 0 0 20px;
+        font-size: 1.2rem;
+        outline: none;
+        border: 2px solid $borderGray;
+        color: $mainLogosBgc;
+        border-radius: 10px;
+        transition: .2s;
+        cursor: pointer;
+        &:focus {
+          border-color: $mainLogosBgc;
+        }
+      }
+    }
+  }
+}
+
+button.submitCovidForm {
+  @include defaultButton();
+  max-width: 180px;
+  margin-bottom: 30px;
+}
+
+p.unwriteChangesCSS  {
+  font-size: 1.2rem;
+  color: $importantColor;
+  margin: 10px 0;
+}
