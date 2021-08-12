@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import DelayLink from 'react-delay-link';
 import classnames from "classnames";
 
 import CONSTANT_DATA from '../../../constants/staticData';
 import Navigation from "../Navigation/Navigation";
 import HamburgerMenu from "./HamburgerMenu";
+import LoadingBigBar from "../LoadingBigBar/LoadingBigBar";
+import { MainStoreContext, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
 
 const {
    topNavBar, topNavBarLinks, headerContainer, mainHeader, siteImportantInfo, stickyHeader, topSiteHeader,
@@ -26,6 +28,8 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
 
    const { TOP_NAVBAR_ELMS } = CONSTANT_DATA;
    const topHeaderHeightRef = useRef<HTMLElement | null>(null);
+
+   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
 
    const [ offset, setOffset ] = useState<number>(0);
    const [ width, setWidth ] = useState<number>(window.innerWidth);
@@ -111,12 +115,17 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
             style = {width > 1250 ? ({ height: `${offset > elmHeight ? 80 : (120 - offset)}px` }) : { height: 90 }}
          >
             <div className = {toggleMainHeaderClasses}>
-               <NavLink to = '/'>
+               <DelayLink
+                  to = '/'
+                  delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                  replace = {false}
+                  clickAction = {timeoutRoutePath}
+               >
                   <img
                      src = {process.env.PUBLIC_URL + `/images/logosBaner.png`}
                      alt = 'banerLogo'
                   />
-               </NavLink>
+               </DelayLink>
                <div className = {navigationRouter}>
                   {ifHeaderHasRedBar && <Navigation ifHeader = {true}/>}
                </div>
@@ -126,6 +135,7 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
                />
             </div>
          </div>
+         <LoadingBigBar/>
          <div
             className = {toggleSiteInfoClasses}
             style = {{ transform: `translateY(-${offset}px)` }}
