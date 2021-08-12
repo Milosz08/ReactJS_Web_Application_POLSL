@@ -8,9 +8,17 @@ import { ModalsStateContext } from "../../../../../../contextStore/ModalsStatePr
 import { MODAL_TYPES } from "../../../../../../contextStore/ModalsStateProvider";
 import classnames from "classnames";
 import UniversalHeader from "../../../../../layouts/UniversalHeader/UniversalHeader";
+import updateLogsDateAsync from "../../../../../../constants/updateLogsDateAsync";
+
+enum IMPORTANT_VALUES {
+   LOW = 'low',
+   MEDIUM = 'medium',
+   HIGH = 'high'
+}
 
 const {
-   modalContainer, modalWrapper, modalWarningInfo, modalWarningButtons, modalOpen,
+   modalContainer, modalWrapper, modalWarningInfo, modalWarningButtons, modalOpen, dangerColorWrapper,
+   calendarWarnInfo, low, medium, high
 } = require('./WarningDeleteModal.module.scss');
 
 /**
@@ -30,17 +38,30 @@ const CalendarDeleteModal = () => {
       const subjectsAfterRemove = copy.filter(object => object._id !== calendarModal.id);
       setDataFetchFromServer({ ...dataFetchFromServer, calendarRecords: subjectsAfterRemove });
       setCalendarModal({ ...calendarModal, ifOpen: false });
+      await updateLogsDateAsync('calendar', process.env.REACT_APP_CALENDAR_ID);
+   }
+
+   const importantClassReturn = (value: string): string => {
+      switch(value) {
+         case IMPORTANT_VALUES.LOW: return low;
+         case IMPORTANT_VALUES.MEDIUM: return medium;
+         case IMPORTANT_VALUES.HIGH: return high;
+         default: throw new Error('Unexpected IMPORTANT_VALUE type');
+      }
    }
 
    const generateInfos = () => {
-      const calendarRecord = calendarRecords.filter((object: any) => object._id === calendarModal.id);
-
-      if(calendarRecord.length !== 0) {
-         const day = calendarRecord[0].day < 10 ? `0${calendarRecord[0].day}` : calendarRecord[0].day;
-         const month = calendarRecord[0].month < 10 ? `0${calendarRecord[0].month}` : calendarRecord[0].month;
-         const fullDate = `${day}/${month}/${calendarRecord[0].year}`;
-         const titles = calendarRecord[0].items.map((item: any) => <p key = {uuidv4()}>{item.message}</p>);
-
+      const calendarRecord = calendarRecords.find((object: any) => object._id === calendarModal.id);
+      if(calendarRecord !== undefined) {
+         const day = calendarRecord.day < 10 ? `0${calendarRecord.day}` : calendarRecord.day;
+         const month = calendarRecord.month < 10 ? `0${calendarRecord.month}` : calendarRecord.month;
+         const fullDate = `${day}/${month}/${calendarRecord.year}`;
+         const titles = calendarRecord.items.map((item: any) => (
+            <p
+               key = {uuidv4()}
+               className = {classnames(calendarWarnInfo, importantClassReturn(item.importantLevel))}
+            >{item.message}</p>
+         ));
          return { fullDate, titles };
       }
       return { fullDate: '', titles: '' };
@@ -48,14 +69,15 @@ const CalendarDeleteModal = () => {
 
    return (
       <div className = {classnames(modalContainer, ifModalOpen)}>
-         <div className = {modalWrapper}>
+         <div className = {classnames(modalWrapper, dangerColorWrapper)}>
             <UniversalHeader
                iconP = {['fas', 'exclamation-triangle']}
                content = 'Usuwanie Aktywności'
                ifCloseButtonVisible = {false}
             />
             <div className = {modalWarningInfo}>
-               Czy na pewno chcesz usunąć wpis/y z dnia {generateInfos().fullDate}
+               Czy na pewno chcesz usunąć {generateInfos().titles.length}
+               {generateInfos().titles.length > 1 ? ' wpisy' : ' wpis'} z dnia {generateInfos().fullDate} o treści:
                {generateInfos().titles}
                z bazy danych? Operacji tej nie można cofnąć.
             </div>
