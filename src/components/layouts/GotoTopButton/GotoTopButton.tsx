@@ -21,9 +21,13 @@ const GotoTopButton = () => {
          }
          setOffset(window.pageYOffset);
       }
+      if(offset === 0) {
+         setShowGoto(false);
+      }
       window.addEventListener('scroll', handleOnScroll);
       return () => window.removeEventListener('scroll', handleOnScroll);
    }, [offset]);
+
 
    const handleClickGotoTop = () => document.body.scrollIntoView({ behavior: 'smooth' });
    const toggleClass = showGoto ? showGotoButton : '';
