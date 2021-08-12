@@ -33,7 +33,7 @@ footer.footerWrapper {
         padding-right: 170px;
         ul {
           list-style-type: none;
-          li a {
+          li a, div[role = 'link'] {
             color: $footerContent;
             line-height: 1.8;
             font-weight: 300;
@@ -58,10 +58,11 @@ footer.footerWrapper {
           padding-top: 20px;
           color: $footerContent;
         }
-        .adminPanelRoute {
+        div[role = 'link'] {
           display: block;
           margin-top: 30px;
           color: $footerHeaders;
+          text-decoration: underline;
         }
       }
     }

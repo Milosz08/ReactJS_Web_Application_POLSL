@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink } from 'react-router-dom';
+import DelayLink from 'react-delay-link';
+
 import FooterForm from './FooterForm';
 import CopyrightFooter from './CopyrightFooter';
 
 import CONSTANT_DATA from "../../../constants/staticData";
+import { MainStoreContext, ROUTER_INTERVAL_TIME } from "../../../contextStore/MainStoreContext";
 
 const {
    footerWrapper, linksPages, revelarPages, footerContainer, externalLinkIcon, formContainer, footerHeaders,
-   footerRouterContex, disclaimerBlock, copyrightSectionContainer, asideSeparator, asideOtherElements,
-   adminPanelRoute
+   footerRouterContex, disclaimerBlock, copyrightSectionContainer, asideSeparator, asideOtherElements
 } = require('./Footer.module.scss');
 
 /**
@@ -19,6 +20,7 @@ const {
 const Footer = () => {
 
    const { TOP_NAVBAR_ELMS, SITES } = CONSTANT_DATA;
+   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
 
    const generateLinks = TOP_NAVBAR_ELMS.map(navElm => (
       <li key = {navElm.title}>
@@ -41,9 +43,14 @@ const Footer = () => {
 
       return (
          <li key = {navElm.title}>
-            <NavLink to = {redeptWithPolish}>
+            <DelayLink
+               to = {redeptWithPolish}
+               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+               replace = {false}
+               clickAction = {timeoutRoutePath}
+            >
                {navElm.title}
-            </NavLink>
+            </DelayLink>
          </li>
       );
    });
@@ -67,12 +74,14 @@ const Footer = () => {
                      celach informacyjnych dla studentów kierunku Informatyka na wydziale Elektrycznym,
                      rozpoczętym w roku akademickim 2020/2021.
                   </div>
-                  <NavLink
+                  <DelayLink
                      to = {'/logowanie-do-panelu-administratora'}
-                     className = {adminPanelRoute}
+                     delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                     replace = {false}
+                     clickAction = {timeoutRoutePath}
                   >
                      Logowanie do Panelu Administratora
-                  </NavLink>
+                  </DelayLink>
                </div>
             </div>
             <div className = {formContainer}>
