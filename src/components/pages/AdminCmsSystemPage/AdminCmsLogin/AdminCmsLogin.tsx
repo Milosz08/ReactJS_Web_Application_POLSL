@@ -10,10 +10,11 @@ import CurrentURLpath from "../../../layouts/CurrentURLpath/CurrentURLpath";
 
 import COOKIES_OBJECT from "../../../../constants/allCookies";
 import AdminCmsLoginInputs from "./AdminCmsLoginInputs";
+import LoadingSystemAnimation from "../../../additionalComponents/LoadingSystemAnimation";
 
 const {
    adminLoginWrapper, adminLoginContainer, adminCredentials, onSubmitCSS, infoAboutToken, poweredBy,
-   authenticationHeader, hideFormOnClick, adminAsyncWrapper, showAsync, infiniteLoad, infiniteUse
+   authenticationHeader, hideFormOnClick
 } = require('./AdminCmsLogin.module.scss');
 
 const COOKIE_ID = uuidv4();
@@ -99,7 +100,9 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
          setHideAuth(true);
          setTimeout(() => { setAuth(true); }, 2000);
          setCredentialsHash([]);
-         setTimeout(() => { handleCookie(COOKIES_OBJECT.adminSession, COOKIE_ID, { path: '/', sameSite: 'strict' }) }, 2000);
+         setTimeout(() => {
+            handleCookie(COOKIES_OBJECT.adminSession, COOKIE_ID, { path: '/', sameSite: 'strict' });
+         }, 2000);
          setCredentials({ login: '', password: '', token: '' });
       } else {
          setErrors({ login: loginBool, password: passwordBool, token: tokenBool });
@@ -126,7 +129,6 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
    }, []);
 
    const toggleClasses = hideAuth ? classnames(adminLoginWrapper, hideFormOnClick) : adminLoginWrapper;
-   const showAsyncElement = hideAuth ? classnames(adminAsyncWrapper, showAsync) : adminAsyncWrapper;
 
    return (
       <Fragment>
@@ -134,18 +136,7 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
          <Header ifHeaderHasRedBar = {false}/>
          <CurrentURLpath ifImportatHeaderActive = {false}/>
          <div className = {adminLoginContainer}>
-            <div className = {showAsyncElement}>
-               <svg className = {infiniteLoad} viewBox = '-2000 -1000 4000 2000'>
-                  <path id = 'inf' d = 'M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z'/>
-                  <use
-                     className = {infiniteUse}
-                     xlinkHref = '#inf'
-                     strokeDasharray = '1570 5143'
-                     strokeDashoffset = '6713px'
-                  />
-               </svg>
-               Logowanie do systemu...
-            </div>
+            <LoadingSystemAnimation hideAuth = {hideAuth}/>
             <div className = {toggleClasses}>
                <h3 className = {authenticationHeader}>Logowanie do systemu CMS</h3>
                <form className = {adminCredentials} onSubmit = {handleOnSubmit}>
