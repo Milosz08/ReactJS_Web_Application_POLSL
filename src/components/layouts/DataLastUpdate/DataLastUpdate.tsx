@@ -5,7 +5,7 @@ const { dataLastUpdate } = require('./DataLastUpdate.module.scss');
 
 interface PropsProvider {
    dataID: string | undefined;
-   content: string;
+   content?: string;
    withoutText: boolean;
 }
 
