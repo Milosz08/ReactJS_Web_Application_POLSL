@@ -11,6 +11,12 @@
     color: $headersH3;
     font-weight: 500;
     line-height: 1;
+    span.additionalTitleHeader {
+      text-decoration: underline;
+      font-weight: 500;
+      color: $yellowHover;
+      padding-left: 10px;
+    }
   }
   .universalHeaderIcon {
     font-size: 1.2rem;
