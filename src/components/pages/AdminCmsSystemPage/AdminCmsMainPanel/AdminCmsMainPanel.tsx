@@ -10,19 +10,22 @@ import CurrentURLpath from '../../../layouts/CurrentURLpath/CurrentURLpath';
 import ModalsStateProvider from '../../../../contextStore/ModalsStateProvider';
 import FormDataAndValidateProvider from '../../../../contextStore/FormDataAndValidateProvider';
 import FormCalendarModalProvider from '../../../../contextStore/FormCalendarModalProvider';
+import FormScheduleModalProvider from "../../../../contextStore/FormScheduleModalProvider";
 
 import UserMessageDeleteModal from './Modals/WarningDeleteModal/UserMessageDeleteModal';
 import CalendarDeleteModal from './Modals/WarningDeleteModal/CalendarDeleteModal';
 import SubjectDeleteModal from './Modals/WarningDeleteModal/SubjectDeleteModal';
 import ViewUserMessageModal from './Modals/ViewUserMessagesModal/ViewUserMessageModal';
+import ScheduleDeleteModal from "./Modals/WarningDeleteModal/ScheduleDeleteModal";
 import AddChangeSubjectModal from './Modals/AddChangeSubjectModal/AddChangeSubjectModal';
 import AddChangeCalendarModal from './Modals/AddChangeCalendarModal/AddChangeCalendarModal';
+import AddChangeScheduleModal from "./Modals/AddChangeScheduleModal/AddChangeScheduleModal";
 import AdminCmsLeftNavigation from './AdminCmsLeftNavigation';
 
 import HomePanel from './Panels/HomePanel';
 import Covid19Panel from './Panels/Covid19Panel';
 import SubjectsPanel from './Panels/SubjectsPanel';
-import ShedulePanel from './Panels/ShedulePanel';
+import SchedulePanel from './Panels/SchedulePanel';
 import CalendarPanel from './Panels/CalendarPanel';
 import UserMessagesPanel from './Panels/UserMessagePanel';
 
@@ -60,6 +63,7 @@ const AdminCmsMainPanel: React.FC<PropsProvider> = ({ setAuth, handleCookie }) =
             <SubjectDeleteModal/>
             <CalendarDeleteModal/>
             <UserMessageDeleteModal/>
+            <ScheduleDeleteModal/>
             <ViewUserMessageModal/>
             <FormDataAndValidateProvider>
                <AddChangeSubjectModal/>
@@ -67,6 +71,9 @@ const AdminCmsMainPanel: React.FC<PropsProvider> = ({ setAuth, handleCookie }) =
             <FormCalendarModalProvider>
                <AddChangeCalendarModal/>
             </FormCalendarModalProvider>
+            <FormScheduleModalProvider>
+               <AddChangeScheduleModal/>
+            </FormScheduleModalProvider>
             <div className = {adminLoginContainer}>
                <div className = {adminLoginWrapper}>
                   <section className = {universalHeader}>
@@ -95,7 +102,7 @@ const AdminCmsMainPanel: React.FC<PropsProvider> = ({ setAuth, handleCookie }) =
                         <FormDataAndValidateProvider>
                            <SubjectsPanel activeNavElm = {activeNavElm}/>
                         </FormDataAndValidateProvider>
-                        <ShedulePanel activeNavElm = {activeNavElm}/>
+                        <SchedulePanel activeNavElm = {activeNavElm}/>
                         <CalendarPanel activeNavElm = {activeNavElm}/>
                         <UserMessagesPanel activeNavElm = {activeNavElm}/>
                      </div>
