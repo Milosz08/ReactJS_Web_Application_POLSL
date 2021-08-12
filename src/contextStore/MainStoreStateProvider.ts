@@ -33,7 +33,7 @@ interface MainStoreStateProvider {
       title: string,
       __v: number
    }>;
-   sheduleSubjects: Array<{
+   scheduleSubjects: Array<{
       _id: string,
       title: string,
       group: string,
