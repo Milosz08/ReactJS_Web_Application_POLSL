@@ -1,0 +1,23 @@
+@import './../../../styles/_variables';
+@import './../../../styles/_mixins';
+
+.bigBarContainer {
+  display: none;
+  width: 100%;
+  height: 3px;
+  background-color: $mainLogosBgc;
+  .bigBarLoading {
+    display: none;
+    height: 100%;
+    width: 0;
+    background-color: $mainLogosBgc;
+    &.visible {
+      display: block;
+      background-color: $yellowDefColor;
+      width: 0;
+    }
+  }
+  &.visible {
+    display: block;
+  }
+}
