@@ -49,14 +49,14 @@ const ScheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
    const [ filteredArray, setFilteredArray ] = useState<any>([]);
 
    const { dayStr } = date;
-   const { sheduleSubjects } = dataFetchFromServer;
+   const { scheduleSubjects } = dataFetchFromServer;
    const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
 
    const ifActive: string = dayStr.toLocaleLowerCase() === dayOfWeek.toLocaleLowerCase() ? active : '';
 
    useEffect(() => {
       const returFilteredArray = (engGroup: string, normalGroup: string): Array<SheduleSubjectsProvider> => (
-         sheduleSubjects.filter((object: SheduleSubjectsProvider) => (
+         scheduleSubjects.filter((object: SheduleSubjectsProvider) => (
             object.group === engGroup || object.group === normalGroup || object.group === 'all'
          )
       ));
@@ -76,7 +76,7 @@ const ScheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
             throw new Error('Selected group not exist!');
       }
 
-   }, [groupSelected, engSelected, NORMAL_GROUPS, sheduleSubjects, ENG_GROUPS, inputField]);
+   }, [groupSelected, engSelected, NORMAL_GROUPS, scheduleSubjects, ENG_GROUPS, inputField]);
 
    const filteredSubjects = filteredArray.filter((subject: SheduleSubjectsProvider): boolean => (
       subject.day.toLocaleLowerCase() === dayOfWeek.toLocaleLowerCase()
@@ -125,11 +125,11 @@ const ScheduleSections: React.FC<PropsProvider> = ({ dayOfWeek }) => {
 
    return (
       <div className = {scheduleSection}>
-         <header className = {`${dayOfWeekCSS} ${ifActive}`}>
+         <header className = {classnames(dayOfWeekCSS, ifActive)}>
             {dayOfWeek}
          </header>
          {generateOneColumnOfTile}
-         <aside className = {`${endLineOfSection} ${ifActive}`}/>
+         <aside className = {classnames(endLineOfSection, ifActive)}/>
       </div>
    );
 }
