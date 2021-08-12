@@ -7,9 +7,12 @@ import ComponentToPrint from "../../../additionalComponents/ComponentToPrint";
 
 import { MainStoreContext } from "../../../../contextStore/MainStoreContext";
 import { ScheduleContext } from "../../../../contextStore/ScheduleProvider";
+import DataLastUpdate from "../../../layouts/DataLastUpdate/DataLastUpdate";
 
 const { scheduleRender } = require('./../../../layouts/Navigation/Navigation.module.scss');
-const { progressBar, progressActive, colored, activeBar, generateButton } = require('./../SchedulePage.module.scss');
+const {
+   progressBar, progressActive, colored, activeBar, generateButton, underInfo
+} = require('./../SchedulePage.module.scss');
 
 /**
  * Komponent generujący sekcję dodatkowe narzędzia do planu zajęć (możliwość stworzenia pliku pdf).
@@ -18,7 +21,7 @@ const AdditionalTools = () => {
 
    const { dataFetchFromServer } = useContext<any>(MainStoreContext);
    const { groupSelected, engSelected } = useContext<any>(ScheduleContext);
-   const { sheduleSubjects } = dataFetchFromServer;
+   const { scheduleSubjects } = dataFetchFromServer;
 
    const componentRef = useRef<any>();
    const [ date, setDate ] = useState<Date>(new Date());
@@ -58,6 +61,11 @@ const AdditionalTools = () => {
 
    return (
       <section className = {scheduleRender}>
+         <DataLastUpdate
+            dataID = {process.env.REACT_APP_SCHEDULE_ID}
+            content = 'planu zajęć'
+            withoutText = {false}
+         />
          <UniversalHeader
             iconP = {['fas', 'tools']}
             content = 'Dodatkowe narzędzia'
@@ -69,11 +77,14 @@ const AdditionalTools = () => {
          >
             Wygeneruj plan w formie pliku PDF
          </button>
+         <span className = {underInfo}>
+            Generowanie planu zajmuje średnio 10 sekund (zależne od ilości przedmiotów w bazie danych).
+         </span>
          <div style = {{ display: "none" }}>
             <ComponentToPrint
                ref = {componentRef}
                date = {date}
-               subjects = {sheduleSubjects}
+               subjects = {scheduleSubjects}
                groupSelected = {groupSelected}
                engSelected = {engSelected}
             />
