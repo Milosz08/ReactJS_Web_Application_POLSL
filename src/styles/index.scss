@@ -15,3 +15,7 @@ html, body, button, input, select, option, textarea {
   animation: none !important;
   transition: none !important;
 }
+
+* [role = 'link'] {
+  cursor: pointer;
+}
