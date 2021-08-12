@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { v4 as uuidv4 } from 'uuid';
+import classnames from 'classnames';
 import axiosInstance from '../../../../../../helpers/request';
 
 import { ModalsStateContext } from '../../../../../../contextStore/ModalsStateProvider';
@@ -8,9 +9,10 @@ import { FormCalendarModalContext } from '../../../../../../contextStore/FormCal
 import { MainStoreContext } from '../../../../../../contextStore/MainStoreContext';
 
 import MessageModule from './MessageModule';
-import { MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 import UniversalHeader from "../../../../../layouts/UniversalHeader/UniversalHeader";
-import classnames from "classnames";
+
+import { MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
+import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
 
 const MAX_ENTRIES_ADD = 4;
 
@@ -50,7 +52,7 @@ const AddChangeCalendarModal = () => {
 
    const editExistValue = async (newObject: any, copy: Array<any>) => {
       await axiosInstance.put(`calendar-record/${calendarModal.id}`, newObject);
-      const index = copy.findIndex(x => x._id === calendarModal.id);
+      const index = copy.findIndex((x: any) => x._id === calendarModal.id);
       if(index >= 0) {
          copy[index] = newObject;
          setDataFetchFromServer({ ...dataFetchFromServer, calendarRecords: copy });
@@ -62,18 +64,6 @@ const AddChangeCalendarModal = () => {
       const newCalendarRecord = res.data;
       copy.push(newCalendarRecord);
       setDataFetchFromServer({ ...dataFetchFromServer, calendarRecords: copy });
-   }
-
-   const updateDate = async () => {
-      const date = new Date();
-      const dateObject = {
-         updateDateFor: 'calendar',
-         updateDate: {
-            day: date.getDate(), month: date.getMonth() + 1, year: date.getFullYear(),
-            hour: date.getHours(), minutes: date.getMinutes(), seconds: date.getSeconds(),
-         },
-      };
-      await axiosInstance.put(`last-update/${process.env.REACT_APP_CALENDAR_ID}`, dateObject);
    }
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -93,25 +83,27 @@ const AddChangeCalendarModal = () => {
                importantLevel: entrie.importantLevel,
             })),
          };
-         if(calendarModal.type === 'edit') {
+         if(calendarModal.type === MODAL_TYPES.EDIT) {
             editExistValue(newObject, copy);
          } else {
             addNewValue(newObject, copy);
          }
-         updateDate();
+         updateLogsDateAsync('calendar', process.env.REACT_APP_CALENDAR_ID);
          restoreValues();
+      } else {
+         setErrors({ date: objErrors.dateBool, time: objErrors.timeBool, message: objErrors.messageBool });
       }
    }
 
    useEffect(() => {
       if(calendarModal.id !== null) {
-         const shellingObject = calendarRecords.filter((object: any) => object._id === calendarModal.id);
-         if(shellingObject.length !== 0) {
-            const month = shellingObject[0].month < 10 ? `0${shellingObject[0].month}` : shellingObject[0].month;
-            const day = shellingObject[0].day < 10 ? `0${shellingObject[0].day}` : shellingObject[0].day;
-            if(calendarModal.type === 'edit') {
-               setDate(`${shellingObject[0].year}-${month}-${day}`);
-               setEntries(shellingObject[0].items.map((item: any) => ({
+         const shellingObject = calendarRecords.find((object: any) => object._id === calendarModal.id);
+         if(shellingObject !== undefined) {
+            const month = shellingObject.month < 10 ? `0${shellingObject.month}` : shellingObject.month;
+            const day = shellingObject.day < 10 ? `0${shellingObject.day}` : shellingObject.day;
+            if(calendarModal.type === MODAL_TYPES.EDIT) {
+               setDate(`${shellingObject.year}-${month}-${day}`);
+               setEntries(shellingObject.items.map((item: any) => ({
                   _id: uuidv4(),
                   start: item.start,
                   message: item.message,
