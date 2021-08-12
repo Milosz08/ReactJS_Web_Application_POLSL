@@ -9,10 +9,14 @@ import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 
 import COOKIES_OBJECT from '../../../constants/allCookies';
+import LoadingSystemAnimation from "../../additionalComponents/LoadingSystemAnimation";
+import classnames from "classnames";
 
-const { userLoginContainer, userLoginWrapper, loginInfo } = require('./AidsPage.module.scss');
 const {
-   userCredentials, inputCredentials, showProtectedField, visibleIcon, onSubmitCSS, wrongData, authenticationHeader
+   userLoginContainer, userLoginWrapper, loginInfo, hideFormOnClick
+} = require('./AidsPage.module.scss');
+const {
+   userCredentials, inputCredentials, showProtectedField, visibleIcon, onSubmitCSS, wrongData, authenticationHeader,
 } = require('./../AdminCmsSystemPage/AdminCmsLogin/AdminCmsLogin.module.scss');
 
 const COOKIE_ID = uuidv4();
@@ -51,6 +55,7 @@ const AidsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
       login: '', password: '', token: ''
    });
    const [ errors, setErrors ] = useState<ErrorsProvider>({ login: false, password: false });
+   const [ hideAuth, setHideAuth ] = useState<boolean>(false);
 
    const checkAuthentication = (): { loginBool: boolean, passwordBool: boolean } => {
       let loginBool = false, passwordBool = false;
@@ -73,8 +78,11 @@ const AidsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
       e.preventDefault();
       const { loginBool, passwordBool } = checkAuthentication();
       if(!loginBool && !passwordBool) {
-         setAuth(true);
-         handleCookie(COOKIES_OBJECT.userSession, COOKIE_ID, { path: '/', sameSite: 'strict' });
+         setHideAuth(true);
+         setTimeout(() => { setAuth(true); }, 2000);
+         setTimeout(() => {
+            handleCookie(COOKIES_OBJECT.userSession, COOKIE_ID, { path: '/', sameSite: 'strict' });
+         }, 2000);
          setLogin('');
          setPassword('');
       } else {
@@ -113,13 +121,16 @@ const AidsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
       fetchData();
    }, []);
 
+   const toggleClasses = hideAuth ? classnames(userLoginWrapper, hideFormOnClick) : userLoginWrapper;
+
    return (
       <Fragment>
          <CookiesNotification/>
          <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive = {true}/>
          <div className = {userLoginContainer}>
-            <div className = {userLoginWrapper}>
+            <LoadingSystemAnimation hideAuth = {hideAuth}/>
+            <div className = {toggleClasses}>
                <p className = {loginInfo}>
                   Dostęp do tej sekcji wymaga autentykacji. Zaloguj się przy pomocy loginu oraz hasła. Jeśli nie
                   znasz swojego hasła, skontaktuj się z głównym administratorem systemu. Aktywne zalogowanie do
@@ -127,7 +138,6 @@ const AidsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
                   systemu.
                </p>
                <h3 className = {authenticationHeader}>Logowanie do systemu</h3>
-
                <form className = {userCredentials} onSubmit = {handleFormSubmit}>
                   <div className = {inputCredentials}>
                      <input
