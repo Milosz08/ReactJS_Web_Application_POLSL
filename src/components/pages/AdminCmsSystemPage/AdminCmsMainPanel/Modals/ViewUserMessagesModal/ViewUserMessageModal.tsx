@@ -8,7 +8,8 @@ import { MainStoreContext } from '../../../../../../contextStore/MainStoreContex
 import { insertUserChoice } from '../../Panels/UserMessagePanel';
 
 const {
-   modalContainer, modalWrapper, modalAddWrapper, modalOpen, modalAddHeader, modalAddIcon, modalViewWrapper
+   modalContainer, modalWrapper, modalAddWrapper, modalOpen, modalAddHeader, modalAddIcon, modalViewWrapper,
+   marginTopAdd
 } = require('./../WarningDeleteModal/WarningDeleteModal.module.scss');
 const {
    messageModalCloseButton
@@ -44,7 +45,7 @@ const ViewUserMessagesModal = () => {
    return (
       <div className = {classnames(modalContainer, ifModalOpen)}>
          <div className = {classnames(modalWrapper, modalAddWrapper, modalViewWrapper)}>
-            <header className = {modalAddHeader}>
+            <header className = {classnames(modalAddHeader, marginTopAdd)}>
                <h3>
                   <FontAwesomeIcon
                      icon = {['fas', 'envelope-open-text']}
@@ -70,7 +71,7 @@ const ViewUserMessagesModal = () => {
                      <strong> {generateValues().date}, {generateValues().time}</strong>
                   </span>
                   <span>Typ wysłanej wiadomości:
-                     <strong>{generateValues().type}</strong>
+                     <strong> {generateValues().type}</strong>
                   </span>
                </p>
                <p className = {messageInfo}>
