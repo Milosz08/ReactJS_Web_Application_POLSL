@@ -16,6 +16,7 @@ interface PropsProvider {
 export interface ModalStateProvider {
    id: string;
    type: string;
+   day?: string;
    ifOpen: boolean;
 }
 
@@ -32,13 +33,17 @@ const ModalsStateProvider: React.FC<PropsProvider> = ({ children }) => {
    const [ subjectModal, setSubjectModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
    const [ calendarModal, setCalendarModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
    const [ messageModal, setMessageModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
+   const [ scheduleModal, setScheduleModal ] = useState<ModalStateProvider>({
+      id: '', type: EDIT, day: '', ifOpen: false
+   });
 
    return (
       <ModalsStateContext.Provider
          value = {{
             subjectModal, setSubjectModal,
             calendarModal, setCalendarModal,
-            messageModal, setMessageModal
+            messageModal, setMessageModal,
+            scheduleModal, setScheduleModal
          }}
       >
          {children}
