@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import classnames from "classnames";
 
 import { MainStoreContext } from '../../../../../contextStore/MainStoreContext';
-import { ModalsStateContext } from '../../../../../contextStore/ModalsStateProvider';
+import { MODAL_TYPES, ModalsStateContext } from '../../../../../contextStore/ModalsStateProvider';
 
 import SearchBox from './AdditionalComponents/SearchBox';
 import DAYS_AND_MONTHS from "../../../../../constants/daysAndMonths";
@@ -69,7 +69,7 @@ const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
             <span className = {listImportant}>{generateImportantDots}</span>
             <button
                className = {modifyElement}
-               onClick = {() => setCalendarModal({ id: entry._id, type: 'edit', ifOpen: true })}
+               onClick = {() => setCalendarModal({ id: entry._id, type: MODAL_TYPES.EDIT, ifOpen: true })}
             >
                <FontAwesomeIcon
                   icon = {['fas', 'edit']}
@@ -79,7 +79,7 @@ const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
             </button>
             <button
                className = {deleteElement}
-               onClick = {() => setCalendarModal({ id: entry._id, type: 'delete', ifOpen: true })}
+               onClick = {() => setCalendarModal({ id: entry._id, type: MODAL_TYPES.REMOVE, ifOpen: true })}
             >
                <FontAwesomeIcon
                   icon = {['fas', 'times']}
@@ -118,7 +118,7 @@ const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
             </div>}
             <button
                className = {addNewRecord}
-               onClick = {() => setCalendarModal({ ...calendarModal, type: 'add', ifOpen: true })}
+               onClick = {() => setCalendarModal({ ...calendarModal, type: MODAL_TYPES.ADD, ifOpen: true })}
             >Dodaj nowy wpis/wpisy</button>
          </ul>
       </div>
