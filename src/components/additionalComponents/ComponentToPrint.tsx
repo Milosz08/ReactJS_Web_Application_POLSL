@@ -27,7 +27,7 @@ interface StateProvider {
       hourS: number;
       minutesS: number;
       secondsS: number;
-   }
+   };
 }
 
 interface PropsProvider {
@@ -43,6 +43,7 @@ interface PropsProvider {
  * konstruktorze.
  */
 class ComponentToPrint extends PureComponent<PropsProvider, StateProvider> {
+   _isMounted = false;
 
    constructor(props: any) {
       super(props);
@@ -53,20 +54,27 @@ class ComponentToPrint extends PureComponent<PropsProvider, StateProvider> {
    }
 
    componentDidMount() {
+      this._isMounted = true;
       const fetchData = async () => {
          const schedulePrint = await axiosInstance.get(`/last-update/${process.env.REACT_APP_PRINTSCHEDULE_ID}`);
          const scheduleUpdate = await axiosInstance.get(`/last-update/${process.env.REACT_APP_SCHEDULE_ID}`);
          const shedulePrintResp = JSON.parse(schedulePrint.request.response);
          const sheduleUpdateResp = JSON.parse(scheduleUpdate.request.response);
          const { day, month, year, hour, minutes, seconds } = sheduleUpdateResp.updateDate;
-         this.setState({
-            semesterInfos: shedulePrintResp.updateDate,
-            updateSchedule: {
-               dayS: day, monthS: month, yearS: year, hourS: hour, minutesS: minutes, secondsS: seconds,
-            }
-         });
+         if(this._isMounted) {
+            this.setState({
+               semesterInfos: shedulePrintResp.updateDate,
+               updateSchedule: {
+                  dayS: day, monthS: month, yearS: year, hourS: hour, minutesS: minutes, secondsS: seconds,
+               }
+            });
+         }
       }
       fetchData();
+   }
+
+   componentWillUnmount() {
+      this._isMounted = false;
    }
 
    generateSubjectsStructure = () => {
