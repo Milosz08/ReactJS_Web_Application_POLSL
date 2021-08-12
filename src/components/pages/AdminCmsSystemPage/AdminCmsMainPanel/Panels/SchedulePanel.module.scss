@@ -1,0 +1,65 @@
+@import './../../../../../styles/_variables';
+@import './../../../../../styles/_mixins';
+
+.scheduleContainer {
+  margin-bottom: 20px;
+}
+
+.oneDaySubjectContainer {
+  width: 100%;
+  button.dayButtonToggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 10px 20px 0 20px;
+    padding: 17px 40px 17px 0;
+    width: calc(100% - 40px);
+    font-size: 1.2rem;
+    line-height: 0;
+    cursor: pointer;
+    background-color: $mainLogosBgc;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    span.dayTitle {
+      flex-grow: 1;
+      text-align: left;
+      text-transform: capitalize;
+    }
+    .fasIcon {
+      width: 70px;
+    }
+  }
+  ul.scheduleList {
+    margin: 0 20px;
+    & > li {
+      .listTitle {
+        flex-grow: 1;
+      }
+      .listHour, .listType, .listGroup {
+        width: 150px;
+      }
+      .listGroupHeader {
+        width: 260px;
+      }
+      .listButtons {
+        display: flex;
+      }
+    }
+  }
+  &:nth-child(3) {
+    margin-top: 30px;
+  }
+}
+
+.addNewSubjectSchedule {
+  margin-bottom: 30px;
+}
+
+.subjectList {
+  display: none;
+  flex-direction: column;
+  &.ejectedList {
+    display: flex;
+  }
+}
