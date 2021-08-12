@@ -68,7 +68,7 @@ const SubjectsPanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
             </button>
             <button
                className = {deleteElement}
-               onClick = {() => setSubjectModal({ ...subjectModal, type: MODAL_TYPES.REMOVE, ifOpen: true })}
+               onClick = {() => setSubjectModal({ id: subject._id, type: MODAL_TYPES.REMOVE, ifOpen: true })}
             >
                <FontAwesomeIcon
                   icon = {['fas', 'times']}
