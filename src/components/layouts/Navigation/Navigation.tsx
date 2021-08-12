@@ -1,6 +1,7 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import DelayLink from 'react-delay-link';
 
+import { MainStoreContext, ROUTER_INTERVAL_TIME } from "../../../contextStore/MainStoreContext";
 import CONSTANT_DATA from '../../../constants/staticData';
 import UniversalHeader from "../UniversalHeader/UniversalHeader";
 
@@ -19,6 +20,8 @@ interface PropsProvider {
  */
 const Navigation: React.FC<PropsProvider > = ({ ifHeader }) => {
 
+   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
+
    const { SITES } = CONSTANT_DATA;
    const classToggle = ifHeader ? navInline : navBlocks;
 
@@ -35,10 +38,15 @@ const Navigation: React.FC<PropsProvider > = ({ ifHeader }) => {
 
       return (
          <li key = {site.title}>
-            <NavLink to = {redeptWithPolish}>
+            <DelayLink
+               to = {redeptWithPolish}
+               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+               replace = {false}
+               clickAction = {timeoutRoutePath}
+            >
                {titleToggle}
                {descriptionToggle}
-            </NavLink>
+            </DelayLink>
          </li>
       );
    });
