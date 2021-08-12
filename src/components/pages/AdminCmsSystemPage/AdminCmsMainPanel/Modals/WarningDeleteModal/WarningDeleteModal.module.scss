@@ -1,0 +1,153 @@
+@import './../../../../../../styles/_variables';
+@import './../../../../../../styles/_mixins';
+
+.modalContainer {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .6);
+  &.modalOpen, &.addModalOpen {
+    display: flex;
+  }
+  .modalWrapper, .modalAddWrapper {
+    width: 800px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px 40px 40px 40px;
+    aside {
+      margin-right: 0;
+    }
+  }
+  .modalAddWrapper {
+    width: 1100px;
+  }
+  .modalViewWrapper {
+    width: 800px;
+  }
+}
+
+header.modalWarningHeader, header.modalAddHeader {
+  h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: $importantColor;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .modalWarningIcon, .modalAddIcon {
+    font-size: 1.2rem;
+    margin-right: 15px;
+  }
+  aside {
+    flex-grow: 1;
+    height: 1px;
+    background-color: $grayBgc;
+    margin: 0 20px;
+  }
+  &.marginTopAdd {
+    margin-top: 20px;
+  }
+}
+
+header.modalAddHeader h3 {
+  color: $headersH3;
+  .modalAddIcon {
+    color: $yellowDefColor;
+  }
+}
+
+.modalWarningInfo {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: $mainLogosBgc;
+  margin: 40px 0;
+  p {
+    margin: 15px 0;
+    font-size: 2rem;
+    color: $yellowHover;
+    &.messageTypeBox {
+      font-size: 1.2rem;
+      margin: 30px 0;
+      color: $headersH3;
+    }
+    &.calendarWarnInfo {
+      position: relative;
+      border: 1px solid $borderGray;
+      border-radius: 10px;
+      padding: 15px 30px;
+      font-size: 1.3rem;
+      margin: 20px;
+      text-align: left;
+      &::before {
+        position: absolute;
+        content: '';
+        right: 10px;
+        margin: 0 5px;
+        bottom: -12px;
+        width: 50px;
+        height: 14px;
+        border-radius: 10px;
+        border: 5px solid #ffffff;
+      }
+    }
+    &.low {
+      color: $goodColor;
+      &::before {
+        background-color: $goodColor;
+      }
+    }
+    &.medium {
+      color: $yellowHover;
+      &::before {
+        background-color: $yellowHover;
+      }
+    }
+    &.high {
+      color: $importantColor;
+      &::before {
+        background-color: $importantColor;
+      }
+    }
+  }
+  strong {
+    color: $yellowDefColor;
+    font-weight: 500;
+  }
+}
+
+.modalWarningButtons {
+  display: flex;
+  justify-content: space-around;
+  button {
+    @include defaultButton();
+    max-width: 240px;
+    &:nth-child(1) {
+      background-color: $lightGrayBgc;
+      color: $footerHeaders;
+      &:hover {
+        box-shadow: 0 0 6px $lightGrayBgc;
+      }
+    }
+  }
+}
+
+strong.deleteSchedule {
+  color: $mainLogosBgc;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.dangerColorWrapper {
+  header * {
+    color: $importantColor;
+  }
+}
