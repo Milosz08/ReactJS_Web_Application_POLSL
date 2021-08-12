@@ -4,6 +4,8 @@ import MainStoreStateProvider from "./MainStoreStateProvider";
 
 export const MainStoreContext = createContext<any>(null);
 
+export const ROUTER_INTERVAL_TIME = .7; //w sekundach
+
 interface PropsProvider {
    children: React.ReactNode;
 }
@@ -17,8 +19,15 @@ interface PropsProvider {
 const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
 
    const [ dataFetchFromServer, setDataFetchFromServer ] = useState<MainStoreStateProvider>({
-      covidData: [], footerForms: [], subjectsData: [], sheduleSubjects: [], calendarRecords: []
+      covidData: [], footerForms: [], subjectsData: [], scheduleSubjects: [], calendarRecords: []
    });
+
+   const [ routePath, setRoutePath ] = useState<boolean>(false);
+
+   const timeoutRoutePath = () => {
+      setRoutePath(true);
+      setTimeout(() => { setRoutePath(false); },(ROUTER_INTERVAL_TIME + .3) * 1000);
+   }
 
    useEffect(() => {
       const getAllData = async () => {
@@ -31,7 +40,7 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
          const covidDataFetch = JSON.parse(covidData.request.response);
          const footerFormFetch = JSON.parse(footerForm.request.response);
          const subjectsDataFetch = JSON.parse(subjectsData.request.response);
-         const sheduleSubjectsFetch = JSON.parse(subjectShedule.request.response);
+         const scheduleSubjectsFetch = JSON.parse(subjectShedule.request.response);
          const calendarRecordsFetch = JSON.parse(calendarRecord.request.response);
 
          subjectsDataFetch.sort((a: any, b: any) => a.title.localeCompare(b.title));
@@ -42,7 +51,7 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
 
          setDataFetchFromServer({
             covidData: covidDataFetch, footerForms: footerFormFetch,
-            subjectsData: subjectsDataFetch, sheduleSubjects: sheduleSubjectsFetch,
+            subjectsData: subjectsDataFetch, scheduleSubjects: scheduleSubjectsFetch,
             calendarRecords: calendarRecordsFetch
          });
       }
@@ -52,7 +61,8 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
    return (
       <MainStoreContext.Provider
          value = {{
-            dataFetchFromServer, setDataFetchFromServer
+            dataFetchFromServer, setDataFetchFromServer,
+            timeoutRoutePath, routePath, setRoutePath
          }}
       >
          {children}
