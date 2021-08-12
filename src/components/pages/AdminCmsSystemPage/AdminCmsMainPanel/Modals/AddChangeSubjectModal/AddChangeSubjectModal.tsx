@@ -40,7 +40,7 @@ const AddChangeSubjectModal = () => {
    } = useContext<any>(FormDataAndValidateContext);
 
    const { subjectsData } = dataFetchFromServer;
-   const ifModalOpen = subjectModal.ifOpen ? modalOpen : '';
+   const ifModalOpen = subjectModal.ifOpen && subjectModal.type !== MODAL_TYPES.REMOVE ? modalOpen : '';
 
    const addNewRecord = async () => {
       const copyArray = [...subjectsData];
