@@ -8,7 +8,8 @@
   margin-bottom: 40px;
   .currentURLwrapper {
     width: $widthVertical;
-    .sigleCellRecord a, .arrowIcon, a {
+    .sigleCellRecord div[role = 'link'], .arrowIcon, div[role = 'link'] {
+      display: inline-block;
       color: $footerContent;
       text-decoration: none;
       font-weight: 500;

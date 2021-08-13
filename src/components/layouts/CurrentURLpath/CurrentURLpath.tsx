@@ -1,7 +1,9 @@
-import React from 'react';
-import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, {useContext} from 'react';
+import DelayLink from 'react-delay-link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { v4 as uuidv4 } from 'uuid';
+
+import { MainStoreContext, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
 
 const {
    currentURLwrapper, currentURLcontainer, sigleCellRecord, arrowIcon, ifHeaderHasRedBar
@@ -18,6 +20,8 @@ interface PropsProvider {
  * @param ifImportatHeaderActive { boolean } - decyduje, czy nawigacja ma być niżej wzgędem szczytu strony
  */
 const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }) => {
+
+   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
 
    const convertCurrentPathnameToString = (): JSX.Element[] => {
       const allPathString: string = decodeURI(window.location.pathname).toString().slice(1);
@@ -45,9 +49,14 @@ const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }) => 
                    icon = {['fas', 'chevron-right']}
                    className = {arrowIcon}
                 />
-                <NavLink to = {prevPathName}>
+               <DelayLink
+                  to = {prevPathName}
+                  delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                  replace = {false}
+                  clickAction = {timeoutRoutePath}
+               >
                   {capitaliseWordsArray.join(' ')}
-                </NavLink>
+               </DelayLink>
             </span>
          );
       });
@@ -57,9 +66,14 @@ const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }) => 
       <div className = {`${currentURLcontainer} ${ifImportatHeaderActive ? ifHeaderHasRedBar : ''}`}>
          <div className = {currentURLwrapper}>
             <span>
-               <NavLink to = '/'>
-                  Strona startowa
-               </NavLink>
+               <DelayLink
+                  to = '/'
+                  delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                  replace = {false}
+                  clickAction = {timeoutRoutePath}
+               >
+                  Strona Główna
+               </DelayLink>
             </span>
             <span>{convertCurrentPathnameToString()}</span>
          </div>
