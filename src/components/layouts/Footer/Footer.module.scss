@@ -33,7 +33,7 @@ footer.footerWrapper {
         padding-right: 170px;
         ul {
           list-style-type: none;
-          li a, div[role = 'link'] {
+          li a, div[role = 'link'] a {
             color: $footerContent;
             line-height: 1.8;
             font-weight: 300;
@@ -59,10 +59,13 @@ footer.footerWrapper {
           color: $footerContent;
         }
         div[role = 'link'] {
-          display: block;
+          display: inline-block;
           margin-top: 30px;
-          color: $footerHeaders;
-          text-decoration: underline;
+          a {
+            cursor: pointer;
+            color: $footerHeaders;
+            text-decoration: underline;
+          }
         }
       }
     }
@@ -85,11 +88,13 @@ footer.footerWrapper {
     max-width: 1900px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     .copyIcons, .copyAuthor, .copyCookies {
       color: $footerContent;
-      flex-basis: 100%;
+      flex-basis: calc(100% / 3);
       text-align: center;
-      a {
+      a, div[role = 'link'] {
+        display: inline-block;
         font-weight: 500;
         color: $footerHeaders;
         text-decoration: none;

@@ -44,12 +44,14 @@ const Footer = () => {
       return (
          <li key = {navElm.title}>
             <DelayLink
-               to = {redeptWithPolish}
+               to = {`/${redeptWithPolish}`}
                delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
                replace = {false}
                clickAction = {timeoutRoutePath}
             >
-               {navElm.title}
+               <a href = {`/${redeptWithPolish}`}>
+                  {navElm.title}
+               </a>
             </DelayLink>
          </li>
       );
@@ -80,7 +82,9 @@ const Footer = () => {
                      replace = {false}
                      clickAction = {timeoutRoutePath}
                   >
-                     Logowanie do Panelu Administratora
+                     <a href = {'/logowanie-do-panelu-administratora'}>
+                        Logowanie do Panelu Administratora
+                     </a>
                   </DelayLink>
                </div>
             </div>
