@@ -121,10 +121,12 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
                   replace = {false}
                   clickAction = {timeoutRoutePath}
                >
-                  <img
-                     src = {process.env.PUBLIC_URL + `/images/logosBaner.png`}
-                     alt = 'banerLogo'
-                  />
+                  <a href = '/'>
+                     <img
+                        src = {process.env.PUBLIC_URL + `/images/logosBaner.png`}
+                        alt = 'banerLogo'
+                     />
+                  </a>
                </DelayLink>
                <div className = {navigationRouter}>
                   {ifHeaderHasRedBar && <Navigation ifHeader = {true}/>}

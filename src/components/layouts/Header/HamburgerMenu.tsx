@@ -1,9 +1,10 @@
-import React, { SetStateAction, Dispatch } from 'react';
+import React, {SetStateAction, Dispatch, useContext} from 'react';
+import DelayLink from 'react-delay-link';
 import classnames from 'classnames';
 
 import CONSTANT_DATA from '../../../constants/staticData';
-import {NavLink} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MainStoreContext, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
 
 const {
    hamburgerContainter, hamburgerButton, hamburgerBars, activeBars, menuWrapper, referentialLinks, outerLinks,
@@ -25,7 +26,9 @@ const HamburgerMenu: React.FC<PropsProvider> = ({ activeHamburger, setActiveHamb
 
    const changeHamburgerButton = activeHamburger ? classnames(hamburgerBars, activeBars) : hamburgerBars;
    const changeMenuSlide = activeHamburger ? classnames(menuWrapper, activeMenu) : menuWrapper;
+
    const { TOP_NAVBAR_ELMS, SITES } = CONSTANT_DATA;
+   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
 
    const topNavbarElm = TOP_NAVBAR_ELMS.map((singleLink: any) => (
       <li key = {singleLink.title}>
@@ -48,9 +51,16 @@ const HamburgerMenu: React.FC<PropsProvider> = ({ activeHamburger, setActiveHamb
 
       return (
          <li key = {site.title}>
-            <NavLink to = {redeptWithPolish}>
-               {site.title}
-            </NavLink>
+            <DelayLink
+               to = {`/${redeptWithPolish}`}
+               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+               replace = {false}
+               clickAction = {timeoutRoutePath}
+            >
+               <a href = {`/${redeptWithPolish}`}>
+                  {site.title}
+               </a>
+            </DelayLink>
          </li>
       );
    });
