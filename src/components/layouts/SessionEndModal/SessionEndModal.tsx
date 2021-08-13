@@ -42,6 +42,8 @@ const SessionEndModal = () => {
 
    const handleLogout = () => {
       document.title = DEFAULT_TITLE;
+      setClassVisible('');
+      setTimeout(() => setContainerVisible(''), 200);
       setAdminAuth(false);
       setAdminSessionInfo(false);
       setLogoutCountdown(LOGOUT_REMAIN_TIME);
@@ -89,8 +91,6 @@ const SessionEndModal = () => {
          setTimeout(() => setClassVisible(active), 200);
       }
       return () => {
-         setClassVisible('');
-         setTimeout(() => setContainerVisible(''), 200);
          clearInterval(index);
          clearInterval(logoutIndex);
       }
