@@ -10,16 +10,16 @@ import CurrentURLpath from '../../../layouts/CurrentURLpath/CurrentURLpath';
 import ModalsStateProvider from '../../../../contextStore/ModalsStateProvider';
 import FormDataAndValidateProvider from '../../../../contextStore/FormDataAndValidateProvider';
 import FormCalendarModalProvider from '../../../../contextStore/FormCalendarModalProvider';
-import FormScheduleModalProvider from "../../../../contextStore/FormScheduleModalProvider";
+import FormScheduleModalProvider from '../../../../contextStore/FormScheduleModalProvider';
 
 import UserMessageDeleteModal from './Modals/WarningDeleteModal/UserMessageDeleteModal';
 import CalendarDeleteModal from './Modals/WarningDeleteModal/CalendarDeleteModal';
 import SubjectDeleteModal from './Modals/WarningDeleteModal/SubjectDeleteModal';
 import ViewUserMessageModal from './Modals/ViewUserMessagesModal/ViewUserMessageModal';
-import ScheduleDeleteModal from "./Modals/WarningDeleteModal/ScheduleDeleteModal";
+import ScheduleDeleteModal from './Modals/WarningDeleteModal/ScheduleDeleteModal';
 import AddChangeSubjectModal from './Modals/AddChangeSubjectModal/AddChangeSubjectModal';
 import AddChangeCalendarModal from './Modals/AddChangeCalendarModal/AddChangeCalendarModal';
-import AddChangeScheduleModal from "./Modals/AddChangeScheduleModal/AddChangeScheduleModal";
+import AddChangeScheduleModal from './Modals/AddChangeScheduleModal/AddChangeScheduleModal';
 import AdminCmsLeftNavigation from './AdminCmsLeftNavigation';
 
 import HomePanel from './Panels/HomePanel';
