@@ -38,9 +38,9 @@ const DevToolsInfo = () => {
                   system CMS bazujący na mechanice działania <strong> Strapi</strong>. Cały kod projektu wraz ze
                   szczegółowym opisem znajduje się na moim repozytorium
                   <a
-                     href = 'https://github.com/Milosz08/POLSL-Informatics-Website-React'
+                     href = 'https://github.com/Milosz08/polsl-web-application-typescript-frontend'
                      target = '_blank'
-                     rel="noreferrer"
+                     rel = 'noreferrer'
                   >
                      <span> Github</span>
                      <FontAwesomeIcon
