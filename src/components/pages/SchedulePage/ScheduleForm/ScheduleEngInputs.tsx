@@ -20,19 +20,19 @@ const ScheduleEngInputs = () => {
          ? classnames(radioInputContainer, activeRadio) : radioInputContainer;
 
       return (
-         <div key={record} className={activeRadioInput}>
+         <div key = {record} className = {activeRadioInput}>
             <input
-               type='radio'
-               id={record}
-               name='eng'
-               onChange={e => setEngSelected(e.target.id)}
-               checked={engSelected === record}
-               value={engSelected}
+               type = 'radio'
+               id = {record}
+               name = 'eng'
+               onChange = {e => setEngSelected(e.target.id)}
+               checked = {engSelected === record}
+               value = {engSelected}
             />
-            <label htmlFor={record}>
+            <label htmlFor = {record}>
                Grupa {record.toLocaleUpperCase()}
             </label>
-            <div className={customRadio}/>
+            <div className = {customRadio}/>
          </div>
       );
    });
