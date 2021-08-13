@@ -5,6 +5,7 @@ import ActualDateProvider from '../../../contextStore/ActualDateProvider';
 import ScheduleProvider from "../../../contextStore/ScheduleProvider";
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
+import AcceptScheduleChoiceModal from './AcceptScheduleChoiceModal/AcceptScheduleChoiceModal';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 import ScheduleForm from './ScheduleForm/ScheduleForm';
@@ -40,6 +41,7 @@ const SchedulePage = () => {
    return (
       <ScheduleProvider>
          <CookiesNotification/>
+         <AcceptScheduleChoiceModal/>
          <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive = {true}/>
          <div className = {scheduleContainer}>
