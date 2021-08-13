@@ -1,4 +1,4 @@
-import React, { Dispatch, Fragment, SetStateAction, useContext, useState } from 'react';
+import React, { Dispatch, Fragment, SetStateAction, useContext, useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -35,6 +35,8 @@ interface PropsProvider {
 const CalendarStructure: React.FC<PropsProvider> = ({ setOpenModal, setDate }) => {
 
    const { dataFetchFromServer } = useContext<any>(MainStoreContext);
+
+   const [ offsetWidth, setOffsetWidth ] = useState<number>(document.body.offsetWidth);
    const [ value, onChange ] = useState<Date>(new Date());
 
    const { calendarRecords } = dataFetchFromServer;
@@ -47,8 +49,8 @@ const CalendarStructure: React.FC<PropsProvider> = ({ setOpenModal, setDate }) =
                item.items.sort((a, b) => (
                   parseInt(a.start.replace(':', '')) - parseInt(b.start.replace(':', ''))
                )).map(prop => (
-                  <Fragment>
-                     <p key = {uuidv4()} className = {prop.importantLevel}>
+                  <Fragment key = {uuidv4()}>
+                     <p className = {prop.importantLevel}>
                         <span className = {messageInit}>{prop.message}</span>
                         <span className = {hourStart}>{prop.start}</span>
                      </p>
@@ -60,9 +62,17 @@ const CalendarStructure: React.FC<PropsProvider> = ({ setOpenModal, setDate }) =
    }
 
    const handleClickDay = (value: Date) => {
-      setOpenModal(true);
-      setDate(value);
+      if(offsetWidth < 970) {
+         setOpenModal(true);
+         setDate(value);
+      }
    }
+
+   useEffect(() => {
+      const handleResize = () => setOffsetWidth(document.body.offsetWidth);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+   }, [offsetWidth]);
 
    return (
       <Calendar
