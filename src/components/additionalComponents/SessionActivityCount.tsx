@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { GlobalModalsStateContext } from "../../contextStore/GlobalModalsStateProvider";
+import { GlobalModalsStateContext } from '../../contextStore/GlobalModalsStateProvider';
 
 export const MAX_INACTIVITY_TIME = 5; //w minutach
 const ACTIVITY_EVENTS: Array<string> = [
