@@ -1,10 +1,21 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {useContext} from 'react';
+import DelayLink from 'react-delay-link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const { copyrightSectionWrapper, copyIcons, copyAuthor, copyCookies, cookiesIcon } = require('./Footer.module.scss');
+import { MainStoreContext, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
 
+const {
+   copyrightSectionWrapper, copyIcons, copyAuthor, copyCookies, cookiesIcon
+} = require('./Footer.module.scss');
+
+/**
+ * Komponent generujący końcową stopkę (prawa autorskie, link do polityki plików Cookies oraz wykorzystane ikony
+ * z biblioteki FontAwesome).
+ */
 const CopytightFooter = () => {
+
+   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
+
    return (
       <div className = {copyrightSectionWrapper}>
          <div className = {copyIcons}>
@@ -33,9 +44,16 @@ const CopytightFooter = () => {
                icon = {['fas', 'cookie-bite']}
                className = {cookiesIcon}
             />
-            <NavLink to = '/polityka-prywatności-cookies'>
-               Polityka Prywatności
-            </NavLink>
+            <DelayLink
+               to = '/polityka-prywatności-cookies'
+               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+               replace = {false}
+               clickAction = {timeoutRoutePath}
+            >
+               <a href = {'/polityka-prywatności-cookies'}>
+                  Polityka Prywatności
+               </a>
+            </DelayLink>
          </div>
       </div>
    );
