@@ -39,13 +39,15 @@ const Navigation: React.FC<PropsProvider > = ({ ifHeader }) => {
       return (
          <li key = {site.title}>
             <DelayLink
-               to = {redeptWithPolish}
+               to = {`/${redeptWithPolish}`}
                delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
                replace = {false}
                clickAction = {timeoutRoutePath}
             >
-               {titleToggle}
-               {descriptionToggle}
+               <a href = {`/${redeptWithPolish}`}>
+                  {titleToggle}
+                  {descriptionToggle}
+               </a>
             </DelayLink>
          </li>
       );
