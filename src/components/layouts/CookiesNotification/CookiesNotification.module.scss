@@ -24,7 +24,6 @@
 header.cookiesHeader {
   h3 {
     display: flex;
-    justify-content: center;
     align-items: center;
     font-size: 2rem;
     color: $headersH3;
@@ -77,8 +76,10 @@ button.cookiesClosePopup, button.messageModalCloseButton {
 section.cookiesMainContent {
   margin: 40px 0;
   font-size: 1.2rem;
-  line-height: 1.5;
+  line-height: 1.3;
   text-align: justify;
+  color: $headersH3;
+  font-weight: 500;
 }
 
 .cookiesButtons {
@@ -101,9 +102,11 @@ section.cookiesMainContent {
     }
   }
   button.readPolicity {
-    background-color: $lightGrayBgc;
+    background-color: transparent;
+    border: 1px solid $mainLogosBgc;
     a {
-      color: $footerHeaders;
+      color: $mainLogosBgc;
+      font-weight: 500;
     }
   }
   button.acceptPolicity {
@@ -114,4 +117,27 @@ section.cookiesMainContent {
 
 .showCookiePopup {
   display: flex;
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 822px) {
+  .cookieNotifContainer {
+    align-items: flex-end;
+  }
+  .cookiesNotifPopupContainer {
+    width: 100%;
+    padding: 10px 30px 30px;
+  }
+  .cookiesButtons {
+    flex-wrap: wrap;
+    button.readPolicity, button.acceptPolicity {
+      width: 300px;
+      margin: 5px 0;
+      font-size: .9rem;
+    }
+  }
+  section.cookiesMainContent {
+    font-size: .8rem;
+  }
 }
