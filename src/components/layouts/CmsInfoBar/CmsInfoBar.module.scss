@@ -1,0 +1,57 @@
+/**
+ * @file CmsInfoBar.module.scss
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief SCSS file pre-generated with ReactCSS Modules to avoid classes conflicts.
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @date final version: 08/18/2021
+ */
+
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.cmsInfoBar * {
+  font-family: 'Open Sans', sans-serif;
+  color: $footerHeaders;
+  font-size: .9rem;
+  letter-spacing: -0.02rem;
+}
+
+.cmsInfoBar {
+  display: none;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+  background-color: $lightGrayBgc;
+  .cmsInfoWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: $widthVertical;
+  }
+  &.active {
+    display: flex;
+  }
+}
+
+button.logoutButton {
+  @include defaultButtonReset();
+  font-weight: 700;
+}
+
+.loginInfo, .sessionTime, .logoutButton {
+  margin: 0 25px;
+}
+
+.logoutButton {
+  margin: 0 0 0 25px;
+  .logoutIcon {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: .8rem;
+  }
+  &:hover.logoutIcon {
+    color: #000;
+  }
+}
