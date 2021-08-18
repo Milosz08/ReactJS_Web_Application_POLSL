@@ -9,7 +9,7 @@ import ChangeCredentials from './AdditionalComponents/ChangeCredentials';
 import GenerateModifyElement from "./AdditionalComponents/GenerateModifyElement";
 
 const { panelContainer, panelActive } = require('./Panels.module.scss');
-const { changeCredentials, disable, disabledInfo, mainInfoContainer, separator } = require('./HomePanel.module.scss');
+const { changeCredentials, disable, disabledInfo, mainInfoContainer } = require('./HomePanel.module.scss');
 
 interface PropsProvider {
    activeNavElm: number;
@@ -29,8 +29,6 @@ const HomePanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
    const { calendarRecords, scheduleSubjects, subjectsData } = dataFetchFromServer;
 
    const setDisabledChanges = parseInt(cookie.__credentialsLevel) !== 2 ? disable : '';
-   const selectRangOfAdmin = parseInt(cookie.__credentialsLevel) === 2 ? 'główny administrator' : 'moderator';
-
    const toggleClass = activeNavElm === 0 ? panelActive : '';
 
    const DATE_ELEMENTS_CMS = [
@@ -67,11 +65,6 @@ const HomePanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
    return (
       <div className = {classnames(panelContainer, toggleClass)}>
          <div className = {mainInfoContainer}>
-            <h4>
-               Jesteś zalogowany jako <strong>{selectRangOfAdmin} systemu </strong>
-               ({cookie.__credentialsLevel} stopień autoryzacji).
-            </h4>
-            <span className = {separator}/>
             {generateDataElements}
          </div>
          <div className = {classnames(changeCredentials, setDisabledChanges)}>

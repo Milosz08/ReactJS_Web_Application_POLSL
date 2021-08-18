@@ -2,7 +2,7 @@
 @import './../../../../../styles/_mixins';
 
 .mainInfoContainer {
-  @include borderWithPseudElementInfo($grayBgc, #ffffff, 1.1rem, 400, 'GŁÓWNE INFORMACJE');
+  @include borderWithPseudElementInfo($borderGray, #ffffff, 1.1rem, 400, 'GŁÓWNE INFORMACJE');
   width: calc(100% - 80px);
   height: 100%;
   margin: 40px 40px 0 40px;
@@ -12,14 +12,7 @@
     left: 50%;
     transform: translateX(-50%);
   }
-  span.separator {
-    display: block;
-    width: 100%;
-    height: 1px;
-    margin-bottom: 10px;
-    background-color: $grayBgc;
-  }
-  h4, p {
+  p {
     font-size: 1.3rem;
     font-weight: 500;
     color: $mainLogosBgc;
