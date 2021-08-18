@@ -1,3 +1,19 @@
+/**
+ * @file Footer.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactDelayLink: "^1.1.6"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DelayLink from 'react-delay-link';
@@ -6,7 +22,7 @@ import FooterForm from './FooterForm';
 import CopyrightFooter from './CopyrightFooter';
 
 import CONSTANT_DATA from "../../../constants/staticData";
-import { MainStoreContext, ROUTER_INTERVAL_TIME } from "../../../contextStore/MainStoreContext";
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from "../../../contextStore/MainStoreContext";
 
 const {
    footerWrapper, linksPages, revelarPages, footerContainer, externalLinkIcon, formContainer, footerHeaders,
@@ -14,13 +30,13 @@ const {
 } = require('./Footer.module.scss');
 
 /**
- * Komponent odpowiadający za implementację stopki (stopka jest uniwersalna i występuje na
- * każdej podstronie, nie zmienia swojej zawartości). Zawiera linki i formularz.
+ * @details The component responsible for the implementation of the footer (the footer is universal and appears on
+ *          every subpage, it does not change its content). Includes links and a form.
  */
 const Footer = () => {
 
    const { TOP_NAVBAR_ELMS, SITES } = CONSTANT_DATA;
-   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
+   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const generateLinks = TOP_NAVBAR_ELMS.map(navElm => (
       <li key = {navElm.title}>

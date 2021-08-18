@@ -1,11 +1,29 @@
+/**
+ * @file Navigation.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^1.1.6"
+ *                ReactCSSmodules: "^0.1.15"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const {
    universalHeader, universalHeaderIcon, universalHeaderButton, additionalTitleHeader
 } = require('./UniversalHeader.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    iconP : IconProp;
    content: string;
@@ -15,14 +33,14 @@ interface PropsProvider {
 }
 
 /**
- * Komponent implementujący główny header w sekcjach. W zależności od podanych propsów, header generuje się z
- * przyciskiem zamknięcia (dla okien typu modal).
+ * @details Component that implements the main header in sections. Depending on the given props, the header
+ *          is generated with a close button (for modal windows).
  *
- * @param iconP - tablica z dwoma parametrami typu string opisującymi ikonę.
- * @param content - zawartość tekstowa nagłówka.
- * @param ifCloseButtonVisible - wartość boolean, wskazująca czy header powinien posiadać przycisk zamknięcia.
- * @param setCloseButton - funkcja przekazywana do obsługi przycisku zamykania modala.
- * @param addHeaderDayIndicator - dla modalu dodającym/modyfikującym przedmioty w planie zajęć.
+ * @param iconP - an array with two string parameters describing the icon.
+ * @param content - the text content of the header.
+ * @param ifCloseButtonVisible - a boolean value, indicating whether the header should have a close button.
+ * @param setCloseButton - function transferred to the operation of the modal closing button.
+ * @param addHeaderDayIndicator - for the modal adding / modifying subjects in the timetable.
  */
 const UniversalHeader: React.FC<PropsProvider> = ({
    iconP, content, ifCloseButtonVisible, setCloseButton, addHeaderDayIndicator

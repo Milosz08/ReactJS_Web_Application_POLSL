@@ -1,26 +1,45 @@
-import React, {SetStateAction, Dispatch, useContext} from 'react';
+/**
+ * @file HambugerMenu.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactDelayLink: "^1.1.6"
+ *                ReactCSSmodules: "^4.7.11"
+ *                classnames: "^2.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
+import React, { SetStateAction, Dispatch, useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DelayLink from 'react-delay-link';
 import classnames from 'classnames';
 
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
 import CONSTANT_DATA from '../../../constants/staticData';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MainStoreContext, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
 
 const {
    hamburgerContainter, hamburgerButton, hamburgerBars, activeBars, menuWrapper, referentialLinks, outerLinks,
    activeMenu, externalLinkIcon
 } = require('./Header.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    activeHamburger: boolean;
    setActiveHamburger: Dispatch<SetStateAction<boolean>>;
 }
 
 /**
- * Komponent generujący przycisk Hamburger wraz z rozwijaną listą menu (tylko na urządzeniach > 1250px).
+ * @details Component generating hamburget button and hamburger drop-down menu after click (only on devices > 1250px).
  *
- * @param activeHamburger { boolean } - parametr mówiący, czy menu hamburger jest aktywne.
- * @param setActiveHamburger { Dispatch<SetStateAction<boolean>> } - zmiana menu hamburger (pokazanie/schowanie).
+ * @param activeHamburger { boolean } - parameter that tells if the hamburger menu is active.
+ * @param setActiveHamburger { Dispatch<SetStateAction<boolean>> } - change visibility of the hamburger (show / hide).
  */
 const HamburgerMenu: React.FC<PropsProvider> = ({ activeHamburger, setActiveHamburger }) => {
 
@@ -28,7 +47,7 @@ const HamburgerMenu: React.FC<PropsProvider> = ({ activeHamburger, setActiveHamb
    const changeMenuSlide = activeHamburger ? classnames(menuWrapper, activeMenu) : menuWrapper;
 
    const { TOP_NAVBAR_ELMS, SITES } = CONSTANT_DATA;
-   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
+   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const topNavbarElm = TOP_NAVBAR_ELMS.map((singleLink: any) => (
       <li key = {singleLink.title}>

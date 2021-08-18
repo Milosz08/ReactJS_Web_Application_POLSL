@@ -1,31 +1,49 @@
+/**
+ * @file AdminCmsLoginInputs.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { Dispatch, Fragment, SetStateAction } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { inputCredentials, wrongData, showProtectedField, visibleIcon } = require('./AdminCmsLogin.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
-   credentials: { login: string, password: string, token: string };
-   setCredentials: Dispatch<SetStateAction<{ login: string, password: string, token: string }>>;
-   errors: { login: boolean, password: boolean, token: boolean };
-   setErrors: Dispatch<SetStateAction<{ login: boolean, password: boolean, token: boolean }>>;
-   visible: { password: boolean, token: boolean };
-   setVisible: Dispatch<SetStateAction<any>>;
+   credentials: { [value: string]: string },
+   setCredentials: Dispatch<SetStateAction<{ [value: string]: string }>>;
+   errors: { [value: string]: boolean };
+   setErrors: Dispatch<SetStateAction<{ [value: string]: boolean }>>;
+   visible: { [value: string]: boolean };
+   setVisible: Dispatch<SetStateAction<{ [value: string]: boolean }>>;
 }
 
 /**
  * Komponent generujący pola wprowadzania loginu, hasła oraz tokena uwierzytelniającego w celu zalogowania do
  * systemu CMS. Komponent nie posiada walidacji. Za walidację wejść odpowiada komponent wyższego rzędu.
  *
- * @param credentials { object } - obiekt przechowujący login, hasło, token.
- * @param setCredentials { Dispatch<SetStateAction<object>> } - metoda ustawiająca parametry logowania.
- * @param errors { object } - błędy w loginie, haśle, tokenie.
- * @param setErrors { Dispatch<SetStateAction<object>> } - metoda ustawiająca błędy wprowadzanych danych.
- * @param visible { object } - widoczność wprowadzanych wartości w polu hasło/token.
- * @param setVisible { Dispatch<SetStateAction<object>> } - metoda ustawiająca widoczność wprowadzanych danych.
+ * @param props { object } - values of the props object containing:
+ *    * credentials { object } - an object that stores login, password and token.
+ *    * setCredentials { Dispatch<SetStateAction<object>> } - method that sets the login parameters.
+ *    * errors { object } - errors in the login, password, token.
+ *    * setErrors { Dispatch<SetStateAction<object>> } - method for setting input errors.
+ *    * visible { object } - visibility of the entered values in the password / token field.
+ *    * setVisible { Dispatch<SetStateAction<object>> } - method setting the visibility of the entered data.
  */
-const AdminCmsLoginInputs: React.FC<PropsProvider> = ({
-   credentials, setCredentials, errors, setErrors, visible, setVisible,
-}) => {
+const AdminCmsLoginInputs: React.FC<PropsProvider> = props => {
+
+   const { credentials, setCredentials, errors, setErrors, visible, setVisible } = props;
 
    const handleChangeInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
       switch(target.placeholder.toLocaleLowerCase()) {

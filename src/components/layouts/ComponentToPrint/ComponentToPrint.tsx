@@ -1,19 +1,64 @@
-import React, { PureComponent, Fragment } from 'react';
-import axiosInstance from '../../helpers/request';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+/**
+ * @file CmsInfoBar.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Statefull class component.
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/18/2021
+ */
 
-import getSingleDateObjects from '../../constants/getSingleDateObjects';
-import GROUPS_STATIC from '../../constants/allGroups';
+import React, { Fragment, PureComponent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axiosInstance from '../../../helpers/request';
 
+import getSingleDateObjects from '../../../constants/getSingleDateObjects';
+import GROUPS_STATIC from '../../../constants/allGroups';
 
 const {
    container, headerPrint, datesPrint, weekDaysPrint, separator, infoPrint, reactIcon
 } = require('./ComponentToPrint.module.scss');
 
-const DAYS = [
-   'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek'
-];
+/**
+ * The table of constants typeof string that stores the consecutive days of the week.
+ */
+const DAYS: string[] = [ 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek' ];
 
+/**
+ * Interface defining the types of scheduleSubjecst object.
+ */
+interface ScheduleSubjects {
+   _id: string,
+   title: string,
+   group: string,
+   day: string,
+   type: string,
+   start: string,
+   end: string,
+   pzeInfo: {
+      platform: string,
+      pzeLink: string
+   }
+}
+
+/**
+ * Interface defining the type of props values.
+ */
+interface PropsProvider {
+   date: Date;
+   subjects: ScheduleSubjects[];
+   groupSelected: string;
+   engSelected: string;
+}
+
+/**
+ * Interface defining the type of state values.
+ */
 interface StateProvider {
    semesterInfos: {
       semester: string;
@@ -21,26 +66,14 @@ interface StateProvider {
       year: string;
    };
    updateSchedule: {
-      dayS: number;
-      monthS: number;
-      yearS: number;
-      hourS: number;
-      minutesS: number;
-      secondsS: number;
+      [value: string]: number;
    };
 }
 
-interface PropsProvider {
-   date: Date;
-   subjects: Array<any>;
-   groupSelected: string;
-   engSelected: string;
-}
-
 /**
- * Komponent klasowy renderujący dynamicznie plan na podstawie rekordów pobieranych z bazy danych i wyborów
- * użytkownika. Korzysta ze statycznego stora i przy zamontowaniu komponentu ustawia wartości dla state w
- * konstruktorze.
+ * @details A class component that dynamically renders a plan based on records retrieved from the database and
+ *          user selections. It uses a static stora and sets the values for state in the constructor when the
+ *          component is mounted.
  */
 class ComponentToPrint extends PureComponent<PropsProvider, StateProvider> {
    _isMounted = false;
@@ -53,7 +86,7 @@ class ComponentToPrint extends PureComponent<PropsProvider, StateProvider> {
       };
    }
 
-   componentDidMount() {
+   componentDidMount(): void {
       this._isMounted = true;
       const fetchData = async () => {
          const schedulePrint = await axiosInstance.get(`/last-update/${process.env.REACT_APP_PRINTSCHEDULE_ID}`);
@@ -73,20 +106,20 @@ class ComponentToPrint extends PureComponent<PropsProvider, StateProvider> {
       fetchData();
    }
 
-   componentWillUnmount() {
+   componentWillUnmount(): void {
       this._isMounted = false;
    }
 
-   generateSubjectsStructure = () => {
+   generateSubjectsStructure = (): JSX.Element[] => {
       const subjects = this.props.subjects;
-      const { NORMAL_GROUPS,  } = GROUPS_STATIC;
-      let subjectsPerDayArray: Array<any> = [];
-      let filteredArray: Array<any> = [];
+      const { NORMAL_GROUPS } = GROUPS_STATIC;
+      let subjectsPerDayArray: ScheduleSubjects[] = [];
+      let filteredArray: any = [];
 
-      const returFilteredArray = (engGroup: string, normalGroup: string) => (
-         subjects.filter((object: any) => (
-            object.group === engGroup || object.group === normalGroup || object.group === 'all')
-         )
+      const returFilteredArray = (engGroup: string, normalGroup: string): ScheduleSubjects[] => (
+         subjects.filter((object: ScheduleSubjects): boolean => (
+            object.group === engGroup || object.group === normalGroup || object.group === 'all'
+         ))
       );
 
       if(this.props.groupSelected !== '') {
@@ -102,17 +135,17 @@ class ComponentToPrint extends PureComponent<PropsProvider, StateProvider> {
          }
       }
 
-      DAYS.forEach((day: string) => {
-         subjectsPerDayArray.push(filteredArray.filter(subject => subject.day === day).sort(
+      DAYS.forEach((day: string): void => {
+         subjectsPerDayArray.push(filteredArray.filter((subject: ScheduleSubjects) => subject.day === day).sort(
             (prevH: any, secH: any): number => (
                parseInt(prevH.start.replace(':', '')) - parseInt(secH.start.replace(':', ''))
             )
          ));
       });
 
-      return subjectsPerDayArray.map((perDay: any, indexDay: number) =>
+      return subjectsPerDayArray.map((perDay: any, indexDay: number): JSX.Element =>
          <Fragment key = {indexDay}>
-            {perDay.map((subject: any, index: number) => (
+            {perDay.map((subject: ScheduleSubjects, index: number) => (
                <tr key = {index}>
                   {index === 0 && <th rowSpan = {perDay.length} className = {weekDaysPrint}>{DAYS[indexDay]}</th>}
                   <td>{subject.start} - {subject.end}</td>
@@ -126,7 +159,7 @@ class ComponentToPrint extends PureComponent<PropsProvider, StateProvider> {
       );
    }
 
-   render() {
+   render(): JSX.Element {
       const { semester, semesterType, year } = this.state.semesterInfos;
       const { dayS, monthS, yearS, hourS, minutesS, secondsS } = this.state.updateSchedule;
       const dayF = dayS < 10 ? `0${dayS}` : dayS;

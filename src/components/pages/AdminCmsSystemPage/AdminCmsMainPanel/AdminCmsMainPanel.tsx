@@ -1,114 +1,42 @@
-import React, { Fragment, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+/**
+ * @file AdminCmsMainPanel.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version project: "^0.1.0"
+ *          ReactJS: "^17.0.2"
+ *          ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/18/2021
+ */
 
-import COOKIES_OBJECT from '../../../../constants/allCookies';
+import React, { Fragment } from 'react';
+
+import ModalsStateProvider from '../../../../contextStore/ModalsStateProvider';
 
 import CookiesNotification from '../../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../../layouts/Header/Header';
 import CurrentURLpath from '../../../layouts/CurrentURLpath/CurrentURLpath';
-
-import ModalsStateProvider from '../../../../contextStore/ModalsStateProvider';
-import FormDataAndValidateProvider from '../../../../contextStore/FormDataAndValidateProvider';
-import FormCalendarModalProvider from '../../../../contextStore/FormCalendarModalProvider';
-import FormScheduleModalProvider from '../../../../contextStore/FormScheduleModalProvider';
-
-import UserMessageDeleteModal from './Modals/WarningDeleteModal/UserMessageDeleteModal';
-import CalendarDeleteModal from './Modals/WarningDeleteModal/CalendarDeleteModal';
-import SubjectDeleteModal from './Modals/WarningDeleteModal/SubjectDeleteModal';
-import ViewUserMessageModal from './Modals/ViewUserMessagesModal/ViewUserMessageModal';
-import ScheduleDeleteModal from './Modals/WarningDeleteModal/ScheduleDeleteModal';
-import AddChangeSubjectModal from './Modals/AddChangeSubjectModal/AddChangeSubjectModal';
-import AddChangeCalendarModal from './Modals/AddChangeCalendarModal/AddChangeCalendarModal';
-import AddChangeScheduleModal from './Modals/AddChangeScheduleModal/AddChangeScheduleModal';
-import AdminCmsLeftNavigation from './AdminCmsLeftNavigation';
-
-import HomePanel from './Panels/HomePanel';
-import Covid19Panel from './Panels/Covid19Panel';
-import SubjectsPanel from './Panels/SubjectsPanel';
-import SchedulePanel from './Panels/SchedulePanel';
-import CalendarPanel from './Panels/CalendarPanel';
-import UserMessagesPanel from './Panels/UserMessagePanel';
-
-const { adminLoginContainer, adminLoginWrapper } = require('./../AdminCmsLogin/AdminCmsLogin.module.scss');
-const { universalHeader, fasIcon } = require('./../../../layouts/Navigation/Navigation.module.scss');
-const { cmsSystemContainer, cmsContent, logoutButton } = require('./AdminCmsMainPanel.module.scss');
-
-interface PropsProvider {
-   setAuth: (value: boolean) => boolean;
-   handleCookie: any;
-}
+import DeleteModalsStructure from "./Modals/DeleteModalsStructure";
+import AddChangeModalsStructure from "./Modals/AddChangeModalsStructure";
+import PanelsStructure from "./PanelsStructure";
 
 /**
- * Komponent generujący panele administratora systemu CMS.
- *
- * @param setAuth { (value: boolean) => boolean } - funkcja ustawiająca autentykację.
- * @param handleCookie { any } - funkcja usuwająca/dodająca obiekt Cookie.
+ * @details The component is responsible for generating the entire structure of the content management system
+ *          administrator panel (CMS). It generates modal windows for adding / editing / deleting records and entire
+ *          panels with navigation. The component is rendered by a protected React Router.
  */
-const AdminCmsMainPanel: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
-
-   const [ activeNavElm, setActiveNavElm ] = useState<number>(0);
-
-   const handleLogout = () => {
-      setAuth(false);
-      handleCookie(COOKIES_OBJECT.adminSession, { path: '/', sameSite: 'strict' });
-      handleCookie(COOKIES_OBJECT.credentialsLevel, { path: '/', sameSite: 'strict' });
-   }
-
+const AdminCmsMainPanel = () => {
    return (
       <Fragment>
          <CookiesNotification/>
          <Header ifHeaderHasRedBar = {false}/>
-         <CurrentURLpath ifImportatHeaderActive = {false}/>
+         <CurrentURLpath ifImportatHeaderActive = {true}/>
          <ModalsStateProvider>
-            <SubjectDeleteModal/>
-            <CalendarDeleteModal/>
-            <UserMessageDeleteModal/>
-            <ScheduleDeleteModal/>
-            <ViewUserMessageModal/>
-            <FormDataAndValidateProvider>
-               <AddChangeSubjectModal/>
-            </FormDataAndValidateProvider>
-            <FormCalendarModalProvider>
-               <AddChangeCalendarModal/>
-            </FormCalendarModalProvider>
-            <FormScheduleModalProvider>
-               <AddChangeScheduleModal/>
-            </FormScheduleModalProvider>
-            <div className = {adminLoginContainer}>
-               <div className = {adminLoginWrapper}>
-                  <section className = {universalHeader}>
-                     <h3>
-                        <FontAwesomeIcon
-                           icon = {['fas', 'industry']}
-                           className = {fasIcon}
-                        />
-                        Panel Systemu Zarządzania Treścią
-                        <aside/>
-                        <button
-                           onClick = {handleLogout}
-                           className = {logoutButton}
-                        >Wyloguj</button>
-                     </h3>
-                  </section>
-
-                  <div className = {cmsSystemContainer}>
-                     <AdminCmsLeftNavigation
-                        activeNavElm = {activeNavElm}
-                        setActiveNavElm = {setActiveNavElm}
-                     />
-                     <div className = {cmsContent}>
-                        <HomePanel activeNavElm = {activeNavElm}/>
-                        <Covid19Panel activeNavElm = {activeNavElm}/>
-                        <FormDataAndValidateProvider>
-                           <SubjectsPanel activeNavElm = {activeNavElm}/>
-                        </FormDataAndValidateProvider>
-                        <SchedulePanel activeNavElm = {activeNavElm}/>
-                        <CalendarPanel activeNavElm = {activeNavElm}/>
-                        <UserMessagesPanel activeNavElm = {activeNavElm}/>
-                     </div>
-                  </div>
-               </div>
-            </div>
+            <DeleteModalsStructure/>
+            <AddChangeModalsStructure/>
+            <PanelsStructure/>
          </ModalsStateProvider>
       </Fragment>
    );

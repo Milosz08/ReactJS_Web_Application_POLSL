@@ -1,6 +1,13 @@
-import React, { createContext, useState } from 'react';
+import React, {createContext, Dispatch, SetStateAction, useState} from 'react';
 
-export const LoginSessionContext = createContext<any>(null);
+export interface LoginSessionProviderTypes {
+   adminAuth: boolean;
+   setAdminAuth: Dispatch<SetStateAction<boolean>>;
+   userAuth: boolean;
+   setUserAuth: Dispatch<SetStateAction<boolean>>;
+}
+
+export const LoginSessionContext = createContext<Partial<LoginSessionProviderTypes>>({ });
 
 interface PropsProvider {
    children: React.ReactNode;

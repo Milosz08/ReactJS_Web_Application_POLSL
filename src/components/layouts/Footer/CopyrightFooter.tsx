@@ -1,20 +1,36 @@
-import React, {useContext} from 'react';
+/**
+ * @file CopyrightFooter.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactDelayLink: "^1.1.6"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/18/2021
+ */
+
+import React, { useContext } from 'react';
 import DelayLink from 'react-delay-link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { MainStoreContext, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
 
 const {
    copyrightSectionWrapper, copyIcons, copyAuthor, copyCookies, cookiesIcon
 } = require('./Footer.module.scss');
 
 /**
- * Komponent generujący końcową stopkę (prawa autorskie, link do polityki plików Cookies oraz wykorzystane ikony
- * z biblioteki FontAwesome).
+ * @details Component that generates the final footer (copyright, link to the Cookies policy and icons from the
+ *          FontAwesome library used).
  */
 const CopytightFooter = () => {
 
-   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
+   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    return (
       <div className = {copyrightSectionWrapper}>

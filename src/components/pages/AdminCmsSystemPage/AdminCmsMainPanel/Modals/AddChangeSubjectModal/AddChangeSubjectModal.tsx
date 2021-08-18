@@ -1,17 +1,30 @@
+/**
+ * @file TimeInputsModal.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axiosInstance from '../../../../../../helpers/request';
 
-import { ModalsStateContext } from '../../../../../../contextStore/ModalsStateProvider';
+import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 import { FormDataAndValidateContext } from '../../../../../../contextStore/FormDataAndValidateProvider';
-import { MainStoreContext } from '../../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
 
 import CheckboxSemesters from './CheckboxSemesters';
 import RadioStatusEnd from './RadioStatusEnd';
 import DepartmentsInject from './DepartmentsInject';
 import TypeAndPlatform from './TypeAndPlatform';
-
-import { MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 import UniversalHeader from "../../../../../layouts/UniversalHeader/UniversalHeader";
 
 const {
@@ -23,15 +36,15 @@ const {
 } = require('./AddChangeSubjectModal.module.scss');
 
 /**
- * Komponent generujący modal umożliwiający administratorowi wprowadzenie nowego przedmiotu/edycję przedmiotu.
- * Komponent korzysta z innych komponentów, generujących resztę inputów formularza oraz walidujących wprowadzane
- * dane przez użytkownika. Komponent korzysta z głównego stora przechowującego dane pobrane z API. Po wysłaniu
- * formularza, komponent łączy się z API i na podstawie odpowiednich metod aktualizuje, bądź dodaje nowy przedmiot.
+ * @details Modal generating component that allows the administrator to enter a new item/edit the item. The component uses
+ *          other components that generate the rest of the form inputs and validate the input by the user. The component uses
+ *          the main store that stores the data downloaded from the API. After sending the form, the component connects to the
+ *          API and, based on appropriate methods, updates or adds a new item.
  */
 const AddChangeSubjectModal = () => {
 
-   const { subjectModal, setSubjectModal } = useContext<any>(ModalsStateContext);
-   const { dataFetchFromServer, setDataFetchFromServer } = useContext<any>(MainStoreContext);
+   const { subjectModal, setSubjectModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
+   const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const {
       title, setTitle, icon, setIcon, errors, setErrors, semesters, setSemesters, departments, setDepartments,
@@ -40,7 +53,7 @@ const AddChangeSubjectModal = () => {
    } = useContext<any>(FormDataAndValidateContext);
 
    const { subjectsData } = dataFetchFromServer;
-   const ifModalOpen = subjectModal.ifOpen && subjectModal.type !== MODAL_TYPES.REMOVE ? modalOpen : '';
+   const ifModalOpen = subjectModal!.ifOpen && subjectModal!.type !== MODAL_TYPES.REMOVE ? modalOpen : '';
 
    const addNewRecord = async () => {
       const copyArray = [...subjectsData];
@@ -61,7 +74,7 @@ const AddChangeSubjectModal = () => {
    const editExistRecord = async () => {
       const copyArray = [...subjectsData];
       const newObject = {
-         _id: subjectModal.id,
+         _id: subjectModal!.id,
          title: title,
          semesters: semesters,
          ifEnd: ifEnd[0],
@@ -69,8 +82,8 @@ const AddChangeSubjectModal = () => {
          icon: ['fas', icon],
          classesPlatforms: classesPlatforms,
       }
-      await axiosInstance.put(`subjects-data/${subjectModal.id}`, newObject);
-      const index = copyArray.findIndex(x => x._id === subjectModal.id);
+      await axiosInstance.put(`subjects-data/${subjectModal!.id}`, newObject);
+      const index = copyArray.findIndex(x => x._id === subjectModal!.id);
       if(index >= 0) {
          copyArray[index] = newObject;
          setDataFetchFromServer({ ...dataFetchFromServer, subjectsData: copyArray });
@@ -93,8 +106,8 @@ const AddChangeSubjectModal = () => {
       e.preventDefault();
       const { title, checkbox, department, icon, platform, checkFull } = validateAll();
       if(checkFull) {
-         setSubjectModal({ id: null, type: '', ifOpen: false });
-         if(subjectModal.type === MODAL_TYPES.EDIT) {
+         setSubjectModal!({ id: '', type: '', ifOpen: false });
+         if(subjectModal!.type === MODAL_TYPES.EDIT) {
             editExistRecord();
          } else {
             addNewRecord();
@@ -116,9 +129,9 @@ const AddChangeSubjectModal = () => {
    }
 
    useEffect(() => {
-      if(subjectModal.id !== null && subjectModal.id) {
-         const shellingObject = subjectsData.find((object: any) => object._id === subjectModal.id);
-         if(subjectModal.type === MODAL_TYPES.EDIT) {
+      if(subjectModal!.id !== null && subjectModal!.id) {
+         const shellingObject = subjectsData.find((object: any) => object._id === subjectModal!.id);
+         if(subjectModal!.type === MODAL_TYPES.EDIT) {
             setTitle(shellingObject.title);
             setIcon(shellingObject.icon[1]);
             setIfEnd([shellingObject.ifEnd, !shellingObject.ifEnd]);
@@ -130,14 +143,14 @@ const AddChangeSubjectModal = () => {
          }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [subjectModal.ifOpen]);
+   }, [subjectModal!.ifOpen]);
 
    return (
       <div className = {`${modalContainer} ${ifModalOpen}`}>
          <div className = {`${modalWrapper} ${modalAddWrapper}`}>
             <UniversalHeader
-               iconP = {['fas', subjectModal.type !== 'edit' ? 'folder-plus' : 'edit']}
-               content = {`Kreator ${subjectModal.type !== 'edit' ? 'dodawania' : 'edytowania'} przedmiotu`}
+               iconP = {['fas', subjectModal!.type !== 'edit' ? 'folder-plus' : 'edit']}
+               content = {`Kreator ${subjectModal!.type !== 'edit' ? 'dodawania' : 'edytowania'} przedmiotu`}
                ifCloseButtonVisible = {false}
             />
             <form onSubmit = {handleSubmitForm} noValidate>

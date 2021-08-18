@@ -3,7 +3,13 @@ import { useCookies } from 'react-cookie';
 
 import COOKIES_OBJECT from "../constants/allCookies";
 
-export const CookiesObjectsContext = createContext<any>(null);
+export interface CookiesObjectsTypes {
+   cookie: { [p: string]: any };
+   setCookie: (name: string, value: any, options?: (any | undefined)) => void;
+   removeCookie: (name: string, options?: (any | undefined)) => void
+}
+
+export const CookiesObjectsContext = createContext<Partial<CookiesObjectsTypes>>({ });
 
 interface PropsProvider {
   children: React.ReactNode;
@@ -27,7 +33,10 @@ const CookiesObjectsProvider: React.FC<PropsProvider> = ({ children } : PropsPro
    ]);
 
    return (
-      <CookiesObjectsContext.Provider value = {{ cookie, setCookie, removeCookie }}>
+      <CookiesObjectsContext.Provider
+         value = {{
+            cookie, setCookie, removeCookie
+         }}>
          {children}
       </CookiesObjectsContext.Provider>
    );

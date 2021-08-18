@@ -1,28 +1,52 @@
-import React, { Fragment } from 'react';
+/**
+ * @file SubjectLayout.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactDelayLink: "^1.1.6"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *                ReactCSSTransitionGroup: "^4.4.2"
+ *
+ * @date final version: 08/18/2021
+ */
+
+import React, { Fragment, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink } from 'react-router-dom';
+import DelayLink from 'react-delay-link';
 import { v4 as uuidv4 } from 'uuid';
-import { SubjectsProvider } from "./Subjects";
+
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
+import { SubjectsProvider } from './Subjects';
 
 const {
    classesPlatformsInfo, navButtons, pzeLinks, separator, subDep, subEnd, subjectsDoIt, subjectsIcon,
    subNotEnd, subStatusInfo
 } = require('./Subjects.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    subjectID: number;
-   filteredArray: Array<SubjectsProvider>;
+   filteredArray: SubjectsProvider[];
 }
 
 /**
- * Komponent implementujący zawartość informacji na temat przedmiotu. Dane są pobierane z bazy danych.
- * Komponent renderowany jest tylko na stronie głównej. Przedmiot generowany jest na podstawie wartości
- * przekazywanych w propsach (index ID oraz tablicę z przedmiotami).
+ * @details A component that implements the content of the information about the item. The data is retrieved from the database.
+ *          The component is rendered only on the home page. The item is generated on the basis of values passed in props
+ *          (index ID and an array with items).
  *
- * @param subjectID { number } - index przedmiotu.
- * @param filteredArray { Array<SubjectsProvider> } - tablica z przechowanymi przedmiotami.
+ * @param subjectID { number } - schedule index.
+ * @param filteredArray { SubjectsProvider[] } - filtered array of schedules (based on input value).
  */
 const SubjectsLayout: React.FC<PropsProvider> = ({ subjectID, filteredArray }) => {
+
+   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const specificSubject = filteredArray[subjectID];
    const classesIfEnd = specificSubject.ifEnd ? 'odbywały' : 'odbywają';
@@ -90,7 +114,7 @@ const SubjectsLayout: React.FC<PropsProvider> = ({ subjectID, filteredArray }) =
          <aside className = {separator}>
             <span/>
             <FontAwesomeIcon
-               icon={specificSubject.icon}
+               icon = {specificSubject.icon}
                className = {subjectsIcon}
             />
             <span/>
@@ -104,12 +128,16 @@ const SubjectsLayout: React.FC<PropsProvider> = ({ subjectID, filteredArray }) =
          </div>
          <div className = {navButtons}>
             {pzeRefer}
-            <NavLink
+            <DelayLink
                to = '/warunki-zaliczenia-przedmiotów'
-               className = {subjectsDoIt}
+               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+               replace = {false}
+               clickAction = {timeoutRoutePath}
             >
-               Warunki zaliczenia przedmiotu
-            </NavLink>
+               <a href = {'/warunki-zaliczenia-przedmiotów'} className = {subjectsDoIt}>
+                  Warunki zaliczenia przedmiotu
+               </a>
+            </DelayLink>
          </div>
       </Fragment>
    );

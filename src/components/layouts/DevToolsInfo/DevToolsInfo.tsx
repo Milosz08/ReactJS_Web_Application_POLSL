@@ -1,3 +1,18 @@
+/**
+ * @file DevToolsInfo.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -8,26 +23,29 @@ const {
 const { externalLinkIcon } = require('./../Footer/Footer.module.scss');
 
 /**
- * Komponent odpowiadający za generowanie bloku informacji o użytych technologiach w procesie budowanie aplikacji.
- * Pojawia się on na wszystkich podstronach, pozycjonowany relatywnie względem kontentu i stopki.
+ * @details Component responsible for generating a block of information about the technologies used in the application
+ *          development process. It appears on all subpages, positioned relatively to the content and footer.
  */
 const DevToolsInfo = () => {
+
+   const generateReactLogo = () => (
+      <div className = {reactLogo}>
+         <FontAwesomeIcon icon = {['fab', 'react']} className = {reactIcon}/>
+      </div>
+   );
+
+   const generateNodeLogo = () => (
+      <div className = {nodeJsLogo}>
+         <FontAwesomeIcon icon = {['fab', 'node-js']} className = {nodeJsIcon}/>
+      </div>
+   );
+
    return (
       <aside className = {reactDevInfo}>
          <div className = {devInfoContainer}>
             <div className = {devInfoIconsContainer}>
-               <div className = {reactLogo}>
-                  <FontAwesomeIcon
-                     icon = {['fab', 'react']}
-                     className = {reactIcon}
-                  />
-               </div>
-               <div className = {nodeJsLogo}>
-                  <FontAwesomeIcon
-                     icon = {['fab', 'node-js']}
-                     className = {nodeJsIcon}
-                  />
-               </div>
+               {generateReactLogo()}
+               {generateNodeLogo()}
             </div>
             <div className = {reactTextContent}>
                <p>

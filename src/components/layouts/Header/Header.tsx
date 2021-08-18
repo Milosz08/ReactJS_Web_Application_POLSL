@@ -1,28 +1,49 @@
+/**
+ * @file Header.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactDelayLink: "^1.1.6"
+ *                ReactCSSmodules: "^4.7.11"
+ *                classnames: "^2.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import DelayLink from 'react-delay-link';
-import classnames from "classnames";
+import classnames from 'classnames';
 
-import CONSTANT_DATA from '../../../constants/staticData';
-import Navigation from "../Navigation/Navigation";
-import HamburgerMenu from "./HamburgerMenu";
-import LoadingBigBar from "../LoadingBigBar/LoadingBigBar";
 import { MainStoreContext, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
+import CONSTANT_DATA from '../../../constants/staticData';
+
+import Navigation from '../Navigation/Navigation';
+import HamburgerMenu from './HamburgerMenu';
+import LoadingBigBar from '../LoadingBigBar/LoadingBigBar';
+import CmsInfoBar from '../CmsInfoBar/CmsInfoBar';
 
 const {
    topNavBar, topNavBarLinks, headerContainer, mainHeader, siteImportantInfo, stickyHeader, topSiteHeader,
    ifHeaderIsOnCookies, siteImportantInfoHide, navigationRouter, headerHideClass
 } = require('./Header.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    ifHeaderHasRedBar: boolean;
 }
 
 /**
- * Komponent generujący nagłównek na stronie. W zależności od flagi ifHeaderHasRedBar, header będzie posiadał
- * pod spodem czerwony pasek informujący o witrynie.
+ * @details Component that generates the header on the page. Depending on the ifHeaderHasRedBar flag, header will
+ *          have a red site bar underneath it.
  *
- * @param ifHeaderHasRedBar { boolean } - parametr definiujący, czy nagłówek ma się pokazywać z czerwonym paskiem
- *                                        informującym o witrynie (wartość true -> pasek aktywny).
+ * @param ifHeaderHasRedBar { boolean } - parameter defining whether the header should be shown with a red bar
+ *                                        informing about the site (true -> active bar).
  */
 const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
 
@@ -34,10 +55,8 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
    const [ offset, setOffset ] = useState<number>(0);
    const [ width, setWidth ] = useState<number>(window.innerWidth);
    const [ menuSticky, setMenuSticky ] = useState<boolean>(false);
-
    const [ elmHeight, setElmHeight ] = useState<number>(0);
    const [ headerHide, setHeaderHide ] = useState<boolean>(false);
-
    const [ activeHamburger, setActiveHamburger ] = useState<boolean>(false);
 
    useEffect(() => {
@@ -144,6 +163,7 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
          >
             Nieoficjalna witryna internetowa kierunku "Informatyka" na wydziale Elektrycznym 2020/2021.
          </div>
+         {document.location.pathname.includes('panel-administratora') && <CmsInfoBar/>}
       </header>
    );
 }

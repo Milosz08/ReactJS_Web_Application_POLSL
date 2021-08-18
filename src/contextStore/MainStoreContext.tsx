@@ -1,8 +1,16 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, {createContext, Dispatch, SetStateAction, useEffect, useState} from 'react';
 import axiosInstance from "../helpers/request";
 import MainStoreStateProvider from "./MainStoreStateProvider";
 
-export const MainStoreContext = createContext<any>(null);
+export interface MainStoreProviderTypes {
+   dataFetchFromServer: MainStoreStateProvider | any;
+   setDataFetchFromServer: Dispatch<SetStateAction<MainStoreStateProvider>> | any;
+   timeoutRoutePath: () => void;
+   routePath: boolean;
+   setRoutePath: Dispatch<SetStateAction<boolean>>;
+}
+
+export const MainStoreContext = createContext<Partial<MainStoreProviderTypes>>({ });
 
 export const ROUTER_INTERVAL_TIME = .7; //w sekundach
 
@@ -24,7 +32,7 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
 
    const [ routePath, setRoutePath ] = useState<boolean>(false);
 
-   const timeoutRoutePath = () => {
+   const timeoutRoutePath = (): void => {
       setRoutePath(true);
       setTimeout(() => { setRoutePath(false); },(ROUTER_INTERVAL_TIME + .3) * 1000);
    }
@@ -34,7 +42,7 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
          const covidData = await axiosInstance.get('/covid-data');
          const footerForm = await axiosInstance.get('/footer-form');
          const subjectsData = await axiosInstance.get('/subjects-data');
-         const subjectShedule = await axiosInstance.get('/subject-shedule');
+         const subjectShedule = await axiosInstance.get('/subject-schedule');
          const calendarRecord = await axiosInstance.get('/calendar-record');
 
          const covidDataFetch = JSON.parse(covidData.request.response);
@@ -50,8 +58,10 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
             .sort((a: any, b: any) => a.year - b.year);
 
          setDataFetchFromServer({
-            covidData: covidDataFetch, footerForms: footerFormFetch,
-            subjectsData: subjectsDataFetch, scheduleSubjects: scheduleSubjectsFetch,
+            covidData: covidDataFetch,
+            footerForms: footerFormFetch,
+            subjectsData: subjectsDataFetch,
+            scheduleSubjects: scheduleSubjectsFetch,
             calendarRecords: calendarRecordsFetch
          });
       }

@@ -1,8 +1,25 @@
+/**
+ * @file FooterForm.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *                classnames: "^2.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axiosInstance from "../../../helpers/request";
+import classnames from 'classnames';
 
+import axiosInstance from "../../../helpers/request";
 import CONSTANT_DATA from "../../../constants/staticData";
 import getSingleDateObjects from "../../../constants/getSingleDateObjects";
 
@@ -11,10 +28,16 @@ const {
    checkmark, formBtnSubmitContainer, footerFormCSS
 } = require('./FooterForm.module.scss');
 
+/**
+ * Constants describing the properties of the textarea JSX tag.
+ */
 const MIN_LENGTH_TEXTAREA: number = 10;
 const MAX_LENGTH_TEXTAREA: number = 300;
-const TEXTAREA_ROWS: number | undefined = 7;
+const TEXTAREA_ROWS: number = 7;
 
+/**
+ * Interface defining the type of state values.
+ */
 interface StateProvider {
    userName: string;
    typeOfMessage: string;
@@ -22,31 +45,23 @@ interface StateProvider {
    agreeCheck: boolean;
 }
 
-interface ErrorsStateProvider {
-   userName: boolean;
-   messageArea: boolean;
-   agreeCheck: boolean;
-   allCorrect: boolean;
-}
-
-interface ValidateProvider {
-   userNameBool: boolean;
-   messageAreaBool: boolean;
-   agreeCheckBool: boolean;
-   allCorrectBool: boolean;
+/**
+ * Interface defining the type of Boolean Map Objects
+ */
+interface BooleanMap {
+   [index: string]: boolean;
 }
 
 /**
- * Komponent implementujący formularz do stopki. Odpowiada również za wysłanie danych ze stanu React do
- * bazy danych w postaci pojedyńczego obiektu (rekordu). W komponencie zawarta jest również pełna walidacja
- * formularza.
+ * @details Component that implements the form to the footer. It is also responsible for sending data from the React
+ *          state to the database as a single object (record). The component also includes full form validation.
  */
 const FooterForm = () => {
 
    const [ formInputs, setFormInputs ] = useState<StateProvider>({
       userName: '', typeOfMessage: 'pageError', messageArea: '', agreeCheck: false
    });
-   const [ errors, setErrors ] = useState<ErrorsStateProvider>({
+   const [ errors, setErrors ] = useState<BooleanMap>({
       userName: false, messageArea: false, agreeCheck: false, allCorrect: false
    });
    const [ showPosMess, setShowPosMess ] = useState<boolean>(false);
@@ -74,7 +89,7 @@ const FooterForm = () => {
       setFormInputs({ ...formInputs, typeOfMessage: target.value })
    );
 
-   const validateForm = (): ValidateProvider => {
+   const validateForm = (): BooleanMap => {
       const { userName, messageArea, agreeCheck } = formInputs;
       let userNameBool = false, messageAreaBool = false, agreeCheckBool = false, allCorrectBool = false;
 
@@ -122,7 +137,7 @@ const FooterForm = () => {
          setFormInputs({ userName: '', typeOfMessage: 'pageError', messageArea: '', agreeCheck: false });
          setErrors({ userName: false, messageArea: false, agreeCheck: false, allCorrect: false });
          showPositiveMessage();
-         postSendFormData(); //strzał do API - wysyłanie do bazy danych
+         postSendFormData();
       } else {
          setErrors({
             userName: !userNameBool, messageArea: !messageAreaBool,
@@ -186,7 +201,7 @@ const FooterForm = () => {
          </div>
          <div className = {formBtnSubmitContainer}>
             <button>
-               <p className = {`${posSendForm} ${showPosMess ? showPositiveMess : ''}`}>
+               <p className = {classnames(posSendForm, showPosMess ? showPositiveMess : '')}>
                   Wiadomość została wysłana.
                </p>
                Wyślij

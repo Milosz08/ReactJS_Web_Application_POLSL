@@ -1,26 +1,46 @@
+/**
+ * @file Navigation.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactDelayLink: "^1.1.6"
+ *                ReactCSSmodules: "^4.7.11"
+ *                classnames: "^2.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { useContext } from 'react';
 import DelayLink from 'react-delay-link';
 
-import { MainStoreContext, ROUTER_INTERVAL_TIME } from "../../../contextStore/MainStoreContext";
+import UniversalHeader from '../UniversalHeader/UniversalHeader';
+
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
 import CONSTANT_DATA from '../../../constants/staticData';
-import UniversalHeader from "../UniversalHeader/UniversalHeader";
 
 const { navInline, navBlocks, arrowGoto } = require('./Navigation.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    ifHeader: boolean;
 }
 
 /**
- * Komponent generujący listę linków, w zależności od parametru w propsach, generowana jest lista bez ikon i
- * innych ozdobników (jeśli ifHeader === true). Jeśli ifHeader === false, generuje linki z ozdobnikami.
+ * @details Component generating a list of links, depending on the parameter in props, a list is generated without
+ *          icons and other embellishments (if ifHeader === true). If ifHeader === false, it generates fancy links.
  *
- * @param ifHeader { boolean } - decyduje, czy nawigacja ma być generowana dla nagłówka, czy dla kontentu na
- *                               głównej stronie (pod licznikiem).
+ * @param ifHeader { boolean } - decides whether the navigation is to be generated for the header or for the content
+ *                               on the main page (under the counter).
  */
 const Navigation: React.FC<PropsProvider > = ({ ifHeader }) => {
 
-   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
+   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const { SITES } = CONSTANT_DATA;
    const classToggle = ifHeader ? navInline : navBlocks;

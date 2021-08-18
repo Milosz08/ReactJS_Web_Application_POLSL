@@ -1,15 +1,31 @@
+/**
+ * @file GotoTopButton.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactCSSmodules: "^4.7.11"
+ *                classnames: "^2.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { useEffect, useState } from 'react';
-import classnames from "classnames";
+import classnames from 'classnames';
 
 const { gotoTopWrapper, showGotoButton } = require('./GotoTopButton.module.scss');
 
 /**
- * Komponent dodający przycik (w pozycji fixed) umożliwiający po kliknięciu przejście do góry strony.
- * Przycisk widoczny jest, tylko gdy pozycja scrolla (od szczytu strony) przekroczy wartość 200 jednostek.
+ * @details Component that adds a button (in the fixed position) that allows you to go to the top of the page after
+ *          clicking. The button is visible only when the scroll position (from the top of the page) exceeds the
+ *          value of 200 units (px).
  */
 const GotoTopButton = () => {
 
-   const [ offset, setOffset ] = useState<number>(0);
+   const [ offset, setOffset ] = useState<number>(window.pageYOffset);
    const [ showGoto, setShowGoto ] = useState<boolean>(false);
 
    useEffect(() => {

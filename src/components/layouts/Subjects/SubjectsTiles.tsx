@@ -1,36 +1,54 @@
+/**
+ * @file SubjectTiles.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { Dispatch, Fragment, SetStateAction } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
+
 import { SubjectsProvider } from './Subjects';
-import classnames from "classnames";
 
 const {
    activeBtn, subjectTile, subjectsIcon, subjectIconWrapper, subjectTitle, subjectInfoBlock
 } = require('./Subjects.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
-   filteredArray: Array<SubjectsProvider>;
+   filteredArray: SubjectsProvider[];
    state: number;
    setState: Dispatch<SetStateAction<number>>;
 }
 
 /**
- * Komponent generujący listę przedmiotów w postaci przycisków. W propsach przekazywana jest tablica przedmiotów
- * do wygenerowania, aktulanie wyświetlany przedmiot i funkcja umożliwiająca zmianę aktualnie wyświetlanego przedmiotu.
+ * @details Component that generates a list of items in the form of buttons. The props contain an array of items to
+ *          generate, the currently displayed item and a function that allows you to change the currently displayed item.
  *
- * @param filteredArray { Array<SubjectsProvider> } - tablica przechowująca wszystkie przedmioty
- * @param state { number } - indeks aktualnie wyświetlanego przedmiotu
- * @param setState { Dispatch<SetStateAction<number>> } - funkcja umożliwiająca zmianę przedmiotu
+ * @param filteredArray { SubjectsProvider[] } - array storing all subjects
+ * @param state { number } - index of the currently displayed subject
+ * @param setState { Dispatch<SetStateAction<number>> } - function that allows you to change the subject
  */
 const SubjectsTiles: React.FC<PropsProvider> = ({ filteredArray, state, setState }) => {
-
-   const handleClick = (id: number) => setState(id);
 
    const subjectsButtons = filteredArray.map((subject: SubjectsProvider, index: number) => {
       const subjectsButtonActive = index === state ? activeBtn : '';
       return (
          <button
             key = {subject.title}
-            onClick = {() => handleClick(index)}
+            onClick = {() => setState(index)}
             className = {subjectTile}
          >
             <div className = {subjectIconWrapper}>

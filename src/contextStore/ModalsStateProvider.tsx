@@ -1,6 +1,4 @@
-import React, { createContext, useState } from 'react';
-
-export const ModalsStateContext = createContext<any>(null);
+import React, {createContext, Dispatch, SetStateAction, useState} from 'react';
 
 export const MODAL_TYPES = {
    EDIT: 'edit',
@@ -20,6 +18,19 @@ export interface ModalStateProvider {
    ifOpen: boolean;
 }
 
+export interface ModalStateType {
+   subjectModal: ModalStateProvider
+   setSubjectModal: Dispatch<SetStateAction<ModalStateProvider>>
+   calendarModal: ModalStateProvider
+   setCalendarModal: Dispatch<SetStateAction<ModalStateProvider>>
+   messageModal: ModalStateProvider
+   setMessageModal: Dispatch<SetStateAction<ModalStateProvider>>
+   scheduleModal: ModalStateProvider
+   setScheduleModal: Dispatch<SetStateAction<ModalStateProvider>>
+}
+
+export const ModalsStateContext = createContext<Partial<ModalStateType>>({ });
+
 /**
  * Store przechowujący stany modali w panelu administratora CMS. Stan składa się z 3 elementów: id elementu,
  * typ okna (edycja, podgląd, usunięcie lub dodanie).
@@ -33,9 +44,7 @@ const ModalsStateProvider: React.FC<PropsProvider> = ({ children }) => {
    const [ subjectModal, setSubjectModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
    const [ calendarModal, setCalendarModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
    const [ messageModal, setMessageModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
-   const [ scheduleModal, setScheduleModal ] = useState<ModalStateProvider>({
-      id: '', type: EDIT, day: '', ifOpen: false
-   });
+   const [ scheduleModal, setScheduleModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, day: '', ifOpen: false });
 
    return (
       <ModalsStateContext.Provider

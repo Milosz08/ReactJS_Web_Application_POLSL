@@ -1,8 +1,26 @@
+/**
+ * @file CookiesNotification.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version       "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactRouterDOM: "^5.2.0"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^4.7.11"
+ *                uuid: "^8.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { useContext } from 'react';
-import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
+import classnames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
-import { CookiesObjectsContext } from '../../../contextStore/CookiesObjectsProvider';
+
+import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../contextStore/CookiesObjectsProvider';
 
 import UniversalHeader from "../UniversalHeader/UniversalHeader";
 
@@ -14,24 +32,26 @@ const {
    acceptPolicity, showCookiePopup
 } = require('./CookiesNotification.module.scss');
 
+/**
+ * Constants on the basis of which the cookie file is generated.
+ */
 const COOKIE_ID = uuidv4();
+const COOKIE_EXPIRES_TIME: number = 365;
 
 /**
- * Komponent odpowiadający za wyświetlanie powiadomienia o używaniu przez aplikację plików Cookies.
- * Komponent korzysta z kontekstu przechowującego metody dostępu do plików Cookie. Komponent tworzy nowy
- * plik cookie po zaakceptowaniu warunków. Modal nie jest wyświetlany, jeśli plik Cookie istnieje.
+ * @details Component responsible for displaying the notification about the use of cookies by the application. The
+ *          component uses the context that stores the access methods to Cookie files. The component creates a new
+ *          Cookie after accepting the terms. The modal is not displayed if the Cookie file exists.
  */
 const CookiesNotification = () => {
 
-   const { cookie, setCookie } = useContext(CookiesObjectsContext)
-   const ifCookieNotExist = cookie.__cookieNotification === undefined ? showCookiePopup : '';
+   const { cookie, setCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext)
+   const ifCookieNotExist = cookie!.__cookieNotification === undefined ? showCookiePopup : '';
 
-   const handleCookieButtons = () => {
-      if(cookie.__cookieNotification === undefined) { //jeśli plik Cookie nie istnieje
-         const expCookie : Date = cookieExpires(365);
-         setCookie(COOKIES_OBJECT.cookiesPopup, COOKIE_ID, {
-            path: '/', expires: expCookie, sameSite: 'strict'
-         });
+   const handleCookieButtons = (): void => {
+      if(cookie!.__cookieNotification === undefined) {
+         const expCookie: Date = cookieExpires(COOKIE_EXPIRES_TIME);
+         setCookie!(COOKIES_OBJECT.cookiesPopup, COOKIE_ID, { path: '/', expires: expCookie, sameSite: 'strict' });
       }
    }
 

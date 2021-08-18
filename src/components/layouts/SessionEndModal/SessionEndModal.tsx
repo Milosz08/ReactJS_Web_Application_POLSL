@@ -1,54 +1,80 @@
+/**
+ * @file SessionEndModal.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @project_name "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactDelayLink: "^1.1.6"
+ *                ReactCSSmodules: "^4.7.11"
+ *                classnames: "^2.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
-import { GlobalModalsStateContext } from '../../../contextStore/GlobalModalsStateProvider';
-import { CookiesObjectsContext } from '../../../contextStore/CookiesObjectsProvider';
-import { LoginSessionContext } from '../../../contextStore/LoginSessionProvider';
+import { GlobalModalsStateContext, GlobalModalsStateTypes } from '../../../contextStore/GlobalModalsStateProvider';
+import { LoginSessionContext, LoginSessionProviderTypes } from '../../../contextStore/LoginSessionProvider';
+import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../contextStore/CookiesObjectsProvider';
 
 import COOKIES_OBJECT from '../../../constants/allCookies';
-import { MAX_INACTIVITY_TIME } from '../../additionalComponents/SessionActivityCount';
+import ROUTING_PATH_NAMES from "../../../constants/routingPathNames";
+import { MAX_INACTIVITY_TIME } from '../CredentialsSequencers/SessionActivityCount';
 
 const {
    sessionWarningContainer, sessionWarningWrapper, show, active, timeContainer, fasIcon, countingInfo,
    buttonsContainer, stayLoggedButton, logoutButton, logoutInfo
 } = require('./SessionEndModal.module.scss');
 
-const LOGOUT_REMAIN_TIME = 30; //w sekundach
-const DEFAULT_TITLE = 'Informatyka | Wydział Elektryczny POLSL';
+/**
+ * Constant describing the time remaining until automatic logout from the system (active modal) in seconds.
+ */
+const LOGOUT_REMAIN_TIME = 30;
 
 /**
- *
+ * A constant that describes the default SPA page title
+ */
+const DEFAULT_TITLE = ROUTING_PATH_NAMES.START_PAGE;
+
+/**
+ * @details Component generating a modal informing the user / administrator about the end of an active session (no activity on
+ *          the page). It allows you to log out manually or stay logged in. If the user does not show the action, after some
+ *          time in the variable "LOGOUT_REMAIN_TIME", he will be automatically logged out of the system.
  */
 const SessionEndModal = () => {
 
-   const { adminSessionInfo, setAdminSessionInfo } = useContext<any>(GlobalModalsStateContext);
-   const { setAdminAuth } = useContext<any>(LoginSessionContext);
-   const { removeCookie } = useContext<any>(CookiesObjectsContext);
+   const { adminSessionInfo, setAdminSessionInfo } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
+   const { setAdminAuth } = useContext<Partial<LoginSessionProviderTypes>>(LoginSessionContext);
+   const { removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
 
    const [ classVisible, setClassVisible ] = useState<string>('');
    const [ containerVisible, setContainerVisible ] = useState<string>('');
    const [ iconPrefix, setIconPrefix ] = useState<any>('hourglass-start');
    const [ logoutCountdown, setLogoutCountdown ] = useState<number>(LOGOUT_REMAIN_TIME);
 
-   const handleStayLogged = () => {
+   const commonDependencies = () => {
       document.title = DEFAULT_TITLE;
       setClassVisible('');
       setTimeout(() => setContainerVisible(''), 200);
-      setAdminAuth(true);
-      setAdminSessionInfo(false);
+      setAdminSessionInfo!({ ...adminSessionInfo, modalOpen: false });
       setLogoutCountdown(LOGOUT_REMAIN_TIME);
    }
 
+   const handleStayLogged = () => {
+      commonDependencies();
+      setAdminAuth!(true);
+   }
+
    const handleLogout = () => {
-      document.title = DEFAULT_TITLE;
-      setClassVisible('');
-      setTimeout(() => setContainerVisible(''), 200);
-      setAdminAuth(false);
-      setAdminSessionInfo(false);
-      setLogoutCountdown(LOGOUT_REMAIN_TIME);
-      removeCookie(COOKIES_OBJECT.adminSession, { path: '/', sameSite: 'strict' });
-      removeCookie(COOKIES_OBJECT.credentialsLevel, { path: '/', sameSite: 'strict' });
+      commonDependencies();
+      setAdminAuth!(false);
+      removeCookie!(COOKIES_OBJECT.adminSession, { path: '/', sameSite: 'strict' });
+      removeCookie!(COOKIES_OBJECT.credentialsLevel, { path: '/', sameSite: 'strict' });
    }
 
    useEffect(() => {
@@ -57,7 +83,7 @@ const SessionEndModal = () => {
       let counter: number = 0;
       let toLogoutCounter: number = LOGOUT_REMAIN_TIME;
       const audio = new Audio(`${process.env.PUBLIC_URL}/audio/session-warning.mp3`);
-      if(adminSessionInfo) {
+      if(adminSessionInfo!.modalOpen) {
          const hourglassAsyncAnimation = () => {
             counter++;
             switch(counter) {
@@ -94,7 +120,8 @@ const SessionEndModal = () => {
          clearInterval(index);
          clearInterval(logoutIndex);
       }
-   }, [adminSessionInfo]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [adminSessionInfo!.modalOpen]);
 
    return (
       <div className = {classnames(sessionWarningContainer, containerVisible, classVisible)}>

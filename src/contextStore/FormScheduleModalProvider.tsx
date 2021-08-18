@@ -1,30 +1,31 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, {createContext, Dispatch, SetStateAction, useEffect, useState} from 'react';
 import axiosInstance from "../helpers/request";
 import GROUPS_STATIC from "../constants/allGroups";
-
-export const FormScheduleModalContext = createContext<any>(null);
+import { SubjectsProvider } from "../components/layouts/Subjects/Subjects";
 
 interface PropsProvider {
    children: React.ReactNode;
 }
 
-interface ErrorsProvider {
-   hourStart: boolean;
-   hourEnd: boolean;
-}
-
-interface ValidateReturnProvider {
-   hourStartBool: boolean;
-   hourEndBool: boolean;
+interface ValidateProvider {
+   [value: string]: boolean;
 }
 
 interface ScheduleProvider {
-   title: string;
-   group: string;
-   type: string;
-   start: string;
-   end: string;
+   [value: string]: string;
 }
+
+export interface FormScheduleModalTypes {
+   errors: ValidateProvider;
+   setErrors: Dispatch<SetStateAction<ValidateProvider>>;
+   scheduleForm: ScheduleProvider;
+   setScheduleForm: Dispatch<SetStateAction<ScheduleProvider>>;
+   allSubjects: SubjectsProvider[];
+   setAllSubjects: Dispatch<SetStateAction<SubjectsProvider[]>>;
+   validateAll: () => ValidateProvider;
+}
+
+export const FormScheduleModalContext = createContext<Partial<FormScheduleModalTypes>>({ });
 
 /**
  *
@@ -32,19 +33,16 @@ interface ScheduleProvider {
  */
 const FormScheduleModalProvider: React.FC<PropsProvider> = ({ children }) => {
 
-   const [ allSubjects, setAllSubjects ] = useState<Array<any>>([]);
-
-   const [ errors, setErrors ] = useState<ErrorsProvider>({ hourStart: false, hourEnd: false });
-   const [ scheduleForm, setScheduleForm ] = useState<ScheduleProvider>({
-      title: '', group: '', type: '', start: '', end: ''
-   });
+   const [ allSubjects, setAllSubjects ] = useState<SubjectsProvider[]>([ ]);
+   const [ errors, setErrors ] = useState<ValidateProvider>({ hourStart: false, hourEnd: false });
+   const [ scheduleForm, setScheduleForm ] = useState<ScheduleProvider>({ title: '', group: '', type: '', start: '', end: '' });
 
    const changeStringToInt = (str: string): number => {
       const withoutDots = str.replace(':', '');
       return parseInt(withoutDots);
    }
 
-   const validateAll = (): ValidateReturnProvider => {
+   const validateAll = (): ValidateProvider => {
       let hourStartBool = false, hourEndBool = false;
       const { start, end } = scheduleForm;
 

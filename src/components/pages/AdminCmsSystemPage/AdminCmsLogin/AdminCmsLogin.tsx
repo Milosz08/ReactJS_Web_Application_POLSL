@@ -1,41 +1,55 @@
+/**
+ * @file AdminCmsLogin.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                CryptoJS: "^4.1.1"
+ *                ReactCSSmodules: "^4.7.11"
+ *                uuid: "^8.3.1"
+ *                classnames: "^2.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { Fragment, useState, useEffect } from 'react';
 import axiosInstance from '../../../../helpers/request';
 import { AES, enc } from 'crypto-js';
 import { v4 as uuidv4 } from 'uuid';
-import classnames from "classnames";
+import classnames from 'classnames';
 
-import CookiesNotification from "../../../layouts/CookiesNotification/CookiesNotification";
-import Header from "../../../layouts/Header/Header";
-import CurrentURLpath from "../../../layouts/CurrentURLpath/CurrentURLpath";
+import CookiesNotification from '../../../layouts/CookiesNotification/CookiesNotification';
+import Header from '../../../layouts/Header/Header';
+import CurrentURLpath from '../../../layouts/CurrentURLpath/CurrentURLpath';
+import LoadingSystemAnimation from '../../../layouts/LoadingSystemAnimation/LoadingSystemAnimation';
 
-import COOKIES_OBJECT from "../../../../constants/allCookies";
-import AdminCmsLoginInputs from "./AdminCmsLoginInputs";
-import LoadingSystemAnimation from "../../../additionalComponents/LoadingSystemAnimation";
+import COOKIES_OBJECT from '../../../../constants/allCookies';
+import AdminCmsLoginInputs from './AdminCmsLoginInputs';
 
 const {
    adminLoginWrapper, adminLoginContainer, adminCredentials, onSubmitCSS, infoAboutToken, poweredBy,
    authenticationHeader, hideFormOnClick
 } = require('./AdminCmsLogin.module.scss');
 
+/**
+ * Constant on the basis of which the cookie file is generated.
+ */
 const COOKIE_ID = uuidv4();
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    setAuth: (value: boolean) => boolean;
-   handleCookie: any;
+   handleCookie: (name: string, value?: any, options?: (any | undefined)) => void;
 }
 
-interface StateProvider {
-   login: string;
-   password: string;
-   token: string;
-}
-
-interface ErrorsProvider {
-   login: boolean;
-   password: boolean;
-   token: boolean;
-}
-
+/**
+ * Interface defining the type of hash credentials values.
+ */
 interface HashProvider {
    _id: string;
    role: number;
@@ -47,23 +61,26 @@ interface HashProvider {
 }
 
 /**
+ * @details Component responsible for generating the input field for the user name, password and token in order to log in to
+ *          the CMS panel. The component takes the encrypted data from the API and decrypts it by checking against the data
+ *          entered by the user. If the data is identical, you will be redirected to the CMS panel.
  *
- * @param setAuth
- * @param handleCookie
+ * @param setAuth { (value: boolean) => boolean } - function deciding if the user / administrator is authenticated.
+ * @param handleCookie { function() } - props dependent function: deleting or adding a cookie.
  */
 const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
 
-   const [ credentials, setCredentials ] = useState<StateProvider>({ login: '', password: '', token: '' });
-   const [ errors, setErrors ] = useState<ErrorsProvider>({ login: false, password: false, token: false });
+   const [ credentials, setCredentials ] = useState<{ [value: string]: string }>({ login: '', password: '', token: '' });
+   const [ errors, setErrors ] = useState<{ [value: string]: boolean }>({ login: false, password: false, token: false });
 
-   const [ visible, setVisible ] = useState<{ password: boolean, token: boolean }>({ password: false, token: false });
-   const [ credentialsHash, setCredentialsHash ] = useState<Array<HashProvider>>([]);
+   const [ visible, setVisible ] = useState<{ [value: string]: boolean }>({ password: false, token: false });
+   const [ credentialsHash, setCredentialsHash ] = useState<HashProvider[]>([]);
 
    const [ hideAuth, setHideAuth ] = useState<boolean>(false);
 
-   const checkAuthentication = (): { loginBool: boolean, passwordBool: boolean, tokenBool: boolean } => {
+   const checkAuthentication = (): { [value: string]: boolean } => {
       let loginBool = false, passwordBool = false, tokenBool = false;
-      let decryptArray: Array<string> = [];
+      let decryptArray: string[] = [];
 
       credentialsHash.forEach(object => {
          const decrLogin = AES.decrypt(object.login, object.token).toString(enc.Utf8);

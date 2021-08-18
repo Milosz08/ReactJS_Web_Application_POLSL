@@ -1,7 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, {createContext, Dispatch, SetStateAction, useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
-export const FormCalendarModalContext = createContext<any>(null);
 
 export const TEXTFIELD_SIZE = {
    MIN_LENGTH: 10,
@@ -12,17 +10,23 @@ interface PropsProvider {
    children: React.ReactNode;
 }
 
-interface ErrorsProvider {
-   date: boolean;
-   time: boolean;
-   message: false;
+interface StateProvider {
+   [value: string]: boolean;
 }
 
-interface ReturnedProvider {
-   dateBool: boolean;
-   timeBool: boolean;
-   messageBool: boolean;
+export interface FormCalendarModalType {
+   date: string;
+   setDate: Dispatch<SetStateAction<string>>;
+   entriesCount: number;
+   setEntriesCount: Dispatch<SetStateAction<number>>;
+   entries: { [value: string]: string }[];
+   setEntries: Dispatch<SetStateAction<{ [value: string]: string; }[]>>;
+   errors: { [value: string]: boolean };
+   setErrors: Dispatch<SetStateAction<StateProvider>>;
+   validateAll: () => StateProvider;
 }
+
+export const FormCalendarModalContext = createContext<Partial<FormCalendarModalType>>({ });
 
 /**
  * Komponent przechowujący store wykorzystywany do modalu kalendarza w systemie CMS. Komponent posiada walidację
@@ -32,15 +36,15 @@ interface ReturnedProvider {
  */
 const FormCalendarModalProvider: React.FC<PropsProvider> = ({ children }) => {
 
-   const [ errors, setErrors ] = useState<ErrorsProvider>({ date: false, time: false, message: false });
+   const [ errors, setErrors ] = useState<StateProvider>({ date: false, time: false, message: false });
 
    const [ date, setDate ] = useState<string>('');
    const [ entriesCount, setEntriesCount ] = useState<number>(1);
-   const [ entries, setEntries ] = useState<any>(Array.from({ length: entriesCount }, () => ({
+   const [ entries, setEntries ] = useState<{ [value: string]: string }[]>(Array.from({ length: entriesCount }, () => ({
       _id: uuidv4(), start: '', message: '', importantLevel: 'low'
    })));
 
-   const validateAll = (): ReturnedProvider => {
+   const validateAll = (): StateProvider => {
       let dateBool = false, timeBool = false, messageBool = false;
       const allTimes = entries.filter((entrie: any) => entrie.start === '');
       const allMessages = entries.filter((entrie: any) => entrie.message === '' || entrie.message.length < 10);

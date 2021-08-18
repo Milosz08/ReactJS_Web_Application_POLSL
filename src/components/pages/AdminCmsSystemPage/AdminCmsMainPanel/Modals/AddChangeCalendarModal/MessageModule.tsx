@@ -1,9 +1,26 @@
+/**
+ * @file MessageModule.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *                classnames: "^2.3.1"
+ *                uuid: "^8.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { Fragment, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { v4 as uuidv4 } from 'uuid';
-import classnames from "classnames";
+import classnames from 'classnames';
 
-import { FormCalendarModalContext } from '../../../../../../contextStore/FormCalendarModalProvider';
+import { FormCalendarModalContext, FormCalendarModalType } from '../../../../../../contextStore/FormCalendarModalProvider';
 import { TEXTFIELD_SIZE } from '../../../../../../contextStore/FormCalendarModalProvider';
 
 const { modalAddIcon } = require('./../WarningDeleteModal/WarningDeleteModal.module.scss');
@@ -14,31 +31,31 @@ const {
 } = require('./AddChangeCalendarModal.module.scss');
 
 /**
- * Komponent generujący formularz wprowadzania/edytowania wpisu kalendarza. Komponent generuje formularz w modalu
- * (panel administratora systemu CMS - panel wpisów kalendarza).
+ * @details Component that generates a form for entering / editing a calendar entry. The component generates a form
+ *          in the modal (CMS system administrator panel - calendar entries panel).
  */
 const MessageModule = () => {
 
-   const { entries, setEntries } = useContext<any>(FormCalendarModalContext);
+   const { entries, setEntries } = useContext<Partial<FormCalendarModalType>>(FormCalendarModalContext);
 
-   const generateEntries = entries.map((entrie: any, index: number) => {
+   const generateEntries = entries!.map((entrie: any, index: number) => {
 
       const handleInputs = ({ target }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-         const copy = [...entries];
+         const copy = [...entries!];
          switch(target.type) {
             case 'radio': copy[index].importantLevel = target.value; break;
             case 'time': copy[index].start = target.value; break;
             case 'textarea': copy[index].message = target.value; break;
             default: throw new Error('Unexpected input! Type of input not exist');
          }
-         setEntries(copy);
+         setEntries!(copy);
       }
 
       const handleRemoveField = () => {
-         const copy = [...entries];
+         const copy = [...entries!];
          copy.splice(index, 1);
          if(index !== -1) {
-            setEntries(copy);
+            setEntries!(copy);
          }
       }
 

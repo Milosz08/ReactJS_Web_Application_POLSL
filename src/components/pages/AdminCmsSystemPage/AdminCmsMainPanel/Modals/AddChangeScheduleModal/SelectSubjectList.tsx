@@ -1,15 +1,32 @@
+/**
+ * @file SelectSubject.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *                classnames: "^2.3.1"
+ *                uuid: "^8.3.1"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { Fragment, useContext, useEffect } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import classnames from "classnames";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
 
-import { FormScheduleModalContext } from '../../../../../../contextStore/FormScheduleModalProvider';
-import { ModalsStateContext, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
-import { MainStoreContext } from "../../../../../../contextStore/MainStoreContext";
+import { FormScheduleModalContext, FormScheduleModalTypes } from '../../../../../../contextStore/FormScheduleModalProvider';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
+import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 
 import STATIC_OPTIONS from '../../../../../../constants/inputOptions';
 import GROUPS_STATIC from '../../../../../../constants/allGroups';
-import TimeInputsModal from "./TimeInputsModal";
+import TimeInputsModal from './TimeInputsModal';
 
 const {
    titleSelectWrapper, typeSelectWrapper, groupSelectWrapper, groupAndTimeContainer, titleAndTypeContainer,
@@ -17,18 +34,18 @@ const {
 } = require('./AddChangeScheduleModal.module.scss');
 
 /**
- *
+ * @details Component that generates input fields in the data entry form to add/edit an item.
  */
 const SelectSubjectList = () => {
 
-   const { scheduleForm, setScheduleForm, allSubjects } = useContext<any>(FormScheduleModalContext);
-   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
-   const { scheduleModal } = useContext<any>(ModalsStateContext);
+   const { scheduleForm, setScheduleForm, allSubjects } = useContext<Partial<FormScheduleModalTypes>>(FormScheduleModalContext);
+   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+   const { scheduleModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
 
    const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
-   const filteredSubject = allSubjects.find((subject: any) => subject.title === scheduleForm.title);
+   const filteredSubject = allSubjects!.find((subject: any) => subject.title === scheduleForm!.title);
 
-   const generateOptionsInSelect = allSubjects.map((subject: any) => (
+   const generateOptionsInSelect = allSubjects!.map((subject: any) => (
       <option key = {`${subject.title}__${uuidv4()}`}>{subject.title}</option>
    ));
 
@@ -55,7 +72,7 @@ const SelectSubjectList = () => {
    }
 
    const generateGroupsOptions = () => {
-      if(scheduleForm.title.toLocaleLowerCase() !== 'język angielski') {
+      if(scheduleForm!.title.toLocaleLowerCase() !== 'język angielski') {
          const generateOptions = NORMAL_GROUPS.map((group: {field: string, text: string}) => (
             <option
                value = {group.field}
@@ -85,18 +102,18 @@ const SelectSubjectList = () => {
    }
 
    useEffect(() => {
-      if(scheduleModal.id) {
+      if(scheduleModal!.id) {
          const { scheduleSubjects } = dataFetchFromServer;
-         const shellingObject = scheduleSubjects.find((subject: any) => subject._id === scheduleModal.id);
+         const shellingObject = scheduleSubjects.find((subject: any) => subject._id === scheduleModal!.id);
          if(shellingObject !== undefined) {
             let { title, group, type, start, end } = shellingObject;
-            if(scheduleModal.type === MODAL_TYPES.EDIT) {
-               setScheduleForm({ title, group, type, start: hourRestructurised(start), end: hourRestructurised(end) });
-            } else if(scheduleModal.type === MODAL_TYPES.ADD) {
-               setScheduleForm({
-                  title: allSubjects[0].title,
+            if(scheduleModal!.type === MODAL_TYPES.EDIT) {
+               setScheduleForm!({ title, group, type, start: hourRestructurised(start), end: hourRestructurised(end) });
+            } else if(scheduleModal!.type === MODAL_TYPES.ADD) {
+               setScheduleForm!({
+                  title: allSubjects![0].title,
                   group: GROUPS_STATIC.NORMAL_GROUPS[0].field,
-                  type: allSubjects[0].classesPlatforms[0].type,
+                  type: allSubjects![0].classesPlatforms[0].type,
                   start: '',
                   end: ''
                });
@@ -106,7 +123,7 @@ const SelectSubjectList = () => {
    }, [allSubjects, dataFetchFromServer, scheduleModal, setScheduleForm]);
 
    const selectGroup = (): string => {
-      if(scheduleForm.title.toLocaleLowerCase() === 'język angielski') {
+      if(scheduleForm!.title.toLocaleLowerCase() === 'język angielski') {
          return GROUPS_STATIC.ENG_GROUPS[0];
       } else {
          return GROUPS_STATIC.NORMAL_GROUPS[0].field;
@@ -114,13 +131,13 @@ const SelectSubjectList = () => {
    }
 
    const selectType = () => {
-      if(allSubjects.length !== 0) {
-         const oneSubject = allSubjects.find((subject: any) => subject.title === scheduleForm.title);
-         const { classesPlatforms } = oneSubject;
+      if(allSubjects!.length !== 0) {
+         const oneSubject = allSubjects!.find((subject: any) => subject.title === scheduleForm!.title);
+         const { classesPlatforms } = oneSubject!;
          if(classesPlatforms[0].type === '' || classesPlatforms[0].type === 'Wszystkie Zajęcia') {
             return 'Wykłady';
          } else {
-            return oneSubject.classesPlatforms[0].type;
+            return oneSubject!.classesPlatforms[0].type;
          }
       } else {
          return 'Wykłady';
@@ -128,11 +145,11 @@ const SelectSubjectList = () => {
    }
 
    useEffect(() => {
-      setScheduleForm({ ...scheduleForm, group: selectGroup(), type: selectType() });
+      setScheduleForm!({ ...scheduleForm, group: selectGroup(), type: selectType() });
       // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [scheduleForm.title]);
+   }, [scheduleForm!.title]);
 
-   const classTurnOff = scheduleModal.type === MODAL_TYPES.EDIT ? turnOffContainer : '';
+   const classTurnOff = scheduleModal!.type === MODAL_TYPES.EDIT ? turnOffContainer : '';
 
    return (
       <Fragment>
@@ -140,8 +157,8 @@ const SelectSubjectList = () => {
             <div className = {classnames(titleSelectWrapper, classTurnOff)}>
                <div className = {selectWrapper}>
                   <select
-                     value = {scheduleForm.title}
-                     onChange = {({ target }) => setScheduleForm({ ...scheduleForm, title: target.value })}
+                     value = {scheduleForm!.title}
+                     onChange = {({ target }) => setScheduleForm!({ ...scheduleForm, title: target.value })}
                   >
                      {generateOptionsInSelect}
                   </select>
@@ -158,8 +175,8 @@ const SelectSubjectList = () => {
             <div className = {typeSelectWrapper}>
                <div className = {selectWrapper}>
                   <select
-                     value = {scheduleForm.type}
-                     onChange = {({ target }) => setScheduleForm({ ...scheduleForm, type: target.value })}
+                     value = {scheduleForm!.type}
+                     onChange = {({ target }) => setScheduleForm!({ ...scheduleForm, type: target.value })}
                   >
                      {generateTypeOfSubjectOptions()}
                   </select>
@@ -175,8 +192,8 @@ const SelectSubjectList = () => {
             <div className = {groupSelectWrapper}>
                <div className = {selectWrapper}>
                   <select
-                     value = {scheduleForm.group}
-                     onChange = {({ target }) => setScheduleForm({ ...scheduleForm, group: target.value })}
+                     value = {scheduleForm!.group}
+                     onChange = {({ target }) => setScheduleForm!({ ...scheduleForm, group: target.value })}
                   >
                      {generateGroupsOptions()}
                   </select>

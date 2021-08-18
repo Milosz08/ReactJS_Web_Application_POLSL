@@ -1,26 +1,46 @@
+/**
+ * @file DataLastUpdate.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import axiosInstance from '../../../helpers/request';
 
 const { dataLastUpdate } = require('./DataLastUpdate.module.scss');
 
+/**
+ * Interface defining the type of props.
+ */
 interface PropsProvider {
    dataID: string | undefined;
    content?: string;
    withoutText: boolean;
 }
 
+/**
+ * Interface defining the type of state values.
+ */
 interface StateProvider {
    fullDate?: string;
    fullTime?: string;
 }
 
 /**
- * Komponent pobierający datę ostatniej modyfikacji bazy danych z serwera (w zależności od parametru dataID,
- * pobierana jest dana modyfikacji konkretnej kolekcji).
+ * @details A component that retrieves the date of the database's last modification from the server (depending on
+ *          the dataID parameter, the modification data of a specific collection is retrieved).
  *
- * @param dataID { string } - id kolekcji bazy danych.
- * @param content { string } - tytuł kolekcji, z której pobierana jest data modyfikacji.
- * @param withoutText { boolean } - flaga decydująca, czy ma się pokazać sama data, czy data z dodatkowym tekstem.
+ * @param dataID { string } - database collection id.
+ * @param content { string } - title of the collection from which the modification date is retrieved.
+ * @param withoutText { boolean } - flag deciding whether to show only the date or the date with additional text.
  */
 const DataLastUpdate: React.FC<PropsProvider> = ({ dataID, content, withoutText }) => {
 

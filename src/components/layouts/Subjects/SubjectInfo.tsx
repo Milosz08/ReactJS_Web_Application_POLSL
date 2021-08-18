@@ -1,3 +1,19 @@
+/**
+ * @file SubjectInfo.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *                ReactCSSTransitionGroup: "^4.4.2"
+ *
+ * @date final version: 08/18/2021
+ */
+
 import React, { Dispatch, SetStateAction } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -11,21 +27,24 @@ const {
    messageoutEnterActive, messageoutExit, messageoutExitActive, prevButtonContainer, nextButtonContainer
 } = require('./Subjects.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    subjectID: number;
-   filteredArray: Array<SubjectsProvider>;
+   filteredArray: SubjectsProvider[];
    state: number;
    setState: Dispatch<SetStateAction<number>>;
 }
 
 /**
- * Komponent generujący informację o przedmiocie. Występuje tylko na stronie głównej. Możliwośc nawigacji po
- * przedmiotach przy pomocy strzałek prawo/lewo. Na podstawie wartości w propsach generuje odpowiedni przedmiot.
+ * @details Component that generates information about an item. It only appears on the home page. Possibility to navigate
+ *          through items using the right / left arrows. Generates the appropriate item based on the value in props.
  *
- * @param subjectID { number } - indeks generowanego przedmiotu.
- * @param filteredArray { SubjectsProvider } - tablica z przedmiotami.
- * @param state { number } - aktualnie obsługiwany indeks przedmiotu.
- * @param setState { Dispatch<SetStateAction<number>> } - zmiana przedmiotu (na podstawie ID).
+ * @param subjectID { number } - index of the generated subject.
+ * @param filteredArray { SubjectsProvider } - array with subjects.
+ * @param state { number } - currently supported item subject.
+ * @param setState { Dispatch<SetStateAction<number>> } - change subject (base on ID value).
  */
 const SubjectInfo: React.FC<PropsProvider> = ({ subjectID, filteredArray, state, setState }) => {
 
