@@ -29,7 +29,7 @@ const ScheduleDeleteModal = () => {
    }
 
    const handleRemoveMessage = async () => {
-      await axiosInstance.delete(`subject-shedule/${scheduleModal.id}`);
+      await axiosInstance.delete(`subject-schedule/${scheduleModal.id}`);
       const copy = [...scheduleSubjects];
       const scheduleAfterRemove = copy.filter(object => object._id !== scheduleModal.id);
       setDataFetchFromServer({ ...dataFetchFromServer, scheduleSubjects: scheduleAfterRemove });
