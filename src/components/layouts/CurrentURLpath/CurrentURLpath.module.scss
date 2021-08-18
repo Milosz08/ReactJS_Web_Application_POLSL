@@ -1,3 +1,14 @@
+/**
+ * @file CurrentURLpath.module.scss
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief SCSS file pre-generated with ReactCSS Modules to avoid classes conflicts.
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @date final version: 08/18/2021
+ */
+
 @import './../../../styles/_variables';
 
 .currentURLcontainer {
@@ -11,10 +22,13 @@
     .sigleCellRecord div[role = 'link'], .arrowIcon, div[role = 'link'] {
       display: inline-block;
       color: $footerContent;
-      text-decoration: none;
-      font-weight: 500;
-      &:hover {
-        text-decoration: underline;
+      a {
+        color: $footerContent;
+        text-decoration: none;
+        font-weight: 500;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

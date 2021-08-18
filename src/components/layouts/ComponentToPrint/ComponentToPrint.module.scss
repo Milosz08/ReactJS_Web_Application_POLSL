@@ -1,5 +1,16 @@
-@import './../../styles/_variables';
-@import './../../styles/_mixins';
+/**
+ * @file ComponentToPrint.module.scss
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief SCSS file pre-generated with ReactCSS Modules to avoid classes conflicts.
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @date final version: 08/18/2021
+ */
+
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .container {
   margin: 50px;
