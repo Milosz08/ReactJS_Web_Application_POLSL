@@ -27,7 +27,7 @@ interface ScrollToTopProps {
  *
  * @param history { any } - remembered address in the browser's search field
  */
-const ScrollToTop: React.FC<ScrollToTopProps> = ({ history }) => {
+const ScrollToTop: React.FC<ScrollToTopProps> = ({ history }): null => {
 
    useEffect(() => {
       const unlisten = history.listen(() => window.scrollTo(0, 0));
