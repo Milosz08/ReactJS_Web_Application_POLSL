@@ -18,7 +18,7 @@ import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
 
 import { insertUserChoice } from '../../Panels/UserMessagePanel';
