@@ -1,5 +1,19 @@
-const CONSTANT_DATA = {
+/**
+ * @file staticData.js
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief JavaScript file storing constants values.
+ *
+ * @project_name "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @date final version: 08/19/2021
+ */
 
+/**
+ * @details An object that stores static data about links in the header, pages used for routing, and options
+ *          to choose from in the footer form.
+ */
+const CONSTANT_DATA = {
    TOP_NAVBAR_ELMS: [
       {
          title: 'Politechnika Śląska',
@@ -26,7 +40,6 @@ const CONSTANT_DATA = {
          link: 'https://usoscas.polsl.pl/cas/login',
       },
    ],
-
    SITES: [
       {
          title: 'Interaktywny plan zajęć',
@@ -45,7 +58,6 @@ const CONSTANT_DATA = {
          description: 'Pod tym linkiem znajdziesz pomoce do nauki obejmujące autorskie materiały z zajęć.',
       },
    ],
-
    FOOTER_OPTIONS: [
       {
          name: 'Błąd na stronie',

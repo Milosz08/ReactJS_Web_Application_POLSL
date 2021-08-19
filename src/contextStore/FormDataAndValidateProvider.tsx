@@ -1,20 +1,43 @@
-import React, {createContext, useState, useContext, Dispatch, SetStateAction} from 'react';
+/**
+ * @file FormDataAndValidateProvider.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component with Context Store (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
+import React, { createContext, useState, useContext, Dispatch, SetStateAction } from 'react';
 import { ModalsStateContext, ModalStateType } from './ModalsStateProvider';
 
-export const FormDataAndValidateContext = createContext<any>(null);
-
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    children: React.ReactNode;
 }
 
+/**
+ * Interface defining the type of errors values.
+ */
 interface ErrorsProvider {
    [value: string]: boolean;
 }
 
+/**
+ * Interface defining the type of platform values.
+ */
 interface PlatformProvider {
    [value: string]: string;
 }
 
+/**
+ * Interface defining the type of return in context store values.
+ */
 export interface FormDataAndValidateType {
    title: string;
    setTitle: Dispatch<SetStateAction<string>>;
@@ -39,12 +62,17 @@ export interface FormDataAndValidateType {
 }
 
 /**
- * Store przechowujący wprowadzane dane do formularza wysyłającego te dane poprzez API na serwer.
- * Posiada klasę walidującą wprowadzane dane, przed wysłaniem na serwer.
- *
- * @param children { React.ReactNode } - wszystkie węzły dziedziczące zawartość stora.
+ * Create the context of the store. Function exported and used to destructurize context members.
  */
-const FormDataAndValidateProvider: React.FC<PropsProvider> = ({ children }) => {
+export const FormDataAndValidateContext = createContext<Partial<FormDataAndValidateType>>({ });
+
+/**
+ * @details Store that stores the entered data to the form that sends this data via API to the server. It has
+ *          a class that validates the entered data before sending it to the server.
+ *
+ * @param children { React.ReactNode } - all nodes of the virtual DOM React tree covered by the Provider.
+ */
+const FormDataAndValidateProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
    const { setSubjectModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
 
@@ -66,7 +94,7 @@ const FormDataAndValidateProvider: React.FC<PropsProvider> = ({ children }) => {
    });
 
    /**
-    * Klasa przechowująca metody walidujące dane wprowadzane do inputów przez wysłaniem do API
+    * Class which stores methods that validate data entered into inputs before being sent to the API.
     */
    class ValidationClass {
       validateTitle(): boolean {

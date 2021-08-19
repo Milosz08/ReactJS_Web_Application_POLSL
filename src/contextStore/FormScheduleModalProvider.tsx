@@ -1,20 +1,46 @@
-import React, {createContext, Dispatch, SetStateAction, useEffect, useState} from 'react';
-import axiosInstance from "../helpers/request";
-import GROUPS_STATIC from "../constants/allGroups";
+/**
+ * @file FormScheduleModalProvider.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component with Context Store (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
+import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import axiosInstance from '../helpers/request';
+
+import GROUPS_STATIC from '../constants/allGroups';
 import { SubjectsProvider } from "../components/layouts/Subjects/Subjects";
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    children: React.ReactNode;
 }
 
+/**
+ * Interface defining the type of validate values.
+ */
 interface ValidateProvider {
    [value: string]: boolean;
 }
 
+/**
+ * Interface defining the type of schedule values.
+ */
 interface ScheduleProvider {
    [value: string]: string;
 }
 
+/**
+ * Interface defining the type of return in context store values.
+ */
 export interface FormScheduleModalTypes {
    errors: ValidateProvider;
    setErrors: Dispatch<SetStateAction<ValidateProvider>>;
@@ -25,13 +51,18 @@ export interface FormScheduleModalTypes {
    validateAll: () => ValidateProvider;
 }
 
+/**
+ * Create the context of the store. Function exported and used to destructurize context members.
+ */
 export const FormScheduleModalContext = createContext<Partial<FormScheduleModalTypes>>({ });
 
 /**
+ * @details Component that stores and shares the state for a modal that adds a new subject to the schedule.
+ *          It also has validation of the entered data before sending to the server.
  *
- * @param children
+ * @param children { React.ReactNode } - all nodes of the virtual DOM React tree covered by the Provider.
  */
-const FormScheduleModalProvider: React.FC<PropsProvider> = ({ children }) => {
+const FormScheduleModalProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
    const [ allSubjects, setAllSubjects ] = useState<SubjectsProvider[]>([ ]);
    const [ errors, setErrors ] = useState<ValidateProvider>({ hourStart: false, hourEnd: false });

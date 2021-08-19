@@ -1,7 +1,35 @@
+/**
+ * @file MainStoreProvider.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component with Context Store (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, {createContext, Dispatch, SetStateAction, useEffect, useState} from 'react';
 import axiosInstance from "../helpers/request";
 import MainStoreStateProvider from "./MainStoreStateProvider";
 
+/**
+ * Constant that defines the time after which routing on the page is to take place (in seconds).
+ */
+export const ROUTER_INTERVAL_TIME = .7;
+
+/**
+ * Interface defining the type of props values.
+ */
+interface PropsProvider {
+   children: React.ReactNode;
+}
+
+/**
+ * Interface defining the type of return in context store values.
+ */
 export interface MainStoreProviderTypes {
    dataFetchFromServer: MainStoreStateProvider | any;
    setDataFetchFromServer: Dispatch<SetStateAction<MainStoreStateProvider>> | any;
@@ -10,19 +38,16 @@ export interface MainStoreProviderTypes {
    setRoutePath: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * Create the context of the store. Function exported and used to destructurize context members.
+ */
 export const MainStoreContext = createContext<Partial<MainStoreProviderTypes>>({ });
 
-export const ROUTER_INTERVAL_TIME = .7; //w sekundach
-
-interface PropsProvider {
-   children: React.ReactNode;
-}
-
 /**
- * Główny store pobierający i przechowujący niewrażliwe dane z serwera (komunikacja przy wykorzystaniu API z
- * backendu). Dziedziczą go wszystkie węzły aplikacji (store globalny).
+ * @details The main store that downloads and stores non-sensitive data from the server (communication using the API
+ *          from the backend). All application nodes (global store) inherit it.
  *
- * @param children { React.ReactNode } - wszystkie węzły dziedziczące zawartość stora.
+ * @param children { React.ReactNode } - all nodes of the virtual DOM React tree covered by the Provider.
  */
 const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
 

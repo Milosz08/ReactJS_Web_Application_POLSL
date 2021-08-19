@@ -1,16 +1,38 @@
-import React, {createContext, Dispatch, SetStateAction, useState} from 'react';
+/**
+ * @file ModalsStateProvider.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component with Context Store (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
 
-export const MODAL_TYPES = {
+import React, { createContext, Dispatch, SetStateAction, useState } from 'react';
+
+/**
+ * Constant Object defining methods for modals.
+ */
+export const MODAL_TYPES: { [value: string]: string } = {
    EDIT: 'edit',
    ADD: 'add',
    REMOVE: 'remove',
    VIEW: 'view',
 }
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    children: React.ReactNode;
 }
 
+/**
+ * Interface defining the type of modals values.
+ */
 export interface ModalStateProvider {
    id: string;
    type: string;
@@ -18,6 +40,9 @@ export interface ModalStateProvider {
    ifOpen: boolean;
 }
 
+/**
+ * Interface defining the type of return in context store values.
+ */
 export interface ModalStateType {
    subjectModal: ModalStateProvider
    setSubjectModal: Dispatch<SetStateAction<ModalStateProvider>>
@@ -29,13 +54,16 @@ export interface ModalStateType {
    setScheduleModal: Dispatch<SetStateAction<ModalStateProvider>>
 }
 
+/**
+ * Create the context of the store. Function exported and used to destructurize context members.
+ */
 export const ModalsStateContext = createContext<Partial<ModalStateType>>({ });
 
 /**
- * Store przechowujący stany modali w panelu administratora CMS. Stan składa się z 3 elementów: id elementu,
- * typ okna (edycja, podgląd, usunięcie lub dodanie).
+ * @details React Store that stores modal states in the CMS admin panel. The state consists of 3 elements: element id,
+ *          window type (edit, preview, delete or add).
  *
- * @param children { React.ReactNode } - wszystkie komponenty przechwytujące store z kontekstu.
+ * @param children { React.ReactNode } - all nodes of the virtual DOM React tree covered by the Provider.
  */
 const ModalsStateProvider: React.FC<PropsProvider> = ({ children }) => {
 

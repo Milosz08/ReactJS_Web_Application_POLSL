@@ -1,15 +1,28 @@
 /**
- * Interfejs typów obiektów przechwytywanych z bazy danych. Interfejs eksportowany do głównego stora
- * (MainStoreContext) przechowującego w obiekcie wszystkie pobrane dane z API
+ * @file MainStoreStateProvider.ts
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript file storing types of values.
+ *
+ * @project_name "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @date final version: 08/18/2021
+ */
+
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+
+/**
+ * @details Interface of object types captured from the database. Interface exported to the main page
+ *          (MainStoreProvider) that stores in the object all the data downloaded from the API.
  */
 interface MainStoreStateProvider {
-   covidData: Array<{
+   covidData: {
       _id: string,
       description: string,
       actualRiskNumber: number,
       __v: number
-   }>;
-   footerForms: Array<{
+   }[];
+   footerForms: {
       _id: string,
       userIdentity: string,
       userChoice: string,
@@ -18,22 +31,22 @@ interface MainStoreStateProvider {
          fullDate: string,
          fullTime: string
       }, __v: number
-   }>;
-   subjectsData: Array<{
+   }[];
+   subjectsData: {
       _id: string,
-      semesters: Array<string>,
-      departments: Array<string>,
-      icon: Array<string>,
+      semesters: string[],
+      departments: string[],
+      icon: IconProp,
       ifEnd: boolean;
-      classesPlatforms: Array<{
+      classesPlatforms: {
          type: string,
          place: string,
          link: string
-      }>,
+      }[],
       title: string,
       __v: number
-   }>;
-   scheduleSubjects: Array<{
+   }[];
+   scheduleSubjects: {
       _id: string,
       title: string,
       group: string,
@@ -45,17 +58,17 @@ interface MainStoreStateProvider {
          platform: string,
          pzeLink: string
       }
-   }>;
-   calendarRecords: Array<{
+   }[];
+   calendarRecords: {
       day: number,
       month: number,
       year: number,
-      items: Array<{
+      items: {
          start: string,
          message: string,
          importantLevel: string
-      }>
-   }>;
+      }[]
+   }[];
 }
 
 export default MainStoreStateProvider;
