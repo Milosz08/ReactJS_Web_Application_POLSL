@@ -14,7 +14,7 @@
  */
 
 import React, { useContext, useEffect, useState } from 'react';
-import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
 import classnames from "classnames";
 
 const { bigBarContainer, bigBarLoading, visible } = require('./LoadingBigBar.module.scss');

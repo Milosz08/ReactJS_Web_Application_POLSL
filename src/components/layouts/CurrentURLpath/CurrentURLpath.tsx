@@ -22,8 +22,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
 
-import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
-import { LoginSessionContext, LoginSessionProviderTypes } from '../../../contextStore/LoginSessionProvider';
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
 
 const {
    currentURLwrapper, currentURLcontainer, sigleCellRecord, arrowIcon, ifHeaderHasRedBar
@@ -84,8 +83,7 @@ const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }): JS
       });
    }
 
-   const toggleMargin = ifImportatHeaderActive
-      ? classnames(currentURLcontainer, ifHeaderHasRedBar) : currentURLcontainer;
+   const toggleMargin = ifImportatHeaderActive ? classnames(currentURLcontainer, ifHeaderHasRedBar) : currentURLcontainer;
 
    return (
       <div className = {toggleMargin}>

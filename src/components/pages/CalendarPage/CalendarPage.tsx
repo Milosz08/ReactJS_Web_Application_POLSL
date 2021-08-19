@@ -18,7 +18,7 @@ import React, { Fragment, useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
-import { MainStoreContext, MainStoreProviderTypes} from '../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes} from '../../../contextStore/MainStoreProvider';
 import { IMPORTANT_VALUES } from '../AdminCmsSystemPage/AdminCmsMainPanel/Modals/WarningDeleteModal/CalendarDeleteModal';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';

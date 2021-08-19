@@ -16,7 +16,7 @@
 import React, { useContext, useState } from 'react';
 import classnames from 'classnames';
 
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
 import { SubjectsProvider } from '../../../../layouts/Subjects/Subjects';
 
 import SearchBox from './AdditionalComponents/SearchBox';

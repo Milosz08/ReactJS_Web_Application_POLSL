@@ -14,7 +14,7 @@
  */
 
 import React, { Fragment, useContext, useState } from 'react';
-import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreProvider';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 import SubjectInfo from './SubjectInfo';

@@ -18,7 +18,7 @@ import React, { useContext } from 'react';
 import DelayLink from 'react-delay-link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
 
 const {
    copyrightSectionWrapper, copyIcons, copyAuthor, copyCookies, cookiesIcon

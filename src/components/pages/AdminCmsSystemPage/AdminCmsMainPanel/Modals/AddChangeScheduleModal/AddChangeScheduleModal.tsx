@@ -17,7 +17,7 @@ import React, { useContext } from 'react';
 import classnames from 'classnames';
 
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 import { FormScheduleModalContext, FormScheduleModalTypes } from '../../../../../../contextStore/FormScheduleModalProvider';
 
 import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';

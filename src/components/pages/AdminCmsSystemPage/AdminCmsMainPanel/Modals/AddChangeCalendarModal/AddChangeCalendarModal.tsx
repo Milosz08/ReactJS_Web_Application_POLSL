@@ -23,7 +23,7 @@ import axiosInstance from '../../../../../../helpers/request';
 
 import { ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
 import { FormCalendarModalContext, FormCalendarModalType } from '../../../../../../contextStore/FormCalendarModalProvider';
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 
 import MessageModule from './MessageModule';
 import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';

@@ -18,7 +18,7 @@ import axiosInstance from '../../../../../../helpers/request';
 import classnames from 'classnames';
 
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 
 import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
 import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';

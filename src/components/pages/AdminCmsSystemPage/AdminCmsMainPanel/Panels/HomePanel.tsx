@@ -19,7 +19,7 @@ import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../../contextStore/CookiesObjectsProvider';
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
 
 import ChangeCredentials from './AdditionalComponents/ChangeCredentials';
 import GenerateModifyElement from './AdditionalComponents/GenerateModifyElement';
@@ -50,7 +50,7 @@ const HomePanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element => {
    const setDisabledChanges = parseInt(cookie!.__credentialsLevel) !== 2 ? disable : '';
    const toggleClass = activeNavElm === 0 ? panelActive : '';
 
-   const DATE_ELEMENTS_CMS = [
+   const DATE_ELEMENTS_CMS: { [value: string]: string | undefined }[] = [
       {
          id: process.env.REACT_APP_SCHEDULE_ID,
          dateText: 'planu zajęć',

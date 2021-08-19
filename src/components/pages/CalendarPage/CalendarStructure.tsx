@@ -18,7 +18,7 @@ import React, { Dispatch, Fragment, SetStateAction, useContext, useState, useEff
 import Calendar from 'react-calendar';
 import { v4 as uuidv4 } from 'uuid';
 
-import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreProvider';
 
 import './CalendarStyles.scss';
 const { messageInit, hourStart } = require('./CalendarPage.module.scss');

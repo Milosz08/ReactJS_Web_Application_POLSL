@@ -17,7 +17,7 @@ import React, { useContext, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import classnames from 'classnames';
 
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../contextStore/MainStoreProvider';
 import { ScheduleContext, ScheduleType } from '../../../../contextStore/ScheduleProvider';
 
 import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';

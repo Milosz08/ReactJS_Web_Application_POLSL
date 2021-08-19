@@ -20,7 +20,7 @@ import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync
 
 import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 import { FormDataAndValidateContext, FormDataAndValidateType } from '../../../../../../contextStore/FormDataAndValidateProvider';
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 
 import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
 import CheckboxSemesters from './CheckboxSemesters';

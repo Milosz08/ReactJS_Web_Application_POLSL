@@ -13,7 +13,7 @@
  */
 
 import React, { useContext } from 'react';
-import { MainStoreContext, MainStoreProviderTypes } from "../../../../contextStore/MainStoreContext";
+import { MainStoreContext, MainStoreProviderTypes } from "../../../../contextStore/MainStoreProvider";
 
 const { covidBlocks, covidInfo, covidInfoBlocks, statusInfo } = require('./CovidInfo.module.scss');
 

@@ -17,7 +17,7 @@ import React, { useContext, useState } from 'react';
 import classnames from 'classnames';
 import axiosInstance from '../../../../../helpers/request';
 
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
 import { CovidDataProvider } from "../../../StartPage/CovidInfo/CovidInfo";
 
 const { panelContainer, panelActive } = require('./Panels.module.scss');

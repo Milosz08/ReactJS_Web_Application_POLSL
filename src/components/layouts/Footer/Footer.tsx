@@ -22,7 +22,7 @@ import FooterForm from './FooterForm';
 import CopyrightFooter from './CopyrightFooter';
 
 import CONSTANT_DATA from "../../../constants/staticData";
-import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from "../../../contextStore/MainStoreContext";
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from "../../../contextStore/MainStoreProvider";
 
 const {
    footerWrapper, linksPages, revelarPages, footerContainer, externalLinkIcon, formContainer, footerHeaders,

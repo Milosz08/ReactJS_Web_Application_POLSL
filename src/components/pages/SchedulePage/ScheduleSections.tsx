@@ -21,7 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 
 import { ActualDateContext, ActualDateTypes } from '../../../contextStore/ActualDateProvider';
-import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreProvider';
 import { ScheduleContext, ScheduleType } from '../../../contextStore/ScheduleProvider';
 
 import GROUPS_STATIC from '../../../constants/allGroups';

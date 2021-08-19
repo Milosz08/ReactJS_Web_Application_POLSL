@@ -19,7 +19,7 @@ import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 import axiosInstance from '../../../../../../helpers/request';
 
-import { MainStoreContext, MainStoreProviderTypes } from "../../../../../../contextStore/MainStoreContext";
+import { MainStoreContext, MainStoreProviderTypes } from "../../../../../../contextStore/MainStoreProvider";
 import { ModalsStateContext, MODAL_TYPES, ModalStateType } from "../../../../../../contextStore/ModalsStateProvider";
 
 import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';

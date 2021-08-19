@@ -19,7 +19,7 @@ import axiosInstance from '../../../../../../helpers/request';
 import { insertUserChoice } from '../../Panels/UserMessagePanel';
 
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 
 import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
 

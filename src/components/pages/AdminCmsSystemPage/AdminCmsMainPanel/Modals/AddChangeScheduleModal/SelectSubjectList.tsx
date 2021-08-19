@@ -21,7 +21,7 @@ import classnames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FormScheduleModalContext, FormScheduleModalTypes } from '../../../../../../contextStore/FormScheduleModalProvider';
-import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 
 import STATIC_OPTIONS from '../../../../../../constants/inputOptions';

@@ -18,7 +18,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import DelayLink from 'react-delay-link';
 import classnames from 'classnames';
 
-import { MainStoreContext, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
 import CONSTANT_DATA from '../../../constants/staticData';
 
 import Navigation from '../Navigation/Navigation';
@@ -50,7 +50,7 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }): JSX.Element => 
    const { TOP_NAVBAR_ELMS } = CONSTANT_DATA;
    const topHeaderHeightRef = useRef<HTMLElement | null>(null);
 
-   const { timeoutRoutePath } = useContext<any>(MainStoreContext);
+   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const [ offset, setOffset ] = useState<number>(0);
    const [ width, setWidth ] = useState<number>(window.innerWidth);

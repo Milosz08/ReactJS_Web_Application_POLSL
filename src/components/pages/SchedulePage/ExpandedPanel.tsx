@@ -20,7 +20,7 @@ import DelayLink from 'react-delay-link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 
-import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
 import { ScheduleSubjectsProvider } from './ScheduleSections';
 import { SubjectsProvider } from '../../layouts/Subjects/Subjects';
 
