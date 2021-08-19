@@ -17,7 +17,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 
-import MainStoreProvider from '../../contextStore/MainStoreContext';
+import MainStoreProvider from '../../contextStore/MainStoreProvider';
 import CookiesObjectsProvider from '../../contextStore/CookiesObjectsProvider';
 import LoginSessionProvider from '../../contextStore/LoginSessionProvider';
 import GlobalModalsStateProvider from '../../contextStore/GlobalModalsStateProvider';
