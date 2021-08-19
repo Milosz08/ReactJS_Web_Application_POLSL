@@ -1,3 +1,19 @@
+/**
+ * @file CookiesHeader.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
@@ -5,7 +21,10 @@ import classnames from 'classnames';
 const { cookiesInfoHeader, fasIcon } = require('./../../../layouts/Navigation/Navigation.module.scss');
 const { cookiesSections, cookieContent } = require('./../CookiesPolicyPage.module.scss');
 
-const CookiesHeader = () => {
+/**
+ * @details Component generates a header in the subpage containing the privacy policy document.
+ */
+const CookiesHeader = (): JSX.Element => {
    return (
       <header className = {classnames(cookiesInfoHeader, cookiesSections)}>
          <h3>

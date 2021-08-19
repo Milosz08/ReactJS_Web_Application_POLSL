@@ -1,5 +1,20 @@
+/**
+ * @file App.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactRouterDOM: "^5.2.0"
+ *                ReactCookie: "^4.0.3"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 
 import MainStoreProvider from '../../contextStore/MainStoreContext';
@@ -11,17 +26,15 @@ import GotoTopButton from '../layouts/GotoTopButton/GotoTopButton';
 import Page from './Page';
 import DevToolsInfo from '../layouts/DevToolsInfo/DevToolsInfo';
 import Footer from '../layouts/Footer/Footer';
-
-import SessionActivityCount from '../additionalComponents/SessionActivityCount';
-import CredentialSequencers from '../additionalComponents/CredentialSequencers';
+import CredentialSequencers from '../layouts/CredentialsSequencers/CredentialSequencers';
 import SessionEndModal from '../layouts/SessionEndModal/SessionEndModal';
 
 import './../../constants/fontAwesomeInject';
 
 /**
- * Główny komponent, generuje całą strukturę aplikacji.
+ * @details Main component responsible for rendering the entire application in a root element.
  */
-const App = () => {
+const App = (): JSX.Element => {
    return (
       <MainStoreProvider>
          <CookiesProvider>

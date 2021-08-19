@@ -1,3 +1,18 @@
+/**
+ * @file ChangeCredentials.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                CryptoJS: "^4.1.1"
+ *                uuid: "^8.3.1"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import CryptoJS, { AES, enc } from 'crypto-js';
 import axiosInstance from '../../../../../../helpers/request';
@@ -10,48 +25,48 @@ const {
    changeCredentialsForm, loginField, confirmViaAdminPasswordField, inputNewAdminToken, errorValue, submitForm
 } = require('./../HomePanel.module.scss');
 
-interface PropsProvider {
-   ifUser: boolean;
-   disableButton: boolean;
+/**
+ * The interface that defines the data types for the state.
+ */
+interface BooleansProvider {
+   [value: string]: boolean;
 }
 
+/**
+ * The interface that defines the data types for the state.
+ */
 interface CredentialsStateProvider {
    ifVisible: boolean;
    value: string;
 }
 
+/**
+ * The interface that defines the data types for the state.
+ */
 interface HashProvider {
    password: string;
    token: string;
 }
 
-interface ErrorsProvider {
-   login: boolean;
-   password: boolean;
-   passNotMath: boolean;
-   token: boolean;
-   notValidAdminPass: boolean;
-}
-
 /**
- * Komponent umożliwiający zmianę autentykacji dla kont administratorów, moderatorów treści oraz użytkowników.
- * Komponent aktywny tylko dla administratorów klasy 2 (najwyższy stopień, główny administrator systemu).
- * Komponent łączy się z bazą danych, wysyła jej nowe hasła uwcześniej je szyfrując metodą AES wraz z każdorazowym
- * ustawianiem sekretnego klucza 512 bitowego na podstawie hasła.
+ * @details A component that allows you to change the authentication for administrators, content moderators and users. Active
+ *          component only for class 2 administrators (top level, primary system administrator). The component connects to
+ *          the database, sends it new passwords, encrypting them with the AES method together with each time setting a secret
+ *          512-bit key based on the password.
  *
- * @param ifUser { boolean } - flaga, mówiąca o tym, czy komponent działa dla użytkownika czy administratora.
- * @param disableButton { boolean } - flaga ustawiająca włączenie/wyłączenie przycisku wysłania formularza.
+ * @param ifUser { boolean } - flag indicating whether the component is running for a user or an administrator.
+ * @param disableButton { boolean } - flag to enable / disable the submit form button.
  */
-const ChangeCredentials: React.FC<PropsProvider> = ({ ifUser, disableButton }) => {
+const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }): JSX.Element => {
 
-   const [ newCredent, setNewCredent ] = useState<{ login: string, passwords: Array<any> }>({
+   const [ newCredent, setNewCredent ] = useState<{ login: string, passwords: any[] }>({
       login: '',
       passwords: Array.from({ length: 2 }, () => ({ id: uuidv4(), ifVisible: false, value: '' })),
    });
    const [ confirmViaAdmin, setConfirmViaAdmin ] = useState<CredentialsStateProvider>({ ifVisible: false, value: '' });
    const [ adminToken, setAdminToken ] = useState<CredentialsStateProvider>({ ifVisible: false, value: '' });
    const [ adminCredHash, setAdminCredHash ] = useState<HashProvider>({ password: '', token: '' });
-   const [ errors, setErrors ] = useState<ErrorsProvider>({
+   const [ errors, setErrors ] = useState<BooleansProvider>({
       login: false, password: false, passNotMath: false, token: false, notValidAdminPass: false,
    });
 
@@ -67,7 +82,7 @@ const ChangeCredentials: React.FC<PropsProvider> = ({ ifUser, disableButton }) =
       }
    }
 
-   const validateData = () => {
+   const validateData = (): { [value: string]: boolean } => {
       let loginBool = false, passBool = false, passNotMathBool = false, tokenBool = false;
       const { login, passwords } = newCredent;
       const { value } = adminToken;
@@ -86,7 +101,7 @@ const ChangeCredentials: React.FC<PropsProvider> = ({ ifUser, disableButton }) =
       return { loginBool, passBool, passNotMathBool, tokenBool };
    }
 
-   const sendChangeCredentials = async () => {
+   const sendChangeCredentials = async (): Promise<any> => {
       const { REACT_APP_ADMIN_ID, REACT_APP_USER_ID } = process.env;
 
       const salt = CryptoJS.lib.WordArray.random(128 / 8);
@@ -96,19 +111,19 @@ const ChangeCredentials: React.FC<PropsProvider> = ({ ifUser, disableButton }) =
       const cryptLogin = AES.encrypt(newCredent.login, hashKey).toString();
       const cryptPassword = AES.encrypt(newCredent.passwords[0].value, hashKey).toString();
 
-      if(!ifUser) { //administrator (ranga 1)
+      if(!ifUser) { //administrator (1)
          const cryptAdminToken = AES.encrypt(adminToken.value, hashKey).toString();
          await axiosInstance.put(`authentication/${REACT_APP_ADMIN_ID}`, {
             role: 1, login: cryptLogin, password: cryptPassword, token: hashKey, adminToken: cryptAdminToken
          });
-      } else { //użytkownik (ranga 0)
+      } else { //user (0)
          await axiosInstance.put(`authentication/${REACT_APP_USER_ID}`, {
             role: 0, login: cryptLogin, password: cryptPassword, token: hashKey
          });
       }
    }
 
-   const handleSubmitSendCredentials = (e: ChangeEvent<HTMLFormElement>) => {
+   const handleSubmitSendCredentials = (e: ChangeEvent<HTMLFormElement>): void => {
       e.preventDefault();
       const decrAdminPassword = AES.decrypt(adminCredHash.password, adminCredHash.token).toString(enc.Utf8);
       const { loginBool, passBool, passNotMathBool, tokenBool } = validateData();
@@ -131,7 +146,7 @@ const ChangeCredentials: React.FC<PropsProvider> = ({ ifUser, disableButton }) =
       }
    }
 
-   const handleInputs = ({ target }: ChangeEvent<HTMLInputElement>) => {
+   const handleInputs = ({ target }: ChangeEvent<HTMLInputElement>): void => {
       switch(target.placeholder.toLocaleLowerCase()) {
          case 'nowy login':
             setNewCredent({ ...newCredent, login: target.value });
@@ -150,7 +165,7 @@ const ChangeCredentials: React.FC<PropsProvider> = ({ ifUser, disableButton }) =
    }
 
    useEffect(() => {
-      const fetchCredentials = async () => {
+      const fetchCredentials = async (): Promise<any> => {
          const { data } = await axiosInstance.get('authentication');
          const { password, token } = data.find((authField: any) => authField.role === 2);
          setAdminCredHash({ password, token });

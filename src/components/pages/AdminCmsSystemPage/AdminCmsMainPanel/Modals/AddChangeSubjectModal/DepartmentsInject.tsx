@@ -1,49 +1,64 @@
+/**
+ * @file DepartmentsInject.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classnames from "classnames";
+import classnames from 'classnames';
 
-import { FormDataAndValidateContext } from "../../../../../../contextStore/FormDataAndValidateProvider";
+import { FormDataAndValidateContext, FormDataAndValidateType } from '../../../../../../contextStore/FormDataAndValidateProvider';
 
 const {
    departmentsContainer, addNewDepartment, someError, removeInputField, inputContainer
 } = require('./AddChangeSubjectModal.module.scss');
 
 /**
- * Komponent renderujący możliwośc wprowadzenia nowego wydziału/edycji już wprowadzonych wydziałów, na którym
- * odbywane są zajęcia (do modala z formularzem w panelu CMS administratora - panel dodawania/edycji przedmiotów).
+ * @details Component rendering the possibility of introducing a new faculty/editing already entered faculties where classes
+ *          are held (to the modal with the form in the administrator's CMS panel - the panel for adding/editing subjects).
  */
-const DepartmentsInject = () => {
+const DepartmentsInject = (): JSX.Element => {
 
    const {
       departments, setDepartments, departmentsCount, setDepartmentsCount, errors, setErrors
-   } = useContext<any>(FormDataAndValidateContext);
+   } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
 
    const addNewValueDepartment = () => {
-      if(departmentsCount < 4) {
-         setDepartmentsCount((prevState: number) => prevState + 1);
-         let updateArray = [...departments];
+      if(departmentsCount! < 4) {
+         setDepartmentsCount!((prevState: number) => prevState + 1);
+         let updateArray = [...departments!];
          updateArray.push('');
-         setDepartments(updateArray);
+         setDepartments!(updateArray);
       }
    }
 
-   const toggleClass = errors.department ? someError : ''
-
-   const generateDepartmentsInputs = Array.from({ length: departmentsCount }, (v, i) => i).map((str, index) => {
+   const toggleClass = errors!.department ? someError : ''
+   const generateDepartmentsInputs = Array.from({ length: departmentsCount! }, (v, i) => i).map((str, index) => {
 
       const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-         let newStateArray = [...departments];
+         let newStateArray = [...departments!];
          newStateArray[index] = target.value;
-         setErrors({ ...errors, department: false });
-         setDepartments(newStateArray);
+         setErrors!({ ...errors, department: false });
+         setDepartments!(newStateArray);
       }
 
       const handleRemoveField = () => {
-         let newStateArray = [...departments];
+         let newStateArray = [...departments!];
          newStateArray.splice(index, 1);
          if(index !== -1) {
-            setDepartmentsCount((prevState: number) => prevState - 1);
-            setDepartments(newStateArray);
+            setDepartmentsCount!((prevState: number) => prevState - 1);
+            setDepartments!(newStateArray);
          }
       }
 
@@ -52,7 +67,7 @@ const DepartmentsInject = () => {
             <input
                type = 'text'
                key = {index}
-               value = {departments[index]}
+               value = {departments![index]}
                onChange = {handleChange}
                placeholder = 'Wprowadź nazwę wydziału'
             />

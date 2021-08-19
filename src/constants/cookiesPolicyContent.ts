@@ -1,4 +1,34 @@
-const STATIC_STRUCTURE = {
+/**
+ * @file cookiesPolicyContent.ts
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript file storing constants values.
+ *
+ * @project_name "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @date final version: 08/18/2021
+ */
+
+/**
+ * Interfaces that defines the data types in the object.
+ */
+interface StaticStructureTypes {
+   LIST_STRUCTURE: ListTypes[];
+   NON_LIST_STRUCTURE: NonListTypes[];
+}
+export interface ListTypes {
+   sectionID: string;
+   sectionArray: { [value: string]: string }[];
+}
+export interface NonListTypes {
+   sectionID: string;
+   sectionArray: string[];
+}
+
+/**
+ * @details An object representing each static cookies document structure element.
+ */
+const STATIC_STRUCTURE: StaticStructureTypes = {
    LIST_STRUCTURE: [
       {
          sectionID: 'Definicje',

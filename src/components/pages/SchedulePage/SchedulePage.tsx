@@ -1,8 +1,23 @@
+/**
+ * @file SchedulePage.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                uuid: "^8.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import ActualDateProvider from '../../../contextStore/ActualDateProvider';
-import ScheduleProvider from "../../../contextStore/ScheduleProvider";
+import ScheduleProvider from '../../../contextStore/ScheduleProvider';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import AcceptScheduleChoiceModal from './AcceptScheduleChoiceModal/AcceptScheduleChoiceModal';
@@ -15,28 +30,27 @@ import AdditionalTools from './ScheduleHeader/AdditionalTools';
 import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
 import ActualDateInfo from './ScheduleHeader/ActualDateInfo';
 
-const {
-   scheduleContainer, scheduleWrapper, scheduleDaysContainer, scheduleDaysWrapper
-} = require('./SchedulePage.module.scss');
+const { scheduleContainer, scheduleWrapper, scheduleDaysContainer, scheduleDaysWrapper } = require('./SchedulePage.module.scss');
 const { scheduleRender } = require('./../../layouts/Navigation/Navigation.module.scss');
 
-const STATIC_DAYS = [
-   'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek',
-];
+/**
+ * Static array of strings representing the consecutive days of the week.
+ */
+export const STATIC_DAYS: string[] = [ 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek' ];
 
 /**
- * Komponent renderujący podstronę z planem zajęć (standardowe komponenty, formularz na podstawie którego generowany
- * jest plan, siatka z planem zajęć oraz dodatkowe narzędzia do planu - generacja dokumentu pdf).
+ * @details Component Rendering subpage with a class schedule (standard components, form on the basis of which a plan,
+ *          a grid with a plan for classes and additional tools for the plan - generation of a PDF document) is generated.
  */
-const SchedulePage = () => {
+const SchedulePage = (): JSX.Element => {
 
-   const executeScrollRef = useRef<any>(null);
+   const executeScrollRef: React.MutableRefObject<any> = useRef<HTMLElement>(null);
 
    const executeScroll = (): void => {
       executeScrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
    }
 
-   const generateDaysStructure = STATIC_DAYS.map(day => <ScheduleSections key = {uuidv4()} dayOfWeek = {day}/>);
+   const generateDaysStructure: JSX.Element[] = STATIC_DAYS.map(day => <ScheduleSections key = {uuidv4()} dayOfWeek = {day}/>);
 
    return (
       <ScheduleProvider>

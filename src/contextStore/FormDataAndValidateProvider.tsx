@@ -1,5 +1,5 @@
-import React, { createContext, useState, useContext } from 'react';
-import { ModalsStateContext } from './ModalsStateProvider';
+import React, {createContext, useState, useContext, Dispatch, SetStateAction} from 'react';
+import { ModalsStateContext, ModalStateType } from './ModalsStateProvider';
 
 export const FormDataAndValidateContext = createContext<any>(null);
 
@@ -8,17 +8,34 @@ interface PropsProvider {
 }
 
 interface ErrorsProvider {
-   title: boolean;
-   checkbox: boolean;
-   department: boolean;
-   icon: boolean;
-   platform: boolean;
+   [value: string]: boolean;
 }
 
 interface PlatformProvider {
-   type: string;
-   place: string;
-   link: string;
+   [value: string]: string;
+}
+
+export interface FormDataAndValidateType {
+   title: string;
+   setTitle: Dispatch<SetStateAction<string>>;
+   semesters: string[];
+   setSemesters: Dispatch<SetStateAction<string[]>>;
+   ifEnd: boolean[];
+   setIfEnd: Dispatch<SetStateAction<boolean[]>>;
+   icon: string;
+   setIcon: Dispatch<SetStateAction<string>>;
+   departmentsCount: number;
+   setDepartmentsCount: Dispatch<SetStateAction<number>>;
+   departments: string[];
+   setDepartments: Dispatch<SetStateAction<string[]>>;
+   classesPlatformsCount: number;
+   setClassesPlatformsCount: Dispatch<SetStateAction<number>>;
+   classesPlatforms: PlatformProvider[];
+   setClassesPlatforms: Dispatch<SetStateAction<PlatformProvider[]>>;
+   errors: ErrorsProvider;
+   setErrors: Dispatch<SetStateAction<ErrorsProvider>>;
+   validateAll: () => ErrorsProvider;
+   restoreValues: () => void;
 }
 
 /**
@@ -29,18 +46,18 @@ interface PlatformProvider {
  */
 const FormDataAndValidateProvider: React.FC<PropsProvider> = ({ children }) => {
 
-   const { setSubjectModal } = useContext<any>(ModalsStateContext);
+   const { setSubjectModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
 
    const [ title, setTitle ] = useState<string>('');
-   const [ semesters, setSemesters ] = useState<Array<string>>(Array.from({ length: 7 }, () => ''));
-   const [ ifEnd, setIfEnd ] = useState<Array<boolean>>([true, false]);
+   const [ semesters, setSemesters ] = useState<string[]>(Array.from({ length: 7 }, () => ''));
+   const [ ifEnd, setIfEnd ] = useState<boolean[]>([true, false]);
    const [ icon, setIcon ] = useState<string>('');
 
    const [ departmentsCount, setDepartmentsCount ] = useState<number>(1);
-   const [ departments, setDepartments ] = useState<Array<string>>(Array.from({ length: departmentsCount }, () => ''));
+   const [ departments, setDepartments ] = useState<string[]>(Array.from({ length: departmentsCount }, () => ''));
 
    const [ classesPlatformsCount, setClassesPlatformsCount ] = useState<number>(1);
-   const [ classesPlatforms, setClassesPlatforms ] = useState<Array<PlatformProvider>>(Array.from({
+   const [ classesPlatforms, setClassesPlatforms ] = useState<PlatformProvider[]>(Array.from({
       length: classesPlatformsCount }, () => ({ type: 'Wykłady', place: 'Zoom', link: '' })
    ));
 
@@ -71,14 +88,14 @@ const FormDataAndValidateProvider: React.FC<PropsProvider> = ({ children }) => {
       }
 
       validatePlatform(): boolean {
-         const arrayOfTypes: Array<any> = [];
+         const arrayOfTypes: any[] = [];
          classesPlatforms.forEach(object => arrayOfTypes.push(object.type));
          const validUrl = classesPlatforms.filter(object => !object.link.includes('https://'));
          return arrayOfTypes.length !== new Set(arrayOfTypes).size || validUrl.length !== 0;
       }
    }
 
-   const validateAll = ()  => {
+   const validateAll = (): ErrorsProvider => {
       const {
          validateTitle, validateCheckbox, validateDepartment, validateIcon, validatePlatform
       } = new ValidationClass();
@@ -96,7 +113,7 @@ const FormDataAndValidateProvider: React.FC<PropsProvider> = ({ children }) => {
    }
 
    const restoreValues = (): void => {
-      setSubjectModal({ id: null, type: '', ifOpen: false });
+      setSubjectModal!({ id: '', type: '', ifOpen: false });
       setTitle('');
       setSemesters(Array.from({ length: 7 }, () => ''));
       setIfEnd([true, false]);
@@ -104,9 +121,7 @@ const FormDataAndValidateProvider: React.FC<PropsProvider> = ({ children }) => {
       setDepartmentsCount(1);
       setDepartments(Array.from({ length: departmentsCount }, () => ''));
       setClassesPlatformsCount(1);
-      setClassesPlatforms(Array.from({
-         length: classesPlatformsCount }, () => ({ type: 'Wykłady', place: 'Zoom', link: '' })
-      ));
+      setClassesPlatforms(Array.from({ length: classesPlatformsCount }, () => ({ type: 'Wykłady', place: 'Zoom', link: '' })));
       setErrors({ title: false, checkbox: false, department: false, icon: false, platform: false });
    }
 

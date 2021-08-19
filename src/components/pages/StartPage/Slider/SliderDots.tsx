@@ -1,21 +1,39 @@
+/**
+ * @file SliderDots.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                uuid: "^8.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const { bannerDots, activeDot } = require('./Slider.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    dotsCount: number;
    actualState: number;
 }
 
 /**
- * Komponent generujący kropki na sliderze, wskazujące na aktualną pozycję slidera. W zależności od parametrów w
- * propsach, generuje się odpowiednia ilość kropek, oraz następuje aktywowanie stanu kropki.
+ * @details Component generating dots on a slider pointing to the current position of the slider. Depending on the parameters
+ *          in props, the corresponding number of dots is generated and the dot status is activated.
  *
- * @param dotsCount { number } - ilość kropek do wygenerowania.
- * @param actualState { number } - przekazywanie akualnego stanu (aktualnie wyświetlanego obrazka)
+ * @param dotsCount { number } - number of dots to generate.
+ * @param actualState { number } - actual state (currently displayed image).
  */
-const SliderDots: React.FC<PropsProvider> = ({ dotsCount, actualState }) => {
+const SliderDots: React.FC<PropsProvider> = ({ dotsCount, actualState }): JSX.Element => {
 
    const generateDots = Array.from({length: dotsCount}).map((nullVal: unknown, index: number) => {
       const activeToggle = ((dotsCount - 1) - index) === actualState / 100 + 1 ? activeDot : null;

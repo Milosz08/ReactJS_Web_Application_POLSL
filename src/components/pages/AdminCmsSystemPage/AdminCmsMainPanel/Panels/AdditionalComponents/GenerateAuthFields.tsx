@@ -1,26 +1,46 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, Fragment } from 'react';
+/**
+ * @file GenerateAuthFields.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
 
-import ShowHideAuthVisible from "./ShowHideAuthVisible";
+import React, { ChangeEvent, Dispatch, SetStateAction, Fragment } from 'react';
+import ShowHideAuthVisible from './ShowHideAuthVisible';
 
 const { passwordField, errorValue } = require('./../HomePanel.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
-   newCredent: any;
-   setNewCredent: Dispatch<SetStateAction<any>>;
-   errors: any;
-   setErrors: Dispatch<SetStateAction<any>>;
+   newCredent: {
+      login: string;
+      passwords: any[];
+   };
+   setNewCredent: Dispatch<SetStateAction<{ login: string, passwords: any[] }>>;
+   errors: {
+      [value: string]: boolean;
+   };
+   setErrors: Dispatch<SetStateAction<{ [value: string]: boolean }>>;
 }
 
 /**
- * Komponent generujący pola do wprowadzania nowych danych autentykacji konta usera/konta moderatora (dostępne
- * tylko z poziomu autentykacji 2 - superadministrator (główny administrator systemu)).
+ * @details Component that generates fields for entering new authentication data of a user / moderator's account
+ *          (available only from authentication level 2 - superadministrator (main system administrator)).
  *
- * @param newCredent { string object } - nowy login/hasło/token.
- * @param setNewCredent { Dispatch<SetStateAction<object>> } - funkcja ustawiająca nowy login/hasło/token.
- * @param errors { boolean object } - obiekt przechowujący błędy przy wpisywaniu wartości do pól edycyjnych.
- * @param setErrors { Dispatch<SetStateAction<object>> } - funkcja ustawiająca błędy wartości pól.
+ * @param newCredent { string object } - new login/password/token.
+ * @param setNewCredent { Dispatch<SetStateAction<object>> } - function that sets a new login/password/token.
+ * @param errors { boolean object } - an object that stores errors when entering values into edit fields.
+ * @param setErrors { Dispatch<SetStateAction<object>> } - a function that sets errors in field values.
  */
-const GenerateAuthField: React.FC<PropsProvider> = ({ newCredent, setNewCredent, errors, setErrors }) => {
+const GenerateAuthField: React.FC<PropsProvider> = ({ newCredent, setNewCredent, errors, setErrors }): JSX.Element => {
 
    const generatePasswordsFields = newCredent.passwords.map((password: any, index: number) => {
       const copy = [...newCredent.passwords];

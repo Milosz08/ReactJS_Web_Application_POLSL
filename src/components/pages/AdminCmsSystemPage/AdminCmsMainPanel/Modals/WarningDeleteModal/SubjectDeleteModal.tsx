@@ -1,32 +1,46 @@
+/**
+ * @file SubjectDeleteModal.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext } from 'react';
 import axiosInstance from '../../../../../../helpers/request';
-import classnames from "classnames";
+import classnames from 'classnames';
 
-import { ModalsStateContext } from '../../../../../../contextStore/ModalsStateProvider';
-import { MainStoreContext } from '../../../../../../contextStore/MainStoreContext';
+import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
 
-import { MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
-import UniversalHeader from "../../../../../layouts/UniversalHeader/UniversalHeader";
-import updateLogsDateAsync from "../../../../../../constants/updateLogsDateAsync";
+import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
+import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
 
 const {
    modalContainer, modalWrapper, modalOpen, modalWarningInfo, modalWarningButtons, dangerColorWrapper
 } = require('./WarningDeleteModal.module.scss');
 
 /**
- * Komponent generujący modal po naciśnięciu przycisku usuwania przedmiotu. Komponent komunikuje się z API i po
- * zatwierdzeniu przez administratora usuwany jest z bazy danych.
+ * @details Modal generating component that allows one subject to be removed. The component connects to the API and with
+ *          its help removes the content from the database and local state.
  */
-const SubjectDeleteModal = () => {
+const SubjectDeleteModal = (): JSX.Element => {
 
-   const { subjectModal, setSubjectModal } = useContext<any>(ModalsStateContext);
-   const { dataFetchFromServer, setDataFetchFromServer } = useContext<any>(MainStoreContext);
+   const { subjectModal, setSubjectModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
+   const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const { subjectsData } = dataFetchFromServer;
-   const ifModalOpen = subjectModal.ifOpen && subjectModal.type === MODAL_TYPES.REMOVE ? modalOpen : '';
+   const ifModalOpen = subjectModal!.ifOpen && subjectModal!.type === MODAL_TYPES.REMOVE ? modalOpen : '';
 
-   const getSearchSubjectTitle = () => {
-      const subjectDataFilter = subjectsData.find((subject: any) => subject._id === subjectModal.id);
+   const getSearchSubjectTitle = (): string => {
+      const subjectDataFilter = subjectsData.find((subject: any) => subject._id === subjectModal!.id);
       if(subjectDataFilter !== undefined) {
          return subjectDataFilter.title;
       } else {
@@ -34,15 +48,15 @@ const SubjectDeleteModal = () => {
       }
    }
 
-   const handleRemoveSubject = async () => {
-      await axiosInstance.delete(`subjects-data/${subjectModal.id}`);
-      const subjectsAfterRemove = [...subjectsData].filter((subject: any) => subject._id !== subjectModal.id);
+   const handleRemoveSubject = async (): Promise<any> => {
+      await axiosInstance.delete(`subjects-data/${subjectModal!.id}`);
+      const subjectsAfterRemove = [...subjectsData].filter((subject: any) => subject._id !== subjectModal!.id);
       setDataFetchFromServer({ ...dataFetchFromServer, subjectsData: subjectsAfterRemove });
-      setSubjectModal({ ...subjectModal, ifOpen: false });
+      setSubjectModal!({ ...subjectModal!, ifOpen: false });
       await updateLogsDateAsync('subjects', process.env.REACT_APP_SUBJECTS_ID);
    }
 
-   const handleExitModal = () => setSubjectModal({ id: '', type: MODAL_TYPES.EDIT, ifOpen: false });
+   const handleExitModal = () => setSubjectModal!({ id: '', type: MODAL_TYPES.EDIT, ifOpen: false });
 
    return (
       <div className = {classnames(modalContainer, ifModalOpen)}>

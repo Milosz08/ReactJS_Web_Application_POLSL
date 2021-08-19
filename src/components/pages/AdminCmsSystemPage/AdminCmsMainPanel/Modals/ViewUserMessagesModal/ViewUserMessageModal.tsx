@@ -1,35 +1,48 @@
+/**
+ * @file ViewUserMessageModal.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classnames from "classnames";
+import classnames from 'classnames';
 
-import { MODAL_TYPES, ModalsStateContext } from '../../../../../../contextStore/ModalsStateProvider';
-import { MainStoreContext } from '../../../../../../contextStore/MainStoreContext';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
+import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
 
 import { insertUserChoice } from '../../Panels/UserMessagePanel';
 
 const {
-   modalContainer, modalWrapper, modalAddWrapper, modalOpen, modalAddHeader, modalAddIcon, modalViewWrapper,
-   marginTopAdd
+   modalContainer, modalWrapper, modalAddWrapper, modalOpen, modalAddHeader, modalAddIcon, modalViewWrapper, marginTopAdd
 } = require('./../WarningDeleteModal/WarningDeleteModal.module.scss');
-const {
-   messageModalCloseButton
-} = require('./../../../../../layouts/CookiesNotification/CookiesNotification.module.scss');
+const { messageModalCloseButton } = require('./../../../../../layouts/CookiesNotification/CookiesNotification.module.scss');
 const { messageInfoContainer, userInfo, messageInfo } = require('./ViewUserMessageModal.module.scss');
 
 /**
- * Komponent generujący modal z panelu CMS z wiadomościa użytkowników. Modal pokazuje szczegóły dotyczące wiadomości:
- * (data wysłania, imię, treść oraz typ wysłanej wiadomości).
+ * @details Component generating a modal from the CMS panel with users' messages. The modal shows the details of the
+ *          message: (date of sending, name, content and type of sent message).
  */
-const ViewUserMessagesModal = () => {
+const ViewUserMessagesModal = (): JSX.Element => {
 
-   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
-   const { messageModal, setMessageModal } = useContext<any>(ModalsStateContext);
+   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+   const { messageModal, setMessageModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
 
    const { footerForms } = dataFetchFromServer;
-   const ifModalOpen = messageModal.ifOpen && messageModal.type === MODAL_TYPES.VIEW ? modalOpen : '';
+   const ifModalOpen = messageModal!.ifOpen && messageModal!.type === MODAL_TYPES.VIEW ? modalOpen : '';
 
-   const generateValues = () => {
-      const userRecord = footerForms.find((message: any) => message._id === messageModal.id);
+   const generateValues = (): { [value: string]: string } => {
+      const userRecord = footerForms.find((message: any) => message._id === messageModal!.id);
       if(userRecord !== undefined) {
          return {
             user: userRecord.userIdentity,
@@ -55,7 +68,7 @@ const ViewUserMessagesModal = () => {
                   <aside/>
                   <button
                      className = {messageModalCloseButton}
-                     onClick = {() => setMessageModal({ ...messageModal, ifOpen: false })}
+                     onClick = {() => setMessageModal!({ ...messageModal!, ifOpen: false })}
                      title = 'Zamknij okno'
                   >
                      <span/>

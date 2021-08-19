@@ -1,15 +1,33 @@
-import React, {Fragment, useContext, useState} from 'react';
-import classnames from "classnames";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+/**
+ * @file CalendarPage.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
+import React, { Fragment, useContext, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
+
+import { MainStoreContext, MainStoreProviderTypes} from '../../../contextStore/MainStoreContext';
+import { IMPORTANT_VALUES } from '../AdminCmsSystemPage/AdminCmsMainPanel/Modals/WarningDeleteModal/CalendarDeleteModal';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
-import UniversalHeader from "../../layouts/UniversalHeader/UniversalHeader";
+import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
 import CalendarStructure from './CalendarStructure';
 import DataLastUpdate from '../../layouts/DataLastUpdate/DataLastUpdate';
-import getSingleDateObjects from "../../../constants/getSingleDateObjects";
-import {MainStoreContext} from "../../../contextStore/MainStoreContext";
+import getSingleDateObjects from '../../../constants/getSingleDateObjects';
 
 const {
    calendarContainer, calendarWrapper, underInfo, mobileInfo, legendInfo, calendarStructureAndModal, dateInfoModal,
@@ -18,11 +36,11 @@ const {
 const { universalHeader } = require('./../../layouts/Navigation/Navigation.module.scss');
 
 /**
- * Komponent generujący podstronę z kalendarzem studenta.
+ * @details Component responsible for the generation of a subpage (routing) that displays the student's calendar.
  */
-const CalendarPage = () => {
+const CalendarPage = (): JSX.Element => {
 
-   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
+   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const [ openModal, setOpenModal ] = useState<boolean>(false);
    const [ date, setDate ] = useState<Date>(new Date());
@@ -34,9 +52,9 @@ const CalendarPage = () => {
    const generateTasksPerDay = () => {
       const selectClass = (value: string) => {
          switch(value) {
-            case 'low': return low;
-            case 'medium': return medium;
-            case 'high': return high;
+            case IMPORTANT_VALUES.LOW:       return low;
+            case IMPORTANT_VALUES.MEDIUM:    return medium;
+            case IMPORTANT_VALUES.HIGH:      return high;
          }
       }
 

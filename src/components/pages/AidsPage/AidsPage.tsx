@@ -1,3 +1,18 @@
+/**
+ * @file AidsPage.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -6,23 +21,26 @@ import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 
 import COOKIES_OBJECT from '../../../constants/allCookies';
-import TILES_DATA from '../../../constants/aidsTilesData';
+import TILES_DATA, { TilesDataTypes } from '../../../constants/aidsTilesData';
 
 const { universalHeader, fasIcon } = require('./../../layouts/Navigation/Navigation.module.scss');
 const {
    aidsContainer, aisdWrapper, logoutButton, aidsMainContent, msTeamsTile, title, iconContainer, icon
 } = require('./AidsPage.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    setAuth: (value: boolean) => boolean;
    handleCookie: any;
 }
 
 /**
- * Komponent generujący stronę z Pomocami Naukowymi.
+ * @details Component that generates a page with Learning Aids.
  *
- * @param setAuth { (value: boolean) => boolean } - funkcja ustawiająca autentykację.
- * @param handleCookie { any } - funkcja usuwająca/dodająca obiekt Cookie.
+ * @param setAuth { (value: boolean) => boolean } - function to set the authentication.
+ * @param handleCookie { any } - function for removing/adding a Cookie object.
  */
 const AidsPage: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
 
@@ -31,7 +49,7 @@ const AidsPage: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
       handleCookie(COOKIES_OBJECT.userSession, { path: '/', sameSite: 'strict' });
    }
 
-   const generateTilesStructure = TILES_DATA.map((tile: any) => (
+   const generateTilesStructure = TILES_DATA.map((tile: TilesDataTypes) => (
       <a href = {tile.link} target = '_blank' rel = 'noreferrer' key = {tile.title}>
          <section className = {msTeamsTile}>
             <div className = {iconContainer}>

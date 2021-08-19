@@ -1,63 +1,74 @@
+/**
+ * @file AidsLogin.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                uuid: "^8.3.1"
+ *                CryptoJS: "^4.1.1"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { Fragment, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axiosInstance from '../../../helpers/request';
 import { AES, enc } from 'crypto-js';
 import { v4 as uuidv4 } from 'uuid';
+import classnames from 'classnames';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
+import LoadingSystemAnimation from '../../layouts/LoadingSystemAnimation/LoadingSystemAnimation';
 
 import COOKIES_OBJECT from '../../../constants/allCookies';
-import LoadingSystemAnimation from "../../additionalComponents/LoadingSystemAnimation";
-import classnames from "classnames";
 
-const {
-   userLoginContainer, userLoginWrapper, loginInfo, hideFormOnClick
-} = require('./AidsPage.module.scss');
+const { userLoginContainer, userLoginWrapper, loginInfo, hideFormOnClick } = require('./AidsPage.module.scss');
 const {
    userCredentials, inputCredentials, showProtectedField, visibleIcon, onSubmitCSS, wrongData, authenticationHeader,
 } = require('./../AdminCmsSystemPage/AdminCmsLogin/AdminCmsLogin.module.scss');
 
+/**
+ * Constant describing the ID of the generated cookie file
+ */
 const COOKIE_ID = uuidv4();
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    setAuth: (value: boolean) => boolean;
    handleCookie: any;
 }
 
-interface CredentialsProvider {
-   login: string;
-   password: string;
-   token: string;
-}
-
-interface ErrorsProvider {
-   login: boolean;
-   password: boolean;
-}
-
 /**
- * Komponent generujący pole autentykacji (logowania) użytkownika. Komponent posiada walidację wprowadzanych danych,
- * oraz po naciśnięciu przycisku submit, dane te są wysyłane w formie zapytania do API. Jeśli dane wysłane do API
- * są między sobą zgodne, następuje przekierowanie. Logowanie jest aktywnie przez jedną sesję przeglądarki (do
- * jej zamknięcia lub ręcznego wylogowania z systemu).
+ * @details Component that generates the user's authentication (login) field. The component has validation of the entered data,
+ *          and after pressing the submit button, the data is sent in the form of a request to the API. If the data sent to
+ *          the API match, redirect takes place. Logging in is active for one browser session (until it is closed or manually
+ *          logged out of the system).
  *
- * @param setAuth { (value: boolean) => boolean } - ustawianie autnetykacji (true -> jest, false -> nie ma)
- * @param handleCookie { any } - funkcja usuwania/dodawania obiektu Cookie.
+ * @param setAuth { (value: boolean) => boolean } - setting authentication (true -> there is, false -> not available).
+ * @param handleCookie { any } - function of removing/adding Cookie object.
  */
 const AidsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
 
    const [ login, setLogin ] = useState<string>('');
    const [ password, setPassword ] = useState<string>('');
    const [ passVisible, setPassVisible ] = useState<boolean>(false);
-   const [ credentialsHash, setCredentialsHash ] = useState<CredentialsProvider>({
+   const [ credentialsHash, setCredentialsHash ] = useState<{ [value: string]: string }>({
       login: '', password: '', token: ''
    });
-   const [ errors, setErrors ] = useState<ErrorsProvider>({ login: false, password: false });
+   const [ errors, setErrors ] = useState<{ [value: string]: boolean }>({ login: false, password: false });
    const [ hideAuth, setHideAuth ] = useState<boolean>(false);
 
-   const checkAuthentication = (): { loginBool: boolean, passwordBool: boolean } => {
+   const checkAuthentication = (): { [value: string]: boolean } => {
       let loginBool = false, passwordBool = false;
 
       const decrLogin = AES.decrypt(credentialsHash.login, credentialsHash.token).toString(enc.Utf8);
@@ -113,7 +124,7 @@ const AidsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
    }
 
    useEffect(() => {
-      const fetchData = async () => {
+      const fetchData = async (): Promise<any> => {
          const { data } = await axiosInstance.get('authentication');
          const { login, password, token } = data.find((authField: any) => authField.role === 0);
          setCredentialsHash({ login, password, token });

@@ -1,35 +1,52 @@
-import React, { useContext, useState } from 'react';
-import axiosInstance from '../../../../../helpers/request';
-import classnames from "classnames";
+/**
+ * @file Covid19Panel.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
 
-import { MainStoreContext } from "../../../../../contextStore/MainStoreContext";
+import React, { useContext, useState } from 'react';
+import classnames from 'classnames';
+import axiosInstance from '../../../../../helpers/request';
+
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreContext';
+import { CovidDataProvider } from "../../../StartPage/CovidInfo/CovidInfo";
 
 const { panelContainer, panelActive } = require('./Panels.module.scss');
-const {
-   covidPanelsContainer, sectionWrapper, submitCovidForm, unwriteChangesCSS
-} = require('./Covid19Panel.module.scss');
+const { covidPanelsContainer, sectionWrapper, submitCovidForm, unwriteChangesCSS } = require('./Covid19Panel.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    activeNavElm: number;
 }
 
 /**
- * Komponent generujący panel z możliwością zmiany poziomów zagrożenia Covid 19.
+ * @details Component that generates a panel with the ability to change Covid 19 threat levels.
  *
- * @param activeNavElm { number } - liczba mówiąca o aktywności danego elementu.
+ * @param activeNavElm { number } - number indicating the activity of a given element.
  */
-const Covid19Panel: React.FC<PropsProvider> = ({ activeNavElm }) => {
+const Covid19Panel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element => {
 
-   const { dataFetchFromServer, setDataFetchFromServer } = useContext<any>(MainStoreContext);
+   const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
    const { covidData } = dataFetchFromServer;
 
-   const [ riskLevels, setRiskLevel ] = useState(covidData.map((object: any) => object.actualRiskNumber));
-   const [ unwriteChanges, setUnwireChanges ] = useState(false);
+   const [ riskLevels, setRiskLevel ] = useState<number[]>(covidData.map((object: CovidDataProvider) => object.actualRiskNumber));
+   const [ unwriteChanges, setUnwireChanges ] = useState<boolean>(false);
 
-   const handleOnChangeInput = (id: string, target: any) => {
-      const copy = [...riskLevels];
-      const dataCopy = [...covidData];
-      const findIndex = dataCopy.findIndex(tile => tile._id === id);
+   const handleOnChangeInput = (id: string, target: EventTarget & HTMLSelectElement): void => {
+      const copy: number[] = [...riskLevels];
+      const dataCopy: CovidDataProvider[] = [...covidData];
+      const findIndex = dataCopy.findIndex((tile: CovidDataProvider) => tile._id === id);
       copy[findIndex] = target === '0' ? 0 : parseInt(target.value);
       dataCopy[findIndex].actualRiskNumber = target === '0' ? 0 : parseInt(target.value);
       setDataFetchFromServer({ ...dataFetchFromServer, covidData: dataCopy })
@@ -37,14 +54,14 @@ const Covid19Panel: React.FC<PropsProvider> = ({ activeNavElm }) => {
       setUnwireChanges(true);
    }
 
-   const handleSubmitChanges = async () => {
+   const handleSubmitChanges = async (): Promise<any> => {
       setUnwireChanges(false);
-      await Promise.all(covidData.map(async (object: any) => {
+      await Promise.all(covidData.map(async (object: CovidDataProvider) => {
          await axiosInstance.put(`covid-data/${object._id}`, object);
       }));
    }
 
-   const generateRiskTiles = covidData.map((tile: any, index: number) => {
+   const generateRiskTiles = covidData.map((tile: CovidDataProvider, index: number): JSX.Element => {
       const generateOptions = Array.from({ length: 4 }, (v, s) => s).map(i => (
          <option key = {i}>{i}</option>
       ));
@@ -64,7 +81,7 @@ const Covid19Panel: React.FC<PropsProvider> = ({ activeNavElm }) => {
       );
    });
 
-   const toggleClass = activeNavElm === 1 ? panelActive : '';
+   const toggleClass: string = activeNavElm === 1 ? panelActive : '';
 
    return (
       <div className = {classnames(panelContainer, toggleClass)}>

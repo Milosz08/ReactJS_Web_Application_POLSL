@@ -1,34 +1,55 @@
+/**
+ * @file CalendarPanel.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                uuid: "^8.3.1"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { v4 as uuidv4 } from 'uuid';
-import classnames from "classnames";
+import classnames from 'classnames';
 
-import { MainStoreContext } from '../../../../../contextStore/MainStoreContext';
-import { MODAL_TYPES, ModalsStateContext } from '../../../../../contextStore/ModalsStateProvider';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreContext';
+import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../contextStore/ModalsStateProvider';
 
 import SearchBox from './AdditionalComponents/SearchBox';
-import DAYS_AND_MONTHS from "../../../../../constants/daysAndMonths";
+import DAYS_AND_MONTHS from '../../../../../constants/daysAndMonths';
+import { IMPORTANT_VALUES } from "../Modals/WarningDeleteModal/CalendarDeleteModal";
 
 const {
-   listNumber, listDate, modifyElement, fasIcon, deleteElement, listSorting, sortById, addNewRecord,
-   sortByDate, sortByImportant, sortByCount, listCount, listImportant, importantDot, lowLevel, mediumLevel,
-   highLevel, recordsNotExist, infoIcon, panelContainer, panelActive
+   listNumber, listDate, modifyElement, fasIcon, deleteElement, listSorting, sortById, addNewRecord, sortByDate,
+   sortByImportant, sortByCount, listCount, listImportant, importantDot, lowLevel, mediumLevel, highLevel,
+   recordsNotExist, infoIcon, panelContainer, panelActive
 } = require('./Panels.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    activeNavElm: number;
 }
 
 /**
- * Komponent generujący zarządzanie wpisami kalendarza (panel administratora CMS).
+ * @details Component that generates the management of calendar entries (CMS admin panel).
  *
- * @param activeNavElm { number } - liczba mówiąca o aktywności danego elementu.
+ * @param activeNavElm { number } - number indicating the activity of a given element.
  */
-const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
+const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element => {
 
    const [ inputField, setInputField ] = useState<string>('');
-   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
-   const { calendarModal, setCalendarModal } = useContext<any>(ModalsStateContext);
+   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+   const { calendarModal, setCalendarModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
    const { calendarRecords } = dataFetchFromServer;
 
    // eslint-disable-next-line array-callback-return
@@ -46,19 +67,16 @@ const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
    }
 
    const generateSubjectsList = filteredArray.map((entry: any, index: number) => {
-
       const generateImportantDots = entry.items.map((dot: any) => {
          const returnCSSstyles = () => {
             switch(dot.importantLevel) {
-               case 'low': return lowLevel;
-               case 'medium': return mediumLevel;
-               case 'high': return highLevel;
-               default: return undefined;
+               case IMPORTANT_VALUES.LOW:    return lowLevel;
+               case IMPORTANT_VALUES.MEDIUM: return mediumLevel;
+               case IMPORTANT_VALUES.HIGH:   return highLevel;
+               default:                      return undefined;
             }
          }
-         return (
-            <div className = {`${importantDot} ${returnCSSstyles()}`} key = {uuidv4()}/>
-         );
+         return <div className = {`${importantDot} ${returnCSSstyles()}`} key = {uuidv4()}/>;
       });
 
       return (
@@ -69,7 +87,7 @@ const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
             <span className = {listImportant}>{generateImportantDots}</span>
             <button
                className = {modifyElement}
-               onClick = {() => setCalendarModal({ id: entry._id, type: MODAL_TYPES.EDIT, ifOpen: true })}
+               onClick = {() => setCalendarModal!({ id: entry._id, type: MODAL_TYPES.EDIT, ifOpen: true })}
             >
                <FontAwesomeIcon
                   icon = {['fas', 'edit']}
@@ -79,7 +97,7 @@ const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
             </button>
             <button
                className = {deleteElement}
-               onClick = {() => setCalendarModal({ id: entry._id, type: MODAL_TYPES.REMOVE, ifOpen: true })}
+               onClick = {() => setCalendarModal!({ id: entry._id, type: MODAL_TYPES.REMOVE, ifOpen: true })}
             >
                <FontAwesomeIcon
                   icon = {['fas', 'times']}
@@ -118,7 +136,7 @@ const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
             </div>}
             <button
                className = {addNewRecord}
-               onClick = {() => setCalendarModal({ ...calendarModal, type: MODAL_TYPES.ADD, ifOpen: true })}
+               onClick = {() => setCalendarModal!({ ...calendarModal!, type: MODAL_TYPES.ADD, ifOpen: true })}
             >Dodaj nowy wpis/wpisy</button>
          </ul>
       </div>

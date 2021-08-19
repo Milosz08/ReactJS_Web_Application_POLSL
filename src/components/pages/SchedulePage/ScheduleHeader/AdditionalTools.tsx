@@ -1,48 +1,62 @@
+/**
+ * @file ScheduleNormalGroupInputs.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext, useRef, useState } from 'react';
-import UniversalHeader from "../../../layouts/UniversalHeader/UniversalHeader";
-import classnames from "classnames";
+import { useReactToPrint } from 'react-to-print';
+import classnames from 'classnames';
 
-import { useReactToPrint } from "react-to-print";
-import ComponentToPrint from "../../../additionalComponents/ComponentToPrint";
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../contextStore/MainStoreContext';
+import { ScheduleContext, ScheduleType } from '../../../../contextStore/ScheduleProvider';
 
-import { MainStoreContext } from "../../../../contextStore/MainStoreContext";
-import { ScheduleContext } from "../../../../contextStore/ScheduleProvider";
-import DataLastUpdate from "../../../layouts/DataLastUpdate/DataLastUpdate";
+import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
+import ComponentToPrint from '../../../layouts/ComponentToPrint/ComponentToPrint';
+import DataLastUpdate from '../../../layouts/DataLastUpdate/DataLastUpdate';
 
 const { scheduleRender } = require('./../../../layouts/Navigation/Navigation.module.scss');
-const {
-   progressBar, progressActive, colored, activeBar, generateButton, underInfo
-} = require('./../SchedulePage.module.scss');
+const { progressBar, progressActive, colored, activeBar, generateButton, underInfo } = require('./../SchedulePage.module.scss');
 
 /**
- * Komponent generujący sekcję dodatkowe narzędzia do planu zajęć (możliwość stworzenia pliku pdf).
+ * @details A component that generates the section Additional tools to the class plan (the ability to create a PDF file).
  */
-const AdditionalTools = () => {
+const AdditionalTools = (): JSX.Element => {
 
-   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
-   const { groupSelected, engSelected } = useContext<any>(ScheduleContext);
+   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+   const { groupSelected, engSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
    const { scheduleSubjects } = dataFetchFromServer;
 
-   const componentRef = useRef<any>();
+   const componentRef: React.MutableRefObject<any> = useRef<HTMLElement>();
+
    const [ date, setDate ] = useState<Date>(new Date());
    const [ show, setShow ] = useState<boolean>(false);
    const [ widthState, setWidthState ] = useState<number>(0);
 
-   const resetValues = () => {
+   const resetValues = (): void => {
       setShow(false);
       setWidthState(0);
    }
 
-   const handlePrint = useReactToPrint({
+   const handlePrint:(() => void) | undefined = useReactToPrint({
       content: () => componentRef.current,
       documentTitle: 'plan_zajec',
       onAfterPrint: () => resetValues(),
    });
 
-   const handleGeneratePDF = () => {
+   const handleGeneratePDF = (): void => {
       let count: number = 0;
       let index: NodeJS.Timeout;
-      const asyncLoadingBar = () => {
+      const asyncLoadingBar = (): void => {
          count++;
          setWidthState(count);
          if(count === 100) {
@@ -57,7 +71,7 @@ const AdditionalTools = () => {
       setDate(new Date());
    }
 
-   const toggleClass = show ? classnames(progressBar, activeBar) : progressBar;
+   const toggleClass: string = show ? classnames(progressBar, activeBar) : progressBar;
 
    return (
       <section className = {scheduleRender}>
@@ -85,8 +99,8 @@ const AdditionalTools = () => {
                ref = {componentRef}
                date = {date}
                subjects = {scheduleSubjects}
-               groupSelected = {groupSelected}
-               engSelected = {engSelected}
+               groupSelected = {groupSelected!}
+               engSelected = {engSelected!}
             />
          </div>
          <aside className = {toggleClass}>

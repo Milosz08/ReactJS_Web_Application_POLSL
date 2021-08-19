@@ -1,34 +1,49 @@
-import React, { useLayoutEffect, useState } from "react";
+/**
+ * @file ScheduleSections.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
 
+import React, { useLayoutEffect, useState } from 'react';
 const { countDownContainer, countDownWrapper, dateFont, mobileDateFont } = require('./CountDown.module.scss');
 
-const EXP_TIME = new Date('2021-10-01 10:00:00').getTime(); //koniec odliczania
+/**
+ * A constant representing the day and time of the counting end.
+ */
+const EXP_TIME: number = new Date('2021-10-01 10:00:00').getTime();
 
+/**
+ * Interface defining the type of State values.
+ */
 interface StateProvider {
-   days: number | string;
-   hours: number | string;
-   minutes: number | string;
-   seconds: number | string;
+   [value: string]: number | string;
 }
 
 /**
- * Komponent na stronie głównej odliczający do daty zapisanej w stałej EXP_TIME. Komponent odświeżany jest co 1
- * sekundę przy pomocy funkcji useLayoutEffect i odlicza czas od aktualnej daty, pobieranej przy każdym odświeżeniu
- * komponentu z klasy Date. Wartości czasu przyjmują stałą ilość znaków (dla < 10 dodawane jest 0).
+ * @details Component on the deductible main page to the date stored in the permanent Exp_Time. The refreshed component
+ *          is every second with the UselayoutEffect function and counts down the time from the current date, collected every
+ *          time the Date class component is refreshed. Time values take a permanent number of characters (for <10 is added 0).
  */
-const CountDown = () => {
+const CountDown = (): JSX.Element => {
 
    const [ date, setDate ] = useState<StateProvider>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
    useLayoutEffect(() => {
-      const setDateObject = (nowTime : number) => {
-         let days : number | string = Math.floor((EXP_TIME / (1000*60*60*24)) - (nowTime / (1000*60*60*24)));
+      const setDateObject = (nowTime : number): StateProvider => {
+         let days : number | string = Math.floor((EXP_TIME / (1000 * 60 * 60 * 24)) - (nowTime / (1000 * 60 * 60 * 24)));
          days = days < 10 ? `0${days}` : days;
 
-         let hours : number | string = Math.floor((EXP_TIME / (1000* 60*60) - nowTime / (1000*60*60)) % 24);
+         let hours : number | string = Math.floor((EXP_TIME / (1000 * 60 * 60) - nowTime / (1000 * 60 * 60)) % 24);
          hours = hours < 10 ? `0${hours}` : hours;
 
-         let minutes : number | string = Math.floor((EXP_TIME / (1000*60) - nowTime / (1000*60)) % 60);
+         let minutes : number | string = Math.floor((EXP_TIME / (1000 * 60) - nowTime / (1000 * 60)) % 60);
          minutes = minutes < 10 ? `0${minutes}` : minutes;
 
          let seconds : number | string = Math.floor((EXP_TIME / 1000 - nowTime / 1000) % 60);

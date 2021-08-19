@@ -1,9 +1,25 @@
+/**
+ * @file TypeAndPlatform.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classnames from "classnames";
+import classnames from 'classnames';
 
-import { FormDataAndValidateContext } from "../../../../../../contextStore/FormDataAndValidateProvider";
-import STATIC_OPTIONS from "../../../../../../constants/inputOptions";
+import { FormDataAndValidateContext, FormDataAndValidateType } from '../../../../../../contextStore/FormDataAndValidateProvider';
+import STATIC_OPTIONS from '../../../../../../constants/inputOptions';
 
 const {
    typeAndPlatformContainer, addNewPZEmodule, someError, oneTypeContainer, removeInputField, selectArrowIcon,
@@ -14,29 +30,29 @@ const {
  * Komponent renderujący sekcję modala dodającego nowy przedmiot, która umożliwia dodanie linków do platformy.
  * Komponent pobiera dane ze stora przechowującego klasę walidującą oraz dane wprowadzane przez użytkownika w modalu.
  */
-const TypeAndPlatform = () => {
+const TypeAndPlatform = (): JSX.Element => {
 
    const { TYPE_OPTIONS, PLATFORMS_OPTIONS } = STATIC_OPTIONS;
 
    const {
       classesPlatforms, setClassesPlatforms, classesPlatformsCount, setClassesPlatformsCount, errors, setErrors
-   } = useContext<any>(FormDataAndValidateContext);
+   } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
 
    const addNewValuePZEmodule = (): void => {
-      if(classesPlatformsCount < TYPE_OPTIONS.length) {
-         setClassesPlatformsCount((prevState: number) => prevState + 1);
-         let updateArray = [...classesPlatforms];
+      if(classesPlatformsCount! < TYPE_OPTIONS.length) {
+         setClassesPlatformsCount!((prevState: number) => prevState + 1);
+         let updateArray = [...classesPlatforms!];
          updateArray.push({ type: 'Wykłady', place: 'Zoom', link: '' });
-         setClassesPlatforms(updateArray);
+         setClassesPlatforms!(updateArray);
       }
    }
 
-   const toggleClass = errors.platform ? someError : '';
+   const toggleClass = errors!.platform ? someError : '';
 
-   const generatePZElinks = Array.from({ length: classesPlatformsCount }, (v, i) => i).map((str, index) => {
+   const generatePZElinks = Array.from({ length: classesPlatformsCount! }, (v, i) => i).map((str, index) => {
 
       const handleChange = (target: any, typeInput: number): void => {
-         let newStateArray = [...classesPlatforms];
+         let newStateArray = [...classesPlatforms!];
          switch(typeInput) {
             case 1:
                newStateArray[index].type = target.value;
@@ -50,16 +66,16 @@ const TypeAndPlatform = () => {
             default:
                throw new Error('Type of input not exist');
          }
-         setErrors({ ...errors, platform: false });
-         setClassesPlatforms(newStateArray);
+         setErrors!({ ...errors, platform: false });
+         setClassesPlatforms!(newStateArray);
       }
 
       const handleRemoveField = () => {
-         let newStateArray = [...classesPlatforms];
+         let newStateArray = [...classesPlatforms!];
          newStateArray.splice(index, 1);
          if(index !== -1) {
-            setClassesPlatformsCount((prevState: number) => prevState - 1);
-            setClassesPlatforms(newStateArray);
+            setClassesPlatformsCount!((prevState: number) => prevState - 1);
+            setClassesPlatforms!(newStateArray);
          }
       }
 
@@ -74,7 +90,7 @@ const TypeAndPlatform = () => {
          <div key = {index} className = {oneTypeContainer}>
             <div className = {selectContainer}>
                <select
-                  value = {classesPlatforms[index].type}
+                  value = {classesPlatforms![index].type}
                   onChange = {({ target }) => handleChange(target, 1)}
                >{generateTypeOptions}</select>
                <FontAwesomeIcon
@@ -84,7 +100,7 @@ const TypeAndPlatform = () => {
             </div>
             <div className = {selectContainer}>
                <select
-                  value = {classesPlatforms[index].place}
+                  value = {classesPlatforms![index].place}
                   onChange = {({ target }) => handleChange(target, 2)}
                >{generatePlatformsOptions}</select>
                <FontAwesomeIcon
@@ -96,7 +112,7 @@ const TypeAndPlatform = () => {
                type = 'url'
                pattern = 'https://.*'
                placeholder = 'Link do Platformy Zdalej Edukacji'
-               value = {classesPlatforms[index].link}
+               value = {classesPlatforms![index].link}
                onChange = {({ target }) => handleChange(target, 3)}
             />
             {index !== 0 && <button type = 'button' onClick = {handleRemoveField}>

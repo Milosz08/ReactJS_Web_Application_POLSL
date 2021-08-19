@@ -1,11 +1,20 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, Dispatch, SetStateAction, useState} from 'react';
 import GROUPS_STATIC from '../constants/allGroups';
 
 interface PropsProvider {
    children: React.ReactNode;
 }
 
-export const ScheduleContext = createContext<any>(null);
+export interface ScheduleType {
+   groupSelected: string;
+   setGroupSelected: Dispatch<SetStateAction<string>>;
+   engSelected: string;
+   setEngSelected: Dispatch<SetStateAction<string>>;
+   inputField: string;
+   setInputField: Dispatch<SetStateAction<string>>;
+}
+
+export const ScheduleContext = createContext<Partial<ScheduleType>>({ });
 
 /**
  * Store przechowujący kontekst stanów odnoszących się do zarządzania planem zajęć (wybór grupy zwykłej,
@@ -13,7 +22,7 @@ export const ScheduleContext = createContext<any>(null);
  *
  * @param children { React.ReactNode } - wszystkie węzły dziedziczące zawartość stora.
  */
-const ScheduleProvider: React.FC<PropsProvider> = ({ children }) => {
+const ScheduleProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
    const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
 

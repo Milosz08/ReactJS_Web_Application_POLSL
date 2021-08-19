@@ -1,3 +1,17 @@
+/**
+ * @file Slider.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useEffect, useRef, useState } from 'react';
 
 import SliderButtons from './SliderButtons';
@@ -7,26 +21,35 @@ const {
    bannerContainer, centerSection, mainTitle, bannerNavigate, colorGrade, sliderComp
 } = require('./Slider.module.scss');
 
-const IMAGES_COUNT = 3;
+/**
+ * Constant representing the number of photos in the "Public Folder" used by Slider.
+ */
+const IMAGES_COUNT: number = 3;
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    autoPlay: boolean;
    duration: number;
 }
 
 /**
- * Komponent generujący slider (wykorzystywany tylko na stronie głównej). W zależności od wartości przekazywanych
- * w propsach, możliwość wyłączenia autoodtwarzania, lub ustawiania własnego czasu między slajdami.
+ * @details A component generating Slider (used only on the home page). Depending on the values transmitted in props,
+ *          the ability to turn off autoops, or set your own time between slides.
  *
- * @param autoPlay { boolean } - czy slider ma sam przerzucać zdjęcia.
- * @param duration { number } - długość trwania jednego slajdu (w sekundach).
+ * @param autoPlay { boolean } - automatic scrolling.
+ * @param duration { number } - length of one slide (in seconds).
  */
-const Slider: React.FC<PropsProvider> = ({ autoPlay, duration }) => {
+const Slider: React.FC<PropsProvider> = ({ autoPlay, duration }): JSX.Element => {
 
    const [ axiosX, setAxiosX ] = useState<number>(100);
-   const autoPlayRef = useRef<any>(null);
+   const autoPlayRef:  React.MutableRefObject<any> = useRef<HTMLElement>(null);
 
-   useEffect(() => { autoPlayRef.current = nextSlide });
+   useEffect(() => {
+      autoPlayRef.current = nextSlide;
+   });
+
    useEffect(() => {
       const play = () => autoPlayRef.current();
       if(autoPlay) {
@@ -35,7 +58,7 @@ const Slider: React.FC<PropsProvider> = ({ autoPlay, duration }) => {
       }
    }, [autoPlay, duration]);
 
-   const nextSlide = () => {
+   const nextSlide = (): void => {
       if(axiosX === -100 * (IMAGES_COUNT - 2)) {
          setAxiosX(100);
       } else {
@@ -43,7 +66,7 @@ const Slider: React.FC<PropsProvider> = ({ autoPlay, duration }) => {
       }
    }
 
-   const prevSlide = () => {
+   const prevSlide = (): void => {
       if(axiosX === 100) {
          setAxiosX(-100 * (IMAGES_COUNT - 2));
       } else {
@@ -51,12 +74,9 @@ const Slider: React.FC<PropsProvider> = ({ autoPlay, duration }) => {
       }
    }
 
-   const imageStructure = Array.from({ length: IMAGES_COUNT }, (v, i) => i).map((count: number) => {
+   const imageStructure: JSX.Element[] = Array.from({ length: IMAGES_COUNT }, (v, i) => i).map((count: number): JSX.Element => {
       const imageSrc = `${process.env.PUBLIC_URL}/images/bannerImages/img${count + 1}.jpg`;
-      const imgStyles = {
-         transform: `translateX(${axiosX}%)`,
-         width: `${100 / IMAGES_COUNT}%`,
-      };
+      const imgStyles: { [value: string]: string } = { transform: `translateX(${axiosX}%)`, width: `${100 / IMAGES_COUNT}%` };
       return (
          <img
             src = {imageSrc}

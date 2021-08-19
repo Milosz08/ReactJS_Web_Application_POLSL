@@ -1,33 +1,46 @@
+/**
+ * @file UserMessageDeleteModal.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext } from 'react';
 import classnames from 'classnames';
 import axiosInstance from '../../../../../../helpers/request';
+import { insertUserChoice } from '../../Panels/UserMessagePanel';
 
-import { ModalsStateContext } from '../../../../../../contextStore/ModalsStateProvider';
-import { MainStoreContext } from '../../../../../../contextStore/MainStoreContext';
+import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
 
-import { MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
-import UniversalHeader from "../../../../../layouts/UniversalHeader/UniversalHeader";
-
-import { insertUserChoice } from "../../Panels/UserMessagePanel";
+import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
 
 const {
    modalContainer, modalWrapper, modalOpen, modalWarningInfo, modalWarningButtons, messageTypeBox, dangerColorWrapper
 } = require('./WarningDeleteModal.module.scss');
 
 /**
- * Komponent generujący modal z wiadomością o usuwaniu wiadomości wysłanej od użytkownika. Jeśli zostanie zatwierdzony,
- * wiadomość przy pomocy API usuwana jest z bazy danych.
+ * @details Modal generating component with a message to delete a message sent from the user. If approved, the
+ *          message is removed from the database using the API.
  */
-const UserMessageDeleteModal = () => {
+const UserMessageDeleteModal = (): JSX.Element => {
 
-   const { messageModal, setMessageModal } = useContext<any>(ModalsStateContext);
-   const { dataFetchFromServer, setDataFetchFromServer } = useContext<any>(MainStoreContext);
+   const { messageModal, setMessageModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
+   const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const { footerForms } = dataFetchFromServer;
-   const ifModalOpen = messageModal.ifOpen && messageModal.type === MODAL_TYPES.REMOVE ? modalOpen : '';
+   const ifModalOpen = messageModal!.ifOpen && messageModal!.type === MODAL_TYPES.REMOVE ? modalOpen : '';
 
-   const generateInfos = () => {
-      const userRecord = footerForms.find((message: any) => message._id === messageModal.id);
+   const generateInfos = (): { [value: string]: string } => {
+      const userRecord = footerForms.find((message: any) => message._id === messageModal!.id);
       if(userRecord !== undefined) {
          return ({
             user: userRecord.userIdentity,
@@ -38,12 +51,12 @@ const UserMessageDeleteModal = () => {
       return { user: '', type: '', message: '' };
    }
 
-   const handleRemoveMessage = async () => {
-      await axiosInstance.delete(`footer-form/${messageModal.id}`);
+   const handleRemoveMessage = async (): Promise<any> => {
+      await axiosInstance.delete(`footer-form/${messageModal!.id}`);
       const copy = [...footerForms];
-      const messagesAfterRemove = copy.filter(object => object._id !== messageModal.id);
+      const messagesAfterRemove = copy.filter(object => object._id !== messageModal!.id);
       setDataFetchFromServer({ ...dataFetchFromServer, footerForms: messagesAfterRemove });
-      setMessageModal({ ...messageModal, ifOpen: false });
+      setMessageModal!({ ...messageModal!, ifOpen: false });
    }
 
    return (
@@ -63,7 +76,7 @@ const UserMessageDeleteModal = () => {
             <div className = {modalWarningButtons}>
                <button onClick = {handleRemoveMessage}>Tak, usuń wiadomość</button>
                <button
-                  onClick = {() => setMessageModal({ ...messageModal, ifOpen: false })}
+                  onClick = {() => setMessageModal!({ ...messageModal!, ifOpen: false })}
                >Nie, zamknij to okno</button>
             </div>
          </div>

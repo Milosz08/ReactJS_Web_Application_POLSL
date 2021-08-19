@@ -1,70 +1,87 @@
+/**
+ * @file ScheduleForm.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactCryptGsm: "^1.0.4"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext, useEffect } from 'react';
 
-import { ScheduleContext } from '../../../../contextStore/ScheduleProvider';
-import { CookiesObjectsContext } from '../../../../contextStore/CookiesObjectsProvider';
-import { GlobalModalsStateContext } from '../../../../contextStore/GlobalModalsStateProvider';
+import { ScheduleContext, ScheduleType } from '../../../../contextStore/ScheduleProvider';
+import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../contextStore/CookiesObjectsProvider';
+import { GlobalModalsStateContext, GlobalModalsStateTypes } from '../../../../contextStore/GlobalModalsStateProvider';
 
+import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
 import ScheduleNormalGroupInputs from './ScheduleNormalGroupInputs';
 import ScheduleEngInputs from './ScheduleEngInputs';
 
 import COOKIES_OBJECT from '../../../../constants/allCookies';
 import GROUPS_STATIC from '../../../../constants/allGroups';
 import cookieExpires from '../../../../constants/cookieExpires';
-import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
 
 const { encrypt, decrypt } = require('react-crypt-gsm');
 
 const { sheduleBlocks } = require('./../../../layouts/Navigation/Navigation.module.scss');
 const {
-   sheduleForm, backgroundImage, formContentWrapper, sheduleSubmit, saveSheduleChoices, saveChoice, resetChoice,
-   gotoShedule
+   sheduleForm, backgroundImage, formContentWrapper, sheduleSubmit, saveSheduleChoices, saveChoice, resetChoice, gotoShedule
 } = require('./ScheduleForm.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    executeScroll: () => void;
 }
 
 /**
- * Komponent generujący pole wyboru przez użytkownika (wybór grupy normalnej, wybór grupy z języka angielskiego) oraz
- * umożliwia zapisanie tego wyboru w dwóch plikach Cookie. Komponent renderuje dodatkowo dwa komponenty, odpowiednio
- * wybór grupy normalnej i wybór grupy z angielskiego.
+ * @details A component that generates a selection field by the user (selection of a normal group, selection of a group from
+ *          the English language) and enables saving this selection in two cookie files. The component additionally renders
+ *          two components, the normal group selection and the English group selection, respectively.
  *
- * @param executeScroll { () => void } - funkcja przekazywana w propsach, przy każdym zapisaniu stanu w pliku Cookie
- *                                       przenosi na szczyt strony (pozycja 0,0) - reset animacji.
+ * @param executeScroll { () => void } - function passed in props, each time saving the state in the cookie file, it
+ *                                       moves to the top of the page (position 0,0) - animation reset.
  */
-const ScheduleForm: React.FC<PropsProvider> = ({ executeScroll }) => {
+const ScheduleForm: React.FC<PropsProvider> = ({ executeScroll }): JSX.Element => {
 
    const { groupSelection, engGroupSelection } = COOKIES_OBJECT;
    const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
 
-   const { groupSelected, setGroupSelected, engSelected, setEngSelected } = useContext<any>(ScheduleContext);
-   const { onSaveOpenModal, setOnSaveOpenModal } = useContext<any>(GlobalModalsStateContext);
-   const { cookie, setCookie, removeCookie } = useContext<any>(CookiesObjectsContext);
+   const { groupSelected, setGroupSelected, engSelected, setEngSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
+   const { setOnSaveOpenModal } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
+   const { cookie, setCookie, removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
 
    const createRememberCookie = (dataEncrypt: string, cookieName: string): void => {
       const encryptData = encrypt(dataEncrypt);
       const expCookie = cookieExpires(365);
-      setCookie(cookieName, encryptData, { path: '/', expires: expCookie, sameSite: 'strict' });
+      setCookie!(cookieName, encryptData, { path: '/', expires: expCookie, sameSite: 'strict' });
    }
 
    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
       window.scrollTo(0, 0);
       e.preventDefault();
-      setOnSaveOpenModal({ ifOpen: true, buttonDisable: false });
-      createRememberCookie(groupSelected, groupSelection);
-      createRememberCookie(engSelected, engGroupSelection);
+      setOnSaveOpenModal!(true);
+      createRememberCookie(groupSelected!, groupSelection);
+      createRememberCookie(engSelected!, engGroupSelection);
    }
 
    const cookieDecryptData = ({ content, tag }: any) => decrypt({ content, tag: new Uint8Array(tag.data) });
 
    useEffect(() => {
       const setDecryptedCookieValue = (): void => {
-         if(cookie.__groupSelection !== undefined || cookie.__engGroupSelection !== undefined) {
-            const decryptingCookieGroups = cookieDecryptData(cookie.__groupSelection);
-            setGroupSelected(decryptingCookieGroups);
+         if(cookie!.__groupSelection !== undefined || cookie!.__engGroupSelection !== undefined) {
+            const decryptingCookieGroups = cookieDecryptData(cookie!.__groupSelection);
+            setGroupSelected!(decryptingCookieGroups);
 
-            const decryptingCookieEng = cookieDecryptData(cookie.__engGroupSelection);
-            setEngSelected(decryptingCookieEng);
+            const decryptingCookieEng = cookieDecryptData(cookie!.__engGroupSelection);
+            setEngSelected!(decryptingCookieEng);
          }
       }
       setDecryptedCookieValue();
@@ -72,11 +89,11 @@ const ScheduleForm: React.FC<PropsProvider> = ({ executeScroll }) => {
 
    const handleResetValues = () => {
       window.scrollTo(0, 0);
-      setOnSaveOpenModal(true);
-      setGroupSelected(NORMAL_GROUPS[0].text);
-      setEngSelected(ENG_GROUPS[0]);
-      removeCookie(groupSelection);
-      removeCookie(engGroupSelection);
+      setOnSaveOpenModal!(true);
+      setGroupSelected!(NORMAL_GROUPS[0].text);
+      setEngSelected!(ENG_GROUPS[0]);
+      removeCookie!(groupSelection);
+      removeCookie!(engGroupSelection);
    }
 
    return (
@@ -96,10 +113,7 @@ const ScheduleForm: React.FC<PropsProvider> = ({ executeScroll }) => {
                <ScheduleNormalGroupInputs/>
                <ScheduleEngInputs/>
                <div className = {sheduleSubmit}>
-                  <button
-                     className = {saveChoice}
-                     disabled = {onSaveOpenModal.buttonDisable}
-                  >
+                  <button className = {saveChoice}>
                      Zapisz mój wybór
                   </button>
                   <button

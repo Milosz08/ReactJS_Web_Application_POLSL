@@ -1,17 +1,33 @@
+/**
+ * @file CookiesTurnOff.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React from 'react';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import STATIC_STRUCTURE from "../../../../constants/cookiesPolicyContent";
+import STATIC_STRUCTURE from '../../../../constants/cookiesPolicyContent';
 
 const { cookieSectionsContent } = require('./../../../layouts/Navigation/Navigation.module.scss');
 const { externalLinkIcon } = require('./../../../layouts/Footer/Footer.module.scss');
 const { cookiesSections, sectionSign, cookieContent } = require('./../CookiesPolicyPage.module.scss');
 
 /**
- * Generacja sekcji informacji o sposobach wyłączenia plików Cookies w przeglądarce
+ * @details The component generates information on how to disable cookies on the User's device in the
+ *          subpage containing the privacy policy document.
  */
-const CookiesTurnOff = () => {
+const CookiesTurnOff = (): JSX.Element => {
 
    const { LIST_STRUCTURE, NON_LIST_STRUCTURE } = STATIC_STRUCTURE;
 

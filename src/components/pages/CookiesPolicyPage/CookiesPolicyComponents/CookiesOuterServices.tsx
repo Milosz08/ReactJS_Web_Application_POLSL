@@ -1,14 +1,31 @@
+/**
+ * @file CookiesOuterServices.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React from 'react';
 import classnames from 'classnames';
 
 import STATIC_STRUCTURE from "../../../../constants/cookiesPolicyContent";
 
 const { cookieSectionsContent } = require('./../../../layouts/Navigation/Navigation.module.scss');
-const {
-   cookiesSections, sectionSign, cookieContent
-} = require('./../CookiesPolicyPage.module.scss');
+const { cookiesSections, sectionSign, cookieContent } = require('./../CookiesPolicyPage.module.scss');
 
-const CookiesOuterServices = () => {
+/**
+ * @details Component generates information about third-party cookies on the subpage
+ *          containing the privacy policy document.
+ */
+const CookiesOuterServices = (): JSX.Element => {
 
    const { LIST_STRUCTURE } = STATIC_STRUCTURE;
 

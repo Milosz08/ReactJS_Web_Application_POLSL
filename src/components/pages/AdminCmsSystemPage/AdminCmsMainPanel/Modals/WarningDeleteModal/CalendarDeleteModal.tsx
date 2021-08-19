@@ -1,20 +1,29 @@
+/**
+ * @file CalendarDeleteModal.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                uuid: "^8.3.1"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^4.7.11"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import classnames from 'classnames';
 import axiosInstance from '../../../../../../helpers/request';
 
-import { MainStoreContext } from "../../../../../../contextStore/MainStoreContext";
-import { ModalsStateContext } from "../../../../../../contextStore/ModalsStateProvider";
+import { MainStoreContext, MainStoreProviderTypes } from "../../../../../../contextStore/MainStoreContext";
+import { ModalsStateContext, MODAL_TYPES, ModalStateType } from "../../../../../../contextStore/ModalsStateProvider";
 
-import { MODAL_TYPES } from "../../../../../../contextStore/ModalsStateProvider";
-import classnames from "classnames";
-import UniversalHeader from "../../../../../layouts/UniversalHeader/UniversalHeader";
-import updateLogsDateAsync from "../../../../../../constants/updateLogsDateAsync";
-
-enum IMPORTANT_VALUES {
-   LOW = 'low',
-   MEDIUM = 'medium',
-   HIGH = 'high'
-}
+import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
+import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
 
 const {
    modalContainer, modalWrapper, modalWarningInfo, modalWarningButtons, modalOpen, dangerColorWrapper,
@@ -22,36 +31,46 @@ const {
 } = require('./WarningDeleteModal.module.scss');
 
 /**
- *
+ * Enumerated type that stores the importance of the calendar entries.
  */
-const CalendarDeleteModal = () => {
+export enum IMPORTANT_VALUES {
+   LOW = 'low',
+   MEDIUM = 'medium',
+   HIGH = 'high'
+}
 
-   const { calendarModal, setCalendarModal } = useContext<any>(ModalsStateContext);
-   const { dataFetchFromServer, setDataFetchFromServer } = useContext<any>(MainStoreContext);
+/**
+ * @details A modal generating component that allows the deletion of one calendar entry. The component connects to the API
+ *          and with its help removes the content from the database and local state.
+ */
+const CalendarDeleteModal = (): JSX.Element => {
 
-   const ifModalOpen = calendarModal.ifOpen && calendarModal.type === MODAL_TYPES.REMOVE ? modalOpen : '';
-   const { calendarRecords } = dataFetchFromServer
+   const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+   const { calendarModal, setCalendarModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
 
-   const handleRemoveSubject = async () => {
-      await axiosInstance.delete(`calendar-record/${calendarModal.id}`);
+   const ifModalOpen = calendarModal!.ifOpen && calendarModal!.type === MODAL_TYPES.REMOVE ? modalOpen : '';
+   const { calendarRecords } = dataFetchFromServer;
+
+   const handleRemoveSubject = async (): Promise<any> => {
+      await axiosInstance.delete(`calendar-record/${calendarModal!.id}`);
       const copy = [...calendarRecords];
-      const subjectsAfterRemove = copy.filter(object => object._id !== calendarModal.id);
+      const subjectsAfterRemove = copy.filter(object => object._id !== calendarModal!.id);
       setDataFetchFromServer({ ...dataFetchFromServer, calendarRecords: subjectsAfterRemove });
-      setCalendarModal({ ...calendarModal, ifOpen: false });
+      setCalendarModal!({ ...calendarModal!, ifOpen: false });
       await updateLogsDateAsync('calendar', process.env.REACT_APP_CALENDAR_ID);
    }
 
    const importantClassReturn = (value: string): string => {
       switch(value) {
-         case IMPORTANT_VALUES.LOW: return low;
+         case IMPORTANT_VALUES.LOW:    return low;
          case IMPORTANT_VALUES.MEDIUM: return medium;
-         case IMPORTANT_VALUES.HIGH: return high;
-         default: throw new Error('Unexpected IMPORTANT_VALUE type');
+         case IMPORTANT_VALUES.HIGH:   return high;
+         default:                      throw new Error('Unexpected IMPORTANT_VALUE type');
       }
    }
 
-   const generateInfos = () => {
-      const calendarRecord = calendarRecords.find((object: any) => object._id === calendarModal.id);
+   const generateInfos = (): { [value: string]: string } => {
+      const calendarRecord = calendarRecords.find((object: any) => object._id === calendarModal!.id);
       if(calendarRecord !== undefined) {
          const day = calendarRecord.day < 10 ? `0${calendarRecord.day}` : calendarRecord.day;
          const month = calendarRecord.month < 10 ? `0${calendarRecord.month}` : calendarRecord.month;
@@ -84,7 +103,7 @@ const CalendarDeleteModal = () => {
             <div className = {modalWarningButtons}>
                <button onClick = {handleRemoveSubject}>Tak, usuń aktywność</button>
                <button
-                  onClick = {() => setCalendarModal({ ...calendarModal, ifOpen: false })}
+                  onClick = {() => setCalendarModal!({ ...calendarModal!, ifOpen: false })}
                >Nie, zamknij to okno</button>
             </div>
          </div>

@@ -1,31 +1,56 @@
-import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+/**
+ * @file ExpandedPanel.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactDelayLink: "^1.1.6"
+ *                ReactFontAwesome: "^2.3.1"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
+import React, {Fragment, useContext, useState} from 'react';
+import DelayLink from 'react-delay-link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
+
+import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreContext';
+import { ScheduleSubjectsProvider } from './ScheduleSections';
+import { SubjectsProvider } from '../../layouts/Subjects/Subjects';
 
 const {
    expandInfo, infoIcon, rotateIcon, expandContainer, expandedInfo, expandActive, expandedLinks
 } = require('./ScheduleSections.module.scss');
 
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
-   tile: any;
-   subjectObj: any;
+   tile: ScheduleSubjectsProvider;
+   subjectObj: SubjectsProvider;
 }
 
 /**
- * Komponent generujący dla każdego przedmiotu (kafelka w gridzie) planu zajęć wysuwane menu z odnośnikami do
- * warunków zaliczenia przedmiotów oraz linków do Platformy Zdalnej Edukacji.
+ * @details Component generating for each object (tiled in grid) of the program of classes sliding menu with references to
+ *          the conditions for passing objects and links to remote education platform.
  *
- * @param tile { object } - przekazywany jeden przedmiot (kafelek).
- * @param subjectObj { object } - przekazywany object z informacjami na temat przedmiotu znajdującego się na kafelku.
+ * @param tile { object } - transmitted one object (tile).
+ * @param subjectObj { object } - transmitted object with information on the subject on the tiled.
  */
 const ExpandedPanel: React.FC<PropsProvider> = ({ tile, subjectObj }) => {
 
+   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
    const [ ifIsExpanded, setifIsExpanded ] = useState<boolean>(false);
 
-   const titleContent = ifIsExpanded ? 'Zwiń panel' : 'Kliknij tutaj po więcej informacji.';
-   const iconRotate = ifIsExpanded ? classnames(infoIcon, rotateIcon) : infoIcon;
-   const activeContainer = ifIsExpanded ? expandContainer : classnames(expandContainer, expandActive);
+   const titleContent: string = ifIsExpanded ? 'Zwiń panel' : 'Kliknij tutaj po więcej informacji.';
+   const iconRotate: string = ifIsExpanded ? classnames(infoIcon, rotateIcon) : infoIcon;
+   const activeContainer: string = ifIsExpanded ? expandContainer : classnames(expandContainer, expandActive);
 
    return (
       <Fragment>
@@ -51,12 +76,16 @@ const ExpandedPanel: React.FC<PropsProvider> = ({ tile, subjectObj }) => {
             >
                Przejdź do PZE
             </a>
-            <Link
+            <DelayLink
                to = '/warunki-zaliczenia-przedmiotów'
-               className = {expandedLinks}
+               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+               replace = {false}
+               clickAction = {timeoutRoutePath}
             >
-               Warunki zaliczenia przedmiotu
-            </Link>
+               <a href = {'/warunki-zaliczenia-przedmiotów'}>
+                  Warunki zaliczenia przedmiotu
+               </a>
+            </DelayLink>
          </div>
       </Fragment>
    );

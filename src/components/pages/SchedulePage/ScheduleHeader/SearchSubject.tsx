@@ -1,3 +1,18 @@
+/**
+ * @file SearchSubject.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -8,7 +23,7 @@ const { searchSubjectWrapper, removeInputField } = require('./../../../layouts/S
 /**
  * Komponent generujący pole wyszukiwania przedmiotów na planie. Wartości inputów pobierane z kontekstu.
  */
-const SearchSubject = () => {
+const SearchSubject = (): JSX.Element => {
 
    const { inputField, setInputField } = useContext<any>(ScheduleContext);
 

@@ -1,9 +1,26 @@
+/**
+ * @file ScheduleSections.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
 import React, { useContext } from 'react';
-import { MainStoreContext } from "../../../../contextStore/MainStoreContext";
+import { MainStoreContext, MainStoreProviderTypes } from "../../../../contextStore/MainStoreContext";
 
 const { covidBlocks, covidInfo, covidInfoBlocks, statusInfo } = require('./CovidInfo.module.scss');
 
-interface CovidDataProvider {
+/**
+ * Interface defining the type of Covid Risk Sections values.
+ */
+export interface CovidDataProvider {
    _id: string;
    description: string;
    actualRiskNumber: number;
@@ -11,12 +28,12 @@ interface CovidDataProvider {
 }
 
 /**
- * Komponent strony głównej informujący o aktualnym poziomie zagrożenia epidemiologicznego na terenie
- * Politechniki Śląskiej. Dane są pobierane z głównego stora.
+ * @details Component of the home page informing about the current level of epidemiological threat in the Silesian
+ *          University of Technology. Data is downloaded from the main blind.
  */
 const CovidInfo = () => {
 
-   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
+   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
    const { covidData } = dataFetchFromServer;
 
    const generateCovidInfos = covidData.map((info: CovidDataProvider) => {

@@ -1,48 +1,66 @@
-import React, {useContext, useState} from 'react';
+/**
+ * @file SchedulePanel.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/19/2021
+ */
+
+import React, { useContext, useState } from 'react';
 import classnames from 'classnames';
-import OneDaySchedule from "./AdditionalComponents/OneDaySchedule";
-import SearchBox from "./AdditionalComponents/SearchBox";
-import {MainStoreContext} from "../../../../../contextStore/MainStoreContext";
+
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreContext';
+import { SubjectsProvider } from '../../../../layouts/Subjects/Subjects';
+
+import SearchBox from './AdditionalComponents/SearchBox';
+import OneDaySchedule from './AdditionalComponents/OneDaySchedule';
+import { STATIC_DAYS } from '../../../SchedulePage/SchedulePage';
 
 const { panelContainer, panelActive } = require('./Panels.module.scss');
 const { scheduleContainer } = require('./SchedulePanel.module.scss');
 
-const DAYS_STATIC = [
-   'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek'
-];
-
+/**
+ * Interface defining the type of props values.
+ */
 interface PropsProvider {
    activeNavElm: number;
 }
 
 /**
- * Komponent generujący panel zarządzania planem zajęć w systemie CMS.
+ * @details Component that generates the panel for managing the schedule in the CMS system.
  *
- * @param activeNavElm { number } - liczba mówiąca o aktywności danego elementu.
+ * @param activeNavElm { number } - a number indicating the activity of a given element.
  */
-const SchedulePanel: React.FC<PropsProvider> = ({ activeNavElm }) => {
+const SchedulePanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element => {
 
    const [ inputField, setInputField ] = useState<string>('');
-   const { dataFetchFromServer } = useContext<any>(MainStoreContext);
+   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const classToggle = activeNavElm === 3 ? panelActive : '';
    const { scheduleSubjects } = dataFetchFromServer;
 
    // eslint-disable-next-line array-callback-return
-   const filteredAllSubjects = scheduleSubjects.filter((subject: any) => {
+   const filteredAllSubjects = scheduleSubjects.filter((subject: any): SubjectsProvider | undefined => {
+      const title = subject.title.toLocaleLowerCase();
+      const type = subject.title.toLocaleLowerCase();
+      const start = subject.title.toLocaleLowerCase();
+      const end = subject.title.toLocaleLowerCase();
+      const input = inputField.toLocaleLowerCase();
       if(inputField === '') {
          return subject;
-      } else if(
-         subject.title.toLocaleLowerCase().includes(inputField.toLocaleLowerCase()) ||
-         subject.type.toLocaleLowerCase().includes(inputField.toLocaleLowerCase()) ||
-         subject.start.toLocaleLowerCase().includes(inputField.toLocaleLowerCase()) ||
-         subject.end.toLocaleLowerCase().includes(inputField.toLocaleLowerCase())
-      ) {
+      } else if(title.includes(input) || type.includes(input) || start.includes(input) || end.includes(input)) {
          return subject;
       }
    });
 
-   const generateFullDaysStructure = DAYS_STATIC.map((day: string) => (
+   const generateFullDaysStructure = STATIC_DAYS.map((day: string) => (
       <OneDaySchedule
          key = {day}
          dayStr = {day}
