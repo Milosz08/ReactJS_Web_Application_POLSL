@@ -25,7 +25,7 @@ import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../cont
 import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 
 import STATIC_OPTIONS from '../../../../../../constants/inputOptions';
-import GROUPS_STATIC from '../../../../../../constants/allGroups';
+import GROUPS_STATIC, { NormalGroupsTypes } from '../../../../../../constants/allGroups';
 import TimeInputsModal from './TimeInputsModal';
 
 const {
@@ -36,7 +36,7 @@ const {
 /**
  * @details Component that generates input fields in the data entry form to add/edit an item.
  */
-const SelectSubjectList = () => {
+const SelectSubjectList = (): JSX.Element => {
 
    const { scheduleForm, setScheduleForm, allSubjects } = useContext<Partial<FormScheduleModalTypes>>(FormScheduleModalContext);
    const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
@@ -73,7 +73,7 @@ const SelectSubjectList = () => {
 
    const generateGroupsOptions = () => {
       if(scheduleForm!.title.toLocaleLowerCase() !== 'język angielski') {
-         const generateOptions = NORMAL_GROUPS.map((group: {field: string, text: string}) => (
+         const generateOptions = NORMAL_GROUPS.map((group: NormalGroupsTypes ) => (
             <option
                value = {group.field}
                key = {group.field}
