@@ -44,7 +44,7 @@ interface PropsProvider {
  * @param subjectID { number } - schedule index.
  * @param filteredArray { SubjectsProvider[] } - filtered array of schedules (based on input value).
  */
-const SubjectsLayout: React.FC<PropsProvider> = ({ subjectID, filteredArray }) => {
+const SubjectsLayout: React.FC<PropsProvider> = ({ subjectID, filteredArray }): JSX.Element => {
 
    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 

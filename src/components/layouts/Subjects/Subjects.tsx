@@ -46,7 +46,7 @@ export interface SubjectsProvider {
  * @details Component that generates an items section on the main page. It includes: a search engine, a list
  *          of items and a window with detailed information about the item.
  */
-const Subjects = () => {
+const Subjects = (): JSX.Element => {
 
    const [ state, setState ] = useState<number>(0);
    const [ input, setInput ] = useState<string>('');

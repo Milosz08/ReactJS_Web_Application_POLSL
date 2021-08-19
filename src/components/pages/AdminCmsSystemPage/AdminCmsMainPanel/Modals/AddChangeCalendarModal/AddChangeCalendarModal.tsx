@@ -49,7 +49,7 @@ const MAX_ENTRIES_ADD = 4;
  *          The component has a validation of the data entered by the user and after clicking the confirmation
  *          button, it sends the data to the API.
  */
-const AddChangeCalendarModal = () => {
+const AddChangeCalendarModal = (): JSX.Element => {
 
    const { calendarModal, setCalendarModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
    const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
@@ -75,7 +75,7 @@ const AddChangeCalendarModal = () => {
       setErrors!({ date: false, time: false, message: false });
    }
 
-   const editExistValue = async (newObject: any, copy: Array<any>) => {
+   const editExistValue = async (newObject: any, copy: any[]) => {
       await axiosInstance.put(`calendar-record/${calendarModal!.id}`, newObject);
       const index = copy.findIndex((x: any) => x._id === calendarModal!.id);
       if(index >= 0) {

@@ -41,7 +41,7 @@ interface PropsProvider {
  * @param state { number } - index of the currently displayed subject
  * @param setState { Dispatch<SetStateAction<number>> } - function that allows you to change the subject
  */
-const SubjectsTiles: React.FC<PropsProvider> = ({ filteredArray, state, setState }) => {
+const SubjectsTiles: React.FC<PropsProvider> = ({ filteredArray, state, setState }): JSX.Element => {
 
    const subjectsButtons = filteredArray.map((subject: SubjectsProvider, index: number) => {
       const subjectsButtonActive = index === state ? activeBtn : '';

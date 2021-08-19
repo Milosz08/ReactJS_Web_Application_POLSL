@@ -33,7 +33,7 @@ const {
  * @details The component responsible for the implementation of the footer (the footer is universal and appears on
  *          every subpage, it does not change its content). Includes links and a form.
  */
-const Footer = () => {
+const Footer = (): JSX.Element => {
 
    const { TOP_NAVBAR_ELMS, SITES } = CONSTANT_DATA;
    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);

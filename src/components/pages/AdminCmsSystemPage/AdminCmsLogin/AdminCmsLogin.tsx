@@ -68,7 +68,7 @@ interface HashProvider {
  * @param setAuth { (value: boolean) => boolean } - function deciding if the user / administrator is authenticated.
  * @param handleCookie { function() } - props dependent function: deleting or adding a cookie.
  */
-const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
+const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }): JSX.Element => {
 
    const [ credentials, setCredentials ] = useState<{ [value: string]: string }>({ login: '', password: '', token: '' });
    const [ errors, setErrors ] = useState<{ [value: string]: boolean }>({ login: false, password: false, token: false });

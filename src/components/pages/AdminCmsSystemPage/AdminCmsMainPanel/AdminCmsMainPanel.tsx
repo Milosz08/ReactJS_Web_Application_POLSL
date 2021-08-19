@@ -4,11 +4,11 @@
  * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
  *
  * @projectName "polsl-web-application-frontend"
- * @version project: "^0.1.0"
- *          ReactJS: "^17.0.2"
- *          ReactCSSmodules: "^4.7.11"
+ * @version "^0.1.0"
  *
- * @date final version: 08/18/2021
+ * @dependencies  ReactJS: "^17.0.2"
+ *
+ * @date final version: 08/19/2021
  */
 
 import React, { Fragment } from 'react';
@@ -23,11 +23,11 @@ import AddChangeModalsStructure from "./Modals/AddChangeModalsStructure";
 import PanelsStructure from "./PanelsStructure";
 
 /**
- * @details The component is responsible for generating the entire structure of the content management system
- *          administrator panel (CMS). It generates modal windows for adding / editing / deleting records and entire
+ * @details Component is responsible for generating the entire structure of the content management system
+ *          administrator panel (CMS). It generates modal windows for adding/editing/deleting records and entire
  *          panels with navigation. The component is rendered by a protected React Router.
  */
-const AdminCmsMainPanel = () => {
+const AdminCmsMainPanel = (): JSX.Element => {
    return (
       <Fragment>
          <CookiesNotification/>

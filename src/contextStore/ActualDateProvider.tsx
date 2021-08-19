@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import DAYS_AND_MONTHS from '../constants/daysAndMonths';
 
-export const ActualDateContext = createContext<any>(null);
 
 interface PropsProvider {
    children: React.ReactNode;
@@ -15,11 +14,17 @@ interface StateProvider {
    time: number;
 }
 
+export interface ActualDateTypes {
+   date: StateProvider;
+}
+
+export const ActualDateContext = createContext<Partial<ActualDateTypes>>({ });
+
 /**
  *
  * @param childern
  */
-const ActualDateProvider: React.FC<PropsProvider> = ({ children }) => {
+const ActualDateProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
    const [ date, setDate ] = useState<StateProvider>({ dayStr: '', day: 0, monthStr: '', year: 0, time: 0 });
    const { DAYS, MONTHS } = DAYS_AND_MONTHS;
@@ -46,8 +51,8 @@ const ActualDateProvider: React.FC<PropsProvider> = ({ children }) => {
          setDate({ dayStr, day, monthStr, year, time });
       }
 
-      counting(); //pierwsze wywołanie
-      const interval = setInterval(counting, 1000 * 60 * 10); //refresh co 10 minut
+      counting();
+      const interval = setInterval(counting, 1000 * 60 * 10);
       return () => clearInterval(interval);
    }, [DAYS, MONTHS]);
 

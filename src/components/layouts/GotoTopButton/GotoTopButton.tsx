@@ -23,7 +23,7 @@ const { gotoTopWrapper, showGotoButton } = require('./GotoTopButton.module.scss'
  *          clicking. The button is visible only when the scroll position (from the top of the page) exceeds the
  *          value of 200 units (px).
  */
-const GotoTopButton = () => {
+const GotoTopButton = (): JSX.Element => {
 
    const [ offset, setOffset ] = useState<number>(window.pageYOffset);
    const [ showGoto, setShowGoto ] = useState<boolean>(false);

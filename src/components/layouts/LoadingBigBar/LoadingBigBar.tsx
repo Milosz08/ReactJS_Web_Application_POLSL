@@ -23,7 +23,7 @@ const { bigBarContainer, bigBarLoading, visible } = require('./LoadingBigBar.mod
  * @details Component that generates a load bar with each routing on the site. The bar fills up synchronously at
  *          the time interval declared in the constant ROUTER_INTERVAL_TIME.
  */
-const LoadingBigBar = () => {
+const LoadingBigBar = (): JSX.Element => {
 
    const { routePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
    const [ widthState, setWidthState ] = useState<number>(0);

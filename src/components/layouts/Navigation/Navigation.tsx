@@ -38,7 +38,7 @@ interface PropsProvider {
  * @param ifHeader { boolean } - decides whether the navigation is to be generated for the header or for the content
  *                               on the main page (under the counter).
  */
-const Navigation: React.FC<PropsProvider > = ({ ifHeader }) => {
+const Navigation: React.FC<PropsProvider > = ({ ifHeader }): JSX.Element => {
 
    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 

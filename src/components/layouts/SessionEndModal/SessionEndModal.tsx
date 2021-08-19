@@ -46,7 +46,7 @@ const DEFAULT_TITLE = ROUTING_PATH_NAMES.START_PAGE;
  *          the page). It allows you to log out manually or stay logged in. If the user does not show the action, after some
  *          time in the variable "LOGOUT_REMAIN_TIME", he will be automatically logged out of the system.
  */
-const SessionEndModal = () => {
+const SessionEndModal = (): JSX.Element => {
 
    const { adminSessionInfo, setAdminSessionInfo } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
    const { setAdminAuth } = useContext<Partial<LoginSessionProviderTypes>>(LoginSessionContext);

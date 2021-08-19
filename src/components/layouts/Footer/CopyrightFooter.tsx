@@ -28,7 +28,7 @@ const {
  * @details Component that generates the final footer (copyright, link to the Cookies policy and icons from the
  *          FontAwesome library used).
  */
-const CopytightFooter = () => {
+const CopytightFooter = (): JSX.Element => {
 
    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 

@@ -45,7 +45,7 @@ interface PropsProvider {
  * @param ifHeaderHasRedBar { boolean } - parameter defining whether the header should be shown with a red bar
  *                                        informing about the site (true -> active bar).
  */
-const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }) => {
+const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }): JSX.Element => {
 
    const { TOP_NAVBAR_ELMS } = CONSTANT_DATA;
    const topHeaderHeightRef = useRef<HTMLElement | null>(null);

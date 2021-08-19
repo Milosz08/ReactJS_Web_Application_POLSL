@@ -41,7 +41,7 @@ interface PropsProvider {
  * @param activeHamburger { boolean } - parameter that tells if the hamburger menu is active.
  * @param setActiveHamburger { Dispatch<SetStateAction<boolean>> } - change visibility of the hamburger (show / hide).
  */
-const HamburgerMenu: React.FC<PropsProvider> = ({ activeHamburger, setActiveHamburger }) => {
+const HamburgerMenu: React.FC<PropsProvider> = ({ activeHamburger, setActiveHamburger }): JSX.Element => {
 
    const changeHamburgerButton = activeHamburger ? classnames(hamburgerBars, activeBars) : hamburgerBars;
    const changeMenuSlide = activeHamburger ? classnames(menuWrapper, activeMenu) : menuWrapper;

@@ -1,5 +1,5 @@
 /**
- * @file TimeInputsModal.tsx
+ * @file AddChangeSubjectModal.tsx
  * @author Miłosz Gilga (gilgamilosz451@gmail.com)
  * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
  *
@@ -10,22 +10,23 @@
  *                ReactFontAwesome: "^0.1.15"
  *                ReactCSSmodules: "^4.7.11"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/19/2021
  */
 
 import React, { useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axiosInstance from '../../../../../../helpers/request';
+import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
 
 import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
-import { FormDataAndValidateContext } from '../../../../../../contextStore/FormDataAndValidateProvider';
+import { FormDataAndValidateContext, FormDataAndValidateType } from '../../../../../../contextStore/FormDataAndValidateProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreContext';
 
+import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
 import CheckboxSemesters from './CheckboxSemesters';
 import RadioStatusEnd from './RadioStatusEnd';
 import DepartmentsInject from './DepartmentsInject';
 import TypeAndPlatform from './TypeAndPlatform';
-import UniversalHeader from "../../../../../layouts/UniversalHeader/UniversalHeader";
 
 const {
    modalContainer, modalWrapper, modalOpen, modalAddWrapper
@@ -41,7 +42,7 @@ const {
  *          the main store that stores the data downloaded from the API. After sending the form, the component connects to the
  *          API and, based on appropriate methods, updates or adds a new item.
  */
-const AddChangeSubjectModal = () => {
+const AddChangeSubjectModal = (): JSX.Element => {
 
    const { subjectModal, setSubjectModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
    const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
@@ -50,7 +51,7 @@ const AddChangeSubjectModal = () => {
       title, setTitle, icon, setIcon, errors, setErrors, semesters, setSemesters, departments, setDepartments,
       ifEnd, setIfEnd, classesPlatforms, setClassesPlatforms, setDepartmentsCount, setClassesPlatformsCount,
       validateAll, restoreValues,
-   } = useContext<any>(FormDataAndValidateContext);
+   } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
 
    const { subjectsData } = dataFetchFromServer;
    const ifModalOpen = subjectModal!.ifOpen && subjectModal!.type !== MODAL_TYPES.REMOVE ? modalOpen : '';
@@ -60,12 +61,13 @@ const AddChangeSubjectModal = () => {
       const newObject = {
          title: title,
          semesters: semesters,
-         ifEnd: ifEnd[0],
+         ifEnd: ifEnd![0],
          departments: departments,
          icon: ['fas', icon],
          classesPlatforms: classesPlatforms,
       };
       const res = await axiosInstance.post('subjects-data', newObject);
+      await updateLogsDateAsync('subjects', process.env.REACT_APP_SUBJECTS_ID);
       const newSubject = res.data;
       copyArray.push(newSubject);
       setDataFetchFromServer({ ...dataFetchFromServer, subjectsData: copyArray });
@@ -77,12 +79,13 @@ const AddChangeSubjectModal = () => {
          _id: subjectModal!.id,
          title: title,
          semesters: semesters,
-         ifEnd: ifEnd[0],
+         ifEnd: ifEnd![0],
          departments: departments,
          icon: ['fas', icon],
          classesPlatforms: classesPlatforms,
       }
       await axiosInstance.put(`subjects-data/${subjectModal!.id}`, newObject);
+      await updateLogsDateAsync('subjects', process.env.REACT_APP_SUBJECTS_ID);
       const index = copyArray.findIndex(x => x._id === subjectModal!.id);
       if(index >= 0) {
          copyArray[index] = newObject;
@@ -90,21 +93,9 @@ const AddChangeSubjectModal = () => {
       }
    }
 
-   const updateDate = async () => {
-      const date = new Date();
-      const dateObject = {
-         updateDateFor: 'subjects',
-         updateDate: {
-            day: date.getDate(), month: date.getMonth() + 1, year: date.getFullYear(),
-            hour: date.getHours(), minutes: date.getMinutes(), seconds: date.getSeconds(),
-         },
-      };
-      await axiosInstance.put(`last-update/${process.env.REACT_APP_SUBJECTS_ID}`, dateObject);
-   }
-
    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const { title, checkbox, department, icon, platform, checkFull } = validateAll();
+      const { title, checkbox, department, icon, platform, checkFull } = validateAll!();
       if(checkFull) {
          setSubjectModal!({ id: '', type: '', ifOpen: false });
          if(subjectModal!.type === MODAL_TYPES.EDIT) {
@@ -113,33 +104,32 @@ const AddChangeSubjectModal = () => {
             addNewRecord();
          }
       } else {
-         setErrors({ title, checkbox, department, icon, platform });
+         setErrors!({ title, checkbox, department, icon, platform });
       }
-      updateDate();
    }
 
    const handleSubjectTitle = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-      setErrors({ ...errors, title: false });
-      setTitle(target.value);
+      setErrors!({ ...errors, title: false });
+      setTitle!(target.value);
    }
 
    const handleIcon = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-      setErrors({ ...errors, icon: false });
-      setIcon(target.value);
+      setErrors!({ ...errors, icon: false });
+      setIcon!(target.value);
    }
 
    useEffect(() => {
       if(subjectModal!.id !== null && subjectModal!.id) {
          const shellingObject = subjectsData.find((object: any) => object._id === subjectModal!.id);
          if(subjectModal!.type === MODAL_TYPES.EDIT) {
-            setTitle(shellingObject.title);
-            setIcon(shellingObject.icon[1]);
-            setIfEnd([shellingObject.ifEnd, !shellingObject.ifEnd]);
-            setSemesters(shellingObject.semesters);
-            setDepartmentsCount(shellingObject.departments.length);
-            setDepartments(shellingObject.departments);
-            setClassesPlatformsCount(shellingObject.classesPlatforms.length);
-            setClassesPlatforms(shellingObject.classesPlatforms);
+            setTitle!(shellingObject.title);
+            setIcon!(shellingObject.icon[1]);
+            setIfEnd!([shellingObject.ifEnd, !shellingObject.ifEnd]);
+            setSemesters!(shellingObject.semesters);
+            setDepartmentsCount!(shellingObject.departments.length);
+            setDepartments!(shellingObject.departments);
+            setClassesPlatformsCount!(shellingObject.classesPlatforms.length);
+            setClassesPlatforms!(shellingObject.classesPlatforms);
          }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -162,9 +152,9 @@ const AddChangeSubjectModal = () => {
                            placeholder = 'Nazwa przedmiotu'
                            value = {title}
                            onChange = {handleSubjectTitle}
-                           className = {errors.title ? someError : ''}
+                           className = {errors!.title ? someError : ''}
                         />
-                        <button type = 'button' onClick = {() => setTitle('')} title = 'Wyczyść pole'>
+                        <button type = 'button' onClick = {() => setTitle!('')} title = 'Wyczyść pole'>
                            <FontAwesomeIcon
                               icon = {['fas', 'trash-alt']}
                               className = {removeInputField}
@@ -177,9 +167,9 @@ const AddChangeSubjectModal = () => {
                            placeholder = 'Ikona (dla prefiksów fas)'
                            value = {icon}
                            onChange = {handleIcon}
-                           className = {errors.icon ? someError : ''}
+                           className = {errors!.icon ? someError : ''}
                         />
-                        <button type = 'button' onClick = {() => setIcon('')} title = 'Przejdź do FontAwesome'>
+                        <button type = 'button' onClick = {() => setIcon!('')} title = 'Przejdź do FontAwesome'>
                            <a href = 'https://fontawesome.com/' rel = 'noreferrer' target = '_blank'>
                               <FontAwesomeIcon
                                  icon = {['fas', 'external-link-alt']}
@@ -190,7 +180,7 @@ const AddChangeSubjectModal = () => {
                      </div>
                   </div>
                   <div className = {multipleInputsContainer}>
-                     <div className = {`${checkFieldsLeft} ${errors.checkbox ? someError : ''}`}>
+                     <div className = {`${checkFieldsLeft} ${errors!.checkbox ? someError : ''}`}>
                         <CheckboxSemesters/>
                         <RadioStatusEnd/>
                      </div>

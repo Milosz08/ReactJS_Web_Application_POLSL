@@ -29,7 +29,7 @@ const { adminAsyncWrapper, showAsync, infiniteLoad, infiniteUse } = require('./L
  *
  * @param ifOpen { boolean } - props deciding whether to show the loading animation.
  */
-const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth }) => {
+const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth }): JSX.Element => {
 
    const showAsyncElement = hideAuth ? classnames(adminAsyncWrapper, showAsync) : adminAsyncWrapper;
 

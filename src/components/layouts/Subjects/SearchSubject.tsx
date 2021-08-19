@@ -44,7 +44,7 @@ interface PropsProvider {
  * @param input { string } - the value entered into the input field.
  * @param setInput { Dispatch<SetStateAction<number>> } - function that updates the value of the input field.
  */
-const SearchSubject: React.FC<PropsProvider> = ({ state, setState, filteredArray, input, setInput }) => {
+const SearchSubject: React.FC<PropsProvider> = ({ state, setState, filteredArray, input, setInput }): JSX.Element => {
 
    const ifSubjectExists = filteredArray.length !== 0 ? (
       <div className={subjectsWrapper}>

@@ -26,7 +26,7 @@ const { externalLinkIcon } = require('./../Footer/Footer.module.scss');
  * @details Component responsible for generating a block of information about the technologies used in the application
  *          development process. It appears on all subpages, positioned relatively to the content and footer.
  */
-const DevToolsInfo = () => {
+const DevToolsInfo = (): JSX.Element => {
 
    const generateReactLogo = () => (
       <div className = {reactLogo}>

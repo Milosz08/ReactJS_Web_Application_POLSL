@@ -46,7 +46,7 @@ interface PropsProvider {
  * @param state { number } - currently supported item subject.
  * @param setState { Dispatch<SetStateAction<number>> } - change subject (base on ID value).
  */
-const SubjectInfo: React.FC<PropsProvider> = ({ subjectID, filteredArray, state, setState }) => {
+const SubjectInfo: React.FC<PropsProvider> = ({ subjectID, filteredArray, state, setState }): JSX.Element => {
 
    const ifSubjectArrayIsEmpty = filteredArray.length !== 0 ? (
       <SubjectLayout

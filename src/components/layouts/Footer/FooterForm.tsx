@@ -56,7 +56,7 @@ interface BooleanMap {
  * @details Component that implements the form to the footer. It is also responsible for sending data from the React
  *          state to the database as a single object (record). The component also includes full form validation.
  */
-const FooterForm = () => {
+const FooterForm = (): JSX.Element => {
 
    const [ formInputs, setFormInputs ] = useState<StateProvider>({
       userName: '', typeOfMessage: 'pageError', messageArea: '', agreeCheck: false

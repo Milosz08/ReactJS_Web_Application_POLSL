@@ -34,7 +34,7 @@ const {
  * @details Component that generates a form for entering / editing a calendar entry. The component generates a form
  *          in the modal (CMS system administrator panel - calendar entries panel).
  */
-const MessageModule = () => {
+const MessageModule = (): JSX.Element => {
 
    const { entries, setEntries } = useContext<Partial<FormCalendarModalType>>(FormCalendarModalContext);
 
@@ -43,10 +43,10 @@ const MessageModule = () => {
       const handleInputs = ({ target }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
          const copy = [...entries!];
          switch(target.type) {
-            case 'radio': copy[index].importantLevel = target.value; break;
-            case 'time': copy[index].start = target.value; break;
-            case 'textarea': copy[index].message = target.value; break;
-            default: throw new Error('Unexpected input! Type of input not exist');
+            case 'radio':     copy[index].importantLevel = target.value;   break;
+            case 'time':      copy[index].start = target.value;            break;
+            case 'textarea':  copy[index].message = target.value;          break;
+            default:          throw new Error('Unexpected input! Type of input not exist');
          }
          setEntries!(copy);
       }

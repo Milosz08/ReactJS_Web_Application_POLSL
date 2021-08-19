@@ -1,14 +1,14 @@
 /**
- * @file PanelStructure.tsx
+ * @file PanelsStructure.tsx
  * @author Miłosz Gilga (gilgamilosz451@gmail.com)
  * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
  *
  * @projectName "polsl-web-application-frontend"
- * @version project: "^0.1.0"
- *          ReactJS: "^17.0.2"
- *          ReactCSSmodules: "^4.7.11"
+ * @version "^0.1.0"
  *
- * @date final version: 08/18/2021
+ * @dependencies  ReactJS: "^17.0.2"
+ *
+ * @date final version: 08/19/2021
  */
 
 import React, { useState } from 'react';
@@ -28,11 +28,11 @@ const { adminLoginContainer, adminLoginWrapper } = require('../AdminCmsLogin/Adm
 const { cmsSystemContainer, cmsContent } = require('./AdminCmsMainPanel.module.scss');
 
 /**
- * @details The component is responsible for generating the structure of the content management system panel (CMS).
+ * @details Component is responsible for generating the structure of the content management system panel (CMS).
  *          The structure includes the header, all panels and tab navigation. The component has a hook that determines
  *          which panel is to be opened at the moment.
  */
-const PanelsStructure = () => {
+const PanelsStructure = (): JSX.Element => {
 
    const [ activeNavElm, setActiveNavElm ] = useState<number>(0);
 

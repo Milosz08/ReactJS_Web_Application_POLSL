@@ -22,7 +22,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../contextStore/CookiesObjectsProvider';
 
-import UniversalHeader from "../UniversalHeader/UniversalHeader";
+import UniversalHeader from '../UniversalHeader/UniversalHeader';
 
 import cookieExpires from '../../../constants/cookieExpires';
 import COOKIES_OBJECT from '../../../constants/allCookies';
@@ -43,7 +43,7 @@ const COOKIE_EXPIRES_TIME: number = 365;
  *          component uses the context that stores the access methods to Cookie files. The component creates a new
  *          Cookie after accepting the terms. The modal is not displayed if the Cookie file exists.
  */
-const CookiesNotification = () => {
+const CookiesNotification = (): JSX.Element => {
 
    const { cookie, setCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext)
    const ifCookieNotExist = cookie!.__cookieNotification === undefined ? showCookiePopup : '';

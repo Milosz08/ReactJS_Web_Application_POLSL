@@ -34,7 +34,7 @@ const {
  * @details Component that generates the status bar of the administrator's session in the CMS (active session
  *          time, buttons, logout, etc.).
  */
-const CmsInfoBar = () => {
+const CmsInfoBar = (): JSX.Element => {
 
    const { adminSessionInfo } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
    const { cookie, removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);

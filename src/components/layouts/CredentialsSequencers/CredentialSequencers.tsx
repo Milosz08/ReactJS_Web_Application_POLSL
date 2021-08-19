@@ -22,7 +22,7 @@ import SessionActivityCount from './SessionActivityCount';
  *          of the administrator / moderator of the content management system (CMS) is implemented.
  *          The component uses React Context. Extendable component.
  */
-const CredentialSequencers = () => {
+const CredentialSequencers = (): JSX.Element => {
 
    const { adminAuth } = useContext<any>(LoginSessionContext);
 

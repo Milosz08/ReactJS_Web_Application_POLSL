@@ -41,7 +41,7 @@ interface PropsProvider {
  *    * visible { object } - visibility of the entered values in the password / token field.
  *    * setVisible { Dispatch<SetStateAction<object>> } - method setting the visibility of the entered data.
  */
-const AdminCmsLoginInputs: React.FC<PropsProvider> = props => {
+const AdminCmsLoginInputs: React.FC<PropsProvider> = (props): JSX.Element => {
 
    const { credentials, setCredentials, errors, setErrors, visible, setVisible } = props;
 

@@ -52,7 +52,7 @@ interface NewObjectTypes {
  * @details Component generating a modal with a form for entering/editing an item in the item list database.
  *          The component has no input validation (validation is in React Context along with input field states).
  */
-const AddChangeScheduleModal = () => {
+const AddChangeScheduleModal = (): JSX.Element => {
 
    const { scheduleModal, setScheduleModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
    const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);

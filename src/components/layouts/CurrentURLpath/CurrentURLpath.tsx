@@ -42,7 +42,7 @@ interface PropsProvider {
  *
  * @params ifImportatHeaderActive { boolean } - decides whether the navigation should be lower than the top of the page.
  */
-const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }) => {
+const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }): JSX.Element => {
 
    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 

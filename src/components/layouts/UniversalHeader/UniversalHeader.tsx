@@ -44,7 +44,7 @@ interface PropsProvider {
  */
 const UniversalHeader: React.FC<PropsProvider> = ({
    iconP, content, ifCloseButtonVisible, setCloseButton, addHeaderDayIndicator
-}) => {
+}): JSX.Element => {
    return (
       <header className = {universalHeader}>
          <h3>

@@ -42,7 +42,7 @@ interface StateProvider {
  * @param content { string } - title of the collection from which the modification date is retrieved.
  * @param withoutText { boolean } - flag deciding whether to show only the date or the date with additional text.
  */
-const DataLastUpdate: React.FC<PropsProvider> = ({ dataID, content, withoutText }) => {
+const DataLastUpdate: React.FC<PropsProvider> = ({ dataID, content, withoutText }): JSX.Element => {
 
    const [ lastUpdate, setLastUpdate ] = useState<StateProvider>({ fullDate: '', fullTime: '' });
 

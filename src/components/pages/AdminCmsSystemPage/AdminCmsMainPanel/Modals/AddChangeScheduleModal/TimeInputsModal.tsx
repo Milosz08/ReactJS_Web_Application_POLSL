@@ -24,7 +24,7 @@ const { timePicker, modalAddIcon } = require('./../AddChangeCalendarModal/AddCha
 /**
  * @details Component that generates fields for entering the start time and end time of an item in the modal.
  */
-const TimeInputsModal = () => {
+const TimeInputsModal = (): JSX.Element => {
 
    const {
       scheduleForm, setScheduleForm, errors, setErrors
