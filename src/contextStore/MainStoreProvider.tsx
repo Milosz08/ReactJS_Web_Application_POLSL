@@ -12,8 +12,8 @@
  */
 
 import React, {createContext, Dispatch, SetStateAction, useEffect, useState} from 'react';
-import axiosInstance from "../helpers/request";
-import MainStoreStateProvider from "./MainStoreStateProvider";
+import axiosInstance from '../helpers/request';
+import MainStoreStateProvider from './MainStoreStateProvider';
 
 /**
  * Constant that defines the time after which routing on the page is to take place (in seconds).
@@ -36,6 +36,8 @@ export interface MainStoreProviderTypes {
    timeoutRoutePath: () => void;
    routePath: boolean;
    setRoutePath: Dispatch<SetStateAction<boolean>>;
+   summerBreak: boolean;
+   setSummerBreak: Dispatch<SetStateAction<boolean>>;
 }
 
 /**
@@ -56,14 +58,20 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
    });
 
    const [ routePath, setRoutePath ] = useState<boolean>(false);
+   const [ summerBreak, setSummerBreak ] = useState<boolean>(true);
 
    const timeoutRoutePath = (): void => {
       setRoutePath(true);
       setTimeout(() => { setRoutePath(false); },(ROUTER_INTERVAL_TIME + .3) * 1000);
    }
 
+   dataFetchFromServer.calendarRecords
+      .sort((a: any, b: any) => a.day - b.day)
+      .sort((a: any, b: any) => a.month - b.month)
+      .sort((a: any, b: any) => a.year - b.year);
+
    useEffect(() => {
-      const getAllData = async () => {
+      const getAllData = async (): Promise<any> => {
          const covidData = await axiosInstance.get('/covid-data');
          const footerForm = await axiosInstance.get('/footer-form');
          const subjectsData = await axiosInstance.get('/subjects-data');
@@ -90,14 +98,23 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
             calendarRecords: calendarRecordsFetch
          });
       }
+
+      const getScheduleBreak = async (): Promise<any> => {
+         const allDates = await axiosInstance.get(`/last-update/${process.env.REACT_APP_SCHEDULE_ID}`);
+         const allDatesFetch = JSON.parse(allDates.request.response);
+         setSummerBreak(allDatesFetch.scheduleBreak);
+      }
+
       getAllData();
+      getScheduleBreak();
    }, []);
    
    return (
       <MainStoreContext.Provider
          value = {{
             dataFetchFromServer, setDataFetchFromServer,
-            timeoutRoutePath, routePath, setRoutePath
+            timeoutRoutePath, routePath, setRoutePath,
+            summerBreak, setSummerBreak
          }}
       >
          {children}
