@@ -11,7 +11,8 @@
  * @date final version: 08/19/2021
  */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../layouts/Header/Header';
@@ -25,6 +26,12 @@ import Subjects from '../../layouts/Subjects/Subjects';
  * @details Component responsible for generating the start page (absolute address - "/").
  */
 const StartPage = (): JSX.Element => {
+
+   useEffect(() => {
+      document.title = ROUTING_PATH_NAMES.START_PAGE;
+      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
+   }, []);
+
    return (
       <Fragment>
          <CookiesNotification/>

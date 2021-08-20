@@ -14,8 +14,9 @@
  * @date final version: 08/19/2021
  */
 
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 import classnames from 'classnames';
 
 import { MainStoreContext, MainStoreProviderTypes} from '../../../contextStore/MainStoreProvider';
@@ -82,6 +83,12 @@ const CalendarPage = (): JSX.Element => {
          );
       }
    }
+
+   useEffect(() => {
+      document.title = ROUTING_PATH_NAMES.CALENDAR_PAGE;
+      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
+   }, []);
+
    return (
       <Fragment>
          <CookiesNotification/>

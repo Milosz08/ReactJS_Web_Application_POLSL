@@ -29,6 +29,7 @@ import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 import LoadingSystemAnimation from '../../layouts/LoadingSystemAnimation/LoadingSystemAnimation';
 
 import COOKIES_OBJECT from '../../../constants/allCookies';
+import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 
 const { userLoginContainer, userLoginWrapper, loginInfo, hideFormOnClick } = require('./AidsPage.module.scss');
 const {
@@ -130,6 +131,11 @@ const AidsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
          setCredentialsHash({ login, password, token });
       }
       fetchData();
+   }, []);
+
+   useEffect(() => {
+      document.title = ROUTING_PATH_NAMES.LOGIN_PAGE;
+      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
    }, []);
 
    const toggleClasses = hideAuth ? classnames(userLoginWrapper, hideFormOnClick) : userLoginWrapper;

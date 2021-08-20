@@ -28,6 +28,7 @@ import LoadingSystemAnimation from '../../../layouts/LoadingSystemAnimation/Load
 
 import COOKIES_OBJECT from '../../../../constants/allCookies';
 import AdminCmsLoginInputs from './AdminCmsLoginInputs';
+import ROUTING_PATH_NAMES from "../../../../constants/routingPathNames";
 
 const {
    adminLoginWrapper, adminLoginContainer, adminCredentials, onSubmitCSS, infoAboutToken, poweredBy,
@@ -145,6 +146,11 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }): JSX.
       fetchData();
    }, []);
 
+   useEffect(() => {
+      document.title = ROUTING_PATH_NAMES.CMS_LOGIN_PAGE;
+      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
+   }, []);
+
    const toggleClasses = hideAuth ? classnames(adminLoginWrapper, hideFormOnClick) : adminLoginWrapper;
 
    return (
@@ -155,7 +161,7 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }): JSX.
          <div className = {adminLoginContainer}>
             <LoadingSystemAnimation hideAuth = {hideAuth}/>
             <div className = {toggleClasses}>
-               <h3 className = {authenticationHeader}>Logowanie do systemu CMS</h3>
+               <h3 className = {authenticationHeader}>Logowanie do systemu WCMS</h3>
                <form className = {adminCredentials} onSubmit = {handleOnSubmit}>
                   <AdminCmsLoginInputs
                      credentials = {credentials}

@@ -32,6 +32,8 @@ const ROUTING_PATH_NAMES: ObjectProvider = {
    LOGIN_PAGE: `${_DEFAULT_PREFIX}Logowanie do Systemu`,
    CMS_LOGIN_PAGE: `${_DEFAULT_PREFIX}Logowanie do Panelu CMS`,
    CMS_PANEL_PAGE: `${_DEFAULT_PREFIX}Panel Administratora`,
+   COOKIES_POLICY: `${_DEFAULT_PREFIX}Polityka Cookies`,
+   SUBJECT_PASS_PAGE: `${_DEFAULT_PREFIX}Warunki Zaliczenia Przedmiotów`,
 }
 
 export default ROUTING_PATH_NAMES;

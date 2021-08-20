@@ -11,16 +11,23 @@
  * @date final version: ---
  */
 
-import React, { Fragment } from 'react';
+import React, {Fragment, useEffect} from 'react';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
+import ROUTING_PATH_NAMES from "../../../constants/routingPathNames";
 
 /**
  * @details Component responsible for generating a page with the guidelines of the opinion of individual items.
  */
 const SubjectsPassPage = (): JSX.Element => {
+
+   useEffect(() => {
+      document.title = ROUTING_PATH_NAMES.SUBJECT_PASS_PAGE;
+      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
+   }, []);
+
    return (
       <Fragment>
          <CookiesNotification/>

@@ -8,12 +8,13 @@
  *
  * @dependencies  ReactJS: "^17.0.2"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/20/2021
  */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 import ModalsStateProvider from '../../../../contextStore/ModalsStateProvider';
+import ROUTING_PATH_NAMES from '../../../../constants/routingPathNames';
 
 import CookiesNotification from '../../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../../layouts/Header/Header';
@@ -28,6 +29,12 @@ import PanelsStructure from "./PanelsStructure";
  *          panels with navigation. The component is rendered by a protected React Router.
  */
 const AdminCmsMainPanel = (): JSX.Element => {
+
+   useEffect(() => {
+      document.title = ROUTING_PATH_NAMES.CMS_PANEL_PAGE;
+      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
+   }, []);
+
    return (
       <Fragment>
          <CookiesNotification/>

@@ -13,8 +13,9 @@
  * @date final version: 08/19/2021
  */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../layouts/Header/Header';
@@ -62,6 +63,11 @@ const AidsPage: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
          </section>
       </a>
    ));
+
+   useEffect(() => {
+      document.title = ROUTING_PATH_NAMES.AISD_PAGE;
+      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
+   }, []);
 
    return (
       <Fragment>

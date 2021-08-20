@@ -14,7 +14,8 @@
  * @date final version: 08/19/2021
  */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 
@@ -89,6 +90,11 @@ const CookiesPolicy = (): JSX.Element => {
          </section>
       );
    });
+
+   useEffect(() => {
+      document.title = ROUTING_PATH_NAMES.COOKIES_POLICY;
+      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
+   }, []);
 
    return (
       <Fragment>
