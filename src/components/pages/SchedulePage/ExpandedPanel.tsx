@@ -82,7 +82,7 @@ const ExpandedPanel: React.FC<PropsProvider> = ({ tile, subjectObj }) => {
                replace = {false}
                clickAction = {timeoutRoutePath}
             >
-               <a href = {'/warunki-zaliczenia-przedmiotów'}>
+               <a href = {'/warunki-zaliczenia-przedmiotów'} className = {expandedLinks}>
                   Warunki zaliczenia przedmiotu
                </a>
             </DelayLink>

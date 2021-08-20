@@ -194,7 +194,7 @@ const FooterForm = (): JSX.Element => {
                checked = {formInputs.agreeCheck}
                onChange = {handleFormElms}
             />
-            <span className = {`${checkmark} ${errors.agreeCheck ? errorSomeInput : ''}`}/>
+            <span className = {classnames(checkmark, errors.agreeCheck ? errorSomeInput : '')}/>
             <label htmlFor = 'agreeCheckfield'>
                Wyrażam zgodę na przetwarzanie wyżej podanych przeze mnie informacji.
             </label>

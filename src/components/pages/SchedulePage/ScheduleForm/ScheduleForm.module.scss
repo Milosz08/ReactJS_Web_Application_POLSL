@@ -133,7 +133,8 @@ form.sheduleForm {
     width: 200px;
     margin: 20px auto;
     &:disabled {
-      background-color: $darkGray;
+      box-shadow: none;
+      background-color: gray;
       color: $grayBgc;
       cursor: not-allowed;
     }

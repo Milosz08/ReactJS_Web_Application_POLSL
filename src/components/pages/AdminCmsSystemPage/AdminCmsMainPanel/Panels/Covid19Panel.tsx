@@ -10,7 +10,7 @@
  *                classnames: "^2.3.1"
  *                ReactCSSmodules: "^1.0.2"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/20/2021
  */
 
 import React, { useContext, useState } from 'react';
@@ -18,10 +18,15 @@ import classnames from 'classnames';
 import axiosInstance from '../../../../../helpers/request';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
-import { CovidDataProvider } from "../../../StartPage/CovidInfo/CovidInfo";
+import { CovidDataProvider } from '../../../StartPage/CovidInfo/CovidInfo';
 
 const { panelContainer, panelActive } = require('./Panels.module.scss');
 const { covidPanelsContainer, sectionWrapper, submitCovidForm, unwriteChangesCSS } = require('./Covid19Panel.module.scss');
+
+/**
+ * Constant representing the maximum number in the Covid19 danger selection options.
+ */
+const MAX_RISK_NUMBER: number = 4;
 
 /**
  * Interface defining the type of props values.
@@ -62,7 +67,7 @@ const Covid19Panel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =>
    }
 
    const generateRiskTiles = covidData.map((tile: CovidDataProvider, index: number): JSX.Element => {
-      const generateOptions = Array.from({ length: 4 }, (v, s) => s).map(i => (
+      const generateOptions = Array.from({ length: MAX_RISK_NUMBER }, (v, s) => s).map(i => (
          <option key = {i}>{i}</option>
       ));
 

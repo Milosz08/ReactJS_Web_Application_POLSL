@@ -74,7 +74,7 @@ form.adminCredentials, form.userCredentials {
 }
 
 .poweredBy {
-  @include borderWithPseudElementInfo($mainLogosBgc, #fff, 1.2rem, 500, 'Powered by');
+  @include borderWithPseudElementInfo($mainLogosBgc, #fff, 1.2rem, 500, 'Based on');
   margin-top: 80px;
   padding-bottom: 20px;
   font-size: 1.1rem;

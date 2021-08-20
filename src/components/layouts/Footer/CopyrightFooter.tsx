@@ -42,7 +42,7 @@ const CopytightFooter = (): JSX.Element => {
                rel = 'noreferrer'
             >
                Font Awesome
-            </a>
+            </a>.
          </div>
          <div className = {copyAuthor}>
             <span>&copy; 2020-2021 by </span>

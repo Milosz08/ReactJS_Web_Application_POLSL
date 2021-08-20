@@ -50,6 +50,7 @@ const ScheduleProvider: React.FC<PropsProvider> = ({ children }): JSX.Element =>
 
    const [ groupSelected, setGroupSelected ] = useState<string>(NORMAL_GROUPS[0].text);
    const [ engSelected, setEngSelected ] = useState<string>(ENG_GROUPS[0]);
+
    const [ inputField, setInputField ] = useState<string>('');
 
    return (

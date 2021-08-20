@@ -90,7 +90,8 @@ const Footer = (): JSX.Element => {
                   <div className = {disclaimerBlock}>
                      Strona nie jest powiązania ani zarządzana przez Politechnikę Śląską. Strona służy jedynie w
                      celach informacyjnych dla studentów kierunku Informatyka na wydziale Elektrycznym,
-                     rozpoczętym w roku akademickim 2020/2021.
+                     rozpoczętym w roku akademickim 2020/2021. Administratorzy/Moderatorzy systemu WCMS nie ponoszą
+                     odpowiedzialności za błędne i/lub nieaktualne dane.
                   </div>
                   <DelayLink
                      to = {'/logowanie-do-panelu-administratora'}
