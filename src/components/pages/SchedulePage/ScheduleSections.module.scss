@@ -33,6 +33,30 @@
   }
 }
 
+.centerSeparateWindow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(80% - 20px);
+  min-width: $widthVertical;
+  max-width: 1600px;
+  min-height: 100px;
+  background-color: #ffffff;
+  border: 2px solid $borderGray;
+  border-radius: 10px;
+  padding: 50px;
+  img {
+    margin-right: 50px;
+  }
+  .centerSeparateContent {
+    h2 {
+      color: $mainLogosBgc;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+  }
+}
+
 .scheduleTile {
   display: flex;
   flex-direction: column;
@@ -71,6 +95,9 @@
   background-color: $mainLogosBgc;
   &.active {
     background-color: $yellowDefColor;
+  }
+  &.separateContainer {
+    margin: 0 10px;
   }
 }
 
@@ -144,6 +171,10 @@ button.expandInfo {
     &:nth-last-child(1) {
       background-color: $yellowDefColor;
       margin-bottom: 0;
+      &:hover {
+        box-shadow: none;
+        background-color: $yellowHover;
+      }
     }
   }
 }
@@ -168,6 +199,22 @@ button.expandInfo {
       &:nth-last-child(1) {
         margin-bottom: 10px;
       }
+    }
+  }
+  .centerSeparateWindow {
+    min-width: 50%;
+    max-width: 100%;
+    width: calc(100% - 60px);
+    margin: 40px 30px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .centerSeparateWindow {
+    flex-direction: column;
+    img {
+      margin-right: 0;
+      margin-bottom: 30px;
     }
   }
 }

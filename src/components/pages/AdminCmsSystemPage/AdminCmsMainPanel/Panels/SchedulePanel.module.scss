@@ -74,3 +74,59 @@
     display: flex;
   }
 }
+
+.setScheduleBreakContainer {
+  border: 1px solid $borderGray;
+  border-radius: 10px;
+  margin: 30px 40px 0;
+  padding: 30px;
+  width: calc(100% - 40px);
+  .checkboxContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    .checkboxWrapper {
+      display: flex;
+      align-items: center;
+      label {
+        font-size: 1.2rem;
+        line-height: 0;
+        color: $mainLogosBgc;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      input[type = 'checkbox'] {
+        @include inputCheckbox($mainLogosBgc);
+        margin-right: 0;
+      }
+      span.checkmark {
+        @include checkmark();
+      }
+    }
+    p {
+      color: $footerHeaders;
+    }
+  }
+  .sendData {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    p {
+      color: $importantColor;
+      font-size: 1.2rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: .2s;
+      &.active {
+        opacity: 1;
+      }
+    }
+    button {
+      @include defaultButton();
+      width: 150px;
+      margin-top: 0;
+    }
+  }
+}

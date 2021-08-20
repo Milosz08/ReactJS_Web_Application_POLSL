@@ -10,7 +10,7 @@
  *                classnames: "^2.3.1"
  *                ReactCSSmodules: "^1.0.2"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/20/2021
  */
 
 import React, { useContext, useState } from 'react';
@@ -21,6 +21,7 @@ import { SubjectsProvider } from '../../../../layouts/Subjects/Subjects';
 
 import SearchBox from './AdditionalComponents/SearchBox';
 import OneDaySchedule from './AdditionalComponents/OneDaySchedule';
+import SetScheduleBreak from './AdditionalComponents/SetScheduleBreak';
 import { STATIC_DAYS } from '../../../SchedulePage/SchedulePage';
 
 const { panelContainer, panelActive } = require('./Panels.module.scss');
@@ -77,6 +78,7 @@ const SchedulePanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
             placeholderProp = 'Wyszukaj po nazwie/typie/godzinie'
          />
          {generateFullDaysStructure}
+         <SetScheduleBreak/>
       </div>
    );
 }

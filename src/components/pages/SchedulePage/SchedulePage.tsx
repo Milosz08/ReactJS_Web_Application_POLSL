@@ -13,11 +13,13 @@
  * @date final version: 08/19/2021
  */
 
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 import { v4 as uuidv4 } from 'uuid';
 
 import ActualDateProvider from '../../../contextStore/ActualDateProvider';
 import ScheduleProvider from '../../../contextStore/ScheduleProvider';
+import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreProvider';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import AcceptScheduleChoiceModal from './AcceptScheduleChoiceModal/AcceptScheduleChoiceModal';
@@ -29,6 +31,7 @@ import SearchSubject from './ScheduleHeader/SearchSubject';
 import AdditionalTools from './ScheduleHeader/AdditionalTools';
 import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
 import ActualDateInfo from './ScheduleHeader/ActualDateInfo';
+import SummerBreakSchedule from "./SummerBreakSchedule";
 
 const { scheduleContainer, scheduleWrapper, scheduleDaysContainer, scheduleDaysWrapper } = require('./SchedulePage.module.scss');
 const { scheduleRender } = require('./../../layouts/Navigation/Navigation.module.scss');
@@ -45,12 +48,20 @@ export const STATIC_DAYS: string[] = [ 'poniedziałek', 'wtorek', 'środa', 'czw
 const SchedulePage = (): JSX.Element => {
 
    const executeScrollRef: React.MutableRefObject<any> = useRef<HTMLElement>(null);
+   const { summerBreak } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
    const executeScroll = (): void => {
       executeScrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
    }
 
-   const generateDaysStructure: JSX.Element[] = STATIC_DAYS.map(day => <ScheduleSections key = {uuidv4()} dayOfWeek = {day}/>);
+   const generateDaysStructure: JSX.Element[] = STATIC_DAYS.map((day: string) => (
+      <ScheduleSections key = {uuidv4()} dayOfWeek = {day}/>
+   ));
+
+   useEffect(() => {
+      document.title = ROUTING_PATH_NAMES.SCHEDULE_PAGE;
+      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
+   }, []);
 
    return (
       <ScheduleProvider>
@@ -76,9 +87,9 @@ const SchedulePage = (): JSX.Element => {
                   <SearchSubject/>
                </div>
                <div className = {scheduleDaysContainer}>
-                  <div className = {scheduleDaysWrapper}>
+                  {summerBreak ? <SummerBreakSchedule/> : <div className = {scheduleDaysWrapper}>
                      {generateDaysStructure}
-                  </div>
+                  </div>}
                </div>
             </ActualDateProvider>
             <AdditionalTools/>
