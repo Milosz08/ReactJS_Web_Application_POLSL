@@ -28,11 +28,11 @@ const { scheduleRender } = require('./../../../layouts/Navigation/Navigation.mod
 const { progressBar, progressActive, colored, activeBar, generateButton, underInfo } = require('./../SchedulePage.module.scss');
 
 /**
- * @details A component that generates the section Additional tools to the class plan (the ability to create a PDF file).
+ * @details Component that generates the section Additional tools to the class plan (the ability to create a PDF file).
  */
 const AdditionalTools = (): JSX.Element => {
 
-   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+   const { dataFetchFromServer, summerBreak } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
    const { groupSelected, engSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
    const { scheduleSubjects } = dataFetchFromServer;
 
@@ -88,6 +88,8 @@ const AdditionalTools = (): JSX.Element => {
          <button
             onClick = {handleGeneratePDF}
             className = {generateButton}
+            disabled = {summerBreak}
+            title = {summerBreak ? 'Wygenerowanie pustego planu zajęć nie jest możliwe' : 'Wygeneruj plan zajęć w formie PDF'}
          >
             Wygeneruj plan w formie pliku PDF
          </button>
