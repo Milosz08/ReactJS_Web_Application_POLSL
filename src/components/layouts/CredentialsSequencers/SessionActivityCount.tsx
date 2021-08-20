@@ -71,6 +71,7 @@ const SessionActivityCount: React.FC<PropsProvider> = ({ authCredentialPerson })
          secondsSinceLastActivity = 0;
          clearInterval(index);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [authCredentialPerson, adminSessionInfo.modalOpen]);
 
    return null;

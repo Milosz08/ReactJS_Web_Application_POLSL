@@ -58,6 +58,7 @@ const AcceptScheduleChoiceModal = (): JSX.Element => {
          setContainerVisible(show);
          setTimeout(() => setAnimShow(active), 200);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [onSaveOpenModal]);
 
    return (
