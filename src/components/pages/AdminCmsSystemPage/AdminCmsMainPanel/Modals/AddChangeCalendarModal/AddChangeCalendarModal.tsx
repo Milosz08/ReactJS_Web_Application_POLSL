@@ -100,7 +100,7 @@ const AddChangeCalendarModal = (): JSX.Element => {
          const newObject = {
             _id: calendarModal!.id,
             day: parseInt(dateSplit[2]),
-            month: parseInt(dateSplit[1]),
+            month: parseInt(dateSplit[1]) - 1,
             year: parseInt(dateSplit[0]),
             items: entries!.map((entrie: any) => ({
                start: entrie.start,
@@ -124,7 +124,7 @@ const AddChangeCalendarModal = (): JSX.Element => {
       if(calendarModal!.id !== null) {
          const shellingObject = calendarRecords.find((object: any) => object._id === calendarModal!.id);
          if(shellingObject !== undefined) {
-            const month = shellingObject.month < 10 ? `0${shellingObject.month}` : shellingObject.month;
+            const month = shellingObject.month < 10 ? `0${shellingObject.month + 1}` : shellingObject.month + 1;
             const day = shellingObject.day < 10 ? `0${shellingObject.day}` : shellingObject.day;
             if(calendarModal!.type === MODAL_TYPES.EDIT) {
                setDate!(`${shellingObject.year}-${month}-${day}`);
