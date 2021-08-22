@@ -72,6 +72,12 @@
   .covidInfo {
     .covidInfoBlocks {
       flex-direction: column;
+      .covidBlocks {
+        span:nth-child(2) {
+          text-align: center;
+          min-width: 40px;
+        }
+      }
     }
     .statusInfo {
       max-width: 300px;

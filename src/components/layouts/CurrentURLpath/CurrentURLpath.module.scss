@@ -47,11 +47,16 @@
 
 @media only screen and (max-width: 1250px) {
   .currentURLcontainer {
-    top: 170px;
+    top: 130px;
+    font-size: .9rem;
     .currentURLwrapper {
       display: flex;
       justify-content: center;
       width: 100%;
     }
+    &.ifHeaderHasRedBar {
+      top: 180px;
+    }
   }
+
 }

@@ -194,3 +194,9 @@ footer.footerWrapper {
     }
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .copyrightSectionContainer {
+    padding: 20px 0 70px;
+  }
+}
