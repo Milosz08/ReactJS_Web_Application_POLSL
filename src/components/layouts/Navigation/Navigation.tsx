@@ -47,7 +47,7 @@ const Navigation: React.FC<PropsProvider > = ({ ifHeader }): JSX.Element => {
 
    const navigationElements = SITES.map(site => {
       const redeptWithPolish: string = site.title.replace(/\s+/g, '-').toLowerCase();
-      const descriptionToggle = !ifHeader && <span>{site.description}</span>;
+      const descriptionToggle: boolean | JSX.Element = !ifHeader && <span>{site.description}</span>;
 
       const titleToggle: string | JSX.Element = ifHeader ? `${site.title}` : (
          <span>
