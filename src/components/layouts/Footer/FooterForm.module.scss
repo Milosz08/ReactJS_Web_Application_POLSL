@@ -98,7 +98,6 @@ form.footerFormCSS {
       font-size: 1.1rem;
       font-weight: 500;
       padding: 5px 10px 8px 10px;
-      outline: none;
       border: 3px solid $mainLogosBgc;
       border-radius: 4px;
       cursor: pointer;
@@ -114,7 +113,7 @@ form.footerFormCSS {
         border: 2px solid $mainLogosBgc;
         color: $mainLogosBgc;
         transition: .6s;
-        transform: translateX(0px);
+        transform: translateX(0);
         &.showPositiveMess {
           transform: translateX(-250px);
         }
