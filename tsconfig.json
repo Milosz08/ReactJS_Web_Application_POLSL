@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": [
+      "es6",
       "dom",
       "dom.iterable",
       "esnext"
@@ -27,7 +28,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true
   },
   "include": [
     "typings",
