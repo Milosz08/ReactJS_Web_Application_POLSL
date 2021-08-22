@@ -158,6 +158,7 @@ button.arrow {
 
 @media only screen and (max-width: 500px) {
   .bannerContainer {
+    height: 100vh;
     .centerSection {
       .mainTitle {
         h2 {
@@ -169,5 +170,12 @@ button.arrow {
         }
       }
     }
+  }
+  button.arrow {
+    top: 0;
+  }
+  .bannerDots div {
+    width: 11px;
+    height: 11px;
   }
 }
