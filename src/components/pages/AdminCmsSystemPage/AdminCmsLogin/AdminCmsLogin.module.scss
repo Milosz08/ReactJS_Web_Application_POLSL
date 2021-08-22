@@ -82,3 +82,18 @@ form.adminCredentials, form.userCredentials {
     margin-bottom: 10px;
   }
 }
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .adminLoginContainer {
+    .adminLoginWrapper {
+      margin-top: 110px;
+    }
+  }
+  form.adminCredentials, form.userCredentials {
+    width: calc(100% - 60px);
+    max-width: 360px;
+    margin: 0 30px;
+  }
+}

@@ -49,3 +49,18 @@
     }
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .gotoTopWrapper {
+    bottom: 60px;
+    width: 45px;
+    height: 45px;
+    &::before {
+      @include arrowNavigate(.7em, -135deg, 1.3em, $whiteColor);
+      margin-top: 1px;
+    }
+    &:hover {
+      bottom: 60px;
+    }
+  }
+}

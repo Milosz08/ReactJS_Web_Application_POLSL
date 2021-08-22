@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/21/2021
  */
 
 @import './../../../styles/_variables';
@@ -107,4 +107,27 @@
   font-size: 1.2rem;
   font-weight: 500;
   color: $importantColor;
+}
+
+////////////////////////////////////////////////////
+
+  @media only screen and (max-width: 1250px) {
+  .aidsMainContent {
+    margin: 0 30px;
+    width: calc(100% - 60px);
+  }
+  .logoutButton {
+    flex-grow: 1;
+    text-align: right;
+  }
+  .aidsContainer {
+    .aisdWrapper {
+      margin-top: 150px;
+    }
+  }
+  .loginInfo {
+    padding: 30px;
+    width: calc(100% - 60px);
+    margin: -10px 30px 40px;
+  }
 }
