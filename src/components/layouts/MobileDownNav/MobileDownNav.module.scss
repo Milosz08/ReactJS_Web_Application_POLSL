@@ -1,0 +1,49 @@
+/**
+ * @file MobileDownNav.module.scss
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief SCSS file pre-generated with ReactCSS Modules to avoid classes conflicts.
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @date final version: 08/22/2021
+ */
+
+@import './../../../styles/_variables';
+@import './../../../styles/_mixins';
+
+.mobileDownContainer {
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 45px;
+  background-color: #f1f1f1;
+  span.activeIndicator {
+    position: absolute;
+    top: 0;
+    width: calc(100% / 5);
+    height: 3px;
+    background-color: $mainLogosBgc;
+    transition: .2s;
+  }
+  div[role = 'link'] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 5);
+    position: relative;
+    height: 100%;
+  }
+}
+
+.icon {
+  display: none;
+  font-size: 1.5rem;
+  color: $mainLogosBgc;
+  &.active {
+    display: block;
+  }
+}
