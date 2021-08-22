@@ -25,7 +25,7 @@ interface PropsProvider {
 const { adminAsyncWrapper, showAsync, infiniteLoad, infiniteUse } = require('./LoadingSystemAnimation.module.scss');
 
 /**
- * Component rendering animation while waiting for data download from API / logging into the system, etc.
+ * @details Component rendering animation while waiting for data download from API / logging into the system, etc.
  *
  * @param ifOpen { boolean } - props deciding whether to show the loading animation.
  */
