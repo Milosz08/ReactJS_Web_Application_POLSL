@@ -14,10 +14,12 @@
  * @date final version: 08/18/2021
  */
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
+
+import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreProvider';
 
 import axiosInstance from "../../../helpers/request";
 import CONSTANT_DATA from "../../../constants/staticData";
@@ -57,6 +59,9 @@ interface BooleanMap {
  *          state to the database as a single object (record). The component also includes full form validation.
  */
 const FooterForm = (): JSX.Element => {
+
+   const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+   const { footerForms } = dataFetchFromServer;
 
    const [ formInputs, setFormInputs ] = useState<StateProvider>({
       userName: '', typeOfMessage: 'pageError', messageArea: '', agreeCheck: false
@@ -110,10 +115,11 @@ const FooterForm = (): JSX.Element => {
    }
 
    const postSendFormData = async (): Promise<any> => {
-      const date = new Date()
+      const date = new Date();
+      const copy = [...footerForms];
       const { day, month, hours, minutes, seconds } = getSingleDateObjects(date);
       const { userName, typeOfMessage, messageArea } = formInputs;
-      await axiosInstance.post('/footer-form', {
+      const objectToSend = {
          userIdentity: userName,
          userChoice: typeOfMessage,
          userMessage: messageArea,
@@ -121,7 +127,10 @@ const FooterForm = (): JSX.Element => {
             fullDate: `${day}/${month}/${date.getFullYear()}`,
             fullTime: `${hours}:${minutes}:${seconds}`,
          }
-      });
+      }
+      await axiosInstance.post('/footer-form', objectToSend);
+      copy.push(objectToSend);
+      setDataFetchFromServer({ ...dataFetchFromServer, footerForms: copy });
    }
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
