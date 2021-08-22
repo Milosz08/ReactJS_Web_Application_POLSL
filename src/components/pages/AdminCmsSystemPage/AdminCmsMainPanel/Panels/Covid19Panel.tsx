@@ -66,7 +66,7 @@ const Covid19Panel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =>
       }));
    }
 
-   const generateRiskTiles = covidData.map((tile: CovidDataProvider, index: number): JSX.Element => {
+   const generateRiskTiles = covidData.map((tile: CovidDataProvider): JSX.Element => {
       const generateOptions = Array.from({ length: MAX_RISK_NUMBER }, (v, s) => s).map(i => (
          <option key = {i}>{i}</option>
       ));
@@ -76,7 +76,7 @@ const Covid19Panel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =>
             <div className = {sectionWrapper}>
                <h3>{tile.description}</h3>
                <select
-                  value = {riskLevels[index]}
+                  value = {tile.actualRiskNumber}
                   onChange = {({ target }) => handleOnChangeInput(tile._id, target)}
                >
                   {generateOptions}
