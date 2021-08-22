@@ -79,6 +79,9 @@
     width: 100%;
     h3 {
       justify-content: flex-start;
+      button {
+        flex-grow: 1;
+      }
     }
     aside {
       display: none;
