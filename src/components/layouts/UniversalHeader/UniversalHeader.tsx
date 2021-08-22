@@ -25,22 +25,22 @@ const {
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   iconP : IconProp;
+   iconP: IconProp;
    content: string;
-   ifCloseButtonVisible : boolean;
+   ifCloseButtonVisible: boolean;
    addHeaderDayIndicator?: string;
-   setCloseButton? : () => void;
+   setCloseButton?: () => void;
 }
 
 /**
  * @details Component that implements the main header in sections. Depending on the given props, the header
  *          is generated with a close button (for modal windows).
  *
- * @param iconP - an array with two string parameters describing the icon.
- * @param content - the text content of the header.
- * @param ifCloseButtonVisible - a boolean value, indicating whether the header should have a close button.
- * @param setCloseButton - function transferred to the operation of the modal closing button.
- * @param addHeaderDayIndicator - for the modal adding / modifying subjects in the timetable.
+ * @param iconP { IconProp } - an array with two string parameters describing the icon.
+ * @param content { string } - the text content of the header.
+ * @param ifCloseButtonVisible { boolean } - a boolean value, indicating whether the header should have a close button.
+ * @param setCloseButton { () => void? } - function transferred to the operation of the modal closing button.
+ * @param addHeaderDayIndicator { string? } - for the modal adding / modifying subjects in the timetable.
  */
 const UniversalHeader: React.FC<PropsProvider> = ({
    iconP, content, ifCloseButtonVisible, setCloseButton, addHeaderDayIndicator
