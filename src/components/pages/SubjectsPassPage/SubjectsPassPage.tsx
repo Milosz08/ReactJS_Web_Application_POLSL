@@ -14,6 +14,7 @@
 import React, {Fragment, useEffect} from 'react';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
+import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 import ROUTING_PATH_NAMES from "../../../constants/routingPathNames";
@@ -31,6 +32,7 @@ const SubjectsPassPage = (): JSX.Element => {
    return (
       <Fragment>
          <CookiesNotification/>
+         <MobileDownNav id = {3}/>
          <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive={true}/>
       </Fragment>

@@ -15,6 +15,7 @@ import React, { Fragment, useEffect } from 'react';
 import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
+import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
 import Header from '../../layouts/Header/Header';
 import Slider from './Slider/Slider';
 import CovidInfo from './CovidInfo/CovidInfo';
@@ -35,6 +36,7 @@ const StartPage = (): JSX.Element => {
    return (
       <Fragment>
          <CookiesNotification/>
+         <MobileDownNav id = {0}/>
          <Header ifHeaderHasRedBar = {true}/>
          <Slider autoPlay = {true} duration={5}/>
          <CovidInfo/>

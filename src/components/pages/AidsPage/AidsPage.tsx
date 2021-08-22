@@ -19,6 +19,7 @@ import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import Header from '../../layouts/Header/Header';
+import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 
 import COOKIES_OBJECT from '../../../constants/allCookies';
@@ -72,6 +73,7 @@ const AidsPage: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
    return (
       <Fragment>
          <CookiesNotification/>
+         <MobileDownNav id = {4}/>
          <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive = {true}/>
          <div className = {aidsContainer}>

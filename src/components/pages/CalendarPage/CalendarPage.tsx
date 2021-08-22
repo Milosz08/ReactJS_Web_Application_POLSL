@@ -23,6 +23,7 @@ import { MainStoreContext, MainStoreProviderTypes} from '../../../contextStore/M
 import { IMPORTANT_VALUES } from '../AdminCmsSystemPage/AdminCmsMainPanel/Modals/WarningDeleteModal/CalendarDeleteModal';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
+import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
@@ -92,6 +93,7 @@ const CalendarPage = (): JSX.Element => {
    return (
       <Fragment>
          <CookiesNotification/>
+         <MobileDownNav id = {2}/>
          <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive = {true}/>
          <div className = {calendarContainer}>

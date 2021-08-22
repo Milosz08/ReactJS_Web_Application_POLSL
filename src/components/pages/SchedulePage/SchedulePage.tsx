@@ -23,6 +23,7 @@ import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import AcceptScheduleChoiceModal from './AcceptScheduleChoiceModal/AcceptScheduleChoiceModal';
+import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 import ScheduleForm from './ScheduleForm/ScheduleForm';
@@ -67,6 +68,7 @@ const SchedulePage = (): JSX.Element => {
       <ScheduleProvider>
          <CookiesNotification/>
          <AcceptScheduleChoiceModal/>
+         <MobileDownNav id = {1}/>
          <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive = {true}/>
          <div className = {scheduleContainer}>
