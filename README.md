@@ -19,6 +19,8 @@ This application was created to provide comprehensive information to students on
 ## Custom CMS (Content Management System)
 I created my own CMS for this application (based on the mechanics and appearance of Strapi - a popular CMS system written in JavaScript). It was a big challenge for me because I was creating such a system for the first time and it may not be perfect, but it works perfectly for its purposes. This system closely communicates with the global React Context Store and API written in NodeJS.
 
+<hr/>
+
 ## Screenshot gallery
 
 > Main Page
@@ -116,4 +118,4 @@ $ git clone https://github.com/Milosz08/ReactJS_Web_Application_POLSL
 All packages with dependencies used in the project can be found in the `package.json`. In addition, in each component I have included information about what packages I use and what versions they are.
 
 ## License
-MIT License [terms of use](https://en.wikipedia.org/wiki/MIT_License).
+This application is on MIT License [terms of use](https://en.wikipedia.org/wiki/MIT_License).
