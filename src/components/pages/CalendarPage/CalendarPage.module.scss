@@ -153,7 +153,7 @@ p span.hourStart {
 
 .underInfo {
   @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Sterowanie');
-  color: $headersH3;
+  color: $mainLogosBgc;
 }
 
 .mobileInfo {

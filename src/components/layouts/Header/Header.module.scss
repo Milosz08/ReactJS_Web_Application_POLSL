@@ -125,7 +125,6 @@ header.topSiteHeader {
         background-color: transparent;
         &::before, &::after {
           top: 0;
-          //background-color: $mainLogosBgc;
           transform: rotate(135deg);
         }
         &::after {
@@ -199,7 +198,7 @@ header.topSiteHeader {
     }
   }
   .siteImportantInfo {
-    font-size: .9rem;
+    font-size: 1rem;
   }
   .topNavBar {
     display: none;
