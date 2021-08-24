@@ -23,6 +23,7 @@ import LoginSessionProvider from '../../contextStore/LoginSessionProvider';
 import GlobalModalsStateProvider from '../../contextStore/GlobalModalsStateProvider';
 
 import GotoTopButton from '../layouts/GotoTopButton/GotoTopButton';
+import ScrollToTop from '../../helpers/ScrollToTop';
 import Page from './Page';
 import DevToolsInfo from '../layouts/DevToolsInfo/DevToolsInfo';
 import Footer from '../layouts/Footer/Footer';
@@ -40,6 +41,7 @@ const App = (): JSX.Element => {
          <CookiesProvider>
             <CookiesObjectsProvider>
                <Router>
+                  <ScrollToTop/>
                   <GlobalModalsStateProvider>
                      <GotoTopButton/>
                      <LoginSessionProvider>

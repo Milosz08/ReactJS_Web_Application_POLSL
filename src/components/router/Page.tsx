@@ -32,7 +32,6 @@ import CalendarPage from '../pages/CalendarPage/CalendarPage';
 import SubjectsPassPage from '../pages/SubjectsPassPage/SubjectsPassPage';
 import AidsPage from '../pages/AidsPage/AidsPage';
 import AidsLogin from '../pages/AidsPage/AidsLogin';
-import ScrollToTop from '../../helpers/ScrollToTop';
 
 /**
  * Fixed plaque storing all unprotected components representing single pages in routing.
@@ -70,7 +69,6 @@ const Page = (): JSX.Element => {
 
    return (
       <Fragment>
-         <ScrollToTop/>
          <Switch>
             <Route
                path = '/' exact
