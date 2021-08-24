@@ -1,6 +1,22 @@
+/**
+ * @file CmsInfoHamburger.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                ReactFontAwesome: "^0.1.15"
+ *                ReactCSSmodules: "^4.7.11"
+ *                classnames: "^2.3.1"
+ *
+ * @date final version: 08/24/2021
+ */
+
 import React, { Fragment, useState } from 'react';
-import classnames from "classnames";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 
 const {
    hamburgerContainer, hamburgerButton, hamburgerBars, hamburgerMenu, active, loginInfoHamburger, sessionTimeHamburger,
@@ -14,7 +30,7 @@ interface PropsProvider {
 }
 
 /**
- * @details
+ * @details Component responsible for generating the hamburger menu for small devices in the CMS panel.
  */
 const CmsInfoHamburger: React.FC<PropsProvider> = ({ credLevel, timeCounting, callback }): JSX.Element => {
 
