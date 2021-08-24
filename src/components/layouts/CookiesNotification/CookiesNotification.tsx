@@ -33,10 +33,10 @@ const {
 } = require('./CookiesNotification.module.scss');
 
 /**
- * Constants on the basis of which the cookie file is generated.
+ * Constant on the basis of which the cookie file is generated.
  */
-const COOKIE_ID = uuidv4();
 const COOKIE_EXPIRES_TIME: number = 365;
+const COOKIE_ID = uuidv4();
 
 /**
  * @details Component responsible for displaying the notification about the use of cookies by the application. The
@@ -51,7 +51,7 @@ const CookiesNotification = (): JSX.Element => {
    const handleCookieButtons = (): void => {
       if(cookie!.__cookieNotification === undefined) {
          const expCookie: Date = cookieExpires(COOKIE_EXPIRES_TIME);
-         setCookie!(COOKIES_OBJECT.cookiesPopup, COOKIE_ID, { path: '/', expires: expCookie, sameSite: 'strict' });
+         setCookie!(COOKIES_OBJECT.cookiesPopup, COOKIE_ID, { path: '/', expires: expCookie });
       }
    }
 

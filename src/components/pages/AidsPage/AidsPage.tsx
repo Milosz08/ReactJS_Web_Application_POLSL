@@ -48,7 +48,7 @@ const AidsPage: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
 
    const handleLogout = (): void => {
       setAuth(false);
-      handleCookie(COOKIES_OBJECT.userSession, { path: '/', sameSite: 'strict' });
+      handleCookie(COOKIES_OBJECT.userSession, { path: '/' });
    }
 
    const generateTilesStructure = TILES_DATA.map((tile: TilesDataTypes) => (

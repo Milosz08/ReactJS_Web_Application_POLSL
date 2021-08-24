@@ -48,8 +48,8 @@ const CmsInfoBar = (): JSX.Element => {
 
    const handleLogout = () => {
       setAdminAuth!(false);
-      removeCookie!(COOKIES_OBJECT.adminSession, { path: '/', sameSite: 'strict' });
-      removeCookie!(COOKIES_OBJECT.credentialsLevel, { path: '/', sameSite: 'strict' });
+      removeCookie!(COOKIES_OBJECT.adminSession, { path: '/' });
+      removeCookie!(COOKIES_OBJECT.credentialsLevel, { path: '/' });
    }
 
    useEffect(() => {

@@ -61,7 +61,7 @@ const ScheduleForm: React.FC<PropsProvider> = ({ executeScroll }): JSX.Element =
    const createRememberCookie = (dataEncrypt: string, cookieName: string): void => {
       const encryptData = encrypt(dataEncrypt);
       const expCookie = cookieExpires(365);
-      setCookie!(cookieName, encryptData, { path: '/', expires: expCookie, sameSite: 'strict' });
+      setCookie!(cookieName, encryptData, { path: '/', expires: expCookie });
    }
 
    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {

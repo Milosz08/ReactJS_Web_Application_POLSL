@@ -94,9 +94,9 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }): JSX.
       });
 
       if(credentials.login === decryptArray[0]) {
-         handleCookie(COOKIES_OBJECT.credentialsLevel, 1, { path: '/', sameSite: 'strict' });
+         handleCookie(COOKIES_OBJECT.credentialsLevel, 1, { path: '/' });
       } else if(credentials.login === decryptArray[3]) {
-         handleCookie(COOKIES_OBJECT.credentialsLevel, 2, { path: '/', sameSite: 'strict' });
+         handleCookie(COOKIES_OBJECT.credentialsLevel, 2, { path: '/' });
       }
 
       if(credentials.login !== decryptArray[0] && credentials.login !== decryptArray[3]) {
@@ -120,7 +120,7 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }): JSX.
          setTimeout(() => { setAuth(true); }, 2000);
          setCredentialsHash([]);
          setTimeout(() => {
-            handleCookie(COOKIES_OBJECT.adminSession, COOKIE_ID, { path: '/', sameSite: 'strict' });
+            handleCookie(COOKIES_OBJECT.adminSession, COOKIE_ID, { path: '/' });
          }, 2000);
          setCredentials({ login: '', password: '', token: '' });
       } else {
