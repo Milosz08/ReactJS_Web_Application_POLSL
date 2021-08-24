@@ -55,7 +55,7 @@ const AdminCmsLoginInputs: React.FC<PropsProvider> = (props): JSX.Element => {
             setCredentials({ ...credentials, password: target.value });
             setErrors({ ...errors, password: false });
             break;
-         case 'unikalny token uwierzytelniający*':
+         case 'token uwierzytelniający*':
             setCredentials({ ...credentials, token: target.value });
             setErrors({ ...errors, token: false });
             break;
