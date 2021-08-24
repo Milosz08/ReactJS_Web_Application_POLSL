@@ -11,13 +11,17 @@
  * @date final version: ---
  */
 
-import React, {Fragment, useEffect} from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
 import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
-import ROUTING_PATH_NAMES from "../../../constants/routingPathNames";
+import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
+
+import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
+
+const { subjectsPassContainer, subjectsPassWrapper, infoBlock, linksContainer } = require('./SubjectsPassPage.module.scss');
 
 /**
  * @details Component responsible for generating a page with the guidelines of the opinion of individual items.
@@ -35,6 +39,38 @@ const SubjectsPassPage = (): JSX.Element => {
          <MobileDownNav id = {3}/>
          <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive={true}/>
+         <div className = {subjectsPassContainer}>
+            <div className = {subjectsPassWrapper}>
+               <UniversalHeader
+                  iconP = {['fas', 'university']}
+                  content = 'Warunki zaliczenia przedmiotów'
+                  ifCloseButtonVisible = {false}
+               />
+               <div className = {infoBlock}>
+                  <p>
+                     Wszyskie karty przedmiotów, w których zawarte są opisy wymaganych umiejętności przed zaliczeniem przedmiotu,
+                     umiejętności nabyte podczas odbywania przedmiotu, oraz umiejętności niezbędne do zdania przedmiotu, znajdziesz
+                     na oficjalnej stronie Wydziału Elektrycznego Politechniki Śląskiej.
+                  </p>
+                  <div className = {linksContainer}>
+                     <a
+                        href = 'https://www.elektr.polsl.pl/images/files/szjk/karty/2020/Karty_I_ST_1-2019.zip'
+                        target = '_blank'
+                        rel = 'noreferrer'
+                     >
+                        Karty przedmiotów
+                     </a>
+                     <a
+                        href = 'https://www.elektr.polsl.pl/images/files/szjk/plany/2019/Plan_I_st_stacjonarne_Ist_2019-2020.xls'
+                        target = '_blank'
+                        rel = 'noreferrer'
+                     >
+                        Plan studiów
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
       </Fragment>
    );
 }
