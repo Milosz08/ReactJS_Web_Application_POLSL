@@ -35,7 +35,7 @@ const getSingleDateObjects = (date: Date): ReturnProvider => {
    }
 
    const day: string | number = addZeroToFillValue(date.getDate());
-   const month: string | number = addZeroToFillValue(date.getMonth());
+   const month: string | number = addZeroToFillValue(date.getMonth() + 1);
    const hours: string | number = addZeroToFillValue(date.getHours());
    const minutes: string | number = addZeroToFillValue(date.getMinutes());
    const seconds: string | number = addZeroToFillValue(date.getSeconds());
