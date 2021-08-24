@@ -11,7 +11,7 @@
  * @date final version: 08/19/2021
  */
 
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
@@ -28,17 +28,27 @@ import Subjects from '../../layouts/Subjects/Subjects';
  */
 const StartPage = (): JSX.Element => {
 
+   const [ widthX, setWidthX ] = useState<number>(document.body.offsetWidth);
+
    useEffect(() => {
       document.title = ROUTING_PATH_NAMES.START_PAGE;
       return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
    }, []);
+
+   useEffect(() => {
+      const onResize = () => {
+         setWidthX(document.body.offsetWidth);
+      }
+      window.addEventListener('resize', onResize);
+      return () => window.removeEventListener('resize', onResize);
+   }, [widthX]);
 
    return (
       <Fragment>
          <CookiesNotification/>
          <MobileDownNav id = {0}/>
          <Header ifHeaderHasRedBar = {true}/>
-         <Slider autoPlay = {true} duration={5}/>
+         <Slider autoPlay = {widthX >= 1250} duration={5}/>
          <CovidInfo/>
          <CountDown/>
          <Navigation ifHeader = {false}/>
