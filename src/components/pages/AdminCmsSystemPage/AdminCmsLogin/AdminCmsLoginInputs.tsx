@@ -113,7 +113,7 @@ const AdminCmsLoginInputs: React.FC<PropsProvider> = (props): JSX.Element => {
          <div className = {inputCredentials}>
             <input
                type = {visible.token ? 'text' : 'password'}
-               placeholder = 'Unikalny token uwierzytelniający*'
+               placeholder = 'Token uwierzytelniający*'
                value = {credentials.token}
                onChange = {handleChangeInput}
                className = {(errors.token && wrongData).toString()}

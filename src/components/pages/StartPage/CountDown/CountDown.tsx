@@ -17,7 +17,7 @@ const { countDownContainer, countDownWrapper, dateFont, mobileDateFont } = requi
 /**
  * A constant representing the day and time of the counting end.
  */
-const EXP_TIME: number = new Date('2021-10-01 10:00:00').getTime();
+const EXP_TIME: number = new Date('2021-10-01T10:00:00').getTime();
 
 /**
  * Interface defining the type of State values.

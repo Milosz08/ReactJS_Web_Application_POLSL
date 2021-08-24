@@ -28,6 +28,7 @@ const {
  * The table of constants typeof string that stores the consecutive days of the week.
  */
 const DAYS: string[] = [ 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek' ];
+const START_STUDY: number = 2020;
 
 /**
  * Interface defining the types of scheduleSubjecst object.
@@ -88,15 +89,24 @@ class ComponentToPrint extends PureComponent<PropsProvider, StateProvider> {
 
    componentDidMount(): void {
       this._isMounted = true;
+      const date = new Date();
+
+      const yearValue = (): string => {
+         return date.getMonth() > 9
+            ? `${date.getFullYear()}/${date.getFullYear() + 1}` : `${date.getFullYear() - 1}/${date.getFullYear()}`
+      }
+
       const fetchData = async () => {
-         const schedulePrint = await axiosInstance.get(`/last-update/${process.env.REACT_APP_PRINTSCHEDULE_ID}`);
          const scheduleUpdate = await axiosInstance.get(`/last-update/${process.env.REACT_APP_SCHEDULE_ID}`);
-         const shedulePrintResp = JSON.parse(schedulePrint.request.response);
          const sheduleUpdateResp = JSON.parse(scheduleUpdate.request.response);
          const { day, month, year, hour, minutes, seconds } = sheduleUpdateResp.updateDate;
          if(this._isMounted) {
             this.setState({
-               semesterInfos: shedulePrintResp.updateDate,
+               semesterInfos: {
+                 semester: String((date.getFullYear() - START_STUDY) * 2),
+                 semesterType: String(date.getMonth() > 0 && date.getMonth() < 9 ? 'letni' : 'zimowy'),
+                 year: yearValue(),
+               },
                updateSchedule: {
                   dayS: day, monthS: month, yearS: year, hourS: hour, minutesS: minutes, secondsS: seconds,
                }
