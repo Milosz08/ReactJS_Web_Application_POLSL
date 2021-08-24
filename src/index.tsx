@@ -16,6 +16,8 @@ import ReactDOM from 'react-dom';
 import './styles/index.scss';
 import App from './components/router/App';
 
+import "core-js";
+
 /**
  * Forcing the scroll at position X: 0, Y: 0 every time you reload.
  */
