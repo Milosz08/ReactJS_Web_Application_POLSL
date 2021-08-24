@@ -19,3 +19,8 @@ html, body, button, input, select, option, textarea {
 * [role = 'link'] {
   cursor: pointer;
 }
+
+body.disable-scroll {
+  position: fixed;
+  width: 100%;
+}
