@@ -19,6 +19,7 @@ import classnames from 'classnames';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../contextStore/MainStoreProvider';
 import { ScheduleContext, ScheduleType } from '../../../../contextStore/ScheduleProvider';
+import ROUTING_PATH_NAMES from '../../../../constants/routingPathNames';
 
 import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
 import ComponentToPrint from '../../../layouts/ComponentToPrint/ComponentToPrint';
@@ -43,13 +44,14 @@ const AdditionalTools = (): JSX.Element => {
    const [ widthState, setWidthState ] = useState<number>(0);
 
    const resetValues = (): void => {
+      document.title = ROUTING_PATH_NAMES.SCHEDULE_PAGE;
       setShow(false);
       setWidthState(0);
    }
 
    const handlePrint:(() => void) | undefined = useReactToPrint({
       content: () => componentRef.current,
-      documentTitle: 'plan_zajec',
+      documentTitle: 'PDF | Plan Zajęć',
       onAfterPrint: () => resetValues(),
    });
 
@@ -57,8 +59,8 @@ const AdditionalTools = (): JSX.Element => {
       let count: number = 0;
       let index: NodeJS.Timeout;
       const asyncLoadingBar = (): void => {
-         count++;
-         setWidthState(count);
+         setWidthState(++count);
+         document.title = `${count}% | Generowanie Planu`;
          if(count === 100) {
             clearInterval(index);
             if(handlePrint) {
