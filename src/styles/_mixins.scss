@@ -22,6 +22,9 @@
 }
 
 @mixin imputField($padding_right, $spaceUpDown) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   padding: $spaceUpDown - 2 $padding_right $spaceUpDown $spaceUpDown + 5;
   outline: none;
   border: 2px solid #d0d0d0;
