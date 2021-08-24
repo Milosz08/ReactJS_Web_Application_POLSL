@@ -11,7 +11,7 @@
  *                ReactCSSmodules: "^4.7.11"
  *                classnames: "^2.3.1"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { useContext, useEffect, useState } from 'react';
@@ -82,7 +82,6 @@ const SessionEndModal = (): JSX.Element => {
       let logoutIndex: NodeJS.Timeout;
       let counter: number = 0;
       let toLogoutCounter: number = LOGOUT_REMAIN_TIME;
-      const audio = new Audio(`${process.env.PUBLIC_URL}/audio/session-warning.mp3`);
       if(adminSessionInfo!.modalOpen) {
          const hourglassAsyncAnimation = () => {
             counter++;
@@ -101,7 +100,7 @@ const SessionEndModal = (): JSX.Element => {
          }
          const logOutAsyncCounting = () => {
             if(toLogoutCounter % 5 === 0) {
-               audio.play();
+               new Audio(`${process.env.PUBLIC_URL}/audio/session-warning.mp3`).play();
             }
             document.title = `Za ${toLogoutCounter} sekund nastąpi wylogowanie`;
             setLogoutCountdown(toLogoutCounter--);

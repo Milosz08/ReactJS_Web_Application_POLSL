@@ -10,7 +10,7 @@
  *                ReactFontAwesome: "^1.1.6"
  *                ReactCSSmodules: "^0.1.15"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 import React from 'react';
@@ -52,8 +52,10 @@ const UniversalHeader: React.FC<PropsProvider> = ({
                icon = {iconP}
                className = {universalHeaderIcon}
             />
-            {content}
-            {addHeaderDayIndicator && <span className = {additionalTitleHeader}>{addHeaderDayIndicator}</span>}
+            <span>
+               {content}
+               {addHeaderDayIndicator && <span className = {additionalTitleHeader}>{addHeaderDayIndicator}</span>}
+            </span>
             <aside/>
             {ifCloseButtonVisible && <button
                className = {universalHeaderButton}

@@ -11,7 +11,7 @@
  *                classnames: "^2.3.1"
  *                ReactCSSmodules: "^4.7.11"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { useContext } from 'react';
@@ -133,7 +133,7 @@ const TypeAndPlatform = (): JSX.Element => {
             className = {addNewPZEmodule}
             onClick = {addNewValuePZEmodule}
          >
-            Dodaj nowy link do zajęć (max {TYPE_OPTIONS.length})
+            Dodaj nowy link (max {TYPE_OPTIONS.length})
          </button>
       </div>
    );

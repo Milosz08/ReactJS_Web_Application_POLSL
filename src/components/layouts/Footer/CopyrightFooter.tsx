@@ -11,7 +11,7 @@
  *                ReactFontAwesome: "^0.1.15"
  *                ReactCSSmodules: "^4.7.11"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { useContext } from 'react';
@@ -45,7 +45,7 @@ const CopytightFooter = (): JSX.Element => {
             </a>.
          </div>
          <div className = {copyAuthor}>
-            <span>&copy; 2020-2021 by </span>
+            <span>&copy; 2020-{new Date().getFullYear()} by </span>
             <a
                href = 'https://github.com/Milosz08'
                target = '_blank'

@@ -12,7 +12,7 @@
  *                classnames: "^2.3.1"
  *                ReactCSSmodules: "^1.0.2"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { useState, useContext } from 'react';
@@ -117,13 +117,13 @@ const CalendarPanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
          <SearchBox
             inputField = {inputField}
             setInputField = {setInputField}
-            placeholderProp = 'Wyszukaj po dacie (dd/mm/yyyy)'
+            placeholderProp = '(dd/mm/yyyy)'
          />
          <ul>
             <li className = {listSorting}>
                <span className = {sortById}>id</span>
-               <span className = {sortByDate}>data wpisu/wpisów</span>
-               <span className = {sortByCount}>ilość wpisów</span>
+               <span className = {sortByDate}>data</span>
+               <span className = {sortByCount}>ilość</span>
                <span className = {sortByImportant}>ważność</span>
             </li>
             {generateSubjectsList}

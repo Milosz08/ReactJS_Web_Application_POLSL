@@ -10,7 +10,7 @@
  *                CryptoJS: "^4.1.1"
  *                uuid: "^8.3.1"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { ChangeEvent, useEffect, useState } from 'react';
@@ -102,7 +102,7 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
    }
 
    const sendChangeCredentials = async (): Promise<any> => {
-      const { REACT_APP_ADMIN_ID, REACT_APP_USER_ID } = process.env;
+      const { REACT_APP_MODERATOR_ID, REACT_APP_USER_ID } = process.env;
 
       const salt = CryptoJS.lib.WordArray.random(128 / 8);
       const key512bits = CryptoJS.PBKDF2(newCredent.passwords[0].value, salt, { keySize: 512 / 32 })
@@ -113,7 +113,7 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
 
       if(!ifUser) { //administrator (1)
          const cryptAdminToken = AES.encrypt(adminToken.value, hashKey).toString();
-         await axiosInstance.put(`authentication/${REACT_APP_ADMIN_ID}`, {
+         await axiosInstance.put(`authentication/${REACT_APP_MODERATOR_ID}`, {
             role: 1, login: cryptLogin, password: cryptPassword, token: hashKey, adminToken: cryptAdminToken
          });
       } else { //user (0)
@@ -179,7 +179,7 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
          <div className = {loginField}>
             <input
                type = 'text'
-               placeholder = 'Nowy login'
+               placeholder = 'Login'
                value = {newCredent.login}
                onChange = {handleInputs}
                className = {errors.login ? errorValue : ''}
@@ -194,7 +194,7 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
          {!ifUser && <div className = {inputNewAdminToken}>
             <input
                type = {adminToken.ifVisible ? 'text' : 'password'}
-               placeholder = 'Nowy token'
+               placeholder = 'Token'
                value = {adminToken.value}
                onChange = {handleInputs}
                className = {errors.token ? errorValue : ''}

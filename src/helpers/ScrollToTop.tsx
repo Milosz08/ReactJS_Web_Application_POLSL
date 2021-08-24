@@ -9,32 +9,22 @@
  * @dependencies  ReactJS: "^17.0.2"
  *                ReactRouterDOM: "^5.2.0"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
-import { useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-
-/**
- * Interface defining the type of props values.
- */
-interface ScrollToTopProps {
-   history: any;
-}
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 /**
  * @details A function that forces a scroll to position X: 0, Y: 0 after each routing (transition to a new address path).
- *
- * @param history { any } - remembered address in the browser's search field
  */
-const ScrollToTop: React.FC<ScrollToTopProps> = ({ history }): null => {
+const ScrollToTop = (): null => {
 
-   useEffect(() => {
-      const unlisten = history.listen(() => window.scrollTo(0, 0));
-      return () => unlisten();
-   }, [history]);
+   const { pathname } = useLocation();
+
+   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
 
    return null;
 }
 
-export default withRouter(ScrollToTop);
+export default ScrollToTop;

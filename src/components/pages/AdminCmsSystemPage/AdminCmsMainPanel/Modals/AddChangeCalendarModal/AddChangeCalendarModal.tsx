@@ -12,7 +12,7 @@
  *                classnames: "^2.3.1"
  *                uuid: "^8.3.1"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { useContext, useEffect } from 'react';
@@ -176,7 +176,7 @@ const AddChangeCalendarModal = (): JSX.Element => {
                      onClick = {handleAddNewEntrie}
                      title = 'Dodaj nowy wpis kalendarza'
                   >
-                     Dodaj nowy wpis kalendarza ({entries!.length}/{MAX_ENTRIES_ADD})
+                     Dodaj nowy wpis ({entries!.length}/{MAX_ENTRIES_ADD})
                   </button>
                </div>
                <div className = {formCalendarButtons}>

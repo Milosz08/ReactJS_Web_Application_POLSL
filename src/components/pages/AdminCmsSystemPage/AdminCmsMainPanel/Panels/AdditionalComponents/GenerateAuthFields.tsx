@@ -8,7 +8,7 @@
  *
  * @dependencies  ReactJS: "^17.0.2"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { ChangeEvent, Dispatch, SetStateAction, Fragment } from 'react';
@@ -67,7 +67,7 @@ const GenerateAuthField: React.FC<PropsProvider> = ({ newCredent, setNewCredent,
          <div className = {passwordField} key = {password.id}>
             <input
                type = {password.ifVisible ? 'text' : 'password'}
-               placeholder = {`Wprowadź ${index !== 0 ? 'ponownie' : ''} nowe hasło`}
+               placeholder = {`${index !== 0 ? 'Potwierdź nowe' : 'Nowe'} hasło`}
                value = {password.value}
                onChange = {handleChangeInput}
                className = {index === 0 ? (errors.password ? errorValue : '') : (errors.passNotMath ? errorValue : '')}

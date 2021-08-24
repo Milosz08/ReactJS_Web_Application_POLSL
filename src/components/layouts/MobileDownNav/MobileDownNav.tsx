@@ -11,7 +11,7 @@
  *                classnames: "^2.3.1"
  *                ReactCSSmodules: "^4.7.11"
  *
- * @date final version: 08/22/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { Fragment, useContext, useState } from 'react';
@@ -36,7 +36,7 @@ const ELEMENTS_COUNT: number = 5;
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   id: number;
+   id?: number;
 }
 
 /**
@@ -48,9 +48,9 @@ const MobileDownNav: React.FC<PropsProvider> = ({ id }): JSX.Element => {
 
    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
-   const [ activeElm, setActiveElm ] = useState<number>(id);
+   const [ activeElm, setActiveElm ] = useState<number>(id === undefined ? -1 : id);
    const [ singleWidthX ] = useState<number>(document.body.offsetWidth / ELEMENTS_COUNT);
-   const [ indicatorXPos, setIndicatorXPos ] = useState<number>(singleWidthX * id);
+   const [ indicatorXPos, setIndicatorXPos ] = useState<number>(id === undefined ? -1 * singleWidthX : singleWidthX * id);
 
    const handleMenuClick = (id: number): void => {
       setIndicatorXPos(singleWidthX * id);

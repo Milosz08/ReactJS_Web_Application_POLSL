@@ -10,7 +10,7 @@
  *                classnames: "^2.3.1"
  *                ReactCSSmodules: "^1.0.2"
  *
- * @date final version: 08/20/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { useContext, useState } from 'react';
@@ -75,7 +75,7 @@ const SchedulePanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
          <SearchBox
             inputField = {inputField}
             setInputField = {setInputField}
-            placeholderProp = 'Wyszukaj po nazwie/typie/godzinie'
+            placeholderProp = 'Nazwa/typ/godzina'
          />
          {generateFullDaysStructure}
          <SetScheduleBreak/>

@@ -1,4 +1,21 @@
-import React, {Fragment, useContext} from 'react';
+/**
+ * @file SummerBreakSchedule.tsx
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @dependencies  ReactJS: "^17.0.2"
+ *                uuid: "^8.3.1"
+ *                classnames: "^2.3.1"
+ *                ReactCSSmodules: "^1.0.2"
+ *
+ * @date final version: 08/24/2021
+ */
+
+import React, { Fragment, useContext } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 
 import { STATIC_DAYS } from './SchedulePage';
@@ -9,7 +26,8 @@ const { dayOfWeekCSS, endLineOfSection, separateContainer } = require('./Schedul
 const { scheduleSection, centerSeparateWindow, centerSeparateContent, active } = require('./ScheduleSections.module.scss');
 
 /**
- * @details
+ * @details Component responsible for generating information about an empty timetable (inter-semester break,
+ *          holidays, etc.).
  */
 const SummerBreakSchedule = (): JSX.Element => {
 
@@ -19,8 +37,8 @@ const SummerBreakSchedule = (): JSX.Element => {
    const generateHeaders: JSX.Element[] = STATIC_DAYS.map((day: string) => {
       const ifActive: string = dayStr.toLocaleLowerCase() === day.toLocaleLowerCase() ? active : '';
       return (
-         <div className={scheduleSection}>
-            <header className={classnames(dayOfWeekCSS, ifActive)}>
+         <div className = {scheduleSection} key = {uuidv4()}>
+            <header className = {classnames(dayOfWeekCSS, ifActive)}>
                {day}
             </header>
          </div>
@@ -30,7 +48,7 @@ const SummerBreakSchedule = (): JSX.Element => {
    const generateFooters: JSX.Element[] = STATIC_DAYS.map((day: string) => {
       const ifActive: string = dayStr.toLocaleLowerCase() === day.toLocaleLowerCase() ? active : '';
       return (
-         <aside className={classnames(endLineOfSection, separateContainer, ifActive)}/>
+         <aside className = {classnames(endLineOfSection, separateContainer, ifActive)} key = {uuidv4()}/>
       );
    });
 

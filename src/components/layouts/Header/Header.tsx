@@ -11,7 +11,7 @@
  *                ReactCSSmodules: "^4.7.11"
  *                classnames: "^2.3.1"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { useContext, useEffect, useRef, useState } from 'react';
@@ -52,8 +52,8 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }): JSX.Element => 
 
    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
-   const [ offset, setOffset ] = useState<number>(0);
    const [ width, setWidth ] = useState<number>(window.innerWidth);
+   const [ offset, setOffset ] = useState<number>(width < 1250 ? 0 : window.pageYOffset);
    const [ menuSticky, setMenuSticky ] = useState<boolean>(false);
    const [ elmHeight, setElmHeight ] = useState<number>(0);
    const [ headerHide, setHeaderHide ] = useState<boolean>(false);
@@ -83,7 +83,7 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }): JSX.Element => 
          setOffset(window.pageYOffset);
       }
       if(topHeaderHeightRef.current != null && width > 1250) {
-         setElmHeight(topHeaderHeightRef.current.offsetHeight)
+         setElmHeight(topHeaderHeightRef.current.offsetHeight);
       }
       if(offset === 0) {
          setMenuSticky(false);

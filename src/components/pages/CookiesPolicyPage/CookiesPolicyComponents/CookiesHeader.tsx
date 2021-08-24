@@ -11,14 +11,14 @@
  *                classnames: "^2.3.1"
  *                ReactCSSmodules: "^1.0.2"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
+import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
 
-const { cookiesInfoHeader, fasIcon } = require('./../../../layouts/Navigation/Navigation.module.scss');
+const { cookiesInfoHeader } = require('./../../../layouts/Navigation/Navigation.module.scss');
 const { cookiesSections, cookieContent } = require('./../CookiesPolicyPage.module.scss');
 
 /**
@@ -27,14 +27,11 @@ const { cookiesSections, cookieContent } = require('./../CookiesPolicyPage.modul
 const CookiesHeader = (): JSX.Element => {
    return (
       <header className = {classnames(cookiesInfoHeader, cookiesSections)}>
-         <h3>
-            <FontAwesomeIcon
-               icon = {['fas', 'cookie-bite']}
-               className = {fasIcon}
-            />
-            Polityka Cookies
-            <aside/>
-         </h3>
+         <UniversalHeader
+            iconP = {['fas', 'cookie-bite']}
+            content = 'Polityka Cookies'
+            ifCloseButtonVisible = {false}
+         />
          <div className = {cookieContent}>
             Poniższa treść Polityki Cookies określa zasady zapisywania i uzyskiwania dostępu do danych na
             Urządzeniach elektronicznych, dalej nazywanych Urządzeniami Użytkowników korzystających z
