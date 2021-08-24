@@ -45,7 +45,12 @@ const SetScheduleBreak = (): JSX.Element => {
       setCheckbox(prevState => !prevState);
    }
 
-   useEffect(() => { setCheckbox(summerBreak!); }, []);
+   useEffect(() => {
+      if(summerBreak !== undefined) {
+         setCheckbox(summerBreak!);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
 
    return (
       <div className = {setScheduleBreakContainer}>
