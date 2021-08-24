@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../../../styles/_variables';
@@ -30,7 +30,8 @@
     width: 800px;
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 10px 40px 40px 40px;
+    padding: 10px 40px 40px;
+    margin: 30px;
     aside {
       margin-right: 0;
     }
@@ -137,6 +138,7 @@ header.modalAddHeader h3 {
 
 .modalWarningButtons {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   button {
     @include defaultButton();
@@ -160,5 +162,25 @@ strong.deleteSchedule {
 .dangerColorWrapper {
   header * {
     color: $importantColor;
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1000px) {
+  .modalContainer {
+    position: absolute;
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .modalContainer {
+    justify-content: flex-start;
+    .modalWrapper, .modalAddWrapper {
+      padding: 10px 30px 30px;
+      margin: 30px 15px;
+      width: calc(100% - 30px);
+    }
   }
 }

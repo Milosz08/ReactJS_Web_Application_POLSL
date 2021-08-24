@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../../styles/_variables';
@@ -136,5 +136,37 @@
     font-weight: 500;
     font-size: 1.1rem;
     margin: 10px 80px;
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .mainInfoContainer, .changeCredentials {
+    width: calc(100% - 40px);
+    margin: 40px 20px 0;
+    padding: 20px;
+    text-align: center;
+    &::before {
+      top: -11px;
+      width: 150px;
+      font-size: 1rem;
+      display: inline-block;
+    }
+  }
+  .changeCredentials {
+    margin: 40px 20px 20px;
+    padding: 20px;
+    .changeCredentialsForm {
+      .loginField, .inputNewAdminToken, .confirmViaAdminPasswordField, .passwordField {
+        input {
+          width: 100%;
+          font-size: .9rem;
+        }
+      }
+    }
+    p.disabledInfo {
+      margin: 10px 20px;
+    }
   }
 }

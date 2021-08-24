@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../../styles/_variables';
@@ -93,7 +93,6 @@ label.insertDataInputField {
     span.sortByType {
       width: 510px;
     }
-
     span.sortByEnd, span.sortByImportant {
       width: 310px;
       color: $footerHeaders;
@@ -165,5 +164,52 @@ button.addNewRecord {
   margin: 50px 0;
   .infoIcon {
     font-size: 2.2rem;
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .panelContainer {
+    h2 {
+      margin: 40px 20px;
+      text-align: center;
+    }
+    ul > li {
+      font-size: 1.2rem;
+      padding: 5px 15px;
+      span.listNumber {
+        width: auto;
+      }
+      span.sortById {
+        width: 30px;
+      }
+      span.sortByType, span.typeOfMessageCSS, span.subjectSemesters, span.sortBySem, span.sortByCount, span.listCount,
+      span.subjectStatus, span.sortByEnd, span.listImportant, span.sortByImportant {
+        display: none;
+      }
+      span.listTitle, span.listDate {
+        width: 200px;
+        margin-left: 20px;
+        padding: 9px 0;
+      }
+      button.modifyElement, button.deleteElement {
+        margin-left: 0;
+        font-size: 1.2rem;
+      }
+    }
+  }
+  label.insertDataInputField {
+    div {
+      input[type = 'text'] {
+        width: 100%;
+      }
+    }
+  }
+  .listImportant {
+    display: none;
+  }
+  button.addNewRecord {
+    padding: 6px 0 9px 0;
   }
 }

@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../../../styles/_variables';
@@ -245,11 +245,57 @@
 .formModalButtons {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   button {
     @include defaultButton();
     max-width: 250px;
     &.subjectFormSend {
       background-color: $yellowDefColor;
+    }
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1000px) {
+  .signleInputsContainer, .multipleInputsContainer, .oneTypeContainer {
+    flex-direction: column;
+    .titleContainer, .iconContainer {
+      margin: 10px 0;
+    }
+  }
+  .multipleInputsContainer {
+    .checkFieldsLeft, .departmentsContainer {
+      margin: 10px 0;
+    }
+  }
+  .typeAndPlatformContainer {
+    margin: 10px 0;
+    .oneTypeContainer {
+      .selectContainer select {
+        width: calc(100% - 20px);
+        margin: 5px 10px;
+      }
+      button {
+        top: 85%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 590px) {
+  .checkboxContainer {
+    .singleCheckboxField {
+      flex-basis: 40%;
+      justify-items: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .checkboxContainer {
+    .singleCheckboxField {
+      flex-basis: 50%;
     }
   }
 }

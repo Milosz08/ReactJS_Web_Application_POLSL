@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../../../styles/_variables';
@@ -126,5 +126,36 @@
   }
   .timeSelectWrapper::before {
     content: 'czas odbywania zajęć';
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1000px) {
+  .titleAndTypeContainer, .groupAndTimeContainer {
+    flex-direction: column;
+    .titleSelectWrapper, .typeSelectWrapper, .groupSelectWrapper, .timeSelectWrapper {
+      flex-direction: column;
+    }
+    .titleSelectWrapper {
+      margin-right: 0;
+    }
+    .typeSelectWrapper, .timeSelectWrapper {
+      margin-left: 0;
+    }
+    .titleSelectWrapper {
+      margin-bottom: 30px;
+    }
+    .timeSelectWrapper {
+      margin-top: 30px;
+      .inputWrapper {
+        max-width: 200px;
+      }
+      span {
+        margin-top: 0;
+        line-height: 20px;
+        height: 30px;
+      }
+    }
   }
 }

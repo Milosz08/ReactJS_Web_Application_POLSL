@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../styles/_variables';
@@ -54,4 +54,22 @@
   font-size: 1.3rem;
   font-weight: 500;
   color: $headersH3;
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .cmsSystemContainer {
+    width: 100%;
+    nav.cmsNavigation {
+      button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+    }
+    .cmsContent {
+      width: calc(100% - 60px);
+    }
+  }
 }

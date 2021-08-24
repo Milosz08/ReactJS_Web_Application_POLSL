@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../../styles/_variables';
@@ -127,6 +127,49 @@
       @include defaultButton();
       width: 150px;
       margin-top: 0;
+    }
+  }
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .oneDaySubjectContainer {
+    button.dayButtonToggle {
+      span:nth-of-type(2) {
+        display: none;
+      }
+    }
+    ul.scheduleList {
+      & > li {
+        .listHour, .listType, .listGroup, .listGroupHeader {
+          display: none;
+        }
+        .listTitle {
+          width: 200px;
+          margin-left: 20px;
+          padding: 9px 0;
+        }
+      }
+    }
+  }
+  .setScheduleBreakContainer {
+    .checkboxContainer {
+      flex-wrap: wrap;
+      .checkboxWrapper {
+        label {
+          line-height: 1.1;
+          margin-left: 10px;
+        }
+      }
+    }
+    .sendData {
+      flex-direction: column-reverse;
+      button {
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 200px;
+      }
     }
   }
 }

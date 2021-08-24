@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../styles/_variables';
@@ -87,8 +87,10 @@ form.adminCredentials, form.userCredentials {
 
 @media only screen and (max-width: 1250px) {
   .adminLoginContainer {
+    width: 100%;
     .adminLoginWrapper {
-      margin-top: 110px;
+      margin-top: 150px;
+      width: calc(100% - 30px);
     }
   }
   form.adminCredentials, form.userCredentials {

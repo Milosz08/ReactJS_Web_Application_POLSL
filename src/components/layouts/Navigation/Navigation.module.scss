@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../styles/_variables';
@@ -125,7 +125,7 @@ section.navInline ul {
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1250px) {
-  .navBlocks, .scheduleRender, .universalHeader, .subjInfos, .sheduleBlocks {
+  .navBlocks, .scheduleRender, .universalHeader, .subjInfos, .sheduleBlocks, .cookiesInfoHeader, .cookieSectionsContent {
     width: calc(100% - 60px);
     margin: 0 30px;
     h3 {
@@ -140,7 +140,7 @@ section.navInline ul {
       }
     }
   }
-  .universalHeader {
+  .universalHeader, .cookiesInfoHeader, .cookieSectionsContent {
     aside {
       display: none;
     }

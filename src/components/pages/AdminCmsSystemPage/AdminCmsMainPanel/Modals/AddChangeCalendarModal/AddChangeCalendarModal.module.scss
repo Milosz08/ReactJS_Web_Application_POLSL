@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../../../styles/_variables';
@@ -69,12 +69,14 @@
   width: 100%;
   .timeAndImportant {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     .importantsRadio {
       display: flex;
       justify-content: space-around;
       align-items: center;
       flex-basis: 40%;
+      margin-top: 20px;
     }
     .inputTime {
       display: flex;
@@ -98,6 +100,7 @@
 }
 
 .radioImportants {
+  margin-right: 10px;
   &:nth-child(1) div::after {
     background-color: $goodColor;
   }
@@ -158,6 +161,7 @@
 
 .formCalendarButtons {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   width: 80%;
   button {

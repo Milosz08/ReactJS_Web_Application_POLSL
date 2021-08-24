@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../styles/_variables';
@@ -58,5 +58,10 @@
       top: 180px;
     }
   }
+}
 
+@media only screen and (max-width: 500px) {
+  .currentURLcontainer {
+    display: none;
+  }
 }

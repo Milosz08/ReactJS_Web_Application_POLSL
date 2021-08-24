@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../styles/_variables';
@@ -15,7 +15,6 @@
 .cookiesInfoContainer {
   display: flex;
   justify-content: center;
-
   .cookiesInfoWrapper {
     position: relative;
     width: $widthVertical;
@@ -70,4 +69,19 @@
   font-size: 2.3rem;
   margin-right: 20px;
   color: $yellowDefColor;
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .cookiesInfoContainer {
+    .cookiesInfoWrapper {
+      width: 100%;
+      margin-top: 110px;
+    }
+  }
+  .sectionSign {
+    display: flex;
+    min-width: 50px;
+  }
 }

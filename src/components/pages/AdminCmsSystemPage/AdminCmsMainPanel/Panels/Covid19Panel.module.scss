@@ -6,7 +6,7 @@
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 @import './../../../../../styles/_variables';
@@ -64,4 +64,19 @@ p.unwriteChangesCSS  {
   font-size: 1.2rem;
   color: $importantColor;
   margin: 10px 0;
+}
+
+////////////////////////////////////////////////////
+
+@media only screen and (max-width: 1250px) {
+  .covidPanelsContainer {
+    section {
+      width: 100%;
+      .sectionWrapper {
+        h3 {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
 }
