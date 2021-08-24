@@ -82,6 +82,7 @@
   &::before {
     position: absolute;
     content: $content;
+    width: fit-content;
     top: -14px;
     left: 20px;
     background-color: $titleBgc;
@@ -144,6 +145,7 @@
   &::after {
     position: absolute;
     content: 'status ukończenia';
+    width: fit-content;
     top: -11px;
     left: 50%;
     padding: 0 10px;
