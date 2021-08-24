@@ -11,7 +11,7 @@
  *                ReactCSSmodules: "^4.7.11"
  *                classnames: "^2.3.1"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { useContext, useState } from 'react';
@@ -21,9 +21,9 @@ import classnames from 'classnames';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreProvider';
 
-import axiosInstance from "../../../helpers/request";
-import CONSTANT_DATA from "../../../constants/staticData";
-import getSingleDateObjects from "../../../constants/getSingleDateObjects";
+import axiosInstance from '../../../helpers/request';
+import CONSTANT_DATA from '../../../constants/staticData';
+import getSingleDateObjects from '../../../constants/getSingleDateObjects';
 
 const {
    errorSomeInput, posSendForm, quantityChars, showPositiveMess, selectFieldCont, selectArrowIcon, checkField,
@@ -128,8 +128,9 @@ const FooterForm = (): JSX.Element => {
             fullTime: `${hours}:${minutes}:${seconds}`,
          }
       }
-      await axiosInstance.post('/footer-form', objectToSend);
-      copy.push(objectToSend);
+      const res = await axiosInstance.post('/footer-form', objectToSend);
+      const newFormFromUser = res.data;
+      copy.push(newFormFromUser);
       setDataFetchFromServer({ ...dataFetchFromServer, footerForms: copy });
    }
 
