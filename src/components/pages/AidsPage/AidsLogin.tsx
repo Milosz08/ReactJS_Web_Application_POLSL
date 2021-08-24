@@ -24,6 +24,7 @@ import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 
 import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
+import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
 import Header from '../../layouts/Header/Header';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 import LoadingSystemAnimation from '../../layouts/LoadingSystemAnimation/LoadingSystemAnimation';
@@ -143,6 +144,7 @@ const AidsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
    return (
       <Fragment>
          <CookiesNotification/>
+         <MobileDownNav/>
          <Header ifHeaderHasRedBar = {true}/>
          <CurrentURLpath ifImportatHeaderActive = {true}/>
          <div className = {userLoginContainer}>

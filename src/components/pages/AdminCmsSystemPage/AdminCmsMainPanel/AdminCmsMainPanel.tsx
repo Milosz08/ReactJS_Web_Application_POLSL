@@ -17,6 +17,7 @@ import ModalsStateProvider from '../../../../contextStore/ModalsStateProvider';
 import ROUTING_PATH_NAMES from '../../../../constants/routingPathNames';
 
 import CookiesNotification from '../../../layouts/CookiesNotification/CookiesNotification';
+import MobileDownNav from '../../../layouts/MobileDownNav/MobileDownNav';
 import Header from '../../../layouts/Header/Header';
 import CurrentURLpath from '../../../layouts/CurrentURLpath/CurrentURLpath';
 import DeleteModalsStructure from "./Modals/DeleteModalsStructure";
@@ -38,6 +39,7 @@ const AdminCmsMainPanel = (): JSX.Element => {
    return (
       <Fragment>
          <CookiesNotification/>
+         <MobileDownNav/>
          <Header ifHeaderHasRedBar = {false}/>
          <CurrentURLpath ifImportatHeaderActive = {true}/>
          <ModalsStateProvider>

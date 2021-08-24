@@ -11,7 +11,7 @@
  *                uuid: "^8.3.1"
  *                ReactCSSmodules: "^1.0.2"
  *
- * @date final version: 08/19/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { Fragment, useEffect } from 'react';
@@ -20,6 +20,7 @@ import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 
 import Header from '../../layouts/Header/Header';
+import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
 import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
 import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
 import CookiesHeader from './CookiesPolicyComponents/CookiesHeader';
@@ -98,6 +99,7 @@ const CookiesPolicy = (): JSX.Element => {
 
    return (
       <Fragment>
+         <MobileDownNav/>
          <Header ifHeaderHasRedBar = {false}/>
          <CurrentURLpath ifImportatHeaderActive = {false}/>
          <div className = {cookiesInfoContainer}>
@@ -107,17 +109,19 @@ const CookiesPolicy = (): JSX.Element => {
                <CookiesOuterServices/>
                {generateNonListStructureDOM}
                <CookiesTurnOff/>
-               <UniversalHeader
-                  iconP = {['fas', 'user-lock']}
-                  content = 'Bezpieczeństwo Aplikacji'
-                  ifCloseButtonVisible = {false}
-               />
-               <div className = {cookieContent}>
-                  Wrażliwe dane wpisywane do formularzy (hasła, tokeny), dane wysyłane do administratorów i moderatorów
-                  strony w formularzach przez Użytkowników oraz wrażliwe dane w bazie danych przechowywane są po
-                  wcześniejszym zaszyfrowaniu. Aplikacja używa jednego z najbardziej niezawodnych
-                  algorytmów kryptograficznych wraz każdorazowo generowanym sekretnym kluczem.
-               </div>
+               <section className = {classnames(cookieSectionsContent, cookiesSections)}>
+                  <UniversalHeader
+                     iconP = {['fas', 'user-lock']}
+                     content = 'Bezpieczeństwo Aplikacji'
+                     ifCloseButtonVisible = {false}
+                  />
+                  <div className = {cookieContent}>
+                     Wrażliwe dane wpisywane do formularzy (hasła, tokeny), dane wysyłane do administratorów i moderatorów
+                     strony w formularzach przez Użytkowników oraz wrażliwe dane w bazie danych przechowywane są po
+                     wcześniejszym zaszyfrowaniu. Aplikacja używa jednego z najbardziej niezawodnych symetrycznych
+                     algorytmów kryptograficznych wraz każdorazowo generowanym sekretnym kluczem.
+                  </div>
+               </section>
                <div className = {sectionDecorationSign}>&#167;</div>
             </div>
          </div>

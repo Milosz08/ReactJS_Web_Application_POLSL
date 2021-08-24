@@ -12,7 +12,7 @@
  *                uuid: "^8.3.1"
  *                classnames: "^2.3.1"
  *
- * @date final version: 08/18/2021
+ * @date final version: 08/24/2021
  */
 
 import React, { Fragment, useState, useEffect } from 'react';
@@ -22,13 +22,14 @@ import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 
 import CookiesNotification from '../../../layouts/CookiesNotification/CookiesNotification';
+import MobileDownNav from '../../../layouts/MobileDownNav/MobileDownNav';
 import Header from '../../../layouts/Header/Header';
 import CurrentURLpath from '../../../layouts/CurrentURLpath/CurrentURLpath';
 import LoadingSystemAnimation from '../../../layouts/LoadingSystemAnimation/LoadingSystemAnimation';
+import AdminCmsLoginInputs from './AdminCmsLoginInputs';
 
 import COOKIES_OBJECT from '../../../../constants/allCookies';
-import AdminCmsLoginInputs from './AdminCmsLoginInputs';
-import ROUTING_PATH_NAMES from "../../../../constants/routingPathNames";
+import ROUTING_PATH_NAMES from '../../../../constants/routingPathNames';
 
 const {
    adminLoginWrapper, adminLoginContainer, adminCredentials, onSubmitCSS, infoAboutToken, poweredBy,
@@ -156,6 +157,7 @@ const AdminCmsLogin: React.FC<PropsProvider> = ({ setAuth, handleCookie }): JSX.
    return (
       <Fragment>
          <CookiesNotification/>
+         <MobileDownNav/>
          <Header ifHeaderHasRedBar = {false}/>
          <CurrentURLpath ifImportatHeaderActive = {false}/>
          <div className = {adminLoginContainer}>
