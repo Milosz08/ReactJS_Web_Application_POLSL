@@ -16,6 +16,23 @@ Advanced, full-stack web application written using the ReactJS library and other
 ## About the Project
 This application was created to provide comprehensive information to students on the current schedule of classes, upcoming activities and information about currently held subjects. This is my first such large and advanced project using the ReactJS library. Writing the application took me about 1.5 months in total. It was a very long 1.5 months of hard work with the code, but thanks to writing the application I learned a lot of new things about ReactJS, TypeScript and the whole NodeJS development environment.
 
+## Custom CMS (Content Management System)
+I created my own CMS for the application (based on the mechanics and appearance of Strapi - a popular CMS system written in JavaScript). It was a big challenge for me because I was creating such a system for the first time and it may not be perfect, but it works perfectly for its purposes. This system closely communicates with the global React Context Store and API written in NodeJS.
+
+## Screenshot gallery
+
+> Main Page
+<img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-1.PNG" width="1920">
+
+> Calendar Page
+<img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-2.PNG" width="1920">
+
+> CMS Login Panel
+<img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-3.PNG" width="1920">
+
+> CMS Main Panel
+<img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-4.PNG" width="1920">
+
 ## Website Routing Structure
 This application was written in the SPA (Single Page Application) standard. Due to this, routing between individual subpages is carried out using the `react-router-dom` library. I also used the `ProtectedRoute` component to support login systems (both for the user and for the administrator).
 
@@ -80,9 +97,6 @@ app.get('/*', (req, res) => {
   });
 });
 ```
-## Screenshot gallery
-
-<img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-1.png" width="1920">
 
 ## Clone and Installation
 If you want to clone and work with this repository, use the built-in interface in your IDE (for example WebStorm or Visual Studio Code) or use the clone project algorithm with git bash:<br>
