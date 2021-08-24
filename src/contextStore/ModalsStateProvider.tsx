@@ -11,7 +11,8 @@
  * @date final version: 08/19/2021
  */
 
-import React, { createContext, Dispatch, SetStateAction, useState } from 'react';
+import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import './../styles/index.scss';
 
 /**
  * Constant Object defining methods for modals.
@@ -73,6 +74,24 @@ const ModalsStateProvider: React.FC<PropsProvider> = ({ children }) => {
    const [ calendarModal, setCalendarModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
    const [ messageModal, setMessageModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
    const [ scheduleModal, setScheduleModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, day: '', ifOpen: false });
+
+   const [ widthAxiosX, setWidthAxiosX ] = useState<number>(document.body.offsetWidth);
+
+   useEffect(() => {
+      if(document.body.offsetWidth < 1000) {
+         if(subjectModal.ifOpen || calendarModal.ifOpen || messageModal.ifOpen ||scheduleModal.ifOpen) {
+            document.body.classList.add('disable-scroll');
+         } else {
+            document.body.classList.remove('disable-scroll');
+         }
+      }
+   }, [subjectModal, calendarModal, messageModal, scheduleModal]);
+
+   useEffect(() => {
+      const getWidthOffset = () => setWidthAxiosX(document.body.offsetWidth);
+      document.addEventListener('resize', getWidthOffset);
+      return () => document.removeEventListener('resize', getWidthOffset);
+   }, [widthAxiosX]);
 
    return (
       <ModalsStateContext.Provider
