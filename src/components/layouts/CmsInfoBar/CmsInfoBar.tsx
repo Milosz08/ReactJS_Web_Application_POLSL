@@ -22,6 +22,7 @@ import { GlobalModalsStateContext, GlobalModalsStateTypes } from '../../../conte
 import { LoginSessionContext, LoginSessionProviderTypes } from '../../../contextStore/LoginSessionProvider';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../contextStore/CookiesObjectsProvider';
 
+import CmsInfoHamburger from './CmsInfoHamburger';
 import { MAX_INACTIVITY_TIME } from '../CredentialsSequencers/SessionActivityCount';
 import COOKIES_OBJECT from '../../../constants/allCookies';
 
@@ -72,7 +73,12 @@ const CmsInfoBar = (): JSX.Element => {
       <div className = {ifCmsBarActive}>
          <div className = {cmsInfoWrapper}>
             <div className = {logoContainer}>
-               <strong>WCMS</strong>Panel 1.0 by Miłosz Gilga
+               <span><strong>WCMS</strong>Panel 1.0 by Miłosz Gilga</span>
+               <CmsInfoHamburger
+                  credLevel = {credLevel}
+                  timeCounting = {timeCounting}
+                  callback = {handleLogout}
+               />
             </div>
             <div className = {mainInfosContainer}>
                <span className = {loginInfo}>
