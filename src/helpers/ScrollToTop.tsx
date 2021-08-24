@@ -12,7 +12,7 @@
  * @date final version: 08/24/2021
  */
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /**
