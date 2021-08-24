@@ -60,9 +60,17 @@ header.topSiteHeader {
     height: 100%;
     width: $widthVertical;
     padding: 16px 0;
-    img {
+    div[role = 'link'] {
       height: 100%;
-      image-rendering: crisp-edges;
+      a {
+        display: block;
+        width: auto !important;
+        height: 100%;
+        img {
+          height: 100%;
+          width: auto !important;
+        }
+      }
     }
     &.ifHeaderIsOnCookies {
       justify-content: center;
@@ -212,6 +220,7 @@ header.topSiteHeader {
   .headerContainer {
     .mainHeader, .mainHeader.ifHeaderIsOnCookies {
       margin: 0 20px;
+      width: calc(100% - 40px);
     }
   }
   .menuWrapper {
