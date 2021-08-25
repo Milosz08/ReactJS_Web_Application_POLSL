@@ -115,7 +115,7 @@ $ git clone https://github.com/Milosz08/ReactJS_Web_Application_POLSL
 > This project is mostly written in TypeScript. For the correct operation of the cloned application, you must have the TypeScript compiler installed together with the Create React App environment. If you do not know how to initiate the Create React App environment, go to [this link](https://create-react-app.dev/docs/getting-started).
 
 ## Dependencies
-All packages with dependencies used in the project can be found in the `package.json`. In addition, in each component I have included information about what packages I use and what versions they are.
+All packages with dependencies used in the project can be found in the `package.json`. In addition, in each component I have included information about what packages I use and version of this packages.
 
 ## License
 This application is on MIT License [terms of use](https://en.wikipedia.org/wiki/MIT_License).
