@@ -17,7 +17,7 @@ Advanced, full-stack web application written using the ReactJS library and other
 This application was created to provide comprehensive information to students on the current schedule of classes, upcoming activities and information about currently held subjects. This is my first such large and advanced project using the ReactJS library. Writing the application took me about 1.5 months in total. It was a very long 1.5 months of hard work with the code, but thanks to writing the application I learned a lot of new things about ReactJS, TypeScript and the whole NodeJS development environment.
 
 ## Custom CMS (Content Management System)
-I created my own CMS for this application (based on the mechanics and appearance of Strapi - a popular CMS system written in JavaScript). It was a big challenge for me because I was creating such a system for the first time and it may not be perfect, but it works perfectly for its purposes. This system closely communicates with the global React Context Store and API written in NodeJS.
+I created my own CMS for this application written fully in TypeScript. It was a big challenge for me because I was creating such a system for the first time and it may not be perfect, but it works perfectly for its purposes. This system closely communicates with the global React Context Store and API written in NodeJS.
 
 <hr/>
 
