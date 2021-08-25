@@ -39,6 +39,7 @@ const {
  * Structure of the data types of the object entered into the API with the data entered by the user.
  */
 interface NewObjectTypes {
+   _id?: string;
    title: string;
    group: string;
    day: string | undefined;
@@ -64,6 +65,7 @@ const AddChangeScheduleModal = (): JSX.Element => {
    const headerContent = `Kreator ${scheduleModal!.type !== MODAL_TYPES.EDIT ? 'dodawania' : 'edytowania'} przedmiotu w dniu`;
 
    const editExistValue = async (newObject: NewObjectTypes) => {
+      console.log(scheduleModal!.id);
       const copy = [...dataFetchFromServer.scheduleSubjects];
       await axiosInstance.put(`subject-schedule/${scheduleModal!.id}`, newObject);
       const index = copy.findIndex((x: SubjectsProvider) => x._id === scheduleModal!.id);
@@ -97,16 +99,17 @@ const AddChangeScheduleModal = (): JSX.Element => {
             }
          });
          const newObject: NewObjectTypes = {
+            _id: scheduleModal!.id, title, group, day: scheduleModal!.day, type, start, end,
+            pzeInfo: { platform: findPzePlatform!.place, pzeLink: findPzePlatform!.link }
+         };
+         const addNewObject: NewObjectTypes = {
             title, group, day: scheduleModal!.day, type, start, end,
-            pzeInfo: {
-               platform: findPzePlatform!.place,
-               pzeLink: findPzePlatform!.link,
-            }
+            pzeInfo: { platform: findPzePlatform!.place, pzeLink: findPzePlatform!.link }
          };
          if(scheduleModal!.type === MODAL_TYPES.EDIT) {
             editExistValue(newObject);
          } else {
-            addNewValue(newObject);
+            addNewValue(addNewObject);
          }
          updateLogsDateAsync('schedule', process.env.REACT_APP_SCHEDULE_ID);
          restoreValues();
@@ -123,7 +126,7 @@ const AddChangeScheduleModal = (): JSX.Element => {
          start: '',
          end: ''
       });
-      setScheduleModal!({ ...scheduleModal!, ifOpen: false });
+      setScheduleModal!({ ...scheduleModal!, id: '', ifOpen: false });
    }
 
    return (

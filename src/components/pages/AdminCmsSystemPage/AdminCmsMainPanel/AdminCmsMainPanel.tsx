@@ -15,6 +15,7 @@ import React, { Fragment, useEffect } from 'react';
 
 import ModalsStateProvider from '../../../../contextStore/ModalsStateProvider';
 import ROUTING_PATH_NAMES from '../../../../constants/routingPathNames';
+import FormScheduleModalProvider from '../../../../contextStore/FormScheduleModalProvider';
 
 const CookiesNotification = React.lazy(() => import('../../../layouts/CookiesNotification/CookiesNotification'));
 const MobileDownNav = React.lazy(() => import('../../../layouts/MobileDownNav/MobileDownNav'));
@@ -43,9 +44,11 @@ const AdminCmsMainPanel = (): JSX.Element => {
          <Header ifHeaderHasRedBar = {false}/>
          <CurrentURLpath ifImportatHeaderActive = {true}/>
          <ModalsStateProvider>
-            <DeleteModalsStructure/>
-            <AddChangeModalsStructure/>
-            <PanelsStructure/>
+            <FormScheduleModalProvider>
+               <DeleteModalsStructure/>
+               <AddChangeModalsStructure/>
+               <PanelsStructure/>
+            </FormScheduleModalProvider>
          </ModalsStateProvider>
       </Fragment>
    );

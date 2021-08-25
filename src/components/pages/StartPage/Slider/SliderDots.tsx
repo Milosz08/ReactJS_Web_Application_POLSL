@@ -37,8 +37,6 @@ const SliderDots: React.FC<PropsProvider> = ({ dotsCount, actualState }): JSX.El
 
    const generateDots = Array.from({length: dotsCount}).map((nullVal: unknown, index: number) => {
       const activeToggle = ((dotsCount - 1) - index) === actualState / 100 + 1 ? activeDot : null;
-
-      console.log()
       return (
          <div key={uuidv4()} className = {activeToggle}/>
       );

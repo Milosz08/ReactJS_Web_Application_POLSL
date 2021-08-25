@@ -78,7 +78,7 @@ const SubjectsPanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
         </span>
             <button
                className = {modifyElement}
-               onClick = {() => setSubjectModal!({ id: subject._id, type: MODAL_TYPES.EDIT, ifOpen: true })}
+               onClick = {() => setSubjectModal!({ id: subject._id, title: subject.title, type: MODAL_TYPES.EDIT, ifOpen: true })}
             >
                <FontAwesomeIcon
                   icon = {['fas', 'edit']}

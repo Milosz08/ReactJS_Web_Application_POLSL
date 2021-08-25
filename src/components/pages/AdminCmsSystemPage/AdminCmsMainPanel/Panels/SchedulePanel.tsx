@@ -51,9 +51,9 @@ const SchedulePanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
    // eslint-disable-next-line array-callback-return
    const filteredAllSubjects = scheduleSubjects.filter((subject: any): SubjectsProvider | undefined => {
       const title = subject.title.toLocaleLowerCase();
-      const type = subject.title.toLocaleLowerCase();
-      const start = subject.title.toLocaleLowerCase();
-      const end = subject.title.toLocaleLowerCase();
+      const type = subject.type.toLocaleLowerCase();
+      const start = subject.start.toLocaleLowerCase();
+      const end = subject.end.toLocaleLowerCase();
       const input = inputField.toLocaleLowerCase();
       if(inputField === '') {
          return subject;

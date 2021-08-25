@@ -36,6 +36,7 @@ interface PropsProvider {
  */
 export interface ModalStateProvider {
    id: string;
+   title?: string;
    type: string;
    day?: string;
    ifOpen: boolean;
@@ -70,7 +71,7 @@ const ModalsStateProvider: React.FC<PropsProvider> = ({ children }) => {
 
    const { EDIT } = MODAL_TYPES;
 
-   const [ subjectModal, setSubjectModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
+   const [ subjectModal, setSubjectModal ] = useState<ModalStateProvider>({ id: '', title: '', type: EDIT, ifOpen: false });
    const [ calendarModal, setCalendarModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
    const [ messageModal, setMessageModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
    const [ scheduleModal, setScheduleModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, day: '', ifOpen: false });

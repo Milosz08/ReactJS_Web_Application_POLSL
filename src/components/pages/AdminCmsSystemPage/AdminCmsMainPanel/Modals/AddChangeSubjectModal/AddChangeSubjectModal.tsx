@@ -21,6 +21,7 @@ import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync
 import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 import { FormDataAndValidateContext, FormDataAndValidateType } from '../../../../../../contextStore/FormDataAndValidateProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
+import { FormScheduleModalContext, FormScheduleModalTypes } from '../../../../../../contextStore/FormScheduleModalProvider';
 
 const UniversalHeader = React.lazy(() => import('../../../../../layouts/UniversalHeader/UniversalHeader'));
 const CheckboxSemesters = React.lazy(() => import('./CheckboxSemesters'));
@@ -46,6 +47,7 @@ const AddChangeSubjectModal = (): JSX.Element => {
 
    const { subjectModal, setSubjectModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
    const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+   const { setAllSubjects } = useContext<Partial<FormScheduleModalTypes>>(FormScheduleModalContext);
 
    const {
       title, setTitle, icon, setIcon, errors, setErrors, semesters, setSemesters, departments, setDepartments,
@@ -53,7 +55,7 @@ const AddChangeSubjectModal = (): JSX.Element => {
       validateAll, restoreValues,
    } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
 
-   const { subjectsData } = dataFetchFromServer;
+   const { subjectsData, scheduleSubjects } = dataFetchFromServer;
    const ifModalOpen = subjectModal!.ifOpen && subjectModal!.type !== MODAL_TYPES.REMOVE ? modalOpen : '';
 
    const addNewRecord = async () => {
@@ -70,6 +72,7 @@ const AddChangeSubjectModal = (): JSX.Element => {
       await updateLogsDateAsync('subjects', process.env.REACT_APP_SUBJECTS_ID);
       const newSubject = res.data;
       copyArray.push(newSubject);
+      setAllSubjects!(copyArray);
       setDataFetchFromServer({ ...dataFetchFromServer, subjectsData: copyArray });
    }
 
@@ -84,13 +87,22 @@ const AddChangeSubjectModal = (): JSX.Element => {
          icon: ['fas', icon],
          classesPlatforms: classesPlatforms,
       }
+      const scheduleSubjectEdit = [...scheduleSubjects].filter((item: any) => item.title === subjectModal!.title);
+      const restOfSubjects = [...scheduleSubjects].filter((item: any) => item.title !== subjectModal!.title);
+      await Promise.all(scheduleSubjectEdit.map( async (item) => {
+         if(item._id !== undefined) {
+            await axiosInstance.delete(`subject-schedule/${item._id}`);
+            await updateLogsDateAsync('schedule', process.env.REACT_APP_SCHEDULE_ID);
+         }
+      }));
       await axiosInstance.put(`subjects-data/${subjectModal!.id}`, newObject);
-      await updateLogsDateAsync('subjects', process.env.REACT_APP_SUBJECTS_ID);
       const index = copyArray.findIndex(x => x._id === subjectModal!.id);
       if(index >= 0) {
          copyArray[index] = newObject;
-         setDataFetchFromServer({ ...dataFetchFromServer, subjectsData: copyArray });
+         setAllSubjects!(copyArray);
+         setDataFetchFromServer({ ...dataFetchFromServer, subjectsData: copyArray, scheduleSubjects: restOfSubjects });
       }
+      await updateLogsDateAsync('subjects', process.env.REACT_APP_SUBJECTS_ID);
    }
 
    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {

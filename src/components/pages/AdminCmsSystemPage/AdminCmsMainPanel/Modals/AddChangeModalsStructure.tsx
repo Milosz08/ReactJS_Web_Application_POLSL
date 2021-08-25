@@ -15,7 +15,6 @@ import React, { Fragment } from 'react';
 
 import FormDataAndValidateProvider from '../../../../../contextStore/FormDataAndValidateProvider';
 import FormCalendarModalProvider from '../../../../../contextStore/FormCalendarModalProvider';
-import FormScheduleModalProvider from '../../../../../contextStore/FormScheduleModalProvider';
 
 const AddChangeSubjectModal = React.lazy(() => import('./AddChangeSubjectModal/AddChangeSubjectModal'));
 const AddChangeCalendarModal = React.lazy(() => import('./AddChangeCalendarModal/AddChangeCalendarModal'));
@@ -35,9 +34,7 @@ const AddChangeModalsStructure = (): JSX.Element => {
          <FormCalendarModalProvider>
             <AddChangeCalendarModal/>
          </FormCalendarModalProvider>
-         <FormScheduleModalProvider>
-            <AddChangeScheduleModal/>
-         </FormScheduleModalProvider>
+         <AddChangeScheduleModal/>
       </Fragment>
    );
 }

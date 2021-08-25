@@ -19,6 +19,7 @@ import classnames from 'classnames';
 
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
+import { FormScheduleModalContext, FormScheduleModalTypes } from '../../../../../../contextStore/FormScheduleModalProvider';
 
 import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
 
@@ -36,8 +37,9 @@ const SubjectDeleteModal = (): JSX.Element => {
 
    const { subjectModal, setSubjectModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
    const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+   const { setAllSubjects } = useContext<Partial<FormScheduleModalTypes>>(FormScheduleModalContext);
 
-   const { subjectsData } = dataFetchFromServer;
+   const { subjectsData, scheduleSubjects } = dataFetchFromServer;
    const ifModalOpen = subjectModal!.ifOpen && subjectModal!.type === MODAL_TYPES.REMOVE ? modalOpen : '';
 
    const getSearchSubjectTitle = (): string => {
@@ -52,9 +54,20 @@ const SubjectDeleteModal = (): JSX.Element => {
    const handleRemoveSubject = async (): Promise<any> => {
       await axiosInstance.delete(`subjects-data/${subjectModal!.id}`);
       const subjectsAfterRemove = [...subjectsData].filter((subject: any) => subject._id !== subjectModal!.id);
-      setDataFetchFromServer({ ...dataFetchFromServer, subjectsData: subjectsAfterRemove });
+      const findSubject = [...subjectsData].find((subject: any) => subject._id === subjectModal!.id);
+      const scheduleAfterDeleteRecord = [...scheduleSubjects].filter((item: any) => item.title !== findSubject.title);
+      const scheduleFindTitle = [...scheduleSubjects].find((schedule: any) => schedule.title === findSubject.title);
+      setAllSubjects!(subjectsAfterRemove);
+      setDataFetchFromServer({ ...dataFetchFromServer,
+         subjectsData: subjectsAfterRemove, scheduleSubjects: scheduleAfterDeleteRecord
+      });
       setSubjectModal!({ ...subjectModal!, ifOpen: false });
+      if(scheduleFindTitle !== undefined) {
+         await axiosInstance.delete(`subject-schedule/${scheduleFindTitle._id}`);
+         await updateLogsDateAsync('schedule', process.env.REACT_APP_SCHEDULE_ID);
+      }
       await updateLogsDateAsync('subjects', process.env.REACT_APP_SUBJECTS_ID);
+
    }
 
    const handleExitModal = () => setSubjectModal!({ id: '', type: MODAL_TYPES.EDIT, ifOpen: false });

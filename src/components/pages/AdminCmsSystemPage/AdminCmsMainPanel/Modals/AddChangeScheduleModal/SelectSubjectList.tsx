@@ -52,7 +52,7 @@ const SelectSubjectList = (): JSX.Element => {
 
    const generateTypeOfSubjectOptions = () => {
       if(filteredSubject) {
-         const { type } = filteredSubject.classesPlatforms[0];
+         const { type } = filteredSubject!.classesPlatforms[0];
          if (type === '' || type.toLocaleLowerCase() === 'wszystkie zajęcia') {
             // eslint-disable-next-line array-callback-return
             return STATIC_OPTIONS.TYPE_OPTIONS.map((type: string) => {
@@ -63,7 +63,7 @@ const SelectSubjectList = (): JSX.Element => {
                }
             });
          } else {
-            return filteredSubject.classesPlatforms.map((platform: any) => (
+            return filteredSubject!.classesPlatforms.map((platform: any) => (
                <option key = {platform.type} value = {platform.type}>{platform.type}</option>
             ));
          }
@@ -98,8 +98,9 @@ const SelectSubjectList = (): JSX.Element => {
    }
 
    const hourRestructurised = (hour: string): string => {
-      const hourInt = parseInt(hour);
-      return hourInt < 10 ? `0${hour}` : hour;
+      const replaceStr = hour.replace(':', '');
+      const hourInt = parseInt(replaceStr);
+      return hourInt < 10 && hourInt !== 0 ? `0${hour}` : hour;
    }
 
    useEffect(() => {
@@ -121,7 +122,8 @@ const SelectSubjectList = (): JSX.Element => {
             }
          }
       }
-   }, [allSubjects, dataFetchFromServer, scheduleModal, setScheduleForm]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [allSubjects, scheduleModal]);
 
    const selectGroup = (): string => {
       if(scheduleForm!.title.toLocaleLowerCase() === 'język angielski') {

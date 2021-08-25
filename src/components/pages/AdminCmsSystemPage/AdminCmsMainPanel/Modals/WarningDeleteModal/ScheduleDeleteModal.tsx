@@ -49,11 +49,12 @@ const ScheduleDeleteModal = (): JSX.Element => {
    }
 
    const handleRemoveMessage = async (): Promise<any> => {
+      console.log(scheduleModal!.id);
       await axiosInstance.delete(`subject-schedule/${scheduleModal!.id}`);
       const copy = [...scheduleSubjects];
       const scheduleAfterRemove = copy.filter(object => object._id !== scheduleModal!.id);
       setDataFetchFromServer({ ...dataFetchFromServer, scheduleSubjects: scheduleAfterRemove });
-      setScheduleModal!({ ...scheduleModal!, ifOpen: false });
+      setScheduleModal!({ ...scheduleModal!, id: '', ifOpen: false });
       await updateLogsDateAsync('schedule', process.env.REACT_APP_SCHEDULE_ID);
    }
 
