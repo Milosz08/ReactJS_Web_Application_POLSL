@@ -17,13 +17,13 @@ import React, { Fragment, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 
-import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
-import Header from '../../layouts/Header/Header';
-import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
-import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
-
 import COOKIES_OBJECT from '../../../constants/allCookies';
 import TILES_DATA, { TilesDataTypes } from '../../../constants/aidsTilesData';
+
+const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
 
 const { universalHeader, fasIcon } = require('./../../layouts/Navigation/Navigation.module.scss');
 const {

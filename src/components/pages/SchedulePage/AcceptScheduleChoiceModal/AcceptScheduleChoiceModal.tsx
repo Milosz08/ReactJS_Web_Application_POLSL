@@ -17,7 +17,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import { GlobalModalsStateContext, GlobalModalsStateTypes } from '../../../../contextStore/GlobalModalsStateProvider';
 
-import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
+const UniversalHeader = React.lazy(() => import('../../../layouts/UniversalHeader/UniversalHeader'));
 
 const {
    scheduleSaveContainer, scheduleSaveWrapper, active, scheduleSaveContent, whenCloseWindow, show

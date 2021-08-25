@@ -18,9 +18,9 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import SubjectLayout from './SubjectLayout';
+import { SubjectsProvider } from './Subjects';
 
-import { SubjectsProvider } from "./Subjects";
+const SubjectLayout = React.lazy(() => import('./SubjectLayout'));
 
 const {
    subInfoContainer, subInfo,  animFlexContainer, emptySubjectField, emptyIcon, messageoutEnter,

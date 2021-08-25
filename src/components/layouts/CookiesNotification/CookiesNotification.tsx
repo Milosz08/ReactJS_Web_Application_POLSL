@@ -22,10 +22,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../contextStore/CookiesObjectsProvider';
 
-import UniversalHeader from '../UniversalHeader/UniversalHeader';
-
 import cookieExpires from '../../../constants/cookieExpires';
 import COOKIES_OBJECT from '../../../constants/allCookies';
+
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
 
 const {
    cookieNotifContainer, cookiesNotifPopupContainer, cookiesMainContent, cookiesButtons, readPolicity,

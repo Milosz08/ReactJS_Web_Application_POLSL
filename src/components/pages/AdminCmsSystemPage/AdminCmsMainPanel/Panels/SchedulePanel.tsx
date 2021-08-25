@@ -19,10 +19,11 @@ import classnames from 'classnames';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
 import { SubjectsProvider } from '../../../../layouts/Subjects/Subjects';
 
-import SearchBox from './AdditionalComponents/SearchBox';
-import OneDaySchedule from './AdditionalComponents/OneDaySchedule';
-import SetScheduleBreak from './AdditionalComponents/SetScheduleBreak';
 import { STATIC_DAYS } from '../../../SchedulePage/SchedulePage';
+
+const SearchBox = React.lazy(() => import('./AdditionalComponents/SearchBox'));
+const OneDaySchedule = React.lazy(() => import('./AdditionalComponents/OneDaySchedule'));
+const SetScheduleBreak = React.lazy(() => import('./AdditionalComponents/SetScheduleBreak'));
 
 const { panelContainer, panelActive } = require('./Panels.module.scss');
 const { scheduleContainer } = require('./SchedulePanel.module.scss');

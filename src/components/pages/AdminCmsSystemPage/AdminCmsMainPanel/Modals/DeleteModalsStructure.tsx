@@ -13,11 +13,11 @@
 
 import React, { Fragment } from 'react';
 
-import SubjectDeleteModal from './WarningDeleteModal/SubjectDeleteModal';
-import CalendarDeleteModal from './WarningDeleteModal/CalendarDeleteModal';
-import UserMessageDeleteModal from './WarningDeleteModal/UserMessageDeleteModal';
-import ScheduleDeleteModal from './WarningDeleteModal/ScheduleDeleteModal';
-import ViewUserMessageModal from './ViewUserMessagesModal/ViewUserMessageModal';
+const SubjectDeleteModal = React.lazy(() => import('./WarningDeleteModal/SubjectDeleteModal'));
+const CalendarDeleteModal = React.lazy(() => import('./WarningDeleteModal/CalendarDeleteModal'));
+const UserMessageDeleteModal = React.lazy(() => import('./WarningDeleteModal/UserMessageDeleteModal'));
+const ScheduleDeleteModal = React.lazy(() => import('./WarningDeleteModal/ScheduleDeleteModal'));
+const ViewUserMessageModal = React.lazy(() => import('./ViewUserMessagesModal/ViewUserMessageModal'));
 
 /**
  * @details Component is responsible for generating the structure of all modals responsible for removing records

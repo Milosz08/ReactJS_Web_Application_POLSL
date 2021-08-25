@@ -16,7 +16,8 @@
 
 import React from 'react';
 import classnames from 'classnames';
-import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
+
+const UniversalHeader = React.lazy(() => import('../../../layouts/UniversalHeader/UniversalHeader'));
 
 const { cookiesInfoHeader } = require('./../../../layouts/Navigation/Navigation.module.scss');
 const { cookiesSections, cookieContent } = require('./../CookiesPolicyPage.module.scss');

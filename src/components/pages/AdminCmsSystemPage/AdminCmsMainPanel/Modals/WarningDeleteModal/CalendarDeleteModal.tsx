@@ -22,8 +22,9 @@ import axiosInstance from '../../../../../../helpers/request';
 import { MainStoreContext, MainStoreProviderTypes } from "../../../../../../contextStore/MainStoreProvider";
 import { ModalsStateContext, MODAL_TYPES, ModalStateType } from "../../../../../../contextStore/ModalsStateProvider";
 
-import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
 import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
+
+const UniversalHeader = React.lazy(() => import('../../../../../layouts/UniversalHeader/UniversalHeader'));
 
 const {
    modalContainer, modalWrapper, modalWarningInfo, modalWarningButtons, modalOpen, dangerColorWrapper,

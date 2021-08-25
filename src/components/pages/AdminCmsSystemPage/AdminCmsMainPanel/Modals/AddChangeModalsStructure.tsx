@@ -17,9 +17,9 @@ import FormDataAndValidateProvider from '../../../../../contextStore/FormDataAnd
 import FormCalendarModalProvider from '../../../../../contextStore/FormCalendarModalProvider';
 import FormScheduleModalProvider from '../../../../../contextStore/FormScheduleModalProvider';
 
-import AddChangeSubjectModal from './AddChangeSubjectModal/AddChangeSubjectModal';
-import AddChangeCalendarModal from './AddChangeCalendarModal/AddChangeCalendarModal';
-import AddChangeScheduleModal from './AddChangeScheduleModal/AddChangeScheduleModal';
+const AddChangeSubjectModal = React.lazy(() => import('./AddChangeSubjectModal/AddChangeSubjectModal'));
+const AddChangeCalendarModal = React.lazy(() => import('./AddChangeCalendarModal/AddChangeCalendarModal'));
+const AddChangeScheduleModal = React.lazy(() => import('./AddChangeScheduleModal/AddChangeScheduleModal'));
 
 /**
  * @details The component is responsible for generating the structure of all modals responsible for adding / modifying

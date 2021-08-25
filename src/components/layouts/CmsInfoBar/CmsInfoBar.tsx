@@ -22,9 +22,10 @@ import { GlobalModalsStateContext, GlobalModalsStateTypes } from '../../../conte
 import { LoginSessionContext, LoginSessionProviderTypes } from '../../../contextStore/LoginSessionProvider';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../contextStore/CookiesObjectsProvider';
 
-import CmsInfoHamburger from './CmsInfoHamburger';
 import { MAX_INACTIVITY_TIME } from '../CredentialsSequencers/SessionActivityCount';
 import COOKIES_OBJECT from '../../../constants/allCookies';
+
+const CmsInfoHamburger = React.lazy(() => import('./CmsInfoHamburger'));
 
 const {
    cmsInfoBar, cmsInfoWrapper, logoContainer, mainInfosContainer, active, loginInfo, sessionTime, logoutButton,

@@ -13,7 +13,7 @@
 
 import React from 'react';
 
-import DataLastUpdate from '../../../../../layouts/DataLastUpdate/DataLastUpdate';
+const DataLastUpdate = React.lazy(() => import('../../../../../layouts/DataLastUpdate/DataLastUpdate'));
 
 /**
  * Interface defining the type of props values.

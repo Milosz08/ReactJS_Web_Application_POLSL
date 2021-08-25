@@ -23,15 +23,15 @@ import { CookiesObjectsContext, CookiesObjectsTypes } from '../../contextStore/C
 import CONSTANT_DATA from '../../constants/staticData';
 import ProtectedLoginRoute from './ProtectedLoginRoute';
 
-import StartPage from '../pages/StartPage/StartPage';
-import AdminCmsLogin from '../pages/AdminCmsSystemPage/AdminCmsLogin/AdminCmsLogin';
-import AdminCmsMainPanel from '../pages/AdminCmsSystemPage/AdminCmsMainPanel/AdminCmsMainPanel';
-import CookiesPolicy from '../pages/CookiesPolicyPage/CookiesPolicyPage';
-import SchedulePage from '../pages/SchedulePage/SchedulePage';
-import CalendarPage from '../pages/CalendarPage/CalendarPage';
-import SubjectsPassPage from '../pages/SubjectsPassPage/SubjectsPassPage';
-import AidsPage from '../pages/AidsPage/AidsPage';
-import AidsLogin from '../pages/AidsPage/AidsLogin';
+const StartPage = React.lazy(() => import('../pages/StartPage/StartPage'));
+const AdminCmsLogin = React.lazy(() => import('../pages/AdminCmsSystemPage/AdminCmsLogin/AdminCmsLogin'));
+const AdminCmsMainPanel = React.lazy(() => import('../pages/AdminCmsSystemPage/AdminCmsMainPanel/AdminCmsMainPanel'));
+const CookiesPolicy = React.lazy(() => import('../pages/CookiesPolicyPage/CookiesPolicyPage'));
+const SchedulePage = React.lazy(() => import('../pages/SchedulePage/SchedulePage'));
+const CalendarPage = React.lazy(() => import('../pages/CalendarPage/CalendarPage'));
+const SubjectsPassPage = React.lazy(() => import('../pages/SubjectsPassPage/SubjectsPassPage'));
+const AidsPage = React.lazy(() => import('../pages/AidsPage/AidsPage'));
+const AidsLogin = React.lazy(() => import('../pages/AidsPage/AidsLogin'));
 
 /**
  * Fixed plaque storing all unprotected components representing single pages in routing.

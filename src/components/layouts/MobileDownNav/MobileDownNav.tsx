@@ -18,12 +18,13 @@ import React, { Fragment, useContext, useState } from 'react';
 import classnames from 'classnames';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreProvider';
-import SingleNavigationElement from './SingleNavigationElement';
 
 import {
    AiFillHome, AiOutlineHome, AiFillSchedule, AiOutlineSchedule, AiFillCalendar, AiOutlineCalendar,
    AiFillBulb, AiOutlineBulb, AiFillCreditCard, AiOutlineCreditCard
 } from 'react-icons/ai';
+
+const SingleNavigationElement = React.lazy(() => import('./SingleNavigationElement'));
 
 const { mobileDownContainer, activeIndicator, icon, active } = require('./MobileDownNav.module.scss');
 

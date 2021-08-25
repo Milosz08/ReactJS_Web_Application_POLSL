@@ -25,11 +25,11 @@ import { ModalsStateContext, ModalStateType } from '../../../../../../contextSto
 import { FormCalendarModalContext, FormCalendarModalType } from '../../../../../../contextStore/FormCalendarModalProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 
-import MessageModule from './MessageModule';
-import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
-
 import { MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
+
+const MessageModule = React.lazy(() => import('./MessageModule'));
+const UniversalHeader = React.lazy(() => import('../../../../../layouts/UniversalHeader/UniversalHeader'));
 
 const {
    modalContainer, modalWrapper, modalAddIcon, modalOpen, modalAddWrapper

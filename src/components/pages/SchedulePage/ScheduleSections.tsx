@@ -25,7 +25,8 @@ import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/
 import { ScheduleContext, ScheduleType } from '../../../contextStore/ScheduleProvider';
 
 import GROUPS_STATIC from '../../../constants/allGroups';
-import ExpandedPanel from './ExpandedPanel';
+
+const ExpandedPanel = React.lazy(() => import('./ExpandedPanel'));
 
 const {
    scheduleSection, dayOfWeekCSS, active, scheduleTile, subjectType, subjectImportant, endLineOfSection,

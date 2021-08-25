@@ -21,10 +21,10 @@ import classnames from 'classnames';
 import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
 import CONSTANT_DATA from '../../../constants/staticData';
 
-import Navigation from '../Navigation/Navigation';
-import HamburgerMenu from './HamburgerMenu';
-import LoadingBigBar from '../LoadingBigBar/LoadingBigBar';
-import CmsInfoBar from '../CmsInfoBar/CmsInfoBar';
+const Navigation = React.lazy(() => import('../Navigation/Navigation'));
+const HamburgerMenu = React.lazy(() => import('./HamburgerMenu'));
+const LoadingBigBar = React.lazy(() => import('../LoadingBigBar/LoadingBigBar'));
+const CmsInfoBar = React.lazy(() => import('../CmsInfoBar/CmsInfoBar'));
 
 const {
    topNavBar, topNavBarLinks, headerContainer, mainHeader, siteImportantInfo, stickyHeader, topSiteHeader,

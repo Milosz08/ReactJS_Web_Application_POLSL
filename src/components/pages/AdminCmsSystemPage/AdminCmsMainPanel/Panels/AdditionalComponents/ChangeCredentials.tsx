@@ -18,8 +18,8 @@ import CryptoJS, { AES, enc } from 'crypto-js';
 import axiosInstance from '../../../../../../helpers/request';
 import { v4 as uuidv4 } from 'uuid';
 
-import ShowHideAuthVisible from './ShowHideAuthVisible';
-import GenerateAuthFields from './GenerateAuthFields';
+const ShowHideAuthVisible = React.lazy(() => import('./ShowHideAuthVisible'));
+const GenerateAuthFields = React.lazy(() => import('./GenerateAuthFields'));
 
 const {
    changeCredentialsForm, loginField, confirmViaAdminPasswordField, inputNewAdminToken, errorValue, submitForm

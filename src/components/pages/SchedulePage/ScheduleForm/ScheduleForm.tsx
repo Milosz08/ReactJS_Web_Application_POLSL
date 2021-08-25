@@ -19,13 +19,13 @@ import { ScheduleContext, ScheduleType } from '../../../../contextStore/Schedule
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../contextStore/CookiesObjectsProvider';
 import { GlobalModalsStateContext, GlobalModalsStateTypes } from '../../../../contextStore/GlobalModalsStateProvider';
 
-import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
-import ScheduleNormalGroupInputs from './ScheduleNormalGroupInputs';
-import ScheduleEngInputs from './ScheduleEngInputs';
-
 import COOKIES_OBJECT from '../../../../constants/allCookies';
 import GROUPS_STATIC from '../../../../constants/allGroups';
 import cookieExpires from '../../../../constants/cookieExpires';
+
+const UniversalHeader = React.lazy(() => import('../../../layouts/UniversalHeader/UniversalHeader'));
+const ScheduleNormalGroupInputs = React.lazy(() => import('./ScheduleNormalGroupInputs'));
+const ScheduleEngInputs = React.lazy(() => import('./ScheduleEngInputs'));
 
 const { encrypt, decrypt } = require('react-crypt-gsm');
 

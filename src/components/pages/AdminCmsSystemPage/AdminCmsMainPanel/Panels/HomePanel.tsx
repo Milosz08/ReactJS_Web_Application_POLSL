@@ -21,8 +21,8 @@ import classnames from 'classnames';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../../contextStore/CookiesObjectsProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
 
-import ChangeCredentials from './AdditionalComponents/ChangeCredentials';
-import GenerateModifyElement from './AdditionalComponents/GenerateModifyElement';
+const ChangeCredentials = React.lazy(() => import('./AdditionalComponents/ChangeCredentials'));
+const GenerateModifyElement = React.lazy(() => import('./AdditionalComponents/GenerateModifyElement'));
 
 const { panelContainer, panelActive } = require('./Panels.module.scss');
 const { changeCredentials, disable, disabledInfo, mainInfoContainer } = require('./HomePanel.module.scss');

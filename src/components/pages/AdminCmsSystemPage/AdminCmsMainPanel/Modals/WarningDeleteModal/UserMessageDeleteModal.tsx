@@ -21,7 +21,7 @@ import { insertUserChoice } from '../../Panels/UserMessagePanel';
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 
-import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
+const UniversalHeader = React.lazy(() => import('../../../../../layouts/UniversalHeader/UniversalHeader'));
 
 const {
    modalContainer, modalWrapper, modalOpen, modalWarningInfo, modalWarningButtons, messageTypeBox, dangerColorWrapper

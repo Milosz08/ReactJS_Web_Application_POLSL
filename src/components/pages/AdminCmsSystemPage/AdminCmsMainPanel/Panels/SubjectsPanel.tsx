@@ -24,7 +24,7 @@ import { MainStoreContext, MainStoreProviderTypes } from '../../../../../context
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../contextStore/ModalsStateProvider';
 import { SubjectsProvider } from '../../../../layouts/Subjects/Subjects';
 
-import SearchBox from './AdditionalComponents/SearchBox';
+const SearchBox = React.lazy(() => import('./AdditionalComponents/SearchBox'));
 
 const {
    panelContainer, panelActive, listNumber, listTitle, subjectStatus, modifyElement, deleteElement, fasIcon, infoIcon,

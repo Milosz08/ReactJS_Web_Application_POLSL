@@ -14,14 +14,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 
-import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
-import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
-import Header from '../../layouts/Header/Header';
-import Slider from './Slider/Slider';
-import CovidInfo from './CovidInfo/CovidInfo';
-import CountDown from './CountDown/CountDown';
-import Navigation from '../../layouts/Navigation/Navigation';
-import Subjects from '../../layouts/Subjects/Subjects';
+const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const Slider = React.lazy(() => import('./Slider/Slider'));
+const CovidInfo = React.lazy(() => import('./CovidInfo/CovidInfo'));
+const CountDown = React.lazy(() => import('./CountDown/CountDown'));
+const Navigation = React.lazy(() => import('../../layouts/Navigation/Navigation'));
+const Subjects = React.lazy(() => import('../../layouts/Subjects/Subjects'));
 
 /**
  * @details Component responsible for generating the start page (absolute address - "/").

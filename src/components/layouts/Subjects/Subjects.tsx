@@ -17,10 +17,10 @@ import React, { Fragment, useContext, useState } from 'react';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreProvider';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-import SubjectInfo from './SubjectInfo';
-import DataLastUpdate from '../DataLastUpdate/DataLastUpdate';
-import UniversalHeader from '../UniversalHeader/UniversalHeader';
-import SearchSubject from './SearchSubject';
+const SubjectInfo = React.lazy(() => import('./SubjectInfo'));
+const DataLastUpdate = React.lazy(() => import('../DataLastUpdate/DataLastUpdate'));
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const SearchSubject = React.lazy(() => import('./SearchSubject'));
 
 const { scheduleRender } = require('./../../layouts/Navigation/Navigation.module.scss');
 

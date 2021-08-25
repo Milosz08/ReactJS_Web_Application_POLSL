@@ -22,14 +22,15 @@ import classnames from 'classnames';
 import { MainStoreContext, MainStoreProviderTypes} from '../../../contextStore/MainStoreProvider';
 import { IMPORTANT_VALUES } from '../AdminCmsSystemPage/AdminCmsMainPanel/Modals/WarningDeleteModal/CalendarDeleteModal';
 
-import CookiesNotification from '../../layouts/CookiesNotification/CookiesNotification';
-import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
-import Header from '../../layouts/Header/Header';
-import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
-import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
-import CalendarStructure from './CalendarStructure';
-import DataLastUpdate from '../../layouts/DataLastUpdate/DataLastUpdate';
 import getSingleDateObjects from '../../../constants/getSingleDateObjects';
+
+const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
+const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const CalendarStructure = React.lazy(() => import('./CalendarStructure'));
+const DataLastUpdate = React.lazy(() => import('../../layouts/DataLastUpdate/DataLastUpdate'));
 
 const {
    calendarContainer, calendarWrapper, underInfo, mobileInfo, legendInfo, calendarStructureAndModal, dateInfoModal,

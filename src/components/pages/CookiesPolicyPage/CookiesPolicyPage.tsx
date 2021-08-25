@@ -19,15 +19,15 @@ import ROUTING_PATH_NAMES from '../../../constants/routingPathNames';
 import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 
-import Header from '../../layouts/Header/Header';
-import MobileDownNav from '../../layouts/MobileDownNav/MobileDownNav';
-import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
-import CurrentURLpath from '../../layouts/CurrentURLpath/CurrentURLpath';
-import CookiesHeader from './CookiesPolicyComponents/CookiesHeader';
-import CookiesOuterServices from './CookiesPolicyComponents/CookiesOuterServices';
-import CookiesTurnOff from './CookiesPolicyComponents/CookiesTurnOff';
-
 import STATIC_STRUCTURE, { ListTypes, NonListTypes } from '../../../constants/cookiesPolicyContent';
+
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
+const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const CookiesHeader = React.lazy(() => import('./CookiesPolicyComponents/CookiesHeader'));
+const CookiesOuterServices = React.lazy(() => import('./CookiesPolicyComponents/CookiesOuterServices'));
+const CookiesTurnOff = React.lazy(() => import('./CookiesPolicyComponents/CookiesTurnOff'));
 
 const { cookieSectionsContent } = require('./../../layouts/Navigation/Navigation.module.scss');
 const {

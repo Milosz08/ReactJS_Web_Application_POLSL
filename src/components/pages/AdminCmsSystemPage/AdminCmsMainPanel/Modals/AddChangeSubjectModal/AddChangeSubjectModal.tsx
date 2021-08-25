@@ -22,11 +22,11 @@ import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../
 import { FormDataAndValidateContext, FormDataAndValidateType } from '../../../../../../contextStore/FormDataAndValidateProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 
-import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
-import CheckboxSemesters from './CheckboxSemesters';
-import RadioStatusEnd from './RadioStatusEnd';
-import DepartmentsInject from './DepartmentsInject';
-import TypeAndPlatform from './TypeAndPlatform';
+const UniversalHeader = React.lazy(() => import('../../../../../layouts/UniversalHeader/UniversalHeader'));
+const CheckboxSemesters = React.lazy(() => import('./CheckboxSemesters'));
+const RadioStatusEnd = React.lazy(() => import('./RadioStatusEnd'));
+const DepartmentsInject = React.lazy(() => import('./DepartmentsInject'));
+const TypeAndPlatform = React.lazy(() => import('./TypeAndPlatform'));
 
 const {
    modalContainer, modalWrapper, modalOpen, modalAddWrapper

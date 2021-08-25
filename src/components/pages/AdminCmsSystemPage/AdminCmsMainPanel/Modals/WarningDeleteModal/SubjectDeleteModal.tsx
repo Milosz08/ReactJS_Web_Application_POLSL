@@ -20,8 +20,9 @@ import classnames from 'classnames';
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 
-import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
 import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
+
+const UniversalHeader = React.lazy(() => import('../../../../../layouts/UniversalHeader/UniversalHeader'));
 
 const {
    modalContainer, modalWrapper, modalOpen, modalWarningInfo, modalWarningButtons, dangerColorWrapper

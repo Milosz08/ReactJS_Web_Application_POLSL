@@ -26,7 +26,8 @@ import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../
 
 import STATIC_OPTIONS from '../../../../../../constants/inputOptions';
 import GROUPS_STATIC, { NormalGroupsTypes } from '../../../../../../constants/allGroups';
-import TimeInputsModal from './TimeInputsModal';
+
+const TimeInputsModal = React.lazy(() => import('./TimeInputsModal'));
 
 const {
    titleSelectWrapper, typeSelectWrapper, groupSelectWrapper, groupAndTimeContainer, titleAndTypeContainer,

@@ -12,7 +12,8 @@
  */
 
 import React, { ChangeEvent, Dispatch, SetStateAction, Fragment } from 'react';
-import ShowHideAuthVisible from './ShowHideAuthVisible';
+
+const ShowHideAuthVisible = React.lazy(() => import('./ShowHideAuthVisible'));
 
 const { passwordField, errorValue } = require('./../HomePanel.module.scss');
 

@@ -14,8 +14,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
-import SliderButtons from './SliderButtons';
-import SliderDots from './SliderDots';
+const SliderButtons = React.lazy(() => import('./SliderButtons'));
+const SliderDots = React.lazy(() => import('./SliderDots'));
 
 const {
    bannerContainer, centerSection, mainTitle, bannerNavigate, colorGrade, sliderComp

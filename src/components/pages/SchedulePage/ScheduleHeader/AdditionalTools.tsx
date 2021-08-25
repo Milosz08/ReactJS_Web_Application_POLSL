@@ -21,9 +21,9 @@ import { MainStoreContext, MainStoreProviderTypes } from '../../../../contextSto
 import { ScheduleContext, ScheduleType } from '../../../../contextStore/ScheduleProvider';
 import ROUTING_PATH_NAMES from '../../../../constants/routingPathNames';
 
-import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
-import ComponentToPrint from '../../../layouts/ComponentToPrint/ComponentToPrint';
-import DataLastUpdate from '../../../layouts/DataLastUpdate/DataLastUpdate';
+const UniversalHeader = React.lazy(() => import('../../../layouts/UniversalHeader/UniversalHeader'));
+const ComponentToPrint = React.lazy(() => import('../../../layouts/ComponentToPrint/ComponentToPrint'));
+const DataLastUpdate = React.lazy(() => import('../../../layouts/DataLastUpdate/DataLastUpdate'));
 
 const { scheduleRender } = require('./../../../layouts/Navigation/Navigation.module.scss');
 const { progressBar, progressActive, colored, activeBar, generateButton, underInfo } = require('./../SchedulePage.module.scss');

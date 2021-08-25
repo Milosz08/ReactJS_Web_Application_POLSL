@@ -13,7 +13,7 @@
  * @date final version: 08/19/2021
  */
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 
@@ -22,40 +22,43 @@ import CookiesObjectsProvider from '../../contextStore/CookiesObjectsProvider';
 import LoginSessionProvider from '../../contextStore/LoginSessionProvider';
 import GlobalModalsStateProvider from '../../contextStore/GlobalModalsStateProvider';
 
-import GotoTopButton from '../layouts/GotoTopButton/GotoTopButton';
-import ScrollToTop from '../../helpers/ScrollToTop';
-import Page from './Page';
-import DevToolsInfo from '../layouts/DevToolsInfo/DevToolsInfo';
-import Footer from '../layouts/Footer/Footer';
-import CredentialSequencers from '../layouts/CredentialsSequencers/CredentialSequencers';
-import SessionEndModal from '../layouts/SessionEndModal/SessionEndModal';
-
 import './../../constants/fontAwesomeInject';
+import LoadingSuspense from '../layouts/LoadingSuspense/LoadingSuspense';
+
+const GotoTopButton = React.lazy(() => import('../layouts/GotoTopButton/GotoTopButton'));
+const ScrollToTop = React.lazy(() => import('../../helpers/ScrollToTop'));
+const Page = React.lazy(() => import('./Page'));
+const DevToolsInfo = React.lazy(() => import('../layouts/DevToolsInfo/DevToolsInfo'));
+const Footer = React.lazy(() => import('../layouts/Footer/Footer'));
+const CredentialSequencers = React.lazy(() => import('../layouts/CredentialsSequencers/CredentialSequencers'));
+const SessionEndModal = React.lazy(() => import('../layouts/SessionEndModal/SessionEndModal'));
 
 /**
  * @details Main component responsible for rendering the entire application in a root element.
  */
 const App = (): JSX.Element => {
    return (
-      <MainStoreProvider>
-         <CookiesProvider>
-            <CookiesObjectsProvider>
-               <Router>
-                  <ScrollToTop/>
-                  <GlobalModalsStateProvider>
-                     <GotoTopButton/>
-                     <LoginSessionProvider>
-                        <SessionEndModal/>
-                        <CredentialSequencers/>
-                        <Page/>
-                     </LoginSessionProvider>
-                     <DevToolsInfo/>
-                     <Footer/>
-                  </GlobalModalsStateProvider>
-               </Router>
-            </CookiesObjectsProvider>
-         </CookiesProvider>
-      </MainStoreProvider>
+      <Suspense fallback = {<LoadingSuspense/>}>
+         <MainStoreProvider>
+            <CookiesProvider>
+               <CookiesObjectsProvider>
+                  <Router>
+                     <ScrollToTop/>
+                     <GlobalModalsStateProvider>
+                        <GotoTopButton/>
+                        <LoginSessionProvider>
+                           <SessionEndModal/>
+                           <CredentialSequencers/>
+                           <Page/>
+                        </LoginSessionProvider>
+                        <DevToolsInfo/>
+                        <Footer/>
+                     </GlobalModalsStateProvider>
+                  </Router>
+               </CookiesObjectsProvider>
+            </CookiesProvider>
+         </MainStoreProvider>
+      </Suspense>
    );
 }
 

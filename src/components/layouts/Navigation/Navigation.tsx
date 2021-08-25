@@ -17,10 +17,10 @@
 import React, { useContext } from 'react';
 import DelayLink from 'react-delay-link';
 
-import UniversalHeader from '../UniversalHeader/UniversalHeader';
-
 import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
 import CONSTANT_DATA from '../../../constants/staticData';
+
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
 
 const { navInline, navBlocks, arrowGoto } = require('./Navigation.module.scss');
 

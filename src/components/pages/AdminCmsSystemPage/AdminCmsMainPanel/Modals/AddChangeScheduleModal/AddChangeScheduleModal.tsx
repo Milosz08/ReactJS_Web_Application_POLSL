@@ -20,13 +20,13 @@ import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 import { FormScheduleModalContext, FormScheduleModalTypes } from '../../../../../../contextStore/FormScheduleModalProvider';
 
-import UniversalHeader from '../../../../../layouts/UniversalHeader/UniversalHeader';
-import SelectSubjectList from './SelectSubjectList';
-
 import GROUPS_STATIC from '../../../../../../constants/allGroups';
 import axiosInstance from '../../../../../../helpers/request';
 import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
 import { SubjectsProvider } from '../../../../../layouts/Subjects/Subjects';
+
+const UniversalHeader = React.lazy(() => import('../../../../../layouts/UniversalHeader/UniversalHeader'));
+const SelectSubjectList = React.lazy(() => import('./SelectSubjectList'));
 
 const {
    modalContainer, modalWrapper, modalOpen, modalAddWrapper

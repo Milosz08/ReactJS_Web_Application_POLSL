@@ -14,7 +14,7 @@
 import React, { Fragment, useContext } from 'react';
 import { LoginSessionContext } from '../../../contextStore/LoginSessionProvider';
 
-import SessionActivityCount from './SessionActivityCount';
+const SessionActivityCount = React.lazy(() => import('./SessionActivityCount'));
 
 /**
  * @details The component is responsible for generating timers counting down the time of an active

@@ -16,13 +16,13 @@ import React, { Fragment, useEffect } from 'react';
 import ModalsStateProvider from '../../../../contextStore/ModalsStateProvider';
 import ROUTING_PATH_NAMES from '../../../../constants/routingPathNames';
 
-import CookiesNotification from '../../../layouts/CookiesNotification/CookiesNotification';
-import MobileDownNav from '../../../layouts/MobileDownNav/MobileDownNav';
-import Header from '../../../layouts/Header/Header';
-import CurrentURLpath from '../../../layouts/CurrentURLpath/CurrentURLpath';
-import DeleteModalsStructure from "./Modals/DeleteModalsStructure";
-import AddChangeModalsStructure from "./Modals/AddChangeModalsStructure";
-import PanelsStructure from "./PanelsStructure";
+const CookiesNotification = React.lazy(() => import('../../../layouts/CookiesNotification/CookiesNotification'));
+const MobileDownNav = React.lazy(() => import('../../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../../layouts/Header/Header'));
+const CurrentURLpath = React.lazy(() => import('../../../layouts/CurrentURLpath/CurrentURLpath'));
+const DeleteModalsStructure = React.lazy(() => import('./Modals/DeleteModalsStructure'));
+const AddChangeModalsStructure = React.lazy(() => import('./Modals/AddChangeModalsStructure'));
+const PanelsStructure = React.lazy(() => import('./PanelsStructure'));
 
 /**
  * @details Component is responsible for generating the entire structure of the content management system

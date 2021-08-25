@@ -13,16 +13,16 @@
 
 import React, { useState } from 'react';
 
-import UniversalHeader from '../../../layouts/UniversalHeader/UniversalHeader';
-import AdminCmsLeftNavigation from './AdminCmsLeftNavigation';
+const UniversalHeader = React.lazy(() => import('../../../layouts/UniversalHeader/UniversalHeader'));
+const AdminCmsLeftNavigation = React.lazy(() => import('./AdminCmsLeftNavigation'));
 
-import HomePanel from './Panels/HomePanel';
-import Covid19Panel from './Panels/Covid19Panel';
-import FormDataAndValidateProvider from '../../../../contextStore/FormDataAndValidateProvider';
-import SubjectsPanel from './Panels/SubjectsPanel';
-import SchedulePanel from './Panels/SchedulePanel';
-import CalendarPanel from './Panels/CalendarPanel';
-import UserMessagesPanel from './Panels/UserMessagePanel';
+const HomePanel = React.lazy(() => import('./Panels/HomePanel'));
+const Covid19Panel = React.lazy(() => import('./Panels/Covid19Panel'));
+const FormDataAndValidateProvider = React.lazy(() => import('../../../../contextStore/FormDataAndValidateProvider'));
+const SubjectsPanel = React.lazy(() => import('./Panels/SubjectsPanel'));
+const SchedulePanel = React.lazy(() => import('./Panels/SchedulePanel'));
+const CalendarPanel = React.lazy(() => import('./Panels/CalendarPanel'));
+const UserMessagesPanel = React.lazy(() => import('./Panels/UserMessagePanel'));
 
 const { adminLoginContainer, adminLoginWrapper } = require('../AdminCmsLogin/AdminCmsLogin.module.scss');
 const { cmsSystemContainer, cmsContent } = require('./AdminCmsMainPanel.module.scss');

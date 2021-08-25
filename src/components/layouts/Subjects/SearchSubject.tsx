@@ -17,7 +17,7 @@ import React, { Fragment, Dispatch, SetStateAction } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SubjectsProvider } from './Subjects';
 
-import SubjectsTiles from './SubjectsTiles';
+const SubjectsTiles = React.lazy(() => import('./SubjectsTiles'));
 
 const {
    searchSubjectWrapper,  removeInputField, subjectsWrapper, emptyIcon, emptySubjectField
