@@ -100,6 +100,15 @@ app.get('/*', (req, res) => {
 });
 ```
 
+> The following packages are necessary for the correct working of this script:
+```
+$ npm i express path --s
+```
+or
+```
+$ yarn add express path
+```
+
 ## Clone and Installation
 If you want to clone and work with this repository, use the built-in interface in your IDE (for example WebStorm or Visual Studio Code) or use the clone project algorithm with git bash:<br>
 1. Open Git Bash.
