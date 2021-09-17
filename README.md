@@ -17,7 +17,7 @@ Advanced, full-stack web application written using the ReactJS library and other
 This application was created to provide comprehensive information to students on the current schedule of classes, upcoming activities and information about currently held subjects. This is my first such large and advanced project using the ReactJS library. Writing the application took me about 1.5 months in total. It was a very long 1.5 months of hard work with the code, but thanks to writing the application I learned a lot of new things about ReactJS, TypeScript and the whole NodeJS development environment.
 
 ## Custom CMS (Content Management System)
-I created my own CMS for this application (based on the mechanics and appearance of Strapi - a popular CMS system written in JavaScript). It was a big challenge for me because I was creating such a system for the first time and it may not be perfect, but it works perfectly for its purposes. This system closely communicates with the global React Context Store and API written in NodeJS.
+I created my own CMS for this application written fully in TypeScript. It was a big challenge for me because I was creating such a system for the first time and it may not be perfect, but it works perfectly for its purposes. This system closely communicates with the global React Context Store and API written in NodeJS.
 
 <hr/>
 
@@ -100,6 +100,15 @@ app.get('/*', (req, res) => {
 });
 ```
 
+> The following packages are necessary for the correct working of this script:
+```
+$ npm i express path --s
+```
+or
+```
+$ yarn add express path
+```
+
 ## Clone and Installation
 If you want to clone and work with this repository, use the built-in interface in your IDE (for example WebStorm or Visual Studio Code) or use the clone project algorithm with git bash:<br>
 1. Open Git Bash.
@@ -115,7 +124,7 @@ $ git clone https://github.com/Milosz08/ReactJS_Web_Application_POLSL
 > This project is mostly written in TypeScript. For the correct operation of the cloned application, you must have the TypeScript compiler installed together with the Create React App environment. If you do not know how to initiate the Create React App environment, go to [this link](https://create-react-app.dev/docs/getting-started).
 
 ## Dependencies
-All packages with dependencies used in the project can be found in the `package.json`. In addition, in each component I have included information about what packages I use and what versions they are.
+All packages with dependencies used in the project can be found in the `package.json`. In addition, in each component I have included information about what packages I use and version of this packages.
 
 ## License
 This application is on MIT License [terms of use](https://en.wikipedia.org/wiki/MIT_License).
