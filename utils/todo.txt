@@ -1,0 +1,71 @@
+Warstwa wizualna aplikacji przetwarzająca dane z backendu.
+
+======================================================= v(1.1) =======================================================
+
+Dodatki:
+- (zdeployowane) możliwość przełączania w panelu CMS między zmiana tokenów dla głównego administratora/moderatora,
+- (do implementacji): nadchodzące wydarzenia (na podstawie aktualnej daty) - nowy panel w sekcji "kalendarz studenta",
+
+Poprawki:
+- brak,
+
+======================================================= v(1.0) =======================================================
+
+Pierwsza wersja - pełna implementacja.
+
+Komponenty Reużywalne:
+- header,
+- czerwony pasek informacyjny nad headerem (nieoficjalna witryna),
+- informacja, zależności deweloperskie
+- stopka wraz z stopką copyright
+
+Strona główna:
+- implementacja: header,
+- implementacja: czerwony pasek,
+- banner ze zdjęciami wydziału,
+- blok informujący o statusie zabezpieczeń covid19
+- timer odliczający do: (aktualnie: 3 semestru, później do dni wolnych),
+- bloki głównej nawigacji,
+- wyszukiwarka przedmiotów wraz z informacjami,
+- implementacja: informacja, zależności deweloperskie,
+- implementacja: stopka wraz z stopką copyright,
+
+Interaktywny plan zajęć:
+... standardowe komponenty,
+- możliwość wyboru w panelu zarządzania,
+- wygenerowany plan zajęć,
+- możliwość wygenerowania pdfa,
+... standardowe komponenty,
+
+Kalendarz studenta:
+... standardowe komponenty,
+- bloki informacyjne (sterowanie, kalendarz na telefonie),
+- wygenerowany kalendarz,
+- informacje na temat aktywności kalendarza,
+... standardowe komponenty,
+
+Warunki zaliczenia przedmiotów (sekcja przekierowująca, w przyszłości pewnie coś na podstawie wpisów CMS):
+... standardowe komponenty,
+- blok przekierowujący (informacja + linki),
+... standardowe komponenty,
+
+Pomoce naukowe:
+... standardowe komponenty,
+=> dostęp tylko poprzez zalogowanie (zaciąganie zahaszowanego hasła z backendu, możliwość zmiany autoryzacji w panelu CMS):
+    - linki prowadzące do poszczególnych dysków, grup i wszelakich pomocy do nauki
+... standardowe komponenty,
+
+SYSTEM CMS:
+... standardowe komponenty,
+=> dostęp tylko poprzez zalogowanie (możliwość zalogowania jako admin/moderator - moderator -> brak możliwości zmiany tokenów):
+    - panel zarządzania treścią:
+        - strona startowa (głównej informacje na temat wpisów do bazy danych, zmiana autoryzacji),
+        - edycja paneli poziomów zagrożenia covid19,
+        - dodawanie, usuwanie i modyfikowanie przedmiotów,
+        - dodawanie, usuwanie i modyfikowanie wpisów w planie zajęć,
+        - dodawanie, usuwanie i modyfikowanie wpisów w kalendarzu,
+        - wiadomości przychodzące od użytkowników (stopka - formularz kontaktowy),
+... standardowe komponenty,
+
+Polityka prywatności:
+- generowanie struktury dokomentu na podstawie danych przechowywanych w obiektach JS.
