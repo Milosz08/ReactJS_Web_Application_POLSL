@@ -9,6 +9,7 @@
  * @dependencies  ReactJS: "^17.0.2"
  *                CryptoJS: "^4.1.1"
  *                uuid: "^8.3.1"
+ *                ReactCssModules: "^4.7.11"
  *
  * @date final version: 08/24/2021
  */
@@ -17,6 +18,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import CryptoJS, { AES, enc } from 'crypto-js';
 import axiosInstance from '../../../../../../helpers/request';
 import { v4 as uuidv4 } from 'uuid';
+import ChangeTypeOfCredentials from './ChangeTypeOfCredentials';
 
 const ShowHideAuthVisible = React.lazy(() => import('./ShowHideAuthVisible'));
 const GenerateAuthFields = React.lazy(() => import('./GenerateAuthFields'));
@@ -49,6 +51,13 @@ interface HashProvider {
 }
 
 /**
+ * Enumeration type stored all credentials levels using in whole webapp.
+ */
+export enum CREDENTIALS {
+   USER, MODERATOR, ADMIN
+}
+
+/**
  * @details A component that allows you to change the authentication for administrators, content moderators and users. Active
  *          component only for class 2 administrators (top level, primary system administrator). The component connects to
  *          the database, sends it new passwords, encrypting them with the AES method together with each time setting a secret
@@ -69,6 +78,8 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
    const [ errors, setErrors ] = useState<BooleansProvider>({
       login: false, password: false, passNotMath: false, token: false, notValidAdminPass: false,
    });
+
+   const [ authFieldType, setAuthFieldType ] = useState<number>(CREDENTIALS.MODERATOR);
 
    const handleConfirmViaAdminVisible = (): void => {
       if(confirmViaAdmin.value !== '') {
@@ -102,7 +113,7 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
    }
 
    const sendChangeCredentials = async (): Promise<any> => {
-      const { REACT_APP_MODERATOR_ID, REACT_APP_USER_ID } = process.env;
+      const { REACT_APP_MODERATOR_ID, REACT_APP_USER_ID, REACT_APP_ADMIN_ID } = process.env;
 
       const salt = CryptoJS.lib.WordArray.random(128 / 8);
       const key512bits = CryptoJS.PBKDF2(newCredent.passwords[0].value, salt, { keySize: 512 / 32 })
@@ -111,12 +122,21 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
       const cryptLogin = AES.encrypt(newCredent.login, hashKey).toString();
       const cryptPassword = AES.encrypt(newCredent.passwords[0].value, hashKey).toString();
 
-      if(!ifUser) { //administrator (1)
+      if(!ifUser) { //not user
          const cryptAdminToken = AES.encrypt(adminToken.value, hashKey).toString();
-         await axiosInstance.put(`authentication/${REACT_APP_MODERATOR_ID}`, {
-            role: 1, login: cryptLogin, password: cryptPassword, token: hashKey, adminToken: cryptAdminToken
-         });
-      } else { //user (0)
+         switch(authFieldType) {
+            case CREDENTIALS.MODERATOR: //moderator (1 of rank)
+               await axiosInstance.put(`authentication/${REACT_APP_MODERATOR_ID}`, {
+                  role: 1, login: cryptLogin, password: cryptPassword, token: hashKey, adminToken: cryptAdminToken
+               });
+               break;
+            case CREDENTIALS.ADMIN: //administrator (2 of rank)
+               await axiosInstance.put(`authentication/${REACT_APP_ADMIN_ID}`, {
+                  role: 2, login: cryptLogin, password: cryptPassword, token: hashKey, adminToken: cryptAdminToken
+               });
+               break;
+         }
+      } else { //user (0 of rank)
          await axiosInstance.put(`authentication/${REACT_APP_USER_ID}`, {
             role: 0, login: cryptLogin, password: cryptPassword, token: hashKey
          });
@@ -132,8 +152,8 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
 
       if(!loginBool && !passBool && !passNotMathBool && !tokenBool && !notValidAdminPassBool) {
          sendChangeCredentials();
-         setNewCredent({ ...newCredent, login: '' });
-         setNewCredent({ ...newCredent,
+         setNewCredent({
+            login: '',
             passwords: Array.from({ length: 2 }, () => ({ id: uuidv4(), ifVisible: false, value: '' }))
          });
          setConfirmViaAdmin({ ...confirmViaAdmin, value: '' });
@@ -148,11 +168,11 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
 
    const handleInputs = ({ target }: ChangeEvent<HTMLInputElement>): void => {
       switch(target.placeholder.toLocaleLowerCase()) {
-         case 'nowy login':
+         case 'login':
             setNewCredent({ ...newCredent, login: target.value });
             setErrors({ ...errors, login: false });
             break;
-         case 'nowy token':
+         case 'token':
             setAdminToken({ ...adminToken, value: target.value });
             setErrors({ ...errors, token: false });
             break;
@@ -176,6 +196,10 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
    return (
       <form className = {changeCredentialsForm} onSubmit = {handleSubmitSendCredentials}>
          <h3>Zmiana poświadczeń dla konta {ifUser ? 'użytkownika' : 'administratora'}</h3>
+         {!ifUser && <ChangeTypeOfCredentials
+             credential = {authFieldType}
+             callback = {setAuthFieldType}
+         />}
          <div className = {loginField}>
             <input
                type = 'text'

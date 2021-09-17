@@ -139,6 +139,17 @@
   }
 }
 
+.changeAuthTypeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0 20px 0;
+  .authRadio {
+    margin: 0 20px;
+  }
+}
+
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1250px) {
