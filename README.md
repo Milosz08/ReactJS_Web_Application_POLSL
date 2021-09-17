@@ -102,11 +102,11 @@ app.get('/*', (req, res) => {
 
 > The following packages are necessary for the correct working of this script:
 ```
-$ npm i express path --s
+$ npm i express --s
 ```
 or
 ```
-$ yarn add express path
+$ yarn add express
 ```
 
 ## Clone and Installation
