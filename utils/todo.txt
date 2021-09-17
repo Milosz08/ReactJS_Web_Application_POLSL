@@ -7,7 +7,7 @@ Dodatki:
 - (do implementacji): nadchodzące wydarzenia (na podstawie aktualnej daty) - nowy panel w sekcji "kalendarz studenta",
 
 Poprawki:
-- brak,
+- (do implementacji): zamiana wszystkich kolorów na zmienne CSS a nie zmienne SCSS (możliwość dodania dark mode),
 
 ======================================================= v(1.0) =======================================================
 
@@ -58,6 +58,8 @@ Pomoce naukowe:
 SYSTEM CMS:
 ... standardowe komponenty,
 => dostęp tylko poprzez zalogowanie (możliwość zalogowania jako admin/moderator - moderator -> brak możliwości zmiany tokenów):
+    - pasek informacyjny dla admina/moderatora (czas sesji, stopień autoryzacji, możliwość wylogowania z systemu),
+    - timer, który po 5 minutach nieaktywności wyświetla ostrzeżenie o końcu sesji (po 30 sek nastąpi automatyczne wylogowanie),
     - panel zarządzania treścią:
         - strona startowa (głównej informacje na temat wpisów do bazy danych, zmiana autoryzacji),
         - edycja paneli poziomów zagrożenia covid19,
