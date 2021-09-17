@@ -234,9 +234,9 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%) scale(0);
-    width: 60%;
-    height: 60%;
-    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+    border-radius: 100%;
     background-color: $mainLogosBgc;
     transition: .2s;
   }
