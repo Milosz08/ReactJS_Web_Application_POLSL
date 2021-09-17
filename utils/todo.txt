@@ -8,6 +8,9 @@ Dodatki:
 
 Poprawki:
 - (do implementacji): zamiana wszystkich kolorów na zmienne CSS a nie zmienne SCSS (możliwość dodania dark mode),
+- (do implementacji): poprawka w kolorze przy zmianie poświadczeń (radio buttons),
+- (do implementacji): zmiana nazwy w zmianie poświadczeń z "Zmiana poświadczeń dla konta administratora" na "Zmiana
+                      poświadczeń dla konta CMS",
 
 ======================================================= v(1.0) =======================================================
 
