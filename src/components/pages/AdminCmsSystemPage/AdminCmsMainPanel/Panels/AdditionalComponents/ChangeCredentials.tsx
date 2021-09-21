@@ -195,7 +195,7 @@ const ChangeCredentials: React.FC<BooleansProvider> = ({ ifUser, disableButton }
 
    return (
       <form className = {changeCredentialsForm} onSubmit = {handleSubmitSendCredentials}>
-         <h3>Zmiana poświadczeń dla konta {ifUser ? 'użytkownika' : 'administratora'}</h3>
+         <h3>Zmiana poświadczeń dla konta {ifUser ? 'użytkownika' : 'panelu CMS'}</h3>
          {!ifUser && <ChangeTypeOfCredentials
              credential = {authFieldType}
              callback = {setAuthFieldType}
