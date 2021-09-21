@@ -9,14 +9,12 @@
  * @date final version: 08/19/2021
  */
 
-@import './../../../../styles/_variables';
-
 .covidInfo {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: $widthVertical;
-  background-color: $covidInfoBgc;
+  width: var(--widthVertical);
+  background-color: var(--yellowColor);
   margin: 0 auto;
   border-radius: 10px;
   transform: translateY(-30px);
@@ -24,7 +22,7 @@
   z-index: 1;
   div, a {
     padding: 15px 20px;
-    color: $topNavbarColor;
+    color: var(--darkNavyBlueColor);
   }
   .statusInfo {
     font-size: 2rem;

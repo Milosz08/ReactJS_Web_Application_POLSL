@@ -9,7 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../../../styles/_variables';
 @import './../../../../../styles/_mixins';
 
 .covidPanelsContainer {
@@ -19,14 +18,14 @@
   section {
     width: 350px;
     height: 130px;
-    border: 2px dashed $mainLogosBgc;
+    border: 2px dashed var(--navyBlueColor);
     border-radius: 10px;
     margin: 20px;
     .sectionWrapper {
       display: flex;
       align-items: center;
       border: 8px solid #ffffff;
-      background: $covidInfoBgc;
+      background: var(--yellowColor);
       border-radius: 16px;
       height: 100%;
       padding: 20px;
@@ -41,13 +40,13 @@
         margin: 0 0 0 20px;
         font-size: 1.2rem;
         outline: none;
-        border: 2px solid $borderGray;
-        color: $mainLogosBgc;
+        border: 2px solid var(--darkGrayTint3);
+        color: var(--navyBlueColor);
         border-radius: 10px;
         transition: .2s;
         cursor: pointer;
         &:focus {
-          border-color: $mainLogosBgc;
+          border-color: var(--navyBlueColor);
         }
       }
     }
@@ -62,7 +61,7 @@ button.submitCovidForm {
 
 p.unwriteChangesCSS  {
   font-size: 1.2rem;
-  color: $importantColor;
+  color: var(--redColor);
   margin: 10px 0;
 }
 

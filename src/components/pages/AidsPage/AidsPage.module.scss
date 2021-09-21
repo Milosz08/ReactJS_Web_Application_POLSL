@@ -9,7 +9,6 @@
  * @date final version: 08/21/2021
  */
 
-@import './../../../styles/_variables';
 @import './../../../styles/_mixins';
 
 .aidsContainer {
@@ -17,7 +16,7 @@
   justify-content: center;
   .aisdWrapper {
     position: relative;
-    width: $widthVertical;
+    width: var(--widthVertical);
     margin-top: 220px;
     display: flex;
     flex-direction: column;
@@ -30,7 +29,7 @@
   margin-left: 40px;
   font-size: 1.3rem;
   font-weight: 500;
-  color: $headersH3;
+  color: var(--darkBlueColor);
 }
 
 .aidsMainContent {
@@ -45,8 +44,8 @@
       padding: 20px 0;
       margin: 10px 0;
       width: 100%;
-      background-color: $mainLogosBgc;
-      color: #ffffff;
+      background-color: var(--navyBlueColor);
+      color: var(--cleanWhiteColor);
       border-radius: 10px;
       overflow: hidden;
       position: relative;
@@ -70,8 +69,8 @@
         display: inline-block;
         width: .2em;
         height: .2em;
-        border-right: 2px solid #ffffff;
-        border-top: 2px solid #ffffff;
+        border-right: 2px solid var(--cleanWhiteColor);
+        border-top: 2px solid var(--cleanWhiteColor);
         transform: rotate(45deg);
         transition: .2s;
       }
@@ -79,7 +78,7 @@
         right: .5em;
       }
       &:hover {
-        box-shadow: 0 0 7px #b6b6b6;
+        box-shadow: 0 0 7px var(--boxShadowTint);
       }
     }
   }
@@ -90,7 +89,7 @@
   justify-content: center;
   .userLoginWrapper {
     position: relative;
-    width: $widthVertical;
+    width: var(--widthVertical);
     margin-top: 200px;
     display: flex;
     flex-direction: column;
@@ -102,11 +101,11 @@
 }
 
 .loginInfo {
-  @include borderWithPseudElementInfo($importantColor, #ffffff, 1.2rem, 500, 'Uwaga');
+  @include borderWithPseudElementInfo(var(--redColor), var(--cleanWhiteColor), 1.2rem, 500, 'Uwaga');
   margin: 60px 0;
   font-size: 1.2rem;
   font-weight: 500;
-  color: $importantColor;
+  color: var(--redColor);
 }
 
 ////////////////////////////////////////////////////

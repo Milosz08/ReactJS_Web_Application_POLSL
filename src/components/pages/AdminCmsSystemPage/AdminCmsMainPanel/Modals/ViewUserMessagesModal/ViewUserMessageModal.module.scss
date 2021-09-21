@@ -9,12 +9,11 @@
  * @date final version: 08/19/2021
  */
 
-@import './../../../../../../styles/_variables';
 @import './../../../../../../styles/_mixins';
 
 .messageInfoContainer {
   .userInfo, .messageInfo {
-    @include borderWithPseudElementInfo($grayBgc, #ffffff, 1rem, 500, 'INFORMACJE');
+    @include borderWithPseudElementInfo(var(--darkGrayTint2), var(--cleanWhiteColor), 1rem, 500, 'INFORMACJE');
     margin: 30px 0;
     &::before {
       top: -12px;
@@ -25,10 +24,10 @@
       display: block;
       font-size: 1.3rem;
       font-weight: 500;
-      color: $mainLogosBgc;
+      color: var(--navyBlueColor);
       strong {
         font-weight: 500;
-        color: $yellowHover;
+        color: var(--darkOrangeColor);
       }
     }
   }

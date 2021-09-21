@@ -9,7 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../../../../styles/_variables';
 @import './../../../../../../styles/_mixins';
 
 .modalAddWrapper {
@@ -28,16 +27,16 @@
       width: 100%;
       font-size: 1.1rem;
       &::placeholder {
-        color: $borderGray;
+        color: var(--darkGrayTint3);
         font-weight: 400;
       }
       &:focus {
-        border-color: $mainLogosBgc;
+        border-color: var(--navyBlueColor);
       }
       &.someError {
-        border: 2px solid $importantColor;
+        border: 2px solid var(--redColor);
         &::placeholder {
-          color: $importantColor;
+          color: var(--redColor);
         }
       }
     }
@@ -53,9 +52,9 @@
   .checkFieldsLeft, .departmentsContainer {
     @include borderContainer();
     &.someError {
-      border-color: $importantColor;
+      border-color: var(--redColor);
       &::after {
-        color: $importantColor;
+        color: var(--redColor);
         font-weight: 600;
       }
     }
@@ -77,13 +76,13 @@
     }
     button.addNewDepartment {
       @include defaultButtonReset();
-      border: 2px dashed $mainLogosBgc;
+      border: 2px dashed var(--navyBlueColor);
       border-radius: 10px;
       padding: 7px 0 10px 0;
       font-size: 1.1rem;
       font-weight: 500;
       margin: 5px 10px;
-      color: $mainLogosBgc;
+      color: var(--navyBlueColor);
     }
 
     &::after {
@@ -105,7 +104,7 @@
     margin: 5px 0;
     select, input {
       @include imputField(50px, 10px);
-      color: $mainLogosBgc;
+      color: var(--navyBlueColor);
       font-size: 1.1rem;
       margin: 0 10px;
       flex-grow: 10;
@@ -134,24 +133,24 @@
       font-size: 1.2rem;
       margin: 0 10px;
       .removeInputField {
-        color: $mainLogosBgc;
+        color: var(--navyBlueColor);
       }
     }
   }
   button.addNewPZEmodule {
     @include defaultButtonReset();
-    border: 2px dashed $mainLogosBgc;
+    border: 2px dashed var(--navyBlueColor);
     border-radius: 10px;
     padding: 7px 0 10px 0;
     font-size: 1.1rem;
     font-weight: 500;
     margin: 5px 10px;
-    color: $mainLogosBgc;
+    color: var(--navyBlueColor);
   }
   &.someError {
-    border-color: $importantColor;
+    border-color: var(--redColor);
     &::after {
-      color: $importantColor;
+      color: var(--redColor);
       font-weight: 600;
     }
   }
@@ -167,7 +166,7 @@
     align-items: center;
     flex-basis: 30%;
     cursor: pointer;
-    color: $headersH3;
+    color: var(--darkBlueColor);
     font-weight: 500;
     label {
       font-size: 1.2rem;
@@ -175,7 +174,7 @@
       cursor: pointer;
     }
     input[type = 'checkbox'] {
-      @include inputCheckbox($mainLogosBgc);
+      @include inputCheckbox(var(--navyBlueColor));
       margin: -3px;
     }
     .checkmark {
@@ -202,7 +201,7 @@
     font-size: 1.2rem;
     text-transform: capitalize;
     cursor: pointer;
-    color: $headersH3;
+    color: var(--navyBlueColor);
     font-weight: 500;
   }
   input[type = 'radio'] {
@@ -213,9 +212,12 @@
     height: 20px;
     margin-right: 10px;
     cursor: pointer;
-    &:checked ~ .radiomark::after {
-      transition: .2s;
-      transform: translate(-50%, -50%) scale(1);
+    &:checked ~ .radiomark {
+      border: none;
+      &::after {
+        transition: .2s;
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
   }
 }
@@ -226,7 +228,7 @@
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  border: 1px solid $footerContent;
+  border: 1px solid var(--darkGray);
   border-radius: 50%;
   &::after {
     content: '';
@@ -236,8 +238,9 @@
     transform: translate(-50%, -50%) scale(0);
     width: 50%;
     height: 50%;
+    border: 5px solid var(--navyBlueColor);
     border-radius: 100%;
-    background-color: $mainLogosBgc;
+    background-color: var(--cleanWhiteColor);
     transition: .2s;
   }
 }
@@ -250,7 +253,7 @@
     @include defaultButton();
     max-width: 250px;
     &.subjectFormSend {
-      background-color: $yellowDefColor;
+      background-color: var(--orangeColor);
     }
   }
 }

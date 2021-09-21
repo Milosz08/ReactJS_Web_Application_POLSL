@@ -9,7 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../../../../styles/_variables';
 @import './../../../../../../styles/_mixins';
 
 .modalContainer {
@@ -22,13 +21,13 @@
   z-index: 9999;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, .6);
+  background-color: var(--transparentModal);
   &.modalOpen, &.addModalOpen {
     display: flex;
   }
   .modalWrapper, .modalAddWrapper {
     width: 800px;
-    background-color: #ffffff;
+    background-color: var(--cleanWhiteColor);
     border-radius: 10px;
     padding: 10px 40px 40px;
     margin: 30px;
@@ -50,7 +49,7 @@ header.modalWarningHeader, header.modalAddHeader {
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    color: $importantColor;
+    color: var(--redColor);
     font-weight: 500;
     line-height: 1.4;
   }
@@ -61,7 +60,7 @@ header.modalWarningHeader, header.modalAddHeader {
   aside {
     flex-grow: 1;
     height: 1px;
-    background-color: $grayBgc;
+    background-color: var(--darkGrayTint2);
     margin: 0 20px;
   }
   &.marginTopAdd {
@@ -70,9 +69,9 @@ header.modalWarningHeader, header.modalAddHeader {
 }
 
 header.modalAddHeader h3 {
-  color: $headersH3;
+  color: var(--darkBlueColor);
   .modalAddIcon {
-    color: $yellowDefColor;
+    color: var(--orangeColor);
   }
 }
 
@@ -80,20 +79,20 @@ header.modalAddHeader h3 {
   text-align: center;
   font-size: 1.3rem;
   font-weight: 500;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
   margin: 40px 0;
   p {
     margin: 15px 0;
     font-size: 2rem;
-    color: $yellowHover;
+    color: var(--darkOrangeColor);
     &.messageTypeBox {
       font-size: 1.2rem;
       margin: 30px 0;
-      color: $headersH3;
+      color: var(--darkBlueColor);
     }
     &.calendarWarnInfo {
       position: relative;
-      border: 1px solid $borderGray;
+      border: 1px solid var(--darkGrayTint3);
       border-radius: 10px;
       padding: 15px 30px;
       font-size: 1.3rem;
@@ -112,26 +111,26 @@ header.modalAddHeader h3 {
       }
     }
     &.low {
-      color: $goodColor;
+      color: var(--greenColor);
       &::before {
-        background-color: $goodColor;
+        background-color: var(--greenColor);
       }
     }
     &.medium {
-      color: $yellowHover;
+      color: var(--orangeColor);
       &::before {
-        background-color: $yellowHover;
+        background-color: var(--orangeColor);
       }
     }
     &.high {
-      color: $importantColor;
+      color: var(--redColor);
       &::before {
-        background-color: $importantColor;
+        background-color: var(--redColor);
       }
     }
   }
   strong {
-    color: $yellowDefColor;
+    color: var(--orangeColor);
     font-weight: 500;
   }
 }
@@ -144,24 +143,24 @@ header.modalAddHeader h3 {
     @include defaultButton();
     max-width: 240px;
     &:nth-child(1) {
-      background-color: $lightGrayBgc;
-      color: $footerHeaders;
+      background-color: var(--lightGrayTint1);
+      color: var(--lightBlack);
       &:hover {
-        box-shadow: 0 0 6px $lightGrayBgc;
+        box-shadow: 0 0 6px var(--lightGrayTint1);
       }
     }
   }
 }
 
 strong.deleteSchedule {
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
   font-weight: 600;
   text-decoration: underline;
 }
 
 .dangerColorWrapper {
   header * {
-    color: $importantColor;
+    color: var(--redColor);
   }
 }
 

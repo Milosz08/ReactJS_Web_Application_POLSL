@@ -9,13 +9,12 @@
  * @date final version: 08/18/2021
  */
 
-@import '../../../styles/variables';
 @import '../../../styles/mixins';
 
 .adminAsyncWrapper {
   position: relative;
   min-height: 500px;
-  width: $widthVertical;
+  width: var(--widthVertical);
   margin-top: 200px;
   display: none;
   flex-direction: column;
@@ -23,7 +22,7 @@
   align-items: center;
   font-size: 1.4rem;
   font-weight: 500;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
   &.showAsync {
     display: flex;
   }
@@ -32,12 +31,12 @@
     max-width: 25em;
     border-radius: 3px;
     fill: none;
-    stroke: $borderGray;
+    stroke: var(--darkGrayTint3);
     stroke-linecap: round;
     stroke-width: 8%
   }
   use.infiniteUse {
-    stroke: $mainLogosBgc;
+    stroke: var(--navyBlueColor);
     animation: loopAnimation 2s ease-in-out infinite;
   }
   @keyframes loopAnimation {

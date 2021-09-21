@@ -9,8 +9,6 @@
  * @date final version: 08/18/2021
  */
 
-@import './../../../styles/_variables';
-
 .externalLinkIcon {
   font-size: .8rem;
   transform: translateY(-3px);
@@ -19,7 +17,7 @@
 
 h3.footerHeaders {
   font-weight: 500;
-  color: $footerHeaders;
+  color: var(--lightBlack);
   margin-bottom: 15px;
   height: 30px;
   width: 100%;
@@ -29,12 +27,12 @@ footer.footerWrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: $lightLightGrayBgc;
+  background-color: var(--lightGray);
   font-size: 1rem;
   .footerContainer {
     display: flex;
     justify-content: space-between;
-    width: $widthVertical;
+    width: var(--widthVertical);
     margin: 60px 0;
     .footerRouterContex {
       display: flex;
@@ -45,13 +43,13 @@ footer.footerWrapper {
         ul {
           list-style-type: none;
           li a, div[role = 'link'] a {
-            color: $footerContent;
+            color: var(--darkGray);
             line-height: 1.8;
             font-weight: 300;
             text-decoration: none;
             transition: .2s;
             &:hover {
-              color: $mainLogosBgc;
+              color: var(--navyBlueColor);
               text-decoration: underline;
             }
           }
@@ -62,18 +60,18 @@ footer.footerWrapper {
         margin: 60px 100px 0 0;
         .asideSeparator {
           height: 1px;
-          background-color: $grayBgc;
+          background-color: var(--darkGrayTint2);
         }
         .disclaimerBlock {
           padding-top: 20px;
-          color: $footerContent;
+          color: var(--darkGray);
         }
         div[role = 'link'] {
           display: inline-block;
           margin-top: 30px;
           a {
             cursor: pointer;
-            color: $footerHeaders;
+            color: var(--lightBlack);
             text-decoration: underline;
           }
         }
@@ -100,13 +98,13 @@ footer.footerWrapper {
     justify-content: space-between;
     flex-wrap: wrap;
     .copyIcons, .copyAuthor, .copyCookies {
-      color: $footerContent;
+      color: var(--darkGray);
       flex-basis: calc(100% / 3);
       text-align: center;
       a, div[role = 'link'] {
         display: inline-block;
         font-weight: 500;
-        color: $footerHeaders;
+        color: var(--lightBlack);
         text-decoration: none;
         &:hover {
           text-decoration: underline;

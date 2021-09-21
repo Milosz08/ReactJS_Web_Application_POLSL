@@ -9,7 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../../styles/_variables';
 @import './../../../../styles/_mixins';
 
 .adminLoginContainer {
@@ -17,7 +16,7 @@
   justify-content: center;
   .adminLoginWrapper {
     position: relative;
-    width: $widthVertical;
+    width: var(--widthVertical);
     margin-top: 230px;
     display: flex;
     flex-direction: column;
@@ -31,7 +30,7 @@
 h3.authenticationHeader {
   font-size: 1.5rem;
   font-weight: 500;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
   margin: 20px 0;
 }
 
@@ -60,7 +59,7 @@ form.adminCredentials, form.userCredentials {
       right: 5px;
       .visibleIcon {
         font-size: 1rem;
-        color: $darkGray;
+        color: var(--darkGrayTint1);
       }
     }
   }
@@ -69,12 +68,12 @@ form.adminCredentials, form.userCredentials {
   }
   aside.infoAboutToken {
     margin-top: 30px;
-    color: $darkGray;
+    color: var(--darkGrayTint1);
   }
 }
 
 .poweredBy {
-  @include borderWithPseudElementInfo($mainLogosBgc, #fff, 1.2rem, 500, 'Based on');
+  @include borderWithPseudElementInfo(var(--navyBlueColor), var(--cleanWhiteColor), 1.2rem, 500, 'Based on');
   margin-top: 80px;
   padding-bottom: 20px;
   font-size: 1.1rem;

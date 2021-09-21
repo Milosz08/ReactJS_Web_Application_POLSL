@@ -9,11 +9,10 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../../../styles/_variables';
 @import './../../../../../styles/_mixins';
 
 .mainInfoContainer {
-  @include borderWithPseudElementInfo($borderGray, #ffffff, 1.1rem, 400, 'GŁÓWNE INFORMACJE');
+  @include borderWithPseudElementInfo(var(--darkGrayTint3), var(--cleanWhiteColor), 1.1rem, 400, 'GŁÓWNE INFORMACJE');
   width: calc(100% - 80px);
   height: 100%;
   margin: 40px 40px 0 40px;
@@ -26,11 +25,11 @@
   p {
     font-size: 1.3rem;
     font-weight: 500;
-    color: $mainLogosBgc;
+    color: var(--navyBlueColor);
     padding: 10px 0;
     line-height: 1;
     strong {
-      color: $yellowDefColor;
+      color: var(--orangeColor);
       font-weight: 500;
     }
   }
@@ -38,14 +37,14 @@
     font-size: 1.1rem;
     padding: 5px 0;
     strong {
-      color: $mainLogosBgc;
+      color: var(--navyBlueColor);
       font-weight: 600;
     }
   }
 }
 
 .changeCredentials {
-  @include borderWithPseudElementInfo($borderGray, #ffffff, 1.1rem, 400, 'ZMIANA POŚWIADCZEŃ');
+  @include borderWithPseudElementInfo(var(--darkGrayTint3), var(--cleanWhiteColor), 1.1rem, 400, 'ZMIANA POŚWIADCZEŃ');
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -60,7 +59,7 @@
     h3 {
       font-size: 1.4rem;
       font-weight: 500;
-      color: $mainLogosBgc;
+      color: var(--navyBlueColor);
       margin: 20px 0;
     }
     .loginField, .inputNewAdminToken, .confirmViaAdminPasswordField, .passwordField {
@@ -71,9 +70,9 @@
         width: 300px;
         margin: 5px 0;
         &.errorValue {
-          border-color: $importantColor;
+          border-color: var(--redColor);
           &::placeholder {
-            color: $importantColor;
+            color: var(--redColor);
           }
         }
         &.blockedInputs {
@@ -91,14 +90,14 @@
         right: 5px;
         .visibleIcon {
           font-size: 1rem;
-          color: $darkGray;
+          color: var(--darkGrayTint1);
         }
       }
     }
     p {
       margin: 20px 0 10px 0;
       max-width: 300px;
-      color: $mainLogosBgc;
+      color: var(--navyBlueColor);
       font-weight: 500;
     }
     button.submitForm {
@@ -113,9 +112,9 @@
     transform: translateX(-50%);
   }
   &.disable {
-    border: 2px solid $importantColor;
+    border: 2px solid var(--redColor);
     &::before {
-      color: $importantColor;
+      color: var(--redColor);
       font-weight: 500;
     }
     .changeCredentialsForm {
@@ -132,7 +131,7 @@
   p.disabledInfo {
     flex-basis: 100%;
     text-align: center;
-    color: $importantColor;
+    color: var(--redColor);
     font-weight: 500;
     font-size: 1.1rem;
     margin: 10px 80px;

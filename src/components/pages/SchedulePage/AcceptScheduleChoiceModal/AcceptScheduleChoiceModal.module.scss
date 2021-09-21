@@ -9,7 +9,6 @@
  * @date final version: 08/19/2021
  */
 
-@import './../../../../styles/_variables';
 @import './../../../../styles/_mixins';
 
 .scheduleSaveContainer {
@@ -42,7 +41,7 @@
     span.scheduleSaveContent, span.whenCloseWindow {
       font-size: 1.3rem;
       font-weight: 500;
-      color: $mainLogosBgc;
+      color: var(--navyBlueColor);
       padding: 20px 50px;
       text-align: center;
     }

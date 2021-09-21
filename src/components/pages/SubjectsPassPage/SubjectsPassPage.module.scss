@@ -1,4 +1,14 @@
-@import './../../../styles/_variables';
+/**
+ * @file SubjectsPassPage.module.scss
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief SCSS file pre-generated with ReactCSS Modules to avoid classes conflicts.
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @date final version: 08/19/2021
+ */
+
 @import './../../../styles/_mixins';
 
 .subjectsPassContainer {
@@ -8,18 +18,18 @@
   .subjectsPassWrapper {
     position: relative;
     margin-top: 230px;
-    width: $widthVertical;
+    width: var(--widthVertical);
     display: flex;
     flex-direction: column;
   }
 }
 
 .infoBlock {
-  @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Przekierowanie');
+  @include borderWithPseudElementInfo(var(--darkBlueColor), var(--cleanWhiteColor), 1.2rem, 500, 'Przekierowanie');
   margin-top: 30px;
   p {
     font-size: 1.2rem;
-    color: $mainLogosBgc;
+    color: var(--navyBlueColor);
     font-weight: 500;
   }
   .linksContainer {

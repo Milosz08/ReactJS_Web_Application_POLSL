@@ -9,7 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../../../styles/_variables';
 @import './../../../../../styles/_mixins';
 
 .scheduleContainer {
@@ -28,8 +27,8 @@
     font-size: 1.2rem;
     line-height: 0;
     cursor: pointer;
-    background-color: $mainLogosBgc;
-    color: #ffffff;
+    background-color: var(--navyBlueColor);
+    color: var(--cleanWhiteColor);
     border: none;
     border-radius: 10px;
     span.dayTitle {
@@ -76,7 +75,7 @@
 }
 
 .setScheduleBreakContainer {
-  border: 1px solid $borderGray;
+  border: 1px solid var(--darkGrayTint3);
   border-radius: 10px;
   margin: 30px 40px 0;
   padding: 30px;
@@ -92,12 +91,12 @@
       label {
         font-size: 1.2rem;
         line-height: 0;
-        color: $mainLogosBgc;
+        color: var(--navyBlueColor);
         font-weight: 500;
         cursor: pointer;
       }
       input[type = 'checkbox'] {
-        @include inputCheckbox($mainLogosBgc);
+        @include inputCheckbox(var(--navyBlueColor));
         margin-right: 0;
       }
       span.checkmark {
@@ -105,7 +104,7 @@
       }
     }
     p {
-      color: $footerHeaders;
+      color: var(--lightBlack);
     }
   }
   .sendData {
@@ -114,7 +113,7 @@
     align-items: center;
     margin-top: 30px;
     p {
-      color: $importantColor;
+      color: var(--redColor);
       font-size: 1.2rem;
       font-weight: 500;
       opacity: 0;

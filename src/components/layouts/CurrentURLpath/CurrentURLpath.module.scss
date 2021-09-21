@@ -9,8 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../styles/_variables';
-
 .currentURLcontainer {
   display: flex;
   justify-content: center;
@@ -18,12 +16,12 @@
   top: 220px;
   margin-bottom: 40px;
   .currentURLwrapper {
-    width: $widthVertical;
+    width: var(--widthVertical);
     .sigleCellRecord div[role = 'link'], .arrowIcon, div[role = 'link'] {
       display: inline-block;
-      color: $footerContent;
+      color: var(--darkGray);
       a {
-        color: $footerContent;
+        color: var(--darkGray);
         text-decoration: none;
         font-weight: 500;
         &:hover {

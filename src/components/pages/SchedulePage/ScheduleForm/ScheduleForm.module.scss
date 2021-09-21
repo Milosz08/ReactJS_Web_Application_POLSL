@@ -9,7 +9,6 @@
  * @date final version: 08/19/2021
  */
 
-@import '../../../../styles/_variables';
 @import '../../../../styles/_mixins';
 
 .formContentWrapper {
@@ -43,9 +42,9 @@ form.sheduleForm {
       height: 50px;
       width: 200px;
       margin: 10px;
-      background-color: $lightLightGrayBgc;
+      background-color: var(--lightGray);
       border-radius: 7px;
-      color: $footerHeaders;
+      color: var(--lightBlack);
       font-size: 1.1rem;
       font-weight: 500;
       cursor: pointer;
@@ -55,7 +54,7 @@ form.sheduleForm {
         width: 22px;
         height: 22px;
         border-radius: 50%;
-        border: 2px solid $grayBgc;
+        border: 2px solid var(--darkGrayTint2);
         top: 50%;
         left: 15px;
         transform: translateY(-50%);
@@ -66,21 +65,21 @@ form.sheduleForm {
           top: 2px;
           width: 4px;
           height: 8px;
-          border: solid $yellowDefColor;
+          border: solid var(--orangeColor);
           border-width: 0 3px 3px 0;
           transform: rotate(45deg) scale(0);
           transition: .2s;
         }
       }
       &.activeRadio {
-        background-color: $yellowDefColor;
-        color: #ffffff;
+        background-color: var(--orangeColor);
+        color: var(--cleanWhiteColor);
         &:hover {
-          background-color: $yellowHover;
+          background-color: var(--darkOrangeColor);
         }
       }
       &:hover {
-        box-shadow: 0 0 4px 0 #dbdbdb;
+        box-shadow: 0 0 4px 0 var(--boxShadowTint2);
       }
     }
   }
@@ -105,8 +104,8 @@ form.sheduleForm {
     opacity: 0;
     cursor: pointer;
     &:checked ~ .customRadio {
-      background-color:#ffffff;
-      border-color: #ffffff;
+      background-color: var(--cleanWhiteColor);
+      border-color: var(--cleanWhiteColor);
       &::after {
         transform: rotate(45deg) scale(1);
       }
@@ -117,11 +116,11 @@ form.sheduleForm {
 form.sheduleForm {
   .groupRadio {
     flex-basis: 10%;
-    @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Wybierz swoją grupę główną');
+    @include borderWithPseudElementInfo(var(--darkBlueColor), var(--cleanWhiteColor), 1.2rem, 500, 'Wybierz swoją grupę główną');
   }
   .englishRadio {
     flex-basis: 46%;
-    @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Wybierz swoją grupę językową');
+    @include borderWithPseudElementInfo(var(--darkBlueColor), var(--cleanWhiteColor), 1.2rem, 500, 'Wybierz swoją grupę językową');
   }
 }
 
@@ -135,12 +134,12 @@ form.sheduleForm {
     &:disabled {
       box-shadow: none;
       background-color: gray;
-      color: $grayBgc;
+      color: var(--darkGrayTint2);
       cursor: not-allowed;
     }
   }
   button.gotoShedule {
-    background-color: $yellowDefColor;
+    background-color: var(--orangeColor);
     font-weight: 500;
   }
 }
@@ -149,8 +148,8 @@ form.sheduleForm {
   max-width: 700px;
   font-size: 1.2rem;
   font-weight: 500;
-  color: $importantColor;
-  @include borderWithPseudElementInfo($importantColor, #ffffff, 1.2rem, 500, 'Uwaga');
+  color: var(--redColor);
+  @include borderWithPseudElementInfo(var(--redColor), var(--cleanWhiteColor), 1.2rem, 500, 'Uwaga');
   margin-bottom: 50px;
   padding: 30px 30px;
 }

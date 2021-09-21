@@ -9,7 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../styles/_variables';
 @import './../../../styles/_mixins';
 
 .cookiesInfoContainer {
@@ -17,21 +16,21 @@
   justify-content: center;
   .cookiesInfoWrapper {
     position: relative;
-    width: $widthVertical;
+    width: var(--widthVertical);
     margin-top: 200px;
   }
 }
 
 .cookieContent {
   font-size: 1.3rem;
-  color: $footerHeaders;
+  color: var(--lightBlack);
   a {
-    color: $headersH3;
+    color: var(--darkBlueColor);
     font-weight: 500;
     text-decoration: none;
     transition: .2s;
     &:hover {
-      color: $yellowDefColor;
+      color: var(--orangeColor);
     }
   }
 }
@@ -45,10 +44,10 @@
   li {
     font-size: 1.3rem;
     padding: 6px 0;
-    color: $footerHeaders;
+    color: var(--lightBlack);
     strong {
       font-weight: 500;
-      color: $headersH3;
+      color: var(--darkBlueColor);
     }
   }
 }
@@ -61,14 +60,14 @@
   font-size: 40rem;
   font-weight: 500;
   line-height: 1;
-  color: $headersH3;
+  color: var(--darkBlueColor);
   opacity: .1;
 }
 
 .sectionSign {
   font-size: 2.3rem;
   margin-right: 20px;
-  color: $yellowDefColor;
+  color: var(--orangeColor);
 }
 
 ////////////////////////////////////////////////////

@@ -9,7 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../styles/_variables';
 @import './../../../styles/_mixins';
 
 section.navInline ul {
@@ -20,7 +19,7 @@ section.navInline ul {
   li {
     margin: 0 15px;
     div[role = 'link'] a {
-      color: $whiteColor;
+      color: var(--whiteColor);
       text-decoration: none;
       font-weight: 500;
     }
@@ -32,26 +31,26 @@ section.navInline ul {
 
 .navBlocks, .subjBlocks, .subjInfos, .cookiesInfoHeader,
 .cookieSectionsContent, .sheduleBlocks, .scheduleRender, .universalHeader {
-  width: $widthVertical;
+  width: var(--widthVertical);
   margin: 0 auto;
   h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 2rem;
-    color: $headersH3;
+    color: var(--darkBlueColor);
     font-weight: 500;
     line-height: 1;
     margin: 30px 0 20px 0;
     .fasIcon {
       font-size: 1.2rem;
       margin-right: 15px;
-      color: $yellowDefColor;
+      color: var(--orangeColor);
     }
     aside {
       flex-grow: 1;
       height: 1px;
-      background-color: $grayBgc;
+      background-color: var(--darkGrayTint2);
       margin-left: 40px;
     }
   }
@@ -65,7 +64,7 @@ section.navInline ul {
   li {
     width: 250px;
     min-height: 250px;
-    background-color: $lightGrayBgc;
+    background-color: var(--lightGrayTint1);
     margin-bottom: 40px;
     border-radius: 10px;
     div[role = 'link'], a {
@@ -94,13 +93,13 @@ section.navInline ul {
     font-size: 2rem;
     font-weight: 400;
     line-height: 1;
-    background-color: $mainLogosBgc;
-    color: $whiteColor;
+    background-color: var(--navyBlueColor);
+    color: var(--whiteColor);
   }
   &:nth-child(2) {
     padding: 10px 15px 15px 15px;
-    border-top: 4px solid $yellowDefColor;
-    color: $headersH3;
+    border-top: 4px solid var(--orangeColor);
+    color: var(--darkBlueColor);
   }
 }
 
@@ -115,7 +114,7 @@ section.navInline ul {
     width: 15px;
     height: 5px;
     &::after {
-      @include arrowNavigate(.5em, -45deg, 0, $whiteColor);
+      @include arrowNavigate(.5em, -45deg, 0, var(--whiteColor));
       border-right-width: 2px;
       border-bottom-width: 2px;
     }

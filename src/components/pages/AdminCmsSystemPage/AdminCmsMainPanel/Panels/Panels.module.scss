@@ -9,7 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../../../styles/_variables';
 @import './../../../../../styles/_mixins';
 
 .panelContainer {
@@ -24,7 +23,7 @@
   h2 {
     margin: 40px 0;
     font-weight: 500;
-    color: $mainLogosBgc;
+    color: var(--navyBlueColor);
   }
 }
 
@@ -34,7 +33,7 @@ label.insertDataInputField {
     input[type = 'text'] {
       @include imputField(15px, 12px);
       width: 350px;
-      border: 2px solid $borderGray;
+      border: 2px solid var(--darkGrayTint3);
     }
     button {
       @include defaultButtonReset();
@@ -45,7 +44,7 @@ label.insertDataInputField {
       height: 50px;
       width: 50px;
       font-size: 1.3rem;
-      color: $mainLogosBgc;
+      color: var(--navyBlueColor);
     }
   }
 }
@@ -62,17 +61,17 @@ label.insertDataInputField {
     text-align: left;
     font-size: 1.2rem;
     padding: 10px 20px;
-    border: 1px solid $borderGray;
+    border: 1px solid var(--darkGrayTint3);
     border-radius: 10px;
     margin: 9px 0;
     font-weight: 500;
-    color: $mainLogosBgc;
+    color: var(--navyBlueColor);
     span.listNumber, span.sortById {
       width: 60px;
-      color: $darkGray;
+      color: var(--darkGrayTint1);
     }
     span.sortById, span.sortByDate, span.sortByImportant, span.sortByCount {
-      color: $footerHeaders;
+      color: var(--lightBlack);
     }
     span.listTitle, span.listDate, span.sortByName, span.sortByDate {
       flex-grow: 1;
@@ -82,9 +81,9 @@ label.insertDataInputField {
     }
     span.subjectStatus, span.sortByEnd, span.listImportant {
       width: 200px;
-      color: $importantColor;
+      color: var(--redColor);
       &.subjectEnd {
-        color: $goodColor;
+        color: var(--greenColor);
       }
     }
     span.typeOfMessageCSS {
@@ -95,7 +94,7 @@ label.insertDataInputField {
     }
     span.sortByEnd, span.sortByImportant {
       width: 310px;
-      color: $footerHeaders;
+      color: var(--lightBlack);
     }
     button.modifyElement, button.deleteElement {
       @include defaultButtonReset();
@@ -108,16 +107,16 @@ label.insertDataInputField {
       margin-left: 20px;
       font-size: 1.2rem;
       &.modifyElement {
-        color: $mainLogosBgc;
+        color: var(--navyBlueColor);
       }
       &.deleteElement {
-        color: $importantColor;
+        color: var(--redColor);
       }
     }
     &.listSorting {
       border: none;
       font-size: 1rem;
-      color: $footerHeaders;
+      color: var(--lightBlack);
       text-transform: uppercase;
       .angleIcon {
         margin-right: 10px;
@@ -134,33 +133,33 @@ label.insertDataInputField {
     border-radius: 50%;
     margin-right: 10px;
     &.lowLevel {
-      background-color: $goodColor;
+      background-color: var(--greenColor);
     }
     &.mediumLevel {
-      background-color: $yellowDefColor;
+      background-color: var(--orangeColor);
     }
     &.highLevel {
-      background-color: $importantColor;
+      background-color: var(--redColor);
     }
   }
 }
 
 button.addNewRecord {
   @include defaultButtonReset();
-  border: 2px dashed $mainLogosBgc;
+  border: 2px dashed var(--navyBlueColor);
   border-radius: 10px;
   width: 100%;
   padding: 10px 0 13px 0;
   font-size: 1.2rem;
   font-weight: 500;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
 }
 
 .recordsNotExist {
   font-size: 2rem;
   font-weight: 400;
   text-align: center;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
   margin: 50px 0;
   .infoIcon {
     font-size: 2.2rem;

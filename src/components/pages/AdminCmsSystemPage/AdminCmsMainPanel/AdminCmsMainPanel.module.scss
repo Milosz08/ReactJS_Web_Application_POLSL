@@ -9,12 +9,11 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../../styles/_variables';
 @import './../../../../styles/_mixins';
 
 .cmsSystemContainer {
   display: flex;
-  width: $widthVertical;
+  width: var(--widthVertical);
   min-height: 500px;
   margin: 20px 0;
   nav.cmsNavigation {
@@ -24,9 +23,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: $borderGray;
-      color: $footerContent;
-      border: 2px solid $borderGray;
+      background-color: var(--darkGrayTint3);
+      color: var(--darkGray);
+      border: 2px solid var(--darkGrayTint3);
       border-radius: 10px 0 0 10px;
       width: 65px;
       height: 65px;
@@ -37,13 +36,13 @@
       &.activeSection {
         border-right: 0;
         background-color: #ffffff;
-        color: $mainLogosBgc;
+        color: var(--navyBlueColor);
       }
     }
   }
   .cmsContent {
     border-radius: 0 10px 10px 10px;
-    border: 2px solid $borderGray;
+    border: 2px solid var(--darkGrayTint3);
     flex-grow: 1;
   }
 }
@@ -53,7 +52,7 @@
   margin-left: 40px;
   font-size: 1.3rem;
   font-weight: 500;
-  color: $headersH3;
+  color: var(--darkBlueColor);
 }
 
 ////////////////////////////////////////////////////

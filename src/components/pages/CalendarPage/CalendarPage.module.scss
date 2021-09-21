@@ -9,7 +9,6 @@
  * @date final version: 08/19/2021
  */
 
-@import './../../../styles/_variables';
 @import './../../../styles/_mixins';
 
 .calendarContainer {
@@ -21,13 +20,13 @@
     margin-top: 230px;
     display: flex;
     flex-direction: column;
-    width: $widthVertical;
+    width: var(--widthVertical);
   }
 }
 
 .calendarStructureAndModal {
   position: relative;
-  border: 2px solid $borderGray;
+  border: 2px solid var(--darkGrayTint3);
   border-radius: 10px;
   padding: 10px;
   margin: 40px 0;
@@ -40,18 +39,18 @@
     z-index: 3;
     width: calc(100% - 20px);
     height: calc(100% - 20px);
-    background-color: #ffffff;
+    background-color: var(--cleanWhiteColor);
     h2 {
       margin-top: 20px;
       font-size: 1.8rem;
       font-weight: 500;
-      color: $mainLogosBgc;
+      color: var(--navyBlueColor);
     }
     span {
       margin: 15px 0 40px 0;
       font-size: 1.1rem;
       text-transform: uppercase;
-      color: $grayBgc;
+      color: var(--darkGrayTint2);
     }
     button.closeModal {
       @include defaultButton();
@@ -66,7 +65,7 @@
         content: '';
         width: 30px;
         height: 2px;
-        background-color: #ffffff;
+        background-color: var(--cleanWhiteColor);
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(45deg);
@@ -82,7 +81,7 @@
 }
 
 .oneCalendarTask {
-  border: 2px solid $importantColor;
+  border: 2px solid var(--redColor);
   border-radius: 10px;
   padding: 20px;
   position: relative;
@@ -95,39 +94,39 @@
   span.taskHour {
     display: block;
     margin: 0;
-    background-color: #ffffff;
+    background-color: var(--cleanWhiteColor);
     position: absolute;
     bottom: -10px;
     text-transform: none;
     right: 20px;
     padding: 0 5px;
-    color: $importantColor;
+    color: var(--redColor);
     font-weight: 500;
     &.low {
-      color: $goodColor;
+      color: var(--greenColor);
     }
     &.medium {
-      color: $yellowHover;
+      color: var(--orangeColor);
     }
     &.high {
-      color: $importantColor;
+      color: var(--redColor);
     }
   }
   &.low {
-    border-color: $goodColor;
+    border-color: var(--greenColor);
   }
   &.medium {
-    border-color: $yellowHover;
+    border-color: var(--orangeColor);
   }
   &.high {
-    border-color: $importantColor;
+    border-color: var(--redColor);
   }
 }
 
 .noActivities {
   margin-top: 120px;
   font-size: 1.6rem;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
   font-weight: 500;
   display: flex;
   flex-direction: column;
@@ -139,7 +138,7 @@
 }
 
 .navigationArrows {
-  color: $darkGray;
+  color: var(--darkGrayTint1);
   font-size: 1.2rem;
 }
 
@@ -147,26 +146,26 @@ p span.hourStart {
   display: block;
   font-weight: 600;
   padding-top: 10px;
-  color: $headersH3;
+  color: var(--darkBlueColor);
   text-align: right;
 }
 
 .underInfo {
-  @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Sterowanie');
-  color: $mainLogosBgc;
+  @include borderWithPseudElementInfo(var(--darkBlueColor), var(--cleanWhiteColor), 1.2rem, 500, 'Sterowanie');
+  color: var(--redColor);
 }
 
 .mobileInfo {
-  @include borderWithPseudElementInfo($importantColor, #ffffff, 1.2rem, 500, 'Kalendarz na Telefonie');
-  color: $importantColor;
+  @include borderWithPseudElementInfo(var(--redColor), var(--cleanWhiteColor), 1.2rem, 500, 'Kalendarz na Telefonie');
+  color: var(--redColor);
 }
 
 .legendInfo {
-  @include borderWithPseudElementInfo($headersH3, #ffffff, 1.2rem, 500, 'Legenda');
-  color: $headersH3;
+  @include borderWithPseudElementInfo(var(--darkBlueColor), var(--cleanWhiteColor), 1.2rem, 500, 'Legenda');
+  color: var(--darkBlueColor);
   span {
     display: inline;
-    color: #ffffff;
+    color: var(--cleanWhiteColor);
     border-radius: 5px;
     font-weight: 400;
     margin-right: 6px;
@@ -178,13 +177,13 @@ p span.hourStart {
     & > li {
       margin: 15px 0;
       &:nth-child(1) span {
-        background-color: $goodColor;
+        background-color: var(--greenColor);
       }
       &:nth-child(2) span {
-        background-color: $yellowDefColor;
+        background-color: var(--orangeColor);
       }
       &:nth-child(3) span {
-        background-color: $importantColor;
+        background-color: var(--redColor);
       }
     }
   }

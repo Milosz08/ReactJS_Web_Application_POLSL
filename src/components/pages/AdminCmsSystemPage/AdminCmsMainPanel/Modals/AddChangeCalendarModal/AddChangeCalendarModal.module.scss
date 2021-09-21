@@ -9,7 +9,6 @@
  * @date final version: 08/24/2021
  */
 
-@import './../../../../../../styles/_variables';
 @import './../../../../../../styles/_mixins';
 
 .newChangeEntrie {
@@ -25,7 +24,7 @@
   transform: translateY(-50%);
   right: 15px;
   font-size: 1.4rem;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
 }
 
 .timePicker {
@@ -41,8 +40,8 @@
     @include resetPickersInputs();
     appearance: none;
     &.someError {
-      border-color: $importantColor;
-      color: $importantColor;
+      border-color: var(--redColor);
+      color: var(--redColor);
     }
   }
 }
@@ -56,10 +55,10 @@
     content: 'wpisy do kalendarza';
   }
   &.someError {
-    border-color: $importantColor;
-    color: $importantColor;
+    border-color: var(--redColor);
+    color: var(--redColor);
     &::after {
-      color: $importantColor;
+      color: var(--redColor);
       font-weight: 600;
     }
   }
@@ -86,7 +85,7 @@
       label {
         font-size: 1.2rem;
         font-weight: 500;
-        color: $mainLogosBgc;
+        color: var(--navyBlueColor);
         margin-right: 30px;
       }
       input[type = 'time'] {
@@ -102,13 +101,13 @@
 .radioImportants {
   margin-right: 10px;
   &:nth-child(1) div::after {
-    background-color: $goodColor;
+    border-color: var(--greenColor);
   }
   &:nth-child(2) div::after {
-    background-color: $yellowDefColor;
+    border-color: var(--orangeColor);
   }
   &:nth-child(3) div::after {
-    background-color: $importantColor;
+    border-color: var(--redColor);
   }
 }
 
@@ -135,7 +134,7 @@
       width: 50px;
       bottom: 10px;
       right: 0;
-      color: $darkGray;
+      color: var(--darkGrayTint1);
     }
   }
   button {
@@ -144,19 +143,19 @@
     width: 40px;
     height: 40px;
     font-size: 1.3rem;
-    color: $mainLogosBgc;
+    color: var(--navyBlueColor);
   }
 }
 
 .addEntrieModule button.addNewEntrie {
   @include defaultButtonReset();
   width: 100%;
-  border: 2px dashed $mainLogosBgc;
+  border: 2px dashed var(--navyBlueColor);
   border-radius: 10px;
   padding: 7px 0 10px 0;
   font-size: 1.1rem;
   font-weight: 500;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
 }
 
 .formCalendarButtons {
@@ -169,6 +168,6 @@
     width: 200px;
   }
   .subjectFormSend {
-    background-color: $yellowDefColor;
+    background-color: var(--orangeColor);
   }
 }

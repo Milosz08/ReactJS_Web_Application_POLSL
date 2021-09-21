@@ -9,11 +9,10 @@
  * @date final version: 08/19/2021
  */
 
-@import './../../../styles/_variables';
 @import './../../../styles/_mixins';
 
 .react-calendar {
-  background-color: #ffffff;
+  background-color: var(--cleanWhiteColor);
 }
 
 .react-calendar__month-view__days button,
@@ -27,8 +26,8 @@
   &.react-calendar__tile {
     display: flex;
     flex-direction: column;
-    border: 3px solid #ffffff;
-    background-color: $calendarBgc;
+    border: 3px solid var(--cleanWhiteColor);
+    background-color: var(--lightGrayTint2);
     border-radius: 10px;
     outline: none;
     padding: 15px;
@@ -36,27 +35,27 @@
       line-height: .7;
       font-size: 1.5rem;
       font-weight: 400;
-      color: $headersH3;
+      color: var(--darkBlueColor);
     }
   }
   &.react-calendar__tile--now {
-    background-color: $yellowDefColor;
+    background-color: var(--orangeColor);
     abbr {
-      color: #ffffff;
+      color: var(--cleanWhiteColor);
     }
   }
   &.react-calendar__month-view__days__day--weekend abbr {
-    color: $importantColor;
+    color: var(--redColor);
   }
   &.react-calendar__month-view__days__day--neighboringMonth {
-    background-color: $calendarPrev;
+    background-color: var(--lightGrayTint3);
     cursor: pointer;
   }
   &.react-calendar__tile--now.react-calendar__month-view__days__day--neighboringMonth {
-    background-color: $yellowDefColor;
+    background-color: var(--orangeColor);
   }
   &.react-calendar__tile--hasActive abbr {
-    color: #ffffff;
+    color: var(--cleanWhiteColor);
   }
   p {
     position: relative;
@@ -77,21 +76,21 @@
       border-radius: 10px;
     }
     &.low {
-      color: $goodColor;
+      color: var(--greenColor);
       &::after {
-        background-color: $goodColor;
+        background-color: var(--greenColor);
       }
     }
     &.medium {
-      color: $yellowHover;
+      color: var(--orangeColor);
       &::after {
-        background-color: $yellowHover;
+        background-color: var(--orangeColor);
       }
     }
     &.high {
-      color: $importantColor;
+      color: var(--redColor);
       &::after {
-        background-color: $importantColor;
+        background-color: var(--redColor);
       }
     }
   }
@@ -106,21 +105,21 @@
       margin-top: 15px;
     }
     &.low {
-      background-color: $goodColor;
+      background-color: var(--greenColor);
     }
     &.medium {
-      background-color: $yellowHover;
+      background-color: var(--orangeColor);
     }
     &.high {
-      background-color: $importantColor;
+      background-color: var(--redColor);
     }
   }
 }
 
 .react-calendar__month-view__days button.react-calendar__tile--now p.medium {
-  color: #ffffff;
+  color: var(--cleanWhiteColor);
   &::after {
-    background-color: #ffffff;
+    background-color: var(--cleanWhiteColor);
   }
 }
 
@@ -131,10 +130,10 @@
   line-height: 1;
   .react-calendar__month-view__weekdays__weekday {
     padding: 10px 0 14px 0;
-    border: 3px solid #ffffff;
+    border: 3px solid var(--cleanWhiteColor);
     border-radius: 10px;
-    background-color: $mainLogosBgc;
-    color: #ffffff;
+    background-color: var(--navyBlueColor);
+    color: var(--cleanWhiteColor);
     abbr {
       text-decoration: none;
     }
@@ -147,11 +146,11 @@
   display: flex;
   justify-content: center;
   text-transform: capitalize;
-  color: $headersH3;
+  color: var(--darkBlueColor);
   cursor: pointer;
   &.react-calendar__tile--now {
-    background-color: $mainLogosBgc;
-    color: #ffffff;
+    background-color: var(--navyBlueColor);
+    color: var(--cleanWhiteColor);
   }
   abbr {
     font-weight: 600;
@@ -179,39 +178,39 @@
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    border: 1px solid $darkGray;
+    border: 1px solid var(--darkGrayTint1);
     margin: 0 20px;
     transition: .2s;
   }
 
   .react-calendar__navigation__prev-button {
     &::before {
-      @include arrowNavigate(.9em, 135deg, 17px, $darkGray);
+      @include arrowNavigate(.9em, 135deg, 17px, var(--darkGrayTint1));
     }
   }
 
   .react-calendar__navigation__next-button {
     &::before {
-      @include arrowNavigate(.9em, -45deg, 11px, $darkGray);
+      @include arrowNavigate(.9em, -45deg, 11px, var(--darkGrayTint1));
     }
   }
 
   .react-calendar__navigation__prev2-button {
     &::before {
-      @include arrowNavigate(.9em, 135deg, 13px, $darkGray);
+      @include arrowNavigate(.9em, 135deg, 13px, var(--darkGrayTint1));
     }
     &::after {
-      @include arrowNavigate(.9em, 135deg, 13px, $darkGray);
+      @include arrowNavigate(.9em, 135deg, 13px, var(--darkGrayTint1));
       left: 10px;
     }
   }
 
   .react-calendar__navigation__next2-button {
     &::before {
-      @include arrowNavigate(.9em, -45deg, 6px, $darkGray);
+      @include arrowNavigate(.9em, -45deg, 6px, var(--darkGrayTint1));
     }
     &::after {
-      @include arrowNavigate(.9em, -45deg, 6px, $darkGray);
+      @include arrowNavigate(.9em, -45deg, 6px, var(--darkGrayTint1));
       left: 10px;
     }
   }
@@ -225,8 +224,8 @@
     transform: translateX(5px);
   }
   button:disabled {
-    background-color: $darkGray;
-    color: $topNavbarHover;
+    background-color: var(--darkGrayTint1);
+    color: var(--darkNavyBlueColor);
     cursor: not-allowed;
   }
 }

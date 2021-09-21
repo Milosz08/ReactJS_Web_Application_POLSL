@@ -9,7 +9,6 @@
  * @date final version: 08/22/2021
  */
 
-@import './../../../styles/_variables';
 @import './../../../styles/_mixins';
 
 .mobileDownContainer {
@@ -20,13 +19,13 @@
   align-items: center;
   width: 100%;
   height: 45px;
-  background-color: $lightGrayBgc;
+  background-color: var(--lightGrayTint1);
   span.activeIndicator {
     position: absolute;
     top: 0;
     width: calc(100% / 5);
     height: 3px;
-    background-color: $mainLogosBgc;
+    background-color: var(--navyBlueColor);
     transition: .2s;
   }
   div[role = 'link'] {
@@ -42,7 +41,7 @@
 .icon {
   display: none;
   font-size: 1.5rem;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
   &.active {
     display: block;
   }

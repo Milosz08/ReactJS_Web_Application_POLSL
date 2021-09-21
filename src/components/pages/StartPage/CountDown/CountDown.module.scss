@@ -9,8 +9,6 @@
  * @date final version: 08/19/2021
  */
 
-@import '../../../../styles/variables';
-
 .countDownContainer {
   display: flex;
   justify-content: center;
@@ -19,9 +17,9 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    width: $widthVertical;
+    width: var(--widthVertical);
     margin: 50px 0;
-    border: 1px solid $grayBgc;
+    border: 1px solid var(--darkGrayTint2);
     border-radius: 10px;
     h2 {
       position: absolute;
@@ -29,11 +27,11 @@
       padding: 0 15px;
       font-size: 1.5rem;
       font-weight: 400;
-      color: $grayBgc;
-      background-color: #ffffff;
+      color: var(--darkGrayTint2);
+      background-color: var(--cleanWhiteColor);
       strong {
         font-weight: 500;
-        color: $mainLogosBgc;
+        color: var(--navyBlueColor);
       }
     }
     .dateFont, .mobileDateFont {
@@ -47,10 +45,10 @@
       span {
         margin: 0 10px;
         font-weight: 300;
-        color: $mainLogosBgc;
+        color: var(--navyBlueColor);
         strong {
           font-weight: 500;
-          color: $yellowDefColor;
+          color: var(--orangeColor);
         }
       }
     }
@@ -60,7 +58,7 @@
       span {
         font-size: 2.5rem;
         font-weight: 500;
-        color: $mainLogosBgc;
+        color: var(--navyBlueColor);
       }
     }
   }

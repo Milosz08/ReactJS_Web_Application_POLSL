@@ -9,7 +9,6 @@
  * @date final version: 08/18/2021
  */
 
-@import './../../../styles/_variables';
 @import './../../../styles/_mixins';
 
 header.topSiteHeader {
@@ -28,20 +27,20 @@ header.topSiteHeader {
 .topNavBar {
   display: flex;
   justify-content: center;
-  background-color: $topNavbarColor;
+  background-color: var(--darkNavyBlueColor);
   .topNavBarLinks {
     display: flex;
     justify-content: space-around;
-    width: $widthVertical;
+    width: var(--widthVertical);
     padding: 8px 0 11px 0;
     a {
-      color: $whiteColor;
+      color: var(--whiteColor);
       text-decoration: none;
       font-size: 1rem;
       font-weight: 400;
       transition: .2s;
       &:hover {
-        color: $topNavbarHover;
+        color: var(--darkGrayTint4);
       }
     }
   }
@@ -51,14 +50,14 @@ header.topSiteHeader {
   display: flex;
   justify-content: center;
   height: 120px;
-  background-color: $mainLogosBgc;
+  background-color: var(--navyBlueColor);
   .mainHeader {
     display: flex;
     position: relative;
     z-index: 6;
     justify-content: space-between;
     height: 100%;
-    width: $widthVertical;
+    width: var(--widthVertical);
     padding: 16px 0;
     div[role = 'link'] {
       height: 100%;
@@ -86,8 +85,8 @@ header.topSiteHeader {
   position: absolute;
   z-index: -1;
   width: 100%;
-  background-color: $importantColor;
-  color: $whiteColor;
+  background-color: var(--redColor);
+  color: var(--whiteColor);
   font-size: 1.2rem;
   padding: 8px 0 10px 0;
   text-align: center;
@@ -114,7 +113,7 @@ header.topSiteHeader {
       position: relative;
       width: 30px;
       height: 2px;
-      background-color: #ffffff;
+      background-color: var(--cleanWhiteColor);
       transition: .3s;
       &::before, &::after {
         content: '';
@@ -123,7 +122,7 @@ header.topSiteHeader {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #ffffff;
+        background-color: var(--cleanWhiteColor);
         transition: .3s;
       }
       &::after {
@@ -153,7 +152,7 @@ header.topSiteHeader {
   right: 0;
   width: 320px;
   height: 100vh;
-  background-color: $mainLogosBgc;
+  background-color: var(--navyBlueColor);
   transform: translate(320px, 0);
   transition: .3s;
   padding-top: 100px;
@@ -168,7 +167,7 @@ header.topSiteHeader {
       & > li {
         padding: 10px 0;
         a {
-          color: #ffffff;
+          color: var(--cleanWhiteColor);
           text-decoration: none;
           .externalLinkIcon {
             position: relative;
@@ -184,7 +183,7 @@ header.topSiteHeader {
     }
   }
   .outerLinks {
-    background-color: $topNavbarColor;
+    background-color: var(--darkNavyBlueColor);
     padding-bottom: 100px;
   }
   &.activeMenu {
