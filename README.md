@@ -127,4 +127,4 @@ $ git clone https://github.com/Milosz08/ReactJS_Web_Application_POLSL
 All packages with dependencies used in the project can be found in the `package.json`. In addition, in each component I have included information about what packages I use and version of this packages.
 
 ## License
-This application is on MIT License [terms of use](https://en.wikipedia.org/wiki/MIT_License).
+This application is on Apache 2.0 License [terms of use](https://www.apache.org/licenses/LICENSE-2.0).
