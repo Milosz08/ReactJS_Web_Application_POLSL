@@ -35,7 +35,7 @@ const STATIC_STRUCTURE: StaticStructureTypes = {
          sectionArray: [
             {
                title: 'serwis',
-               description: `serwis internetowy działający pod adresem ${window.location.hostname}`,
+               description: `serwis internetowy działający pod adresem '${document.location.hostname}'`,
             },
             {
                title: 'serwis zewnętrzny',
