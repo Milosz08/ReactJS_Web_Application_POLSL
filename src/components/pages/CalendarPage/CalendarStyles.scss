@@ -251,6 +251,9 @@
     }
     span.low, span.medium, span.high {
       display: block;
+      &.medium {
+        background-color: var(--cleanWhiteColor);
+      }
     }
   }
 }
@@ -306,6 +309,9 @@
     &.react-calendar__tile {
       justify-content: center;
       align-items: center;
+    }
+    span.low, span.medium, span.high {
+      display: block;
     }
   }
 }

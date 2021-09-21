@@ -152,7 +152,7 @@ p span.hourStart {
 
 .underInfo {
   @include borderWithPseudElementInfo(var(--darkBlueColor), var(--cleanWhiteColor), 1.2rem, 500, 'Sterowanie');
-  color: var(--redColor);
+  color: var(--navyBlueColor);
 }
 
 .mobileInfo {
