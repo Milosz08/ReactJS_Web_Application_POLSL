@@ -72,7 +72,7 @@ const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }): JS
                   to = {prevPathName}
                   delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
                   replace = {false}
-                  clickAction = {timeoutRoutePath}
+                  clickAction = {() => timeoutRoutePath!(prevPathName)}
                >
                   <a href = {prevPathName}>
                      {capitaliseWordsArray.join(' ')}
@@ -93,7 +93,7 @@ const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }): JS
                   to = '/'
                   delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
                   replace = {false}
-                  clickAction = {timeoutRoutePath}
+                  clickAction = {() => timeoutRoutePath!('/')}
                >
                   <a href = '/'>
                      Strona Główna
