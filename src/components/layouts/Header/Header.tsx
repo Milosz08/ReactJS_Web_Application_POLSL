@@ -138,7 +138,7 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }): JSX.Element => 
                   to = '/'
                   delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
                   replace = {false}
-                  clickAction = {timeoutRoutePath}
+                  clickAction = {() => timeoutRoutePath!('/')}
                >
                   <a href = '/'>
                      <img

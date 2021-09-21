@@ -27,7 +27,7 @@ interface PropsProvider {
       path: string,
       id: number
    };
-   action: (id: number) => void;
+   action: (id: number, path: string) => void;
    Component: React.ReactElement;
 }
 
@@ -44,7 +44,7 @@ const SingleNavigationElement: React.FC<PropsProvider> = ({ pathAttr, action, Co
          to = {pathAttr.path}
          delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
          replace = {false}
-         clickAction = {() => action(pathAttr.id)}
+         clickAction = {() => action(pathAttr.id, pathAttr.path)}
       >
          <a className = {oneIconWrapper} href = {pathAttr.path}>
             {Component}

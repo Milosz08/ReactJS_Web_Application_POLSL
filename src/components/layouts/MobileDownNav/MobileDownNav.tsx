@@ -53,10 +53,10 @@ const MobileDownNav: React.FC<PropsProvider> = ({ id }): JSX.Element => {
    const [ singleWidthX ] = useState<number>(document.body.offsetWidth / ELEMENTS_COUNT);
    const [ indicatorXPos, setIndicatorXPos ] = useState<number>(id === undefined ? -1 * singleWidthX : singleWidthX * id);
 
-   const handleMenuClick = (id: number): void => {
+   const handleMenuClick = (id: number, path: string): void => {
       setIndicatorXPos(singleWidthX * id);
       setActiveElm(id);
-      timeoutRoutePath!();
+      timeoutRoutePath!(path);
    }
 
    return (

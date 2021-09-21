@@ -63,7 +63,7 @@ const Footer = (): JSX.Element => {
                to = {`/${redeptWithPolish}`}
                delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
                replace = {false}
-               clickAction = {timeoutRoutePath}
+               clickAction = {() => timeoutRoutePath!(`/${redeptWithPolish}`)}
             >
                <a href = {`/${redeptWithPolish}`}>
                   {navElm.title}

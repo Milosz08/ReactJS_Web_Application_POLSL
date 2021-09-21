@@ -33,7 +33,7 @@ interface PropsProvider {
 export interface MainStoreProviderTypes {
    dataFetchFromServer: MainStoreStateProvider | any;
    setDataFetchFromServer: Dispatch<SetStateAction<MainStoreStateProvider>> | any;
-   timeoutRoutePath: () => void;
+   timeoutRoutePath: (value: string) => void;
    routePath: boolean;
    setRoutePath: Dispatch<SetStateAction<boolean>>;
    summerBreak: boolean;
@@ -60,9 +60,11 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
    const [ routePath, setRoutePath ] = useState<boolean>(false);
    const [ summerBreak, setSummerBreak ] = useState<boolean>(true);
 
-   const timeoutRoutePath = (): void => {
-      setRoutePath(true);
-      setTimeout(() => { setRoutePath(false); },(ROUTER_INTERVAL_TIME + .3) * 1000);
+   const timeoutRoutePath = (gotoPath: string): void => {
+      if(gotoPath !== decodeURIComponent(document.location.pathname)) { //Prevent goto same page
+         setRoutePath(true);
+         setTimeout(() => { setRoutePath(false); },(ROUTER_INTERVAL_TIME + .3) * 1000);
+      }
    }
 
    dataFetchFromServer.calendarRecords
