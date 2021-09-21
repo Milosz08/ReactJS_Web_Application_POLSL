@@ -1,10 +1,19 @@
-@import '_variables';
+/**
+ * @file _mixins.scss
+ * @author Miłosz Gilga (gilgamilosz451@gmail.com)
+ * @brief SCSS mixins styles file.
+ *
+ * @projectName "polsl-web-application-frontend"
+ * @version "^0.1.0"
+ *
+ * @date final version: 08/19/2021
+ */
 
 @mixin errorInputForm() {
-  border-color: $importantColor;
-  color: $importantColor;
+  border-color: var(--redColor);
+  color: var(--redColor);
   &::placeholder {
-    color: $importantColor;
+    color: var(--redColor);
   }
 }
 
@@ -27,19 +36,19 @@
   appearance: none;
   padding: $spaceUpDown - 2 $padding_right $spaceUpDown $spaceUpDown + 5;
   outline: none;
-  border: 2px solid #d0d0d0;
+  border: 2px solid var(--darkGrayTint3);
   border-radius: 10px;
   font-size: 1.2rem;
   font-weight: 500;
-  color: $mainLogosBgc;
+  color: var(--navyBlueColor);
   width: 100%;
   transition: .2s;
   &::placeholder {
-    color: #d0d0d0;
+    color: var(--darkGrayTint3);
     font-weight: 400;
   }
   &:focus {
-    border-color: $mainLogosBgc;
+    border-color: var(--navyBlueColor);
   }
 }
 
@@ -47,7 +56,7 @@
   font-size: 1.2rem;
   text-transform: uppercase;
   text-align: center;
-  color: $darkGray;
+  color: var(--darkGrayTint1);
   font-weight: 300;
 }
 
@@ -60,12 +69,12 @@
   margin-top: 30px;
   border: none;
   border-radius: 10px;
-  background-color: $mainLogosBgc;
-  color: #ffffff;
+  background-color: var(--navyBlueColor);
+  color: var(--cleanWhiteColor);
   cursor: pointer;
   transition: .2s;
   &:hover {
-    box-shadow: 0 0 7px #b6b6b6;
+    box-shadow: 0 0 7px var(--boxShadowTint);
   }
 }
 
@@ -108,7 +117,7 @@
   border: none;
   cursor: pointer;
   .removeInputField {
-    color: $mainLogosBgc;
+    color: var(--navyBlueColor);
   }
 }
 
@@ -118,8 +127,8 @@
   height: $height;
   padding: 15px 0;
   border-radius: 10px;
-  color: $mainLogosBgc;
-  border: 2px dashed $mainLogosBgc;
+  color: var(--navyBlueColor);
+  border: 2px dashed var(--navyBlueColor);
   font-size: 1.3rem;
   font-weight: 500;
   &::after, &::before {
@@ -130,7 +139,7 @@
     transform: translate(-50%, -50%);
     width: $crossSize;
     height: 2px;
-    background-color: $mainLogosBgc;
+    background-color: var(--navyBlueColor);
   }
   &::before {
     width: 2px;
@@ -140,7 +149,7 @@
 
 @mixin borderContainer() {
   position: relative;
-  border: 2px solid $borderGray;
+  border: 2px solid var(--darkGrayTint3);
   border-radius: 10px;
   margin: 15px;
   padding: 15px;
@@ -152,11 +161,11 @@
     top: -11px;
     left: 50%;
     padding: 0 10px;
-    color: $grayBgc;
+    color: var(--darkGrayTint2);
     font-weight: 400;
     text-transform: uppercase;
     transform: translateX(-50%);
-    background-color: #ffffff;
+    background-color: var(--cleanWhiteColor);
   }
 }
 
@@ -165,7 +174,7 @@
   height: 20px;
   width: 20px;
   border-radius: 5px;
-  border: 1px solid $footerContent;
+  border: 1px solid var(--darkGray);
   transition: .2s;
   &::after {
     content: '';
@@ -175,7 +184,7 @@
     top: 2px;
     width: 4px;
     height: 8px;
-    border: solid white;
+    border: solid var(--cleanWhiteColor);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
