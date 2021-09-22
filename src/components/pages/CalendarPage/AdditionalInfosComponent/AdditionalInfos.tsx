@@ -1,5 +1,5 @@
 /**
- * @file CalendarPage.tsx
+ * @file AdditionalInfos.tsx
  * @author Miłosz Gilga (gilgamilosz451@gmail.com)
  * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
  *
