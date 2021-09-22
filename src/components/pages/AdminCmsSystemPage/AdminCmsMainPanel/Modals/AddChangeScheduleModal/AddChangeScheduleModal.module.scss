@@ -12,149 +12,149 @@
 @import './../../../../../../styles/_mixins';
 
 .titleAndTypeContainer, .groupAndTimeContainer {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 30px;
-  .titleSelectWrapper, .typeSelectWrapper, .groupSelectWrapper, .timeSelectWrapper {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    border: 1px solid var(--darkGrayTint3);
-    border-radius: 10px;
-    padding: 30px;
-    &::before {
-      position: absolute;
-      content: 'nazwa przedmiotu';
-      text-transform: uppercase;
-      color: var(--darkGrayTint3);
-      background-color: #ffffff;
-      top: -11px;
-      padding: 0 10px;
-    }
-    select, input[type = 'time'] {
-      @include imputField(0, 8px);
-      appearance: none;
-      cursor: pointer;
-      font-size: 1.1rem;
-      &::-ms-expand {
-        display: none;
-      }
-      &.someError {
-        border-color: var(--redColor);
-        color: var(--redColor);
-        &::after {
-          color: var(--redColor);
-          font-weight: 600;
-        }
-      }
-    }
-    input[type = 'time'] {
-      @include imputField(0, 7px);
-      @include resetPickersInputs();
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-    .selectWrapper, .inputWrapper {
-      position: relative;
-      max-width: 400px;
-      width: 100%;
-      margin: 0 60px;
-      select, input {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 30px;
+    .titleSelectWrapper, .typeSelectWrapper, .groupSelectWrapper, .timeSelectWrapper {
+        display: flex;
         position: relative;
-      }
-      .selectArrowIcon {
-        position: absolute;
-        color: var(--navyBlueColor);
-        top: 50%;
-        transform: translateY(-50%);
-        right: 15px;
-      }
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        border: 1px solid var(--darkGrayTint3);
+        border-radius: 10px;
+        padding: 30px;
+        &::before {
+            position: absolute;
+            content: 'nazwa przedmiotu';
+            text-transform: uppercase;
+            color: var(--darkGrayTint3);
+            background-color: #ffffff;
+            top: -11px;
+            padding: 0 10px;
+        }
+        select, input[type = 'time'] {
+            @include imputField(0, 8px);
+            appearance: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            &::-ms-expand {
+                display: none;
+            }
+            &.someError {
+                border-color: var(--redColor);
+                color: var(--redColor);
+                &::after {
+                    color: var(--redColor);
+                    font-weight: 600;
+                }
+            }
+        }
+        input[type = 'time'] {
+            @include imputField(0, 7px);
+            @include resetPickersInputs();
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .selectWrapper, .inputWrapper {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+            margin: 0 60px;
+            select, input {
+                position: relative;
+            }
+            .selectArrowIcon {
+                position: absolute;
+                color: var(--navyBlueColor);
+                top: 50%;
+                transform: translateY(-50%);
+                right: 15px;
+            }
+        }
+        .inputWrapper {
+            margin: 0 30px;
+        }
+        &.turnOffContainer {
+            select, .selectArrowIcon {
+                opacity: .5;
+            }
+            select {
+                pointer-events: none;
+            }
+            p {
+                display: block;
+            }
+        }
     }
-    .inputWrapper {
-      margin: 0 30px;
+    .titleSelectWrapper, .groupSelectWrapper {
+        margin: 0 20px 0 0;
     }
-    &.turnOffContainer {
-      select, .selectArrowIcon {
-        opacity: .5;
-      }
-      select {
-        pointer-events: none;
-      }
-      p {
-        display: block;
-      }
+    .titleSelectWrapper {
+        flex-direction: column;
+        p {
+            display: none;
+            padding-top: 15px;
+            color: var(--redColor);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
+            &.turnOffContainer {
+                display: block;
+            }
+        }
     }
-  }
-  .titleSelectWrapper, .groupSelectWrapper {
-    margin: 0 20px 0 0;
-  }
-  .titleSelectWrapper {
-    flex-direction: column;
-    p {
-      display: none;
-      padding-top: 15px;
-      color: var(--redColor);
-      font-size: 1.1rem;
-      font-weight: 500;
-      text-align: center;
-      &.turnOffContainer {
-        display: block;
-      }
+    .typeSelectWrapper, .timeSelectWrapper {
+        margin: 0 0 0 20px;
+        span {
+            margin-top: -6px;
+            color: var(--navyBlueColor);
+            font-size: 3rem;
+            line-height: 0;
+        }
     }
-  }
-  .typeSelectWrapper, .timeSelectWrapper {
-    margin: 0 0 0 20px;
-    span {
-      margin-top: -6px;
-      color: var(--navyBlueColor);
-      font-size: 3rem;
-      line-height: 0;
+    .typeSelectWrapper {
+        flex-basis: 60%;
     }
-  }
-  .typeSelectWrapper {
-    flex-basis: 60%;
-  }
-  .typeSelectWrapper::before {
-    content: 'typ zajęć';
-  }
-  .groupSelectWrapper::before {
-    content: 'grupa zajęciowa';
-  }
-  .timeSelectWrapper::before {
-    content: 'czas odbywania zajęć';
-  }
+    .typeSelectWrapper::before {
+        content: 'typ zajęć';
+    }
+    .groupSelectWrapper::before {
+        content: 'grupa zajęciowa';
+    }
+    .timeSelectWrapper::before {
+        content: 'czas odbywania zajęć';
+    }
 }
 
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1000px) {
-  .titleAndTypeContainer, .groupAndTimeContainer {
-    flex-direction: column;
-    .titleSelectWrapper, .typeSelectWrapper, .groupSelectWrapper, .timeSelectWrapper {
-      flex-direction: column;
+    .titleAndTypeContainer, .groupAndTimeContainer {
+        flex-direction: column;
+        .titleSelectWrapper, .typeSelectWrapper, .groupSelectWrapper, .timeSelectWrapper {
+            flex-direction: column;
+        }
+        .titleSelectWrapper {
+            margin-right: 0;
+        }
+        .typeSelectWrapper, .timeSelectWrapper {
+            margin-left: 0;
+        }
+        .titleSelectWrapper {
+            margin-bottom: 30px;
+        }
+        .timeSelectWrapper {
+            margin-top: 30px;
+            .inputWrapper {
+                max-width: 200px;
+            }
+            span {
+                margin-top: 0;
+                line-height: 20px;
+                height: 30px;
+            }
+        }
     }
-    .titleSelectWrapper {
-      margin-right: 0;
-    }
-    .typeSelectWrapper, .timeSelectWrapper {
-      margin-left: 0;
-    }
-    .titleSelectWrapper {
-      margin-bottom: 30px;
-    }
-    .timeSelectWrapper {
-      margin-top: 30px;
-      .inputWrapper {
-        max-width: 200px;
-      }
-      span {
-        margin-top: 0;
-        line-height: 20px;
-        height: 30px;
-      }
-    }
-  }
 }

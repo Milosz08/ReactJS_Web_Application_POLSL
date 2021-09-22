@@ -20,11 +20,11 @@ import { Redirect, Route } from 'react-router';
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   auth: boolean;
-   setAuth: (value: boolean) => boolean;
-   handleCookie: any;
-   redirectPath: any;
-   component: any;
+    auth: boolean;
+    setAuth: (value: boolean) => boolean;
+    handleCookie: any;
+    redirectPath: any;
+    component: any;
 }
 
 /**
@@ -38,20 +38,20 @@ interface PropsProvider {
  * @param rest - rest of the parameters passed to inherited components.
  */
 const ProtectedLoginRoute: React.FC<PropsProvider | any> = ({
-   auth, setAuth, handleCookie, redirectPath, component: Component, ...rest
+    auth, setAuth, handleCookie, redirectPath, component: Component, ...rest
 }): JSX.Element => {
 
-   const renderPathStructure = (props: any) => {
-      if(auth) {
-         return <Component {...props} setAuth = {setAuth} handleCookie = {handleCookie}/>;
-      } else {
-         return <Redirect to = {redirectPath}/>;
-      }
-   }
+    const renderPathStructure = (props: any) => {
+        if (auth) {
+            return <Component {...props} setAuth = {setAuth} handleCookie = {handleCookie}/>;
+        } else {
+            return <Redirect to = {redirectPath}/>;
+        }
+    }
 
-   return (
-      <Route {...rest} render = {(props: any) => renderPathStructure(props)}/>
-   );
+    return (
+        <Route {...rest} render = {(props: any) => renderPathStructure(props)}/>
+    );
 }
 
 export default ProtectedLoginRoute;

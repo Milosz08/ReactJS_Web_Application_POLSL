@@ -29,9 +29,9 @@ const INPUT_ID = uuidv4();
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   inputField: string;
-   setInputField: Dispatch<SetStateAction<string>>;
-   placeholderProp: string;
+    inputField: string;
+    setInputField: Dispatch<SetStateAction<string>>;
+    placeholderProp: string;
 }
 
 /**
@@ -43,30 +43,30 @@ interface PropsProvider {
  * @param placeholderProp { string } - value in the placeholder.
  */
 const SearchBox: React.FC<PropsProvider> = ({ inputField, setInputField, placeholderProp }): JSX.Element => {
-   return (
-      <label
-         htmlFor = {`${placeholderProp}__id_${INPUT_ID}`}
-         className = {insertDataInputField}
-      >
-         <div>
-            <input
-               type = 'text'
-               placeholder = {placeholderProp}
-               value = {inputField}
-               onChange = {({ target }) => setInputField(target.value)}
-               id = {`${placeholderProp}__id_${INPUT_ID}`}
-            />
-            <button
-               onClick = {() => setInputField('')}
-               title = 'Wyczyść pole'
-            >
-               <FontAwesomeIcon
-                  icon = {['fas', 'trash-alt']}
-               />
-            </button>
-         </div>
-      </label>
-   );
+    return (
+        <label
+            htmlFor = {`${placeholderProp}__id_${INPUT_ID}`}
+            className = {insertDataInputField}
+        >
+            <div>
+                <input
+                    type = 'text'
+                    placeholder = {placeholderProp}
+                    value = {inputField}
+                    onChange = {({ target }) => setInputField(target.value)}
+                    id = {`${placeholderProp}__id_${INPUT_ID}`}
+                />
+                <button
+                    onClick = {() => setInputField('')}
+                    title = 'Wyczyść pole'
+                >
+                    <FontAwesomeIcon
+                        icon = {[ 'fas', 'trash-alt' ]}
+                    />
+                </button>
+            </div>
+        </label>
+    );
 }
 
 export default SearchBox;

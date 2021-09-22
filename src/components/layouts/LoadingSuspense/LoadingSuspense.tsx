@@ -21,31 +21,31 @@ const { loadingSuspenseContainer, infiniteLoad, infiniteUse, active } = require(
  */
 const LoadingSuspense = (): JSX.Element => {
 
-   const [ isVisible, setIsVisible ] = useState<boolean>(false);
-   const toggleClass = isVisible ? classnames(loadingSuspenseContainer, active) : loadingSuspenseContainer;
+    const [ isVisible, setIsVisible ] = useState<boolean>(false);
+    const toggleClass = isVisible ? classnames(loadingSuspenseContainer, active) : loadingSuspenseContainer;
 
-   useEffect(() => {
-      setIsVisible(true);
-      return () => setIsVisible(false);
-   }, []);
+    useEffect(() => {
+        setIsVisible(true);
+        return () => setIsVisible(false);
+    }, []);
 
-   return (
-      <div className = {toggleClass}>
-         <svg className = {infiniteLoad} viewBox = '-2000 -1000 4000 2000'>
-            <path
-               id = 'inf'
-               d = 'M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z'
-            />
-            <use
-               className = {infiniteUse}
-               xlinkHref = '#inf'
-               strokeDasharray = '1570 5143'
-               strokeDashoffset = '6713px'
-            />
-         </svg>
-         Ładowanie strony...
-      </div>
-   );
+    return (
+        <div className = {toggleClass}>
+            <svg className = {infiniteLoad} viewBox = '-2000 -1000 4000 2000'>
+                <path
+                    id = 'inf'
+                    d = 'M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z'
+                />
+                <use
+                    className = {infiniteUse}
+                    xlinkHref = '#inf'
+                    strokeDasharray = '1570 5143'
+                    strokeDashoffset = '6713px'
+                />
+            </svg>
+            Ładowanie strony...
+        </div>
+    );
 }
 
 export default LoadingSuspense;

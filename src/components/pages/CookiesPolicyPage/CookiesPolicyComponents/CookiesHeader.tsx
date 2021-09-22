@@ -26,20 +26,20 @@ const { cookiesSections, cookieContent } = require('./../CookiesPolicyPage.modul
  * @details Component generates a header in the subpage containing the privacy policy document.
  */
 const CookiesHeader = (): JSX.Element => {
-   return (
-      <header className = {classnames(cookiesInfoHeader, cookiesSections)}>
-         <UniversalHeader
-            iconP = {['fas', 'cookie-bite']}
-            content = 'Polityka Cookies'
-            ifCloseButtonVisible = {false}
-         />
-         <div className = {cookieContent}>
-            Poniższa treść Polityki Cookies określa zasady zapisywania i uzyskiwania dostępu do danych na
-            Urządzeniach elektronicznych, dalej nazywanych Urządzeniami Użytkowników korzystających z
-            Serwisu do celów świadczenia usług drogą elektroniczną przez Administratora Serwisu.
-         </div>
-      </header>
-   );
+    return (
+        <header className = {classnames(cookiesInfoHeader, cookiesSections)}>
+            <UniversalHeader
+                iconP = {[ 'fas', 'cookie-bite' ]}
+                content = 'Polityka Cookies'
+                ifCloseButtonVisible = {false}
+            />
+            <div className = {cookieContent}>
+                Poniższa treść Polityki Cookies określa zasady zapisywania i uzyskiwania dostępu do danych na
+                Urządzeniach elektronicznych, dalej nazywanych Urządzeniami Użytkowników korzystających z
+                Serwisu do celów świadczenia usług drogą elektroniczną przez Administratora Serwisu.
+            </div>
+        </header>
+    );
 }
 
 export default CookiesHeader;

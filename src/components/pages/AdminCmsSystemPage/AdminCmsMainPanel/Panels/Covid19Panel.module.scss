@@ -12,70 +12,70 @@
 @import './../../../../../styles/_mixins';
 
 .covidPanelsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  section {
-    width: 350px;
-    height: 130px;
-    border: 2px dashed var(--navyBlueColor);
-    border-radius: 10px;
-    margin: 20px;
-    .sectionWrapper {
-      display: flex;
-      align-items: center;
-      border: 8px solid #ffffff;
-      background: var(--yellowColor);
-      border-radius: 16px;
-      height: 100%;
-      padding: 20px;
-      h3 {
-        font-size: 1.2rem;
-        font-weight: 400;
-      }
-      select {
-        width: 90px;
-        font-weight: 500;
-        padding: 8px 5px;
-        margin: 0 0 0 20px;
-        font-size: 1.2rem;
-        outline: none;
-        border: 2px solid var(--darkGrayTint3);
-        color: var(--navyBlueColor);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    section {
+        width: 350px;
+        height: 130px;
+        border: 2px dashed var(--navyBlueColor);
         border-radius: 10px;
-        transition: .2s;
-        cursor: pointer;
-        &:focus {
-          border-color: var(--navyBlueColor);
+        margin: 20px;
+        .sectionWrapper {
+            display: flex;
+            align-items: center;
+            border: 8px solid #ffffff;
+            background: var(--yellowColor);
+            border-radius: 16px;
+            height: 100%;
+            padding: 20px;
+            h3 {
+                font-size: 1.2rem;
+                font-weight: 400;
+            }
+            select {
+                width: 90px;
+                font-weight: 500;
+                padding: 8px 5px;
+                margin: 0 0 0 20px;
+                font-size: 1.2rem;
+                outline: none;
+                border: 2px solid var(--darkGrayTint3);
+                color: var(--navyBlueColor);
+                border-radius: 10px;
+                transition: .2s;
+                cursor: pointer;
+                &:focus {
+                    border-color: var(--navyBlueColor);
+                }
+            }
         }
-      }
     }
-  }
 }
 
 button.submitCovidForm {
-  @include defaultButton();
-  max-width: 180px;
-  margin-bottom: 30px;
+    @include defaultButton();
+    max-width: 180px;
+    margin-bottom: 30px;
 }
 
-p.unwriteChangesCSS  {
-  font-size: 1.2rem;
-  color: var(--redColor);
-  margin: 10px 0;
+p.unwriteChangesCSS {
+    font-size: 1.2rem;
+    color: var(--redColor);
+    margin: 10px 0;
 }
 
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1250px) {
-  .covidPanelsContainer {
-    section {
-      width: 100%;
-      .sectionWrapper {
-        h3 {
-          font-size: 1.1rem;
+    .covidPanelsContainer {
+        section {
+            width: 100%;
+            .sectionWrapper {
+                h3 {
+                    font-size: 1.1rem;
+                }
+            }
         }
-      }
     }
-  }
 }

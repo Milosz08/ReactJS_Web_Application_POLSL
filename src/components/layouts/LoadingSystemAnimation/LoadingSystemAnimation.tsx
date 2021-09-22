@@ -19,7 +19,7 @@ import classnames from 'classnames';
  * Interface defining the type of state values.
  */
 interface PropsProvider {
-   hideAuth: boolean;
+    hideAuth: boolean;
 }
 
 const { adminAsyncWrapper, showAsync, infiniteLoad, infiniteUse } = require('./LoadingSystemAnimation.module.scss');
@@ -31,25 +31,25 @@ const { adminAsyncWrapper, showAsync, infiniteLoad, infiniteUse } = require('./L
  */
 const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth }): JSX.Element => {
 
-   const showAsyncElement = hideAuth ? classnames(adminAsyncWrapper, showAsync) : adminAsyncWrapper;
+    const showAsyncElement = hideAuth ? classnames(adminAsyncWrapper, showAsync) : adminAsyncWrapper;
 
-   return (
-      <div className = {showAsyncElement}>
-         <svg className = {infiniteLoad} viewBox = '-2000 -1000 4000 2000'>
-            <path
-               id = 'inf'
-               d = 'M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z'
-            />
-            <use
-               className = {infiniteUse}
-               xlinkHref = '#inf'
-               strokeDasharray = '1570 5143'
-               strokeDashoffset = '6713px'
-            />
-         </svg>
-         Logowanie do systemu...
-      </div>
-   );
+    return (
+        <div className = {showAsyncElement}>
+            <svg className = {infiniteLoad} viewBox = '-2000 -1000 4000 2000'>
+                <path
+                    id = 'inf'
+                    d = 'M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z'
+                />
+                <use
+                    className = {infiniteUse}
+                    xlinkHref = '#inf'
+                    strokeDasharray = '1570 5143'
+                    strokeDashoffset = '6713px'
+                />
+            </svg>
+            Logowanie do systemu...
+        </div>
+    );
 }
 
 export default LoadingSystemAnimation;

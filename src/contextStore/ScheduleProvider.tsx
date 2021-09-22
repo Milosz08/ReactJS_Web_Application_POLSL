@@ -18,25 +18,25 @@ import GROUPS_STATIC from '../constants/allGroups';
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 /**
  * Interface defining the type of return in context store values.
  */
 export interface ScheduleType {
-   groupSelected: string;
-   setGroupSelected: Dispatch<SetStateAction<string>>;
-   engSelected: string;
-   setEngSelected: Dispatch<SetStateAction<string>>;
-   inputField: string;
-   setInputField: Dispatch<SetStateAction<string>>;
+    groupSelected: string;
+    setGroupSelected: Dispatch<SetStateAction<string>>;
+    engSelected: string;
+    setEngSelected: Dispatch<SetStateAction<string>>;
+    inputField: string;
+    setInputField: Dispatch<SetStateAction<string>>;
 }
 
 /**
  * Create the context of the store. Function exported and used to destructurize context members.
  */
-export const ScheduleContext = createContext<Partial<ScheduleType>>({ });
+export const ScheduleContext = createContext<Partial<ScheduleType>>({});
 
 /**
  * @details React Store that stores the context of states relating to the management of the timetable (regular
@@ -46,24 +46,24 @@ export const ScheduleContext = createContext<Partial<ScheduleType>>({ });
  */
 const ScheduleProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
-   const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
+    const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
 
-   const [ groupSelected, setGroupSelected ] = useState<string>(NORMAL_GROUPS[0].text);
-   const [ engSelected, setEngSelected ] = useState<string>(ENG_GROUPS[0]);
+    const [ groupSelected, setGroupSelected ] = useState<string>(NORMAL_GROUPS[0].text);
+    const [ engSelected, setEngSelected ] = useState<string>(ENG_GROUPS[0]);
 
-   const [ inputField, setInputField ] = useState<string>('');
+    const [ inputField, setInputField ] = useState<string>('');
 
-   return (
-      <ScheduleContext.Provider
-         value = {{
-            groupSelected, setGroupSelected,
-            engSelected, setEngSelected,
-            inputField, setInputField
-         }}
-      >
-         {children}
-      </ScheduleContext.Provider>
-   );
+    return (
+        <ScheduleContext.Provider
+            value = {{
+                groupSelected, setGroupSelected,
+                engSelected, setEngSelected,
+                inputField, setInputField
+            }}
+        >
+            {children}
+        </ScheduleContext.Provider>
+    );
 }
 
 export default ScheduleProvider;

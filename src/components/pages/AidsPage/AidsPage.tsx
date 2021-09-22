@@ -27,15 +27,15 @@ const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/Cur
 
 const { universalHeader, fasIcon } = require('./../../layouts/Navigation/Navigation.module.scss');
 const {
-   aidsContainer, aisdWrapper, logoutButton, aidsMainContent, msTeamsTile, title, iconContainer, icon
+    aidsContainer, aisdWrapper, logoutButton, aidsMainContent, msTeamsTile, title, iconContainer, icon
 } = require('./AidsPage.module.scss');
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   setAuth: (value: boolean) => boolean;
-   handleCookie: any;
+    setAuth: (value: boolean) => boolean;
+    handleCookie: any;
 }
 
 /**
@@ -46,59 +46,62 @@ interface PropsProvider {
  */
 const AidsPage: React.FC<PropsProvider> = ({ setAuth, handleCookie }) => {
 
-   const handleLogout = (): void => {
-      setAuth(false);
-      handleCookie(COOKIES_OBJECT.userSession, { path: '/' });
-   }
+    const handleLogout = (): void => {
+        setAuth(false);
+        handleCookie(COOKIES_OBJECT.userSession, { path: '/' });
+    }
 
-   const generateTilesStructure = TILES_DATA.map((tile: TilesDataTypes) => (
-      <a href = {tile.link} target = '_blank' rel = 'noreferrer' key = {tile.title}>
-         <section className = {msTeamsTile}>
-            <div className = {iconContainer}>
-               <FontAwesomeIcon
-                  icon = {tile.icon}
-                  className = {icon}
-               />
+    const generateTilesStructure = TILES_DATA.map((tile: TilesDataTypes) => (
+        <a href = {tile.link} target = '_blank' rel = 'noreferrer' key = {tile.title}>
+            <section className = {msTeamsTile}>
+                <div className = {iconContainer}>
+                    <FontAwesomeIcon
+                        icon = {tile.icon}
+                        className = {icon}
+                    />
+                </div>
+                <div className = {title}>{tile.title}</div>
+            </section>
+        </a>
+    ));
+
+    useEffect(() => {
+        document.title = ROUTING_PATH_NAMES.AISD_PAGE;
+        return () => {
+            document.title = ROUTING_PATH_NAMES.START_PAGE
+        };
+    }, []);
+
+    return (
+        <Fragment>
+            <CookiesNotification/>
+            <MobileDownNav id = {4}/>
+            <Header ifHeaderHasRedBar = {true}/>
+            <CurrentURLpath ifImportatHeaderActive = {true}/>
+            <div className = {aidsContainer}>
+                <div className = {aisdWrapper}>
+                    <section className = {universalHeader}>
+                        <h3>
+                            <FontAwesomeIcon
+                                icon = {[ 'fas', 'lightbulb' ]}
+                                className = {fasIcon}
+                            />
+                            Pomoce Naukowe
+                            <aside/>
+                            <button
+                                onClick = {handleLogout}
+                                className = {logoutButton}
+                            >Wyloguj
+                            </button>
+                        </h3>
+                    </section>
+                    <div className = {aidsMainContent}>
+                        {generateTilesStructure}
+                    </div>
+                </div>
             </div>
-            <div className = {title}>{tile.title}</div>
-         </section>
-      </a>
-   ));
-
-   useEffect(() => {
-      document.title = ROUTING_PATH_NAMES.AISD_PAGE;
-      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
-   }, []);
-
-   return (
-      <Fragment>
-         <CookiesNotification/>
-         <MobileDownNav id = {4}/>
-         <Header ifHeaderHasRedBar = {true}/>
-         <CurrentURLpath ifImportatHeaderActive = {true}/>
-         <div className = {aidsContainer}>
-            <div className = {aisdWrapper}>
-               <section className = {universalHeader}>
-                  <h3>
-                     <FontAwesomeIcon
-                        icon = {['fas', 'lightbulb']}
-                        className = {fasIcon}
-                     />
-                     Pomoce Naukowe
-                     <aside/>
-                     <button
-                        onClick = {handleLogout}
-                        className = {logoutButton}
-                     >Wyloguj</button>
-                  </h3>
-               </section>
-               <div className = {aidsMainContent}>
-                  {generateTilesStructure}
-               </div>
-            </div>
-         </div>
-      </Fragment>
-   );
+        </Fragment>
+    );
 }
 
 export default AidsPage;

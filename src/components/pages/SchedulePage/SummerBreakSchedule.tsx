@@ -31,43 +31,43 @@ const { scheduleSection, centerSeparateWindow, centerSeparateContent, active } =
  */
 const SummerBreakSchedule = (): JSX.Element => {
 
-   const { date } = useContext<Partial<ActualDateTypes>>(ActualDateContext);
-   const { dayStr } = date!;
+    const { date } = useContext<Partial<ActualDateTypes>>(ActualDateContext);
+    const { dayStr } = date!;
 
-   const generateHeaders: JSX.Element[] = STATIC_DAYS.map((day: string) => {
-      const ifActive: string = dayStr.toLocaleLowerCase() === day.toLocaleLowerCase() ? active : '';
-      return (
-         <div className = {scheduleSection} key = {uuidv4()}>
-            <header className = {classnames(dayOfWeekCSS, ifActive)}>
-               {day}
-            </header>
-         </div>
-      );
-   });
-
-   const generateFooters: JSX.Element[] = STATIC_DAYS.map((day: string) => {
-      const ifActive: string = dayStr.toLocaleLowerCase() === day.toLocaleLowerCase() ? active : '';
-      return (
-         <aside className = {classnames(endLineOfSection, separateContainer, ifActive)} key = {uuidv4()}/>
-      );
-   });
-
-   return (
-      <Fragment>
-         <div className = {classnames(scheduleDaysWrapper, separateTopMargin)}>
-            {generateHeaders}
-         </div>
-         <div className = {centerSeparateWindow}>
-            <img src = {`${process.env.PUBLIC_URL}/images/summertime.png`} alt = 'summer'/>
-            <div className = {centerSeparateContent}>
-               <h2>Brak zajęć</h2>
+    const generateHeaders: JSX.Element[] = STATIC_DAYS.map((day: string) => {
+        const ifActive: string = dayStr.toLocaleLowerCase() === day.toLocaleLowerCase() ? active : '';
+        return (
+            <div className = {scheduleSection} key = {uuidv4()}>
+                <header className = {classnames(dayOfWeekCSS, ifActive)}>
+                    {day}
+                </header>
             </div>
-         </div>
-         <div className = {classnames(scheduleDaysWrapper, separateBottomMargin)}>
-            {generateFooters}
-         </div>
-      </Fragment>
-   );
+        );
+    });
+
+    const generateFooters: JSX.Element[] = STATIC_DAYS.map((day: string) => {
+        const ifActive: string = dayStr.toLocaleLowerCase() === day.toLocaleLowerCase() ? active : '';
+        return (
+            <aside className = {classnames(endLineOfSection, separateContainer, ifActive)} key = {uuidv4()}/>
+        );
+    });
+
+    return (
+        <Fragment>
+            <div className = {classnames(scheduleDaysWrapper, separateTopMargin)}>
+                {generateHeaders}
+            </div>
+            <div className = {centerSeparateWindow}>
+                <img src = {`${process.env.PUBLIC_URL}/images/summertime.png`} alt = 'summer'/>
+                <div className = {centerSeparateContent}>
+                    <h2>Brak zajęć</h2>
+                </div>
+            </div>
+            <div className = {classnames(scheduleDaysWrapper, separateBottomMargin)}>
+                {generateFooters}
+            </div>
+        </Fragment>
+    );
 }
 
 export default SummerBreakSchedule;

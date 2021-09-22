@@ -13,7 +13,7 @@
  */
 
 import React, { useContext } from 'react';
-import { MainStoreContext, MainStoreProviderTypes } from "../../../../contextStore/MainStoreProvider";
+import { MainStoreContext, MainStoreProviderTypes } from '../../../../contextStore/MainStoreProvider';
 
 const { covidBlocks, covidInfo, covidInfoBlocks, statusInfo } = require('./CovidInfo.module.scss');
 
@@ -21,10 +21,10 @@ const { covidBlocks, covidInfo, covidInfoBlocks, statusInfo } = require('./Covid
  * Interface defining the type of Covid Risk Sections values.
  */
 export interface CovidDataProvider {
-   _id: string;
-   description: string;
-   actualRiskNumber: number;
-   __v: number;
+    _id: string;
+    description: string;
+    actualRiskNumber: number;
+    __v: number;
 }
 
 /**
@@ -33,34 +33,34 @@ export interface CovidDataProvider {
  */
 const CovidInfo = () => {
 
-   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
-   const { covidData } = dataFetchFromServer;
+    const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const { covidData } = dataFetchFromServer;
 
-   const generateCovidInfos = covidData.map((info: CovidDataProvider) => {
-      return (
-         <div
-            className = {covidBlocks}
-            key = {info._id}
-         >
-            <span>{info.description}:</span>
-            <span>{info.actualRiskNumber}</span>
-         </div>
-      );
-   });
+    const generateCovidInfos = covidData.map((info: CovidDataProvider) => {
+        return (
+            <div
+                className = {covidBlocks}
+                key = {info._id}
+            >
+                <span>{info.description}:</span>
+                <span>{info.actualRiskNumber}</span>
+            </div>
+        );
+    });
 
-   return (
-      <div className = {covidInfo}>
-         <div className = {statusInfo}>Status zabezpieczeń COVID-19</div>
-         <a
-            href = 'https://covid.polsl.pl/'
-            target = '_blank'
-            rel = 'noreferrer'
-         >więcej informacji</a>
-         <div className = {covidInfoBlocks}>
-            {generateCovidInfos}
-         </div>
-      </div>
-   );
+    return (
+        <div className = {covidInfo}>
+            <div className = {statusInfo}>Status zabezpieczeń COVID-19</div>
+            <a
+                href = "https://covid.polsl.pl/"
+                target = "_blank"
+                rel = "noreferrer"
+            >więcej informacji</a>
+            <div className = {covidInfoBlocks}>
+                {generateCovidInfos}
+            </div>
+        </div>
+    );
 }
 
 export default CovidInfo;

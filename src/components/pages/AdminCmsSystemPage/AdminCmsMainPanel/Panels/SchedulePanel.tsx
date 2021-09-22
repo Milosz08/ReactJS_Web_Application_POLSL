@@ -32,7 +32,7 @@ const { scheduleContainer } = require('./SchedulePanel.module.scss');
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   activeNavElm: number;
+    activeNavElm: number;
 }
 
 /**
@@ -42,46 +42,46 @@ interface PropsProvider {
  */
 const SchedulePanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element => {
 
-   const [ inputField, setInputField ] = useState<string>('');
-   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const [ inputField, setInputField ] = useState<string>('');
+    const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
-   const classToggle = activeNavElm === 3 ? panelActive : '';
-   const { scheduleSubjects } = dataFetchFromServer;
+    const classToggle = activeNavElm === 3 ? panelActive : '';
+    const { scheduleSubjects } = dataFetchFromServer;
 
-   // eslint-disable-next-line array-callback-return
-   const filteredAllSubjects = scheduleSubjects.filter((subject: any): SubjectsProvider | undefined => {
-      const title = subject.title.toLocaleLowerCase();
-      const type = subject.type.toLocaleLowerCase();
-      const start = subject.start.toLocaleLowerCase();
-      const end = subject.end.toLocaleLowerCase();
-      const input = inputField.toLocaleLowerCase();
-      if(inputField === '') {
-         return subject;
-      } else if(title.includes(input) || type.includes(input) || start.includes(input) || end.includes(input)) {
-         return subject;
-      }
-   });
+    // eslint-disable-next-line array-callback-return
+    const filteredAllSubjects = scheduleSubjects.filter((subject: any): SubjectsProvider | undefined => {
+        const title = subject.title.toLocaleLowerCase();
+        const type = subject.type.toLocaleLowerCase();
+        const start = subject.start.toLocaleLowerCase();
+        const end = subject.end.toLocaleLowerCase();
+        const input = inputField.toLocaleLowerCase();
+        if (inputField === '') {
+            return subject;
+        } else if (title.includes(input) || type.includes(input) || start.includes(input) || end.includes(input)) {
+            return subject;
+        }
+    });
 
-   const generateFullDaysStructure = STATIC_DAYS.map((day: string) => (
-      <OneDaySchedule
-         key = {day}
-         dayStr = {day}
-         filteredAllSubjects = {filteredAllSubjects}
-      />
-   ));
+    const generateFullDaysStructure = STATIC_DAYS.map((day: string) => (
+        <OneDaySchedule
+            key = {day}
+            dayStr = {day}
+            filteredAllSubjects = {filteredAllSubjects}
+        />
+    ));
 
-   return (
-      <div className = {classnames(panelContainer, scheduleContainer, classToggle)}>
-         <h2>Dodawanie, Usuwanie i Modyfikowanie przedmiotów planu zajęć</h2>
-         <SearchBox
-            inputField = {inputField}
-            setInputField = {setInputField}
-            placeholderProp = 'Nazwa/typ/godzina'
-         />
-         {generateFullDaysStructure}
-         <SetScheduleBreak/>
-      </div>
-   );
+    return (
+        <div className = {classnames(panelContainer, scheduleContainer, classToggle)}>
+            <h2>Dodawanie, Usuwanie i Modyfikowanie przedmiotów planu zajęć</h2>
+            <SearchBox
+                inputField = {inputField}
+                setInputField = {setInputField}
+                placeholderProp = 'Nazwa/typ/godzina'
+            />
+            {generateFullDaysStructure}
+            <SetScheduleBreak/>
+        </div>
+    );
 }
 
 export default SchedulePanel;

@@ -12,33 +12,33 @@
 @import './../../../../../../styles/_mixins';
 
 .messageInfoContainer {
-  .userInfo, .messageInfo {
-    @include borderWithPseudElementInfo(var(--darkGrayTint2), var(--cleanWhiteColor), 1rem, 500, 'INFORMACJE');
-    margin: 30px 0;
-    &::before {
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
+    .userInfo, .messageInfo {
+        @include borderWithPseudElementInfo(var(--darkGrayTint2), var(--cleanWhiteColor), 1rem, 500, 'INFORMACJE');
+        margin: 30px 0;
+        &::before {
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        span {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--navyBlueColor);
+            strong {
+                font-weight: 500;
+                color: var(--darkOrangeColor);
+            }
+        }
     }
-    span {
-      display: block;
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--navyBlueColor);
-      strong {
-        font-weight: 500;
-        color: var(--darkOrangeColor);
-      }
+    .messageInfo {
+        text-align: center;
+        &::before {
+            content: 'TREŚĆ WYSYŁANEJ WIADOMOŚCI'
+        }
     }
-  }
-  .messageInfo {
-    text-align: center;
-    &::before {
-      content: 'TREŚĆ WYSYŁANEJ WIADOMOŚCI'
-    }
-  }
 }
 
 .viewMargin {
-  padding-top: 20px;
+    padding-top: 20px;
 }

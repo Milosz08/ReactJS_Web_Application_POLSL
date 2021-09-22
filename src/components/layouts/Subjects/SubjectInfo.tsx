@@ -23,18 +23,18 @@ import { SubjectsProvider } from './Subjects';
 const SubjectLayout = React.lazy(() => import('./SubjectLayout'));
 
 const {
-   subInfoContainer, subInfo,  animFlexContainer, emptySubjectField, emptyIcon, messageoutEnter,
-   messageoutEnterActive, messageoutExit, messageoutExitActive, prevButtonContainer, nextButtonContainer
+    subInfoContainer, subInfo, animFlexContainer, emptySubjectField, emptyIcon, messageoutEnter,
+    messageoutEnterActive, messageoutExit, messageoutExitActive, prevButtonContainer, nextButtonContainer
 } = require('./Subjects.module.scss');
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   subjectID: number;
-   filteredArray: SubjectsProvider[];
-   state: number;
-   setState: Dispatch<SetStateAction<number>>;
+    subjectID: number;
+    filteredArray: SubjectsProvider[];
+    state: number;
+    setState: Dispatch<SetStateAction<number>>;
 }
 
 /**
@@ -48,68 +48,68 @@ interface PropsProvider {
  */
 const SubjectInfo: React.FC<PropsProvider> = ({ subjectID, filteredArray, state, setState }): JSX.Element => {
 
-   const ifSubjectArrayIsEmpty = filteredArray.length !== 0 ? (
-      <SubjectLayout
-         subjectID = {subjectID}
-         filteredArray = {filteredArray}
-      />
-   ) : (
-      <div className = {emptySubjectField}>
-         <FontAwesomeIcon
-            icon = {['fas', 'exclamation-circle']}
-            className = {emptyIcon}
-         />
-         <span>Nie znalazłem szukanego przedmiotu.</span>
-      </div>
-   );
+    const ifSubjectArrayIsEmpty = filteredArray.length !== 0 ? (
+        <SubjectLayout
+            subjectID = {subjectID}
+            filteredArray = {filteredArray}
+        />
+    ) : (
+        <div className = {emptySubjectField}>
+            <FontAwesomeIcon
+                icon = {[ 'fas', 'exclamation-circle' ]}
+                className = {emptyIcon}
+            />
+            <span>Nie znalazłem szukanego przedmiotu.</span>
+        </div>
+    );
 
-   const handlePrevClick = () => {
-      if(state === 0) {
-         setState(filteredArray.length - 1);
-      } else {
-         setState(prevState => prevState - 1);
-      }
-   }
+    const handlePrevClick = () => {
+        if (state === 0) {
+            setState(filteredArray.length - 1);
+        } else {
+            setState(prevState => prevState - 1);
+        }
+    }
 
-   const handleNextClick = () => {
-      if(state === filteredArray.length - 1) {
-         setState(0);
-      } else {
-         setState(prevState => prevState + 1);
-      }
-   }
+    const handleNextClick = () => {
+        if (state === filteredArray.length - 1) {
+            setState(0);
+        } else {
+            setState(prevState => prevState + 1);
+        }
+    }
 
-   const generatePrevButton = filteredArray.length > 1 ? <button onClick = {handlePrevClick}/> : null;
-   const generateNextButton = filteredArray.length > 1 ? <button onClick = {handleNextClick}/> : null;
+    const generatePrevButton = filteredArray.length > 1 ? <button onClick = {handlePrevClick}/> : null;
+    const generateNextButton = filteredArray.length > 1 ? <button onClick = {handleNextClick}/> : null;
 
-   return (
-      <div className = {subInfoContainer}>
-         <div className = {prevButtonContainer}>
-            {generatePrevButton}
-         </div>
-         <div className = {subInfo}>
-            <TransitionGroup>
-               <CSSTransition
-                  key = {subjectID}
-                  timeout = {50}
-                  classNames = {{
-                     enterActive: messageoutEnter,
-                     enterDone: messageoutEnterActive,
-                     exitActive: messageoutExit,
-                     exitDone: messageoutExitActive,
-                  }}
-               >
-                  <div className = {animFlexContainer}>
-                     {ifSubjectArrayIsEmpty}
-                  </div>
-               </CSSTransition>
-            </TransitionGroup>
-         </div>
-         <div className = {nextButtonContainer}>
-            {generateNextButton}
-         </div>
-      </div>
-   );
+    return (
+        <div className = {subInfoContainer}>
+            <div className = {prevButtonContainer}>
+                {generatePrevButton}
+            </div>
+            <div className = {subInfo}>
+                <TransitionGroup>
+                    <CSSTransition
+                        key = {subjectID}
+                        timeout = {50}
+                        classNames = {{
+                            enterActive: messageoutEnter,
+                            enterDone: messageoutEnterActive,
+                            exitActive: messageoutExit,
+                            exitDone: messageoutExitActive,
+                        }}
+                    >
+                        <div className = {animFlexContainer}>
+                            {ifSubjectArrayIsEmpty}
+                        </div>
+                    </CSSTransition>
+                </TransitionGroup>
+            </div>
+            <div className = {nextButtonContainer}>
+                {generateNextButton}
+            </div>
+        </div>
+    );
 }
 
 export default SubjectInfo;

@@ -23,8 +23,8 @@ const { radiomark, singleRadio } = require('./../../Modals/AddChangeSubjectModal
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   credential: number;
-   callback: Dispatch<SetStateAction<number>>;
+    credential: number;
+    callback: Dispatch<SetStateAction<number>>;
 }
 
 /**
@@ -35,30 +35,30 @@ interface PropsProvider {
  * @param callback { Dispatch<SetStateAction<number>> } - change the authentication level.
  */
 const ChangeTypeOfCredentials: React.FC<PropsProvider> = ({ credential, callback }) => (
-   <div className = {changeAuthTypeContainer}>
-       <div className = {classnames(singleRadio, authRadio)}>
-           <input
-               type = "radio"
-               id = "range2"
-               name = "rangeFields"
-               checked = {credential === CREDENTIALS.MODERATOR}
-               onChange = {() => callback(CREDENTIALS.MODERATOR)}
-           />
-           <label htmlFor = "range2">Moderator</label>
-           <div className = {radiomark}/>
-       </div>
-       <div className = {classnames(singleRadio, authRadio)}>
-           <input
-               type = "radio"
-               id = "range1"
-               name = "rangeFields"
-               checked = {credential === CREDENTIALS.ADMIN}
-               onChange = {() => callback(CREDENTIALS.ADMIN)}
-           />
-           <label htmlFor = "range1">Administrator</label>
-           <div className = {radiomark}/>
-       </div>
-   </div>
+    <div className = {changeAuthTypeContainer}>
+        <div className = {classnames(singleRadio, authRadio)}>
+            <input
+                type = 'radio'
+                id = 'range2'
+                name = 'rangeFields'
+                checked = {credential === CREDENTIALS.MODERATOR}
+                onChange = {() => callback(CREDENTIALS.MODERATOR)}
+            />
+            <label htmlFor = 'range2'>Moderator</label>
+            <div className = {radiomark}/>
+        </div>
+        <div className = {classnames(singleRadio, authRadio)}>
+            <input
+                type = 'radio'
+                id = 'range1'
+                name = 'rangeFields'
+                checked = {credential === CREDENTIALS.ADMIN}
+                onChange = {() => callback(CREDENTIALS.ADMIN)}
+            />
+            <label htmlFor = 'range1'>Administrator</label>
+            <div className = {radiomark}/>
+        </div>
+    </div>
 );
 
 export default ChangeTypeOfCredentials;

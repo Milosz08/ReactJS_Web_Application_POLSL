@@ -17,33 +17,33 @@ import React, { createContext, Dispatch, SetStateAction, useState } from 'react'
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 /**
  * Interface defining the type of state values.
  */
 interface StateProvider {
-   modalOpen: boolean;
-   counter: number;
+    modalOpen: boolean;
+    counter: number;
 }
 
 /**
  * Interface defining the type of return in context store values.
  */
 export interface GlobalModalsStateTypes {
-   onSaveOpenModal: boolean;
-   setOnSaveOpenModal: Dispatch<SetStateAction<boolean>>
-   adminSessionInfo: StateProvider;
-   setAdminSessionInfo: Dispatch<SetStateAction<StateProvider>> | any
-   lastActivity: number;
-   setLastActivity: Dispatch<SetStateAction<number>>
+    onSaveOpenModal: boolean;
+    setOnSaveOpenModal: Dispatch<SetStateAction<boolean>>
+    adminSessionInfo: StateProvider;
+    setAdminSessionInfo: Dispatch<SetStateAction<StateProvider>> | any
+    lastActivity: number;
+    setLastActivity: Dispatch<SetStateAction<number>>
 }
 
 /**
  * Create the context of the store. Function exported and used to destructurize context members.
  */
-export const GlobalModalsStateContext = createContext<Partial<GlobalModalsStateTypes>>({ });
+export const GlobalModalsStateContext = createContext<Partial<GlobalModalsStateTypes>>({});
 
 /**
  * @details Store component for global modals (saving schedule preferences to Cookie object, notification of end of
@@ -53,21 +53,21 @@ export const GlobalModalsStateContext = createContext<Partial<GlobalModalsStateT
  */
 const GlobalModalsStateProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
-   const [ onSaveOpenModal, setOnSaveOpenModal ] = useState<boolean>(false);
-   const [ adminSessionInfo, setAdminSessionInfo ] = useState<StateProvider>({ modalOpen: false, counter: 0 });
-   const [ lastActivity, setLastActivity ] = useState<number>(0);
+    const [ onSaveOpenModal, setOnSaveOpenModal ] = useState<boolean>(false);
+    const [ adminSessionInfo, setAdminSessionInfo ] = useState<StateProvider>({ modalOpen: false, counter: 0 });
+    const [ lastActivity, setLastActivity ] = useState<number>(0);
 
-   return (
-      <GlobalModalsStateContext.Provider
-         value = {{
-            onSaveOpenModal, setOnSaveOpenModal,
-            adminSessionInfo, setAdminSessionInfo,
-            lastActivity, setLastActivity
-         }}
-      >
-         {children}
-      </GlobalModalsStateContext.Provider>
-   );
+    return (
+        <GlobalModalsStateContext.Provider
+            value = {{
+                onSaveOpenModal, setOnSaveOpenModal,
+                adminSessionInfo, setAdminSessionInfo,
+                lastActivity, setLastActivity
+            }}
+        >
+            {children}
+        </GlobalModalsStateContext.Provider>
+    );
 }
 
 export default GlobalModalsStateProvider;

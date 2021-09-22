@@ -20,7 +20,7 @@ import { GlobalModalsStateContext, GlobalModalsStateTypes } from '../../../../co
 const UniversalHeader = React.lazy(() => import('../../../layouts/UniversalHeader/UniversalHeader'));
 
 const {
-   scheduleSaveContainer, scheduleSaveWrapper, active, scheduleSaveContent, whenCloseWindow, show
+    scheduleSaveContainer, scheduleSaveWrapper, active, scheduleSaveContent, whenCloseWindow, show
 } = require('./AcceptScheduleChoiceModal.module.scss');
 
 /**
@@ -35,50 +35,50 @@ const COUNTING_VALUE: number = 3;
  */
 const AcceptScheduleChoiceModal = (): JSX.Element => {
 
-   const { onSaveOpenModal, setOnSaveOpenModal } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
+    const { onSaveOpenModal, setOnSaveOpenModal } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
 
-   const [ counting, setCounting ] = useState<number>(COUNTING_VALUE);
-   const [ containerVisible, setContainerVisible ] = useState<string>('');
-   const [ animShow, setAnimShow ] = useState<string>('');
+    const [ counting, setCounting ] = useState<number>(COUNTING_VALUE);
+    const [ containerVisible, setContainerVisible ] = useState<string>('');
+    const [ animShow, setAnimShow ] = useState<string>('');
 
-   useEffect(() => {
-      if(onSaveOpenModal) {
-         let count: number = COUNTING_VALUE;
-         let index: NodeJS.Timeout;
-         const asyncLoadingBar = () => {
-            setCounting(--count);
-            if(count === 0) {
-               clearInterval(index);
-               setOnSaveOpenModal!(false);
-               setAnimShow('');
-               setTimeout(() => setContainerVisible(''), 200);
+    useEffect(() => {
+        if (onSaveOpenModal) {
+            let count: number = COUNTING_VALUE;
+            let index: NodeJS.Timeout;
+            const asyncLoadingBar = () => {
+                setCounting(--count);
+                if (count === 0) {
+                    clearInterval(index);
+                    setOnSaveOpenModal!(false);
+                    setAnimShow('');
+                    setTimeout(() => setContainerVisible(''), 200);
+                }
             }
-         }
-         index = setInterval(asyncLoadingBar, 1000);
-         setContainerVisible(show);
-         setTimeout(() => setAnimShow(active), 200);
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [onSaveOpenModal]);
+            index = setInterval(asyncLoadingBar, 1000);
+            setContainerVisible(show);
+            setTimeout(() => setAnimShow(active), 200);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ onSaveOpenModal ]);
 
-   return (
-      <div className = {classnames(scheduleSaveContainer, containerVisible, animShow)}>
-         <div className = {classnames(scheduleSaveWrapper, animShow)}>
-            <UniversalHeader
-               iconP = {['fas', 'info-circle']}
-               content = 'Informacja'
-               ifCloseButtonVisible = {false}
-            />
-            <span className = {scheduleSaveContent}>
+    return (
+        <div className = {classnames(scheduleSaveContainer, containerVisible, animShow)}>
+            <div className = {classnames(scheduleSaveWrapper, animShow)}>
+                <UniversalHeader
+                    iconP = {[ 'fas', 'info-circle' ]}
+                    content = 'Informacja'
+                    ifCloseButtonVisible = {false}
+                />
+                <span className = {scheduleSaveContent}>
                Twój wybór został zapisany. Przy kolejnym wejściu na stronę, aplikacja automatycznie ustawi
                wybrane przez Ciebie preferencje.
             </span>
-            <span className = {whenCloseWindow}>
+                <span className = {whenCloseWindow}>
                Okno zamknie się automatycznie za: <strong>{counting}</strong>
             </span>
-         </div>
-      </div>
-   );
+            </div>
+        </div>
+    );
 }
 
 export default AcceptScheduleChoiceModal;

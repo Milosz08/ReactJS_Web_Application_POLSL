@@ -18,18 +18,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const {
-   universalHeader, universalHeaderIcon, universalHeaderButton, additionalTitleHeader
+    universalHeader, universalHeaderIcon, universalHeaderButton, additionalTitleHeader
 } = require('./UniversalHeader.module.scss');
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   iconP: IconProp;
-   content: string;
-   ifCloseButtonVisible: boolean;
-   addHeaderDayIndicator?: string;
-   setCloseButton?: () => void;
+    iconP: IconProp;
+    content: string;
+    ifCloseButtonVisible: boolean;
+    addHeaderDayIndicator?: string;
+    setCloseButton?: () => void;
 }
 
 /**
@@ -43,29 +43,29 @@ interface PropsProvider {
  * @param addHeaderDayIndicator { string? } - for the modal adding / modifying subjects in the timetable.
  */
 const UniversalHeader: React.FC<PropsProvider> = ({
-   iconP, content, ifCloseButtonVisible, setCloseButton, addHeaderDayIndicator
+    iconP, content, ifCloseButtonVisible, setCloseButton, addHeaderDayIndicator
 }): JSX.Element => {
-   return (
-      <header className = {universalHeader}>
-         <h3>
-            <FontAwesomeIcon
-               icon = {iconP}
-               className = {universalHeaderIcon}
-            />
-            <span>
+    return (
+        <header className = {universalHeader}>
+            <h3>
+                <FontAwesomeIcon
+                    icon = {iconP}
+                    className = {universalHeaderIcon}
+                />
+                <span>
                {content}
-               {addHeaderDayIndicator && <span className = {additionalTitleHeader}>{addHeaderDayIndicator}</span>}
+                    {addHeaderDayIndicator && <span className = {additionalTitleHeader}>{addHeaderDayIndicator}</span>}
             </span>
-            <aside/>
-            {ifCloseButtonVisible && <button
-               className = {universalHeaderButton}
-               onClick = {setCloseButton}
-            >
-               <span/>
-            </button>}
-         </h3>
-      </header>
-   );
+                <aside/>
+                {ifCloseButtonVisible && <button
+                    className = {universalHeaderButton}
+                    onClick = {setCloseButton}
+                >
+                    <span/>
+                </button>}
+            </h3>
+        </header>
+    );
 }
 
 export default UniversalHeader;

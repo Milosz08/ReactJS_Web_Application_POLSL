@@ -34,35 +34,35 @@ const { cmsSystemContainer, cmsContent } = require('./AdminCmsMainPanel.module.s
  */
 const PanelsStructure = (): JSX.Element => {
 
-   const [ activeNavElm, setActiveNavElm ] = useState<number>(0);
+    const [ activeNavElm, setActiveNavElm ] = useState<number>(0);
 
-   return (
-      <div className = {adminLoginContainer}>
-         <div className = {adminLoginWrapper}>
-            <UniversalHeader
-               iconP = {['fas', 'industry']}
-               content = 'Panel Systemu Zarządzania Treścią'
-               ifCloseButtonVisible = {false}
-            />
-            <div className = {cmsSystemContainer}>
-               <AdminCmsLeftNavigation
-                  activeNavElm = {activeNavElm}
-                  setActiveNavElm = {setActiveNavElm}
-               />
-               <div className = {cmsContent}>
-                  <HomePanel activeNavElm = {activeNavElm}/>
-                  <Covid19Panel activeNavElm = {activeNavElm}/>
-                  <FormDataAndValidateProvider>
-                     <SubjectsPanel activeNavElm = {activeNavElm}/>
-                  </FormDataAndValidateProvider>
-                  <SchedulePanel activeNavElm = {activeNavElm}/>
-                  <CalendarPanel activeNavElm = {activeNavElm}/>
-                  <UserMessagesPanel activeNavElm = {activeNavElm}/>
-               </div>
+    return (
+        <div className = {adminLoginContainer}>
+            <div className = {adminLoginWrapper}>
+                <UniversalHeader
+                    iconP = {[ 'fas', 'industry' ]}
+                    content = 'Panel Systemu Zarządzania Treścią'
+                    ifCloseButtonVisible = {false}
+                />
+                <div className = {cmsSystemContainer}>
+                    <AdminCmsLeftNavigation
+                        activeNavElm = {activeNavElm}
+                        setActiveNavElm = {setActiveNavElm}
+                    />
+                    <div className = {cmsContent}>
+                        <HomePanel activeNavElm = {activeNavElm}/>
+                        <Covid19Panel activeNavElm = {activeNavElm}/>
+                        <FormDataAndValidateProvider>
+                            <SubjectsPanel activeNavElm = {activeNavElm}/>
+                        </FormDataAndValidateProvider>
+                        <SchedulePanel activeNavElm = {activeNavElm}/>
+                        <CalendarPanel activeNavElm = {activeNavElm}/>
+                        <UserMessagesPanel activeNavElm = {activeNavElm}/>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   );
+        </div>
+    );
 }
 
 export default PanelsStructure;

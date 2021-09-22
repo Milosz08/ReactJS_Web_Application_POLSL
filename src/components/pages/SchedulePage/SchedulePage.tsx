@@ -48,56 +48,58 @@ export const STATIC_DAYS: string[] = [ 'poniedziałek', 'wtorek', 'środa', 'czw
  */
 const SchedulePage = (): JSX.Element => {
 
-   const executeScrollRef: React.MutableRefObject<any> = useRef<HTMLElement>(null);
-   const { summerBreak } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const executeScrollRef: React.MutableRefObject<any> = useRef<HTMLElement>(null);
+    const { summerBreak } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
-   const executeScroll = (): void => {
-      executeScrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-   }
+    const executeScroll = (): void => {
+        executeScrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    }
 
-   const generateDaysStructure: JSX.Element[] = STATIC_DAYS.map((day: string) => (
-      <ScheduleSections key = {uuidv4()} dayOfWeek = {day}/>
-   ));
+    const generateDaysStructure: JSX.Element[] = STATIC_DAYS.map((day: string) => (
+        <ScheduleSections key = {uuidv4()} dayOfWeek = {day}/>
+    ));
 
-   useEffect(() => {
-      document.title = ROUTING_PATH_NAMES.SCHEDULE_PAGE;
-      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
-   }, []);
+    useEffect(() => {
+        document.title = ROUTING_PATH_NAMES.SCHEDULE_PAGE;
+        return () => {
+            document.title = ROUTING_PATH_NAMES.START_PAGE
+        };
+    }, []);
 
-   return (
-      <ScheduleProvider>
-         <CookiesNotification/>
-         <AcceptScheduleChoiceModal/>
-         <MobileDownNav id = {1}/>
-         <Header ifHeaderHasRedBar = {true}/>
-         <CurrentURLpath ifImportatHeaderActive = {true}/>
-         <div className = {scheduleContainer}>
-            <ActualDateProvider>
-               <div className = {scheduleWrapper}>
-                  <ScheduleForm executeScroll = {executeScroll}/>
-                  <section 
-                     className = {scheduleRender}
-                     ref = {executeScrollRef}
-                  >
-                     <UniversalHeader
-                        iconP = {['fas', 'calendar-check']}
-                        content = 'Wygenerowany Plan Zajęć'
-                        ifCloseButtonVisible = {false}
-                     />
-                     <ActualDateInfo/>
-                  </section>
-                  <SearchSubject/>
-               </div>
-               <div className = {scheduleDaysContainer}>
-                  {summerBreak ? <SummerBreakSchedule/> : <div className = {scheduleDaysWrapper}>
-                     {generateDaysStructure}
-                  </div>}
-               </div>
-            </ActualDateProvider>
-            <AdditionalTools/>
-         </div>
-      </ScheduleProvider>
-   );
+    return (
+        <ScheduleProvider>
+            <CookiesNotification/>
+            <AcceptScheduleChoiceModal/>
+            <MobileDownNav id = {1}/>
+            <Header ifHeaderHasRedBar = {true}/>
+            <CurrentURLpath ifImportatHeaderActive = {true}/>
+            <div className = {scheduleContainer}>
+                <ActualDateProvider>
+                    <div className = {scheduleWrapper}>
+                        <ScheduleForm executeScroll = {executeScroll}/>
+                        <section
+                            className = {scheduleRender}
+                            ref = {executeScrollRef}
+                        >
+                            <UniversalHeader
+                                iconP = {[ 'fas', 'calendar-check' ]}
+                                content = 'Wygenerowany Plan Zajęć'
+                                ifCloseButtonVisible = {false}
+                            />
+                            <ActualDateInfo/>
+                        </section>
+                        <SearchSubject/>
+                    </div>
+                    <div className = {scheduleDaysContainer}>
+                        {summerBreak ? <SummerBreakSchedule/> : <div className = {scheduleDaysWrapper}>
+                            {generateDaysStructure}
+                        </div>}
+                    </div>
+                </ActualDateProvider>
+                <AdditionalTools/>
+            </div>
+        </ScheduleProvider>
+    );
 }
 
 export default SchedulePage;

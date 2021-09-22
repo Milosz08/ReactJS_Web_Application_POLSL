@@ -28,8 +28,8 @@ import COOKIES_OBJECT from '../../../constants/allCookies';
 const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
 
 const {
-   cookieNotifContainer, cookiesNotifPopupContainer, cookiesMainContent, cookiesButtons, readPolicity,
-   acceptPolicity, showCookiePopup
+    cookieNotifContainer, cookiesNotifPopupContainer, cookiesMainContent, cookiesButtons, readPolicity,
+    acceptPolicity, showCookiePopup
 } = require('./CookiesNotification.module.scss');
 
 /**
@@ -45,48 +45,48 @@ const COOKIE_ID = uuidv4();
  */
 const CookiesNotification = (): JSX.Element => {
 
-   const { cookie, setCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext)
-   const ifCookieNotExist = cookie!.__cookieNotification === undefined ? showCookiePopup : '';
+    const { cookie, setCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext)
+    const ifCookieNotExist = cookie!.__cookieNotification === undefined ? showCookiePopup : '';
 
-   const handleCookieButtons = (): void => {
-      if(cookie!.__cookieNotification === undefined) {
-         const expCookie: Date = cookieExpires(COOKIE_EXPIRES_TIME);
-         setCookie!(COOKIES_OBJECT.cookiesPopup, COOKIE_ID, { path: '/', expires: expCookie });
-      }
-   }
+    const handleCookieButtons = (): void => {
+        if (cookie!.__cookieNotification === undefined) {
+            const expCookie: Date = cookieExpires(COOKIE_EXPIRES_TIME);
+            setCookie!(COOKIES_OBJECT.cookiesPopup, COOKIE_ID, { path: '/', expires: expCookie });
+        }
+    }
 
-   return (
-      <div className = {classnames(cookieNotifContainer, ifCookieNotExist)}>
-         <div className = {cookiesNotifPopupContainer}>
-            <UniversalHeader
-               iconP = {['fas', 'cookie-bite']}
-               content = 'Pliki Cookies'
-               ifCloseButtonVisible = {true}
-               setCloseButton = {handleCookieButtons}
-            />
-            <section className = {cookiesMainContent}>
-               W celu optymalizacji treści i wygody użytkowania, strona którą będziesz przeglądał korzysta z
-               plików Cookies zapisanych na Twoim urządzeniu. Pliki Cookies, potocznie nazywane Ciasteczkami,
-               możesz kontrolować za pomocą ustawień swojej przeglądarki internetowej. Dalsze korzystanie ze
-               strony lub zamknięcie tego okna bez zmiany ustawień przeglądarki, oznacza że akceptujesz
-               stosowanie polityki plików Cookies.
-            </section>
-            <div className = {cookiesButtons}>
-               <button className = {readPolicity}>
-                  <NavLink to = '/polityka-prywatności-cookies'>
-                     Przeczytaj Politykę Prywatności
-                  </NavLink>
-               </button>
-               <button
-                  className = {acceptPolicity}
-                  onClick = {handleCookieButtons}
-               >
-                  Zgadzam się z Polityką Cookies
-               </button>
+    return (
+        <div className = {classnames(cookieNotifContainer, ifCookieNotExist)}>
+            <div className = {cookiesNotifPopupContainer}>
+                <UniversalHeader
+                    iconP = {[ 'fas', 'cookie-bite' ]}
+                    content = 'Pliki Cookies'
+                    ifCloseButtonVisible = {true}
+                    setCloseButton = {handleCookieButtons}
+                />
+                <section className = {cookiesMainContent}>
+                    W celu optymalizacji treści i wygody użytkowania, strona którą będziesz przeglądał korzysta z
+                    plików Cookies zapisanych na Twoim urządzeniu. Pliki Cookies, potocznie nazywane Ciasteczkami,
+                    możesz kontrolować za pomocą ustawień swojej przeglądarki internetowej. Dalsze korzystanie ze
+                    strony lub zamknięcie tego okna bez zmiany ustawień przeglądarki, oznacza że akceptujesz
+                    stosowanie polityki plików Cookies.
+                </section>
+                <div className = {cookiesButtons}>
+                    <button className = {readPolicity}>
+                        <NavLink to = '/polityka-prywatności-cookies'>
+                            Przeczytaj Politykę Prywatności
+                        </NavLink>
+                    </button>
+                    <button
+                        className = {acceptPolicity}
+                        onClick = {handleCookieButtons}
+                    >
+                        Zgadzam się z Polityką Cookies
+                    </button>
+                </div>
             </div>
-         </div>
-      </div>
-   );
+        </div>
+    );
 }
 
 export default CookiesNotification;

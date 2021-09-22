@@ -12,67 +12,67 @@
 @import './../../../styles/_mixins';
 
 .subjectsPassContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .subjectsPassWrapper {
-    position: relative;
-    margin-top: 230px;
-    width: var(--widthVertical);
     display: flex;
     flex-direction: column;
-  }
+    align-items: center;
+    .subjectsPassWrapper {
+        position: relative;
+        margin-top: 230px;
+        width: var(--widthVertical);
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .infoBlock {
-  @include borderWithPseudElementInfo(var(--darkBlueColor), var(--cleanWhiteColor), 1.2rem, 500, 'Przekierowanie');
-  margin-top: 30px;
-  p {
-    font-size: 1.2rem;
-    color: var(--navyBlueColor);
-    font-weight: 500;
-  }
-  .linksContainer {
-    display: flex;
-    justify-content: flex-end;
-    a {
-      @include defaultButton();
-      max-width: 190px;
-      margin: 30px 20px 0;
-      text-align: center;
-      text-decoration: none;
+    @include borderWithPseudElementInfo(var(--darkBlueColor), var(--cleanWhiteColor), 1.2rem, 500, 'Przekierowanie');
+    margin-top: 30px;
+    p {
+        font-size: 1.2rem;
+        color: var(--navyBlueColor);
+        font-weight: 500;
     }
-  }
+    .linksContainer {
+        display: flex;
+        justify-content: flex-end;
+        a {
+            @include defaultButton();
+            max-width: 190px;
+            margin: 30px 20px 0;
+            text-align: center;
+            text-decoration: none;
+        }
+    }
 }
 
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1250px) {
-  .subjectsPassContainer {
-    width: calc(100% - 60px);
-    margin: 0 30px;
-    .subjectsPassWrapper {
-      width: 100%;
-      margin-top: 150px;
+    .subjectsPassContainer {
+        width: calc(100% - 60px);
+        margin: 0 30px;
+        .subjectsPassWrapper {
+            width: 100%;
+            margin-top: 150px;
+        }
     }
-  }
-  .infoBlock {
-    .linksContainer {
-      justify-content: center;
+    .infoBlock {
+        .linksContainer {
+            justify-content: center;
+        }
     }
-  }
 }
 
 @media only screen and (max-width: 663px) {
-  .infoBlock {
-    padding: 30px;
-    .linksContainer {
-      margin-top: 20px;
-      flex-direction: column;
-      align-items: center;
-      a {
-        margin: 20px 20px 0;
-      }
+    .infoBlock {
+        padding: 30px;
+        .linksContainer {
+            margin-top: 20px;
+            flex-direction: column;
+            align-items: center;
+            a {
+                margin: 20px 20px 0;
+            }
+        }
     }
-  }
 }

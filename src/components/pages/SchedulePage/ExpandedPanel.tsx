@@ -15,7 +15,7 @@
  * @date final version: 08/19/2021
  */
 
-import React, {Fragment, useContext, useState} from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import DelayLink from 'react-delay-link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
@@ -25,15 +25,15 @@ import { ScheduleSubjectsProvider } from './ScheduleSections';
 import { SubjectsProvider } from '../../layouts/Subjects/Subjects';
 
 const {
-   expandInfo, infoIcon, rotateIcon, expandContainer, expandedInfo, expandActive, expandedLinks
+    expandInfo, infoIcon, rotateIcon, expandContainer, expandedInfo, expandActive, expandedLinks
 } = require('./ScheduleSections.module.scss');
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   tile: ScheduleSubjectsProvider;
-   subjectObj: SubjectsProvider;
+    tile: ScheduleSubjectsProvider;
+    subjectObj: SubjectsProvider;
 }
 
 /**
@@ -45,50 +45,50 @@ interface PropsProvider {
  */
 const ExpandedPanel: React.FC<PropsProvider> = ({ tile, subjectObj }) => {
 
-   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
-   const [ ifIsExpanded, setifIsExpanded ] = useState<boolean>(false);
+    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const [ ifIsExpanded, setifIsExpanded ] = useState<boolean>(false);
 
-   const titleContent: string = ifIsExpanded ? 'Zwiń panel' : 'Kliknij tutaj po więcej informacji.';
-   const iconRotate: string = ifIsExpanded ? classnames(infoIcon, rotateIcon) : infoIcon;
-   const activeContainer: string = ifIsExpanded ? expandContainer : classnames(expandContainer, expandActive);
+    const titleContent: string = ifIsExpanded ? 'Zwiń panel' : 'Kliknij tutaj po więcej informacji.';
+    const iconRotate: string = ifIsExpanded ? classnames(infoIcon, rotateIcon) : infoIcon;
+    const activeContainer: string = ifIsExpanded ? expandContainer : classnames(expandContainer, expandActive);
 
-   return (
-      <Fragment>
-         <button
-            className = {expandInfo}
-            onClick = {() => setifIsExpanded(prevState => !prevState)}
-            title = {titleContent}
-         >
-            <FontAwesomeIcon
-               icon = {['fas', 'chevron-down']}
-               className = {iconRotate}
-            />
-         </button>
-         <div className = {activeContainer} >
-            <p className = {expandedInfo}>
-               <span>{tile.type === 'wykład' ? 'wykłady' : tile.type} </span>
-               {subjectObj.ifEnd ? 'odbywały' : 'odbywają'} się przez komunikator
-               <strong> {tile.pzeInfo.platform}</strong>. Wszystkie linki znajdziesz na PZE.
-            </p>
-            <a
-               href = {tile.pzeInfo.pzeLink} rel = 'noreferrer'
-               className = {expandedLinks}
+    return (
+        <Fragment>
+            <button
+                className = {expandInfo}
+                onClick = {() => setifIsExpanded(prevState => !prevState)}
+                title = {titleContent}
             >
-               Przejdź do PZE
-            </a>
-            <DelayLink
-               to = '/warunki-zaliczenia-przedmiotów'
-               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
-               replace = {false}
-               clickAction = {timeoutRoutePath}
-            >
-               <a href = {'/warunki-zaliczenia-przedmiotów'} className = {expandedLinks}>
-                  Warunki zaliczenia przedmiotu
-               </a>
-            </DelayLink>
-         </div>
-      </Fragment>
-   );
+                <FontAwesomeIcon
+                    icon = {[ 'fas', 'chevron-down' ]}
+                    className = {iconRotate}
+                />
+            </button>
+            <div className = {activeContainer}>
+                <p className = {expandedInfo}>
+                    <span>{tile.type === 'wykład' ? 'wykłady' : tile.type} </span>
+                    {subjectObj.ifEnd ? 'odbywały' : 'odbywają'} się przez komunikator
+                    <strong> {tile.pzeInfo.platform}</strong>. Wszystkie linki znajdziesz na PZE.
+                </p>
+                <a
+                    href = {tile.pzeInfo.pzeLink} rel = 'noreferrer'
+                    className = {expandedLinks}
+                >
+                    Przejdź do PZE
+                </a>
+                <DelayLink
+                    to = '/warunki-zaliczenia-przedmiotów'
+                    delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                    replace = {false}
+                    clickAction = {timeoutRoutePath}
+                >
+                    <a href = {'/warunki-zaliczenia-przedmiotów'} className = {expandedLinks}>
+                        Warunki zaliczenia przedmiotu
+                    </a>
+                </DelayLink>
+            </div>
+        </Fragment>
+    );
 }
 
 export default ExpandedPanel;

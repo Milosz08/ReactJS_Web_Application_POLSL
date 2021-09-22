@@ -27,36 +27,36 @@ const { groupRadio, customRadio, radioInputContainer, activeRadio } = require('.
  */
 const ScheduleNormalGroupInputs = (): JSX.Element => {
 
-   const { NORMAL_GROUPS } = GROUPS_STATIC;
-   const { groupSelected, setGroupSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
+    const { NORMAL_GROUPS } = GROUPS_STATIC;
+    const { groupSelected, setGroupSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
 
-   const generateInputStructure = NORMAL_GROUPS.map((object: NormalGroupsTypes) => {
-      const activeRadioClass = groupSelected === object.text
-         ? classnames(radioInputContainer, activeRadio) : radioInputContainer;
+    const generateInputStructure = NORMAL_GROUPS.map((object: NormalGroupsTypes) => {
+        const activeRadioClass = groupSelected === object.text
+            ? classnames(radioInputContainer, activeRadio) : radioInputContainer;
 
-      return (
-         <div key = {object.text} className = {activeRadioClass}>
-            <input
-               type = 'radio'
-               id = {object.text}
-               name = 'groups'
-               onChange = {({ target }) => setGroupSelected!(target.id)}
-               checked = {groupSelected === object.text}
-               value = {object.text}
-            />
-            <label htmlFor = {object.text}>
-               Grupa {object.text}
-            </label>
-            <div className = {customRadio}/>
-         </div>
-      );
-   });
+        return (
+            <div key = {object.text} className = {activeRadioClass}>
+                <input
+                    type = 'radio'
+                    id = {object.text}
+                    name = 'groups'
+                    onChange = {({ target }) => setGroupSelected!(target.id)}
+                    checked = {groupSelected === object.text}
+                    value = {object.text}
+                />
+                <label htmlFor = {object.text}>
+                    Grupa {object.text}
+                </label>
+                <div className = {customRadio}/>
+            </div>
+        );
+    });
 
-   return (
-      <div className = {groupRadio}>
-         {generateInputStructure}
-      </div>
-   );
+    return (
+        <div className = {groupRadio}>
+            {generateInputStructure}
+        </div>
+    );
 }
 
 export default ScheduleNormalGroupInputs;

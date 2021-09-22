@@ -12,63 +12,63 @@
 @import './../../../../styles/_mixins';
 
 .cmsSystemContainer {
-  display: flex;
-  width: var(--widthVertical);
-  min-height: 500px;
-  margin: 20px 0;
-  nav.cmsNavigation {
-    transform: translateX(2px);
-    button {
-      @include defaultButtonReset();
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: var(--darkGrayTint3);
-      color: var(--darkGray);
-      border: 2px solid var(--darkGrayTint3);
-      border-radius: 10px 0 0 10px;
-      width: 65px;
-      height: 65px;
-      font-size: 1.3rem;
-      &:not(:nth-child(1)) {
-        margin: 5px 0;
-      }
-      &.activeSection {
-        border-right: 0;
-        background-color: #ffffff;
-        color: var(--navyBlueColor);
-      }
+    display: flex;
+    width: var(--widthVertical);
+    min-height: 500px;
+    margin: 20px 0;
+    nav.cmsNavigation {
+        transform: translateX(2px);
+        button {
+            @include defaultButtonReset();
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--darkGrayTint3);
+            color: var(--darkGray);
+            border: 2px solid var(--darkGrayTint3);
+            border-radius: 10px 0 0 10px;
+            width: 65px;
+            height: 65px;
+            font-size: 1.3rem;
+            &:not(:nth-child(1)) {
+                margin: 5px 0;
+            }
+            &.activeSection {
+                border-right: 0;
+                background-color: #ffffff;
+                color: var(--navyBlueColor);
+            }
+        }
     }
-  }
-  .cmsContent {
-    border-radius: 0 10px 10px 10px;
-    border: 2px solid var(--darkGrayTint3);
-    flex-grow: 1;
-  }
+    .cmsContent {
+        border-radius: 0 10px 10px 10px;
+        border: 2px solid var(--darkGrayTint3);
+        flex-grow: 1;
+    }
 }
 
 .logoutButton {
-  @include defaultButtonReset();
-  margin-left: 40px;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: var(--darkBlueColor);
+    @include defaultButtonReset();
+    margin-left: 40px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--darkBlueColor);
 }
 
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1250px) {
-  .cmsSystemContainer {
-    width: 100%;
-    nav.cmsNavigation {
-      button {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-      }
+    .cmsSystemContainer {
+        width: 100%;
+        nav.cmsNavigation {
+            button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        .cmsContent {
+            width: calc(100% - 60px);
+        }
     }
-    .cmsContent {
-      width: calc(100% - 60px);
-    }
-  }
 }

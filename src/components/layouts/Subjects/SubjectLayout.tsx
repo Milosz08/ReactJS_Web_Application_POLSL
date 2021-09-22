@@ -24,16 +24,16 @@ import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '
 import { SubjectsProvider } from './Subjects';
 
 const {
-   classesPlatformsInfo, navButtons, pzeLinks, separator, subDep, subEnd, subjectsDoIt, subjectsIcon,
-   subNotEnd, subStatusInfo
+    classesPlatformsInfo, navButtons, pzeLinks, separator, subDep, subEnd, subjectsDoIt, subjectsIcon,
+    subNotEnd, subStatusInfo
 } = require('./Subjects.module.scss');
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   subjectID: number;
-   filteredArray: SubjectsProvider[];
+    subjectID: number;
+    filteredArray: SubjectsProvider[];
 }
 
 /**
@@ -46,101 +46,101 @@ interface PropsProvider {
  */
 const SubjectsLayout: React.FC<PropsProvider> = ({ subjectID, filteredArray }): JSX.Element => {
 
-   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
-   const specificSubject = filteredArray[subjectID];
-   const classesIfEnd = specificSubject.ifEnd ? 'odbywały' : 'odbywają';
+    const specificSubject = filteredArray[subjectID];
+    const classesIfEnd = specificSubject.ifEnd ? 'odbywały' : 'odbywają';
 
-   const multipleDepartment = specificSubject.departments.length !== 1
-      ? specificSubject.departments.map((department: string) => <span key = {uuidv4()}>wydział {department}</span>)
-      : `wydział ${specificSubject.departments[0]}`;
+    const multipleDepartment = specificSubject.departments.length !== 1
+        ? specificSubject.departments.map((department: string) => <span key = {uuidv4()}>wydział {department}</span>)
+        : `wydział ${specificSubject.departments[0]}`;
 
-   const classesPlatforms = specificSubject.classesPlatforms.length !== 1
-      ? specificSubject.classesPlatforms.map(platform => ((
-         <span key = {platform.type}>
+    const classesPlatforms = specificSubject.classesPlatforms.length !== 1
+        ? specificSubject.classesPlatforms.map(platform => ((
+                <span key = {platform.type}>
             {`${platform.type} ${classesIfEnd} się poprzed komunikator `}
-            <strong>{`${platform.place}`}</strong>.
+                    <strong>{`${platform.place}`}</strong>.
          </span>
-      ))
-      ) : (
-         <span>
+            ))
+        ) : (
+            <span>
             {`Zajęcia ${classesIfEnd} się poprzed komunikator `}
-            <strong>{`${specificSubject.classesPlatforms[0].place}`}</strong>.
+                <strong>{`${specificSubject.classesPlatforms[0].place}`}</strong>.
          </span>
-      );
+        );
 
-   const pzeRefer = specificSubject.classesPlatforms.length !== 1
-      ? specificSubject.classesPlatforms.map(platform => (
-         <a
-            key = {platform.link}
-            href = {platform.link}
-            className = {pzeLinks}
-            target = '_blank'
-            rel = 'noreferrer'
-         >
-            {`Link do PZE (${platform.type})`}
-         </a>
-      )) : (
-         <a
-            href = {specificSubject.classesPlatforms[0].link}
-            className = {pzeLinks}
-            target = '_blank'
-            rel = 'noreferrer'
-         >
-            {`Link do PZE (Wszystkie zajęcia)`}
-         </a>
-      );
-
-   const subStatus = specificSubject.ifEnd
-      ? <span className = {subEnd}>zakończony</span>
-      : <span className = {subNotEnd}>w trakcie</span>
-
-   const withoutBlankSpaces = specificSubject.semesters.filter(semester => semester !== '');
-
-   const semestersCount = withoutBlankSpaces.map((semester, i) => {
-      const toggleOnEndOfString = i === withoutBlankSpaces.length - 1 ? '.' : ', ';
-      return (
-         <span key = {uuidv4()}>{`${semester}${toggleOnEndOfString}`}</span>
-      )
-   });
-
-   return (
-      <Fragment>
-         <header>przedmiot</header>
-         <h2>{filteredArray[subjectID].title}</h2>
-         <div className = {subDep}>
-            {multipleDepartment}
-         </div>
-         <aside className = {separator}>
-            <span/>
-            <FontAwesomeIcon
-               icon = {specificSubject.icon}
-               className = {subjectsIcon}
-            />
-            <span/>
-         </aside>
-         <div className = {subStatusInfo}>
-            <p>Status przedmiotu: {subStatus}</p>
-            <p>Odbywany przez semestr: {semestersCount}</p>
-         </div>
-         <div className = {classesPlatformsInfo}>
-            {classesPlatforms}
-         </div>
-         <div className = {navButtons}>
-            {pzeRefer}
-            <DelayLink
-               to = '/warunki-zaliczenia-przedmiotów'
-               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
-               replace = {false}
-               clickAction = {timeoutRoutePath}
+    const pzeRefer = specificSubject.classesPlatforms.length !== 1
+        ? specificSubject.classesPlatforms.map(platform => (
+            <a
+                key = {platform.link}
+                href = {platform.link}
+                className = {pzeLinks}
+                target = '_blank'
+                rel = 'noreferrer'
             >
-               <a href = {'/warunki-zaliczenia-przedmiotów'} className = {subjectsDoIt}>
-                  Warunki zaliczenia przedmiotu
-               </a>
-            </DelayLink>
-         </div>
-      </Fragment>
-   );
+                {`Link do PZE (${platform.type})`}
+            </a>
+        )) : (
+            <a
+                href = {specificSubject.classesPlatforms[0].link}
+                className = {pzeLinks}
+                target = '_blank'
+                rel = 'noreferrer'
+            >
+                {`Link do PZE (Wszystkie zajęcia)`}
+            </a>
+        );
+
+    const subStatus = specificSubject.ifEnd
+        ? <span className = {subEnd}>zakończony</span>
+        : <span className = {subNotEnd}>w trakcie</span>
+
+    const withoutBlankSpaces = specificSubject.semesters.filter(semester => semester !== '');
+
+    const semestersCount = withoutBlankSpaces.map((semester, i) => {
+        const toggleOnEndOfString = i === withoutBlankSpaces.length - 1 ? '.' : ', ';
+        return (
+            <span key = {uuidv4()}>{`${semester}${toggleOnEndOfString}`}</span>
+        )
+    });
+
+    return (
+        <Fragment>
+            <header>przedmiot</header>
+            <h2>{filteredArray[subjectID].title}</h2>
+            <div className = {subDep}>
+                {multipleDepartment}
+            </div>
+            <aside className = {separator}>
+                <span/>
+                <FontAwesomeIcon
+                    icon = {specificSubject.icon}
+                    className = {subjectsIcon}
+                />
+                <span/>
+            </aside>
+            <div className = {subStatusInfo}>
+                <p>Status przedmiotu: {subStatus}</p>
+                <p>Odbywany przez semestr: {semestersCount}</p>
+            </div>
+            <div className = {classesPlatformsInfo}>
+                {classesPlatforms}
+            </div>
+            <div className = {navButtons}>
+                {pzeRefer}
+                <DelayLink
+                    to = '/warunki-zaliczenia-przedmiotów'
+                    delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                    replace = {false}
+                    clickAction = {timeoutRoutePath}
+                >
+                    <a href = {'/warunki-zaliczenia-przedmiotów'} className = {subjectsDoIt}>
+                        Warunki zaliczenia przedmiotu
+                    </a>
+                </DelayLink>
+            </div>
+        </Fragment>
+    );
 }
 
 export default SubjectsLayout;

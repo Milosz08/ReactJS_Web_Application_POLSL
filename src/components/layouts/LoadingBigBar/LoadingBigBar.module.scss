@@ -12,22 +12,22 @@
 @import './../../../styles/_mixins';
 
 .bigBarContainer {
-  display: none;
-  width: 100%;
-  height: 3px;
-  background-color: var(--navyBlueColor);
-  .bigBarLoading {
     display: none;
-    height: 100%;
-    width: 0;
+    width: 100%;
+    height: 3px;
     background-color: var(--navyBlueColor);
-    &.visible {
-      display: block;
-      background-color: var(--orangeColor);
-      width: 0;
+    .bigBarLoading {
+        display: none;
+        height: 100%;
+        width: 0;
+        background-color: var(--navyBlueColor);
+        &.visible {
+            display: block;
+            background-color: var(--orangeColor);
+            width: 0;
+        }
     }
-  }
-  &.visible {
-    display: block;
-  }
+    &.visible {
+        display: block;
+    }
 }

@@ -24,23 +24,23 @@ const { dateInfoContainer } = require('../SchedulePage.module.scss');
  */
 const ActualDateInfo = (): JSX.Element => {
 
-   const { date } = useContext<Partial<ActualDateTypes>>(ActualDateContext);
-   const { groupSelected, engSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
+    const { date } = useContext<Partial<ActualDateTypes>>(ActualDateContext);
+    const { groupSelected, engSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
 
-   return (
-      <div className = {dateInfoContainer}>
+    return (
+        <div className = {dateInfoContainer}>
          <span>Wyświetlam plan dla parametrów:
             <strong> Grupa {groupSelected}</strong>,
             <strong> Grupa {engSelected!.toLocaleUpperCase()} </strong>
          </span>
-         <span>
+            <span>
          Dzisiaj jest
             <strong> {date!.dayStr}</strong>,
             <strong> {date!.day} {date!.monthStr} {date!.year} </strong>
          roku.
          </span>
-      </div>
-   );
+        </div>
+    );
 }
 
 export default ActualDateInfo;

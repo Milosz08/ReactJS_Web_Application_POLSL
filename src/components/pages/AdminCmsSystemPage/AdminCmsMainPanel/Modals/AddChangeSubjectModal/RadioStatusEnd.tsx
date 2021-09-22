@@ -23,38 +23,38 @@ const { radioContainer, singleRadio, radiomark } = require('./AddChangeSubjectMo
  */
 const RadioStatusEnd = (): JSX.Element => {
 
-   const { ifEnd, setIfEnd } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
+    const { ifEnd, setIfEnd } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
 
-   const handleRadioButton = (index: number): void => {
-      if(index === 0) {
-         setIfEnd!([false, true]);
-      } else {
-         setIfEnd!([true, false]);
-      }
-   }
+    const handleRadioButton = (index: number): void => {
+        if (index === 0) {
+            setIfEnd!([ false, true ]);
+        } else {
+            setIfEnd!([ true, false ]);
+        }
+    }
 
-   const generateStatusRadioInputs = Array.from(['w trakcie', 'zakończony']).map((status, index) => (
-      <div key = {status} className = {singleRadio}>
-         <input
-            checked = {!ifEnd![index]}
-            type = 'radio'
-            id = {status}
-            name = 'subjectsStatus'
-            value = {status}
-            onChange = {() => handleRadioButton(index)}
-         />
-         <label htmlFor = {status}>
-            {status}
-         </label>
-         <div className = {radiomark}/>
-      </div>
-   ));
+    const generateStatusRadioInputs = Array.from([ 'w trakcie', 'zakończony' ]).map((status, index) => (
+        <div key = {status} className = {singleRadio}>
+            <input
+                checked = {!ifEnd![index]}
+                type = 'radio'
+                id = {status}
+                name = 'subjectsStatus'
+                value = {status}
+                onChange = {() => handleRadioButton(index)}
+            />
+            <label htmlFor = {status}>
+                {status}
+            </label>
+            <div className = {radiomark}/>
+        </div>
+    ));
 
-   return (
-      <div className = {radioContainer}>
-         {generateStatusRadioInputs}
-      </div>
-  );
+    return (
+        <div className = {radioContainer}>
+            {generateStatusRadioInputs}
+        </div>
+    );
 }
 
 export default RadioStatusEnd;

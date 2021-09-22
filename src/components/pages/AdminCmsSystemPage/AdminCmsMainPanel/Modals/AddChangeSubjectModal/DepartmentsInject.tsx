@@ -21,7 +21,7 @@ import classnames from 'classnames';
 import { FormDataAndValidateContext, FormDataAndValidateType } from '../../../../../../contextStore/FormDataAndValidateProvider';
 
 const {
-   departmentsContainer, addNewDepartment, someError, removeInputField, inputContainer
+    departmentsContainer, addNewDepartment, someError, removeInputField, inputContainer
 } = require('./AddChangeSubjectModal.module.scss');
 
 /**
@@ -30,72 +30,73 @@ const {
  */
 const DepartmentsInject = (): JSX.Element => {
 
-   const {
-      departments, setDepartments, departmentsCount, setDepartmentsCount, errors, setErrors
-   } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
+    const {
+        departments, setDepartments, departmentsCount, setDepartmentsCount, errors, setErrors
+    } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
 
-   const addNewValueDepartment = () => {
-      if(departmentsCount! < 4) {
-         setDepartmentsCount!((prevState: number) => prevState + 1);
-         let updateArray = [...departments!];
-         updateArray.push('');
-         setDepartments!(updateArray);
-      }
-   }
+    const addNewValueDepartment = () => {
+        if (departmentsCount! < 4) {
+            setDepartmentsCount!((prevState: number) => prevState + 1);
+            let updateArray = [ ...departments! ];
+            updateArray.push('');
+            setDepartments!(updateArray);
+        }
+    }
 
-   const toggleClass = errors!.department ? someError : ''
-   const generateDepartmentsInputs = Array.from({ length: departmentsCount! }, (v, i) => i).map((str, index) => {
+    const toggleClass = errors!.department ? someError : ''
+    const generateDepartmentsInputs = Array.from({ length: departmentsCount! }, (v, i) => i).map((str, index) => {
 
-      const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-         let newStateArray = [...departments!];
-         newStateArray[index] = target.value;
-         setErrors!({ ...errors, department: false });
-         setDepartments!(newStateArray);
-      }
-
-      const handleRemoveField = () => {
-         let newStateArray = [...departments!];
-         newStateArray.splice(index, 1);
-         if(index !== -1) {
-            setDepartmentsCount!((prevState: number) => prevState - 1);
+        const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+            let newStateArray = [ ...departments! ];
+            newStateArray[index] = target.value;
+            setErrors!({ ...errors, department: false });
             setDepartments!(newStateArray);
-         }
-      }
+        }
 
-      return (
-         <div key = {index} className = {inputContainer}>
-            <input
-               type = 'text'
-               key = {index}
-               value = {departments![index]}
-               onChange = {handleChange}
-               placeholder = 'Wprowadź nazwę wydziału'
-            />
-            {index !== 0 && <button
-               type = 'button'
-               onClick = {handleRemoveField}
-               title = 'Usuń pole wprowadzania wydziału'
-            >
-               <FontAwesomeIcon
-                  icon = {['fas', 'times']}
-                  className = {removeInputField}
-               />
-            </button>}
-         </div>
-      )
-   });
+        const handleRemoveField = () => {
+            let newStateArray = [ ...departments! ];
+            newStateArray.splice(index, 1);
+            if (index !== -1) {
+                setDepartmentsCount!((prevState: number) => prevState - 1);
+                setDepartments!(newStateArray);
+            }
+        }
 
-   return (
-      <div className = {classnames(departmentsContainer, toggleClass)}>
-         {generateDepartmentsInputs}
-         <button
-            type = 'button'
-            className = {addNewDepartment}
-            onClick = {addNewValueDepartment}
-            title = 'Dodaj nowy wydział'
-         >Dodaj nowy wydział (max 4)</button>
-      </div>
-   );
+        return (
+            <div key = {index} className = {inputContainer}>
+                <input
+                    type = 'text'
+                    key = {index}
+                    value = {departments![index]}
+                    onChange = {handleChange}
+                    placeholder = 'Wprowadź nazwę wydziału'
+                />
+                {index !== 0 && <button
+                    type = 'button'
+                    onClick = {handleRemoveField}
+                    title = 'Usuń pole wprowadzania wydziału'
+                >
+                    <FontAwesomeIcon
+                        icon = {[ 'fas', 'times' ]}
+                        className = {removeInputField}
+                    />
+                </button>}
+            </div>
+        )
+    });
+
+    return (
+        <div className = {classnames(departmentsContainer, toggleClass)}>
+            {generateDepartmentsInputs}
+            <button
+                type = 'button'
+                className = {addNewDepartment}
+                onClick = {addNewValueDepartment}
+                title = 'Dodaj nowy wydział'
+            >Dodaj nowy wydział (max 4)
+            </button>
+        </div>
+    );
 }
 
 export default DepartmentsInject;

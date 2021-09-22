@@ -19,10 +19,10 @@ const DataLastUpdate = React.lazy(() => import('../../../../../layouts/DataLastU
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   dataID: string | undefined;
-   dateText: string;
-   countText: string;
-   arrayLength: number;
+    dataID: string | undefined;
+    dateText: string;
+    countText: string;
+    arrayLength: number;
 }
 
 /**
@@ -35,16 +35,16 @@ interface PropsProvider {
  * @param arrayLength { number } - array length (number of elements).
  */
 const GenerateModifyElement: React.FC<PropsProvider> = ({ dataID, dateText, countText, arrayLength }): JSX.Element => {
-   return (
-      <p>
-         Ostatnia modyfikacja {dateText}: {' '}
-         <DataLastUpdate
-            dataID = {dataID}
-            withoutText = {true}
-         />.
-         Ilość {countText} w bazie danych: <strong>{arrayLength}</strong>.
-      </p>
-   );
+    return (
+        <p>
+            Ostatnia modyfikacja {dateText}: {' '}
+            <DataLastUpdate
+                dataID = {dataID}
+                withoutText = {true}
+            />.
+            Ilość {countText} w bazie danych: <strong>{arrayLength}</strong>.
+        </p>
+    );
 }
 
 export default GenerateModifyElement;

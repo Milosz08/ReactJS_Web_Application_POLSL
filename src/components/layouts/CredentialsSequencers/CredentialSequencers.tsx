@@ -24,13 +24,13 @@ const SessionActivityCount = React.lazy(() => import('./SessionActivityCount'));
  */
 const CredentialSequencers = (): JSX.Element => {
 
-   const { adminAuth } = useContext<any>(LoginSessionContext);
+    const { adminAuth } = useContext<any>(LoginSessionContext);
 
-   return (
-      <Fragment>
-         <SessionActivityCount authCredentialPerson = {adminAuth}/>
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            <SessionActivityCount authCredentialPerson = {adminAuth}/>
+        </Fragment>
+    );
 }
 
 export default CredentialSequencers;

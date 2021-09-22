@@ -37,29 +37,29 @@ const SessionEndModal = React.lazy(() => import('../layouts/SessionEndModal/Sess
  * @details Main component responsible for rendering the entire application in a root element.
  */
 const App = (): JSX.Element => {
-   return (
-      <Suspense fallback = {<LoadingSuspense/>}>
-         <MainStoreProvider>
-            <CookiesProvider>
-               <CookiesObjectsProvider>
-                  <Router>
-                     <ScrollToTop/>
-                     <GlobalModalsStateProvider>
-                        <GotoTopButton/>
-                        <LoginSessionProvider>
-                           <SessionEndModal/>
-                           <CredentialSequencers/>
-                           <Page/>
-                        </LoginSessionProvider>
-                        <DevToolsInfo/>
-                        <Footer/>
-                     </GlobalModalsStateProvider>
-                  </Router>
-               </CookiesObjectsProvider>
-            </CookiesProvider>
-         </MainStoreProvider>
-      </Suspense>
-   );
+    return (
+        <Suspense fallback = {<LoadingSuspense/>}>
+            <MainStoreProvider>
+                <CookiesProvider>
+                    <CookiesObjectsProvider>
+                        <Router>
+                            <ScrollToTop/>
+                            <GlobalModalsStateProvider>
+                                <GotoTopButton/>
+                                <LoginSessionProvider>
+                                    <SessionEndModal/>
+                                    <CredentialSequencers/>
+                                    <Page/>
+                                </LoginSessionProvider>
+                                <DevToolsInfo/>
+                                <Footer/>
+                            </GlobalModalsStateProvider>
+                        </Router>
+                    </CookiesObjectsProvider>
+                </CookiesProvider>
+            </MainStoreProvider>
+        </Suspense>
+    );
 }
 
 export default App;

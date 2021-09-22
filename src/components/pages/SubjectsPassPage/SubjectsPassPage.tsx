@@ -28,51 +28,55 @@ const { subjectsPassContainer, subjectsPassWrapper, infoBlock, linksContainer } 
  */
 const SubjectsPassPage = (): JSX.Element => {
 
-   useEffect(() => {
-      document.title = ROUTING_PATH_NAMES.SUBJECT_PASS_PAGE;
-      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
-   }, []);
+    useEffect(() => {
+        document.title = ROUTING_PATH_NAMES.SUBJECT_PASS_PAGE;
+        return () => {
+            document.title = ROUTING_PATH_NAMES.START_PAGE
+        };
+    }, []);
 
-   return (
-      <Fragment>
-         <CookiesNotification/>
-         <MobileDownNav id = {3}/>
-         <Header ifHeaderHasRedBar = {true}/>
-         <CurrentURLpath ifImportatHeaderActive={true}/>
-         <div className = {subjectsPassContainer}>
-            <div className = {subjectsPassWrapper}>
-               <UniversalHeader
-                  iconP = {['fas', 'university']}
-                  content = 'Warunki zaliczenia przedmiotów'
-                  ifCloseButtonVisible = {false}
-               />
-               <div className = {infoBlock}>
-                  <p>
-                     Wszyskie karty przedmiotów, w których zawarte są opisy wymaganych umiejętności przed zaliczeniem przedmiotu,
-                     umiejętności nabyte podczas odbywania przedmiotu, oraz umiejętności niezbędne do zdania przedmiotu, znajdziesz
-                     na oficjalnej stronie Wydziału Elektrycznego Politechniki Śląskiej.
-                  </p>
-                  <div className = {linksContainer}>
-                     <a
-                        href = 'https://www.elektr.polsl.pl/images/files/szjk/karty/2020/Karty_I_ST_1-2019.zip'
-                        target = '_blank'
-                        rel = 'noreferrer'
-                     >
-                        Karty przedmiotów
-                     </a>
-                     <a
-                        href = 'https://www.elektr.polsl.pl/images/files/szjk/plany/2019/Plan_I_st_stacjonarne_Ist_2019-2020.xls'
-                        target = '_blank'
-                        rel = 'noreferrer'
-                     >
-                        Plan studiów
-                     </a>
-                  </div>
-               </div>
+    return (
+        <Fragment>
+            <CookiesNotification/>
+            <MobileDownNav id = {3}/>
+            <Header ifHeaderHasRedBar = {true}/>
+            <CurrentURLpath ifImportatHeaderActive = {true}/>
+            <div className = {subjectsPassContainer}>
+                <div className = {subjectsPassWrapper}>
+                    <UniversalHeader
+                        iconP = {[ 'fas', 'university' ]}
+                        content = "Warunki zaliczenia przedmiotów"
+                        ifCloseButtonVisible = {false}
+                    />
+                    <div className = {infoBlock}>
+                        <p>
+                            Wszyskie karty przedmiotów, w których zawarte są opisy wymaganych umiejętności przed zaliczeniem
+                            przedmiotu,
+                            umiejętności nabyte podczas odbywania przedmiotu, oraz umiejętności niezbędne do zdania przedmiotu,
+                            znajdziesz
+                            na oficjalnej stronie Wydziału Elektrycznego Politechniki Śląskiej.
+                        </p>
+                        <div className = {linksContainer}>
+                            <a
+                                href = "https://www.elektr.polsl.pl/images/files/szjk/karty/2020/Karty_I_ST_1-2019.zip"
+                                target = "_blank"
+                                rel = "noreferrer"
+                            >
+                                Karty przedmiotów
+                            </a>
+                            <a
+                                href = "https://www.elektr.polsl.pl/images/files/szjk/plany/2019/Plan_I_st_stacjonarne_Ist_2019-2020.xls"
+                                target = "_blank"
+                                rel = "noreferrer"
+                            >
+                                Plan studiów
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </Fragment>
-   );
+        </Fragment>
+    );
 }
 
 export default SubjectsPassPage;

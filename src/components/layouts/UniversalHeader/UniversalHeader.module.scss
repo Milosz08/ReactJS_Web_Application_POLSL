@@ -10,87 +10,87 @@
  */
 
 .universalHeader {
-  width: 100%;
-  margin: 30px 0;
-  h3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: var(--darkBlueColor);
-    font-weight: 500;
-    line-height: 1;
-    span.additionalTitleHeader {
-      text-decoration: underline;
-      font-weight: 500;
-      color: var(--darkOrangeColor);
-      padding-left: 10px;
+    width: 100%;
+    margin: 30px 0;
+    h3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        color: var(--darkBlueColor);
+        font-weight: 500;
+        line-height: 1;
+        span.additionalTitleHeader {
+            text-decoration: underline;
+            font-weight: 500;
+            color: var(--darkOrangeColor);
+            padding-left: 10px;
+        }
     }
-  }
-  .universalHeaderIcon {
-    font-size: 1.2rem;
-    margin-right: 15px;
-    color: var(--orangeColor);
-  }
-  aside {
-    flex-grow: 1;
-    height: 1px;
-    background-color: var(--darkGrayTint1);
-    margin-left: 30px;
-  }
+    .universalHeaderIcon {
+        font-size: 1.2rem;
+        margin-right: 15px;
+        color: var(--orangeColor);
+    }
+    aside {
+        flex-grow: 1;
+        height: 1px;
+        background-color: var(--darkGrayTint1);
+        margin-left: 30px;
+    }
 }
 
 .universalHeaderButton {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  span {
-    position: absolute;
-    right: 0;
-    width: 70%;
-    height: 2px;
-    background-color: var(--darkGrayTint1);
-    transform: rotate(45deg);
-    &::after {
-      position: absolute;
-      content: '';
-      width: 100%;
-      height: 100%;
-      left: 0;
-      background-color: var(--darkGrayTint1);
-      transform-origin: center;
-      transform: rotate(90deg);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    span {
+        position: absolute;
+        right: 0;
+        width: 70%;
+        height: 2px;
+        background-color: var(--darkGrayTint1);
+        transform: rotate(45deg);
+        &::after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            left: 0;
+            background-color: var(--darkGrayTint1);
+            transform-origin: center;
+            transform: rotate(90deg);
+        }
     }
-  }
 }
 
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1250px) {
-  .universalHeader {
-    width: 100%;
-    h3 {
-      justify-content: flex-start;
-      button {
-        flex-grow: 1;
-      }
+    .universalHeader {
+        width: 100%;
+        h3 {
+            justify-content: flex-start;
+            button {
+                flex-grow: 1;
+            }
+        }
+        aside {
+            display: none;
+        }
     }
-    aside {
-      display: none;
-    }
-  }
 }
 
 @media only screen and (max-width: 822px) {
-  .universalHeaderButton {
-    display: none;
-  }
+    .universalHeaderButton {
+        display: none;
+    }
 }
 
 

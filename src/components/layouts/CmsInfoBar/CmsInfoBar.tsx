@@ -28,8 +28,8 @@ import COOKIES_OBJECT from '../../../constants/allCookies';
 const CmsInfoHamburger = React.lazy(() => import('./CmsInfoHamburger'));
 
 const {
-   cmsInfoBar, cmsInfoWrapper, logoContainer, mainInfosContainer, active, loginInfo, sessionTime, logoutButton,
-   logoutIcon,
+    cmsInfoBar, cmsInfoWrapper, logoContainer, mainInfosContainer, active, loginInfo, sessionTime, logoutButton,
+    logoutIcon,
 } = require('./CmsInfoBar.module.scss');
 
 /**
@@ -38,70 +38,70 @@ const {
  */
 const CmsInfoBar = (): JSX.Element => {
 
-   const { adminSessionInfo } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
-   const { cookie, removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
-   const { adminAuth, setAdminAuth } = useContext<Partial<LoginSessionProviderTypes>>(LoginSessionContext);
+    const { adminSessionInfo } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
+    const { cookie, removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
+    const { adminAuth, setAdminAuth } = useContext<Partial<LoginSessionProviderTypes>>(LoginSessionContext);
 
-   const [ timeCounting, setTimeCounting ] = useState<string>('');
+    const [ timeCounting, setTimeCounting ] = useState<string>('');
 
-   const ifCmsBarActive = adminAuth ? classnames(cmsInfoBar, active) : cmsInfoBar;
-   const credLevel = cookie!.__credentialsLevel === '2' ? 'Administrator' : 'Moderator';
+    const ifCmsBarActive = adminAuth ? classnames(cmsInfoBar, active) : cmsInfoBar;
+    const credLevel = cookie!.__credentialsLevel === '2' ? 'Administrator' : 'Moderator';
 
-   const handleLogout = () => {
-      setAdminAuth!(false);
-      removeCookie!(COOKIES_OBJECT.adminSession, { path: '/' });
-      removeCookie!(COOKIES_OBJECT.credentialsLevel, { path: '/' });
-   }
+    const handleLogout = () => {
+        setAdminAuth!(false);
+        removeCookie!(COOKIES_OBJECT.adminSession, { path: '/' });
+        removeCookie!(COOKIES_OBJECT.credentialsLevel, { path: '/' });
+    }
 
-   useEffect(() => {
-      const handleEveryTick = () => {
-         const fullSeconds = MAX_INACTIVITY_TIME * 60;
-         const expireTime = fullSeconds - adminSessionInfo!.counter;
+    useEffect(() => {
+        const handleEveryTick = () => {
+            const fullSeconds = MAX_INACTIVITY_TIME * 60;
+            const expireTime = fullSeconds - adminSessionInfo!.counter;
 
-         const onlyMinutes = Math.floor(expireTime / 60);
-         const onlyMinutesWithZero = onlyMinutes < 10 ? `0${onlyMinutes}` : onlyMinutes;
+            const onlyMinutes = Math.floor(expireTime / 60);
+            const onlyMinutesWithZero = onlyMinutes < 10 ? `0${onlyMinutes}` : onlyMinutes;
 
-         const onlySeconds = expireTime - onlyMinutes * 60;
-         const onlySecondsWithZero = onlySeconds < 10 ? `0${onlySeconds}` : onlySeconds;
+            const onlySeconds = expireTime - onlyMinutes * 60;
+            const onlySecondsWithZero = onlySeconds < 10 ? `0${onlySeconds}` : onlySeconds;
 
-         setTimeCounting(`${onlyMinutesWithZero}:${onlySecondsWithZero}`);
-      }
-      handleEveryTick();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [adminSessionInfo!.counter]);
+            setTimeCounting(`${onlyMinutesWithZero}:${onlySecondsWithZero}`);
+        }
+        handleEveryTick();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ adminSessionInfo!.counter ]);
 
-   return (
-      <div className = {ifCmsBarActive}>
-         <div className = {cmsInfoWrapper}>
-            <div className = {logoContainer}>
-               <span><strong>WCMS</strong>Panel 1.0 by Miłosz Gilga</span>
-               <CmsInfoHamburger
-                  credLevel = {credLevel}
-                  timeCounting = {timeCounting}
-                  callback = {handleLogout}
-               />
-            </div>
-            <div className = {mainInfosContainer}>
+    return (
+        <div className = {ifCmsBarActive}>
+            <div className = {cmsInfoWrapper}>
+                <div className = {logoContainer}>
+                    <span><strong>WCMS</strong>Panel 1.0 by Miłosz Gilga</span>
+                    <CmsInfoHamburger
+                        credLevel = {credLevel}
+                        timeCounting = {timeCounting}
+                        callback = {handleLogout}
+                    />
+                </div>
+                <div className = {mainInfosContainer}>
                <span className = {loginInfo}>
                   Zalogowany jako: <strong>{credLevel}</strong>
                </span>
-               <span className = {sessionTime}>
+                    <span className = {sessionTime}>
                   Pozostały czas sesji: <strong>{timeCounting}</strong>
                </span>
-               <button
-                  className = {logoutButton}
-                  onClick = {handleLogout}
-               >
-                  <FontAwesomeIcon
-                     icon = {['fas', 'power-off']}
-                     className = {logoutIcon}
-                  />
-                  Wyloguj
-               </button>
+                    <button
+                        className = {logoutButton}
+                        onClick = {handleLogout}
+                    >
+                        <FontAwesomeIcon
+                            icon = {[ 'fas', 'power-off' ]}
+                            className = {logoutIcon}
+                        />
+                        Wyloguj
+                    </button>
+                </div>
             </div>
-         </div>
-      </div>
-   );
+        </div>
+    );
 }
 
 export default CmsInfoBar;

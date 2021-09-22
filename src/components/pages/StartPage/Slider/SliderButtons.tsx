@@ -22,8 +22,8 @@ const { arrow, left, right } = require('./Slider.module.scss');
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   moveSlide: () => void;
-   direction: string;
+    moveSlide: () => void;
+    direction: string;
 }
 
 /**
@@ -35,14 +35,14 @@ interface PropsProvider {
  */
 const SliderButtons: React.FC<PropsProvider> = ({ moveSlide, direction }): JSX.Element => {
 
-   const classToggle: string = direction === 'left' ? left : right;
+    const classToggle: string = direction === 'left' ? left : right;
 
-   return (
-      <button
-         className = {classnames(arrow, classToggle)}
-         onClick = {moveSlide}
-      />
-   );
+    return (
+        <button
+            className = {classnames(arrow, classToggle)}
+            onClick = {moveSlide}
+        />
+    );
 }
 
 export default SliderButtons;

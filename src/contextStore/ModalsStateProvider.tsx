@@ -18,48 +18,48 @@ import './../styles/index.scss';
  * Constant Object defining methods for modals.
  */
 export const MODAL_TYPES: { [value: string]: string } = {
-   EDIT: 'edit',
-   ADD: 'add',
-   REMOVE: 'remove',
-   VIEW: 'view',
+    EDIT: 'edit',
+    ADD: 'add',
+    REMOVE: 'remove',
+    VIEW: 'view',
 }
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 /**
  * Interface defining the type of modals values.
  */
 export interface ModalStateProvider {
-   id: string;
-   title?: string;
-   type: string;
-   day?: string;
-   ifOpen: boolean;
+    id: string;
+    title?: string;
+    type: string;
+    day?: string;
+    ifOpen: boolean;
 }
 
 /**
  * Interface defining the type of return in context store values.
  */
 export interface ModalStateType {
-   subjectModal: ModalStateProvider
-   setSubjectModal: Dispatch<SetStateAction<ModalStateProvider>>
-   calendarModal: ModalStateProvider
-   setCalendarModal: Dispatch<SetStateAction<ModalStateProvider>>
-   messageModal: ModalStateProvider
-   setMessageModal: Dispatch<SetStateAction<ModalStateProvider>>
-   scheduleModal: ModalStateProvider
-   setScheduleModal: Dispatch<SetStateAction<ModalStateProvider>>
+    subjectModal: ModalStateProvider
+    setSubjectModal: Dispatch<SetStateAction<ModalStateProvider>>
+    calendarModal: ModalStateProvider
+    setCalendarModal: Dispatch<SetStateAction<ModalStateProvider>>
+    messageModal: ModalStateProvider
+    setMessageModal: Dispatch<SetStateAction<ModalStateProvider>>
+    scheduleModal: ModalStateProvider
+    setScheduleModal: Dispatch<SetStateAction<ModalStateProvider>>
 }
 
 /**
  * Create the context of the store. Function exported and used to destructurize context members.
  */
-export const ModalsStateContext = createContext<Partial<ModalStateType>>({ });
+export const ModalsStateContext = createContext<Partial<ModalStateType>>({});
 
 /**
  * @details React Store that stores modal states in the CMS admin panel. The state consists of 3 elements: element id,
@@ -69,43 +69,43 @@ export const ModalsStateContext = createContext<Partial<ModalStateType>>({ });
  */
 const ModalsStateProvider: React.FC<PropsProvider> = ({ children }) => {
 
-   const { EDIT } = MODAL_TYPES;
+    const { EDIT } = MODAL_TYPES;
 
-   const [ subjectModal, setSubjectModal ] = useState<ModalStateProvider>({ id: '', title: '', type: EDIT, ifOpen: false });
-   const [ calendarModal, setCalendarModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
-   const [ messageModal, setMessageModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
-   const [ scheduleModal, setScheduleModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, day: '', ifOpen: false });
+    const [ subjectModal, setSubjectModal ] = useState<ModalStateProvider>({ id: '', title: '', type: EDIT, ifOpen: false });
+    const [ calendarModal, setCalendarModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
+    const [ messageModal, setMessageModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, ifOpen: false });
+    const [ scheduleModal, setScheduleModal ] = useState<ModalStateProvider>({ id: '', type: EDIT, day: '', ifOpen: false });
 
-   const [ widthAxiosX, setWidthAxiosX ] = useState<number>(document.body.offsetWidth);
+    const [ widthAxiosX, setWidthAxiosX ] = useState<number>(document.body.offsetWidth);
 
-   useEffect(() => {
-      if(document.body.offsetWidth < 1000) {
-         if(subjectModal.ifOpen || calendarModal.ifOpen || messageModal.ifOpen ||scheduleModal.ifOpen) {
-            document.body.classList.add('disable-scroll');
-         } else {
-            document.body.classList.remove('disable-scroll');
-         }
-      }
-   }, [subjectModal, calendarModal, messageModal, scheduleModal]);
+    useEffect(() => {
+        if (document.body.offsetWidth < 1000) {
+            if (subjectModal.ifOpen || calendarModal.ifOpen || messageModal.ifOpen || scheduleModal.ifOpen) {
+                document.body.classList.add('disable-scroll');
+            } else {
+                document.body.classList.remove('disable-scroll');
+            }
+        }
+    }, [ subjectModal, calendarModal, messageModal, scheduleModal ]);
 
-   useEffect(() => {
-      const getWidthOffset = () => setWidthAxiosX(document.body.offsetWidth);
-      document.addEventListener('resize', getWidthOffset);
-      return () => document.removeEventListener('resize', getWidthOffset);
-   }, [widthAxiosX]);
+    useEffect(() => {
+        const getWidthOffset = () => setWidthAxiosX(document.body.offsetWidth);
+        document.addEventListener('resize', getWidthOffset);
+        return () => document.removeEventListener('resize', getWidthOffset);
+    }, [ widthAxiosX ]);
 
-   return (
-      <ModalsStateContext.Provider
-         value = {{
-            subjectModal, setSubjectModal,
-            calendarModal, setCalendarModal,
-            messageModal, setMessageModal,
-            scheduleModal, setScheduleModal
-         }}
-      >
-         {children}
-      </ModalsStateContext.Provider>
-   );
+    return (
+        <ModalsStateContext.Provider
+            value = {{
+                subjectModal, setSubjectModal,
+                calendarModal, setCalendarModal,
+                messageModal, setMessageModal,
+                scheduleModal, setScheduleModal
+            }}
+        >
+            {children}
+        </ModalsStateContext.Provider>
+    );
 }
 
 export default ModalsStateProvider;

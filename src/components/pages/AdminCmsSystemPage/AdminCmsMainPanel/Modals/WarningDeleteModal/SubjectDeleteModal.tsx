@@ -26,7 +26,7 @@ import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync
 const UniversalHeader = React.lazy(() => import('../../../../../layouts/UniversalHeader/UniversalHeader'));
 
 const {
-   modalContainer, modalWrapper, modalOpen, modalWarningInfo, modalWarningButtons, dangerColorWrapper
+    modalContainer, modalWrapper, modalOpen, modalWarningInfo, modalWarningButtons, dangerColorWrapper
 } = require('./WarningDeleteModal.module.scss');
 
 /**
@@ -35,63 +35,64 @@ const {
  */
 const SubjectDeleteModal = (): JSX.Element => {
 
-   const { subjectModal, setSubjectModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
-   const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
-   const { setAllSubjects } = useContext<Partial<FormScheduleModalTypes>>(FormScheduleModalContext);
+    const { subjectModal, setSubjectModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
+    const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const { setAllSubjects } = useContext<Partial<FormScheduleModalTypes>>(FormScheduleModalContext);
 
-   const { subjectsData, scheduleSubjects } = dataFetchFromServer;
-   const ifModalOpen = subjectModal!.ifOpen && subjectModal!.type === MODAL_TYPES.REMOVE ? modalOpen : '';
+    const { subjectsData, scheduleSubjects } = dataFetchFromServer;
+    const ifModalOpen = subjectModal!.ifOpen && subjectModal!.type === MODAL_TYPES.REMOVE ? modalOpen : '';
 
-   const getSearchSubjectTitle = (): string => {
-      const subjectDataFilter = subjectsData.find((subject: any) => subject._id === subjectModal!.id);
-      if(subjectDataFilter !== undefined) {
-         return subjectDataFilter.title;
-      } else {
-         return '';
-      }
-   }
+    const getSearchSubjectTitle = (): string => {
+        const subjectDataFilter = subjectsData.find((subject: any) => subject._id === subjectModal!.id);
+        if (subjectDataFilter !== undefined) {
+            return subjectDataFilter.title;
+        } else {
+            return '';
+        }
+    }
 
-   const handleRemoveSubject = async (): Promise<any> => {
-      await axiosInstance.delete(`subjects-data/${subjectModal!.id}`);
-      const subjectsAfterRemove = [...subjectsData].filter((subject: any) => subject._id !== subjectModal!.id);
-      const findSubject = [...subjectsData].find((subject: any) => subject._id === subjectModal!.id);
-      const scheduleAfterDeleteRecord = [...scheduleSubjects].filter((item: any) => item.title !== findSubject.title);
-      const scheduleFindTitle = [...scheduleSubjects].find((schedule: any) => schedule.title === findSubject.title);
-      setAllSubjects!(subjectsAfterRemove);
-      setDataFetchFromServer({ ...dataFetchFromServer,
-         subjectsData: subjectsAfterRemove, scheduleSubjects: scheduleAfterDeleteRecord
-      });
-      setSubjectModal!({ ...subjectModal!, ifOpen: false });
-      if(scheduleFindTitle !== undefined) {
-         await axiosInstance.delete(`subject-schedule/${scheduleFindTitle._id}`);
-         await updateLogsDateAsync('schedule', process.env.REACT_APP_SCHEDULE_ID);
-      }
-      await updateLogsDateAsync('subjects', process.env.REACT_APP_SUBJECTS_ID);
+    const handleRemoveSubject = async (): Promise<any> => {
+        await axiosInstance.delete(`subjects-data/${subjectModal!.id}`);
+        const subjectsAfterRemove = [ ...subjectsData ].filter((subject: any) => subject._id !== subjectModal!.id);
+        const findSubject = [ ...subjectsData ].find((subject: any) => subject._id === subjectModal!.id);
+        const scheduleAfterDeleteRecord = [ ...scheduleSubjects ].filter((item: any) => item.title !== findSubject.title);
+        const scheduleFindTitle = [ ...scheduleSubjects ].find((schedule: any) => schedule.title === findSubject.title);
+        setAllSubjects!(subjectsAfterRemove);
+        setDataFetchFromServer({
+            ...dataFetchFromServer,
+            subjectsData: subjectsAfterRemove, scheduleSubjects: scheduleAfterDeleteRecord
+        });
+        setSubjectModal!({ ...subjectModal!, ifOpen: false });
+        if (scheduleFindTitle !== undefined) {
+            await axiosInstance.delete(`subject-schedule/${scheduleFindTitle._id}`);
+            await updateLogsDateAsync('schedule', process.env.REACT_APP_SCHEDULE_ID);
+        }
+        await updateLogsDateAsync('subjects', process.env.REACT_APP_SUBJECTS_ID);
 
-   }
+    }
 
-   const handleExitModal = () => setSubjectModal!({ id: '', type: MODAL_TYPES.EDIT, ifOpen: false });
+    const handleExitModal = () => setSubjectModal!({ id: '', type: MODAL_TYPES.EDIT, ifOpen: false });
 
-   return (
-      <div className = {classnames(modalContainer, ifModalOpen)}>
-         <div className = {classnames(modalWrapper, dangerColorWrapper)}>
-            <UniversalHeader
-               iconP = {['fas', 'exclamation-triangle']}
-               content = 'Usuwanie Przedmiotu'
-               ifCloseButtonVisible = {false}
-            />
-            <div className = {modalWarningInfo}>
-               Czy na pewno chcesz usunąć przedmiot
-               <p>{getSearchSubjectTitle()}</p>
-               z bazy danych? Operacji tej nie można cofnąć.
+    return (
+        <div className = {classnames(modalContainer, ifModalOpen)}>
+            <div className = {classnames(modalWrapper, dangerColorWrapper)}>
+                <UniversalHeader
+                    iconP = {[ 'fas', 'exclamation-triangle' ]}
+                    content = 'Usuwanie Przedmiotu'
+                    ifCloseButtonVisible = {false}
+                />
+                <div className = {modalWarningInfo}>
+                    Czy na pewno chcesz usunąć przedmiot
+                    <p>{getSearchSubjectTitle()}</p>
+                    z bazy danych? Operacji tej nie można cofnąć.
+                </div>
+                <div className = {modalWarningButtons}>
+                    <button onClick = {handleRemoveSubject}>Tak, usuń przedmiot</button>
+                    <button onClick = {handleExitModal}>Nie, zamknij to okno</button>
+                </div>
             </div>
-            <div className = {modalWarningButtons}>
-               <button onClick = {handleRemoveSubject}>Tak, usuń przedmiot</button>
-               <button onClick = {handleExitModal}>Nie, zamknij to okno</button>
-            </div>
-         </div>
-      </div>
-   );
+        </div>
+    );
 }
 
 export default SubjectDeleteModal;

@@ -12,162 +12,162 @@
 @import './../../../../../../styles/_mixins';
 
 .newChangeEntrie {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .timePicker, .calendarPicker {
-  position: absolute;
-  z-index: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 15px;
-  font-size: 1.4rem;
-  color: var(--navyBlueColor);
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    font-size: 1.4rem;
+    color: var(--navyBlueColor);
 }
 
 .timePicker {
-  font-size: 1.1rem;
+    font-size: 1.1rem;
 }
 
 .dateInputsContainer {
-  margin: 20px 0;
-  max-width: 250px;
-  position: relative;
-  input[type = 'date'] {
-    @include imputField(0, 10px);
-    @include resetPickersInputs();
-    appearance: none;
-    &.someError {
-      border-color: var(--redColor);
-      color: var(--redColor);
+    margin: 20px 0;
+    max-width: 250px;
+    position: relative;
+    input[type = 'date'] {
+        @include imputField(0, 10px);
+        @include resetPickersInputs();
+        appearance: none;
+        &.someError {
+            border-color: var(--redColor);
+            color: var(--redColor);
+        }
     }
-  }
 }
 
 .addEntrieModule {
-  @include borderContainer();
-  width: 100%;
-  padding: 20px;
-  transition: .2s;
-  &::after {
-    content: 'wpisy do kalendarza';
-  }
-  &.someError {
-    border-color: var(--redColor);
-    color: var(--redColor);
+    @include borderContainer();
+    width: 100%;
+    padding: 20px;
+    transition: .2s;
     &::after {
-      color: var(--redColor);
-      font-weight: 600;
+        content: 'wpisy do kalendarza';
     }
-  }
+    &.someError {
+        border-color: var(--redColor);
+        color: var(--redColor);
+        &::after {
+            color: var(--redColor);
+            font-weight: 600;
+        }
+    }
 }
 
 .messageModuleContainer {
-  width: 100%;
-  .timeAndImportant {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    .importantsRadio {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-basis: 40%;
-      margin-top: 20px;
+    width: 100%;
+    .timeAndImportant {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        .importantsRadio {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-basis: 40%;
+            margin-top: 20px;
+        }
+        .inputTime {
+            display: flex;
+            align-items: center;
+            position: relative;
+            flex-basis: 30%;
+            label {
+                font-size: 1.2rem;
+                font-weight: 500;
+                color: var(--navyBlueColor);
+                margin-right: 30px;
+            }
+            input[type = 'time'] {
+                @include imputField(0, 7px);
+                @include resetPickersInputs();
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+        }
     }
-    .inputTime {
-      display: flex;
-      align-items: center;
-      position: relative;
-      flex-basis: 30%;
-      label {
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: var(--navyBlueColor);
-        margin-right: 30px;
-      }
-      input[type = 'time'] {
-        @include imputField(0, 7px);
-        @include resetPickersInputs();
-        font-size: 1.1rem;
-        font-weight: 600;
-      }
-    }
-  }
 }
 
 .radioImportants {
-  margin-right: 10px;
-  &:nth-child(1) div::after {
-    border-color: var(--greenColor);
-  }
-  &:nth-child(2) div::after {
-    border-color: var(--orangeColor);
-  }
-  &:nth-child(3) div::after {
-    border-color: var(--redColor);
-  }
+    margin-right: 10px;
+    &:nth-child(1) div::after {
+        border-color: var(--greenColor);
+    }
+    &:nth-child(2) div::after {
+        border-color: var(--orangeColor);
+    }
+    &:nth-child(3) div::after {
+        border-color: var(--redColor);
+    }
 }
 
 .messageAndExitField {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin: 10px 0;
-  .messageTextfield {
     display: flex;
-    justify-content: center;
-    position: relative;
+    align-items: center;
     width: 100%;
     margin: 10px 0;
-    textarea {
-      @include imputField(0, 10px);
-      padding-right: 15px;
-      font-size: 1.1rem;
-      position: relative;
-      resize: none;
+    .messageTextfield {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        margin: 10px 0;
+        textarea {
+            @include imputField(0, 10px);
+            padding-right: 15px;
+            font-size: 1.1rem;
+            position: relative;
+            resize: none;
+        }
+        .quantityChars {
+            position: absolute;
+            width: 50px;
+            bottom: 10px;
+            right: 0;
+            color: var(--darkGrayTint1);
+        }
     }
-    .quantityChars {
-      position: absolute;
-      width: 50px;
-      bottom: 10px;
-      right: 0;
-      color: var(--darkGrayTint1);
+    button {
+        @include defaultButtonReset();
+        margin: 0 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+        color: var(--navyBlueColor);
     }
-  }
-  button {
-    @include defaultButtonReset();
-    margin: 0 20px;
-    width: 40px;
-    height: 40px;
-    font-size: 1.3rem;
-    color: var(--navyBlueColor);
-  }
 }
 
 .addEntrieModule button.addNewEntrie {
-  @include defaultButtonReset();
-  width: 100%;
-  border: 2px dashed var(--navyBlueColor);
-  border-radius: 10px;
-  padding: 7px 0 10px 0;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--navyBlueColor);
+    @include defaultButtonReset();
+    width: 100%;
+    border: 2px dashed var(--navyBlueColor);
+    border-radius: 10px;
+    padding: 7px 0 10px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--navyBlueColor);
 }
 
 .formCalendarButtons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 80%;
-  button {
-    @include defaultButton();
-    width: 200px;
-  }
-  .subjectFormSend {
-    background-color: var(--orangeColor);
-  }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 80%;
+    button {
+        @include defaultButton();
+        width: 200px;
+    }
+    .subjectFormSend {
+        background-color: var(--orangeColor);
+    }
 }

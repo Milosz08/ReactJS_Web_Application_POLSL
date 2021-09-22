@@ -17,23 +17,23 @@ import React, { createContext, Dispatch, SetStateAction, useState } from 'react'
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 /**
  * Interface defining the type of return in context store values.
  */
 export interface LoginSessionProviderTypes {
-   adminAuth: boolean;
-   setAdminAuth: Dispatch<SetStateAction<boolean>>;
-   userAuth: boolean;
-   setUserAuth: Dispatch<SetStateAction<boolean>>;
+    adminAuth: boolean;
+    setAdminAuth: Dispatch<SetStateAction<boolean>>;
+    userAuth: boolean;
+    setUserAuth: Dispatch<SetStateAction<boolean>>;
 }
 
 /**
  * Create the context of the store. Function exported and used to destructurize context members.
  */
-export const LoginSessionContext = createContext<Partial<LoginSessionProviderTypes>>({ });
+export const LoginSessionContext = createContext<Partial<LoginSessionProviderTypes>>({});
 
 /**
  * @details Component that stores the store with information about an active user and administrator session. Values from
@@ -43,19 +43,19 @@ export const LoginSessionContext = createContext<Partial<LoginSessionProviderTyp
  */
 const LoginSessionProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
-   const [ adminAuth, setAdminAuth ] = useState<boolean>(false);
-   const [ userAuth, setUserAuth ] = useState<boolean>(false);
+    const [ adminAuth, setAdminAuth ] = useState<boolean>(false);
+    const [ userAuth, setUserAuth ] = useState<boolean>(false);
 
-   return (
-      <LoginSessionContext.Provider
-         value = {{
-            adminAuth, setAdminAuth,
-            userAuth, setUserAuth,
-         }}
-      >
-         {children}
-      </LoginSessionContext.Provider>
-   );
+    return (
+        <LoginSessionContext.Provider
+            value = {{
+                adminAuth, setAdminAuth,
+                userAuth, setUserAuth,
+            }}
+        >
+            {children}
+        </LoginSessionContext.Provider>
+    );
 }
 
 export default LoginSessionProvider;

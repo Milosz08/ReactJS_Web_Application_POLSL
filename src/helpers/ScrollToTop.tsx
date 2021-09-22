@@ -1,7 +1,7 @@
 /**
- * @file SubjectsPassPage.tsx
+ * @file ScrollToTop.tsx
  * @author Miłosz Gilga (gilgamilosz451@gmail.com)
- * @brief TypeScript React Stateless functional component (simplify state with React Hooks).
+ * @brief Helper TS function.
  *
  * @projectName "polsl-web-application-frontend"
  * @version "^0.1.0"
@@ -20,11 +20,13 @@ import { useLocation } from 'react-router-dom';
  */
 const ScrollToTop = (): null => {
 
-   const { pathname } = useLocation();
+    const { pathname } = useLocation();
 
-   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [ pathname ]);
 
-   return null;
+    return null;
 }
 
 export default ScrollToTop;

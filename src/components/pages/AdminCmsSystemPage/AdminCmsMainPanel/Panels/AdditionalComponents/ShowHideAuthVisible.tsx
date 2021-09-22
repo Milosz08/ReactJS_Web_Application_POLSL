@@ -22,8 +22,8 @@ const { showProtectedField, visibleIcon } = require('./../HomePanel.module.scss'
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   handleVisible: () => void;
-   ifVisible: boolean;
+    handleVisible: () => void;
+    ifVisible: boolean;
 }
 
 /**
@@ -33,18 +33,18 @@ interface PropsProvider {
  * @param ifVisible { boolean } - actual state (visible/invisible).
  */
 const ShowHideAuthVisible: React.FC<PropsProvider> = ({ handleVisible, ifVisible }): JSX.Element => {
-   return (
-      <button
-         type = 'button'
-         onClick = {handleVisible}
-         className = {showProtectedField}
-      >
-         <FontAwesomeIcon
-            icon = {['fas', `${ifVisible ? 'eye-slash' : 'eye'}`]}
-            className = {visibleIcon}
-         />
-      </button>
-   );
+    return (
+        <button
+            type = 'button'
+            onClick = {handleVisible}
+            className = {showProtectedField}
+        >
+            <FontAwesomeIcon
+                icon = {[ 'fas', `${ifVisible ? 'eye-slash' : 'eye'}` ]}
+                className = {visibleIcon}
+            />
+        </button>
+    );
 }
 
 export default ShowHideAuthVisible;

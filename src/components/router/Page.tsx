@@ -44,75 +44,77 @@ const PAGES_COMPONENTS: any[] = [ SchedulePage, CalendarPage, SubjectsPassPage, 
  */
 const Page = (): JSX.Element => {
 
-   const { SITES } = CONSTANT_DATA;
-   const { adminAuth, setAdminAuth, userAuth, setUserAuth } = useContext<Partial<LoginSessionProviderTypes>>(LoginSessionContext);
-   const { cookie, setCookie, removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
+    const { SITES } = CONSTANT_DATA;
+    const {
+        adminAuth, setAdminAuth, userAuth, setUserAuth
+    } = useContext<Partial<LoginSessionProviderTypes>>(LoginSessionContext);
+    const { cookie, setCookie, removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
 
-   useEffect(() => {
-      cookie!.__adminSessionStayed !== undefined ? setAdminAuth!(true) : setAdminAuth!(false);
-      cookie!.__userSessionStayed !== undefined ? setUserAuth!(true) : setUserAuth!(false);
-   }, [cookie, setAdminAuth, setUserAuth]);
+    useEffect(() => {
+        cookie!.__adminSessionStayed !== undefined ? setAdminAuth!(true) : setAdminAuth!(false);
+        cookie!.__userSessionStayed !== undefined ? setUserAuth!(true) : setUserAuth!(false);
+    }, [ cookie, setAdminAuth, setUserAuth ]);
 
-   // eslint-disable-next-line array-callback-return
-   const routeStructure = SITES.map((site: { [value: string]: string }, index: number) => {
-      if(site.title !== 'Pomoce naukowe') {
-         const redeptWithPolish = site.title.replace(/\s+/g, '-').toLowerCase();
-         return (
-            <Route
-               path = {`/${redeptWithPolish}`}
-               component = {PAGES_COMPONENTS[index]}
-               key = {uuidv4()}
-            />
-         );
-      }
-   });
+    // eslint-disable-next-line array-callback-return
+    const routeStructure = SITES.map((site: { [value: string]: string }, index: number) => {
+        if (site.title !== 'Pomoce naukowe') {
+            const redeptWithPolish = site.title.replace(/\s+/g, '-').toLowerCase();
+            return (
+                <Route
+                    path = {`/${redeptWithPolish}`}
+                    component = {PAGES_COMPONENTS[index]}
+                    key = {uuidv4()}
+                />
+            );
+        }
+    });
 
-   return (
-      <Fragment>
-         <Switch>
-            <Route
-               path = '/' exact
-               component = {StartPage}
-            />
-            {routeStructure}
-            <ProtectedLoginRoute exact
-               path = '/logowanie-do-panelu-administratora'
-               component = {AdminCmsLogin}
-               redirectPath = '/logowanie-do-panelu-administratora/panel-administratora'
-               auth = {!adminAuth}
-               setAuth = {setAdminAuth}
-               handleCookie = {setCookie}
-            />
-            <ProtectedLoginRoute exact
-               path = '/logowanie-do-panelu-administratora/panel-administratora'
-               component = {AdminCmsMainPanel}
-               redirectPath = '/logowanie-do-panelu-administratora'
-               auth = {adminAuth}
-            />
-            <ProtectedLoginRoute exact
-               path = '/logowanie'
-               component = {AidsLogin}
-               redirectPath = '/pomoce-naukowe'
-               auth = {!userAuth}
-               setAuth = {setUserAuth}
-               handleCookie = {setCookie}
-            />
-            <ProtectedLoginRoute exact
-               path = '/pomoce-naukowe'
-               component = {AidsPage}
-               redirectPath = '/logowanie'
-               auth = {userAuth}
-               setAuth = {setUserAuth}
-               handleCookie = {removeCookie}
-            />
-            <Route
-               path = '/polityka-prywatności-cookies'
-               component = {CookiesPolicy}
-            />
-            <Route render = {() => <Redirect to = {{ pathname: '/' }}/>} />
-         </Switch>
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            <Switch>
+                <Route
+                    path = '/' exact
+                    component = {StartPage}
+                />
+                {routeStructure}
+                <ProtectedLoginRoute exact
+                                     path = '/logowanie-do-panelu-administratora'
+                                     component = {AdminCmsLogin}
+                                     redirectPath = '/logowanie-do-panelu-administratora/panel-administratora'
+                                     auth = {!adminAuth}
+                                     setAuth = {setAdminAuth}
+                                     handleCookie = {setCookie}
+                />
+                <ProtectedLoginRoute exact
+                                     path = '/logowanie-do-panelu-administratora/panel-administratora'
+                                     component = {AdminCmsMainPanel}
+                                     redirectPath = '/logowanie-do-panelu-administratora'
+                                     auth = {adminAuth}
+                />
+                <ProtectedLoginRoute exact
+                                     path = '/logowanie'
+                                     component = {AidsLogin}
+                                     redirectPath = '/pomoce-naukowe'
+                                     auth = {!userAuth}
+                                     setAuth = {setUserAuth}
+                                     handleCookie = {setCookie}
+                />
+                <ProtectedLoginRoute exact
+                                     path = '/pomoce-naukowe'
+                                     component = {AidsPage}
+                                     redirectPath = '/logowanie'
+                                     auth = {userAuth}
+                                     setAuth = {setUserAuth}
+                                     handleCookie = {removeCookie}
+                />
+                <Route
+                    path = '/polityka-prywatności-cookies'
+                    component = {CookiesPolicy}
+                />
+                <Route render = {() => <Redirect to = {{ pathname: '/' }}/>}/>
+            </Switch>
+        </Fragment>
+    );
 }
 
 export default Page;

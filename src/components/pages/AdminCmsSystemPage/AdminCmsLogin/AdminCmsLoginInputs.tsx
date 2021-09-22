@@ -21,12 +21,12 @@ const { inputCredentials, wrongData, showProtectedField, visibleIcon } = require
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   credentials: { [value: string]: string },
-   setCredentials: Dispatch<SetStateAction<{ [value: string]: string }>>;
-   errors: { [value: string]: boolean };
-   setErrors: Dispatch<SetStateAction<{ [value: string]: boolean }>>;
-   visible: { [value: string]: boolean };
-   setVisible: Dispatch<SetStateAction<{ [value: string]: boolean }>>;
+    credentials: { [value: string]: string },
+    setCredentials: Dispatch<SetStateAction<{ [value: string]: string }>>;
+    errors: { [value: string]: boolean };
+    setErrors: Dispatch<SetStateAction<{ [value: string]: boolean }>>;
+    visible: { [value: string]: boolean };
+    setVisible: Dispatch<SetStateAction<{ [value: string]: boolean }>>;
 }
 
 /**
@@ -43,94 +43,95 @@ interface PropsProvider {
  */
 const AdminCmsLoginInputs: React.FC<PropsProvider> = (props): JSX.Element => {
 
-   const { credentials, setCredentials, errors, setErrors, visible, setVisible } = props;
+    const { credentials, setCredentials, errors, setErrors, visible, setVisible } = props;
 
-   const handleChangeInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-      switch(target.placeholder.toLocaleLowerCase()) {
-         case 'login':
-            setCredentials({ ...credentials, login: target.value });
-            setErrors({ ...errors, login: false });
-            break;
-         case 'hasło':
-            setCredentials({ ...credentials, password: target.value });
-            setErrors({ ...errors, password: false });
-            break;
-         case 'token uwierzytelniający*':
-            setCredentials({ ...credentials, token: target.value });
-            setErrors({ ...errors, token: false });
-            break;
-         default:
-            throw new Error('Unexpected target placeholder token');
-      }
-   }
+    const handleChangeInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+        switch (target.placeholder.toLocaleLowerCase()) {
+            case 'login':
+                setCredentials({ ...credentials, login: target.value });
+                setErrors({ ...errors, login: false });
+                break;
+            case 'hasło':
+                setCredentials({ ...credentials, password: target.value });
+                setErrors({ ...errors, password: false });
+                break;
+            case 'token uwierzytelniający*':
+                setCredentials({ ...credentials, token: target.value });
+                setErrors({ ...errors, token: false });
+                break;
+            default:
+                throw new Error('Unexpected target placeholder token');
+        }
+    }
 
-   const setVisibleInputs = (id: string): void => {
-      switch(id) {
-         case 'password':
-            if(credentials.password !== '') {
-               setVisible((prevState: any) => ({ ...setVisible, password: !prevState.password }))
-            }
-            break;
-         case 'token':
-            if(credentials.token !== '') {
-               setVisible((prevState: any) => ({ ...setVisible, token: !prevState.token }))
-            }
-            break;
-         default: throw new Error('Unexpected input visibility button id');
-      }
-   }
+    const setVisibleInputs = (id: string): void => {
+        switch (id) {
+            case 'password':
+                if (credentials.password !== '') {
+                    setVisible((prevState: any) => ({ ...setVisible, password: !prevState.password }))
+                }
+                break;
+            case 'token':
+                if (credentials.token !== '') {
+                    setVisible((prevState: any) => ({ ...setVisible, token: !prevState.token }))
+                }
+                break;
+            default:
+                throw new Error('Unexpected input visibility button id');
+        }
+    }
 
-   return (
-      <Fragment>
-         <div className = {inputCredentials}>
-            <input
-               type = 'text'
-               placeholder = 'Login'
-               value = {credentials.login}
-               onChange = {handleChangeInput}
-               className = {(errors.login && wrongData).toString()}
-            />
-         </div>
-         <div className = {inputCredentials}>
-            <input
-               type = {visible.password ? 'text' : 'password'}
-               placeholder = 'Hasło'
-               value = {credentials.password}
-               onChange = {handleChangeInput}
-               className = {(errors.password && wrongData).toString()}
-            />
-            <button
-               className = {showProtectedField}
-               type = 'button'
-               onClick = {() => setVisibleInputs('password')}
-            >
-               <FontAwesomeIcon
-                  icon = {['fas', `${visible.password ? 'eye-slash' : 'eye'}`]}
-                  className = {visibleIcon}
-               />
-            </button>
-         </div>
-         <div className = {inputCredentials}>
-            <input
-               type = {visible.token ? 'text' : 'password'}
-               placeholder = 'Token uwierzytelniający*'
-               value = {credentials.token}
-               onChange = {handleChangeInput}
-               className = {(errors.token && wrongData).toString()}
-            />
-            <button
-               className = {showProtectedField}
-               type = 'button'
-               onClick = {() => setVisibleInputs('token')}
-            >
-               <FontAwesomeIcon
-                  icon = {['fas', `${visible.token ? 'eye-slash' : 'eye'}`]}
-                  className = {visibleIcon}
-               />
-            </button>
-         </div>
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            <div className = {inputCredentials}>
+                <input
+                    type = 'text'
+                    placeholder = 'Login'
+                    value = {credentials.login}
+                    onChange = {handleChangeInput}
+                    className = {(errors.login && wrongData).toString()}
+                />
+            </div>
+            <div className = {inputCredentials}>
+                <input
+                    type = {visible.password ? 'text' : 'password'}
+                    placeholder = 'Hasło'
+                    value = {credentials.password}
+                    onChange = {handleChangeInput}
+                    className = {(errors.password && wrongData).toString()}
+                />
+                <button
+                    className = {showProtectedField}
+                    type = 'button'
+                    onClick = {() => setVisibleInputs('password')}
+                >
+                    <FontAwesomeIcon
+                        icon = {[ 'fas', `${visible.password ? 'eye-slash' : 'eye'}` ]}
+                        className = {visibleIcon}
+                    />
+                </button>
+            </div>
+            <div className = {inputCredentials}>
+                <input
+                    type = {visible.token ? 'text' : 'password'}
+                    placeholder = 'Token uwierzytelniający*'
+                    value = {credentials.token}
+                    onChange = {handleChangeInput}
+                    className = {(errors.token && wrongData).toString()}
+                />
+                <button
+                    className = {showProtectedField}
+                    type = 'button'
+                    onClick = {() => setVisibleInputs('token')}
+                >
+                    <FontAwesomeIcon
+                        icon = {[ 'fas', `${visible.token ? 'eye-slash' : 'eye'}` ]}
+                        className = {visibleIcon}
+                    />
+                </button>
+            </div>
+        </Fragment>
+    );
 }
 
 export default AdminCmsLoginInputs;

@@ -32,26 +32,28 @@ const PanelsStructure = React.lazy(() => import('./PanelsStructure'));
  */
 const AdminCmsMainPanel = (): JSX.Element => {
 
-   useEffect(() => {
-      document.title = ROUTING_PATH_NAMES.CMS_PANEL_PAGE;
-      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
-   }, []);
+    useEffect(() => {
+        document.title = ROUTING_PATH_NAMES.CMS_PANEL_PAGE;
+        return () => {
+            document.title = ROUTING_PATH_NAMES.START_PAGE
+        };
+    }, []);
 
-   return (
-      <Fragment>
-         <CookiesNotification/>
-         <MobileDownNav/>
-         <Header ifHeaderHasRedBar = {false}/>
-         <CurrentURLpath ifImportatHeaderActive = {true}/>
-         <ModalsStateProvider>
-            <FormScheduleModalProvider>
-               <DeleteModalsStructure/>
-               <AddChangeModalsStructure/>
-               <PanelsStructure/>
-            </FormScheduleModalProvider>
-         </ModalsStateProvider>
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            <CookiesNotification/>
+            <MobileDownNav/>
+            <Header ifHeaderHasRedBar = {false}/>
+            <CurrentURLpath ifImportatHeaderActive = {true}/>
+            <ModalsStateProvider>
+                <FormScheduleModalProvider>
+                    <DeleteModalsStructure/>
+                    <AddChangeModalsStructure/>
+                    <PanelsStructure/>
+                </FormScheduleModalProvider>
+            </ModalsStateProvider>
+        </Fragment>
+    );
 }
 
 export default AdminCmsMainPanel;

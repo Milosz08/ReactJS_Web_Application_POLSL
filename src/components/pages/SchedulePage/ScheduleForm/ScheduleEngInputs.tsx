@@ -19,7 +19,7 @@ import classnames from 'classnames';
 import GROUPS_STATIC from '../../../../constants/allGroups';
 import { ScheduleContext, ScheduleType } from '../../../../contextStore/ScheduleProvider';
 
-const { englishRadio, customRadio, radioInputContainer, activeRadio  } = require('./ScheduleForm.module.scss');
+const { englishRadio, customRadio, radioInputContainer, activeRadio } = require('./ScheduleForm.module.scss');
 
 /**
  * @details Component that generates radio inputs to choose from the English group. Data retrieved
@@ -27,35 +27,35 @@ const { englishRadio, customRadio, radioInputContainer, activeRadio  } = require
  */
 const ScheduleEngInputs = (): JSX.Element => {
 
-   const { ENG_GROUPS } = GROUPS_STATIC;
-   const { engSelected, setEngSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
+    const { ENG_GROUPS } = GROUPS_STATIC;
+    const { engSelected, setEngSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
 
-   const generateInputStructure = ENG_GROUPS.map((record: string): JSX.Element=> {
-      const activeRadioInput = engSelected === record ? classnames(radioInputContainer, activeRadio) : radioInputContainer;
+    const generateInputStructure = ENG_GROUPS.map((record: string): JSX.Element => {
+        const activeRadioInput = engSelected === record ? classnames(radioInputContainer, activeRadio) : radioInputContainer;
 
-      return (
-         <div key = {record} className = {activeRadioInput}>
-            <input
-               type = 'radio'
-               id = {record}
-               name = 'eng'
-               onChange = {e => setEngSelected!(e.target.id)}
-               checked = {engSelected === record}
-               value = {engSelected}
-            />
-            <label htmlFor = {record}>
-               Grupa {record.toLocaleUpperCase()}
-            </label>
-            <div className = {customRadio}/>
-         </div>
-      );
-   });
+        return (
+            <div key = {record} className = {activeRadioInput}>
+                <input
+                    type = 'radio'
+                    id = {record}
+                    name = 'eng'
+                    onChange = {e => setEngSelected!(e.target.id)}
+                    checked = {engSelected === record}
+                    value = {engSelected}
+                />
+                <label htmlFor = {record}>
+                    Grupa {record.toLocaleUpperCase()}
+                </label>
+                <div className = {customRadio}/>
+            </div>
+        );
+    });
 
-   return (
-      <div className = {englishRadio}>
-         {generateInputStructure}
-      </div>
-   );
+    return (
+        <div className = {englishRadio}>
+            {generateInputStructure}
+        </div>
+    );
 }
 
 export default ScheduleEngInputs;

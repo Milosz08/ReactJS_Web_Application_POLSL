@@ -23,12 +23,12 @@ const { oneIconWrapper } = require('./MobileDownNav.module.scss');
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   pathAttr: {
-      path: string,
-      id: number
-   };
-   action: (id: number, path: string) => void;
-   Component: React.ReactElement;
+    pathAttr: {
+        path: string,
+        id: number
+    };
+    action: (id: number, path: string) => void;
+    Component: React.ReactElement;
 }
 
 /**
@@ -39,18 +39,18 @@ interface PropsProvider {
  * @param componentsObj { React.ReactElement } - icon (filled and empty) in the form of a React component.
  */
 const SingleNavigationElement: React.FC<PropsProvider> = ({ pathAttr, action, Component }): JSX.Element => {
-   return (
-      <DelayLink
-         to = {pathAttr.path}
-         delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
-         replace = {false}
-         clickAction = {() => action(pathAttr.id, pathAttr.path)}
-      >
-         <a className = {oneIconWrapper} href = {pathAttr.path}>
-            {Component}
-         </a>
-      </DelayLink>
-   );
+    return (
+        <DelayLink
+            to = {pathAttr.path}
+            delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+            replace = {false}
+            clickAction = {() => action(pathAttr.id, pathAttr.path)}
+        >
+            <a className = {oneIconWrapper} href = {pathAttr.path}>
+                {Component}
+            </a>
+        </DelayLink>
+    );
 }
 
 export default SingleNavigationElement;

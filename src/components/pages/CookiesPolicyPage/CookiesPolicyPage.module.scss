@@ -12,75 +12,75 @@
 @import './../../../styles/_mixins';
 
 .cookiesInfoContainer {
-  display: flex;
-  justify-content: center;
-  .cookiesInfoWrapper {
-    position: relative;
-    width: var(--widthVertical);
-    margin-top: 200px;
-  }
+    display: flex;
+    justify-content: center;
+    .cookiesInfoWrapper {
+        position: relative;
+        width: var(--widthVertical);
+        margin-top: 200px;
+    }
 }
 
 .cookieContent {
-  font-size: 1.3rem;
-  color: var(--lightBlack);
-  a {
-    color: var(--darkBlueColor);
-    font-weight: 500;
-    text-decoration: none;
-    transition: .2s;
-    &:hover {
-      color: var(--orangeColor);
+    font-size: 1.3rem;
+    color: var(--lightBlack);
+    a {
+        color: var(--darkBlueColor);
+        font-weight: 500;
+        text-decoration: none;
+        transition: .2s;
+        &:hover {
+            color: var(--orangeColor);
+        }
     }
-  }
 }
 
 .cookiesSections {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .cookiesList {
-  margin-left: 25px;
-  li {
-    font-size: 1.3rem;
-    padding: 6px 0;
-    color: var(--lightBlack);
-    strong {
-      font-weight: 500;
-      color: var(--darkBlueColor);
+    margin-left: 25px;
+    li {
+        font-size: 1.3rem;
+        padding: 6px 0;
+        color: var(--lightBlack);
+        strong {
+            font-weight: 500;
+            color: var(--darkBlueColor);
+        }
     }
-  }
 }
 
 .sectionDecorationSign {
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  right: 100px;
-  font-size: 40rem;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--darkBlueColor);
-  opacity: .1;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 100px;
+    font-size: 40rem;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--darkBlueColor);
+    opacity: .1;
 }
 
 .sectionSign {
-  font-size: 2.3rem;
-  margin-right: 20px;
-  color: var(--orangeColor);
+    font-size: 2.3rem;
+    margin-right: 20px;
+    color: var(--orangeColor);
 }
 
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1250px) {
-  .cookiesInfoContainer {
-    .cookiesInfoWrapper {
-      width: 100%;
-      margin-top: 110px;
+    .cookiesInfoContainer {
+        .cookiesInfoWrapper {
+            width: 100%;
+            margin-top: 110px;
+        }
     }
-  }
-  .sectionSign {
-    display: flex;
-    min-width: 50px;
-  }
+    .sectionSign {
+        display: flex;
+        min-width: 50px;
+    }
 }

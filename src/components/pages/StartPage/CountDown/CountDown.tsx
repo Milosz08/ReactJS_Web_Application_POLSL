@@ -12,6 +12,7 @@
  */
 
 import React, { useLayoutEffect, useState } from 'react';
+
 const { countDownContainer, countDownWrapper, dateFont, mobileDateFont } = require('./CountDown.module.scss');
 
 /**
@@ -23,7 +24,7 @@ const EXP_TIME: number = new Date('2021-10-01T10:00:00').getTime();
  * Interface defining the type of State values.
  */
 interface StateProvider {
-   [value: string]: number | string;
+    [value: string]: number | string;
 }
 
 /**
@@ -33,50 +34,50 @@ interface StateProvider {
  */
 const CountDown = (): JSX.Element => {
 
-   const [ date, setDate ] = useState<StateProvider>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    const [ date, setDate ] = useState<StateProvider>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-   useLayoutEffect(() => {
-      const setDateObject = (nowTime : number): StateProvider => {
-         let days : number | string = Math.floor((EXP_TIME / (1000 * 60 * 60 * 24)) - (nowTime / (1000 * 60 * 60 * 24)));
-         days = days < 10 ? `0${days}` : days;
+    useLayoutEffect(() => {
+        const setDateObject = (nowTime: number): StateProvider => {
+            let days: number | string = Math.floor((EXP_TIME / (1000 * 60 * 60 * 24)) - (nowTime / (1000 * 60 * 60 * 24)));
+            days = days < 10 ? `0${days}` : days;
 
-         let hours : number | string = Math.floor((EXP_TIME / (1000 * 60 * 60) - nowTime / (1000 * 60 * 60)) % 24);
-         hours = hours < 10 ? `0${hours}` : hours;
+            let hours: number | string = Math.floor((EXP_TIME / (1000 * 60 * 60) - nowTime / (1000 * 60 * 60)) % 24);
+            hours = hours < 10 ? `0${hours}` : hours;
 
-         let minutes : number | string = Math.floor((EXP_TIME / (1000 * 60) - nowTime / (1000 * 60)) % 60);
-         minutes = minutes < 10 ? `0${minutes}` : minutes;
+            let minutes: number | string = Math.floor((EXP_TIME / (1000 * 60) - nowTime / (1000 * 60)) % 60);
+            minutes = minutes < 10 ? `0${minutes}` : minutes;
 
-         let seconds : number | string = Math.floor((EXP_TIME / 1000 - nowTime / 1000) % 60);
-         seconds = seconds < 10 ? `0${seconds}` : seconds;
+            let seconds: number | string = Math.floor((EXP_TIME / 1000 - nowTime / 1000) % 60);
+            seconds = seconds < 10 ? `0${seconds}` : seconds;
 
-         return { days, hours, minutes, seconds };
-      }
+            return { days, hours, minutes, seconds };
+        }
 
-      const counting = () => {
-         const { days, hours, minutes, seconds } = setDateObject(new Date().getTime());
-         setDate({ days, hours, minutes, seconds });
-      }
+        const counting = () => {
+            const { days, hours, minutes, seconds } = setDateObject(new Date().getTime());
+            setDate({ days, hours, minutes, seconds });
+        }
 
-      const index = setInterval(counting, 1000);
-      return () => clearInterval(index);
-   });
+        const index = setInterval(counting, 1000);
+        return () => clearInterval(index);
+    });
 
-   return (
-      <div className = {countDownContainer}>
-         <div className = {countDownWrapper}>
-            <h2>Do rozpoczęcia <strong>III semestru</strong> brakuje:</h2>
-            <div className = {dateFont}>
-               <span><strong>{date.days}</strong> dni, </span>
-               <span><strong>{date.hours}</strong> godzin, </span>
-               <span><strong>{date.minutes}</strong> minut, </span>
-               <span><strong>{date.seconds}</strong> sekund </span>
+    return (
+        <div className = {countDownContainer}>
+            <div className = {countDownWrapper}>
+                <h2>Do rozpoczęcia <strong>III semestru</strong> brakuje:</h2>
+                <div className = {dateFont}>
+                    <span><strong>{date.days}</strong> dni, </span>
+                    <span><strong>{date.hours}</strong> godzin, </span>
+                    <span><strong>{date.minutes}</strong> minut, </span>
+                    <span><strong>{date.seconds}</strong> sekund </span>
+                </div>
+                <div className = {mobileDateFont}>
+                    <span>{date.days}:{date.hours}:{date.minutes}:{date.seconds}</span>
+                </div>
             </div>
-            <div className = {mobileDateFont}>
-               <span>{date.days}:{date.hours}:{date.minutes}:{date.seconds}</span>
-            </div>
-         </div>
-      </div>
-   );
+        </div>
+    );
 }
 
 export default CountDown;

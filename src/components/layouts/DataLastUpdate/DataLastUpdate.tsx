@@ -21,17 +21,17 @@ const { dataLastUpdate } = require('./DataLastUpdate.module.scss');
  * Interface defining the type of props.
  */
 interface PropsProvider {
-   dataID: string | undefined;
-   content?: string;
-   withoutText: boolean;
+    dataID: string | undefined;
+    content?: string;
+    withoutText: boolean;
 }
 
 /**
  * Interface defining the type of state values.
  */
 interface StateProvider {
-   fullDate?: string;
-   fullTime?: string;
+    fullDate?: string;
+    fullTime?: string;
 }
 
 /**
@@ -44,43 +44,43 @@ interface StateProvider {
  */
 const DataLastUpdate: React.FC<PropsProvider> = ({ dataID, content, withoutText }): JSX.Element => {
 
-   const [ lastUpdate, setLastUpdate ] = useState<StateProvider>({ fullDate: '', fullTime: '' });
+    const [ lastUpdate, setLastUpdate ] = useState<StateProvider>({ fullDate: '', fullTime: '' });
 
-   const fetchLastUpdate = useCallback(async (): Promise<void> => {
-      const { data } = await axiosInstance.get(`/last-update/${dataID}`);
-      const { updateDate } = data;
+    const fetchLastUpdate = useCallback(async (): Promise<void> => {
+        const { data } = await axiosInstance.get(`/last-update/${dataID}`);
+        const { updateDate } = data;
 
-      const day: string = updateDate.day < 10 ? `0${updateDate.day}` : updateDate.day;
-      const month: string = updateDate.month < 10 ? `0${updateDate.month}` : updateDate.month;
+        const day: string = updateDate.day < 10 ? `0${updateDate.day}` : updateDate.day;
+        const month: string = updateDate.month < 10 ? `0${updateDate.month}` : updateDate.month;
 
-      const hour: string = updateDate.hour < 10 ? `0${updateDate.hour}` : updateDate.hour;
-      const minutes: string = updateDate.minutes < 10 ? `0${updateDate.minutes}` : updateDate.minutes;
-      const seconds: string = updateDate.seconds < 10 ? `0${updateDate.seconds}` : updateDate.seconds;
+        const hour: string = updateDate.hour < 10 ? `0${updateDate.hour}` : updateDate.hour;
+        const minutes: string = updateDate.minutes < 10 ? `0${updateDate.minutes}` : updateDate.minutes;
+        const seconds: string = updateDate.seconds < 10 ? `0${updateDate.seconds}` : updateDate.seconds;
 
-      setLastUpdate({
-         fullDate: `${day}/${month}/${updateDate.year}`,
-         fullTime: `${hour}:${minutes}:${seconds}`,
-      });
-   }, [dataID]);
+        setLastUpdate({
+            fullDate: `${day}/${month}/${updateDate.year}`,
+            fullTime: `${hour}:${minutes}:${seconds}`,
+        });
+    }, [ dataID ]);
 
-   useEffect(() => {
-      fetchLastUpdate();
-      return () => setLastUpdate({ });
-   }, [fetchLastUpdate]);
+    useEffect(() => {
+        fetchLastUpdate();
+        return () => setLastUpdate({});
+    }, [ fetchLastUpdate ]);
 
-   const generateStructure = !withoutText ? (
-      <div className = {dataLastUpdate}>
-         <p>Ostatnia aktualizacja {content}: {lastUpdate.fullDate}, {lastUpdate.fullTime}</p>
-      </div>
-   ) : (
-      <strong>{lastUpdate.fullDate}, {lastUpdate.fullTime}</strong>
-   );
+    const generateStructure = !withoutText ? (
+        <div className = {dataLastUpdate}>
+            <p>Ostatnia aktualizacja {content}: {lastUpdate.fullDate}, {lastUpdate.fullTime}</p>
+        </div>
+    ) : (
+        <strong>{lastUpdate.fullDate}, {lastUpdate.fullTime}</strong>
+    );
 
-   return (
-      <Fragment>
-         {generateStructure}
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            {generateStructure}
+        </Fragment>
+    );
 }
 
 export default DataLastUpdate;

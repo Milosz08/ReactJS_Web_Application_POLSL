@@ -25,14 +25,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
 
 const {
-   currentURLwrapper, currentURLcontainer, sigleCellRecord, arrowIcon, ifHeaderHasRedBar
+    currentURLwrapper, currentURLcontainer, sigleCellRecord, arrowIcon, ifHeaderHasRedBar
 } = require('./CurrentURLpath.module.scss');
 
 /**
  * Interface defining the type of props.
  */
 interface PropsProvider {
-   ifImportatHeaderActive: boolean;
+    ifImportatHeaderActive: boolean;
 }
 
 /**
@@ -43,69 +43,69 @@ interface PropsProvider {
  */
 const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }): JSX.Element => {
 
-   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
-   const convertCurrentPathnameToString = (): JSX.Element[] => {
-      const allPathString: string = decodeURI(window.location.pathname).toString().slice(1);
-      const lengthOfArray: number = allPathString.split('/').length;
-      const arraysOfAllPathnames: string[] = allPathString.split('/', lengthOfArray);
-      let prevPathName: string = '';
+    const convertCurrentPathnameToString = (): JSX.Element[] => {
+        const allPathString: string = decodeURI(window.location.pathname).toString().slice(1);
+        const lengthOfArray: number = allPathString.split('/').length;
+        const arraysOfAllPathnames: string[] = allPathString.split('/', lengthOfArray);
+        let prevPathName: string = '';
 
-      return arraysOfAllPathnames.map((pathname: string) => {
-         const replaceMinus: string = pathname.replaceAll('-', ' ');
-         const countOfSigleWords: number = replaceMinus.split(' ').length + 1;
-         const sigleWordsArray: string[] = replaceMinus.split(' ', countOfSigleWords);
-         prevPathName += `/${pathname}`;
+        return arraysOfAllPathnames.map((pathname: string) => {
+            const replaceMinus: string = pathname.replaceAll('-', ' ');
+            const countOfSigleWords: number = replaceMinus.split(' ').length + 1;
+            const sigleWordsArray: string[] = replaceMinus.split(' ', countOfSigleWords);
+            prevPathName += `/${pathname}`;
 
-         const capitaliseWordsArray = sigleWordsArray.map((word: string) => {
-            const lower: string = word.toLocaleLowerCase();
-            return word.charAt(0).toUpperCase() + lower.slice(1);
-         });
+            const capitaliseWordsArray = sigleWordsArray.map((word: string) => {
+                const lower: string = word.toLocaleLowerCase();
+                return word.charAt(0).toUpperCase() + lower.slice(1);
+            });
 
-         return (
-            <span key = {uuidv4()} className = {sigleCellRecord}>
+            return (
+                <span key = {uuidv4()} className = {sigleCellRecord}>
                 <FontAwesomeIcon
-                   icon = {['fas', 'chevron-right']}
-                   className = {arrowIcon}
+                    icon = {[ 'fas', 'chevron-right' ]}
+                    className = {arrowIcon}
                 />
                <DelayLink
-                  to = {prevPathName}
-                  delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
-                  replace = {false}
-                  clickAction = {() => timeoutRoutePath!(prevPathName)}
+                   to = {prevPathName}
+                   delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                   replace = {false}
+                   clickAction = {() => timeoutRoutePath!(prevPathName)}
                >
                   <a href = {prevPathName}>
                      {capitaliseWordsArray.join(' ')}
                   </a>
                </DelayLink>
             </span>
-         );
-      });
-   }
+            );
+        });
+    }
 
-   const toggleMargin = ifImportatHeaderActive ? classnames(currentURLcontainer, ifHeaderHasRedBar) : currentURLcontainer;
+    const toggleMargin = ifImportatHeaderActive ? classnames(currentURLcontainer, ifHeaderHasRedBar) : currentURLcontainer;
 
-   return (
-      <div className = {toggleMargin}>
-         <div className = {currentURLwrapper}>
+    return (
+        <div className = {toggleMargin}>
+            <div className = {currentURLwrapper}>
             <span>
                <DelayLink
-                  to = '/'
-                  delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
-                  replace = {false}
-                  clickAction = {() => timeoutRoutePath!('/')}
+                   to = '/'
+                   delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                   replace = {false}
+                   clickAction = {() => timeoutRoutePath!('/')}
                >
                   <a href = '/'>
                      Strona Główna
                   </a>
                </DelayLink>
             </span>
-            <span>
+                <span>
                {convertCurrentPathnameToString()}
             </span>
-         </div>
-      </div>
-   );
+            </div>
+        </div>
+    );
 }
 
 export default CurrentURLpath;

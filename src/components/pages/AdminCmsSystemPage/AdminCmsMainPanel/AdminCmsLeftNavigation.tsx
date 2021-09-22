@@ -24,8 +24,8 @@ const { activeSection, cmsNavigation } = require('./AdminCmsMainPanel.module.scs
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   activeNavElm: number;
-   setActiveNavElm: Dispatch<SetStateAction<number>>
+    activeNavElm: number;
+    setActiveNavElm: Dispatch<SetStateAction<number>>
 }
 
 /**
@@ -34,26 +34,26 @@ interface PropsProvider {
  * @param activeNavElm { number } - the number indicating the active panel.
  * @param setActiveNavElm { Dispatch<SetStateAction<number>> } - function to set the active panel.
  */
-const AdminCmsLeftNavigation: React.FC<PropsProvider> = ({ activeNavElm, setActiveNavElm  }): JSX.Element => {
+const AdminCmsLeftNavigation: React.FC<PropsProvider> = ({ activeNavElm, setActiveNavElm }): JSX.Element => {
 
-   const generateNavStructure = STATIC_NAV.map((navElm: StaticNavTypes, id: number) => (
-      <button
-         className = {activeNavElm === id ? activeSection : ''}
-         onClick = {() => setActiveNavElm(id)}
-         key = {id}
-      >
-         <FontAwesomeIcon
-            icon = {['fas', navElm.icon]}
-            title = {navElm.alt}
-         />
-      </button>
-   ));
+    const generateNavStructure = STATIC_NAV.map((navElm: StaticNavTypes, id: number) => (
+        <button
+            className = {activeNavElm === id ? activeSection : ''}
+            onClick = {() => setActiveNavElm(id)}
+            key = {id}
+        >
+            <FontAwesomeIcon
+                icon = {[ 'fas', navElm.icon ]}
+                title = {navElm.alt}
+            />
+        </button>
+    ));
 
-   return (
-      <nav className = {cmsNavigation}>
-         {generateNavStructure}
-      </nav>
-   )
+    return (
+        <nav className = {cmsNavigation}>
+            {generateNavStructure}
+        </nav>
+    )
 }
 
 export default AdminCmsLeftNavigation;

@@ -15,11 +15,11 @@ import axiosInstance from '../helpers/request';
  * Interface that defines the date types in the object.
  */
 interface DateObjectTypes {
-   updateDateFor: string;
-   scheduleBreak?: boolean;
-   updateDate: {
-      [value: string]: number;
-   }
+    updateDateFor: string;
+    scheduleBreak?: boolean;
+    updateDate: {
+        [value: string]: number;
+    }
 }
 
 /**
@@ -31,38 +31,38 @@ interface DateObjectTypes {
  * @param schedule? { boolean } - (only for schedule) selection, whether the plan should be visible whether to be hidden.
  */
 const updateDate = async (
-   updateFor: string, updateID: string | undefined, ifSchedule: boolean = false, schedule: boolean = false
+    updateFor: string, updateID: string | undefined, ifSchedule: boolean = false, schedule: boolean = false
 ): Promise<void> => {
-   const date = new Date();
-   let dateObject: DateObjectTypes;
-   if(ifSchedule) {
-      dateObject = {
-         updateDateFor: updateFor,
-         scheduleBreak: schedule,
-         updateDate: {
-            day: date.getDate(),
-            month: date.getMonth() + 1,
-            year: date.getFullYear(),
-            hour: date.getHours(),
-            minutes: date.getMinutes(),
-            seconds: date.getSeconds(),
-         },
-      };
-   } else {
-      dateObject = {
-         updateDateFor: updateFor,
-         updateDate: {
-            day: date.getDate(),
-            month: date.getMonth() + 1,
-            year: date.getFullYear(),
-            hour: date.getHours(),
-            minutes: date.getMinutes(),
-            seconds: date.getSeconds(),
-         },
-      };
-   }
+    const date = new Date();
+    let dateObject: DateObjectTypes;
+    if (ifSchedule) {
+        dateObject = {
+            updateDateFor: updateFor,
+            scheduleBreak: schedule,
+            updateDate: {
+                day: date.getDate(),
+                month: date.getMonth() + 1,
+                year: date.getFullYear(),
+                hour: date.getHours(),
+                minutes: date.getMinutes(),
+                seconds: date.getSeconds(),
+            },
+        };
+    } else {
+        dateObject = {
+            updateDateFor: updateFor,
+            updateDate: {
+                day: date.getDate(),
+                month: date.getMonth() + 1,
+                year: date.getFullYear(),
+                hour: date.getHours(),
+                minutes: date.getMinutes(),
+                seconds: date.getSeconds(),
+            },
+        };
+    }
 
-   await axiosInstance.put(`last-update/${updateID}`, dateObject);
+    await axiosInstance.put(`last-update/${updateID}`, dateObject);
 }
 
 export default updateDate;

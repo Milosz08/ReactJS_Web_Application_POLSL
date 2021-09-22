@@ -12,163 +12,163 @@
 @import './../../../../../styles/_mixins';
 
 .scheduleContainer {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .oneDaySubjectContainer {
-  width: 100%;
-  button.dayButtonToggle {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 10px 20px 0 20px;
-    padding: 17px 40px 17px 0;
-    width: calc(100% - 40px);
-    font-size: 1.2rem;
-    line-height: 0;
-    cursor: pointer;
-    background-color: var(--navyBlueColor);
-    color: var(--cleanWhiteColor);
-    border: none;
-    border-radius: 10px;
-    span.dayTitle {
-      flex-grow: 1;
-      text-align: left;
-      text-transform: capitalize;
-    }
-    .fasIcon {
-      width: 70px;
-    }
-  }
-  ul.scheduleList {
-    margin: 0 20px;
-    & > li {
-      .listTitle {
-        flex-grow: 1;
-      }
-      .listHour, .listType, .listGroup {
-        width: 150px;
-      }
-      .listGroupHeader {
-        width: 260px;
-      }
-      .listButtons {
+    width: 100%;
+    button.dayButtonToggle {
         display: flex;
-      }
+        align-items: center;
+        justify-content: flex-start;
+        margin: 10px 20px 0 20px;
+        padding: 17px 40px 17px 0;
+        width: calc(100% - 40px);
+        font-size: 1.2rem;
+        line-height: 0;
+        cursor: pointer;
+        background-color: var(--navyBlueColor);
+        color: var(--cleanWhiteColor);
+        border: none;
+        border-radius: 10px;
+        span.dayTitle {
+            flex-grow: 1;
+            text-align: left;
+            text-transform: capitalize;
+        }
+        .fasIcon {
+            width: 70px;
+        }
     }
-  }
-  &:nth-child(3) {
-    margin-top: 30px;
-  }
+    ul.scheduleList {
+        margin: 0 20px;
+        & > li {
+            .listTitle {
+                flex-grow: 1;
+            }
+            .listHour, .listType, .listGroup {
+                width: 150px;
+            }
+            .listGroupHeader {
+                width: 260px;
+            }
+            .listButtons {
+                display: flex;
+            }
+        }
+    }
+    &:nth-child(3) {
+        margin-top: 30px;
+    }
 }
 
 .addNewSubjectSchedule {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .subjectList {
-  display: none;
-  flex-direction: column;
-  &.ejectedList {
-    display: flex;
-  }
+    display: none;
+    flex-direction: column;
+    &.ejectedList {
+        display: flex;
+    }
 }
 
 .setScheduleBreakContainer {
-  border: 1px solid var(--darkGrayTint3);
-  border-radius: 10px;
-  margin: 30px 40px 0;
-  padding: 30px;
-  width: calc(100% - 40px);
-  .checkboxContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.1rem;
-    .checkboxWrapper {
-      display: flex;
-      align-items: center;
-      label {
-        font-size: 1.2rem;
-        line-height: 0;
-        color: var(--navyBlueColor);
-        font-weight: 500;
-        cursor: pointer;
-      }
-      input[type = 'checkbox'] {
-        @include inputCheckbox(var(--navyBlueColor));
-        margin-right: 0;
-      }
-      span.checkmark {
-        @include checkmark();
-      }
+    border: 1px solid var(--darkGrayTint3);
+    border-radius: 10px;
+    margin: 30px 40px 0;
+    padding: 30px;
+    width: calc(100% - 40px);
+    .checkboxContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1rem;
+        .checkboxWrapper {
+            display: flex;
+            align-items: center;
+            label {
+                font-size: 1.2rem;
+                line-height: 0;
+                color: var(--navyBlueColor);
+                font-weight: 500;
+                cursor: pointer;
+            }
+            input[type = 'checkbox'] {
+                @include inputCheckbox(var(--navyBlueColor));
+                margin-right: 0;
+            }
+            span.checkmark {
+                @include checkmark();
+            }
+        }
+        p {
+            color: var(--lightBlack);
+        }
     }
-    p {
-      color: var(--lightBlack);
+    .sendData {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
+        p {
+            color: var(--redColor);
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: .2s;
+            &.active {
+                opacity: 1;
+            }
+        }
+        button {
+            @include defaultButton();
+            width: 150px;
+            margin-top: 0;
+        }
     }
-  }
-  .sendData {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
-    p {
-      color: var(--redColor);
-      font-size: 1.2rem;
-      font-weight: 500;
-      opacity: 0;
-      transition: .2s;
-      &.active {
-        opacity: 1;
-      }
-    }
-    button {
-      @include defaultButton();
-      width: 150px;
-      margin-top: 0;
-    }
-  }
 }
 
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1250px) {
-  .oneDaySubjectContainer {
-    button.dayButtonToggle {
-      span:nth-of-type(2) {
-        display: none;
-      }
-    }
-    ul.scheduleList {
-      & > li {
-        .listHour, .listType, .listGroup, .listGroupHeader {
-          display: none;
+    .oneDaySubjectContainer {
+        button.dayButtonToggle {
+            span:nth-of-type(2) {
+                display: none;
+            }
         }
-        .listTitle {
-          width: 200px;
-          margin-left: 20px;
-          padding: 9px 0;
+        ul.scheduleList {
+            & > li {
+                .listHour, .listType, .listGroup, .listGroupHeader {
+                    display: none;
+                }
+                .listTitle {
+                    width: 200px;
+                    margin-left: 20px;
+                    padding: 9px 0;
+                }
+            }
         }
-      }
     }
-  }
-  .setScheduleBreakContainer {
-    .checkboxContainer {
-      flex-wrap: wrap;
-      .checkboxWrapper {
-        label {
-          line-height: 1.1;
-          margin-left: 10px;
+    .setScheduleBreakContainer {
+        .checkboxContainer {
+            flex-wrap: wrap;
+            .checkboxWrapper {
+                label {
+                    line-height: 1.1;
+                    margin-left: 10px;
+                }
+            }
         }
-      }
+        .sendData {
+            flex-direction: column-reverse;
+            button {
+                margin-bottom: 20px;
+                width: 100%;
+                max-width: 200px;
+            }
+        }
     }
-    .sendData {
-      flex-direction: column-reverse;
-      button {
-        margin-bottom: 20px;
-        width: 100%;
-        max-width: 200px;
-      }
-    }
-  }
 }

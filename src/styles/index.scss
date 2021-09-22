@@ -1,63 +1,64 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
-  --redColor:           #c43434;   //importantColor
-  --greenColor:         #1d8e1d;   //goodColor
-  --yellowColor:        #fefe00;   //covidInfoBgc
-  --orangeColor:        #efaa15;   //yellowDefColor
-  --darkOrangeColor:    #df9e12;   //yellowHover
+    --redColor: #c43434; //importantColor
+    --greenColor: #1d8e1d; //goodColor
+    --yellowColor: #fefe00; //covidInfoBgc
+    --orangeColor: #efaa15; //yellowDefColor
+    --darkOrangeColor: #df9e12; //yellowHover
 
-  --blueColor:          #0056aa;   //hoverDarken
-  --darkBlueColor:      #183557;   //headersH3
-  --navyBlueColor:      #003c7d;   //mainLogosBgc
-  --darkNavyBlueColor:  #00234a;   //topNavbarColor
+    --blueColor: #0056aa; //hoverDarken
+    --darkBlueColor: #183557; //headersH3
+    --navyBlueColor: #003c7d; //mainLogosBgc
+    --darkNavyBlueColor: #00234a; //topNavbarColor
 
-  --cleanWhiteColor:    #ffffff;   //cleanWhiteColor
-  --whiteColor:         #ececec;   //whiteColor
-  --blackColor:         #000000;   //blackColor
-  --lightBlack:         #535353;   //footerHeaders
-  --darkGray:           #797979;   //footerContent
-  --darkGrayTint1:      #929292;   //darkGray
-  --darkGrayTint2:      #b8b8b8;   //grayBgc
-  --darkGrayTint3:      #d0d0d0;   //borderGray
-  --darkGrayTint4:      #cacaca;   //topNavbarHover
+    --cleanWhiteColor: #ffffff; //cleanWhiteColor
+    --whiteColor: #ececec; //whiteColor
+    --blackColor: #000000; //blackColor
+    --lightBlack: #535353; //footerHeaders
 
-  --lightGray:          #f2f2f2;   //lightLightGrayBgc
-  --lightGrayTint1:     #e5e7e8;   //lightGrayBgc
-  --lightGrayTint2:     #eeeeee;   //calendarBgc
-  --lightGrayTint3:     #dfdfdf;   //calendarPrev
-  --lightGrayTint4:     #e2e2e2;   //lightGrayTint4
+    --darkGray: #797979; //footerContent
+    --darkGrayTint1: #929292; //darkGray
+    --darkGrayTint2: #b8b8b8; //grayBgc
+    --darkGrayTint3: #d0d0d0; //borderGray
+    --darkGrayTint4: #cacaca; //topNavbarHover
 
-  --boxShadowColor:     #bdbdbd;
-  --boxShadowTint:      #b6b6b6;
-  --boxShadowTint2:     #dbdbdb;
-  --boxShadowTint3:     #878787;
+    --lightGray: #f2f2f2; //lightLightGrayBgc
+    --lightGrayTint1: #e5e7e8; //lightGrayBgc
+    --lightGrayTint2: #eeeeee; //calendarBgc
+    --lightGrayTint3: #dfdfdf; //calendarPrev
+    --lightGrayTint4: #e2e2e2; //lightGrayTint4
 
-  --widthVertical:      1200px;    //Safearea content for 4:3 aspect ratio screens
-  --transparentModal:   rgba(0, 0, 0, .6);
+    --boxShadowColor: #bdbdbd;
+    --boxShadowTint: #b6b6b6;
+    --boxShadowTint2: #dbdbdb;
+    --boxShadowTint3: #878787;
+
+    --widthVertical: 1200px; //Safearea content for 4:3 aspect ratio screens
+    --transparentModal: rgba(0, 0, 0, .6);
 }
 
 html, body, button, input, select, option, textarea {
-  font-family: 'Barlow Semi Condensed', sans-serif;
+    font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
 .stopTransitions * {
-  animation: none !important;
-  transition: none !important;
+    animation: none !important;
+    transition: none !important;
 }
 
 * [role = 'link'] {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 body.disable-scroll {
-  position: fixed;
-  width: 100%;
+    position: fixed;
+    width: 100%;
 }

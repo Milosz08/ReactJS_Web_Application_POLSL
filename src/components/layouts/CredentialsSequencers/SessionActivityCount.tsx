@@ -23,14 +23,14 @@ export const MAX_INACTIVITY_TIME: number = 5;
  * A string array that stores every possible event (user interaction with the page). Used to reset the timer.
  */
 const ACTIVITY_EVENTS: string[] = [
-   'mousedown', 'mousemove', 'keydown', 'scroll', 'touchstart'
+    'mousedown', 'mousemove', 'keydown', 'scroll', 'touchstart'
 ];
 
 /**
  * Interface defining the type of props.
  */
 interface PropsProvider {
-   authCredentialPerson: boolean;
+    authCredentialPerson: boolean;
 }
 
 /**
@@ -43,38 +43,38 @@ interface PropsProvider {
  */
 const SessionActivityCount: React.FC<PropsProvider> = ({ authCredentialPerson }): null => {
 
-   const { adminSessionInfo, setAdminSessionInfo } = useContext<any>(GlobalModalsStateContext);
+    const { adminSessionInfo, setAdminSessionInfo } = useContext<any>(GlobalModalsStateContext);
 
-   useEffect(() => {
-      let index: NodeJS.Timeout;
-      let secondsSinceLastActivity: number = 0;
-      const maxInactivity: number = (60 * MAX_INACTIVITY_TIME);
-      const activity = (): number => secondsSinceLastActivity = 0;
+    useEffect(() => {
+        let index: NodeJS.Timeout;
+        let secondsSinceLastActivity: number = 0;
+        const maxInactivity: number = (60 * MAX_INACTIVITY_TIME);
+        const activity = (): number => secondsSinceLastActivity = 0;
 
-      ACTIVITY_EVENTS.forEach((eventName: string) => document.addEventListener(eventName, activity, true));
+        ACTIVITY_EVENTS.forEach((eventName: string) => document.addEventListener(eventName, activity, true));
 
-      const asyncCountingSession = () => {
-         secondsSinceLastActivity++;
-         setAdminSessionInfo({ ...adminSessionInfo, counter: secondsSinceLastActivity });
-         if(secondsSinceLastActivity > maxInactivity) {
-            setAdminSessionInfo({ ...adminSessionInfo, modalOpen: true });
+        const asyncCountingSession = () => {
+            secondsSinceLastActivity++;
+            setAdminSessionInfo({ ...adminSessionInfo, counter: secondsSinceLastActivity });
+            if (secondsSinceLastActivity > maxInactivity) {
+                setAdminSessionInfo({ ...adminSessionInfo, modalOpen: true });
+                secondsSinceLastActivity = 0;
+                clearInterval(index);
+            }
+        }
+
+        if (authCredentialPerson && !adminSessionInfo.modalOpen) {
+            index = setInterval(asyncCountingSession, 1000);
+        }
+
+        return () => {
             secondsSinceLastActivity = 0;
             clearInterval(index);
-         }
-      }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ authCredentialPerson, adminSessionInfo.modalOpen ]);
 
-      if(authCredentialPerson && !adminSessionInfo.modalOpen) {
-         index = setInterval(asyncCountingSession, 1000);
-      }
-
-      return () => {
-         secondsSinceLastActivity = 0;
-         clearInterval(index);
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [authCredentialPerson, adminSessionInfo.modalOpen]);
-
-   return null;
+    return null;
 }
 
 export default SessionActivityCount;

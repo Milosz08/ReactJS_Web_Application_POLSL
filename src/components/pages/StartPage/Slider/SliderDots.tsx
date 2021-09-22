@@ -22,8 +22,8 @@ const { bannerDots, activeDot } = require('./Slider.module.scss');
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   dotsCount: number;
-   actualState: number;
+    dotsCount: number;
+    actualState: number;
 }
 
 /**
@@ -35,18 +35,18 @@ interface PropsProvider {
  */
 const SliderDots: React.FC<PropsProvider> = ({ dotsCount, actualState }): JSX.Element => {
 
-   const generateDots = Array.from({length: dotsCount}).map((nullVal: unknown, index: number) => {
-      const activeToggle = ((dotsCount - 1) - index) === actualState / 100 + 1 ? activeDot : null;
-      return (
-         <div key={uuidv4()} className = {activeToggle}/>
-      );
-   });
+    const generateDots = Array.from({ length: dotsCount }).map((nullVal: unknown, index: number) => {
+        const activeToggle = ((dotsCount - 1) - index) === actualState / 100 + 1 ? activeDot : null;
+        return (
+            <div key = {uuidv4()} className = {activeToggle}/>
+        );
+    });
 
-   return (
-      <div className = {bannerDots}>
-         {generateDots}
-      </div>
-   );
+    return (
+        <div className = {bannerDots}>
+            {generateDots}
+        </div>
+    );
 }
 
 export default SliderDots;

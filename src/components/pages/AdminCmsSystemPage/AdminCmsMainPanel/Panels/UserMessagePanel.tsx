@@ -18,7 +18,7 @@
 import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { v4 as uuidv4 } from 'uuid';
-import classnames from "classnames";
+import classnames from 'classnames';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../contextStore/ModalsStateProvider';
@@ -26,8 +26,8 @@ import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../
 const SearchBox = React.lazy(() => import('./AdditionalComponents/SearchBox'));
 
 const {
-   panelContainer, panelActive, recordsNotExist, infoIcon, listSorting, sortById, sortByName, sortByType,
-   listNumber, listTitle, typeOfMessageCSS, modifyElement, fasIcon, deleteElement
+    panelContainer, panelActive, recordsNotExist, infoIcon, listSorting, sortById, sortByName, sortByType,
+    listNumber, listTitle, typeOfMessageCSS, modifyElement, fasIcon, deleteElement
 } = require('./Panels.module.scss');
 
 /**
@@ -37,33 +37,38 @@ const {
  * @param choice { string } - wybór z pola select.
  */
 export const insertUserChoice = (choice: string): string => {
-   switch(choice) {
-      case 'sheduleModify':      return 'Modyfikacja planu zajęć';
-      case 'pageError':          return 'Błąd na stronie';
-      case 'calendarNewDate':    return 'Modyfikacja kalendarza';
-      default:                   return 'Inne zgłoszenie';
-   }
+    switch (choice) {
+        case 'sheduleModify':
+            return 'Modyfikacja planu zajęć';
+        case 'pageError':
+            return 'Błąd na stronie';
+        case 'calendarNewDate':
+            return 'Modyfikacja kalendarza';
+        default:
+            return 'Inne zgłoszenie';
+    }
 }
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   activeNavElm: number;
+    activeNavElm: number;
 }
 
 /**
  * Interface defining the type of FooterForm values.
  */
 interface FooterFormProvider {
-   _id: string,
-   userIdentity: string,
-   userChoice: string,
-   userMessage: string,
-   sendDate: {
-      fullDate: string,
-      fullTime: string
-   }, __v: number
+    _id: string,
+    userIdentity: string,
+    userChoice: string,
+    userMessage: string,
+    sendDate: {
+        fullDate: string,
+        fullTime: string
+    },
+    __v: number
 }
 
 /**
@@ -75,77 +80,77 @@ interface FooterFormProvider {
  */
 const UserMessagesPanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element => {
 
-   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
-   const { setMessageModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
+    const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const { setMessageModal } = useContext<Partial<ModalStateType>>(ModalsStateContext);
 
-   const [ inputField, setInputField ] = useState<string>('');
-   const { footerForms } = dataFetchFromServer;
+    const [ inputField, setInputField ] = useState<string>('');
+    const { footerForms } = dataFetchFromServer;
 
-   const toggleClass = activeNavElm === 5 ? panelActive : '';
+    const toggleClass = activeNavElm === 5 ? panelActive : '';
 
-   const filteredList = footerForms.filter((form: FooterFormProvider): FooterFormProvider | null => {
-      const typeOfMessage = insertUserChoice(form.userChoice).toLocaleLowerCase();
-      if(inputField === '') {
-         return form;
-      } else if(typeOfMessage.includes(inputField.toLocaleLowerCase())) {
-         return form;
-      }
-      return null;
-   });
+    const filteredList = footerForms.filter((form: FooterFormProvider): FooterFormProvider | null => {
+        const typeOfMessage = insertUserChoice(form.userChoice).toLocaleLowerCase();
+        if (inputField === '') {
+            return form;
+        } else if (typeOfMessage.includes(inputField.toLocaleLowerCase())) {
+            return form;
+        }
+        return null;
+    });
 
-   const generateMessagesList = filteredList.map((message: { [value: string]: string }, index: number) => (
-      <li key = {uuidv4()}>
-         <span className = {listNumber}>{index + 1}</span>
-         <span className = {listTitle}>{message.userIdentity}</span>
-         <span className = {typeOfMessageCSS}>{insertUserChoice(message.userChoice)}</span>
-         <button
-            className = {modifyElement}
-            onClick = {() => setMessageModal!({ id: message._id, type: MODAL_TYPES.VIEW, ifOpen: true })}
-         >
-            <FontAwesomeIcon
-               icon = {['fas', 'envelope-open-text']}
-               className = {fasIcon}
-               title = 'Kliknij, aby zobaczyć szczegóły'
+    const generateMessagesList = filteredList.map((message: { [value: string]: string }, index: number) => (
+        <li key = {uuidv4()}>
+            <span className = {listNumber}>{index + 1}</span>
+            <span className = {listTitle}>{message.userIdentity}</span>
+            <span className = {typeOfMessageCSS}>{insertUserChoice(message.userChoice)}</span>
+            <button
+                className = {modifyElement}
+                onClick = {() => setMessageModal!({ id: message._id, type: MODAL_TYPES.VIEW, ifOpen: true })}
+            >
+                <FontAwesomeIcon
+                    icon = {[ 'fas', 'envelope-open-text' ]}
+                    className = {fasIcon}
+                    title = 'Kliknij, aby zobaczyć szczegóły'
+                />
+            </button>
+            <button
+                className = {deleteElement}
+                onClick = {() => setMessageModal!({ id: message._id, type: MODAL_TYPES.REMOVE, ifOpen: true })}
+            >
+                <FontAwesomeIcon
+                    icon = {[ 'fas', 'times' ]}
+                    className = {fasIcon}
+                    title = 'Usuń wiadmość'
+                />
+            </button>
+        </li>
+    ));
+
+    return (
+        <div className = {classnames(panelContainer, toggleClass)}>
+            <h2>Przeglądanie i Usuwanie wiadmości użytkowników</h2>
+            <SearchBox
+                inputField = {inputField}
+                setInputField = {setInputField}
+                placeholderProp = 'Typ'
             />
-         </button>
-         <button
-            className = {deleteElement}
-            onClick = {() => setMessageModal!({ id: message._id, type: MODAL_TYPES.REMOVE, ifOpen: true })}
-         >
-            <FontAwesomeIcon
-               icon = {['fas', 'times']}
-               className = {fasIcon}
-               title = 'Usuń wiadmość'
-            />
-         </button>
-      </li>
-   ));
-
-   return (
-      <div className = {classnames(panelContainer, toggleClass)}>
-         <h2>Przeglądanie i Usuwanie wiadmości użytkowników</h2>
-         <SearchBox
-            inputField = {inputField}
-            setInputField = {setInputField}
-            placeholderProp = 'Typ'
-         />
-         <ul>
-            {footerForms.length !== 0 && <li className = {listSorting}>
-               <span className = {sortById}>id</span>
-               <span className = {sortByName}>imię/nick</span>
-               <span className = {sortByType}>typ</span>
-            </li>}
-            {generateMessagesList}
-            {footerForms.length === 0 && <div className = {recordsNotExist}>
-               <FontAwesomeIcon
-                  icon = {['fas', 'info-circle']}
-                  className = {infoIcon}
-               />
-               <p>Brak wiadomości</p>
-            </div>}
-         </ul>
-      </div>
-   );
+            <ul>
+                {footerForms.length !== 0 && <li className = {listSorting}>
+                    <span className = {sortById}>id</span>
+                    <span className = {sortByName}>imię/nick</span>
+                    <span className = {sortByType}>typ</span>
+                </li>}
+                {generateMessagesList}
+                {footerForms.length === 0 && <div className = {recordsNotExist}>
+                    <FontAwesomeIcon
+                        icon = {[ 'fas', 'info-circle' ]}
+                        className = {infoIcon}
+                    />
+                    <p>Brak wiadomości</p>
+                </div>}
+            </ul>
+        </div>
+    );
 }
 
 export default UserMessagesPanel;

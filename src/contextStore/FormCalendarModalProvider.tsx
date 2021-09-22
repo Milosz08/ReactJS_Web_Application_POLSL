@@ -18,43 +18,43 @@ import { v4 as uuidv4 } from 'uuid';
  * Object of constants describing the minimum and maximum dimensions of the text field in the form.
  */
 export const TEXTFIELD_SIZE: { [value: string]: number } = {
-   MIN_LENGTH: 10,
-   MAX_LENGTH: 80
+    MIN_LENGTH: 10,
+    MAX_LENGTH: 80
 }
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 /**
  * Interface defining the type of state values.
  */
 interface StateProvider {
-   [value: string]: boolean;
+    [value: string]: boolean;
 }
 
 /**
  * Interface defining the type of return in context store values.
  */
 export interface FormCalendarModalType {
-   date: string;
-   setDate: Dispatch<SetStateAction<string>>;
-   entriesCount: number;
-   setEntriesCount: Dispatch<SetStateAction<number>>;
-   entries: { [value: string]: string }[];
-   setEntries: Dispatch<SetStateAction<{ [value: string]: string; }[]>>;
-   errors: { [value: string]: boolean };
-   setErrors: Dispatch<SetStateAction<StateProvider>>;
-   validateAll: () => StateProvider;
+    date: string;
+    setDate: Dispatch<SetStateAction<string>>;
+    entriesCount: number;
+    setEntriesCount: Dispatch<SetStateAction<number>>;
+    entries: { [value: string]: string }[];
+    setEntries: Dispatch<SetStateAction<{ [value: string]: string; }[]>>;
+    errors: { [value: string]: boolean };
+    setErrors: Dispatch<SetStateAction<StateProvider>>;
+    validateAll: () => StateProvider;
 }
 
 /**
  * Create the context of the store. Function exported and used to destructurize context members.
  */
-export const FormCalendarModalContext = createContext<Partial<FormCalendarModalType>>({ });
+export const FormCalendarModalContext = createContext<Partial<FormCalendarModalType>>({});
 
 /**
  * @details Store component used for the calendar modal in the CMS system. The component has validation of data entered in
@@ -64,47 +64,47 @@ export const FormCalendarModalContext = createContext<Partial<FormCalendarModalT
  */
 const FormCalendarModalProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
-   const [ errors, setErrors ] = useState<StateProvider>({ date: false, time: false, message: false });
+    const [ errors, setErrors ] = useState<StateProvider>({ date: false, time: false, message: false });
 
-   const [ date, setDate ] = useState<string>('');
-   const [ entriesCount, setEntriesCount ] = useState<number>(1);
-   const [ entries, setEntries ] = useState<{ [value: string]: string }[]>(Array.from({ length: entriesCount }, () => ({
-      _id: uuidv4(), start: '', message: '', importantLevel: 'low'
-   })));
+    const [ date, setDate ] = useState<string>('');
+    const [ entriesCount, setEntriesCount ] = useState<number>(1);
+    const [ entries, setEntries ] = useState<{ [value: string]: string }[]>(Array.from({ length: entriesCount }, () => ({
+        _id: uuidv4(), start: '', message: '', importantLevel: 'low'
+    })));
 
-   const validateAll = (): StateProvider => {
-      let dateBool = false, timeBool = false, messageBool = false;
-      const allTimes = entries.filter((entrie: { [value: string]: string }) => entrie.start === '');
-      const allMessages = entries.filter((entrie: { [value: string]: string }) => (
-         entrie.message === '' || entrie.message.length < 10
-      ));
+    const validateAll = (): StateProvider => {
+        let dateBool = false, timeBool = false, messageBool = false;
+        const allTimes = entries.filter((entrie: { [value: string]: string }) => entrie.start === '');
+        const allMessages = entries.filter((entrie: { [value: string]: string }) => (
+            entrie.message === '' || entrie.message.length < 10
+        ));
 
-      if(date === '') {
-         dateBool = true;
-      }
-      if(allTimes.length !== 0) {
-         timeBool = true;
-      }
-      if(allMessages.length !== 0) {
-         messageBool = true;
-      }
+        if (date === '') {
+            dateBool = true;
+        }
+        if (allTimes.length !== 0) {
+            timeBool = true;
+        }
+        if (allMessages.length !== 0) {
+            messageBool = true;
+        }
 
-      return { dateBool, timeBool, messageBool };
-   }
+        return { dateBool, timeBool, messageBool };
+    }
 
-   return (
-      <FormCalendarModalContext.Provider
-         value = {{
-            date, setDate,
-            entriesCount, setEntriesCount,
-            entries, setEntries,
-            errors, setErrors,
-            validateAll
-         }}
-      >
-         {children}
-      </FormCalendarModalContext.Provider>
-   );
+    return (
+        <FormCalendarModalContext.Provider
+            value = {{
+                date, setDate,
+                entriesCount, setEntriesCount,
+                entries, setEntries,
+                errors, setErrors,
+                validateAll
+            }}
+        >
+            {children}
+        </FormCalendarModalContext.Provider>
+    );
 }
 
 export default FormCalendarModalProvider;

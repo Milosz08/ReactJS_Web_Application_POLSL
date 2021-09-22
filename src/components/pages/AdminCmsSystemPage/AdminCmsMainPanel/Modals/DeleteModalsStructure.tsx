@@ -24,15 +24,15 @@ const ViewUserMessageModal = React.lazy(() => import('./ViewUserMessagesModal/Vi
  *          from the database using the API. The relevant buttons are activated beforehand.
  */
 const DeleteModalsStructure = (): JSX.Element => {
-   return (
-      <Fragment>
-         <SubjectDeleteModal/>
-         <CalendarDeleteModal/>
-         <UserMessageDeleteModal/>
-         <ScheduleDeleteModal/>
-         <ViewUserMessageModal/>
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            <SubjectDeleteModal/>
+            <CalendarDeleteModal/>
+            <UserMessageDeleteModal/>
+            <ScheduleDeleteModal/>
+            <ViewUserMessageModal/>
+        </Fragment>
+    );
 }
 
 export default DeleteModalsStructure;

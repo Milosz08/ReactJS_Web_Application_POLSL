@@ -28,7 +28,7 @@ const { navInline, navBlocks, arrowGoto } = require('./Navigation.module.scss');
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   ifHeader: boolean;
+    ifHeader: boolean;
 }
 
 /**
@@ -38,55 +38,55 @@ interface PropsProvider {
  * @param ifHeader { boolean } - decides whether the navigation is to be generated for the header or for the content
  *                               on the main page (under the counter).
  */
-const Navigation: React.FC<PropsProvider > = ({ ifHeader }): JSX.Element => {
+const Navigation: React.FC<PropsProvider> = ({ ifHeader }): JSX.Element => {
 
-   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
-   const { SITES } = CONSTANT_DATA;
-   const classToggle = ifHeader ? navInline : navBlocks;
+    const { SITES } = CONSTANT_DATA;
+    const classToggle = ifHeader ? navInline : navBlocks;
 
-   const navigationElements = SITES.map(site => {
-      const redeptWithPolish: string = site.title.replace(/\s+/g, '-').toLowerCase();
-      const descriptionToggle: boolean | JSX.Element = !ifHeader && <span>{site.description}</span>;
+    const navigationElements = SITES.map(site => {
+        const redeptWithPolish: string = site.title.replace(/\s+/g, '-').toLowerCase();
+        const descriptionToggle: boolean | JSX.Element = !ifHeader && <span>{site.description}</span>;
 
-      const titleToggle: string | JSX.Element = ifHeader ? `${site.title}` : (
-         <span>
+        const titleToggle: string | JSX.Element = ifHeader ? `${site.title}` : (
+            <span>
             {site.title}
-            <span className = {arrowGoto}/>
+                <span className = {arrowGoto}/>
          </span>
-      );
+        );
 
-      return (
-         <li key = {site.title}>
-            <DelayLink
-               to = {`/${redeptWithPolish}`}
-               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
-               replace = {false}
-               clickAction = {() => timeoutRoutePath!(`/${redeptWithPolish}`)}
-            >
-               <a href = {`/${redeptWithPolish}`}>
-                  {titleToggle}
-                  {descriptionToggle}
-               </a>
-            </DelayLink>
-         </li>
-      );
-   });
+        return (
+            <li key = {site.title}>
+                <DelayLink
+                    to = {`/${redeptWithPolish}`}
+                    delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                    replace = {false}
+                    clickAction = {() => timeoutRoutePath!(`/${redeptWithPolish}`)}
+                >
+                    <a href = {`/${redeptWithPolish}`}>
+                        {titleToggle}
+                        {descriptionToggle}
+                    </a>
+                </DelayLink>
+            </li>
+        );
+    });
 
-   return (
-      <section className = {classToggle}>
-         { !ifHeader &&
-         <UniversalHeader
-            iconP = {['fas', 'location-arrow']}
-            content = 'Główna Nawigacja'
-            ifCloseButtonVisible = {false}
-         />
-         }
-         <ul>
-            {navigationElements}
-         </ul>
-      </section>
-   );
+    return (
+        <section className = {classToggle}>
+            {!ifHeader &&
+            <UniversalHeader
+                iconP = {[ 'fas', 'location-arrow' ]}
+                content = 'Główna Nawigacja'
+                ifCloseButtonVisible = {false}
+            />
+            }
+            <ul>
+                {navigationElements}
+            </ul>
+        </section>
+    );
 }
 
 export default Navigation;

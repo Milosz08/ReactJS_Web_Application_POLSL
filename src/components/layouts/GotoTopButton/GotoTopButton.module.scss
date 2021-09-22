@@ -12,57 +12,57 @@
 @import './../../../styles/_mixins';
 
 .gotoTopWrapper {
-  position: fixed;
-  z-index: 999;
-  bottom: 50px;
-  right: 50px;
-  background-color: var(--navyBlueColor);
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: .4s;
-  outline: none;
-  border: none;
-  transform: scale(0);
-  &::before {
-    @include arrowNavigate(1em, -135deg, 1.7em, var(--whiteColor));
-    margin-top: 2px;
-  }
-  &:hover {
-    bottom: 56px;
-  }
-  &.showGotoButton {
-    transform: scale(1);
-  }
+    position: fixed;
+    z-index: 999;
+    bottom: 50px;
+    right: 50px;
+    background-color: var(--navyBlueColor);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .4s;
+    outline: none;
+    border: none;
+    transform: scale(0);
+    &::before {
+        @include arrowNavigate(1em, -135deg, 1.7em, var(--whiteColor));
+        margin-top: 2px;
+    }
+    &:hover {
+        bottom: 56px;
+    }
+    &.showGotoButton {
+        transform: scale(1);
+    }
 }
 
 ////////////////////////////////////////////////////
 
 @media only screen and (max-width: 1250px) {
-  .gotoTopWrapper {
-    bottom: 20px;
-    right: 20px;
-    &:hover {
-      bottom: 26px;
+    .gotoTopWrapper {
+        bottom: 20px;
+        right: 20px;
+        &:hover {
+            bottom: 26px;
+        }
     }
-  }
 }
 
 @media only screen and (max-width: 500px) {
-  .gotoTopWrapper {
-    bottom: 60px;
-    width: 50px;
-    height: 50px;
-    &::before {
-      @include arrowNavigate(.7em, -135deg, 1.3em, var(--whiteColor));
-      margin-left: 0;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-135deg);
-      margin-top: 1px;
+    .gotoTopWrapper {
+        bottom: 60px;
+        width: 50px;
+        height: 50px;
+        &::before {
+            @include arrowNavigate(.7em, -135deg, 1.3em, var(--whiteColor));
+            margin-left: 0;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-135deg);
+            margin-top: 1px;
+        }
+        &:hover {
+            bottom: 60px;
+        }
     }
-    &:hover {
-      bottom: 60px;
-    }
-  }
 }

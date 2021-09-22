@@ -23,31 +23,31 @@ const INTERVAL_RESET_DATE: number = 10;
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 /**
  * Interface defining the type of state values.
  */
 interface StateProvider {
-   dayStr: string;
-   day: number;
-   monthStr: string;
-   year: number;
-   time: number;
+    dayStr: string;
+    day: number;
+    monthStr: string;
+    year: number;
+    time: number;
 }
 
 /**
  * Interface defining the type of actual date values.
  */
 export interface ActualDateTypes {
-   date: StateProvider;
+    date: StateProvider;
 }
 
 /**
  * Create the context of the store. Function exported and used to destructurize context members.
  */
-export const ActualDateContext = createContext<Partial<ActualDateTypes>>({ });
+export const ActualDateContext = createContext<Partial<ActualDateTypes>>({});
 
 /**
  * @details React component that is a store that holds a date object. Component is
@@ -57,43 +57,43 @@ export const ActualDateContext = createContext<Partial<ActualDateTypes>>({ });
  */
 const ActualDateProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
-   const [ date, setDate ] = useState<StateProvider>({ dayStr: '', day: 0, monthStr: '', year: 0, time: 0 });
-   const { DAYS, MONTHS } = DAYS_AND_MONTHS;
+    const [ date, setDate ] = useState<StateProvider>({ dayStr: '', day: 0, monthStr: '', year: 0, time: 0 });
+    const { DAYS, MONTHS } = DAYS_AND_MONTHS;
 
-   useEffect(() => {
-      const dateObject = (date: Date): StateProvider => {
-         const day: number = date.getDate();
-         const year: number = date.getFullYear();
-         const hours: number = date.getHours();
-         const minutes: number = date.getMinutes();
-         const time: number = parseInt(`${hours}${minutes}`);
+    useEffect(() => {
+        const dateObject = (date: Date): StateProvider => {
+            const day: number = date.getDate();
+            const year: number = date.getFullYear();
+            const hours: number = date.getHours();
+            const minutes: number = date.getMinutes();
+            const time: number = parseInt(`${hours}${minutes}`);
 
-         const actualDay = DAYS.find((day: { id: number, name: string }): { } => day.id === date.getDay());
-         const actualMonth = MONTHS.find((month: { id: number, paraphrase: string }) => month.id === date.getMonth());
+            const actualDay = DAYS.find((day: { id: number, name: string }): {} => day.id === date.getDay());
+            const actualMonth = MONTHS.find((month: { id: number, paraphrase: string }) => month.id === date.getMonth());
 
-         const dayStr: string = actualDay!.name;
-         const monthStr: string = actualMonth!.paraphrase;
+            const dayStr: string = actualDay!.name;
+            const monthStr: string = actualMonth!.paraphrase;
 
-         return { dayStr, day, monthStr, year, time }
-      }
+            return { dayStr, day, monthStr, year, time }
+        }
 
-      const counting = () => {
-         const { dayStr, day, monthStr, year, time } = dateObject(new Date());
-         setDate({ dayStr, day, monthStr, year, time });
-      }
+        const counting = () => {
+            const { dayStr, day, monthStr, year, time } = dateObject(new Date());
+            setDate({ dayStr, day, monthStr, year, time });
+        }
 
-      counting();
-      const interval = setInterval(counting, 1000 * 60 * INTERVAL_RESET_DATE);
-      return () => clearInterval(interval);
-   }, [DAYS, MONTHS]);
+        counting();
+        const interval = setInterval(counting, 1000 * 60 * INTERVAL_RESET_DATE);
+        return () => clearInterval(interval);
+    }, [ DAYS, MONTHS ]);
 
-   return (
-      <ActualDateContext.Provider
-         value = {{ date }}
-      >
-         {children}
-      </ActualDateContext.Provider>
-   );
+    return (
+        <ActualDateContext.Provider
+            value = {{ date }}
+        >
+            {children}
+        </ActualDateContext.Provider>
+    );
 }
 
 export default ActualDateProvider;

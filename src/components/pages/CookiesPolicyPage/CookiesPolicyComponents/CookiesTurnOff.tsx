@@ -29,34 +29,34 @@ const { cookiesSections, sectionSign, cookieContent } = require('./../CookiesPol
  */
 const CookiesTurnOff = (): JSX.Element => {
 
-   const { LIST_STRUCTURE, NON_LIST_STRUCTURE } = STATIC_STRUCTURE;
+    const { LIST_STRUCTURE, NON_LIST_STRUCTURE } = STATIC_STRUCTURE;
 
-   return (
-      <section className = {classnames(cookieSectionsContent, cookiesSections)}>
-         <h3>
+    return (
+        <section className = {classnames(cookieSectionsContent, cookiesSections)}>
+            <h3>
             <span className = {sectionSign}>
                &#167; {LIST_STRUCTURE.length + NON_LIST_STRUCTURE.length + 2}
             </span>
-            Jak wyłączyć pliki Cookie
-            <aside/>
-         </h3>
-         <div className = {cookieContent}>
-            Dyrektywa Unijna i Polskie Prawo Telekomunikacyjne nakazuje serwisom internetowym informowanie
-            swoich użytkowników w jakim celu je wykorzystują i jak można je wyłączyć. Jeśli nie wiesz jak
-            wyłączyć pliki Cookies na swoim Urządzeniu, przejdź pod <a
-               href = 'https://jakwylaczyccookie.pl/jak-wylaczyc-pliki-cookies/'
-               target = '_blank'
-               rel = 'noreferrer'
+                Jak wyłączyć pliki Cookie
+                <aside/>
+            </h3>
+            <div className = {cookieContent}>
+                Dyrektywa Unijna i Polskie Prawo Telekomunikacyjne nakazuje serwisom internetowym informowanie
+                swoich użytkowników w jakim celu je wykorzystują i jak można je wyłączyć. Jeśli nie wiesz jak
+                wyłączyć pliki Cookies na swoim Urządzeniu, przejdź pod <a
+                href = 'https://jakwylaczyccookie.pl/jak-wylaczyc-pliki-cookies/'
+                target = '_blank'
+                rel = 'noreferrer'
             >
-               ten link
-               <FontAwesomeIcon
-                  icon = {['fas', 'external-link-alt']}
-                  className = {externalLinkIcon}
-               />
+                ten link
+                <FontAwesomeIcon
+                    icon = {[ 'fas', 'external-link-alt' ]}
+                    className = {externalLinkIcon}
+                />
             </a>.
-         </div>
-      </section>
-   );
+            </div>
+        </section>
+    );
 }
 
 export default CookiesTurnOff;

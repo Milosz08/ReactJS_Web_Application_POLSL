@@ -26,17 +26,17 @@ const AddChangeScheduleModal = React.lazy(() => import('./AddChangeScheduleModal
  *          stores validation methods and the state of the forms.
  */
 const AddChangeModalsStructure = (): JSX.Element => {
-   return (
-      <Fragment>
-         <FormDataAndValidateProvider>
-            <AddChangeSubjectModal/>
-         </FormDataAndValidateProvider>
-         <FormCalendarModalProvider>
-            <AddChangeCalendarModal/>
-         </FormCalendarModalProvider>
-         <AddChangeScheduleModal/>
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            <FormDataAndValidateProvider>
+                <AddChangeSubjectModal/>
+            </FormDataAndValidateProvider>
+            <FormCalendarModalProvider>
+                <AddChangeCalendarModal/>
+            </FormCalendarModalProvider>
+            <AddChangeScheduleModal/>
+        </Fragment>
+    );
 }
 
 export default AddChangeModalsStructure;

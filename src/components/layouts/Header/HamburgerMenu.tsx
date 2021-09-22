@@ -23,16 +23,16 @@ import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '
 import CONSTANT_DATA from '../../../constants/staticData';
 
 const {
-   hamburgerContainter, hamburgerButton, hamburgerBars, activeBars, menuWrapper, referentialLinks, outerLinks,
-   activeMenu, externalLinkIcon
+    hamburgerContainter, hamburgerButton, hamburgerBars, activeBars, menuWrapper, referentialLinks, outerLinks,
+    activeMenu, externalLinkIcon
 } = require('./Header.module.scss');
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   activeHamburger: boolean;
-   setActiveHamburger: Dispatch<SetStateAction<boolean>>;
+    activeHamburger: boolean;
+    setActiveHamburger: Dispatch<SetStateAction<boolean>>;
 }
 
 /**
@@ -43,70 +43,70 @@ interface PropsProvider {
  */
 const HamburgerMenu: React.FC<PropsProvider> = ({ activeHamburger, setActiveHamburger }): JSX.Element => {
 
-   const changeHamburgerButton = activeHamburger ? classnames(hamburgerBars, activeBars) : hamburgerBars;
-   const changeMenuSlide = activeHamburger ? classnames(menuWrapper, activeMenu) : menuWrapper;
+    const changeHamburgerButton = activeHamburger ? classnames(hamburgerBars, activeBars) : hamburgerBars;
+    const changeMenuSlide = activeHamburger ? classnames(menuWrapper, activeMenu) : menuWrapper;
 
-   const { TOP_NAVBAR_ELMS, SITES } = CONSTANT_DATA;
-   const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const { TOP_NAVBAR_ELMS, SITES } = CONSTANT_DATA;
+    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
-   const topNavbarElm = TOP_NAVBAR_ELMS.map((singleLink: any) => (
-      <li key = {singleLink.title}>
-         <a
-            href = {singleLink.link}
-            target = '_blank'
-            rel = 'noreferrer'
-         >
-            {singleLink.title}
-            <FontAwesomeIcon
-               icon = {['fas', 'external-link-alt']}
-               className = {externalLinkIcon}
-            />
-         </a>
-      </li>
-   ));
-
-   const navigationElements = SITES.map(site => {
-      const redeptWithPolish: string = site.title.replace(/\s+/g, '-').toLowerCase();
-
-      return (
-         <li key = {site.title}>
-            <DelayLink
-               to = {`/${redeptWithPolish}`}
-               delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
-               replace = {false}
-               clickAction = {timeoutRoutePath}
+    const topNavbarElm = TOP_NAVBAR_ELMS.map((singleLink: any) => (
+        <li key = {singleLink.title}>
+            <a
+                href = {singleLink.link}
+                target = '_blank'
+                rel = 'noreferrer'
             >
-               <a href = {`/${redeptWithPolish}`}>
-                  {site.title}
-               </a>
-            </DelayLink>
-         </li>
-      );
-   });
+                {singleLink.title}
+                <FontAwesomeIcon
+                    icon = {[ 'fas', 'external-link-alt' ]}
+                    className = {externalLinkIcon}
+                />
+            </a>
+        </li>
+    ));
 
-   return (
-      <div className = {hamburgerContainter}>
-         <button
-            className = {hamburgerButton}
-            onClick = {() => setActiveHamburger((prevState: boolean) => !prevState)}
-            title = {`Kliknij aby ${!activeHamburger ? 'rozwinąć' : 'schować'} menu`}
-         >
-            <div className = {changeHamburgerButton}/>
-         </button>
-         <div className = {changeMenuSlide}>
-            <div className = {referentialLinks}>
-               <ul>
-                  {navigationElements}
-               </ul>
+    const navigationElements = SITES.map(site => {
+        const redeptWithPolish: string = site.title.replace(/\s+/g, '-').toLowerCase();
+
+        return (
+            <li key = {site.title}>
+                <DelayLink
+                    to = {`/${redeptWithPolish}`}
+                    delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
+                    replace = {false}
+                    clickAction = {timeoutRoutePath}
+                >
+                    <a href = {`/${redeptWithPolish}`}>
+                        {site.title}
+                    </a>
+                </DelayLink>
+            </li>
+        );
+    });
+
+    return (
+        <div className = {hamburgerContainter}>
+            <button
+                className = {hamburgerButton}
+                onClick = {() => setActiveHamburger((prevState: boolean) => !prevState)}
+                title = {`Kliknij aby ${!activeHamburger ? 'rozwinąć' : 'schować'} menu`}
+            >
+                <div className = {changeHamburgerButton}/>
+            </button>
+            <div className = {changeMenuSlide}>
+                <div className = {referentialLinks}>
+                    <ul>
+                        {navigationElements}
+                    </ul>
+                </div>
+                <div className = {outerLinks}>
+                    <ul>
+                        {topNavbarElm}
+                    </ul>
+                </div>
             </div>
-            <div className = {outerLinks}>
-               <ul>
-                  {topNavbarElm}
-               </ul>
-            </div>
-         </div>
-      </div>
-   );
+        </div>
+    );
 }
 
 export default HamburgerMenu;

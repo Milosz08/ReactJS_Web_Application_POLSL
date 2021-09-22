@@ -13,12 +13,12 @@
  * @details Object which stored all cookies names used in the application.
  */
 const COOKIES_OBJECT = {
-   cookiesPopup: '__cookieNotification',
-   adminSession: '__adminSessionStayed',
-   credentialsLevel: '__credentialsLevel',
-   userSession: '__userSessionStayed',
-   groupSelection: '__groupSelection',
-   engGroupSelection: '__engGroupSelection',
+    cookiesPopup: '__cookieNotification',
+    adminSession: '__adminSessionStayed',
+    credentialsLevel: '__credentialsLevel',
+    userSession: '__userSessionStayed',
+    groupSelection: '__groupSelection',
+    engGroupSelection: '__engGroupSelection',
 };
 
 export default COOKIES_OBJECT;

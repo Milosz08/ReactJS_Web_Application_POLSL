@@ -28,33 +28,35 @@ const Subjects = React.lazy(() => import('../../layouts/Subjects/Subjects'));
  */
 const StartPage = (): JSX.Element => {
 
-   const [ widthX, setWidthX ] = useState<number>(document.body.offsetWidth);
+    const [ widthX, setWidthX ] = useState<number>(document.body.offsetWidth);
 
-   useEffect(() => {
-      document.title = ROUTING_PATH_NAMES.START_PAGE;
-      return () => { document.title = ROUTING_PATH_NAMES.START_PAGE };
-   }, []);
+    useEffect(() => {
+        document.title = ROUTING_PATH_NAMES.START_PAGE;
+        return () => {
+            document.title = ROUTING_PATH_NAMES.START_PAGE
+        };
+    }, []);
 
-   useEffect(() => {
-      const onResize = () => {
-         setWidthX(document.body.offsetWidth);
-      }
-      window.addEventListener('resize', onResize);
-      return () => window.removeEventListener('resize', onResize);
-   }, [widthX]);
+    useEffect(() => {
+        const onResize = () => {
+            setWidthX(document.body.offsetWidth);
+        }
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
+    }, [ widthX ]);
 
-   return (
-      <Fragment>
-         <CookiesNotification/>
-         <MobileDownNav id = {0}/>
-         <Header ifHeaderHasRedBar = {true}/>
-         <Slider autoPlay = {widthX >= 1250} duration={5}/>
-         <CovidInfo/>
-         <CountDown/>
-         <Navigation ifHeader = {false}/>
-         <Subjects/>
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            <CookiesNotification/>
+            <MobileDownNav id = {0}/>
+            <Header ifHeaderHasRedBar = {true}/>
+            <Slider autoPlay = {widthX >= 1250} duration = {5}/>
+            <CovidInfo/>
+            <CountDown/>
+            <Navigation ifHeader = {false}/>
+            <Subjects/>
+        </Fragment>
+    );
 }
 
 export default StartPage;

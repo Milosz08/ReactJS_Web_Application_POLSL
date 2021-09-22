@@ -27,40 +27,42 @@ const { checkboxContainer, someError, singleCheckboxField, checkmark } = require
  */
 const CheckboxSemesters = (): JSX.Element => {
 
-   const { SEMESTERS } = STATIC_OPTIONS;
-   const { semesters, setSemesters, errors, setErrors } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
+    const { SEMESTERS } = STATIC_OPTIONS;
+    const {
+        semesters, setSemesters, errors, setErrors
+    } = useContext<Partial<FormDataAndValidateType>>(FormDataAndValidateContext);
 
-   const toggleClass = errors!.checkbox ? someError : '';
+    const toggleClass = errors!.checkbox ? someError : '';
 
-   const generateSemestersCheckboxInputs = SEMESTERS.map((sem, index) => {
+    const generateSemestersCheckboxInputs = SEMESTERS.map((sem, index) => {
 
-      const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-         let updateArray = [...semesters!];
-         target.checked ? updateArray[index] = target.value : updateArray[index] = '';
-         setErrors!({ ...errors, checkbox: false });
-         setSemesters!(updateArray);
-      }
+        const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+            let updateArray = [ ...semesters! ];
+            target.checked ? updateArray[index] = target.value : updateArray[index] = '';
+            setErrors!({ ...errors, checkbox: false });
+            setSemesters!(updateArray);
+        }
 
-      return (
-         <div key = {sem} className = {singleCheckboxField}>
-            <input
-               checked = {sem === semesters![index]}
-               type = 'checkbox'
-               id = {sem}
-               value = {sem}
-               onChange = {handleChange}
-            />
-            <label htmlFor = {sem}>{`Semestr ${index + 1}`}</label>
-            <div className = {checkmark}/>
-         </div>
-      )
-   });
+        return (
+            <div key = {sem} className = {singleCheckboxField}>
+                <input
+                    checked = {sem === semesters![index]}
+                    type = 'checkbox'
+                    id = {sem}
+                    value = {sem}
+                    onChange = {handleChange}
+                />
+                <label htmlFor = {sem}>{`Semestr ${index + 1}`}</label>
+                <div className = {checkmark}/>
+            </div>
+        )
+    });
 
-   return (
-      <div className = {classnames(checkboxContainer, toggleClass)}>
-         {generateSemestersCheckboxInputs}
-      </div>
-   );
+    return (
+        <div className = {classnames(checkboxContainer, toggleClass)}>
+            {generateSemestersCheckboxInputs}
+        </div>
+    );
 }
 
 export default CheckboxSemesters;

@@ -16,59 +16,59 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
  *          (MainStoreProvider) that stores in the object all the data downloaded from the API.
  */
 interface MainStoreStateProvider {
-   covidData: {
-      _id: string,
-      description: string,
-      actualRiskNumber: number,
-      __v: number
-   }[];
-   footerForms: {
-      _id: string,
-      userIdentity: string,
-      userChoice: string,
-      userMessage: string,
-      sendDate: {
-         fullDate: string,
-         fullTime: string
-      }, __v: number
-   }[];
-   subjectsData: {
-      _id: string,
-      semesters: string[],
-      departments: string[],
-      icon: IconProp,
-      ifEnd: boolean;
-      classesPlatforms: {
-         type: string,
-         place: string,
-         link: string
-      }[],
-      title: string,
-      __v: number
-   }[];
-   scheduleSubjects: {
-      _id: string,
-      title: string,
-      group: string,
-      day: string,
-      type: string,
-      start: string,
-      end: string,
-      pzeInfo: {
-         platform: string,
-         pzeLink: string
-      }
-   }[];
-   calendarRecords: {
-      day: number,
-      month: number,
-      year: number,
-      items: {
-         start: string,
-         message: string,
-         importantLevel: string
-      }[]
-   }[];
+    covidData: {
+        _id: string,
+        description: string,
+        actualRiskNumber: number,
+        __v: number
+    }[];
+    footerForms: {
+        _id: string,
+        userIdentity: string,
+        userChoice: string,
+        userMessage: string,
+        sendDate: {
+            fullDate: string,
+            fullTime: string
+        }, __v: number
+    }[];
+    subjectsData: {
+        _id: string,
+        semesters: string[],
+        departments: string[],
+        icon: IconProp,
+        ifEnd: boolean;
+        classesPlatforms: {
+            type: string,
+            place: string,
+            link: string
+        }[],
+        title: string,
+        __v: number
+    }[];
+    scheduleSubjects: {
+        _id: string,
+        title: string,
+        group: string,
+        day: string,
+        type: string,
+        start: string,
+        end: string,
+        pzeInfo: {
+            platform: string,
+            pzeLink: string
+        }
+    }[];
+    calendarRecords: {
+        day: number,
+        month: number,
+        year: number,
+        items: {
+            start: string,
+            message: string,
+            importantLevel: string
+        }[]
+    }[];
 }
 
 export default MainStoreStateProvider;

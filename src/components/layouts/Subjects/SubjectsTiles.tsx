@@ -21,16 +21,16 @@ import classnames from 'classnames';
 import { SubjectsProvider } from './Subjects';
 
 const {
-   activeBtn, subjectTile, subjectsIcon, subjectIconWrapper, subjectTitle, subjectInfoBlock
+    activeBtn, subjectTile, subjectsIcon, subjectIconWrapper, subjectTitle, subjectInfoBlock
 } = require('./Subjects.module.scss');
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   filteredArray: SubjectsProvider[];
-   state: number;
-   setState: Dispatch<SetStateAction<number>>;
+    filteredArray: SubjectsProvider[];
+    state: number;
+    setState: Dispatch<SetStateAction<number>>;
 }
 
 /**
@@ -43,31 +43,31 @@ interface PropsProvider {
  */
 const SubjectsTiles: React.FC<PropsProvider> = ({ filteredArray, state, setState }): JSX.Element => {
 
-   const subjectsButtons = filteredArray.map((subject: SubjectsProvider, index: number) => {
-      const subjectsButtonActive = index === state ? activeBtn : '';
-      return (
-         <button
-            key = {subject.title}
-            onClick = {() => setState(index)}
-            className = {subjectTile}
-         >
-            <div className = {subjectIconWrapper}>
-               <FontAwesomeIcon
-                  icon={subject.icon}
-                  className = {subjectsIcon}
-               />
-            </div>
-            <div className = {subjectTitle}>{subject.title}</div>
-            <div className = {classnames(subjectInfoBlock, subjectsButtonActive)}/>
-         </button>
-      );
-   });
+    const subjectsButtons = filteredArray.map((subject: SubjectsProvider, index: number) => {
+        const subjectsButtonActive = index === state ? activeBtn : '';
+        return (
+            <button
+                key = {subject.title}
+                onClick = {() => setState(index)}
+                className = {subjectTile}
+            >
+                <div className = {subjectIconWrapper}>
+                    <FontAwesomeIcon
+                        icon = {subject.icon}
+                        className = {subjectsIcon}
+                    />
+                </div>
+                <div className = {subjectTitle}>{subject.title}</div>
+                <div className = {classnames(subjectInfoBlock, subjectsButtonActive)}/>
+            </button>
+        );
+    });
 
-   return (
-      <Fragment>
-         {subjectsButtons}
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            {subjectsButtons}
+        </Fragment>
+    );
 }
 
 export default SubjectsTiles;

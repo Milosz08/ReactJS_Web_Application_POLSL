@@ -15,7 +15,7 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
-import classnames from "classnames";
+import classnames from 'classnames';
 
 const { bigBarContainer, bigBarLoading, visible } = require('./LoadingBigBar.module.scss');
 
@@ -25,39 +25,39 @@ const { bigBarContainer, bigBarLoading, visible } = require('./LoadingBigBar.mod
  */
 const LoadingBigBar = (): JSX.Element => {
 
-   const { routePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
-   const [ widthState, setWidthState ] = useState<number>(0);
+    const { routePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const [ widthState, setWidthState ] = useState<number>(0);
 
-   useEffect(() => {
-      const asyncCounting = () => {
-         if(routePath) {
-            let count: number = 0;
-            let index: NodeJS.Timeout;
-            const asyncLoadingBar = () => {
-               count++;
-               setWidthState(count);
-               if(count === 100) {
-                  clearInterval(index);
-               }
+    useEffect(() => {
+        const asyncCounting = () => {
+            if (routePath) {
+                let count: number = 0;
+                let index: NodeJS.Timeout;
+                const asyncLoadingBar = () => {
+                    count++;
+                    setWidthState(count);
+                    if (count === 100) {
+                        clearInterval(index);
+                    }
+                }
+                index = setInterval(asyncLoadingBar, ROUTER_INTERVAL_TIME * 10);
             }
-            index = setInterval(asyncLoadingBar, ROUTER_INTERVAL_TIME * 10);
-         }
-      }
-      asyncCounting();
-      setWidthState(0);
-   }, [routePath]);
+        }
+        asyncCounting();
+        setWidthState(0);
+    }, [ routePath ]);
 
-   const toggleVisible = routePath ? classnames(bigBarContainer, visible) : bigBarContainer;
-   const activeBarVisible = routePath ? classnames(bigBarLoading, visible) : bigBarLoading;
+    const toggleVisible = routePath ? classnames(bigBarContainer, visible) : bigBarContainer;
+    const activeBarVisible = routePath ? classnames(bigBarLoading, visible) : bigBarLoading;
 
-   return (
-      <div className = {toggleVisible}>
+    return (
+        <div className = {toggleVisible}>
          <span
-            className = {activeBarVisible}
-            style = {{ width: `${widthState}%` }}
+             className = {activeBarVisible}
+             style = {{ width: `${widthState}%` }}
          />
-      </div>
-   );
+        </div>
+    );
 }
 
 export default LoadingBigBar;

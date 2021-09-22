@@ -28,18 +28,18 @@ const { scheduleRender } = require('./../../layouts/Navigation/Navigation.module
  * Interface defining the types of iterate one Subject object fetch from API values.
  */
 export interface SubjectsProvider {
-   _id: string,
-   semesters: string[],
-   departments: string[],
-   icon: IconProp,
-   ifEnd: boolean;
-   classesPlatforms: {
-      type: string,
-      place: string,
-      link: string
-   }[],
-   title: string,
-   __v: number
+    _id: string,
+    semesters: string[],
+    departments: string[],
+    icon: IconProp,
+    ifEnd: boolean;
+    classesPlatforms: {
+        type: string,
+        place: string,
+        link: string
+    }[],
+    title: string,
+    __v: number
 }
 
 /**
@@ -48,53 +48,53 @@ export interface SubjectsProvider {
  */
 const Subjects = (): JSX.Element => {
 
-   const [ state, setState ] = useState<number>(0);
-   const [ input, setInput ] = useState<string>('');
-   const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
+    const [ state, setState ] = useState<number>(0);
+    const [ input, setInput ] = useState<string>('');
+    const { dataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
 
-   // eslint-disable-next-line array-callback-return
-   const filteredArray = dataFetchFromServer!.subjectsData.filter((subject: SubjectsProvider) => {
-      if(input === '') {
-         return subject;
-      } else if(subject.title.toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
-         return subject;
-      }
-   });
+    // eslint-disable-next-line array-callback-return
+    const filteredArray = dataFetchFromServer!.subjectsData.filter((subject: SubjectsProvider) => {
+        if (input === '') {
+            return subject;
+        } else if (subject.title.toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
+            return subject;
+        }
+    });
 
-   return (
-      <Fragment>
-         <section className = {scheduleRender}>
-            <UniversalHeader
-               iconP = {['fas', 'chalkboard']}
-               content = 'Przedmioty'
-               ifCloseButtonVisible = {false}
+    return (
+        <Fragment>
+            <section className = {scheduleRender}>
+                <UniversalHeader
+                    iconP = {[ 'fas', 'chalkboard' ]}
+                    content = 'Przedmioty'
+                    ifCloseButtonVisible = {false}
+                />
+                <SearchSubject
+                    state = {state}
+                    setState = {setState}
+                    filteredArray = {filteredArray}
+                    input = {input}
+                    setInput = {setInput}
+                />
+                <DataLastUpdate
+                    dataID = {process.env.REACT_APP_SUBJECTS_ID}
+                    content = 'przedmiotów'
+                    withoutText = {false}
+                />
+                <UniversalHeader
+                    iconP = {[ 'fas', 'university' ]}
+                    content = 'Szczegółowe informacje'
+                    ifCloseButtonVisible = {false}
+                />
+            </section>
+            <SubjectInfo
+                subjectID = {state}
+                filteredArray = {filteredArray}
+                state = {state}
+                setState = {setState}
             />
-            <SearchSubject
-               state = {state}
-               setState = {setState}
-               filteredArray = {filteredArray}
-               input = {input}
-               setInput = {setInput}
-            />
-            <DataLastUpdate
-               dataID = {process.env.REACT_APP_SUBJECTS_ID}
-               content = 'przedmiotów'
-               withoutText = {false}
-            />
-            <UniversalHeader
-               iconP = {['fas', 'university']}
-               content = 'Szczegółowe informacje'
-               ifCloseButtonVisible = {false}
-            />
-         </section>
-         <SubjectInfo
-            subjectID = {state}
-            filteredArray = {filteredArray}
-            state = {state}
-            setState = {setState}
-         />
-      </Fragment>
-   );
+        </Fragment>
+    );
 }
 
 export default Subjects;

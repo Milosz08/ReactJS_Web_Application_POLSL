@@ -20,18 +20,18 @@ import { SubjectsProvider } from './Subjects';
 const SubjectsTiles = React.lazy(() => import('./SubjectsTiles'));
 
 const {
-   searchSubjectWrapper,  removeInputField, subjectsWrapper, emptyIcon, emptySubjectField
+    searchSubjectWrapper, removeInputField, subjectsWrapper, emptyIcon, emptySubjectField
 } = require('./Subjects.module.scss');
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   state: number;
-   input: string;
-   setInput: Dispatch<SetStateAction<string>>
-   setState: Dispatch<SetStateAction<number>>;
-   filteredArray: SubjectsProvider[];
+    state: number;
+    input: string;
+    setInput: Dispatch<SetStateAction<string>>
+    setState: Dispatch<SetStateAction<number>>;
+    filteredArray: SubjectsProvider[];
 }
 
 /**
@@ -46,51 +46,51 @@ interface PropsProvider {
  */
 const SearchSubject: React.FC<PropsProvider> = ({ state, setState, filteredArray, input, setInput }): JSX.Element => {
 
-   const ifSubjectExists = filteredArray.length !== 0 ? (
-      <div className={subjectsWrapper}>
-         <SubjectsTiles
-            state = {state}
-            setState = {setState}
-            filteredArray = {filteredArray}
-         />
-      </div>
-   ) : (
-      <div className = {emptySubjectField}>
-         <FontAwesomeIcon
-            icon = {['fas', 'exclamation-circle']}
-            className = {emptyIcon}
-         />
-         <span>Nie znalazłem szukanego przemiotu.</span>
-      </div>
-   );
+    const ifSubjectExists = filteredArray.length !== 0 ? (
+        <div className = {subjectsWrapper}>
+            <SubjectsTiles
+                state = {state}
+                setState = {setState}
+                filteredArray = {filteredArray}
+            />
+        </div>
+    ) : (
+        <div className = {emptySubjectField}>
+            <FontAwesomeIcon
+                icon = {[ 'fas', 'exclamation-circle' ]}
+                className = {emptyIcon}
+            />
+            <span>Nie znalazłem szukanego przemiotu.</span>
+        </div>
+    );
 
-   const handleInput = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-      setState(0);
-      setInput(target.value);
-   }
+    const handleInput = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+        setState(0);
+        setInput(target.value);
+    }
 
-   return (
-      <Fragment>
-         <aside className = {searchSubjectWrapper}>
-            <label htmlFor = 'searchSubject'>
-               <input
-                  type = 'text'
-                  placeholder = 'Wyszukaj przedmiot'
-                  value = {input}
-                  onChange = {handleInput}
-                  id = 'searchSubject'
-               />
-               <button onClick = {() => setInput('')}>
-                  <FontAwesomeIcon
-                     icon = {['fas', 'trash-alt']}
-                     className = {removeInputField}
-                  />
-               </button>
-            </label>
-         </aside>
-         {ifSubjectExists}
-      </Fragment>
-   );
+    return (
+        <Fragment>
+            <aside className = {searchSubjectWrapper}>
+                <label htmlFor = 'searchSubject'>
+                    <input
+                        type = 'text'
+                        placeholder = 'Wyszukaj przedmiot'
+                        value = {input}
+                        onChange = {handleInput}
+                        id = 'searchSubject'
+                    />
+                    <button onClick = {() => setInput('')}>
+                        <FontAwesomeIcon
+                            icon = {[ 'fas', 'trash-alt' ]}
+                            className = {removeInputField}
+                        />
+                    </button>
+                </label>
+            </aside>
+            {ifSubjectExists}
+        </Fragment>
+    );
 }
 
 export default SearchSubject;

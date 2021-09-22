@@ -31,14 +31,14 @@ const { encrypt, decrypt } = require('react-crypt-gsm');
 
 const { sheduleBlocks } = require('./../../../layouts/Navigation/Navigation.module.scss');
 const {
-   sheduleForm, backgroundImage, formContentWrapper, sheduleSubmit, saveSheduleChoices, saveChoice, resetChoice, gotoShedule
+    sheduleForm, backgroundImage, formContentWrapper, sheduleSubmit, saveSheduleChoices, saveChoice, resetChoice, gotoShedule
 } = require('./ScheduleForm.module.scss');
 
 /**
  * Interface defining the type of props values.
  */
 interface PropsProvider {
-   executeScroll: () => void;
+    executeScroll: () => void;
 }
 
 /**
@@ -51,96 +51,96 @@ interface PropsProvider {
  */
 const ScheduleForm: React.FC<PropsProvider> = ({ executeScroll }): JSX.Element => {
 
-   const { groupSelection, engGroupSelection } = COOKIES_OBJECT;
-   const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
+    const { groupSelection, engGroupSelection } = COOKIES_OBJECT;
+    const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
 
-   const { groupSelected, setGroupSelected, engSelected, setEngSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
-   const { setOnSaveOpenModal } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
-   const { cookie, setCookie, removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
+    const { groupSelected, setGroupSelected, engSelected, setEngSelected } = useContext<Partial<ScheduleType>>(ScheduleContext);
+    const { setOnSaveOpenModal } = useContext<Partial<GlobalModalsStateTypes>>(GlobalModalsStateContext);
+    const { cookie, setCookie, removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
 
-   const createRememberCookie = (dataEncrypt: string, cookieName: string): void => {
-      const encryptData = encrypt(dataEncrypt);
-      const expCookie = cookieExpires(365);
-      setCookie!(cookieName, encryptData, { path: '/', expires: expCookie });
-   }
+    const createRememberCookie = (dataEncrypt: string, cookieName: string): void => {
+        const encryptData = encrypt(dataEncrypt);
+        const expCookie = cookieExpires(365);
+        setCookie!(cookieName, encryptData, { path: '/', expires: expCookie });
+    }
 
-   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-      window.scrollTo(0, 0);
-      e.preventDefault();
-      setOnSaveOpenModal!(true);
-      createRememberCookie(groupSelected!, groupSelection);
-      createRememberCookie(engSelected!, engGroupSelection);
-   }
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+        window.scrollTo(0, 0);
+        e.preventDefault();
+        setOnSaveOpenModal!(true);
+        createRememberCookie(groupSelected!, groupSelection);
+        createRememberCookie(engSelected!, engGroupSelection);
+    }
 
-   const cookieDecryptData = ({ content, tag }: any) => decrypt({ content, tag: new Uint8Array(tag.data) });
+    const cookieDecryptData = ({ content, tag }: any) => decrypt({ content, tag: new Uint8Array(tag.data) });
 
-   useEffect(() => {
-      const setDecryptedCookieValue = (): void => {
-         if(cookie!.__groupSelection !== undefined || cookie!.__engGroupSelection !== undefined) {
-            const decryptingCookieGroups = cookieDecryptData(cookie!.__groupSelection);
-            setGroupSelected!(decryptingCookieGroups);
+    useEffect(() => {
+        const setDecryptedCookieValue = (): void => {
+            if (cookie!.__groupSelection !== undefined || cookie!.__engGroupSelection !== undefined) {
+                const decryptingCookieGroups = cookieDecryptData(cookie!.__groupSelection);
+                setGroupSelected!(decryptingCookieGroups);
 
-            const decryptingCookieEng = cookieDecryptData(cookie!.__engGroupSelection);
-            setEngSelected!(decryptingCookieEng);
-         }
-      }
-      setDecryptedCookieValue();
-   }, [setGroupSelected, setEngSelected, cookie]);
+                const decryptingCookieEng = cookieDecryptData(cookie!.__engGroupSelection);
+                setEngSelected!(decryptingCookieEng);
+            }
+        }
+        setDecryptedCookieValue();
+    }, [ setGroupSelected, setEngSelected, cookie ]);
 
-   const handleResetValues = () => {
-      window.scrollTo(0, 0);
-      setOnSaveOpenModal!(true);
-      setGroupSelected!(NORMAL_GROUPS[0].text);
-      setEngSelected!(ENG_GROUPS[0]);
-      removeCookie!(groupSelection);
-      removeCookie!(engGroupSelection);
-   }
+    const handleResetValues = () => {
+        window.scrollTo(0, 0);
+        setOnSaveOpenModal!(true);
+        setGroupSelected!(NORMAL_GROUPS[0].text);
+        setEngSelected!(ENG_GROUPS[0]);
+        removeCookie!(groupSelection);
+        removeCookie!(engGroupSelection);
+    }
 
-   return (
-      <section className = {sheduleBlocks}>
-         <UniversalHeader
-            iconP = {['fas', 'clipboard-list']}
-            content = 'Panel Zarządzania'
-            ifCloseButtonVisible = {false}
-         />
-         <div className = {formContentWrapper}>
-            <img
-               src = {process.env.PUBLIC_URL + '/images/sheduleBgc.png'}
-               alt = 'background additional'
-               className = {backgroundImage}
+    return (
+        <section className = {sheduleBlocks}>
+            <UniversalHeader
+                iconP = {[ 'fas', 'clipboard-list' ]}
+                content = 'Panel Zarządzania'
+                ifCloseButtonVisible = {false}
             />
-            <form className = {sheduleForm} onSubmit = {handleFormSubmit}>
-               <ScheduleNormalGroupInputs/>
-               <ScheduleEngInputs/>
-               <div className = {sheduleSubmit}>
-                  <button className = {saveChoice}>
-                     Zapisz mój wybór
-                  </button>
-                  <button
-                     className = {resetChoice}
-                     disabled = {groupSelected === NORMAL_GROUPS[0].text && engSelected === ENG_GROUPS[0]}
-                     onClick = {handleResetValues}
-                     type = 'button'
-                  >
-                     Przywróć domyślnie
-                  </button>
-                  <button
-                     className = {gotoShedule}
-                     onClick = {executeScroll}
-                     type = 'button'
-                  >
-                     Przejdź do Planu
-                  </button>
-               </div>
-            </form>
-         </div>
-         <div className = {saveSheduleChoices}>
-            Po wybraniu właściwych opcji, poniższy plan wygeneruje się automatycznie. Jeśli natomiast chcesz
-            zapisać swój wybór nawet po zamknięciu przeglądarki, kliknij w niebieski przycisk po prawej stronie.
-            Aby zapisywanie wyboru zadziałało, twoja przeglądarka musi mieć włączoną obsługę plików Cookies.
-         </div>
-      </section>
-   );
+            <div className = {formContentWrapper}>
+                <img
+                    src = {process.env.PUBLIC_URL + '/images/sheduleBgc.png'}
+                    alt = 'background additional'
+                    className = {backgroundImage}
+                />
+                <form className = {sheduleForm} onSubmit = {handleFormSubmit}>
+                    <ScheduleNormalGroupInputs/>
+                    <ScheduleEngInputs/>
+                    <div className = {sheduleSubmit}>
+                        <button className = {saveChoice}>
+                            Zapisz mój wybór
+                        </button>
+                        <button
+                            className = {resetChoice}
+                            disabled = {groupSelected === NORMAL_GROUPS[0].text && engSelected === ENG_GROUPS[0]}
+                            onClick = {handleResetValues}
+                            type = 'button'
+                        >
+                            Przywróć domyślnie
+                        </button>
+                        <button
+                            className = {gotoShedule}
+                            onClick = {executeScroll}
+                            type = 'button'
+                        >
+                            Przejdź do Planu
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div className = {saveSheduleChoices}>
+                Po wybraniu właściwych opcji, poniższy plan wygeneruje się automatycznie. Jeśli natomiast chcesz
+                zapisać swój wybór nawet po zamknięciu przeglądarki, kliknij w niebieski przycisk po prawej stronie.
+                Aby zapisywanie wyboru zadziałało, twoja przeglądarka musi mieć włączoną obsługę plików Cookies.
+            </div>
+        </section>
+    );
 }
 
 export default ScheduleForm;

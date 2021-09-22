@@ -16,7 +16,7 @@ import ReactDOM from 'react-dom';
 import './styles/index.scss';
 import App from './components/router/App';
 
-import "core-js";
+import 'core-js';
 
 /**
  * Forcing the scroll at position X: 0, Y: 0 every time you reload.
@@ -28,14 +28,14 @@ window.onbeforeunload = () => window.scrollTo(0, 0);
  */
 let resizeTimer: NodeJS.Timeout;
 window.addEventListener('resize', (): void => {
-   document.body.classList.add('stopTransitions');
-   clearTimeout(resizeTimer);
-   resizeTimer = setTimeout(():void => {
-      document.body.classList.remove('stopTransitions');
-   }, 400)
+    document.body.classList.add('stopTransitions');
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout((): void => {
+        document.body.classList.remove('stopTransitions');
+    }, 400)
 });
 
 /**
  * @details Render entire application.
  */
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
