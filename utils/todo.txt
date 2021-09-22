@@ -3,7 +3,15 @@ Warstwa wizualna aplikacji przetwarzająca dane z backendu.
 ======================================================= v(1.2) =======================================================
 
 Dodatki:
-- (do implementacji): nadchodzące wydarzenia (na podstawie aktualnej daty) - nowy panel w sekcji "kalendarz studenta",
+- (zaimplementowane): nadchodzące wydarzenia (na podstawie aktualnej daty) - nowy panel w sekcji "kalendarz studenta"
+                      (więcej szczegółów o nowej funkcjonalności w komentarzu JSDoc w package'u komponentów).
+
+Poprawki:
+- (zaimplementowane): końcowy refaktor kodu, przygotowanie pod testy jednostkowe komponentów (testy zostaną przeprowadzone
+                      przez JEST) i ostateczne sprawdzenie komentarzy JSDoc.
+
+Inne:
+- (do implementacji): zaaplikowanie testów jednostkowych komponentów przy pomocy JEST
 
 ======================================================= v(1.1) =======================================================
 
