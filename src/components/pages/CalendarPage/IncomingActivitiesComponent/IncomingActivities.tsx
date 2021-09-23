@@ -49,18 +49,18 @@ const IncomingActivities = (): JSX.Element => {
     const [ allActivities, setAllActivities ] = useState<ObjectProvider[]>([]);
 
     // eslint-disable-next-line array-callback-return
-    const generateRecentActivities = allActivities.map((activity: ObjectProvider) => {
+    const generateRecentActivities = allActivities.map((activity: ObjectProvider): JSX.Element | undefined => {
         const { date } = activity;
 
-        const currDate = new Date();
-        const itemDate = new Date(date);
+        const currDate: Date = new Date();
+        const itemDate: Date = new Date(date);
 
-        const ifDateIsNotLower = itemDate.getTime() > currDate.getTime();
-        const ifDateIsNotHigher = itemDate.getTime() < (currDate.getTime() + (1000 * 60 * 60 * 24 * DAYS_INCOME));
+        const ifDateIsNotLower: boolean = itemDate.getTime() > currDate.getTime();
+        const ifDateIsNotHigher: boolean = itemDate.getTime() < (currDate.getTime() + (1000 * 60 * 60 * 24 * DAYS_INCOME));
 
         const { day, month, hours, minutes } = getSingleDateObjects(itemDate);
 
-        const chooseImportantLevel = () => {
+        const chooseImportantLevel = (): string | undefined => {
             switch (activity.important) {
                 case 'low':
                     return low;
@@ -89,7 +89,7 @@ const IncomingActivities = (): JSX.Element => {
         }
     });
 
-    const generateNonActivities = generateRecentActivities.every((curValue) => curValue === undefined) ? (
+    const generateNonActivities: JSX.Element | null = generateRecentActivities.every((curValue) => curValue === undefined) ? (
         <div className = {emptySubjectField}>
             <FontAwesomeIcon
                 icon = {[ 'fas', 'exclamation-circle' ]}
