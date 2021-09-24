@@ -35,7 +35,7 @@ const {
 /**
  * This constant that defines how many days in advance upcoming events should show up.
  */
-const DAYS_INCOME: number = 7;
+const DAYS_INCOME: number = 8;
 
 /**
  * @details Component responsible for generating upcoming events. Bookmark in addition to the student's
@@ -97,7 +97,7 @@ const IncomingActivities = (): JSX.Element => {
             />
             <span>Brak nadchodzących wydarzeń.</span>
             <span className = {asideActivitiesInfo}>
-                Wydarzenia wyświetlane są automatycznie z {DAYS_INCOME}-dniowym wyprzedzeniem.
+                Wydarzenia wyświetlane są automatycznie z {DAYS_INCOME - 1}-dniowym wyprzedzeniem.
             </span>
         </div>
     ) : null;
