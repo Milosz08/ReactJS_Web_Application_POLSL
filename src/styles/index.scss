@@ -1,3 +1,17 @@
+/*!
+ * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+ * file except in compliance with the License. You may obtain a copy of the License at
+ *
+ *     <http://www.apache.org/license/LICENSE-2.0>
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the license.
+ */
+
 * {
     margin: 0;
     padding: 0;
@@ -8,41 +22,41 @@
 }
 
 :root {
-    --redColor: #c43434; //importantColor
-    --greenColor: #1d8e1d; //goodColor
-    --yellowColor: #fefe00; //covidInfoBgc
-    --orangeColor: #efaa15; //yellowDefColor
-    --darkOrangeColor: #df9e12; //yellowHover
+    --redColor:             #c43434; //importantColor
+    --greenColor:           #1d8e1d; //goodColor
+    --yellowColor:          #fefe00; //covidInfoBgc
+    --orangeColor:          #efaa15; //yellowDefColor
+    --darkOrangeColor:      #df9e12; //yellowHover
 
-    --blueColor: #0056aa; //hoverDarken
-    --darkBlueColor: #183557; //headersH3
-    --navyBlueColor: #003c7d; //mainLogosBgc
-    --darkNavyBlueColor: #00234a; //topNavbarColor
+    --blueColor:            #0056aa; //hoverDarken
+    --darkBlueColor:        #183557; //headersH3
+    --navyBlueColor:        #003c7d; //mainLogosBgc
+    --darkNavyBlueColor:    #00234a; //topNavbarColor
 
-    --cleanWhiteColor: #ffffff; //cleanWhiteColor
-    --whiteColor: #ececec; //whiteColor
-    --blackColor: #000000; //blackColor
-    --lightBlack: #535353; //footerHeaders
+    --cleanWhiteColor:      #ffffff; //cleanWhiteColor
+    --whiteColor:           #ececec; //whiteColor
+    --blackColor:           #000000; //blackColor
+    --lightBlack:           #535353; //footerHeaders
 
-    --darkGray: #797979; //footerContent
-    --darkGrayTint1: #929292; //darkGray
-    --darkGrayTint2: #b8b8b8; //grayBgc
-    --darkGrayTint3: #d0d0d0; //borderGray
-    --darkGrayTint4: #cacaca; //topNavbarHover
+    --darkGray:             #797979; //footerContent
+    --darkGrayTint1:        #929292; //darkGray
+    --darkGrayTint2:        #b8b8b8; //grayBgc
+    --darkGrayTint3:        #d0d0d0; //borderGray
+    --darkGrayTint4:        #cacaca; //topNavbarHover
 
-    --lightGray: #f2f2f2; //lightLightGrayBgc
-    --lightGrayTint1: #e5e7e8; //lightGrayBgc
-    --lightGrayTint2: #eeeeee; //calendarBgc
-    --lightGrayTint3: #dfdfdf; //calendarPrev
-    --lightGrayTint4: #e2e2e2; //lightGrayTint4
+    --lightGray:            #f2f2f2; //lightLightGrayBgc
+    --lightGrayTint1:       #e5e7e8; //lightGrayBgc
+    --lightGrayTint2:       #eeeeee; //calendarBgc
+    --lightGrayTint3:       #dfdfdf; //calendarPrev
+    --lightGrayTint4:       #e2e2e2; //lightGrayTint4
 
-    --boxShadowColor: #bdbdbd;
-    --boxShadowTint: #b6b6b6;
-    --boxShadowTint2: #dbdbdb;
-    --boxShadowTint3: #878787;
+    --boxShadowColor:       #bdbdbd;
+    --boxShadowTint:        #b6b6b6;
+    --boxShadowTint2:       #dbdbdb;
+    --boxShadowTint3:       #878787;
 
-    --widthVertical: 1200px; //Safearea content for 4:3 aspect ratio screens
-    --transparentModal: rgba(0, 0, 0, .6);
+    --widthVertical:        1200px; //Safearea content for 4:3 aspect ratio screens
+    --transparentModal:     rgba(0, 0, 0, .6);
 }
 
 html, body, button, input, select, option, textarea {
