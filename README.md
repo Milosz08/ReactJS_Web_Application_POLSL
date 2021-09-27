@@ -9,7 +9,7 @@ Advanced, full-stack web application written using the ReactJS library and other
 </p>
 
 > See this website at [informatyka-pol-elektr.pl](https://informatyka-pol-elektr.pl/) <br>
-> See API for this website written in NodeJS in my repo: [NodeJS_ServerAPI_POLSL](https://github.com/Milosz08/NodeJS_ServerAPI_POLSL)
+> See API for this website written in NodeJS in my repo: [NodeJS_RestAPI_POLSL](https://github.com/Milosz08/NodeJS_RestAPI_POLSL)
 
 <hr/>
 
