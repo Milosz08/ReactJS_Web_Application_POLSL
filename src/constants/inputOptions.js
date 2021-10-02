@@ -25,7 +25,7 @@ const STATIC_OPTIONS = {
     ],
     PLATFORMS_OPTIONS: [
         'Microsoft Teams', 'Google Classroom', 'Hangouts Meet', 'Zoom', 'Skype', 'Slack', 'Facebook', 'WhatsApp',
-        'Big Blue Button', 'Cisco Webex Teams',
+        'Big Blue Button', 'Cisco Webex Teams', 'Kontaktowy'
     ],
 };
 
