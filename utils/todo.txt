@@ -5,6 +5,7 @@ Warstwa wizualna aplikacji przetwarzająca dane z backendu.
 Dodatki:
 - (zaimplementowane): nadchodzące wydarzenia (na podstawie aktualnej daty) - nowy panel w sekcji "kalendarz studenta"
                       (więcej szczegółów o nowej funkcjonalności w komentarzu JSDoc w package'u komponentów).
+- (zaimplementowane): numer sali przy planie zajęć (oraz możliwość dodania/edycji z poziomu panelu CMS).
 
 Poprawki:
 - (zaimplementowane): końcowy refaktor kodu, przygotowanie pod testy jednostkowe komponentów (testy zostaną przeprowadzone
