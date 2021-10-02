@@ -39,16 +39,14 @@ const CountDown = (): JSX.Element => {
 
     useLayoutEffect(() => {
         const setDateObject = (nowTime: number): StateProvider => {
-            let days: number | string = Math.floor((EXP_TIME / (1000 * 60 * 60 * 24)) - (nowTime / (1000 * 60 * 60 * 24)));
-            days = days < 10 ? `0${days}` : days;
+            let days: number | string = Math.floor((EXP_TIME / (1000 * 60 * 60 * 24)) - (nowTime / (1000 * 60 * 60 * 24))) * -1;
 
-            let hours: number | string = Math.floor((EXP_TIME / (1000 * 60 * 60) - nowTime / (1000 * 60 * 60)) % 24);
-            hours = hours < 10 ? `0${hours}` : hours;
+            let hours: number | string = Math.floor((EXP_TIME / (1000 * 60 * 60) - nowTime / (1000 * 60 * 60)) % 24) * -1;
 
-            let minutes: number | string = Math.floor((EXP_TIME / (1000 * 60) - nowTime / (1000 * 60)) % 60);
+            let minutes: number | string = Math.floor((EXP_TIME / (1000 * 60) - nowTime / (1000 * 60)) % 60) * -1;
             minutes = minutes < 10 ? `0${minutes}` : minutes;
 
-            let seconds: number | string = Math.floor((EXP_TIME / 1000 - nowTime / 1000) % 60);
+            let seconds: number | string = Math.floor((EXP_TIME / 1000 - nowTime / 1000) % 60) * -1;
             seconds = seconds < 10 ? `0${seconds}` : seconds;
 
             return { days, hours, minutes, seconds };
@@ -66,12 +64,12 @@ const CountDown = (): JSX.Element => {
     return (
         <div className = {countDownContainer}>
             <div className = {countDownWrapper}>
-                <h2>Do rozpoczęcia <strong>III semestru</strong> brakuje:</h2>
+                <h2>Od rozpoczęcia <strong>III semestru</strong> minęło:</h2>
                 <div className = {dateFont}>
                     <span><strong>{date.days}</strong> dni, </span>
-                    <span><strong>{date.hours}</strong> godzin, </span>
-                    <span><strong>{date.minutes}</strong> minut, </span>
-                    <span><strong>{date.seconds}</strong> sekund </span>
+                    <span><strong>{date.hours}</strong> godziny, </span>
+                    <span><strong>{date.minutes}</strong> minuty, </span>
+                    <span><strong>{date.seconds}</strong> sekundy </span>
                 </div>
                 <div className = {mobileDateFont}>
                     <span>{date.days}:{date.hours}:{date.minutes}:{date.seconds}</span>
