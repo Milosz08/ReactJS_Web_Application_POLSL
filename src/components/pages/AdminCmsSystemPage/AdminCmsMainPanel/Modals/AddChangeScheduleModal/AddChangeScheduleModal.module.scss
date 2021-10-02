@@ -19,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     margin: 20px 30px;
-    .titleSelectWrapper, .typeSelectWrapper, .groupSelectWrapper, .timeSelectWrapper {
+    .titleSelectWrapper, .typeSelectWrapper, .groupSelectWrapper, .timeSelectWrapper, .roomInputWrapper {
         display: flex;
         position: relative;
         justify-content: center;
@@ -37,7 +37,7 @@
             top: -11px;
             padding: 0 10px;
         }
-        select, input[type = 'time'] {
+        select, input[type = 'time'], input[type = 'text'] {
             @include imputField(0, 8px);
             appearance: none;
             cursor: pointer;
@@ -53,6 +53,9 @@
                     font-weight: 600;
                 }
             }
+        }
+        input[type = 'text'] {
+            cursor: default;
         }
         input[type = 'time'] {
             @include imputField(0, 7px);
@@ -94,6 +97,9 @@
     .titleSelectWrapper, .groupSelectWrapper {
         margin: 0 20px 0 0;
     }
+    .groupSelectWrapper .selectWrapper {
+        margin: 0 20px;
+    }
     .titleSelectWrapper {
         flex-direction: column;
         p {
@@ -120,6 +126,9 @@
     .typeSelectWrapper {
         flex-basis: 60%;
     }
+    .roomInputWrapper {
+        flex-basis: 50%;
+    }
     .typeSelectWrapper::before {
         content: 'typ zajęć';
     }
@@ -128,6 +137,9 @@
     }
     .timeSelectWrapper::before {
         content: 'czas odbywania zajęć';
+    }
+    .roomInputWrapper::before {
+        content: 'numer sali';
     }
 }
 
@@ -148,7 +160,7 @@
         .titleSelectWrapper {
             margin-bottom: 30px;
         }
-        .timeSelectWrapper {
+        .timeSelectWrapper, .roomInputWrapper {
             margin-top: 30px;
             .inputWrapper {
                 max-width: 200px;

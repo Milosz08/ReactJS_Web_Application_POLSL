@@ -54,16 +54,22 @@ const SubjectsLayout: React.FC<PropsProvider> = ({ subjectID, filteredArray }): 
 
     const classesPlatforms = specificSubject.classesPlatforms.length !== 1
         ? specificSubject.classesPlatforms.map(platform => ((
-                <span key = {platform.type}>
-            {`${platform.type} ${classesIfEnd} się poprzed komunikator `}
-                    <strong>{`${platform.place}`}</strong>.
-         </span>
+            <span key = {platform.type}>
+                {
+                    `${platform.type} ${classesIfEnd} się
+                    ${platform.place !== 'Kontaktowy' ? 'poprzed komunikator ' : 'w sposób '}`
+                }
+                <strong>{`${platform.place}`}</strong>.
+            </span>
             ))
         ) : (
             <span>
-            {`Zajęcia ${classesIfEnd} się poprzed komunikator `}
+                {
+                    `Zajęcia ${classesIfEnd} się 
+                    ${specificSubject.classesPlatforms[0].place !== 'Kontaktowy' ? 'poprzed komunikator ' : 'w sposób '}`
+                }
                 <strong>{`${specificSubject.classesPlatforms[0].place}`}</strong>.
-         </span>
+            </span>
         );
 
     const pzeRefer = specificSubject.classesPlatforms.length !== 1
@@ -131,7 +137,10 @@ const SubjectsLayout: React.FC<PropsProvider> = ({ subjectID, filteredArray }): 
                     replace = {false}
                     clickAction = {timeoutRoutePath}
                 >
-                    <a href = {'/warunki-zaliczenia-przedmiotów'} className = {subjectsDoIt}>
+                    <a
+                        href = {'/warunki-zaliczenia-przedmiotów'}
+                        className = {subjectsDoIt}
+                    >
                         Warunki zaliczenia przedmiotu
                     </a>
                 </DelayLink>

@@ -34,6 +34,7 @@ const {
  * Interface defining the type of Subjects tiles in schedule values.
  */
 export interface ScheduleSubjectsProvider {
+    room: string;
     _id: string,
     title: string,
     group: string,

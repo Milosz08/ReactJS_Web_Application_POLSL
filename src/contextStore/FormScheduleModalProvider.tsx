@@ -67,7 +67,9 @@ const FormScheduleModalProvider: React.FC<PropsProvider> = ({ children }): JSX.E
 
     const [ allSubjects, setAllSubjects ] = useState<SubjectsProvider[]>([]);
     const [ errors, setErrors ] = useState<ValidateProvider>({ hourStart: false, hourEnd: false });
-    const [ scheduleForm, setScheduleForm ] = useState<ScheduleProvider>({ title: '', group: '', type: '', start: '', end: '' });
+    const [ scheduleForm, setScheduleForm ] = useState<ScheduleProvider>({
+        title: '', group: '', room: '', type: '', start: '', end: ''
+    });
 
     const changeStringToInt = (str: string): number => {
         const withoutDots = str.replace(':', '');
@@ -97,9 +99,9 @@ const FormScheduleModalProvider: React.FC<PropsProvider> = ({ children }): JSX.E
             const subjectsDataFetch = JSON.parse(subjectsData.request.response);
             subjectsDataFetch.sort((a: any, b: any) => a.title.localeCompare(b.title));
             setScheduleForm({
-                title: subjectsDataFetch[0].title,
+                title: subjectsDataFetch[0]?.title,
                 group: GROUPS_STATIC.NORMAL_GROUPS[0].field,
-                type: subjectsDataFetch[0].classesPlatforms[0].type,
+                type: subjectsDataFetch[0]?.classesPlatforms[0].type,
                 start: '',
                 end: '',
             });

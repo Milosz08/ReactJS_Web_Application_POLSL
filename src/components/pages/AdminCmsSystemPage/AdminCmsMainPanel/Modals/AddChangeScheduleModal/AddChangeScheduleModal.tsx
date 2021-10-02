@@ -43,6 +43,7 @@ interface NewObjectTypes {
     group: string;
     day: string | undefined;
     type: string;
+    room: string;
     start: string;
     end: string;
     pzeInfo: { [value: string]: string };
@@ -87,22 +88,22 @@ const AddChangeScheduleModal = (): JSX.Element => {
         const objErrors = validateAll!();
         if (!objErrors.hourStartBool && !objErrors.hourStartEnd) {
             const copy = [ ...allSubjects! ];
-            const { title, group, type, start, end } = scheduleForm!;
+            const { title, group, type, start, end, room } = scheduleForm!;
             const findOneSubject = copy.find((subject: SubjectsProvider) => subject.title === scheduleForm!.title);
             // eslint-disable-next-line array-callback-return
             const findPzePlatform = findOneSubject!.classesPlatforms.find((platform: { [value: string]: string }) => {
-                if (platform.type === '') {
+                if (platform.type === '' || platform.type === 'Wszystkie Zajęcia') {
                     return findOneSubject!.classesPlatforms[0].place;
                 } else if (platform.type === scheduleForm!.type) {
                     return platform;
                 }
             });
             const newObject: NewObjectTypes = {
-                _id: scheduleModal!.id, title, group, day: scheduleModal!.day, type, start, end,
+                _id: scheduleModal!.id, title, group, day: scheduleModal!.day, type, start, end, room,
                 pzeInfo: { platform: findPzePlatform!.place, pzeLink: findPzePlatform!.link }
             };
             const addNewObject: NewObjectTypes = {
-                title, group, day: scheduleModal!.day, type, start, end,
+                title, group, day: scheduleModal!.day, type, start, end, room,
                 pzeInfo: { platform: findPzePlatform!.place, pzeLink: findPzePlatform!.link }
             };
             if (scheduleModal!.type === MODAL_TYPES.EDIT) {
@@ -119,9 +120,10 @@ const AddChangeScheduleModal = (): JSX.Element => {
 
     const restoreValues = (): void => {
         setScheduleForm!({
-            title: allSubjects![0].title,
+            title: allSubjects![0]?.title,
             group: GROUPS_STATIC.NORMAL_GROUPS[0].field,
-            type: allSubjects![0].classesPlatforms[0].type,
+            type: allSubjects![0]?.classesPlatforms[0].type,
+            room: '',
             start: '',
             end: ''
         });

@@ -163,6 +163,14 @@ button.expandInfo {
         span {
             text-transform: capitalize;
         }
+        .roomContainer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            strong {
+                color: var(--orangeColor);
+            }
+        }
     }
     .expandedLinks {
         @include defaultButton();

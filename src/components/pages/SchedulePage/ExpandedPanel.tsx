@@ -22,7 +22,7 @@ import { ScheduleSubjectsProvider } from './ScheduleSections';
 import { SubjectsProvider } from '../../layouts/Subjects/Subjects';
 
 const {
-    expandInfo, infoIcon, rotateIcon, expandContainer, expandedInfo, expandActive, expandedLinks
+    expandInfo, infoIcon, rotateIcon, expandContainer, expandedInfo, expandActive, expandedLinks, roomContainer
 } = require('./ScheduleSections.module.scss');
 
 /**
@@ -63,8 +63,12 @@ const ExpandedPanel: React.FC<PropsProvider> = ({ tile, subjectObj }) => {
             </button>
             <div className = {activeContainer}>
                 <p className = {expandedInfo}>
+                    <div className = {roomContainer}>
+                        Aula: <strong>{tile.room.toLocaleUpperCase()}</strong>
+                    </div>
                     <span>{tile.type === 'wykład' ? 'wykłady' : tile.type} </span>
-                    {subjectObj.ifEnd ? 'odbywały' : 'odbywają'} się przez komunikator
+                    {subjectObj.ifEnd ? 'odbywały' : 'odbywają'} się
+                    {tile.pzeInfo.platform !== 'Kontaktowy' ? ' przez komunikator ' : ' w sposób '}
                     <strong> {tile.pzeInfo.platform}</strong>. Wszystkie linki znajdziesz na PZE.
                 </p>
                 <a

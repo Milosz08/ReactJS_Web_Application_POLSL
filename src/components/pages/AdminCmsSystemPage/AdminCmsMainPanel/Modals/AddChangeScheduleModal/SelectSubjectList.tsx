@@ -28,7 +28,7 @@ const TimeInputsModal = React.lazy(() => import('./TimeInputsModal'));
 
 const {
     titleSelectWrapper, typeSelectWrapper, groupSelectWrapper, groupAndTimeContainer, titleAndTypeContainer,
-    timeSelectWrapper, turnOffContainer, selectArrowIcon, selectWrapper
+    timeSelectWrapper, turnOffContainer, selectArrowIcon, selectWrapper, roomInputWrapper
 } = require('./AddChangeScheduleModal.module.scss');
 
 /**
@@ -70,7 +70,7 @@ const SelectSubjectList = (): JSX.Element => {
     }
 
     const generateGroupsOptions = () => {
-        if (scheduleForm!.title.toLocaleLowerCase() !== 'język angielski') {
+        if (scheduleForm!.title?.toLocaleLowerCase() !== 'język angielski') {
             const generateOptions = NORMAL_GROUPS.map((group: NormalGroupsTypes) => (
                 <option
                     value = {group.field}
@@ -105,14 +105,17 @@ const SelectSubjectList = (): JSX.Element => {
             const { scheduleSubjects } = dataFetchFromServer;
             const shellingObject = scheduleSubjects.find((subject: any) => subject._id === scheduleModal!.id);
             if (shellingObject !== undefined) {
-                let { title, group, type, start, end } = shellingObject;
+                let { title, group, room, type, start, end } = shellingObject;
                 if (scheduleModal!.type === MODAL_TYPES.EDIT) {
-                    setScheduleForm!({ title, group, type, start: hourRestructurised(start), end: hourRestructurised(end) });
+                    setScheduleForm!({
+                        title, group, type, room, start: hourRestructurised(start), end: hourRestructurised(end)
+                    });
                 } else if (scheduleModal!.type === MODAL_TYPES.ADD) {
                     setScheduleForm!({
                         title: allSubjects![0].title,
                         group: GROUPS_STATIC.NORMAL_GROUPS[0].field,
                         type: allSubjects![0].classesPlatforms[0].type,
+                        room: '',
                         start: '',
                         end: ''
                     });
@@ -123,7 +126,7 @@ const SelectSubjectList = (): JSX.Element => {
     }, [ allSubjects, scheduleModal ]);
 
     const selectGroup = (): string => {
-        if (scheduleForm!.title.toLocaleLowerCase() === 'język angielski') {
+        if (scheduleForm!.title?.toLocaleLowerCase() === 'język angielski') {
             return GROUPS_STATIC.ENG_GROUPS[0];
         } else {
             return GROUPS_STATIC.NORMAL_GROUPS[0].field;
@@ -202,6 +205,13 @@ const SelectSubjectList = (): JSX.Element => {
                             className = {selectArrowIcon}
                         />
                     </div>
+                </div>
+                <div className = {roomInputWrapper} >
+                    <input
+                        type = 'text'
+                        value = {scheduleForm!.room}
+                        onChange = {({ target }) => setScheduleForm!({ ...scheduleForm, room: target.value })}
+                    />
                 </div>
                 <div className = {timeSelectWrapper}>
                     <TimeInputsModal/>

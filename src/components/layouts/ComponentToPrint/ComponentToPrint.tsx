@@ -37,6 +37,7 @@ interface ScheduleSubjects {
     title: string,
     group: string,
     day: string,
+    room: string,
     type: string,
     start: string,
     end: string,
@@ -159,7 +160,7 @@ class ComponentToPrint extends PureComponent<PropsProvider, StateProvider> {
                         {index === 0 && <th rowSpan = {perDay.length} className = {weekDaysPrint}>{DAYS[indexDay]}</th>}
                         <td>{subject.start} - {subject.end}</td>
                         <td>{subject.title}</td>
-                        <td>{subject.type}</td>
+                        <td>{subject.type}, {subject.room.toLocaleUpperCase()}</td>
                         <td>{subject.pzeInfo.platform}</td>
                     </tr>
                 ))}
