@@ -48,7 +48,6 @@ const ScheduleDeleteModal = (): JSX.Element => {
     }
 
     const handleRemoveMessage = async (): Promise<any> => {
-        console.log(scheduleModal!.id);
         await axiosInstance.delete(`subject-schedule/${scheduleModal!.id}`);
         const copy = [ ...scheduleSubjects ];
         const scheduleAfterRemove = copy.filter(object => object._id !== scheduleModal!.id);

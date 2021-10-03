@@ -65,7 +65,6 @@ const AddChangeScheduleModal = (): JSX.Element => {
     const headerContent = `Kreator ${scheduleModal!.type !== MODAL_TYPES.EDIT ? 'dodawania' : 'edytowania'} przedmiotu w dniu`;
 
     const editExistValue = async (newObject: NewObjectTypes) => {
-        console.log(scheduleModal!.id);
         const copy = [ ...dataFetchFromServer.scheduleSubjects ];
         await axiosInstance.put(`subject-schedule/${scheduleModal!.id}`, newObject);
         const index = copy.findIndex((x: SubjectsProvider) => x._id === scheduleModal!.id);
