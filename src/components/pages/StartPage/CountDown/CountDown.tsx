@@ -67,9 +67,9 @@ const CountDown = (): JSX.Element => {
                 <h2>Od rozpoczęcia <strong>III semestru</strong> minęło:</h2>
                 <div className = {dateFont}>
                     <span><strong>{date.days}</strong> dni, </span>
-                    <span><strong>{date.hours}</strong> godziny, </span>
-                    <span><strong>{date.minutes}</strong> minuty, </span>
-                    <span><strong>{date.seconds}</strong> sekundy </span>
+                    <span><strong>{date.hours}</strong> godzin, </span>
+                    <span><strong>{date.minutes}</strong> minut, </span>
+                    <span><strong>{date.seconds}</strong> sekund </span>
                 </div>
                 <div className = {mobileDateFont}>
                     <span>{date.days}:{date.hours}:{date.minutes}:{date.seconds}</span>
