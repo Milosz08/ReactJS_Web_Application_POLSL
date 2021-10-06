@@ -1,5 +1,10 @@
 Warstwa wizualna aplikacji przetwarzająca dane z backendu.
 
+======================================================= v(1.3) =======================================================
+Dodatki:
+- (do implementacji): trójpodział poszczególnych grup (laboratoria z SK) w sekcji dynamicznego generowania planu zajęć.
+- (do implementacji): usunięcie podziału grupy C1 z angielskiego (fuzja dwóch grup w jedną)
+
 ======================================================= v(1.2) =======================================================
 
 Dodatki:
