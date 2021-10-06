@@ -77,54 +77,36 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
 
     useEffect(() => {
         const getAllData = async (): Promise<any> => {
-            try {
-                const covidData = await axiosInstance.get('/covid-data');
-                const footerForm = await axiosInstance.get('/footer-form');
-                const subjectsData = await axiosInstance.get('/subjects-data');
-                const subjectShedule = await axiosInstance.get('/subject-schedule');
-                const calendarRecord = await axiosInstance.get('/calendar-record');
-                if(!covidData || !footerForm || !subjectsData || !subjectShedule || !calendarRecord) {
-                    return Promise.reject(Error('Database connection problem!'));
-                } else {
-                    console.log('(mainly resources): Downloading resources from the database successfully completed.');
-                }
-                const covidDataFetch = JSON.parse(covidData.request.response);
-                const footerFormFetch = JSON.parse(footerForm.request.response);
-                const subjectsDataFetch = JSON.parse(subjectsData.request.response);
-                const scheduleSubjectsFetch = JSON.parse(subjectShedule.request.response);
-                const calendarRecordsFetch = JSON.parse(calendarRecord.request.response);
+            const covidData = await axiosInstance.get('/covid-data');
+            const footerForm = await axiosInstance.get('/footer-form');
+            const subjectsData = await axiosInstance.get('/subjects-data');
+            const subjectShedule = await axiosInstance.get('/subject-schedule');
+            const calendarRecord = await axiosInstance.get('/calendar-record');
+            const covidDataFetch = JSON.parse(covidData.request.response);
+            const footerFormFetch = JSON.parse(footerForm.request.response);
+            const subjectsDataFetch = JSON.parse(subjectsData.request.response);
+            const scheduleSubjectsFetch = JSON.parse(subjectShedule.request.response);
+            const calendarRecordsFetch = JSON.parse(calendarRecord.request.response);
 
-                subjectsDataFetch.sort((a: any, b: any) => a.title.localeCompare(b.title));
-                calendarRecordsFetch
-                    .sort((a: any, b: any) => a.day - b.day)
-                    .sort((a: any, b: any) => a.month - b.month)
-                    .sort((a: any, b: any) => a.year - b.year);
+            subjectsDataFetch.sort((a: any, b: any) => a.title.localeCompare(b.title));
+            calendarRecordsFetch
+                .sort((a: any, b: any) => a.day - b.day)
+                .sort((a: any, b: any) => a.month - b.month)
+                .sort((a: any, b: any) => a.year - b.year);
 
-                setDataFetchFromServer({
-                    covidData: covidDataFetch,
-                    footerForms: footerFormFetch,
-                    subjectsData: subjectsDataFetch,
-                    scheduleSubjects: scheduleSubjectsFetch,
-                    calendarRecords: calendarRecordsFetch
-                });
-            } catch (err) {
-                throw err;
-            }
+            setDataFetchFromServer({
+                covidData: covidDataFetch,
+                footerForms: footerFormFetch,
+                subjectsData: subjectsDataFetch,
+                scheduleSubjects: scheduleSubjectsFetch,
+                calendarRecords: calendarRecordsFetch
+            });
         }
 
         const getScheduleBreak = async (): Promise<any> => {
-            try {
-                const allDates = await axiosInstance.get(`/last-update/${process.env.REACT_APP_SCHEDULE_ID}`);
-                if(!allDates) {
-                    return Promise.reject(Error('Database connection problem!'));
-                } else {
-                    console.log('(scheduleBreakFlag): Downloading resources from the database successfully completed.');
-                }
-                const allDatesFetch = JSON.parse(allDates.request.response);
-                setSummerBreak(allDatesFetch.scheduleBreak);
-            } catch (err) {
-                throw err;
-            }
+            const allDates = await axiosInstance.get(`/last-update/${process.env.REACT_APP_SCHEDULE_ID}`);
+            const allDatesFetch = JSON.parse(allDates.request.response);
+            setSummerBreak(allDatesFetch.scheduleBreak);
         }
 
         getAllData();
