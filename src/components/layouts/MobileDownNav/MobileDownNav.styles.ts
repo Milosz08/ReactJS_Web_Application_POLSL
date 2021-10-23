@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -12,48 +12,52 @@
  * governing permissions and limitations under the license.
  */
 
-@import './../../../styles/_mixins';
+import styled from 'styled-components';
+import { a_rs, button_rs } from '../../../styles/reset.styles';
 
-.mobileDownContainer {
+export const MobileDownNavContainer = styled.nav`
     position: fixed;
     z-index: 999;
     bottom: 0;
     display: none;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
     height: 45px;
     background-color: var(--lightGrayTint1);
-    span.activeIndicator {
-        position: absolute;
-        top: 0;
-        width: calc(100% / 5);
-        height: 3px;
-        background-color: var(--navyBlueColor);
-        transition: .2s;
+    @media only screen and (max-width: 500px) {
+        display: flex;
     }
+`;
+
+export const ActiveIndicator = styled('span')<{ position: number }>`
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    width: calc(100% / 5);
+    height: 4px;
+    background-color: var(--navyBlueColor);
+    transition: .2s;
+    transform: translateX(${props => props.position}%);
+`;
+
+export const MobileDownNavSingleElementContainer = styled(button_rs)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 5);
+    position: relative;
+    height: calc(100% - 4px);
     div[role = 'link'] {
         display: flex;
-        justify-content: center;
         align-items: center;
-        width: calc(100% / 5);
-        position: relative;
+        flex-grow: 1;
         height: 100%;
     }
-}
+`;
 
-.icon {
-    display: none;
-    font-size: 1.5rem;
+export const MobileDownNavSingleAnchor = styled(a_rs)`
+    display: block;
+    width: 100%;
     color: var(--navyBlueColor);
-    &.active {
-        display: block;
-    }
-}
-
-////////////////////////////////////////////////////
-
-@media only screen and (max-width: 500px) {
-    .mobileDownContainer {
-        display: flex;
-    }
-}
+    font-size: 1.5rem;
+`;
