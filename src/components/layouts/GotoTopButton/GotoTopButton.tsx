@@ -12,44 +12,27 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { useEffect, useState } from 'react';
-import classnames from 'classnames';
+import * as React from 'react';
+import useGotoTopButton from '../../../helpers/hooks/useGotoTopButton';
 
-const { gotoTopWrapper, showGotoButton } = require('./GotoTopButton.module.scss');
+import { GotoTopButtonContainer } from './GotoTopButton.styles';
 
 /**
- * @details Component that adds a button (in the fixed position) that allows you to go to the top of the page after
- *          clicking. The button is visible only when the scroll position (from the top of the page) exceeds the
- *          value of 200 units (px).
+ * Component that adds a button (in the fixed position) that allows you to go to the top of the page after
+ * clicking. The button is visible only when the scroll position (from the top of the page) exceeds the
+ * value of 200 units (px).
  */
 const GotoTopButton = (): JSX.Element => {
 
-    const [ offset, setOffset ] = useState<number>(window.pageYOffset);
-    const [ showGoto, setShowGoto ] = useState<boolean>(false);
+    const showGoto = useGotoTopButton();
 
-    useEffect(() => {
-        const handleOnScroll = () => {
-            if (offset > 200) {
-                setShowGoto(true);
-            } else {
-                setShowGoto(false);
-            }
-            setOffset(window.pageYOffset);
-        }
-        if (offset === 0) {
-            setShowGoto(false);
-        }
-        window.addEventListener('scroll', handleOnScroll);
-        return () => window.removeEventListener('scroll', handleOnScroll);
-    }, [ offset ]);
-
-
-    const handleClickGotoTop = () => document.body.scrollIntoView({ behavior: 'smooth' });
-    const toggleClass = showGoto ? showGotoButton : '';
+    const handleClickGotoTop = () => {
+        document.body.scrollIntoView({ behavior: 'smooth' });
+    };
 
     return (
-        <button
-            className = {classnames(gotoTopWrapper, toggleClass)}
+        <GotoTopButtonContainer
+            ifActive = {showGoto}
             onClick = {handleClickGotoTop}
         />
     );
