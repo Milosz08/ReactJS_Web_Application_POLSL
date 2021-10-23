@@ -13,27 +13,18 @@
  */
 
 import React, { useContext, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classnames from 'classnames';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../contextStore/MainStoreProvider';
 
-import axiosInstance from '../../../helpers/request';
-import CONSTANT_DATA from '../../../constants/staticData';
+import axiosInstance from '../../../helpers/misc/request';
 import getSingleDateObjects from '../../../constants/getSingleDateObjects';
 
-const {
-    errorSomeInput, posSendForm, quantityChars, showPositiveMess, selectFieldCont, selectArrowIcon, checkField,
-    checkmark, formBtnSubmitContainer, footerFormCSS
-} = require('./FooterForm.module.scss');
 
 /**
  * Constants describing the properties of the textarea JSX tag.
  */
 const MIN_LENGTH_TEXTAREA: number = 10;
 const MAX_LENGTH_TEXTAREA: number = 300;
-const TEXTAREA_ROWS: number = 7;
 
 /**
  * Interface defining the type of state values.
@@ -68,29 +59,6 @@ const FooterForm = (): JSX.Element => {
         userName: false, messageArea: false, agreeCheck: false, allCorrect: false
     });
     const [ showPosMess, setShowPosMess ] = useState<boolean>(false);
-
-    const handleFormElms = ({ target }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        switch (target.type) {
-            case 'text':
-                setFormInputs({ ...formInputs, userName: target.value });
-                setErrors({ ...errors, userName: false });
-                break;
-            case 'textarea':
-                setFormInputs({ ...formInputs, messageArea: target.value });
-                setErrors({ ...errors, messageArea: false });
-                break;
-            case 'checkbox':
-                setFormInputs(prevState => ({ ...formInputs, agreeCheck: !prevState.agreeCheck }));
-                setErrors({ ...errors, agreeCheck: false });
-                break;
-            default:
-                throw new Error('Unexpected name. Unknow type of form field.');
-        }
-    }
-
-    const handleSelectField = ({ target }: React.ChangeEvent<HTMLSelectElement>): void => (
-        setFormInputs({ ...formInputs, typeOfMessage: target.value })
-    );
 
     const validateForm = (): BooleanMap => {
         const { userName, messageArea, agreeCheck } = formInputs;
@@ -154,67 +122,9 @@ const FooterForm = (): JSX.Element => {
         }
     }
 
-    const generateOptions = CONSTANT_DATA.FOOTER_OPTIONS.map(option => (
-        <option
-            value = {option.value}
-            key = {uuidv4()}
-        >{option.name}</option>
-    ));
-
     return (
-        <form onSubmit = {handleSubmit} className = {footerFormCSS} noValidate>
-            <input
-                type = 'text'
-                placeholder = 'Imię lub nick (bez spacji)'
-                onChange = {handleFormElms}
-                value = {formInputs.userName}
-                className = {errors.userName ? errorSomeInput : ''}
-            />
-            <div className = {selectFieldCont}>
-                <select
-                    id = 'chooseOptions'
-                    onChange = {handleSelectField}
-                    value = {formInputs.typeOfMessage}
-                >
-                    {generateOptions}
-                </select>
-                <FontAwesomeIcon
-                    icon = {[ 'fas', 'chevron-down' ]}
-                    className = {selectArrowIcon}
-                />
-            </div>
-            <textarea
-                placeholder = 'Wpisz tutaj swoją wiadomość'
-                onChange = {handleFormElms}
-                value = {formInputs.messageArea}
-                rows = {TEXTAREA_ROWS}
-                minLength = {MIN_LENGTH_TEXTAREA}
-                maxLength = {MAX_LENGTH_TEXTAREA}
-                className = {errors.messageArea ? errorSomeInput : ''}
-            />
-            <span className = {quantityChars}>
-            {formInputs.messageArea.length} / {MAX_LENGTH_TEXTAREA}
-         </span>
-            <div className = {checkField}>
-                <input
-                    type = 'checkbox'
-                    id = 'agreeCheckfield'
-                    checked = {formInputs.agreeCheck}
-                    onChange = {handleFormElms}
-                />
-                <span className = {classnames(checkmark, errors.agreeCheck ? errorSomeInput : '')}/>
-                <label htmlFor = 'agreeCheckfield'>
-                    Wyrażam zgodę na przetwarzanie wyżej podanych przeze mnie informacji.
-                </label>
-            </div>
-            <div className = {formBtnSubmitContainer}>
-                <button>
-                    <p className = {classnames(posSendForm, showPosMess ? showPositiveMess : '')}>
-                        Wiadomość została wysłana.
-                    </p>
-                    Wyślij
-                </button>
-            </div>
+        <form onSubmit = {handleSubmit} noValidate>
+           123
         </form>
     );
 }
