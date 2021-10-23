@@ -13,43 +13,36 @@
  */
 
 import React from 'react';
-import classnames from 'classnames';
 
-/**
- * Interface defining the type of state values.
- */
+import { InfiniteLoadVectorUse, InifiteLoadVector, LoadingSystemAnimationContainer } from './LoadingSystemAnimation.styles';
+
 interface PropsProvider {
     hideAuth: boolean;
 }
 
-const { adminAsyncWrapper, showAsync, infiniteLoad, infiniteUse } = require('./LoadingSystemAnimation.module.scss');
-
 /**
- * @details Component rendering animation while waiting for data download from API / logging into the system, etc.
+ * Component rendering animation while waiting for data download from
+ * API/logging into the system, etc.
  *
  * @param ifOpen { boolean } - props deciding whether to show the loading animation.
  */
-const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth }): JSX.Element => {
-
-    const showAsyncElement = hideAuth ? classnames(adminAsyncWrapper, showAsync) : adminAsyncWrapper;
-
-    return (
-        <div className = {showAsyncElement}>
-            <svg className = {infiniteLoad} viewBox = '-2000 -1000 4000 2000'>
-                <path
-                    id = 'inf'
-                    d = 'M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z'
-                />
-                <use
-                    className = {infiniteUse}
-                    xlinkHref = '#inf'
-                    strokeDasharray = '1570 5143'
-                    strokeDashoffset = '6713px'
-                />
-            </svg>
-            Logowanie do systemu...
-        </div>
-    );
-}
+const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth }): JSX.Element => (
+    <LoadingSystemAnimationContainer
+        ifActive = {hideAuth}
+    >
+        <InifiteLoadVector viewBox = '-2000 -1000 4000 2000'>
+            <path
+                id = 'inf'
+                d = 'M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z'
+            />
+            <InfiniteLoadVectorUse
+                xlinkHref = '#inf'
+                strokeDasharray = '1570 5143'
+                strokeDashoffset = '6713px'
+            />
+        </InifiteLoadVector>
+        Logowanie do systemu...
+    </LoadingSystemAnimationContainer>
+);
 
 export default LoadingSystemAnimation;

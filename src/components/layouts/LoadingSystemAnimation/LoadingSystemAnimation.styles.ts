@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -12,39 +12,38 @@
  * governing permissions and limitations under the license.
  */
 
-@import '../../../styles/mixins';
+import styled from 'styled-components';
 
-.adminAsyncWrapper {
+export const LoadingSystemAnimationContainer = styled('div')<{ ifActive: boolean }>`
     position: relative;
     min-height: 500px;
     width: var(--widthVertical);
     margin-top: 200px;
-    display: none;
+    display: ${props => props.ifActive ? 'flex' : 'none'};
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--navyBlueColor);
-    &.showAsync {
-        display: flex;
-    }
-    svg.infiniteLoad {
-        width: 280px;
-        max-width: 25em;
-        border-radius: 3px;
-        fill: none;
-        stroke: var(--darkGrayTint3);
-        stroke-linecap: round;
-        stroke-width: 8%
-    }
-    use.infiniteUse {
-        stroke: var(--navyBlueColor);
-        animation: loopAnimation 2s ease-in-out infinite;
-    }
+`;
+
+export const InifiteLoadVector = styled.svg`
+    width: 280px;
+    max-width: 25em;
+    border-radius: 3px;
+    fill: none;
+    stroke: var(--darkGrayTint3);
+    stroke-linecap: round;
+    stroke-width: 8%;
+`;
+
+export const InfiniteLoadVectorUse = styled('use')`
+    stroke: var(--navyBlueColor);
+    animation: loopAnimation 2s ease-in-out infinite;
     @keyframes loopAnimation {
         to {
             stroke-dashoffset: 0
         }
     }
-}
+`;
