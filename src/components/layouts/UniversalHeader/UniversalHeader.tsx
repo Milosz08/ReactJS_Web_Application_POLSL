@@ -12,19 +12,20 @@
  * governing permissions and limitations under the license.
  */
 
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import * as React from 'react';
 
-const {
-    universalHeader, universalHeaderIcon, universalHeaderButton, additionalTitleHeader
-} = require('./UniversalHeader.module.scss');
+import {
+    UniversalHeaderContainer, UniversalHeaderHeadling, UniversalHeaderIconWrapper, UniversalHeaderMainContent,
+    AdditionalHeaderTitle, Separator, CloseButton, CloseButtonTime
+} from './UniversalHeader.styles';
 
-/**
- * Interface defining the type of props values.
- */
+import IconComponent from '../../../helpers/componentsAndMiddleware/IconComponent';
+
 interface PropsProvider {
-    iconP: IconProp;
+    iconP: {
+        family: string;
+        name: string;
+    };
     content: string;
     ifCloseButtonVisible: boolean;
     addHeaderDayIndicator?: string;
@@ -32,10 +33,10 @@ interface PropsProvider {
 }
 
 /**
- * @details Component that implements the main header in sections. Depending on the given props, the header
- *          is generated with a close button (for modal windows).
+ * Component that implements the main header in sections. Depending on the given props, the header
+ * is generated with a close button (for modal windows).
  *
- * @param iconP { IconProp } - an array with two string parameters describing the icon.
+ * @param iconP { family: string, name: string } - an array with two string parameters describing the icon.
  * @param content { string } - the text content of the header.
  * @param ifCloseButtonVisible { boolean } - a boolean value, indicating whether the header should have a close button.
  * @param setCloseButton { () => void? } - function transferred to the operation of the modal closing button.
@@ -43,28 +44,33 @@ interface PropsProvider {
  */
 const UniversalHeader: React.FC<PropsProvider> = ({
     iconP, content, ifCloseButtonVisible, setCloseButton, addHeaderDayIndicator
-}): JSX.Element => {
-    return (
-        <header className = {universalHeader}>
-            <h3>
-                <FontAwesomeIcon
-                    icon = {iconP}
-                    className = {universalHeaderIcon}
+}): JSX.Element => (
+    <UniversalHeaderContainer>
+        <UniversalHeaderHeadling>
+            <UniversalHeaderIconWrapper>
+                <IconComponent
+                    family = {iconP.family}
+                    name = {iconP.name}
                 />
-                <span>
-               {content}
-                    {addHeaderDayIndicator && <span className = {additionalTitleHeader}>{addHeaderDayIndicator}</span>}
-            </span>
-                <aside/>
-                {ifCloseButtonVisible && <button
-                    className = {universalHeaderButton}
+            </UniversalHeaderIconWrapper>
+            <UniversalHeaderMainContent>
+                {content}
+                {addHeaderDayIndicator &&
+                    <AdditionalHeaderTitle>
+                        {addHeaderDayIndicator}
+                    </AdditionalHeaderTitle>
+                }
+            </UniversalHeaderMainContent>
+            <Separator/>
+            {ifCloseButtonVisible &&
+                <CloseButton
                     onClick = {setCloseButton}
                 >
-                    <span/>
-                </button>}
-            </h3>
-        </header>
-    );
-}
+                    <CloseButtonTime/>
+                </CloseButton>
+            }
+        </UniversalHeaderHeadling>
+    </UniversalHeaderContainer>
+);
 
 export default UniversalHeader;
