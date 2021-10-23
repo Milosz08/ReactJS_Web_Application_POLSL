@@ -13,17 +13,15 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import classnames from 'classnames';
 
-const { loadingSuspenseContainer, infiniteLoad, infiniteUse, active } = require('./LoadingSuspense.module.scss');
+import { InfiniteLoad, InfiniteUse, LoadingSuspenseContainer } from './LoadingSuspense.styles';
 
 /**
- * @details Component responsible for generating the board that is displayed while loading all React components.
+ * @details Component responsible for generating the board that is displayed while loading all React componentsAndMiddleware.
  */
 const LoadingSuspense = (): JSX.Element => {
 
     const [ isVisible, setIsVisible ] = useState<boolean>(false);
-    const toggleClass = isVisible ? classnames(loadingSuspenseContainer, active) : loadingSuspenseContainer;
 
     useEffect(() => {
         setIsVisible(true);
@@ -34,21 +32,22 @@ const LoadingSuspense = (): JSX.Element => {
     }, []);
 
     return (
-        <div className = {toggleClass}>
-            <svg className = {infiniteLoad} viewBox = '-2000 -1000 4000 2000'>
+        <LoadingSuspenseContainer
+            ifActive = {isVisible}
+        >
+            <InfiniteLoad viewBox = '-2000 -1000 4000 2000'>
                 <path
                     id = 'inf'
                     d = 'M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z'
                 />
-                <use
-                    className = {infiniteUse}
+                <InfiniteUse
                     xlinkHref = '#inf'
                     strokeDasharray = '1570 5143'
                     strokeDashoffset = '6713px'
                 />
-            </svg>
+            </InfiniteLoad>
             Ładowanie strony...
-        </div>
+        </LoadingSuspenseContainer>
     );
 }
 
