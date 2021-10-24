@@ -20,6 +20,7 @@ import { BannerColorGrade, ImageSliderContainer } from './ImagesSlider.style';
 import ImagesSliderMainTitle from './subcomponents/ImagesSliderMainTitle';
 import ImagesSliderButtons, { Directions } from './subcomponents/ImagesSliderButtons';
 import ImagesSliderComposition from './subcomponents/ImagesSliderComposition';
+import useGetWindowWidth from '../../../helpers/hooks/useGetWindowWidth';
 
 
 /**
@@ -33,7 +34,8 @@ export const IMAGES_COUNT: number = 3;
  */
 const ImagesSlider: React.FC = (): JSX.Element => {
 
-    const [ axiosX, prevSlide, nextSlide ] = useSlider();
+    const widthX = useGetWindowWidth();
+    const [ axiosX, prevSlide, nextSlide ] = useSlider(widthX > 500, 5);
 
     const handleMoveSlide = (dir: Directions): void => {
         switch(dir) {

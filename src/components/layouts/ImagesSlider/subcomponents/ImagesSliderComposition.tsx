@@ -33,7 +33,7 @@ const ImagesSliderComposition: React.FC<PropsProvider> = ({ axiosX }): JSX.Eleme
             <SliderSingleImage
                 key = {`banner__setNumber${count}`}
                 src = {imageSrc}
-                widthCSS = {100 / IMAGES_COUNT}
+                widthCSS = {100 * IMAGES_COUNT}
                 positionCSS = {axiosX}
                 alt = {`banner__setNumber${count}`}
             />

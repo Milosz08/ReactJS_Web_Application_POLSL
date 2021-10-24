@@ -24,6 +24,9 @@ export const ImageSliderContainer = styled.main`
     height: 800px;
     color: var(--whiteColor);
     overflow: hidden;
+    @media only screen and (max-width: 500px) {
+        height: 100vh;
+    }
 `;
 
 export const MainTitleContainer = styled.div`
@@ -34,23 +37,51 @@ export const MainTitleContainer = styled.div`
     z-index: 2;
     bottom: 70px;
     width: var(--widthVertical);
+    @media only screen and (max-width: 1250px) {
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+    }
+    @media only screen and (max-width: 500px) {
+        margin-bottom: 60px;
+    }
 `;
 
-export const MainTitleWrapper = styled.div``;
+export const MainTitleWrapper = styled.div`
+    @media only screen and (max-width: 1250px) {
+        margin-bottom: 30px;
+    }
+`;
 
 export const MainTitleHeaderFirst = styled.h2`
     font-size: 6rem;
     font-weight: 600;
     text-transform: uppercase;
+    @media only screen and (max-width: 1250px) {
+        font-size: 4.5rem;
+    }
+    @media only screen and (max-width: 500px) {
+        font-size: 3.5rem;
+    }
 `;
 
 export const MainTitleHeaderSecond = styled.h4`
     font-size: 2rem;
     font-weight: 400;
+    @media only screen and (max-width: 1250px) {
+        font-size: 1.5rem;
+    }
+    @media only screen and (max-width: 500px) {
+        font-size: 1.3rem;
+        font-weight: 400;
+    }
 `;
 
 export const BannerDotsContainer = styled.div`
     display: flex;
+    @media only screen and (max-width: 500px) {
+        display: none;
+    }
 `;
 
 export const BannerSingleDotElement = styled('div')<{ ifActive: boolean }>`
@@ -88,6 +119,9 @@ export const BannerNavigateButtonsContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media only screen and (max-width: 500px) {
+        display: none;
+    }
 `;
 
 export const BannerNavigateButtons = styled(button_rs)<{ ifLeft: boolean }>`
@@ -122,6 +156,9 @@ export const SliderCompositionContainer = styled('div')<{ widthCSS: number }>`
     height: 800px;
     display: inline-block;
     z-index: -2;
+    @media only screen and (max-width: 500px) {
+        height: 100vh;
+    }
 `;
 
 export const SliderSingleImage = styled('img').attrs(props => ({
@@ -129,7 +166,8 @@ export const SliderSingleImage = styled('img').attrs(props => ({
         transform: `translateX(${props.positionCSS}%)`
     }
 }))<{ widthCSS: number }>`
-    width: ${props => `${props.widthCSS}%`};
-    margin-top: -180px;
+    width: calc(100% / 3);
+    height: 100%;
+    object-fit: cover;
     transition: .6s all cubic-bezier(.44,.06,.5,.88);
 `;
