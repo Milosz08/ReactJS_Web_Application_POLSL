@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -12,25 +12,30 @@
  * governing permissions and limitations under the license.
  */
 
-@import './../../../styles/_mixins';
+export enum AUTH_IDENTITIES {
+    USER, MODERATOR, ADMIN, UNDEFINED
+}
 
-.bigBarContainer {
-    display: none;
-    width: 100%;
-    height: 3px;
-    background-color: var(--navyBlueColor);
-    .bigBarLoading {
-        display: none;
-        height: 100%;
-        width: 0;
-        background-color: var(--navyBlueColor);
-        &.visible {
-            display: block;
-            background-color: var(--orangeColor);
-            width: 0;
-        }
+export interface SessionInitialTypes {
+    adminAuthStatus: {
+        logged: boolean;
+        identity: AUTH_IDENTITIES;
     }
-    &.visible {
-        display: block;
+    userLoggedStatus: boolean;
+    sessionInfo: {
+        adminSessionCounter: number;
+        ifModalOpen: boolean;
     }
 }
+
+export const InitialState: SessionInitialTypes = {
+    adminAuthStatus: {
+        logged: false,
+        identity: AUTH_IDENTITIES.UNDEFINED,
+    },
+    userLoggedStatus: false,
+    sessionInfo: {
+        adminSessionCounter: 0,
+        ifModalOpen: false,
+    }
+} as const;
