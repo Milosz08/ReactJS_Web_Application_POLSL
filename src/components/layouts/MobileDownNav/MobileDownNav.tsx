@@ -20,7 +20,7 @@ import { setMobileNavActiveElm } from '../../../redux/preferencesReduxStore/acti
 
 import MOBILE_NAV_ELMS from '../../../helpers/structs/mobileNavElements';
 
-import { MobileDownNavContainer, ActiveIndicator } from './MobileDownNav.styles';
+import { MobileDownNavContainer, ActiveIndicator, ActiveIndicatorContainer } from './MobileDownNav.styles';
 
 import MultipleNavElements from './subcomponents/MultipleNavElements';
 
@@ -45,9 +45,11 @@ const MobileDownNav: React.FC<PropsProvider> = ({ id }): JSX.Element => {
 
     return (
         <MobileDownNavContainer>
-            <ActiveIndicator
-                position = {position}
-            />
+            <ActiveIndicatorContainer>
+                <ActiveIndicator
+                    position = {position}
+                />
+            </ActiveIndicatorContainer>
             <MultipleNavElements
                 setPosition = {setPosition}
             />

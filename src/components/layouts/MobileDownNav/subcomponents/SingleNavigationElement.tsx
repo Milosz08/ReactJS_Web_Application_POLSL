@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -12,44 +12,48 @@
  * governing permissions and limitations under the license.
  */
 
-import React from 'react';
+import * as React from 'react';
 import DelayLink from 'react-delay-link';
-import { ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
 
-const { oneIconWrapper } = require('./MobileDownNav.module.scss');
+import { ROUTER_INTERVAL_TIME } from '../../../../contextStore/MainStoreProvider';
+import IconComponent from '../../../../helpers/componentsAndMiddleware/IconComponent';
 
-/**
- * Interface defining the type of props values.
- */
+import { MobileDownNavSingleAnchor, MobileDownNavSingleElementContainer } from '../MobileDownNav.styles';
+
 interface PropsProvider {
     pathAttr: {
         path: string,
         id: number
     };
     action: (id: number, path: string) => void;
-    Component: React.ReactElement;
+    icon: string;
 }
 
 /**
- * @details Component responsible for generating a single button (routing) in the bottom menu on mobile devices (phones).
+ * Component responsible for generating a single button (routing) in the bottom menu on mobile devices (phones).
  *
  * @param pathAttr { [value: string]: string | number } - path and name property object.
  * @param action { (id: number) => void } - function is started by pressing the button.
  * @param componentsObj { React.ReactElement } - icon (filled and empty) in the form of a React component.
  */
-const SingleNavigationElement: React.FC<PropsProvider> = ({ pathAttr, action, Component }): JSX.Element => {
-    return (
+const SingleNavigationElement: React.FC<PropsProvider> = ({ pathAttr, action, icon }): JSX.Element => (
+    <MobileDownNavSingleElementContainer>
         <DelayLink
             to = {pathAttr.path}
             delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
             replace = {false}
             clickAction = {() => action(pathAttr.id, pathAttr.path)}
         >
-            <a className = {oneIconWrapper} href = {pathAttr.path}>
-                {Component}
-            </a>
+            <MobileDownNavSingleAnchor
+                href = {pathAttr.path}
+            >
+                <IconComponent
+                    family = {'AntDesignIcons'}
+                    name = {icon}
+                />
+            </MobileDownNavSingleAnchor>
         </DelayLink>
-    );
-}
+    </MobileDownNavSingleElementContainer>
+);
 
 export default SingleNavigationElement;

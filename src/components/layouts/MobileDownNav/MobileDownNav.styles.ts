@@ -23,10 +23,19 @@ export const MobileDownNavContainer = styled.nav`
     align-items: flex-end;
     width: 100%;
     height: 45px;
-    background-color: var(--lightGrayTint1);
+    background-color: var(--mobileNavigation);
     @media only screen and (max-width: 500px) {
         display: flex;
     }
+`;
+
+export const ActiveIndicatorContainer = styled.div`
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--mobileNavigation);
 `;
 
 export const ActiveIndicator = styled('span')<{ position: number }>`
