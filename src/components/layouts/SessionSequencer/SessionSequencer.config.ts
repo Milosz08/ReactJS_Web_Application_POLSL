@@ -15,7 +15,7 @@
 /**
  * Maximum session time (inactivity on the part of the user). Exported variable.
  */
-export const MAX_INACTIVITY_TIME: number = 1;
+export const MAX_INACTIVITY_TIME: number = 5;
 
 /**
  * Maximum modal open time (after this time, modal will be closed and user/administrator will be logout).
