@@ -18,7 +18,8 @@ import { FRONT_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
 
 import { MainHeaderContentContainer, MainLogoContainer, MainLogoImage, MainHeaderNavigationRouterLinks } from '../Header.styles';
 
-const Navigation = React.lazy(() => import('../../Navigation/Navigation'));
+import MainHeaderRightNavigation from './MainHeaderRightNavigation';
+
 const Hamburger = React.lazy(() => import('../../Hamburger/Hamburger'));
 
 interface PropsProvider {
@@ -47,7 +48,7 @@ const MainHeaderContent: React.FC<PropsProvider> = ({ width, offset, elmHeight, 
 
     const renderedNavigation = ifHeaderHasRedBar && (
         <MainHeaderNavigationRouterLinks>
-            <Navigation ifHeader = {true}/>
+            <MainHeaderRightNavigation/>
         </MainHeaderNavigationRouterLinks>
     );
 

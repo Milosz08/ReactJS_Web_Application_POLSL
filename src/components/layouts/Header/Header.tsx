@@ -45,7 +45,7 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }): JSX.Element => 
     const { grabber, menuSticky, headerHide, elmHeight, width, offset } = useHeaderOnScroll(hamburgerToggle);
 
     const generateCmsInfobar = (): JSX.Element | null => {
-        const checkIfIsCms = document.location.pathname.includes(FRONT_ENDPOINTS.ADMIN_PANEL.substring(1));
+        const checkIfIsCms = decodeURI(document.location.pathname).includes(FRONT_ENDPOINTS.ADMIN_PANEL.substring(1));
         return checkIfIsCms ? <CmsInfoBar/> : null;
     };
 
@@ -65,9 +65,9 @@ const Header: React.FC<PropsProvider> = ({ ifHeaderHasRedBar }): JSX.Element => 
                 ifHeaderHasRedBar = {ifHeaderHasRedBar}
             />
             <LoadingBigBar/>
-            <UnofficialInfo
+            {ifHeaderHasRedBar && <UnofficialInfo
                 offset = {offset}
-            />
+            />}
             {generateCmsInfobar()}
         </MainHeaderContainer>
     );

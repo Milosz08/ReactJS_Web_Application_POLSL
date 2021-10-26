@@ -13,7 +13,7 @@
  */
 
 import styled from 'styled-components';
-import { a_rs } from '../../../styles/reset.styles';
+import { a_rs, ul_rs } from '../../../styles/reset.styles';
 
 export const MainHeaderContainer = styled('header').attrs(props => ({
     style: {
@@ -55,6 +55,7 @@ export const MainHeaderNavigationSingleLink = styled(a_rs)`
     transition: var(--transitionDuration) color ease-in-out;
     :hover {
         color: var(--darkGrayTint4);
+        text-decoration: none;
     }
 `;
 
@@ -115,5 +116,22 @@ export const UnofficialInfoContainer = styled('div').attrs(props => ({
     background-color: var(--redColor);
     @media only screen and (max-width: 1250px) {
         font-size: 1rem;
+    }
+`;
+
+export const NavigationHeaderInline = styled(ul_rs)`
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    height: 100%;
+`;
+
+export const NavigationHeaderInlineSingleElement = styled.li`
+    margin: 0 15px;
+    color: var(--whiteColor);
+    text-decoration: none;
+    font-weight: 500;
+    :nth-last-child(1) {
+        margin-left: 15px;
     }
 `;
