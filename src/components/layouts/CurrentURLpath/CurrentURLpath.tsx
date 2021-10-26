@@ -12,96 +12,41 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { useContext } from 'react';
-import DelayLink from 'react-delay-link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classnames from 'classnames';
-import { v4 as uuidv4 } from 'uuid';
+import * as React from 'react';
 
-import { MainStoreContext, MainStoreProviderTypes, ROUTER_INTERVAL_TIME } from '../../../contextStore/MainStoreProvider';
+import DelayRouterLink from '../../../helpers/componentsAndMiddleware/DelayRouterLink';
+import { FRONT_ENDPOINTS } from '../../../helpers/structs/appEndpoints';
 
-const {
-    currentURLwrapper, currentURLcontainer, sigleCellRecord, arrowIcon, ifHeaderHasRedBar
-} = require('./CurrentURLpath.module.scss');
+import { CurrentURLpathContainer, CurrentURLpathSingleElement, CurrentURLpathWrapper } from './CurrentURLpath.styles';
 
-/**
- * Interface defining the type of props.
- */
+import SingleCurrentURLpath from './subcomponents/SingleCurrentURLpath';
+
 interface PropsProvider {
     ifImportatHeaderActive: boolean;
 }
 
 /**
- * @details Component that generates navigation of pages / subpages. Depending on the address path, it generates an
- *          appropriate sequence of hyperlinks to subsequent subpages.
+ * Component that generates navigation of pages / subpages. Depending on the address path, it generates an
+ * appropriate sequence of hyperlinks to subsequent subpages.
  *
  * @params ifImportatHeaderActive { boolean } - decides whether the navigation should be lower than the top of the page.
  */
-const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }): JSX.Element => {
-
-    const { timeoutRoutePath } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
-
-    const convertCurrentPathnameToString = (): JSX.Element[] => {
-        const allPathString: string = decodeURI(window.location.pathname).toString().slice(1);
-        const lengthOfArray: number = allPathString.split('/').length;
-        const arraysOfAllPathnames: string[] = allPathString.split('/', lengthOfArray);
-        let prevPathName: string = '';
-
-        return arraysOfAllPathnames.map((pathname: string) => {
-            const replaceMinus: string = pathname.replaceAll('-', ' ');
-            const countOfSigleWords: number = replaceMinus.split(' ').length + 1;
-            const sigleWordsArray: string[] = replaceMinus.split(' ', countOfSigleWords);
-            prevPathName += `/${pathname}`;
-
-            const capitaliseWordsArray = sigleWordsArray.map((word: string) => {
-                const lower: string = word.toLocaleLowerCase();
-                return word.charAt(0).toUpperCase() + lower.slice(1);
-            });
-
-            return (
-                <span key = {uuidv4()} className = {sigleCellRecord}>
-                <FontAwesomeIcon
-                    icon = {[ 'fas', 'chevron-right' ]}
-                    className = {arrowIcon}
+const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }): JSX.Element => (
+    <CurrentURLpathContainer
+        changeTop = {ifImportatHeaderActive}
+    >
+        <CurrentURLpathWrapper
+            changeTop = {ifImportatHeaderActive}
+        >
+            <CurrentURLpathSingleElement>
+                <DelayRouterLink
+                    render = {() => 'Strona Główna'}
+                    pathTo = {FRONT_ENDPOINTS.ABSOLUTE}
                 />
-               <DelayLink
-                   to = {prevPathName}
-                   delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
-                   replace = {false}
-                   clickAction = {() => timeoutRoutePath!(prevPathName)}
-               >
-                  <a href = {prevPathName}>
-                     {capitaliseWordsArray.join(' ')}
-                  </a>
-               </DelayLink>
-            </span>
-            );
-        });
-    }
-
-    const toggleMargin = ifImportatHeaderActive ? classnames(currentURLcontainer, ifHeaderHasRedBar) : currentURLcontainer;
-
-    return (
-        <div className = {toggleMargin}>
-            <div className = {currentURLwrapper}>
-            <span>
-               <DelayLink
-                   to = '/'
-                   delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
-                   replace = {false}
-                   clickAction = {() => timeoutRoutePath!('/')}
-               >
-                  <a href = '/'>
-                     Strona Główna
-                  </a>
-               </DelayLink>
-            </span>
-                <span>
-               {convertCurrentPathnameToString()}
-            </span>
-            </div>
-        </div>
-    );
-}
+            </CurrentURLpathSingleElement>
+            <SingleCurrentURLpath/>
+        </CurrentURLpathWrapper>
+    </CurrentURLpathContainer>
+);
 
 export default CurrentURLpath;
