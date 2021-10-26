@@ -18,6 +18,9 @@ import { button_rs } from '../../../styles/reset.styles';
 export const UniversalHeaderContainer = styled.header`
     width: 100%;
     margin: 30px 0;
+    @media only screen and (max-width: 1250px) {
+        width: 100%;
+    }
 `;
 
 export const UniversalHeaderHeadling = styled.h3`
@@ -28,6 +31,14 @@ export const UniversalHeaderHeadling = styled.h3`
     color: var(--darkBlueColor);
     font-weight: 500;
     line-height: 1;
+    @media only screen and (max-width: 1250px) {
+        justify-content: space-between;
+    }
+`;
+
+export const UniversalHeaderTitleSection = styled.div`
+    display: flex;
+    align-items: center;
 `;
 
 export const UniversalHeaderMainContent = styled.span``;
@@ -50,6 +61,9 @@ export const Separator = styled.aside`
     height: 1px;
     background-color: var(--darkGrayTint1);
     margin-left: 30px;
+    @media only screen and (max-width: 1250px) {
+        display: none;
+    }
 `;
 
 export const CloseButton = styled(button_rs)`

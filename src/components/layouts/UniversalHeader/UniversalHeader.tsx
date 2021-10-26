@@ -16,7 +16,7 @@ import * as React from 'react';
 
 import {
     UniversalHeaderContainer, UniversalHeaderHeadling, UniversalHeaderIconWrapper, UniversalHeaderMainContent,
-    AdditionalHeaderTitle, Separator, CloseButton, CloseButtonTime
+    AdditionalHeaderTitle, Separator, CloseButton, CloseButtonTime, UniversalHeaderTitleSection
 } from './UniversalHeader.styles';
 
 import IconComponent from '../../../helpers/componentsAndMiddleware/IconComponent';
@@ -47,20 +47,22 @@ const UniversalHeader: React.FC<PropsProvider> = ({
 }): JSX.Element => (
     <UniversalHeaderContainer>
         <UniversalHeaderHeadling>
-            <UniversalHeaderIconWrapper>
-                <IconComponent
-                    family = {iconP.family}
-                    name = {iconP.name}
-                />
-            </UniversalHeaderIconWrapper>
-            <UniversalHeaderMainContent>
-                {content}
-                {addHeaderDayIndicator &&
+            <UniversalHeaderTitleSection>
+                <UniversalHeaderIconWrapper>
+                    <IconComponent
+                        family = {iconP.family}
+                        name = {iconP.name}
+                    />
+                </UniversalHeaderIconWrapper>
+                <UniversalHeaderMainContent>
+                    {content}
+                    {addHeaderDayIndicator &&
                     <AdditionalHeaderTitle>
                         {addHeaderDayIndicator}
                     </AdditionalHeaderTitle>
-                }
-            </UniversalHeaderMainContent>
+                    }
+                </UniversalHeaderMainContent>
+            </UniversalHeaderTitleSection>
             <Separator/>
             {ifCloseButtonVisible &&
                 <CloseButton
