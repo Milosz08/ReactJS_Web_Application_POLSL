@@ -12,68 +12,42 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import axiosInstance from '../../../helpers/request';
+import React, { Fragment } from 'react';
 
-const { dataLastUpdate } = require('./DataLastUpdate.module.scss');
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/reduxStore';
+import { ApiInitialTypes } from '../../../redux/apiReduxStore/initialState';
+import { updateSections } from '../../../redux/apiReduxStore/types';
 
-/**
- * Interface defining the type of props.
- */
+import { DataLastUpdateContainer, DataLastUpdateParagraph } from './DataLastUpdate.styles';
+
 interface PropsProvider {
-    dataID: string | undefined;
+    type: updateSections;
     content?: string;
-    withoutText: boolean;
 }
 
 /**
- * Interface defining the type of state values.
- */
-interface StateProvider {
-    fullDate?: string;
-    fullTime?: string;
-}
-
-/**
- * @details A component that retrieves the date of the database's last modification from the server (depending on
- *          the dataID parameter, the modification data of a specific collection is retrieved).
+ * Component retrieves the date of the database's last modification from the server (depending on
+ * the dataID parameter, the modification data of a specific collection is retrieved).
  *
  * @param dataID { string } - database collection id.
  * @param content { string } - title of the collection from which the modification date is retrieved.
- * @param withoutText { boolean } - flag deciding whether to show only the date or the date with additional text.
  */
-const DataLastUpdate: React.FC<PropsProvider> = ({ dataID, content, withoutText }): JSX.Element => {
+const DataLastUpdate: React.FC<PropsProvider> = ({ type, content }): JSX.Element => {
 
-    const [ lastUpdate, setLastUpdate ] = useState<StateProvider>({ fullDate: '', fullTime: '' });
+    const { lastUpdate }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const findMathUpdateType = lastUpdate.find(el => el.updateDateFor === type);
 
-    const fetchLastUpdate = useCallback(async (): Promise<void> => {
-        const { data } = await axiosInstance.get(`/last-update/${dataID}`);
-        const { updateDate } = data;
-
-        const day: string = updateDate.day < 10 ? `0${updateDate.day}` : updateDate.day;
-        const month: string = updateDate.month < 10 ? `0${updateDate.month}` : updateDate.month;
-
-        const hour: string = updateDate.hour < 10 ? `0${updateDate.hour}` : updateDate.hour;
-        const minutes: string = updateDate.minutes < 10 ? `0${updateDate.minutes}` : updateDate.minutes;
-        const seconds: string = updateDate.seconds < 10 ? `0${updateDate.seconds}` : updateDate.seconds;
-
-        setLastUpdate({
-            fullDate: `${day}/${month}/${updateDate.year}`,
-            fullTime: `${hour}:${minutes}:${seconds}`,
-        });
-    }, [ dataID ]);
-
-    useEffect(() => {
-        fetchLastUpdate();
-        return () => setLastUpdate({});
-    }, [ fetchLastUpdate ]);
-
-    const generateStructure = !withoutText ? (
-        <div className = {dataLastUpdate}>
-            <p>Ostatnia aktualizacja {content}: {lastUpdate.fullDate}, {lastUpdate.fullTime}</p>
-        </div>
+    const generateStructure = content ? (
+        <DataLastUpdateContainer>
+            <DataLastUpdateParagraph>
+                Ostatnia aktualizacja {content}: {findMathUpdateType?.updateDate.date}, {findMathUpdateType?.updateDate.time}
+            </DataLastUpdateParagraph>
+        </DataLastUpdateContainer>
     ) : (
-        <strong>{lastUpdate.fullDate}, {lastUpdate.fullTime}</strong>
+        <strong>
+            {findMathUpdateType?.updateDate.date}, {findMathUpdateType?.updateDate.time}
+        </strong>
     );
 
     return (
