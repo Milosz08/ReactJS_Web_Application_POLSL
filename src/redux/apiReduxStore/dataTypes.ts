@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -12,24 +12,33 @@
  * governing permissions and limitations under the license.
  */
 
-.dataLastUpdate {
-    display: flex;
-    justify-content: flex-end;
-    margin: 30px 0 40px 0;
-    p {
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: var(--navyBlueColor);
+import { updateSections } from './types';
+
+export interface FooterFormTypes {
+    _id: string;
+    userIdentity: string;
+    userChoice: string;
+    userMessage: string;
+    servlettTime: {
+        fullDate: string;
+        fullTime: string;
     }
+    __v?: number;
 }
 
-////////////////////////////////////////////////////
+export interface CovidWarningsTypes {
+    _id: string;
+    description: string;
+    actualRiskNumber: number;
+    __v?: number;
+}
 
-@media only screen and (max-width: 1250px) {
-    .dataLastUpdate {
-        justify-content: center;
-        p {
-            margin: 0 30px 0 15px;
-        }
+export interface LastUpdateTypes {
+    _id: string;
+    updateDateFor: updateSections;
+    updateDate: {
+        date: string;
+        time: string;
     }
+    __v?: number;
 }
