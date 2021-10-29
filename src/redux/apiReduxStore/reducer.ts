@@ -22,7 +22,7 @@ import ConvertTimeUTC from '../../helpers/functionsAndClasses/convertTimeUTC';
 
 const {
     GET_SINGLE_FOOTERFORM_DATA, SEND_SINGLE_FOOTERFORM_DATA, GET_SINGLE_COVID_DATA, GET_SINGLE_LAST_UPDATE,
-    UPDATE_SINGLE_LAST_UPDATE
+    UPDATE_SINGLE_LAST_UPDATE, GET_SINGLE_SUBJECT_DATA, FILTERED_SUBJECTS_LIST, SORT_BY_NAME
 } = apiTypes;
 
 const apiReducer = (state = initialState, action: any) => {
@@ -65,7 +65,7 @@ const apiReducer = (state = initialState, action: any) => {
             let newState = [ ...state.lastUpdate ];
             const findIndexType = newState.findIndex(el => el.updateDateFor === updateStateType);
             if(findIndexType === -1) {
-                throw new Error(`Line: 65, redux reducer error! Change update state not found!`);
+                throw new Error(`ERROR! Redux reducer error! Set new state not found!`);
             } else {
                 newState[findIndexType].updateDate = new ConvertTimeUTC().getAllDateElms();
                 const updateDatabaseClaster = async () => {
@@ -74,6 +74,35 @@ const apiReducer = (state = initialState, action: any) => {
                 updateDatabaseClaster();
             }
             return { ...state, lastUpdate: newState };
+        }
+
+        case GET_SINGLE_SUBJECT_DATA: {
+            const { singleSubjectData } = action.payload;
+            return { ...state,
+                subjectsContent: [ ...state.subjectsContent, singleSubjectData ],
+                searchedSubjects: [ ...state.searchedSubjects, singleSubjectData ]
+            };
+        }
+
+        case FILTERED_SUBJECTS_LIST: {
+            const { filterCrit } = action.payload;
+            // eslint-disable-next-line array-callback-return
+            const subjectsNewState = [...state.subjectsContent].filter(el => {
+                if (filterCrit === '') {
+                    return el;
+                } else if (el.title.toLocaleLowerCase().includes(filterCrit.toLocaleLowerCase())) {
+                    return el;
+                }
+            })
+            return { ...state, searchedSubjects: subjectsNewState };
+        }
+
+        case SORT_BY_NAME: {
+            const { typeElmsArray } = action.payload;
+            typeElmsArray.forEach((el: any) => {
+                state[el].sort((a: any, b: any) => a.title.localeCompare(b.title));
+            });
+            return state;
         }
 
         default: {

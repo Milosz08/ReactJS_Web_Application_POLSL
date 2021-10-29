@@ -42,3 +42,21 @@ export interface LastUpdateTypes {
     }
     __v?: number;
 }
+
+export interface SubjectsContentTypes {
+    _id: string;
+    title: string;
+    ifEnd: boolean;
+    semesters: string[];
+    departments: string[];
+    icon: {
+        family: string;
+        name: string;
+    };
+    classesPatforms: {
+        type: string;
+        place: string;
+        link: string;
+    }[];
+    __v?: number;
+}

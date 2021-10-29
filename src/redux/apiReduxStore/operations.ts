@@ -15,12 +15,14 @@
 import axiosInstance from '../../helpers/misc/request';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 
-import { addCovidWarningLevel, addFooterMessage, addLastUpdate } from './actions';
-import { CovidWarningsTypes, FooterFormTypes, LastUpdateTypes } from './dataTypes';
+import { addCovidWarningLevel, addFooterMessage, addLastUpdate, addSingleSubject, sortingIncomingElmsByName } from './actions';
+import { CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, SubjectsContentTypes } from './dataTypes';
+import { sortAvailables } from './types';
 
 const footerEndpoint: string = API_ENDPOINTS.FOOTER_FORM;
 const covidEndpoint: string = API_ENDPOINTS.COVID_WARNINGS;
 const updateEndpoint: string = API_ENDPOINTS.LAST_UPDATE;
+const subjectsEndpoint: string = API_ENDPOINTS.SUBJECTS_ELMS;
 
 /**
  *
@@ -58,5 +60,17 @@ export const getAllLastUpdateElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const lastUpdates = await fetchElementFromAPI(updateEndpoint);
         lastUpdates.forEach((element: LastUpdateTypes) => dispatch(addLastUpdate(element)));
+    };
+};
+
+/**
+ *
+ */
+export const getAllSubjectsElements = () => {
+    return async (dispatch: (prop: any) => void) => {
+        const subjects = await fetchElementFromAPI(subjectsEndpoint);
+        subjects.forEach((element: SubjectsContentTypes) => dispatch(addSingleSubject(element)));
+        dispatch(sortingIncomingElmsByName(sortAvailables.SUBJECTS_STA));
+        dispatch(sortingIncomingElmsByName(sortAvailables.SUBJECTS_DYN));
     };
 };

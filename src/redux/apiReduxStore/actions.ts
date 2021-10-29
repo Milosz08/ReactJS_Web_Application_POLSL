@@ -12,8 +12,8 @@
  * governing permissions and limitations under the license.
  */
 
-import apiTypes, { updateSections } from './types';
-import { CovidWarningsTypes, FooterFormTypes, LastUpdateTypes } from './dataTypes';
+import apiTypes, { sortAvailables, updateSections } from './types';
+import { CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, SubjectsContentTypes } from './dataTypes';
 
 interface ReturnedToReducer {
     type: apiTypes;
@@ -54,5 +54,26 @@ export const updateSelectedState = (updateStateType: updateSections): ReturnedTo
     type: apiTypes.UPDATE_SINGLE_LAST_UPDATE,
     payload: {
         updateStateType
+    }
+});
+
+export const addSingleSubject = (singleSubjectData: SubjectsContentTypes): ReturnedToReducer => ({
+    type: apiTypes.GET_SINGLE_SUBJECT_DATA,
+    payload: {
+        singleSubjectData
+    }
+});
+
+export const filteredSubjectsList = (filterCrit: string): ReturnedToReducer => ({
+    type: apiTypes.FILTERED_SUBJECTS_LIST,
+    payload: {
+        filterCrit
+    }
+});
+
+export const sortingIncomingElmsByName = (...typeElmsArray: sortAvailables[]): ReturnedToReducer => ({
+    type: apiTypes.SORT_BY_NAME,
+    payload: {
+        typeElmsArray
     }
 });

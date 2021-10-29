@@ -18,12 +18,24 @@ enum apiTypes {
     GET_SINGLE_COVID_DATA = 'GET_ALL_COVID_DATA',
     GET_SINGLE_LAST_UPDATE = 'GET_ALL_LAST_UPDATE',
     UPDATE_SINGLE_LAST_UPDATE = 'UPDATE_SINGLE_LAST_UPDATE',
+    GET_SINGLE_SUBJECT_DATA = 'GET_SINGLE_SUBJECT_DATA',
+    FILTERED_SUBJECTS_LIST = 'FILTERED_SUBJECTS_LIST',
+    SORT_BY_NAME = 'SORT_BY_NAME',
 }
 
 export enum updateSections {
     SUBJECTS = 'subjects',
     CALENDAR = 'calendar',
     SCHEDULE = 'schedule'
+}
+
+export enum sortAvailables {
+    SUBJECTS_STA = 'subjectsContent',
+    SUBJECTS_DYN = 'searchedSubjects',
+}
+
+export enum sortInputTypes {
+    SUBJECT_SEARCH = 'subjectSearch',
 }
 
 export default apiTypes;
