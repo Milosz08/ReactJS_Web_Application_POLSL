@@ -13,7 +13,10 @@
  */
 
 export enum AUTH_IDENTITIES {
-    USER, MODERATOR, ADMIN, UNDEFINED
+    USER= 'użytkownik',
+    MODERATOR = 'moderator',
+    ADMIN = 'administrator',
+    UNDEFINED = 'niezdefiniowany'
 }
 
 export interface SessionInitialTypes {

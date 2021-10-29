@@ -12,16 +12,20 @@
  * governing permissions and limitations under the license.
  */
 
-import { CovidWarningsTypes, FooterFormTypes, LastUpdateTypes } from './dataTypes';
+import { CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, SubjectsContentTypes } from './dataTypes';
 
 export interface ApiInitialTypes {
     footerFormMessages: FooterFormTypes[];
     covidWarningLevels: CovidWarningsTypes[];
     lastUpdate: LastUpdateTypes[];
+    subjectsContent: SubjectsContentTypes[];
+    searchedSubjects: SubjectsContentTypes[];
 }
 
 export const initialState: ApiInitialTypes = {
     footerFormMessages: [],
     covidWarningLevels: [],
     lastUpdate: [],
+    subjectsContent: [],
+    searchedSubjects: [],
 };
