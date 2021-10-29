@@ -50,10 +50,10 @@ export const AdditionalHeaderTitle = styled.span`
     padding-left: 10px;
 `;
 
-export const UniversalHeaderIconWrapper = styled.div`
-    font-size: 1.2rem;
+export const UniversalHeaderIconWrapper = styled('div')<{ customSize: string }>`
     margin-right: 15px;
     color: var(--orangeColor);
+    font-size: ${props => !Boolean(props.customSize) ? '1.2rem' : props.customSize};
 `;
 
 export const Separator = styled.aside`

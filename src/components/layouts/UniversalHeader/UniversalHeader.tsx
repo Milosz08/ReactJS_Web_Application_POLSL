@@ -28,6 +28,7 @@ interface PropsProvider {
     };
     content: string;
     ifCloseButtonVisible: boolean;
+    changeIconSize?: string;
     addHeaderDayIndicator?: string;
     setCloseButton?: () => void;
 }
@@ -41,14 +42,17 @@ interface PropsProvider {
  * @param ifCloseButtonVisible { boolean } - a boolean value, indicating whether the header should have a close button.
  * @param setCloseButton { () => void? } - function transferred to the operation of the modal closing button.
  * @param addHeaderDayIndicator { string? } - for the modal adding / modifying subjects in the timetable.
+ * @param changeIconSize { string } - custom icon size (by default is 1rem).
  */
 const UniversalHeader: React.FC<PropsProvider> = ({
-    iconP, content, ifCloseButtonVisible, setCloseButton, addHeaderDayIndicator
+    iconP, content, ifCloseButtonVisible, setCloseButton, addHeaderDayIndicator, changeIconSize
 }): JSX.Element => (
     <UniversalHeaderContainer>
         <UniversalHeaderHeadling>
             <UniversalHeaderTitleSection>
-                <UniversalHeaderIconWrapper>
+                <UniversalHeaderIconWrapper
+                    customSize = {changeIconSize}
+                >
                     <IconComponent
                         family = {iconP.family}
                         name = {iconP.name}
