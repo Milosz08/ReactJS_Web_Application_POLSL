@@ -36,7 +36,11 @@ const useCountingFromUpToDown = (counter: number) => {
             const onlySeconds = expireTime - onlyMinutes * 60;
             const onlySecondsWithZero = onlySeconds < 10 ? `0${onlySeconds}` : onlySeconds;
 
-            setTimeCounting(`${onlyMinutesWithZero}:${onlySecondsWithZero}`);
+            if (onlyMinutes >= 0) {
+                setTimeCounting(`${onlyMinutesWithZero < 0 ? '00' : onlyMinutesWithZero}:${onlySecondsWithZero}`);
+            } else {
+                setTimeCounting('00:00');
+            }
         }
         handleEveryTick();
         // eslint-disable-next-line react-hooks/exhaustive-deps
