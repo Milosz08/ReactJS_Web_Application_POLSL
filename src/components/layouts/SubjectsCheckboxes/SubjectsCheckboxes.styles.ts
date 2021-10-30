@@ -20,7 +20,7 @@ export const SubjectsCheckboxesContainer = styled.section`
     ${StandardContainer()};
 `;
 
-export const SubjectsCheckboxesWrapper = styled.div`
+export const SubjectsCheckboxesWrapper = styled.article`
     ${StandardSafetyAreaWrapper()};
     @media only screen and (max-width: 450px) {
         width: 100%;
