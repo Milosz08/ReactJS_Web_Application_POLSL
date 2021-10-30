@@ -13,14 +13,15 @@
  */
 
 import * as React from 'react';
-import { SeparatorIcon, SeparatorLine, SingleSubjectIconSeparatorContainer } from './SubjectInfoStructure.style';
-import IconComponent from '../../../../../helpers/componentsAndMiddleware/IconComponent';
 import { useContext } from 'react';
+
+import IconComponent from '../../../../../helpers/componentsAndMiddleware/IconComponent';
 import { SubjectContext, SubjectContextProvider } from '../SubjectInfoContent';
 
+import { SeparatorIcon, SeparatorLine, SingleSubjectIconSeparatorContainer } from './SubjectInfoStructure.style';
 
 /**
- *
+ * Component responsible for generating subject info separator.
  */
 const SingleSubjectIconSeparator: React.FC = (): JSX.Element => {
 

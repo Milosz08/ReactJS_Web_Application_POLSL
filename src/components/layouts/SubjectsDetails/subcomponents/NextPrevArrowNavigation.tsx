@@ -15,11 +15,12 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 
-import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
-import { NavigateArrowButton } from '../SubjectsDetails.styles';
+import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
 import { prevNextSubjectActivePanel } from '../../../../redux/preferencesReduxStore/actions';
+
+import { NavigateArrowButton } from '../SubjectsDetails.styles';
 
 export enum arrowDirs {
     PREV, NEXT

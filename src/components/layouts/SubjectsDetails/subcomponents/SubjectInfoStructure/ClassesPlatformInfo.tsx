@@ -13,16 +13,15 @@
  */
 
 import * as React from 'react';
+import { useContext } from 'react';
 
 import generateID from '../../../../../helpers/functionsAndClasses/generateID';
-
-import { ClassesPlatformInfoContainer, ClassesPlatformInfoSingleElement } from './SubjectInfoStructure.style';
-import { useContext } from 'react';
 import { SubjectContext, SubjectContextProvider } from '../SubjectInfoContent';
 
+import { ClassesPlatformInfoContainer, ClassesPlatformInfoSingleElement } from './SubjectInfoStructure.style';
+
 /**
- *
- *
+ * Component responsible for generating all platform infos.
  */
 const ClassesPlatformInfo: React.FC = () => {
 

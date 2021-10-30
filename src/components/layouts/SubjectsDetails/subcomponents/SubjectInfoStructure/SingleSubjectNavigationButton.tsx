@@ -13,20 +13,19 @@
  */
 
 import * as React from 'react';
-import {
-    ExternalIconLink,
-    PzePlatformLinkAnchor,
-    SingleSubjectNavigationButtonContainer,
-    SubjectsTermsLinkWrapper
-} from './SubjectInfoStructure.style';
+import { useContext } from 'react';
+
 import DelayRouterLink from '../../../../../helpers/componentsAndMiddleware/DelayRouterLink';
 import { FRONT_ENDPOINTS } from '../../../../../helpers/structs/appEndpoints';
-import { useContext } from 'react';
 import { SubjectContext, SubjectContextProvider } from '../SubjectInfoContent';
 
+import {
+    ExternalIconLink, PzePlatformLinkAnchor, SingleSubjectNavigationButtonContainer, SubjectsTermsLinkWrapper
+} from './SubjectInfoStructure.style';
 
 /**
- *
+ * Component responsible for generate single subject navigations buttons structure
+ * (terms and PZE platform/s links).
  */
 const SingleSubjectNavigationButton: React.FC = (): JSX.Element => {
 

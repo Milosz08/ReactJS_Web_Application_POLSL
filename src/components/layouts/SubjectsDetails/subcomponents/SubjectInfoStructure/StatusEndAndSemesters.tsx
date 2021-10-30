@@ -13,13 +13,15 @@
  */
 
 import * as React from 'react';
-import generateID from '../../../../../helpers/functionsAndClasses/generateID';
-import { SingleSubjectStatusContainer, StatusEndAndSemesterInfo } from './SubjectInfoStructure.style';
 import { useContext } from 'react';
+
+import generateID from '../../../../../helpers/functionsAndClasses/generateID';
 import { SubjectContext, SubjectContextProvider } from '../SubjectInfoContent';
 
+import { SingleSubjectStatusContainer, StatusEndAndSemesterInfo } from './SubjectInfoStructure.style';
+
 /**
- *
+ * Component responsible for generating subject status and semesters.
  */
 const StatusEndAndSemesters: React.FC = (): JSX.Element => {
 

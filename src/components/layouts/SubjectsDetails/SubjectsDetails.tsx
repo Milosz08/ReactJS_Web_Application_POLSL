@@ -13,10 +13,10 @@
  */
 
 import * as React from 'react';
+import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
 import { SubjectDetailsWindowContainer, SubjectsDetailsContainer, SubjectsDetailsWrapper } from './SubjectsDetails.styles';
 
-import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 import UniversalHeader from '../UniversalHeader/UniversalHeader';
 import NextPrevArrowNavigation, { arrowDirs } from './subcomponents/NextPrevArrowNavigation';
 import SubjectInfoContent from './subcomponents/SubjectInfoContent';
