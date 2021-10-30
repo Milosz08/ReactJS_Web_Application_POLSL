@@ -38,7 +38,7 @@ export const LoginSessionContext = createContext<Partial<LoginSessionProviderTyp
 
 /**
  * @details Component that stores the store with information about an active user and administrator session. Values from
- *          Hooks are passed to all domain components wrapped with provider.
+ *          Hooks are passed to all domain componentsAndMiddleware wrapped with provider.
  *
  * @param children { React.ReactNode } - all nodes of the virtual DOM React tree covered by the Provider.
  */
