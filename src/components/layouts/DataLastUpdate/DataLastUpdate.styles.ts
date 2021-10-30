@@ -17,7 +17,7 @@ import styled from 'styled-components';
 export const DataLastUpdateContainer = styled.section`
     display: flex;
     justify-content: flex-end;
-    margin: 30px 0 40px 0;
+    margin-top: 30px;
     @media only screen and (max-width: 1250px) {
         justify-content: center;
     }
