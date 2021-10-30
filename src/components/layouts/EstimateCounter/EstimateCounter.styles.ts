@@ -19,7 +19,7 @@ export const EstimateCounterContainer = styled.section`
     justify-content: center;
 `;
 
-export const EstimateCounterWrapper = styled.div`
+export const EstimateCounterWrapper = styled.article`
     display: flex;
     flex-direction: column;
     align-items: center;
