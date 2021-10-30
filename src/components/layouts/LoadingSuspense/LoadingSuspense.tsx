@@ -17,7 +17,8 @@ import React, { useEffect, useState } from 'react';
 import { InfiniteLoad, InfiniteUse, LoadingSuspenseContainer } from './LoadingSuspense.styles';
 
 /**
- * @details Component responsible for generating the board that is displayed while loading all React componentsAndMiddleware.
+ * Component responsible for generating the board that is displayed while loading all
+ * React componentsAndMiddleware.
  */
 const LoadingSuspense = (): JSX.Element => {
 
