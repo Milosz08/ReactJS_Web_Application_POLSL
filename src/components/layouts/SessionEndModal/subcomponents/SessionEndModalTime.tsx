@@ -21,8 +21,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
 import { SessionInitialTypes } from '../../../../redux/sessionReduxStore/initialState';
 
-import { MAX_INACTIVITY_TIME } from '../../CredentialsSequencers/SessionActivityCount';
-import { MODAL_REMAIN_SECONDS } from '../../SessionSequencer/SessionSequencer.config';
+import { MAX_INACTIVITY_TIME, MODAL_REMAIN_SECONDS } from '../../SessionSequencer/SessionSequencer.config';
 
 import {
     SessionEndModalCountingDown, SessionEndModalTextInfo, SessionEndModalTimeContainer, SessionEndModalTimeIconWrapper
