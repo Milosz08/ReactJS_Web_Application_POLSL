@@ -56,6 +56,6 @@ export const CleanInputButtonIconWrapper = styled.div`
 `;
 
 export const TrashAlIconStyles = styled(FaTrashAlt)<{ $ifError: boolean }>`
-    color: var(${props => props.ifError ? '--redColor' : '--navyBlueColor'});
+    color: var(${props => props.$ifError ? '--redColor' : '--navyBlueColor'});
     flex-grow: 1;
 `;
