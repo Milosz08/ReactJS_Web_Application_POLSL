@@ -31,7 +31,10 @@ interface PropsProvider {
 }
 
 /**
+ * Component is responsible for generating all mobile navigation elements. Setting
+ * position based on callback props function.
  *
+ * @param setPosition { Dispatch<SetStateAction<number>> } - callback function to set position.
  */
 const MultipleNavElements: React.FC<PropsProvider> = ({ setPosition }): JSX.Element => {
 
