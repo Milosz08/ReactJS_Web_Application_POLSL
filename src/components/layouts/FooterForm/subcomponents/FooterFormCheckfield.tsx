@@ -24,7 +24,7 @@ import { FOOTER_INPUTS } from '../../../../helpers/structs/footerOptions.config'
 import { CheckboxCheckmark, CheckboxInput, CheckFieldContainer, CheckFieldLabel } from '../FooterForm.styles';
 
 /**
- *
+ * Component responsible for generating footer form checkfield.
  */
 const FooterFormCheckfield: React.FC = (): JSX.Element => {
 

@@ -22,7 +22,7 @@ import FooterFormCheckfield from './subcomponents/FooterFormCheckfield';
 import FooterFormSubmitButton from './subcomponents/FooterFormSubmitButton';
 
 /**
- *
+ * Generate footer form struct container.
  */
 const FooterForm: React.FC = (): JSX.Element => (
     <FooterFormWrapper>

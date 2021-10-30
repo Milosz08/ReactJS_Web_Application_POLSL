@@ -14,16 +14,20 @@
 
 import * as React from 'react';
 import useFooterForm from '../../../../helpers/hooks/useFooterForm';
+import useTitleFooterForm from '../../../../helpers/hooks/useTitleFooterForm';
 
 import { FormSubmitAsideText, FormSubmitButton, FormSubmitButtonContainer } from '../FooterForm.styles';
-import useTitleFooterForm from '../../../../helpers/hooks/useTitleFooterForm';
-import { useDispatch } from 'react-redux';
-import { postDataFooterForm } from '../../../../redux/preferencesReduxStore/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/reduxStore';
+import { sendFooterMessage } from '../../../../redux/apiReduxStore/actions';
+import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
 /**
- *
+ * Component responsible for generating footer form structure and implementation logic from custom hooks.
  */
 const FooterFormSubmitButton: React.FC = (): JSX.Element => {
+
+    const { footerForm }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
     const [ validateForm, clearAllInputs ] = useFooterForm();
     const [ grabber, handleShowPosMess ] = useTitleFooterForm();
@@ -33,10 +37,9 @@ const FooterFormSubmitButton: React.FC = (): JSX.Element => {
     const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (validateForm()) {
-            dispatcher(postDataFooterForm());
+            dispatcher(sendFooterMessage(footerForm));
             handleShowPosMess();
             clearAllInputs();
-            console.log('submit');
         }
     };
 

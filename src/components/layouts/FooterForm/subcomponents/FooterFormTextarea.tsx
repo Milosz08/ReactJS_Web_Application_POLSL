@@ -25,7 +25,8 @@ import { FOOTER_INPUTS, FOOTER_TEXTAREA_PROPS } from '../../../../helpers/struct
 import { FooterFormTextareaStyled, TextareaCharsQuantity } from '../FooterForm.styles';
 
 /**
- *
+ * Component responsible for generating textarea container and custom logic
+ * with connected to the react redux store.
  */
 const FooterFormTextarea: React.FC = (): JSX.Element => {
 

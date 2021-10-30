@@ -27,7 +27,7 @@ import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../../../helpers/structs/foote
 import { FooterFormInput, FooterFormSelect, FooterFormSelectContainer, ShowOptionsArrowWrapper } from '../FooterForm.styles';
 
 /**
- *
+ * Component responsible for generating footer form general inputs (nickname, choice and message).
  */
 const FooterFormInputs: React.FC = (): JSX.Element => {
 
