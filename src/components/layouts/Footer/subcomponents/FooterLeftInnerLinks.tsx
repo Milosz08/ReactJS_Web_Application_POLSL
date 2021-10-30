@@ -22,7 +22,7 @@ import NAVIGATION_ELEMENTS from '../../../../helpers/structs/navigationElements'
 import { FooterHeadling, FooterLinksContainer, FooterLinksUnorderedList, SingleFooterLinkElement } from '../Footer.styles';
 
 /**
- *
+ * Component responsible for generating page routing links in footer container.
  */
 const FooterLeftInnerLinks: React.FC = (): JSX.Element => {
 

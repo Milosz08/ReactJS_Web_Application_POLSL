@@ -19,7 +19,7 @@ import { FooterFormContainer, FooterHeadling } from '../Footer.styles';
 import FooterForm from '../../FooterForm/FooterForm';
 
 /**
- *
+ * Component responsible for generate footer right content (mainly form).
  */
 const MainFooterRightContent: React.FC = (): JSX.Element => (
     <FooterFormContainer>

@@ -24,7 +24,7 @@ import {
 import { ExternalLinkIconInheritance } from '../../Hamburger/Hamburger.styles';
 
 /**
- *
+ * Component responsible for generating anchor links to polsl web addresses.
  */
 const FooterLeftOuterLinks: React.FC = (): JSX.Element => {
 

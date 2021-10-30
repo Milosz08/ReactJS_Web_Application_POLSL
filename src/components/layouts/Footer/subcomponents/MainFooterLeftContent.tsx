@@ -21,7 +21,8 @@ import FooterLeftOuterLinks from './FooterLeftOuterLinks';
 import DisclaimerFooter from './DisclaimerFooter';
 
 /**
- *
+ * Component responsible for generating struct for main footer left content
+ * (mainly links, routing and disclaimer notification).
  */
 const MainFooterLeftContent: React.FC = (): JSX.Element => (
     <MainFooterLeftSection>

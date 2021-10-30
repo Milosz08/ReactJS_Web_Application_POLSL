@@ -18,7 +18,7 @@ import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRo
 import { FRONT_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
 
 /**
- *
+ * Component responsible for generating disclaimer notification about data and CMS content.
  */
 const DisclaimerFooter: React.FC = (): JSX.Element => (
     <DisclaimerFooterContainer>

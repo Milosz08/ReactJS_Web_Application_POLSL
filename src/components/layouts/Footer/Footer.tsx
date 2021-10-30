@@ -21,7 +21,7 @@ import MainFooterRightContent from './subcomponents/MainFooterRightContent';
 import CopyrightFooterSection from './subcomponents/CopyrightFooter';
 
 /**
- * This component is responsible for the implementation of the footer (the footer is universal and appears on
+ * Component responsible for the implementation of the footer (the footer is universal and appears on
  * every subpage, it does not change its content). Includes links and a form.
  */
 const Footer: React.FC = (): JSX.Element => (

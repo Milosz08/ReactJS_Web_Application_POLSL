@@ -24,7 +24,7 @@ import {
 } from '../Footer.styles';
 
 /**
- *
+ * Component responsible for generating copyright footer section.
  */
 const CopyrightFooterSection: React.FC = (): JSX.Element => {
 
