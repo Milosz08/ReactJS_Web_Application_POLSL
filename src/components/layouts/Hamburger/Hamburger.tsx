@@ -20,7 +20,7 @@ const HamburgerButton = React.lazy(() => import('./subcomponents/HamburgerButton
 const HamburgerMenu = React.lazy(() => import('./subcomponents/HamburgerMenu'));
 
 /**
- *
+ * Component responsible for generating Hamburger struct elements (button and menu).
  */
 const Hamburger: React.FC = (): JSX.Element => (
     <HamburgerContainer>

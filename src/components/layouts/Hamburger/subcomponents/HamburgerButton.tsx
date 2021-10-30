@@ -22,7 +22,7 @@ import { toggleHamburger } from '../../../../redux/preferencesReduxStore/actions
 import { HamburgerBars, HamburgerButtonContainer } from '../Hamburger.styles';
 
 /**
- *
+ * Component responsible for generate hamburger button element with react redux state logic.
  */
 const HamburgerButton: React.FC = (): JSX.Element => {
 

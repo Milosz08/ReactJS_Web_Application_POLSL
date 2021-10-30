@@ -29,7 +29,7 @@ import {
 } from '../Hamburger.styles';
 
 /**
- *
+ * Component responsible for generate hamburger menu element with react redux state logic.
  */
 const HamburgerMenu: React.FC = (): JSX.Element => {
 
