@@ -12,77 +12,59 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
-import classnames from 'classnames';
-import { v4 as uuidv4 } from 'uuid';
+import * as React from 'react';
+import { useContext } from 'react';
 
-import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../contextStore/CookiesObjectsProvider';
+import useModalShowHide from '../../../helpers/hooks/useModalShowHide';
+import generateID from '../../../helpers/functionsAndClasses/generateID';
+import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
-import cookieExpires from '../../../constants/cookieExpires';
-import COOKIES_OBJECT from '../../../constants/allCookies';
+import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../context/cookiesContext/CookiesObjectsProvider';
+import cookieExpires from '../../../context/cookiesContext/cookieExpires';
+import COOKIES_OBJECT from '../../../context/cookiesContext/allCookies.config';
 
+import { CookiesNotificationContainer, CookiesNotificationWrapper } from './CookiesNotification.styles';
+
+import CookiesSectionContainer from './subcomponents/CookiesSectionContainer';
+import CookiesButtonsContainer from './subcomponents/CookiesButtonsContainer';
 const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
 
-const {
-    cookieNotifContainer, cookiesNotifPopupContainer, cookiesMainContent, cookiesButtons, readPolicity,
-    acceptPolicity, showCookiePopup
-} = require('./CookiesNotification.module.scss');
-
 /**
- * Constant on the basis of which the cookie file is generated.
- */
-const COOKIE_EXPIRES_TIME: number = 365;
-const COOKIE_ID = uuidv4();
-
-/**
- * @details Component responsible for displaying the notification about the use of cookies by the application. The
- *          component uses the context that stores the access methods to Cookie files. The component creates a new
- *          Cookie after accepting the terms. The modal is not displayed if the Cookie file exists.
+ * Component responsible for displaying the notification about the use of cookies by the application. The
+ * component uses the context that stores the access methods to Cookie files. The component creates a new
+ * Cookie after accepting the terms. The modal is not displayed if the Cookie file exists.
  */
 const CookiesNotification = (): JSX.Element => {
 
-    const { cookie, setCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext)
-    const ifCookieNotExist = cookie!.__cookieNotification === undefined ? showCookiePopup : '';
+    const { cookie, setCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
+    const [ modal, background ] = useModalShowHide(!Boolean(cookie![COOKIES_OBJECT.cookiesPopup]));
 
     const handleCookieButtons = (): void => {
-        if (cookie!.__cookieNotification === undefined) {
-            const expCookie: Date = cookieExpires(COOKIE_EXPIRES_TIME);
-            setCookie!(COOKIES_OBJECT.cookiesPopup, COOKIE_ID, { path: '/', expires: expCookie });
+        if (!Boolean(cookie![COOKIES_OBJECT.cookiesPopup])) {
+            const expCookie: Date = cookieExpires(365);
+            setCookie!(COOKIES_OBJECT.cookiesPopup, generateID('c', 8), { path: '/', expires: expCookie });
         }
-    }
+    };
 
     return (
-        <div className = {classnames(cookieNotifContainer, ifCookieNotExist)}>
-            <div className = {cookiesNotifPopupContainer}>
+        <CookiesNotificationContainer
+            ref = {background}
+        >
+            <CookiesNotificationWrapper
+                ref = {modal}
+            >
                 <UniversalHeader
-                    iconP = {[ 'fas', 'cookie-bite' ]}
+                    iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaCookieBite' }}
                     content = 'Pliki Cookies'
                     ifCloseButtonVisible = {true}
                     setCloseButton = {handleCookieButtons}
                 />
-                <section className = {cookiesMainContent}>
-                    W celu optymalizacji treści i wygody użytkowania, strona którą będziesz przeglądał korzysta z
-                    plików Cookies zapisanych na Twoim urządzeniu. Pliki Cookies, potocznie nazywane Ciasteczkami,
-                    możesz kontrolować za pomocą ustawień swojej przeglądarki internetowej. Dalsze korzystanie ze
-                    strony lub zamknięcie tego okna bez zmiany ustawień przeglądarki, oznacza że akceptujesz
-                    stosowanie polityki plików Cookies.
-                </section>
-                <div className = {cookiesButtons}>
-                    <button className = {readPolicity}>
-                        <NavLink to = '/polityka-prywatności-cookies'>
-                            Przeczytaj Politykę Prywatności
-                        </NavLink>
-                    </button>
-                    <button
-                        className = {acceptPolicity}
-                        onClick = {handleCookieButtons}
-                    >
-                        Zgadzam się z Polityką Cookies
-                    </button>
-                </div>
-            </div>
-        </div>
+                <CookiesSectionContainer/>
+                <CookiesButtonsContainer
+                    handleCookieButtons = {handleCookieButtons}
+                />
+            </CookiesNotificationWrapper>
+        </CookiesNotificationContainer>
     );
 }
 
