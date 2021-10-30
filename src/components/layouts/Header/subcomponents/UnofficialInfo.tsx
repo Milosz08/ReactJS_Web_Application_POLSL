@@ -21,9 +21,9 @@ interface PropsProvider {
 }
 
 /**
+ * Component responsible for generating site disclaimer info.
  *
- *
- * @param offset { number } -
+ * @param offset { number } - scroll from top.
  */
 const UnofficialInfo: React.FC<PropsProvider> = ({ offset }): JSX.Element => (
     <UnofficialInfoContainer

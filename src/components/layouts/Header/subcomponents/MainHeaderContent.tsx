@@ -30,12 +30,12 @@ interface PropsProvider {
 }
 
 /**
+ * Component responsible for generate header top content.
  *
- *
- * @param width
- * @param offset
- * @param elmHeight
- * @param ifHeaderHasRedBar
+ * @param width { number } - width of site.
+ * @param offset { number } - scroll from top.
+ * @param elmHeight { number } - height of header.
+ * @param ifHeaderHasRedBar { boolean } - flag, which decided, what content was show.
  */
 const MainHeaderContent: React.FC<PropsProvider> = ({ width, offset, elmHeight, ifHeaderHasRedBar }): JSX.Element => {
 

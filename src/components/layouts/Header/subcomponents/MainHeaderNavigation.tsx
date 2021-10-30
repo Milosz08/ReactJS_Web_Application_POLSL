@@ -23,8 +23,9 @@ interface PropsProvider {
 }
 
 /**
+ * Component responsible for generate main header navigation.
  *
- * @param grabber
+ * @param grabber { React.RefObject<HTMLDivElement> } - referential to pseudoDOM element.
  */
 const MainHeaderNavigation: React.FC<PropsProvider> = ({ grabber }): JSX.Element => {
 
