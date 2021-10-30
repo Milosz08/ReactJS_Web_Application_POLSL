@@ -20,7 +20,7 @@ export const NavigationStartContainer = styled.section`
     ${StandardContainer()};
 `;
 
-export const NavigationStartWrapper = styled.div`
+export const NavigationStartWrapper = styled.article`
     ${StandardSafetyAreaWrapper()};
 `;
 

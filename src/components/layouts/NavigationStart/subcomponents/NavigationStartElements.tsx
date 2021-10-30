@@ -24,7 +24,7 @@ import {
 } from '../NavigationStart.styles';
 
 /**
- *
+ * Component is responsible for generating all navigation elements in start page (fancy boxes).
  */
 const NavigationStartElements: React.FC = (): JSX.Element => {
 
