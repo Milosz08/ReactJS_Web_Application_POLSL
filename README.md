@@ -9,7 +9,7 @@ Advanced, full-stack web application written using the ReactJS library and other
 </p>
 
 > See this website at [informatyka-pol-elektr.pl](https://informatyka-pol-elektr.pl/) <br>
-> See API for this website written in NodeJS in my repo: [NodeJS_RestAPI_POLSL](https://github.com/Milosz08/NodeJS_RestAPI_POLSL)
+> See API for this website written in Java Spring Boot in my repo: [Spring_RestFullApi_POLSL](https://github.com/Milosz08/Spring_RestFullApi_POLSL)
 
 <hr/>
 
@@ -34,80 +34,6 @@ I created my own CMS for this application written fully in TypeScript. It was a 
 
 > CMS Main Panel
 <img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-4.PNG" width="1920">
-
-## Website Routing Structure
-This application was written in the SPA (Single Page Application) standard. Due to this, routing between individual subpages is carried out using the `react-router-dom` library. I also used the `ProtectedRoute` component to support login systems (both for the user and for the administrator).
-
-Main structure of all routings in this application:
-
-```
-  informatyka-pol-elektr.pl
-  ├── interaktywny-plan-zajęć
-  ├── kalendarz-studenta
-  ├── warunki-zaliczenia-przedmiotów
-  ├── pomoce-naukowe
-  ├── logowanie
-  ├── polityka-prywaności-cookies
-  └── logowanie-do-panelu-administratora
-      └── panel-administatora
-```
-
-> Simple use of protected routing component on this site (using TypeScript):
-
-```tsx
-import React from 'react';
-import { Redirect, Route } from 'react-router';
-
-interface PropsProvider {
-   auth: boolean;
-   setAuth: (value: boolean) => boolean;
-   redirectPath: string;
-   component: React.FunctionComponent;
-}
-
-const ProtectedLoginRoute: React.FC<PropsProvider | any> = ({
-   auth, setAuth, redirectPath, component: Component, ...rest
-}): JSX.Element => {
-
-   const renderPathStructure = (props: any) => {
-      if(auth) {
-         return <Component {...props} setAuth = {setAuth}/>;
-      } else {
-         return <Redirect to = {redirectPath}/>;
-      }
-   }
-
-   return (
-      <Route {...rest} render = {(props: any) => renderPathStructure(props)}/>
-   );
-}
-
-export default ProtectedLoginRoute;
-```
-
-If, like me, you had a problem with routing in a ready-made application hosted on the server (which was not on localhost) and you use express in the back-end, use this script in the main server file (for example `index.js` or `app.js`):
-
-```js
-const express = require('express');
-const path = require('path');
-
-const app = express();
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '[your index.html file path on server]'), (err) => {
-    if(err) res.status(500).send(err);
-  });
-});
-```
-
-> The following packages are necessary for the correct working of this script:
-```
-$ npm i express --s
-```
-or
-```
-$ yarn add express
-```
 
 ## Clone and Installation
 If you want to clone and work with this repository, use the built-in interface in your IDE (for example WebStorm or Visual Studio Code) or use the clone project algorithm with git bash:<br>
