@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -12,7 +12,18 @@
  * governing permissions and limitations under the license.
  */
 
-@import './../../../styles/_mixins';
+@mixin arrowNavigate($_size, $_angle, $from_left, $color) {
+    content: '';
+    position: absolute;
+    margin-left: $from_left;
+    top: 50%;
+    display: block;
+    border-right: 2px solid $color;
+    border-bottom: 2px solid $color;
+    width: $_size;
+    height: $_size;
+    transform: translate(0, -50%) rotate($_angle);
+}
 
 .react-calendar {
     background-color: var(--cleanWhiteColor);
@@ -78,26 +89,26 @@
             height: 4px;
             border-radius: 10px;
         }
-        &.low {
+        &.LOW {
             color: var(--greenColor);
             &::after {
                 background-color: var(--greenColor);
             }
         }
-        &.medium {
+        &.MEDIUM {
             color: var(--orangeColor);
             &::after {
                 background-color: var(--orangeColor);
             }
         }
-        &.high {
+        &.HIGH {
             color: var(--redColor);
             &::after {
                 background-color: var(--redColor);
             }
         }
     }
-    span.low, span.medium, span.high {
+    span.LOW, span.MEDIUM, span.HIGH {
         display: none;
         margin-top: 5px;
         width: 100%;
@@ -107,19 +118,19 @@
         &:nth-of-type(1) {
             margin-top: 15px;
         }
-        &.low {
+        &.LOW {
             background-color: var(--greenColor);
         }
-        &.medium {
+        &.MEDIUM {
             background-color: var(--orangeColor);
         }
-        &.high {
+        &.HIGH {
             background-color: var(--redColor);
         }
     }
 }
 
-.react-calendar__month-view__days button.react-calendar__tile--now p.medium {
+.react-calendar__month-view__days button.react-calendar__tile--now p.MEDIUM {
     color: var(--cleanWhiteColor);
     &::after {
         background-color: var(--cleanWhiteColor);
@@ -165,18 +176,30 @@
     display: flex;
     justify-content: center;
     .react-calendar__navigation__label {
-        @include defaultButton();
+        display: block;
+        width: 100%;
         font-size: 1.4rem;
         text-transform: capitalize;
         padding: 8px 0;
         max-width: 300px;
         margin: 0 30px;
+        font-weight: 400;
+        border: none;
+        border-radius: 10px;
+        background-color: var(--navyBlueColor);
+        color: var(--cleanWhiteColor);
+        cursor: pointer;
+        transition: .2s;
+        &:hover {
+            box-shadow: 0 0 7px var(--boxShadowTint);
+        }
     }
     .react-calendar__navigation__prev2-button,
     .react-calendar__navigation__prev-button,
     .react-calendar__navigation__next2-button,
     .react-calendar__navigation__next-button {
-        @include defaultButtonReset();
+        background-color: transparent;
+        cursor: pointer;
         position: relative;
         width: 45px;
         height: 45px;
@@ -247,11 +270,8 @@
         p {
             display: none;
         }
-        span.low, span.medium, span.high {
+        span.LOW, span.MEDIUM, span.HIGH {
             display: block;
-            &.medium {
-                background-color: var(--cleanWhiteColor);
-            }
         }
     }
 }
@@ -308,7 +328,7 @@
             justify-content: center;
             align-items: center;
         }
-        span.low, span.medium, span.high {
+        span.LOW, span.MEDIUM, span.HIGH {
             display: block;
         }
     }
