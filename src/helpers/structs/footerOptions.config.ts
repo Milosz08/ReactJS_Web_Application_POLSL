@@ -15,23 +15,23 @@
 export const FOOTER_OPTIONS: { [name: string]: string }[] = [
     {
         name: 'Kliknij, aby wybrać opcję',
-        value: 'optionDisabled',
+        value: 'OPTION_DISABLED',
     },
     {
         name: 'Błąd na stronie',
-        value: 'pageError',
+        value: 'PAGE_ERROR',
     },
     {
         name: 'Modyfikacja Planu Zajęć',
-        value: 'sheduleModify',
+        value: 'SHEDULE_MODIFY',
     },
     {
         name: 'Modyfikacja/dodanie ważnego terminu',
-        value: 'calendarNewDate',
+        value: 'CALENDAR_NEW_DATE',
     },
     {
         name: 'Inny, niewymieniony wyżej',
-        value: 'default',
+        value: 'DEFAULT',
     },
 ];
 
