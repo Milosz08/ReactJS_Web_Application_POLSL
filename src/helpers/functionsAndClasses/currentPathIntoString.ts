@@ -36,7 +36,10 @@ class CurrentPathIntoString {
     private capitaliseFirstLetter(word: string[]): string {
         return word.map((character: string) => {
             const lower: string = character.toLocaleLowerCase();
-            return character.charAt(0).toUpperCase() + lower.slice(1);
+            if(character !== 'i') {
+                return character.charAt(0).toUpperCase() + lower.slice(1);
+            }
+            return character.charAt(0) + lower.slice(1);
         }).join(' ');
     };
 }
