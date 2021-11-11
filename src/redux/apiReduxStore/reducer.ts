@@ -19,10 +19,12 @@ import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 
 import axiosInstance from '../../helpers/misc/request';
 import ConvertTimeUTC from '../../helpers/functionsAndClasses/convertTimeUTC';
+import { CurrentScheduleContentTypes } from './dataTypes';
 
 const {
-    GET_SINGLE_FOOTERFORM_DATA, SEND_SINGLE_FOOTERFORM_DATA, GET_SINGLE_COVID_DATA, GET_SINGLE_LAST_UPDATE,
-    UPDATE_SINGLE_LAST_UPDATE, GET_SINGLE_SUBJECT_DATA, FILTERED_SUBJECTS_LIST, SORT_BY_NAME
+    GET_SINGLE_FOOTERFORM_DATA, SEND_SINGLE_FOOTERFORM_DATA, GET_SINGLE_COVID_DATA, GET_SINGLE_LAST_UPDATE, SORT_BY_DATE,
+    UPDATE_SINGLE_LAST_UPDATE, GET_SINGLE_SUBJECT_DATA, SORT_BY_NAME, GET_SINGLE_SCHEDULE_SUBJECT, GET_SINGLE_CALENDAR_RECORD,
+    FILTERED_SCHEDULE_SUBJECTS
 } = apiTypes;
 
 const apiReducer = (state = initialState, action: any) => {
@@ -49,7 +51,7 @@ const apiReducer = (state = initialState, action: any) => {
 
         case GET_SINGLE_COVID_DATA: {
             const { covidWarningLevels } = action.payload;
-            if(state.covidWarningLevels.length === 3) {
+            if (state.covidWarningLevels.length === 3) {
                 return state;
             }
             return { ...state, covidWarningLevels: [ ...state.covidWarningLevels, covidWarningLevels ] };
@@ -64,7 +66,7 @@ const apiReducer = (state = initialState, action: any) => {
             const { updateStateType } = action.payload;
             let newState = [ ...state.lastUpdate ];
             const findIndexType = newState.findIndex(el => el.updateDateFor === updateStateType);
-            if(findIndexType === -1) {
+            if (findIndexType === -1) {
                 throw new Error(`ERROR! Redux reducer error! Set new state not found!`);
             } else {
                 newState[findIndexType].updateDate = new ConvertTimeUTC().getAllDateElms();
@@ -78,23 +80,7 @@ const apiReducer = (state = initialState, action: any) => {
 
         case GET_SINGLE_SUBJECT_DATA: {
             const { singleSubjectData } = action.payload;
-            return { ...state,
-                subjectsContent: [ ...state.subjectsContent, singleSubjectData ],
-                searchedSubjects: [ ...state.searchedSubjects, singleSubjectData ]
-            };
-        }
-
-        case FILTERED_SUBJECTS_LIST: {
-            const { filterCrit } = action.payload;
-            // eslint-disable-next-line array-callback-return
-            const subjectsNewState = [...state.subjectsContent].filter(el => {
-                if (filterCrit === '') {
-                    return el;
-                } else if (el.title.toLocaleLowerCase().includes(filterCrit.toLocaleLowerCase())) {
-                    return el;
-                }
-            })
-            return { ...state, searchedSubjects: subjectsNewState };
+            return { ...state, subjectsContent: [ ...state.subjectsContent, singleSubjectData ] };
         }
 
         case SORT_BY_NAME: {
@@ -103,6 +89,64 @@ const apiReducer = (state = initialState, action: any) => {
                 state[el].sort((a: any, b: any) => a.title.localeCompare(b.title));
             });
             return state;
+        }
+
+        case GET_SINGLE_SCHEDULE_SUBJECT: {
+            const { singleScheduleSubject } = action.payload;
+            const insertingSubjects = state.scheduleContent;
+            Object.keys(state.scheduleContent).forEach((key: string, idx: number) => {
+                if (idx === singleScheduleSubject.day) {
+                    insertingSubjects[key].push(singleScheduleSubject);
+                    return;
+                }
+            });
+            return { ...state, scheduleContent: insertingSubjects };
+        }
+
+        case GET_SINGLE_CALENDAR_RECORD: {
+            const { singleCalendarRecord } = action.payload;
+            return { ...state, calendarContent: [ ...state.calendarContent, singleCalendarRecord ] };
+        }
+
+        case SORT_BY_DATE: {
+            const { typeElmsArray } = action.payload;
+            state[typeElmsArray]
+                .sort((a: any, b: any) => a.day - b.day)
+                .sort((a: any, b: any) => a.month - b.month)
+                .sort((a: any, b: any) => a.year - b.year);
+            return state;
+        }
+
+        case FILTERED_SCHEDULE_SUBJECTS: {
+            const { normalGroup, engGroup, skGroup } = action.payload;
+            const normalAndSkGroup = `${skGroup},${normalGroup}`;
+            let middlewareObject: { [value: string]: CurrentScheduleContentTypes[] } = {
+                monday: [], tuesday: [], wednesday: [], thursday: [], friday: []
+            };
+            Object.keys(state.scheduleContent).forEach(day => {
+                const middlewareArray = state.scheduleContent[day].filter(el => (
+                    el.group === normalAndSkGroup || el.group === normalGroup|| el.group === engGroup || el.group === 'wszyscy'
+                ));
+                middlewareArray.forEach(el => {
+                    const [ hourStart, minuteStart ] = el.subjectHours.start.split(':');
+                    const [ hourEnd, minuteEnd ] = el.subjectHours.end.split(':');
+                    middlewareObject[day].push({
+                        title: el.title,
+                        type: el.subjectInfo.type,
+                        place: el.subjectInfo.subjectsPze.place,
+                        room: el.subjectInfo.room,
+                        pzeLink: el.subjectInfo.subjectsPze,
+                        hours: {
+                            start: Number(hourStart + minuteStart + '00'),
+                            end: Number(hourEnd + minuteEnd + '00'),
+                            fullStart: el.subjectHours.start,
+                            fullEnd: el.subjectHours.end,
+                        }
+                    });
+                });
+                middlewareObject[day].sort((a: any, b: any) => a.hours.start - b.hours.end);
+            });
+            return { ...state, currentScheduleContent: middlewareObject };
         }
 
         default: {
