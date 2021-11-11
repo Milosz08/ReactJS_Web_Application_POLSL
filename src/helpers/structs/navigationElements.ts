@@ -65,8 +65,8 @@ const NAVIGATION_ELEMENTS: PropsProvider = {
         },
         {
             path: FRONT_ENDPOINTS.TERMS,
-            title: 'Warunki zaliczenia przedmiotów',
-            description: 'Szczegółowy opis wymagań niezbędnych do uzyskania zaliczenia z danego przedmiotu.',
+            title: 'Przedmioty i zaliczenia',
+            description: 'Szczegółowy opis przedmiotu i wymagań niezbędnych do jego zaliczenia.',
         },
         {
             path: FRONT_ENDPOINTS.HELPS,
