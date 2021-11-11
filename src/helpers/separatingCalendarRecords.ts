@@ -12,50 +12,62 @@
  * governing permissions and limitations under the license.
  */
 
-export interface ObjectProvider {
+import { CalendarContentTypes } from '../redux/apiReduxStore/dataTypes';
+
+export interface SeparateCalendarTiles {
     _id: string,
     date: string,
     important: string,
     message: string,
 }
 
-/**
- * @details This function takes an array of objects (calendar entries) as a parameter and uses it to generate
- *          a new array of objects, this time separating all activities (including those on the same day).
- *
- * @param calendarRecords { object[] } - all calendar activities pulled from api in react component.
- *
- * @return { ObjectProvider[] } - inverted result array with all calendar entries separated
- */
-const separatingCalendarRecords = (calendarRecords: ObjectProvider) => {
-    let endingArray: ObjectProvider[] = [];
-
-    // @ts-ignore
-    for (const record of calendarRecords) {
-
-        const day = record.day < 10 ? `0${record.day}` : record.day;
-        const month = record.month + 1 < 10 ? `0${record.month + 1}` : record.month + 1;
-
-        if (record.items.length > 1) { //If in same day is 2n activities
-            for (const item of record.items) {
-                endingArray.push({
-                    _id: record._id,
-                    date: `${record.year}-${month}-${day}T${item.start}`,
-                    important: item.importantLevel,
-                    message: item.message
-                });
-            }
-        } else { //If in same day is one activity
-            endingArray.push({
-                _id: record._id,
-                date: `${record.year}-${month}-${day}T${record.items[0].start}`,
-                important: record.items[0].importantLevel,
-                message: record.items[0].message
-            });
-        }
-    }
-
-    return endingArray.reverse();
+interface ItemsTypes {
+    start: string,
+    message: string,
+    importantLevel: string
 }
 
-export default separatingCalendarRecords;
+/**
+ * This class takes an array of objects (calendar entries) as a parameter and uses it to generate
+ * a new array of objects, this time separating all activities (including those on the same day).
+ */
+class SeparatingSingleCalendarTiles {
+
+    private readonly _calendarTiles: CalendarContentTypes[] = [];
+    private _endingArray: SeparateCalendarTiles[] = [];
+
+    constructor(calendarTiles: CalendarContentTypes[]) {
+        this._calendarTiles = calendarTiles;
+    };
+
+    private insertMultipleItems(items: CalendarContentTypes, day: string, month: string, dayTile: CalendarContentTypes): void {
+        for (const item of items.items) {
+            this.insertSingleItem(item, day, month, dayTile);
+        }
+    };
+
+    private insertSingleItem(item: ItemsTypes, day: string, month: string, dayTile: CalendarContentTypes): void {
+        this._endingArray = [ ...this._endingArray, {
+            _id: dayTile._id,
+            date: `${dayTile.year}-${month}-${day}T${item.start}`,
+            important: item.importantLevel,
+            message: item.message
+        } ];
+    };
+
+    public getAllReversedItems(): SeparateCalendarTiles[] {
+        this._calendarTiles.forEach(dayTile => {
+            const day: string = dayTile.day < 10 ? `0${dayTile.day}` : String(dayTile.day);
+            const month: string = dayTile.month < 10 ? `0${dayTile.month}` : String(dayTile.month);
+            if (dayTile.items.length > 1) { //If in same day is 2n activities
+                this.insertMultipleItems(dayTile, day, month, dayTile);
+            } else { //If in same day is one activity
+                this.insertSingleItem(dayTile.items[0], day, month, dayTile);
+            }
+        });
+        return this._endingArray.reverse();
+    };
+
+}
+
+export default SeparatingSingleCalendarTiles;
