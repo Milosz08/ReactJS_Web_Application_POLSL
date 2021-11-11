@@ -16,6 +16,8 @@ import * as React from 'react';
 import { useContext } from 'react';
 
 import generateID from '../../../../../helpers/functionsAndClasses/generateID';
+import { AllSemesters } from '../../../../../helpers/structs/allSemesters';
+
 import { SubjectContext, SubjectContextProvider } from '../SubjectInfoContent';
 
 import { SingleSubjectStatusContainer, StatusEndAndSemesterInfo } from './SubjectInfoStructure.style';
@@ -26,15 +28,14 @@ import { SingleSubjectStatusContainer, StatusEndAndSemesterInfo } from './Subjec
 const StatusEndAndSemesters: React.FC = (): JSX.Element => {
 
     const { subject } = useContext<Partial<SubjectContextProvider>>(SubjectContext);
-    const withoutBlankSpaces = subject!.semesters.filter(semester => semester !== '');
 
-    const semestersCount = withoutBlankSpaces.map((semester, i) => {
-        const toggleOnEndOfString = i === withoutBlankSpaces.length - 1 ? '.' : ', ';
+    const semestersCount = subject!.semesters.map(semester => {
+        const toggleOnEndOfString = semester - 1 === subject!.semesters.length - 1 ? '.' : ', ';
         return (
             <span
                 key = {generateID()}
             >
-                {`${semester}${toggleOnEndOfString}`}
+                {`${AllSemesters[semester - 1]}${toggleOnEndOfString}`}
             </span>
         )
     });
