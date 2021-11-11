@@ -14,7 +14,7 @@
 
 import { useState } from 'react';
 
-import ROUTING_PATH_NAMES from '../../constants/routingPathNames';
+import ROUTING_PATH_NAMES from '../structs/routingPathNames';
 import ConvertTimeUTC, { DATE_OR_TIME } from '../functionsAndClasses/convertTimeUTC';
 
 /**
@@ -46,12 +46,12 @@ const useGeneratePdfLine = (generateCallback: (() => void) | undefined) => {
                 clearInterval(index);
                 if (generateCallback) {
                     generateCallback();
+                    setDate(`${date.getAllDateElms(DATE_OR_TIME.DATE_TYPE)} ${date.getAllDateElms(DATE_OR_TIME.TIME_TYPE)}`);
                 }
             }
         }
         index = setInterval(asyncLoadingBar, 100);
         setShow(true);
-        setDate(`${date.getAllDateElms(DATE_OR_TIME.DATE_TYPE)} ${date.getAllDateElms(DATE_OR_TIME.TIME_TYPE)}`);
     };
 
     return { date, widthState, show, reset, generatingCounter };
