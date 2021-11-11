@@ -34,8 +34,7 @@ const useSuspenseBar = () => {
                 let count: number = 0;
                 let index: NodeJS.Timeout;
                 const asyncLoadingBar = () => {
-                    count++;
-                    setWidthState(count);
+                    setWidthState(++count);
                     if (count === 100) {
                         clearInterval(index);
                     }
