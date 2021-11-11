@@ -13,8 +13,11 @@
  */
 
 import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
+import GROUPS_STATIC from '../../helpers/structs/allGroups';
+import { groupsTypes } from './types';
 
 const { USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
+const { NORMAL, ENGLISH, SK } = groupsTypes;
 
 export interface PreferencesInitialTypes {
     hamburgerToggle: boolean;
@@ -32,6 +35,16 @@ export interface PreferencesInitialTypes {
     };
     searchInputsErrors: {
         [value: string]: boolean;
+    };
+    activeSubjectPanelID: number;
+    chooseGroups: {
+        [value: string]: string;
+    }
+    saveScheduleOptionModalOpen: boolean;
+    clearScheduleOptionModalOpen: boolean;
+    calendarMobileModalOpen: {
+        toggleState: boolean,
+        dateInfo: Date,
     };
 }
 
@@ -54,8 +67,22 @@ export const initialState = {
     cmsHamburgerToggle: false,
     searchInputs: {
         subjectSearch: '',
+        scheduleSearch: '',
     },
     searchInputsErrors: {
         subjectSearch: false,
-    }
+        scheduleSearch: false,
+    },
+    activeSubjectPanelID: 0,
+    chooseGroups: {
+        [NORMAL]: GROUPS_STATIC.NORMAL_GROUPS[0],
+        [ENGLISH]: GROUPS_STATIC.ENG_GROUPS[0],
+        [SK]: GROUPS_STATIC.SK_GROUPS[0],
+    },
+    saveScheduleOptionModalOpen: false,
+    clearScheduleOptionModalOpen: false,
+    calendarMobileModalOpen: {
+        toggleState: false,
+        dateInfo: new Date()
+    },
 } as const;
