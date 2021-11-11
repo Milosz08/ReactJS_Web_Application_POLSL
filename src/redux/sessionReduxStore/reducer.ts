@@ -15,7 +15,7 @@
 import sessionTypes from './types';
 import { InitialState } from './initialState';
 
-import ROUTING_PATH_NAMES from '../../constants/routingPathNames';
+import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
 
 const {
     CHANGE_ADMIN_LOGGED_STATUS, CHANGE_USER_LOGGED_STATUS, INCREASE_SESSION_COUNER, TOGGLE_WARNING_SESSION_MODAL
