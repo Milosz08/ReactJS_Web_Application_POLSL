@@ -13,18 +13,30 @@
  */
 
 import axiosInstance from '../../helpers/misc/request';
+import GROUPS_STATIC from '../../helpers/structs/allGroups';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 
-import { addCovidWarningLevel, addFooterMessage, addLastUpdate, addSingleSubject, sortingIncomingElmsByName } from './actions';
-import { CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, SubjectsContentTypes } from './dataTypes';
+import {
+    addCovidWarningLevel, addFooterMessage, addLastUpdate, addSingleCalendarRecord, addSingleScheduleSubject,
+    addSingleSubject, filteredScheduleSubjects, sortingIcomingElmsByDate, sortingIncomingElmsByName
+} from './actions';
+
+import {
+    CalendarContentTypes, CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, ScheduleContentTypes, SubjectsContentTypes
+} from './dataTypes';
+
 import { sortAvailables } from './types';
+import { decrypt } from 'react-crypt-gsm';
 
 const footerEndpoint: string = API_ENDPOINTS.FOOTER_FORM;
 const covidEndpoint: string = API_ENDPOINTS.COVID_WARNINGS;
 const updateEndpoint: string = API_ENDPOINTS.LAST_UPDATE;
 const subjectsEndpoint: string = API_ENDPOINTS.SUBJECTS_ELMS;
+const scheduleEndpoint: string = API_ENDPOINTS.SCHEDULE_SUBJECTS;
+const calendarEndpoint: string = API_ENDPOINTS.CALENDAR_RECORDS;
 
 /**
+ *
  *
  * @param endpoint
  */
@@ -33,9 +45,6 @@ const fetchElementFromAPI = async (endpoint: string) => {
     return data;
 };
 
-/**
- *
- */
 export const getAllFooterFormElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const footerFormMessages = await fetchElementFromAPI(footerEndpoint);
@@ -43,9 +52,6 @@ export const getAllFooterFormElements = () => {
     };
 };
 
-/**
- *
- */
 export const getAllCovidWarningElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const covidWarningLevels = await fetchElementFromAPI(covidEndpoint);
@@ -53,9 +59,6 @@ export const getAllCovidWarningElements = () => {
     };
 };
 
-/**
- *
- */
 export const getAllLastUpdateElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const lastUpdates = await fetchElementFromAPI(updateEndpoint);
@@ -63,14 +66,35 @@ export const getAllLastUpdateElements = () => {
     };
 };
 
-/**
- *
- */
 export const getAllSubjectsElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const subjects = await fetchElementFromAPI(subjectsEndpoint);
         subjects.forEach((element: SubjectsContentTypes) => dispatch(addSingleSubject(element)));
-        dispatch(sortingIncomingElmsByName(sortAvailables.SUBJECTS_STA));
-        dispatch(sortingIncomingElmsByName(sortAvailables.SUBJECTS_DYN));
+        dispatch(sortingIncomingElmsByName(sortAvailables.SUBJECTS));
+    };
+};
+
+export const getAllScheduleElements = (groupCookies: any) => {
+    return async (dispatch: (prop: any) => void) => {
+        const scheduleSubjects = await fetchElementFromAPI(scheduleEndpoint);
+        scheduleSubjects.forEach((element: ScheduleContentTypes) => dispatch(addSingleScheduleSubject(element)));
+        const cookieDecryptData = ({ content, tag }: any) => (
+            decrypt({ content, tag: new Uint8Array(tag.data) })
+        );
+        if(Boolean(groupCookies)) {
+            const [ normal, eng, sk ] = cookieDecryptData(groupCookies).split(',');
+            dispatch(filteredScheduleSubjects(normal, eng, sk));
+        } else {
+            const { NORMAL_GROUPS, ENG_GROUPS, SK_GROUPS } = GROUPS_STATIC;
+            dispatch(filteredScheduleSubjects(NORMAL_GROUPS[0], ENG_GROUPS[0], SK_GROUPS[0]));
+        }
+    };
+};
+
+export const getAllCalendarElements = () => {
+    return async (dispatch: (prop: any) => void) => {
+        const calendar = await fetchElementFromAPI(calendarEndpoint);
+        calendar.forEach((element: CalendarContentTypes) => dispatch(addSingleCalendarRecord(element)));
+        dispatch(sortingIcomingElmsByDate(sortAvailables.CALENDAR));
     };
 };
