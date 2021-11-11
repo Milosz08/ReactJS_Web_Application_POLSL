@@ -15,9 +15,11 @@
 import * as React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+import { createContext, useContext } from 'react';
+import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
-import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
 import { SubjectsContentTypes } from '../../../../redux/apiReduxStore/dataTypes';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
@@ -25,7 +27,6 @@ import { SubjectInfoContentContainer } from '../SubjectsDetails.styles';
 
 import SingleSubjectInfoContent from './SingleSubjectInfoContent';
 import NotFindContent from '../../NotFindContent/NotFindContent';
-import { createContext } from 'react';
 
 export interface SubjectContextProvider {
     subject: SubjectsContentTypes;
@@ -38,10 +39,10 @@ export const SubjectContext = createContext<Partial<SubjectContextProvider>>({ }
  */
 const SubjectInfoContent: React.FC = (): JSX.Element => {
 
-    const { searchedSubjects }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const { subjectsNewState } = useContext<Partial<SearchingTypes>>(SearchingContext);
     const { activeSubjectPanelID }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
-    const subjectObject = searchedSubjects.find((_, idx) => idx === activeSubjectPanelID);
+    const subjectObject = subjectsNewState!.find((_, idx) => idx === activeSubjectPanelID);
 
     const generateSubjectOrNotFound: JSX.Element = Boolean(subjectObject) ? (
         <SingleSubjectInfoContent/>
