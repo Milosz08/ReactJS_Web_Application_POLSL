@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -12,27 +12,22 @@
  * governing permissions and limitations under the license.
  */
 
-/**
- * Interfaces that defines the data types in the object.
- */
 export interface GroupsStaticTypes {
-    NORMAL_GROUPS: NormalGroupsTypes[];
+    NORMAL_GROUPS: string[];
     ENG_GROUPS: string[];
+    SK_GROUPS: string[];
 }
 
-export interface NormalGroupsTypes {
-    [value: string]: string;
-}
-
-/**
- * @details An object representing each groups.
- */
 const GROUPS_STATIC: GroupsStaticTypes = {
     NORMAL_GROUPS: [
-        { field: 'firstGroup', text: 'Pierwsza' },
-        { field: 'secondGroup', text: 'Druga' }
+        'pierwsza', 'druga'
     ],
-    ENG_GROUPS: [ 'b2a', 'b2b', 'c1a', 'c1b' ],
+    ENG_GROUPS: [
+        'b2a', 'b2b', 'c1'
+    ],
+    SK_GROUPS: [
+        'pon', 'czw', 'pt'
+    ]
 };
 
 export default GROUPS_STATIC;
