@@ -20,7 +20,7 @@ import {
 } from '../DevToolsInfo.styles';
 
 /**
- *
+ * Component responsible for generate developments tools info content.
  */
 const DevToolsContent: React.FC = (): JSX.Element => (
     <DevToolsTextContentContainer>
@@ -29,9 +29,9 @@ const DevToolsContent: React.FC = (): JSX.Element => (
             standardzie <strong>SPA (Single Page Application)</strong>. Za zarządzanie stanem komponentów odpowiada
             system <strong>Redux</strong> wraz z oprogramowaniem middleware umożliwiającym pracę w
             bibliotece <strong>ReactJS. </strong> Aplikacja korzysta z Restowego API działającym na silniku
-            <strong> NodeJS </strong> wraz z komunikującą się z nim nierelacyjną bazą danych <strong>MongoDB</strong>. Do
-            aplikacji został stworzony autorski system CMS bazujący na mechanice działania <strong> Strapi</strong>. Całość
-            aplikacji została napisana w języku <strong>TypeScript</strong>. Kod projektu znajdziesz na moim repozytorium:{' '}
+            <strong> Java Spring Boot </strong> wraz z komunikującą się z nim nierelacyjną bazą danych <strong>MongoDB</strong>. Całość
+            warstwy front-end aplikacji została napisana w języku <strong>TypeScript</strong>. Kod projektu znajdziesz na moim
+            repozytorium:{' '}
             <DevToolsGithubLink
                 href = 'https://github.com/Milosz08/ReactJS_Web_Application_POLSL'
                 target = '_blank'

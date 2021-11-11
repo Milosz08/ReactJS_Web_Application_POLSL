@@ -13,12 +13,12 @@
  */
 
 import * as React from 'react';
-import { SiReact, SiRedux } from 'react-icons/all';
+import { SiReact, SiJava } from 'react-icons/all';
 
 import { DevToolsLogoAnchor, DevToolsLogosContainer } from '../DevToolsInfo.styles';
 
 /**
- *
+ * Component responsible for generating developing tools icons.
  */
 const DevToolsLogos: React.FC = (): JSX.Element => (
     <DevToolsLogosContainer>
@@ -30,11 +30,11 @@ const DevToolsLogos: React.FC = (): JSX.Element => (
             <SiReact/>
         </DevToolsLogoAnchor>
         <DevToolsLogoAnchor
-            href = 'https://redux.js.org/'
+            href = 'https://spring.io/'
             target = '_blank'
             rel = 'noreferrer'
         >
-            <SiRedux/>
+            <SiJava/>
         </DevToolsLogoAnchor>
     </DevToolsLogosContainer>
 );
