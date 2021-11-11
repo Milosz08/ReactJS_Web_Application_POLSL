@@ -19,19 +19,23 @@ enum apiTypes {
     GET_SINGLE_LAST_UPDATE = 'GET_ALL_LAST_UPDATE',
     UPDATE_SINGLE_LAST_UPDATE = 'UPDATE_SINGLE_LAST_UPDATE',
     GET_SINGLE_SUBJECT_DATA = 'GET_SINGLE_SUBJECT_DATA',
-    FILTERED_SUBJECTS_LIST = 'FILTERED_SUBJECTS_LIST',
+    GET_SINGLE_SCHEDULE_SUBJECT = 'GET_SINGLE_SCHEDULE_SUBJECT',
+    GET_SINGLE_CALENDAR_RECORD = 'GET_SINGLE_CALENDAR_RECORD',
     SORT_BY_NAME = 'SORT_BY_NAME',
+    SORT_BY_DATE = 'SORT_BY_DATE',
+    FILTERED_SCHEDULE_SUBJECTS = 'FILTERED_SCHEDULE_SUBJECTS',
 }
 
 export enum updateSections {
-    SUBJECTS = 'subjects',
-    CALENDAR = 'calendar',
-    SCHEDULE = 'schedule'
+    SUBJECTS = 'SUBJECTS',
+    CALENDAR = 'CALENDAR',
+    SCHEDULE = 'SCHEDULE'
 }
 
 export enum sortAvailables {
-    SUBJECTS_STA = 'subjectsContent',
-    SUBJECTS_DYN = 'searchedSubjects',
+    SUBJECTS = 'subjectsContent',
+    SCHEDULE = 'scheduleContent',
+    CALENDAR = 'calendarContent',
 }
 
 export enum sortInputTypes {
