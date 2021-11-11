@@ -13,6 +13,7 @@
  */
 
 import * as React from 'react';
+import { useEffect } from 'react';
 import GROUPS_STATIC from '../../../../helpers/structs/allGroups';
 
 import { RootState } from '../../../../redux/reduxStore';
@@ -24,7 +25,6 @@ import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore
 import {
     ScheduleCustomRadio, ScheduleRadioInput, ScheduleRadioInputsContainer, ScheduleRadioInputsWrapper, ScheduleRadioLabel
 } from '../ScheduleForm.styles';
-import { useEffect } from 'react';
 
 interface PropsProvider {
     groupArray: string[];
