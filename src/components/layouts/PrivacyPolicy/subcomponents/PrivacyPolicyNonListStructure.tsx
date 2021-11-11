@@ -15,7 +15,7 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 
-import STATIC_STRUCTURE, { NonListTypes } from '../../../../constants/cookiesPolicyContent';
+import STATIC_STRUCTURE, { NonListTypes } from '../../../../helpers/structs/cookiesPolicyContent';
 
 import {
     PrivacyPolicyUnorderedListElement, PrivacyPolicyHeaderContainer, PrivacyPolicyListContainer

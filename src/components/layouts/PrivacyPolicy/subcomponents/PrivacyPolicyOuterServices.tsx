@@ -13,7 +13,7 @@
  */
 
 import * as React from 'react';
-import STATIC_STRUCTURE from '../../../../constants/cookiesPolicyContent';
+import STATIC_STRUCTURE from '../../../../helpers/structs/cookiesPolicyContent';
 
 import { PrivacyPolicyHeaderContainer, PrivacyPolicyTextContent } from '../PrivacyPolicy.styles';
 
