@@ -19,17 +19,20 @@ import * as FontAwesomeIcons from 'react-icons/fa';
 import * as AntDesignIcons from "react-icons/ai";
 import * as BoxIcons from 'react-icons/bi';
 import * as IonIcons from 'react-icons/io';
+import * as MaterialDesignIcons from 'react-icons/md';
 
 //import { MdCheckBoxOutlineBlank } from 'react-icons/all';
 
 export const IconFamilies = {
     FontAwesomeIcons,
+    MaterialDesignIcons,
     AntDesignIcons,
     BoxIcons,
     IonIcons,
 }
 
 export enum IconFamiliesType {
+    MaterialDesignIcons = 'MaterialDesignIcons',
     FontAwesomeIcons = 'FontAwesomeIcons',
     AntDesignIcons = 'AntDesignIcons',
     BoxIcons = 'BoxIcons',
@@ -47,7 +50,10 @@ interface PropsProvider {
 }
 
 /**
+ * Component reponsible for generating dynamically icon based props values.
  *
+ * @param family { string } - icon family (from IconFamilies object).
+ * @param name { string } - icon name (pure string, based on icon types).
  */
 const IconComponent: React.FC<PropsProvider> = ({ family, name }): JSX.Element => {
 
