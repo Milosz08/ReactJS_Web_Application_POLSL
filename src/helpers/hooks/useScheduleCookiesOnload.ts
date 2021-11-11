@@ -15,6 +15,8 @@
 import { useContext, useEffect } from 'react';
 import { decrypt } from 'react-crypt-gsm';
 
+import GROUPS_STATIC from '../structs/allGroups';
+
 import { useDispatch } from 'react-redux';
 import { groupsTypes } from '../../redux/preferencesReduxStore/types';
 import { setSelectedGroup } from '../../redux/preferencesReduxStore/actions';
@@ -28,26 +30,28 @@ import { CookiesObjectsContext, CookiesObjectsTypes } from '../../context/cookie
 const useScheduleCookiesOnload = (): void => {
 
     const { cookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
-    
-    const { groupSelection, engGroupSelection, skGroupSelection } = COOKIES_OBJECT;
+
+    const { groupSelection } = COOKIES_OBJECT;
+    const { NORMAL_GROUPS, ENG_GROUPS, SK_GROUPS } = GROUPS_STATIC;
     const { NORMAL, ENGLISH, SK } = groupsTypes;
-    
+
     const dispatcher = useDispatch();
-    
+
     useEffect(() => {
         const cookieDecryptData = ({ content, tag }: any) => (
-            decrypt({ content, tag: new Uint8Array(tag.data) }
-        ));
-        
+            decrypt({ content, tag: new Uint8Array(tag.data) })
+        );
+
         const setDecryptedCookieValue = (): void => {
-            if (Boolean(cookie![groupSelection]) || Boolean(cookie![engGroupSelection]) || Boolean(cookie![skGroupSelection])) {
-                dispatcher(setSelectedGroup(NORMAL, cookieDecryptData(cookie![groupSelection])));
-                dispatcher(setSelectedGroup(ENGLISH, cookieDecryptData(cookie![engGroupSelection])));
-                dispatcher(setSelectedGroup(SK, cookieDecryptData(cookie![skGroupSelection])));
+            if (Boolean(cookie![groupSelection])) {
+                const [ normal, eng, sk ] = cookieDecryptData(cookie![groupSelection]).split(',');
+                dispatcher(setSelectedGroup(NORMAL, normal));
+                dispatcher(setSelectedGroup(ENGLISH, eng));
+                dispatcher(setSelectedGroup(SK, sk));
             }
         };
         setDecryptedCookieValue();
-    }, [ ENGLISH, NORMAL, SK, cookie, dispatcher, engGroupSelection, groupSelection, skGroupSelection ]);
+    }, [ ENGLISH, ENG_GROUPS, NORMAL, NORMAL_GROUPS, SK, SK_GROUPS, cookie, dispatcher, groupSelection ]);
 
 };
 
