@@ -41,3 +41,8 @@ export enum LEVELS {
     MEDIUM = 'MEDIUM',
     HIGH = 'HIGH'
 }
+
+/**
+ * Constant that defines how many days in advance upcoming events should show up.
+ */
+export const DAYS_INCOME: number = 8;
