@@ -14,7 +14,7 @@
 
 import * as React from 'react';
 
-import CONSTANT_DATA from '../../../../constants/staticData';
+import NAVIGATION_ELEMENTS from './../../../../helpers/structs/navigationElements';
 
 import { MainHeaderNavigationContainer, MainHeaderNavigationLinks, MainHeaderNavigationSingleLink } from '../Header.styles';
 
@@ -29,7 +29,7 @@ interface PropsProvider {
  */
 const MainHeaderNavigation: React.FC<PropsProvider> = ({ grabber }): JSX.Element => {
 
-    const { TOP_NAVBAR_ELMS } = CONSTANT_DATA;
+    const { TOP_NAVBAR_ELMS } = NAVIGATION_ELEMENTS;
 
     const topNavbarElm: JSX.Element[] = TOP_NAVBAR_ELMS.map(singleLink => (
         <MainHeaderNavigationSingleLink
