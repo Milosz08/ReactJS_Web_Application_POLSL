@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -12,22 +12,18 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { createContext } from 'react';
+import * as React from 'react';
+import { createContext } from 'react';
 import { useCookies } from 'react-cookie';
-import COOKIES_OBJECT from '../constants/allCookies';
 
-/**
- * Interface defining the type of Cookies hook values and functions.
- */
+import COOKIES_OBJECT from './allCookies.config';
+
 export interface CookiesObjectsTypes {
     cookie: { [p: string]: any };
     setCookie: (name: string, value: any, options?: (any | undefined)) => void;
     removeCookie: (name: string, options?: (any | undefined)) => void
 }
 
-/**
- * Interface defining the type of props values.
- */
 interface PropsProvider {
     children: React.ReactNode;
 }
@@ -38,21 +34,15 @@ interface PropsProvider {
 export const CookiesObjectsContext = createContext<Partial<CookiesObjectsTypes>>({});
 
 /**
- * @details Provider that stores all cookie names used in React. The props passes: the global cookie object and two
- *          methods: setCookie () to create a new Cookie object and the corresponding removeCookie () to remove the
- *          selected cookie object.
+ * Provider that stores all cookie names used in React. The props passes: the global cookie object and two
+ * methods: setCookie () to create a new Cookie object and the corresponding removeCookie () to remove the
+ * selected cookie object.
  *
  * @param children { React.ReactNode } - all nodes of the virtual DOM React tree covered by the Provider.
  */
 const CookiesObjectsProvider: React.FC<PropsProvider> = ({ children }: PropsProvider): JSX.Element => {
 
-    const {
-        cookiesPopup, adminSession, credentialsLevel, userSession, groupSelection, engGroupSelection
-    } = COOKIES_OBJECT;
-
-    const [ cookie, setCookie, removeCookie ] = useCookies([
-        cookiesPopup, adminSession, credentialsLevel, userSession, groupSelection, engGroupSelection
-    ]);
+    const [ cookie, setCookie, removeCookie ] = useCookies(Object.keys(COOKIES_OBJECT).map(key => COOKIES_OBJECT[key]));
 
     return (
         <CookiesObjectsContext.Provider
