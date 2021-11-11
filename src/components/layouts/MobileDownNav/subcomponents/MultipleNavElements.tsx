@@ -16,7 +16,6 @@ import * as React from 'react';
 import { Dispatch, Fragment, SetStateAction } from 'react';
 
 import MOBILE_NAV_ELMS, { MobileNavElmsProvider } from '../../../../helpers/structs/mobileNavElements';
-import generateID from '../../../../helpers/functionsAndClasses/generateID';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
@@ -54,7 +53,7 @@ const MultipleNavElements: React.FC<PropsProvider> = ({ setPosition }): JSX.Elem
 
         return (
             <SingleNavigationElement
-                key = {generateID()}
+                key = {id}
                 pathAttr = {{ path: navElm.path, id }}
                 action = {handleNavigationClick}
                 icon = {`Ai${chooseActiveElm}${navElm.iconFamilySufix}`}
