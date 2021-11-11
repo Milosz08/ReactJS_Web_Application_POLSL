@@ -13,41 +13,49 @@
  */
 
 import * as React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import GROUPS_STATIC from '../../../../helpers/structs/allGroups';
 
 import COOKIES_OBJECT from '../../../../context/cookiesContext/allCookies.config';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../context/cookiesContext/CookiesObjectsProvider';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { groupsTypes } from '../../../../redux/preferencesReduxStore/types';
 import { setSelectedGroup, toggleClearScheduleModal } from '../../../../redux/preferencesReduxStore/actions';
 
 import { ScheduleClearInputsButton } from '../ScheduleForm.styles';
+import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
+import { RootState } from '../../../../redux/reduxStore';
+import { filteredScheduleSubjects } from '../../../../redux/apiReduxStore/actions';
 
 /**
  * Component responsible for generating clear all schedule preferences button.
  */
 const ScheduleClearButton: React.FC = (): JSX.Element => {
 
+    const { chooseGroups }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
     const { removeCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
-    const { groupSelection, engGroupSelection, skGroupSelection } = COOKIES_OBJECT;
+    const { groupSelection } = COOKIES_OBJECT;
 
     const dispatcher = useDispatch();
 
     const { NORMAL, ENGLISH, SK } = groupsTypes;
+    const { normalGroup, engGroup, skGroup } = chooseGroups;
     const { NORMAL_GROUPS, ENG_GROUPS, SK_GROUPS } = GROUPS_STATIC;
 
     const handleClearButton = (): void => {
+        window.scrollTo(0, 0);
         dispatcher(toggleClearScheduleModal(true));
         dispatcher(setSelectedGroup(NORMAL, NORMAL_GROUPS[0]));
         dispatcher(setSelectedGroup(ENGLISH, ENG_GROUPS[0]));
         dispatcher(setSelectedGroup(SK, SK_GROUPS[0]));
         removeCookie!(groupSelection);
-        removeCookie!(engGroupSelection);
-        removeCookie!(skGroupSelection);
     };
+
+    useEffect(() => {
+        dispatcher(filteredScheduleSubjects(normalGroup, engGroup, skGroup));
+    }, [ normalGroup, engGroup, skGroup, dispatcher ]);
 
     return (
         <ScheduleClearInputsButton
