@@ -12,10 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-/**
- * Interface defining the type of object values.
- */
-interface ObjectProvider {
+export interface RoutingTypes {
     [pathNames: string]: string;
 }
 
@@ -25,9 +22,10 @@ interface ObjectProvider {
 const _DEFAULT_PREFIX: string = 'Informatyka | ';
 
 /**
- * @details An object that stores all dependencies related to title names while rendering subsequent page components.
+ * An object that stores all dependencies related to title names while
+ * rendering subsequent page componentsAndMiddleware.
  */
-const ROUTING_PATH_NAMES: ObjectProvider = {
+const ROUTING_PATH_NAMES: RoutingTypes = {
     START_PAGE: `${_DEFAULT_PREFIX}Wydział Elektryczny Politechniki Śląskiej`,
     SCHEDULE_PAGE: `${_DEFAULT_PREFIX}Interaktywny Plan Zajęć`,
     CALENDAR_PAGE: `${_DEFAULT_PREFIX}Kalendarz Studenta`,
@@ -35,8 +33,8 @@ const ROUTING_PATH_NAMES: ObjectProvider = {
     LOGIN_PAGE: `${_DEFAULT_PREFIX}Logowanie do Systemu`,
     CMS_LOGIN_PAGE: `${_DEFAULT_PREFIX}Logowanie do Panelu CMS`,
     CMS_PANEL_PAGE: `${_DEFAULT_PREFIX}Panel Administratora`,
-    COOKIES_POLICY: `${_DEFAULT_PREFIX}Polityka Cookies`,
-    SUBJECT_PASS_PAGE: `${_DEFAULT_PREFIX}Warunki Zaliczenia Przedmiotów`,
-}
+    COOKIES_POLICY: `${_DEFAULT_PREFIX}Polityka Prywatności`,
+    SUBJECT_PASS_PAGE: `${_DEFAULT_PREFIX}Przedmioty i Zaliczenia`,
+} as const;
 
 export default ROUTING_PATH_NAMES;
