@@ -13,7 +13,7 @@
  */
 
 /**
- * @details Function Returning the DATE class object based on time (on days) passed on in the parameter.
+ * Function Returning the DATE class object based on time (on days) passed on in the parameter.
  *
  * @param expDays { number } - time after which the cookie file will be deleted.
  */
