@@ -23,40 +23,84 @@ export interface FooterFormTypes {
         fullDate: string;
         fullTime: string;
     }
-    __v?: number;
 }
 
 export interface CovidWarningsTypes {
     _id: string;
     description: string;
     actualRiskNumber: number;
-    __v?: number;
 }
 
 export interface LastUpdateTypes {
     _id: string;
     updateDateFor: updateSections;
     updateDate: {
-        date: string;
-        time: string;
+        fullDate: string;
+        fullTime: string;
     }
-    __v?: number;
 }
 
 export interface SubjectsContentTypes {
     _id: string;
     title: string;
     ifEnd: boolean;
-    semesters: string[];
+    semesters: number[];
     departments: string[];
     icon: {
         family: string;
         name: string;
     };
-    classesPatforms: {
+    classesPlatforms: {
         type: string;
         place: string;
         link: string;
     }[];
-    __v?: number;
+}
+
+export interface ScheduleContentTypes {
+    _id: string;
+    title: string;
+    day: number;
+    group: string;
+    subjectHours: {
+        start: string;
+        end: string;
+    },
+    subjectInfo: {
+        type: string;
+        room: string;
+        subjectsPze: {
+            place: string;
+            link: string;
+        }
+    }
+}
+
+export interface CalendarContentTypes {
+    _id: string;
+    day: number,
+    month: number,
+    year: number,
+    items: {
+        start: string,
+        message: string,
+        importantLevel: string
+    }[]
+}
+
+export interface CurrentScheduleContentTypes {
+    title: string;
+    type: string;
+    place: string;
+    room: string;
+    pzeLink: {
+        place: string;
+        link: string;
+    };
+    hours: {
+        start: number;
+        end: number;
+        fullStart: string;
+        fullEnd: string;
+    }
 }
