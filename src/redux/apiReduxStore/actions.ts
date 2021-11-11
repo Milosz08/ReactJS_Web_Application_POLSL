@@ -13,7 +13,10 @@
  */
 
 import apiTypes, { sortAvailables, updateSections } from './types';
-import { CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, SubjectsContentTypes } from './dataTypes';
+
+import {
+    CalendarContentTypes, CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, ScheduleContentTypes, SubjectsContentTypes
+} from './dataTypes';
 
 interface ReturnedToReducer {
     type: apiTypes;
@@ -64,16 +67,37 @@ export const addSingleSubject = (singleSubjectData: SubjectsContentTypes): Retur
     }
 });
 
-export const filteredSubjectsList = (filterCrit: string): ReturnedToReducer => ({
-    type: apiTypes.FILTERED_SUBJECTS_LIST,
-    payload: {
-        filterCrit
-    }
-});
-
 export const sortingIncomingElmsByName = (...typeElmsArray: sortAvailables[]): ReturnedToReducer => ({
     type: apiTypes.SORT_BY_NAME,
     payload: {
         typeElmsArray
+    }
+});
+
+export const addSingleScheduleSubject = (singleScheduleSubject: ScheduleContentTypes): ReturnedToReducer => ({
+    type: apiTypes.GET_SINGLE_SCHEDULE_SUBJECT,
+    payload: {
+        singleScheduleSubject
+    }
+});
+
+export const addSingleCalendarRecord = (singleCalendarRecord: CalendarContentTypes): ReturnedToReducer => ({
+    type: apiTypes.GET_SINGLE_CALENDAR_RECORD,
+    payload: {
+        singleCalendarRecord
+    }
+});
+
+export const sortingIcomingElmsByDate = (...typeElmsArray: sortAvailables[]): ReturnedToReducer => ({
+    type: apiTypes.SORT_BY_DATE,
+    payload: {
+        typeElmsArray
+    }
+});
+
+export const filteredScheduleSubjects = (normalGroup: string, engGroup: string, skGroup: string): ReturnedToReducer => ({
+    type: apiTypes.FILTERED_SCHEDULE_SUBJECTS,
+    payload: {
+        normalGroup, engGroup, skGroup
     }
 });
