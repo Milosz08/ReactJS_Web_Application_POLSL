@@ -17,7 +17,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { changeAdminLoggedStatus, toggleWarningSessionModal } from '../../../../redux/sessionReduxStore/actions';
 
-import ROUTING_PATH_NAMES from '../../../../constants/routingPathNames';
+import ROUTING_PATH_NAMES from '../../../../helpers/structs/routingPathNames';
 
 import { SessionEndModalButtonsContainer, SessionEndModalLogout, SessionEndModalStaysession } from '../SessionEndModal.styles';
 
