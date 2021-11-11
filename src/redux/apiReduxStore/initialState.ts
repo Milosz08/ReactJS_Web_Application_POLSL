@@ -12,14 +12,26 @@
  * governing permissions and limitations under the license.
  */
 
-import { CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, SubjectsContentTypes } from './dataTypes';
+import {
+    CalendarContentTypes, CovidWarningsTypes, CurrentScheduleContentTypes, FooterFormTypes, LastUpdateTypes,
+    ScheduleContentTypes, SubjectsContentTypes
+} from './dataTypes';
+
+export interface ScheduleSubjectDays {
+    [value: string]: ScheduleContentTypes[];
+}
 
 export interface ApiInitialTypes {
-    footerFormMessages: FooterFormTypes[];
+    footerFormMessages: FooterFormTypes[],
     covidWarningLevels: CovidWarningsTypes[];
     lastUpdate: LastUpdateTypes[];
     subjectsContent: SubjectsContentTypes[];
-    searchedSubjects: SubjectsContentTypes[];
+    scheduleContent: ScheduleSubjectDays;
+    currentScheduleContent: {
+        [value: string]: CurrentScheduleContentTypes[];
+    };
+    calendarContent: CalendarContentTypes[];
+    summerBreakActive: boolean;
 }
 
 export const initialState: ApiInitialTypes = {
@@ -27,5 +39,20 @@ export const initialState: ApiInitialTypes = {
     covidWarningLevels: [],
     lastUpdate: [],
     subjectsContent: [],
-    searchedSubjects: [],
+    scheduleContent: {
+        monday: [],
+        tuesday: [],
+        wednesday: [],
+        thursday: [],
+        friday: []
+    },
+    currentScheduleContent: {
+        monday: [],
+        tuesday: [],
+        wednesday: [],
+        thursday: [],
+        friday: []
+    },
+    calendarContent: [],
+    summerBreakActive: false,
 };
