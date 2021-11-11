@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../redux/reduxStore';
 import { searchInputs } from '../../../redux/preferencesReduxStore/types';
-import { insertInSearchInput } from '../../../redux/preferencesReduxStore/actions';
+import { insertInSearchInput, setSubjectActivePanel } from '../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../redux/preferencesReduxStore/initialState';
 
 import {
@@ -32,14 +32,13 @@ interface PropsProvider {
 }
 
 /**
- * Component responsible for generate universal search input. This components is connected with
+ * Universal component responsible for generate universal search input. This components is connected with
  * react redux state management and has erorrs handling.
  *
  * @param type { searchInputs } - search input type (enum).
  * @param placeholder { string } - aria label text value.
- * @param filterReducer { ?(filterCrit: string) => any } - callback function from custom hook to filtered elements.
  */
-const UniversalSearch: React.FC<PropsProvider> = ({ type, placeholder, filterReducer }): JSX.Element => {
+const UniversalSearch: React.FC<PropsProvider> = ({ type, placeholder }): JSX.Element => {
 
     const dispatcher = useDispatch();
 
@@ -49,16 +48,13 @@ const UniversalSearch: React.FC<PropsProvider> = ({ type, placeholder, filterRed
 
     const handleInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
         dispatcher(insertInSearchInput(type, target.value));
-        if (Boolean(filterReducer)) {
-            dispatcher(filterReducer!(target.value));
+        if (type === searchInputs.SUBJECT_SEARCH) {
+            dispatcher(setSubjectActivePanel(0));
         }
     };
 
     const handleClearInput = () => {
         dispatcher(insertInSearchInput(type, ''));
-        if (Boolean(filterReducer)) {
-            dispatcher(filterReducer!(''));
-        }
     };
 
     return (
