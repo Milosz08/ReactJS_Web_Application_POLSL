@@ -15,16 +15,15 @@
 import * as React from 'react';
 
 import { updateSections } from '../../../redux/apiReduxStore/types';
+import { searchInputs } from '../../../redux/preferencesReduxStore/types';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
 import { SubjectsCheckboxesContainer, SubjectsCheckboxesWrapper } from './SubjectsCheckboxes.styles';
 
-import DataLastUpdate from '../DataLastUpdate/DataLastUpdate';
-import UniversalHeader from '../UniversalHeader/UniversalHeader';
-import UniversalSearch from '../UniversalSearch/UniversalSearch';
-import { searchInputs } from '../../../redux/preferencesReduxStore/types';
-import AllCheckboxes from './subcomponents/AllCheckboxes';
-import { filteredSubjectsList } from '../../../redux/apiReduxStore/actions';
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const UniversalSearch = React.lazy(() => import('../UniversalSearch/UniversalSearch'));
+const AllCheckboxes = React.lazy(() => import('./subcomponents/AllCheckboxes'));
+const DataLastUpdate = React.lazy(() => import('../DataLastUpdate/DataLastUpdate'));
 
 /**
  * Component responsible for generate subjects tiles section components group.
@@ -41,7 +40,6 @@ const SubjectCheckboxes: React.FC = (): JSX.Element => (
             <UniversalSearch
                 type = {searchInputs.SUBJECT_SEARCH}
                 placeholder = 'Wyszukaj przedmiot'
-                filterReducer = {filteredSubjectsList}
             />
             <AllCheckboxes/>
             <DataLastUpdate
