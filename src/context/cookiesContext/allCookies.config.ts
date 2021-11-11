@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -13,15 +13,14 @@
  */
 
 /**
- * @details Object which stored all cookies names used in the application.
+ * Object which stored all cookies names used in the application.
  */
 const COOKIES_OBJECT = {
     cookiesPopup: '__cookieNotification',
     adminSession: '__adminSessionStayed',
-    credentialsLevel: '__credentialsLevel',
     userSession: '__userSessionStayed',
+    credentialsLevel: '__credentialsLevel',
     groupSelection: '__groupSelection',
-    engGroupSelection: '__engGroupSelection',
-};
+} as const;
 
 export default COOKIES_OBJECT;
