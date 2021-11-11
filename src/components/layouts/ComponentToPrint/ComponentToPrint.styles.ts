@@ -51,12 +51,6 @@ export const ComponentToPrintTable = styled.table`
     margin-top: 10px;
 `;
 
-export const ComponentToPrintTh = styled.th`
-    ${BasicTableElements()};
-    padding: 15px 10px;
-    text-align: left;
-`;
-
 export const ComponentToPrintTd = styled.td`
     ${BasicTableElements()};
     padding: 15px 10px;
