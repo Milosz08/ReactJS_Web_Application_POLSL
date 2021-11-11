@@ -13,7 +13,11 @@
  */
 
 import * as React from 'react';
+import { useContext } from 'react';
+
+import { searchInputs } from '../../../redux/preferencesReduxStore/types';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
+import { ExecuteScrollContext, ExecuteScrollContextTypes } from '../../pages/SchedulePage';
 
 import {
     ScheduleAsideHeaderContainer, ScheduleAsideHeaderParamsContainer, ScheduleAsideHeaderWrapper
@@ -22,31 +26,37 @@ import {
 import UniversalHeader from '../UniversalHeader/UniversalHeader';
 import ScheduleAsideHeaderParams from './subcomponents/ScheduleAsideHeaderParams';
 import ScheduleAsideHeaderDate from './subcomponents/ScheduleAsideHeaderDate';
-import { searchInputs } from '../../../redux/preferencesReduxStore/types';
 import UniversalSearch from '../UniversalSearch/UniversalSearch';
 
 /**
- *
+ * Component responsible for generating all addition schedule info and header components.
  */
-const ScheduleAsideHeader: React.FC = (): JSX.Element => (
-    <ScheduleAsideHeaderContainer>
-        <ScheduleAsideHeaderWrapper>
-            <UniversalHeader
-                iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaCalendarCheck' }}
-                content = 'Wygenerowany Plan Zajęć'
-                ifCloseButtonVisible = {false}
-                changeIconSize = '1.5rem'
-            />
-            <ScheduleAsideHeaderParamsContainer>
-                <ScheduleAsideHeaderParams/>
-                <ScheduleAsideHeaderDate/>
-            </ScheduleAsideHeaderParamsContainer>
-            <UniversalSearch
-                type = {searchInputs.SCHEDULE_SEARCH}
-                placeholder = 'Wyszukaj przedmiot'
-            />
-        </ScheduleAsideHeaderWrapper>
-    </ScheduleAsideHeaderContainer>
-);
+const ScheduleAsideHeader: React.FC = (): JSX.Element => {
+
+    const { executeScrollRef } = useContext<Partial<ExecuteScrollContextTypes>>(ExecuteScrollContext);
+
+    return (
+        <ScheduleAsideHeaderContainer>
+            <ScheduleAsideHeaderWrapper>
+                <UniversalHeader
+                    iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaCalendarCheck' }}
+                    content = 'Wygenerowany Plan Zajęć'
+                    ifCloseButtonVisible = {false}
+                    changeIconSize = '1.5rem'
+                />
+                <ScheduleAsideHeaderParamsContainer
+                    ref = {executeScrollRef}
+                >
+                    <ScheduleAsideHeaderParams/>
+                    <ScheduleAsideHeaderDate/>
+                </ScheduleAsideHeaderParamsContainer>
+                <UniversalSearch
+                    type = {searchInputs.SCHEDULE_SEARCH}
+                    placeholder = 'Wyszukaj przedmiot'
+                />
+            </ScheduleAsideHeaderWrapper>
+        </ScheduleAsideHeaderContainer>
+    );
+};
 
 export default ScheduleAsideHeader;

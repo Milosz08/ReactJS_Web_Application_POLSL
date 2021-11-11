@@ -15,14 +15,18 @@
 import * as React from 'react';
 
 import { ScheduleGotoInputButton } from '../ScheduleForm.styles';
+import { useContext } from 'react';
+import { ExecuteScrollContext, ExecuteScrollContextTypes } from '../../../pages/SchedulePage';
 
 /**
  * Component responsible for generate goto button, which send user directly into schedule section.
  */
 const ScheduleGotoButton: React.FC = (): JSX.Element => {
 
-    const handleGotoButton = (): void => {
+    const { executeScroll } = useContext<Partial<ExecuteScrollContextTypes>>(ExecuteScrollContext);
 
+    const handleGotoButton = (): void => {
+        executeScroll!();
     };
 
     return (
