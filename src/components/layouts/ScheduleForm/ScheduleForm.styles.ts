@@ -121,6 +121,7 @@ export const ScheduleRadioLabel = styled('label')<{ disabled: boolean }>`
     display: block;
     line-height: 50px;
     padding: 0 20px 0 50px;
+    text-transform: capitalize;
 `;
 
 export const ScheduleCustomRadio = styled.span`
