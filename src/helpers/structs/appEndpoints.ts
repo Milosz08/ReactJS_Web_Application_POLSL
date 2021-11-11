@@ -16,7 +16,7 @@ export enum FRONT_ENDPOINTS {
     ABSOLUTE = '/',
     SCHEDULE = '/interaktywny-plan-zajęć',
     CALENDAR = '/kalendarz-studenta',
-    TERMS = '/warunki-zaliczenia-przedmiotów',
+    TERMS = '/przedmioty-i-zaliczenia',
     HELPS = '/pomoce-naukowe',
     ADMIN_LOGIN = '/logowanie-do-systemu',
     ADMIN_PANEL = '/system-zarządzania-treścią',
@@ -28,5 +28,7 @@ export enum API_ENDPOINTS {
     FOOTER_FORM = '/footer-form',
     COVID_WARNINGS = '/covid-data',
     LAST_UPDATE = '/last-update',
-    SUBJECTS_ELMS = '/subjects-data'
+    SUBJECTS_ELMS = '/subject-data',
+    SCHEDULE_SUBJECTS = '/schedule-subjects',
+    CALENDAR_RECORDS = '/calendar',
 }
