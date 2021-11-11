@@ -15,7 +15,7 @@
 import styled from 'styled-components';
 import { BorderWithPseudoElement, DefaultButton } from '../../../styles/mixins.styles';
 import { a_rs } from '../../../styles/reset.styles';
-import { AiOutlineFileExcel, AiOutlineFileZip, BsFileEarmarkZip, BsFileZip, FaFileArchive } from 'react-icons/all';
+import { AiOutlineFileExcel, AiOutlineFileZip } from 'react-icons/all';
 
 export const SubjectsAndTermsContainer = styled.div`
     display: flex;
@@ -38,12 +38,12 @@ export const SubjectsAndTermsWrapper = styled.div`
 
 export const SubjectsAndTermsInfoContent = styled.div`
     ${BorderWithPseudoElement({
-    _color: 'var(--navyBlueColor)',
-    _titleBgc: 'var(--cleanWhiteColor)',
-    _content: 'Zewnętrzne Przekierowanie',
-    _fontSize: '1.2rem',
-    _fontWeight: 500
-})};
+        _color: 'var(--navyBlueColor)',
+        _titleBgc: 'var(--cleanWhiteColor)',
+        _content: 'Zewnętrzne Przekierowanie',
+        _fontSize: '1.2rem',
+        _fontWeight: 500
+    })};
     margin: 50px 0;
 `;
 
