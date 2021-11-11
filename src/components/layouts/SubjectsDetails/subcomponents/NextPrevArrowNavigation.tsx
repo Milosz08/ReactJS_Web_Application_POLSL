@@ -13,14 +13,13 @@
  */
 
 import * as React from 'react';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/reduxStore';
-import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
+import { useDispatch } from 'react-redux';
 import { prevNextSubjectActivePanel } from '../../../../redux/preferencesReduxStore/actions';
 
 import { NavigateArrowButton } from '../SubjectsDetails.styles';
+import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
 
 export enum arrowDirs {
     PREV, NEXT
@@ -38,15 +37,14 @@ interface PropsProvider {
  */
 const NextPrevArrowNavigation: React.FC<PropsProvider> = ({ dir }): JSX.Element => {
 
-    const { searchedSubjects }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
-
+    const { subjectsNewState } = useContext<Partial<SearchingTypes>>(SearchingContext);
     const dispatcher = useDispatch();
 
     const handleButtonClick = (): void => {
-        dispatcher(prevNextSubjectActivePanel(dir, searchedSubjects.length));
+        dispatcher(prevNextSubjectActivePanel(dir, subjectsNewState!.length));
     };
 
-    const renderedArrow: JSX.Element | null = searchedSubjects.length > 1 ? (
+    const renderedArrow: JSX.Element | null = subjectsNewState!.length > 1 ? (
         <NavigateArrowButton
             onClick = {handleButtonClick}
             ifLeft = {dir === arrowDirs.PREV}
