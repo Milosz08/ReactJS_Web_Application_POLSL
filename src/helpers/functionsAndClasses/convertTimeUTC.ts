@@ -13,6 +13,7 @@
  */
 
 import DAYS_AND_MONTHS from './../../helpers/structs/daysAndMonths';
+import { STATIC_DAYS } from '../structs/schedule.config';
 
 const { DAYS, MONTHS } = DAYS_AND_MONTHS;
 
@@ -28,6 +29,7 @@ export enum DATE_OR_TIME {
  *
  */
 class ConvertTimeUTC {
+
     private readonly _currTime: Date;
 
     private readonly _hours: string = '';
@@ -53,6 +55,18 @@ class ConvertTimeUTC {
 
     private static convertingSingleValue(toConvert: number): string {
         return Number(toConvert) < 10 ? `0${toConvert}` : String(toConvert)
+    };
+
+    public getDayPolishName(): string {
+        return DAYS.find((day: { id: number, name: string }): {} => day.id === this._day)!.name;
+    };
+
+    public getDayEnglishName(): string {
+        return STATIC_DAYS.find((day: { id: number, name: string, eng: string }): {} => day.id === this._day - 1)!.eng;
+    };
+
+    public getMonthPolishName(): string {
+        return MONTHS.find((month: { id: number, paraphrase: string }) => month.id === this._currTime.getMonth())!.paraphrase;
     };
 
     public getOneDateElm(element: DATE_ELEMENTS): string {
@@ -93,12 +107,16 @@ class ConvertTimeUTC {
         }
     };
 
-    public getDayPolishName(): string {
-        return DAYS.find((day: { id: number, name: string }): {} => day.id === this._day)!.name;
-    };
+    public getDestructurizedDate(): { [value: string]: string } {
+        const { convertingSingleValue } = ConvertTimeUTC;
 
-    public getMonthPolishName(): string {
-        return MONTHS.find((month: { id: number, paraphrase: string }) => month.id === this._currTime.getMonth())!.paraphrase;
+        const day: string | number = convertingSingleValue(this._currTime.getDate());
+        const month: string | number = convertingSingleValue(this._currTime.getMonth() + 1);
+        const hours: string | number = convertingSingleValue(this._currTime.getHours());
+        const minutes: string | number = convertingSingleValue(this._currTime.getMinutes());
+        const seconds: string | number = convertingSingleValue(this._currTime.getSeconds());
+
+        return { day, month, hours, minutes, seconds };
     };
 }
 
