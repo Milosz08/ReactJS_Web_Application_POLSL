@@ -12,12 +12,12 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { useContext, useEffect, useRef } from 'react';
+import * as React from 'react';
+import { createContext } from 'react';
 import { Fragment } from 'react';
 
-import ROUTING_PATH_NAMES from '../../constants/routingPathNames';
+import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
 
-import { MainStoreContext, MainStoreProviderTypes } from '../../contextStore/MainStoreProvider';
 import ScheduleTypeManagement from '../layouts/ScheduleTypeManagement/ScheduleTypeManagement';
 import ScheduleSaveModal from '../layouts/ScheduleSaveModal/ScheduleSaveModal';
 import ScheduleClearModal from '../layouts/ScheduleClearModal/ScheduleClearModal';
@@ -25,16 +25,20 @@ import ScheduleAsideHeader from '../layouts/ScheduleAsideHeader/ScheduleAsideHea
 import ScheduleLayout from '../layouts/ScheduleLayout/ScheduleLayout';
 import ScheduleDateUpdate from '../layouts/ScheduleDateUpdate/ScheduleDateUpdate';
 import SchedulePdfGenerator from '../layouts/SchedulePdfGenerator/SchedulePdfGenerator';
+import useOnScrollMove from '../../helpers/hooks/useOnScrollMove';
+import usePageTitle from '../../helpers/hooks/usePageTitle';
 
 const CookiesNotification = React.lazy(() => import('../layouts/CookiesNotification/CookiesNotification'));
 const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
 const Header = React.lazy(() => import('../layouts/Header/Header'));
 const CurrentURLpath = React.lazy(() => import('../layouts/CurrentURLpath/CurrentURLpath'));
 
-/**
- * Static array of strings representing the consecutive days of the week.
- */
-export const STATIC_DAYS: string[] = [ 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek' ];
+export interface ExecuteScrollContextTypes {
+    executeScrollRef: React.MutableRefObject<any>;
+    executeScroll: () => void;
+}
+
+export const ExecuteScrollContext = createContext<Partial<ExecuteScrollContextTypes>>({ });
 
 /**
  * Component rendering subpage with a class schedule (standard componentsAndMiddleware, form on the basis of which a plan,
@@ -42,19 +46,8 @@ export const STATIC_DAYS: string[] = [ 'poniedziałek', 'wtorek', 'środa', 'czw
  */
 const SchedulePage = (): JSX.Element => {
 
-    const executeScrollRef: React.MutableRefObject<any> = useRef<HTMLElement>(null);
-
-    const executeScroll = (): void => {
-        executeScrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-    }
-
-
-    useEffect(() => {
-        document.title = ROUTING_PATH_NAMES.SCHEDULE_PAGE;
-        return () => {
-            document.title = ROUTING_PATH_NAMES.START_PAGE
-        };
-    }, []);
+    const { executeScrollRef, executeScroll } = useOnScrollMove();
+    usePageTitle(ROUTING_PATH_NAMES.SCHEDULE_PAGE);
 
     return (
         <Fragment>
@@ -64,11 +57,15 @@ const SchedulePage = (): JSX.Element => {
             <MobileDownNav id = {1}/>
             <Header ifHeaderHasRedBar = {true}/>
             <CurrentURLpath ifImportatHeaderActive = {true}/>
-            <ScheduleTypeManagement/>
-            <ScheduleAsideHeader/>
-            <ScheduleLayout/>
-            <ScheduleDateUpdate/>
-            <SchedulePdfGenerator/>
+            <ExecuteScrollContext.Provider
+                value = {{ executeScrollRef, executeScroll }}
+            >
+                <ScheduleTypeManagement/>
+                <ScheduleAsideHeader/>
+                <ScheduleLayout/>
+                <ScheduleDateUpdate/>
+                <SchedulePdfGenerator/>
+            </ExecuteScrollContext.Provider>
         </Fragment>
     );
 }
