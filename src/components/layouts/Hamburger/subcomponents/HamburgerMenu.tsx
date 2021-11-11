@@ -37,7 +37,9 @@ const HamburgerMenu: React.FC = (): JSX.Element => {
     const { SITES, TOP_NAVBAR_ELMS } = NAVIGATION_ELEMENTS;
 
     const generateExternalList = TOP_NAVBAR_ELMS.map(goto => (
-        <HamburgerListItem key = {generateID()}>
+        <HamburgerListItem
+            key = {generateID()}
+        >
             <HamburgerExternalLink
                 href = {goto.link}
                 target = '_blank'
@@ -52,7 +54,9 @@ const HamburgerMenu: React.FC = (): JSX.Element => {
     ));
 
     const generateLinksList = SITES.map(site => (
-        <HamburgerListItem key = {generateID()}>
+        <HamburgerListItem
+            key = {site.title}
+        >
             <DelayRouterLink
                 render = {() => site.title}
                 pathTo = {site.path}
