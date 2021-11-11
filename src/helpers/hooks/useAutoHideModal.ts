@@ -47,7 +47,7 @@ const useAutoHideModal = (esimateTime: number, callbackDispatcher: (value: boole
             clearInterval(intervalIndex);
             setTimeout(() => setEstimate(esimateTime), 1000);
         }
-    }, [ callbackDispatcher, esimateTime, listener ]);
+    }, [ callbackDispatcher, dispatcher, esimateTime, listener ]);
 
     return estimate;
 };
