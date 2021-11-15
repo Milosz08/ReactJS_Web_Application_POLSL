@@ -15,18 +15,18 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 
-import {
-    IncomingActivitesContainer, IncomingActivitiesContentMessage, IncomingActivitiesDateInfo, IncomingActivitiesIndicator,
-    IncomingActivitiesMainWrapper
-} from '../CalendarIncomingActivities.styles';
+import { DAYS_INCOME } from '../../../../helpers/structs/calendar.config';
+import ConvertTimeUTC from '../../../../helpers/functionsAndClasses/convertTimeUTC';
+import SeparatingSingleCalendarTiles from '../../../../helpers/separatingCalendarRecords';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
 import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
-import SeparatingSingleCalendarTiles from '../../../../helpers/separatingCalendarRecords';
 
-import { DAYS_INCOME } from '../../../../helpers/structs/calendar.config';
-import ConvertTimeUTC from '../../../../helpers/functionsAndClasses/convertTimeUTC';
+import {
+    IncomingActivitesContainer, IncomingActivitiesContentMessage, IncomingActivitiesDateInfo, IncomingActivitiesIndicator,
+    IncomingActivitiesMainWrapper
+} from '../CalendarIncomingActivities.styles';
 
 const NoIcomingActivities = React.lazy(() => import('./NoIncomingActivities'));
 
