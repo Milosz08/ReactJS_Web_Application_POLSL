@@ -23,6 +23,8 @@ import SubjectsDetails from '../layouts/SubjectsDetails/SubjectsDetails';
 import SearchingProvider from '../../context/searchingContext/SearchingProvider';
 import { sortAvailables, sortInputTypes } from '../../redux/apiReduxStore/types';
 import usePageTitle from '../../helpers/hooks/usePageTitle';
+import CalendarIncomingActivites from '../layouts/CalendarIncomingActivities/CalendarIncomingActivites';
+import CurrentSubjectActive from '../layouts/CurrentSubjectActive/CurrentSubjectActive';
 
 const CookiesNotification = React.lazy(() => import('../layouts/CookiesNotification/CookiesNotification'));
 const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
@@ -44,6 +46,8 @@ const StartPage = (): JSX.Element => {
             <ImagesSlider/>
             <CovidInfoSection/>
             <EstimateCounter/>
+            <CurrentSubjectActive/>
+            <CalendarIncomingActivites/>
             <Navigation/>
             <SearchingProvider
                 sortType = {sortInputTypes.SUBJECT_SEARCH}
