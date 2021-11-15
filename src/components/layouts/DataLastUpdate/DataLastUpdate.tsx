@@ -30,23 +30,24 @@ interface PropsProvider {
  * Component retrieves the date of the database's last modification from the server (depending on
  * the dataID parameter, the modification data of a specific collection is retrieved).
  *
- * @param dataID { string } - database collection id.
+ * @param type { string } - database collection id.
  * @param content { string } - title of the collection from which the modification date is retrieved.
  */
-const DataLastUpdate: React.FC<PropsProvider> = ({ type, content }): JSX.Element => {
+const DataLastUpdate: React.FC< PropsProvider> = ({ type, content }): JSX.Element => {
 
     const { lastUpdate }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
     const findMathUpdateType = lastUpdate.find(el => el.updateDateFor === type);
+    const updateDate = findMathUpdateType ? findMathUpdateType.updateDate : undefined;
 
     const generateStructure = content ? (
         <DataLastUpdateContainer>
             <DataLastUpdateParagraph>
-                Ostatnia aktualizacja {content}: {findMathUpdateType?.updateDate.date}, {findMathUpdateType?.updateDate.time}
+                Ostatnia aktualizacja {content}: {updateDate?.fullDate}, {updateDate?.fullTime}
             </DataLastUpdateParagraph>
         </DataLastUpdateContainer>
     ) : (
         <strong>
-            {findMathUpdateType?.updateDate.date}, {findMathUpdateType?.updateDate.time}
+            {updateDate?.fullDate}, {updateDate?.fullTime}
         </strong>
     );
 
@@ -55,6 +56,6 @@ const DataLastUpdate: React.FC<PropsProvider> = ({ type, content }): JSX.Element
             {generateStructure}
         </Fragment>
     );
-}
+};
 
 export default DataLastUpdate;
