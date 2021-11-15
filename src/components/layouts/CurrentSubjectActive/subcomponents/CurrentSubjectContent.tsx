@@ -49,13 +49,14 @@ const CurrentSubjectContent: React.FC = (): JSX.Element => {
     const currTime: number = Number(`${insertZeros(date.time.hr)}${insertZeros(date.time.min)}${insertZeros(date.time.sec)}`);
 
     const duringSubjectIdx = singleDayCurrentSchedule?.findIndex(el => el.hours.start <= currTime && el.hours.end > currTime);
+    const weekend = new Date().getDay() === 6 || new Date().getDay() === 0;
 
     return (
         <DuringSubjectContext.Provider
             value = {{ singleDayCurrentSchedule, duringSubjectIdx }}
         >
             <CurrentSubjectAllSubjectsContainer>
-                {duringSubjectIdx !== -1 ? <CurrentSubjectAllSubjectWrapper>
+                {duringSubjectIdx !== -1 && !weekend ? <CurrentSubjectAllSubjectWrapper>
                     <CurrentSubjectDuringSubject
                         counter = {currTime}
                     />
