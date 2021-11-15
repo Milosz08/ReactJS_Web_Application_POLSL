@@ -111,3 +111,10 @@ export const toggleCalendarMobileModal = (toggleState: boolean, dateInfo: Date):
         toggleState, dateInfo
     }
 });
+
+export const toggleUserLogoutModal = (toggleState: boolean): ReturnedToReducer => ({
+    type: preferencesTypes.TOGGLE_USER_LOGOUT_MODAL,
+    payload: {
+        toggleState
+    }
+});

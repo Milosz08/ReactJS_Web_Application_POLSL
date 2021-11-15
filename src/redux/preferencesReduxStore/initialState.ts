@@ -46,6 +46,7 @@ export interface PreferencesInitialTypes {
         toggleState: boolean,
         dateInfo: Date,
     };
+    userLogoutModalOpen: boolean;
 }
 
 export const initialState = {
@@ -85,4 +86,5 @@ export const initialState = {
         toggleState: false,
         dateInfo: new Date()
     },
+    userLogoutModalOpen: false,
 } as const;
