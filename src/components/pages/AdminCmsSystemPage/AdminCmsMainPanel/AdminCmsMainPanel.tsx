@@ -15,7 +15,7 @@
 import React, { Fragment, useEffect } from 'react';
 
 import ModalsStateProvider from '../../../../contextStore/ModalsStateProvider';
-import ROUTING_PATH_NAMES from '../../../../constants/routingPathNames';
+import ROUTING_PATH_NAMES from '../../../../helpers/structs/routingPathNames';
 import FormScheduleModalProvider from '../../../../contextStore/FormScheduleModalProvider';
 
 const CookiesNotification = React.lazy(() => import('../../../layouts/CookiesNotification/CookiesNotification'));
