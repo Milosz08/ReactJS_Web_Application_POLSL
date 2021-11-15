@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import axiosInstance from '../helpers/request';
+import axiosInstance from '../helpers/misc/request';
 
 /**
  * Interface that defines the date types in the object.
