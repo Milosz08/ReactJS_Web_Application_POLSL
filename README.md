@@ -19,6 +19,9 @@ This application was created to provide comprehensive information to students on
 ## Redux state management
 This application uses an extended system to handle state: "Redux". I opted for this system because it is extensible, stable, and relatively fast compared to the ContextAPI offered by ReactJS (ContextAPI was also used in the application, but it is only used to distribute state between up to a few components).
 
+## Animations
+Modal show/hide and main page slider animations with some rest of minor animations made with [React GSAP Animation Library](https://greensock.com/gsap/).
+
 ## Custom CMS (Content Management System)
 I created my own CMS for this application written fully in TypeScript. It was a big challenge for me because I was creating such a system for the first time and it may not be perfect, but it works perfectly for its purposes.
 
