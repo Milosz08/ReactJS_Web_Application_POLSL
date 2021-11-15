@@ -58,15 +58,18 @@ class ConvertTimeUTC {
     };
 
     public getDayPolishName(): string {
-        return DAYS.find((day: { id: number, name: string }): {} => day.id === this._day)!.name;
+        const day = DAYS.find((day: { id: number, name: string }): {} => day.id === this._day);
+        return Boolean(day) ? day!.name : '';
     };
 
     public getDayEnglishName(): string {
-        return STATIC_DAYS.find((day: { id: number, name: string, eng: string }): {} => day.id === this._day - 1)!.eng;
+        const dayEng = STATIC_DAYS.find((day: { id: number, name: string, eng: string }): {} => day.id === this._day - 1);
+        return Boolean(dayEng) ? dayEng!.eng : '';
     };
 
     public getMonthPolishName(): string {
-        return MONTHS.find((month: { id: number, paraphrase: string }) => month.id === this._currTime.getMonth())!.paraphrase;
+        const month = MONTHS.find((month: { id: number, paraphrase: string }) => month.id === this._currTime.getMonth());
+        return Boolean(month) ? month!.paraphrase : '';
     };
 
     public getOneDateElm(element: DATE_ELEMENTS): string {
