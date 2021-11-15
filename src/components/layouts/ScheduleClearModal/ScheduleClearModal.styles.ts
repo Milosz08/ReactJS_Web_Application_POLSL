@@ -39,7 +39,7 @@ export const ScheduleClearModalSections = styled.div`
 
 export const MdSettingsBackupRestoreIconComponent = styled(MdSettingsBackupRestore)`
     font-size: 5rem;
-    color: var(--greenColor);
+    color: var(--orangeColor);
     margin: 20px 0;
 `;
 

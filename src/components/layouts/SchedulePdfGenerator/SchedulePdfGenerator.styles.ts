@@ -22,6 +22,9 @@ export const SchedulePdfGeneratorContainer = styled.section`
 
 export const SchedulePdfGeneratorWrapper = styled.article`
     ${StandardSafetyAreaWrapper()};
+    @media only screen and (max-width: 1250px) {
+        margin-bottom: 0;
+    }
 `;
 
 export const SchedulePdfGeneratorButtonContainer = styled.div`

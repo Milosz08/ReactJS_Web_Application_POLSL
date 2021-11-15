@@ -22,6 +22,7 @@ import {
 
 export const ScheduleTypeManagementContainer = styled.section`
     ${StandardContainer()};
+    margin-bottom: 40px;
 `;
 
 export const ScheduleTypeManagementWrapper = styled.article`

@@ -38,7 +38,7 @@ export const ScheduleSaveModalSections = styled.div`
 
 export const BiCheckDoubleIconComponent = styled(BiCheckDouble)`
     font-size: 6rem;
-    color: var(--greenColor);
+    color: var(--orangeColor);
     margin: 20px 0;
 `;
 
