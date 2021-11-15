@@ -12,6 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
+import * as React from 'react';
 import { createRef, useEffect, useState } from 'react';
 
 /**
@@ -19,7 +20,7 @@ import { createRef, useEffect, useState } from 'react';
  *
  * @param length { number } - number of references to be generated.
  */
-const useMultipleRef = (length: number) => {
+const useMultipleRef = (length: number): React.MutableRefObject<any>[] => {
 
     const [ elRefs, setElRefs ] = useState([]);
 
