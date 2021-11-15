@@ -16,28 +16,32 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 
-import MainStoreProvider from '../../contextStore/MainStoreProvider';
-import CookiesObjectsProvider from '../../contextStore/CookiesObjectsProvider';
-import LoginSessionProvider from '../../contextStore/LoginSessionProvider';
-import GlobalModalsStateProvider from '../../contextStore/GlobalModalsStateProvider';
+import { Provider } from 'react-redux';
+import reduxStore from '../../redux/reduxStore';
 
-import './../../constants/fontAwesomeInject';
-import LoadingSuspense from '../layouts/LoadingSuspense/LoadingSuspense';
+import GlobalStyle from '../../styles/global.styles';
+import './../../constants/fontAwesomeInject';  // to remove
 
+const LoadingSuspense = React.lazy(() => import('../layouts/LoadingSuspense/LoadingSuspense'));
+const MainStoreProvider = React.lazy(() => import('../../contextStore/MainStoreProvider'));
+const CookiesObjectsProvider = React.lazy(() => import('../../context/cookiesContext/CookiesObjectsProvider'));
+const ScrollToTop = React.lazy(() => import('../../helpers/componentsAndMiddleware/ScrollToTop'));
+const GlobalModalsStateProvider = React.lazy(() => import('../../contextStore/GlobalModalsStateProvider'));
 const GotoTopButton = React.lazy(() => import('../layouts/GotoTopButton/GotoTopButton'));
-const ScrollToTop = React.lazy(() => import('../../helpers/ScrollToTop'));
+const LoginSessionProvider = React.lazy(() => import('../../contextStore/LoginSessionProvider'));
+const SessionEndModal = React.lazy(() => import('../layouts/SessionEndModal/SessionEndModal'));
+const SessionSequencer = React.lazy(() => import('../layouts/SessionSequencer/SessionSequencer'));
 const Page = React.lazy(() => import('./Page'));
 const DevToolsInfo = React.lazy(() => import('../layouts/DevToolsInfo/DevToolsInfo'));
 const Footer = React.lazy(() => import('../layouts/Footer/Footer'));
-const CredentialSequencers = React.lazy(() => import('../layouts/CredentialsSequencers/CredentialSequencers'));
-const SessionEndModal = React.lazy(() => import('../layouts/SessionEndModal/SessionEndModal'));
 
 /**
- * @details Main component responsible for rendering the entire application in a root element.
+ * Main component responsible for rendering the entire application in a root element.
  */
-const App = (): JSX.Element => {
-    return (
+const App = (): JSX.Element => (
+    <Provider store = {reduxStore}>
         <Suspense fallback = {<LoadingSuspense/>}>
+            <GlobalStyle/>
             <MainStoreProvider>
                 <CookiesProvider>
                     <CookiesObjectsProvider>
@@ -47,7 +51,7 @@ const App = (): JSX.Element => {
                                 <GotoTopButton/>
                                 <LoginSessionProvider>
                                     <SessionEndModal/>
-                                    <CredentialSequencers/>
+                                    <SessionSequencer/>
                                     <Page/>
                                 </LoginSessionProvider>
                                 <DevToolsInfo/>
@@ -58,7 +62,7 @@ const App = (): JSX.Element => {
                 </CookiesProvider>
             </MainStoreProvider>
         </Suspense>
-    );
-}
+    </Provider>
+);
 
 export default App;
