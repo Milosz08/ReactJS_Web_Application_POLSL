@@ -34,7 +34,7 @@ interface PropsProvider {
  * @param handleCookie { any } - function which suppourt the Cookies object (add/delete).
  * @param redirectPath { string } - path to move ReactRouter.
  * @param Component - React Component to render (page).
- * @param rest - rest of the parameters passed to inherited components.
+ * @param rest - rest of the parameters passed to inherited componentsAndMiddleware.
  */
 const ProtectedLoginRoute: React.FC<PropsProvider | any> = ({
     auth, setAuth, handleCookie, redirectPath, component: Component, ...rest

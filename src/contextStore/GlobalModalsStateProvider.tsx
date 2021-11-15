@@ -47,7 +47,7 @@ export interface GlobalModalsStateTypes {
 export const GlobalModalsStateContext = createContext<Partial<GlobalModalsStateTypes>>({});
 
 /**
- * @details Store component for global modals (saving schedule preferences to Cookie object, notification of end of
+ * @details Store component for global modals (saving schedule preferencesReduxStore to Cookie object, notification of end of
  *          active session time, etc.).
  *
  * @param children { React.ReactNode } - all nodes of the virtual DOM React tree covered by the Provider.

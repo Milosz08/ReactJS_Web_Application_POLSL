@@ -15,10 +15,10 @@
 import axios from 'axios';
 
 /**
- * @details Function that sets a prefix for the API. Fixed value for the local server.
+ * Function sets a prefix for the API. Fixed value for the local server.
  */
 const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'https://localhost:3000/api',
+    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8080/api',
 });
 
 export default axiosInstance;
