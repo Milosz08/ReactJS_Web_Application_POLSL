@@ -22,7 +22,7 @@ import reduxStore from '../../redux/reduxStore';
 import GlobalStyle from '../../styles/global.styles';
 import './../../constants/fontAwesomeInject';  // to remove
 
-const LoadingSuspense = React.lazy(() => import('../layouts/LoadingSuspense/LoadingSuspense'));
+import LoadingSuspense from '../layouts/LoadingSuspense/LoadingSuspense';
 const MainStoreProvider = React.lazy(() => import('../../contextStore/MainStoreProvider'));
 const CookiesObjectsProvider = React.lazy(() => import('../../context/cookiesContext/CookiesObjectsProvider'));
 const ScrollToTop = React.lazy(() => import('../../helpers/componentsAndMiddleware/ScrollToTop'));
