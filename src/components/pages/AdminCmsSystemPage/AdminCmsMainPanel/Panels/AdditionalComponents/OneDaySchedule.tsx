@@ -18,7 +18,6 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import classnames from 'classnames';
 
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
-import { SubjectsProvider } from '../../../../../layouts/Subjects/Subjects';
 
 const {
     modifyElement, deleteElement, addNewRecord, listNumber, sortById, listSorting, infoIcon, recordsNotExist
@@ -33,7 +32,7 @@ const {
  */
 interface PropsProvider {
     dayStr: string;
-    filteredAllSubjects: SubjectsProvider[];
+    filteredAllSubjects: any[];
 }
 
 /**

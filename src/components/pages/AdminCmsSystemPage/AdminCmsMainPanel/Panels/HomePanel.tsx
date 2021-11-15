@@ -16,7 +16,7 @@ import React, { useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 
-import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../../contextStore/CookiesObjectsProvider';
+import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../../context/cookiesContext/CookiesObjectsProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
 
 const ChangeCredentials = React.lazy(() => import('./AdditionalComponents/ChangeCredentials'));

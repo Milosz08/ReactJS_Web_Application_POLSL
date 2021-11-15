@@ -14,7 +14,7 @@
 
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import CryptoJS, { AES, enc } from 'crypto-js';
-import axiosInstance from '../../../../../../helpers/request';
+import axiosInstance from '../../../../../../helpers/misc/request';
 import { v4 as uuidv4 } from 'uuid';
 import ChangeTypeOfCredentials from './ChangeTypeOfCredentials';
 

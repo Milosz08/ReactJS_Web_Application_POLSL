@@ -13,7 +13,7 @@
  */
 
 import React, { createContext, Dispatch, SetStateAction, useState } from 'react';
-import GROUPS_STATIC from '../constants/allGroups';
+import GROUPS_STATIC from '../helpers/structs/allGroups';
 
 /**
  * Interface defining the type of props values.
@@ -49,7 +49,7 @@ const ScheduleProvider: React.FC<PropsProvider> = ({ children }): JSX.Element =>
 
     const { NORMAL_GROUPS, ENG_GROUPS } = GROUPS_STATIC;
 
-    const [ groupSelected, setGroupSelected ] = useState<string>(NORMAL_GROUPS[0].text);
+    const [ groupSelected, setGroupSelected ] = useState<string>(NORMAL_GROUPS[0]);
     const [ engSelected, setEngSelected ] = useState<string>(ENG_GROUPS[0]);
 
     const [ inputField, setInputField ] = useState<string>('');

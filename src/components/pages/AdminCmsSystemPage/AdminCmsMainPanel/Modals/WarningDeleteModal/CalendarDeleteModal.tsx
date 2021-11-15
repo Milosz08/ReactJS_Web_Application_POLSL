@@ -15,7 +15,7 @@
 import React, { useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
-import axiosInstance from '../../../../../../helpers/request';
+import axiosInstance from '../../../../../../helpers/misc/request';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 import { ModalsStateContext, MODAL_TYPES, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
@@ -92,11 +92,11 @@ const CalendarDeleteModal = (): JSX.Element => {
     return (
         <div className = {classnames(modalContainer, ifModalOpen)}>
             <div className = {classnames(modalWrapper, dangerColorWrapper)}>
-                <UniversalHeader
-                    iconP = {[ 'fas', 'exclamation-triangle' ]}
-                    content = 'Usuwanie Aktywności'
-                    ifCloseButtonVisible = {false}
-                />
+                {/*<UniversalHeader*/}
+                {/*    iconP = {[ 'fas', 'exclamation-triangle' ]}*/}
+                {/*    content = 'Usuwanie Aktywności'*/}
+                {/*    ifCloseButtonVisible = {false}*/}
+                {/*/>*/}
                 <div className = {modalWarningInfo}>
                     Czy na pewno chcesz usunąć {generateInfos().titles.length}
                     {generateInfos().titles.length > 1 ? ' wpisy' : ' wpis'} z dnia {generateInfos().fullDate} o treści:

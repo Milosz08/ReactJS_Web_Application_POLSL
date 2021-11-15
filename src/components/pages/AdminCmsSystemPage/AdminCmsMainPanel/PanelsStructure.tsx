@@ -40,11 +40,11 @@ const PanelsStructure = (): JSX.Element => {
     return (
         <div className = {adminLoginContainer}>
             <div className = {adminLoginWrapper}>
-                <UniversalHeader
-                    iconP = {[ 'fas', 'industry' ]}
-                    content = 'Panel Systemu Zarządzania Treścią'
-                    ifCloseButtonVisible = {false}
-                />
+                {/*<UniversalHeader*/}
+                {/*    iconP = {[ 'fas', 'industry' ]}*/}
+                {/*    content = 'Panel Systemu Zarządzania Treścią'*/}
+                {/*    ifCloseButtonVisible = {false}*/}
+                {/*/>*/}
                 <div className = {cmsSystemContainer}>
                     <AdminCmsLeftNavigation
                         activeNavElm = {activeNavElm}

@@ -20,7 +20,7 @@ import classnames from 'classnames';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../contextStore/ModalsStateProvider';
 
-import DAYS_AND_MONTHS from '../../../../../constants/daysAndMonths';
+import DAYS_AND_MONTHS from '../../../../../helpers/structs/daysAndMonths';
 import { IMPORTANT_VALUES } from '../Modals/WarningDeleteModal/CalendarDeleteModal';
 
 const SearchBox = React.lazy(() => import('./AdditionalComponents/SearchBox'));

@@ -13,7 +13,7 @@
  */
 
 import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
-import axiosInstance from '../helpers/request';
+import axiosInstance from '../helpers/misc/request';
 import MainStoreStateProvider from './MainStoreStateProvider';
 
 /**
@@ -76,41 +76,39 @@ const MainStoreProvider: React.FC<PropsProvider> = ({ children }) => {
         .sort((a: any, b: any) => a.year - b.year);
 
     useEffect(() => {
-        const getAllData = async (): Promise<any> => {
-            const covidData = await axiosInstance.get('/covid-data');
-            const footerForm = await axiosInstance.get('/footer-form');
-            const subjectsData = await axiosInstance.get('/subjects-data');
-            const subjectShedule = await axiosInstance.get('/subject-schedule');
-            const calendarRecord = await axiosInstance.get('/calendar-record');
-            const covidDataFetch = JSON.parse(covidData.request.response);
-            const footerFormFetch = JSON.parse(footerForm.request.response);
-            const subjectsDataFetch = JSON.parse(subjectsData.request.response);
-            const scheduleSubjectsFetch = JSON.parse(subjectShedule.request.response);
-            const calendarRecordsFetch = JSON.parse(calendarRecord.request.response);
+        // const getAllData = async (): Promise<any> => {
+            // const covidData = await axiosInstance.get('/covid-data');
+            // const footerForm = await axiosInstance.get('/footer-form');
+            // const subjectsData = await axiosInstance.get('/subjects-data');
+            // const subjectShedule = await axiosInstance.get('/subject-schedule');
+            // const covidDataFetch = JSON.parse(covidData.request.response);
+            // const footerFormFetch = JSON.parse(footerForm.request.response);
+            // const subjectsDataFetch = JSON.parse(subjectsData.request.response);
+            // const scheduleSubjectsFetch = JSON.parse(subjectShedule.request.response);
 
-            subjectsDataFetch.sort((a: any, b: any) => a.title.localeCompare(b.title));
-            calendarRecordsFetch
-                .sort((a: any, b: any) => a.day - b.day)
-                .sort((a: any, b: any) => a.month - b.month)
-                .sort((a: any, b: any) => a.year - b.year);
+            // subjectsDataFetch.sort((a: any, b: any) => a.title.localeCompare(b.title));
+            // calendarRecordsFetch
+            //     .sort((a: any, b: any) => a.day - b.day)
+            //     .sort((a: any, b: any) => a.month - b.month)
+            //     .sort((a: any, b: any) => a.year - b.year);
 
-            setDataFetchFromServer({
-                covidData: covidDataFetch,
-                footerForms: footerFormFetch,
-                subjectsData: subjectsDataFetch,
-                scheduleSubjects: scheduleSubjectsFetch,
-                calendarRecords: calendarRecordsFetch
-            });
-        }
+            // setDataFetchFromServer({
+            //     covidData: covidDataFetch,
+            //     footerForms: footerFormFetch,
+            //     subjectsData: subjectsDataFetch,
+            //     scheduleSubjects: scheduleSubjectsFetch,
+            //     calendarRecords: []
+            // });
+        // }
 
-        const getScheduleBreak = async (): Promise<any> => {
-            const allDates = await axiosInstance.get(`/last-update/${process.env.REACT_APP_SCHEDULE_ID}`);
-            const allDatesFetch = JSON.parse(allDates.request.response);
-            setSummerBreak(allDatesFetch.scheduleBreak);
-        }
+        // const getScheduleBreak = async (): Promise<any> => {
+        //     const allDates = await axiosInstance.get(`/last-update/${process.env.REACT_APP_SCHEDULE_ID}`);
+        //     const allDatesFetch = JSON.parse(allDates.request.response);
+        //     setSummerBreak(allDatesFetch.scheduleBreak);
+        // }
 
-        getAllData();
-        getScheduleBreak();
+        // getAllData();
+        // getScheduleBreak();
     }, []);
 
     return (

@@ -13,7 +13,7 @@
  */
 
 import React, { useContext } from 'react';
-import axiosInstance from '../../../../../../helpers/request';
+import axiosInstance from '../../../../../../helpers/misc/request';
 import classnames from 'classnames';
 
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
@@ -75,11 +75,11 @@ const SubjectDeleteModal = (): JSX.Element => {
     return (
         <div className = {classnames(modalContainer, ifModalOpen)}>
             <div className = {classnames(modalWrapper, dangerColorWrapper)}>
-                <UniversalHeader
-                    iconP = {[ 'fas', 'exclamation-triangle' ]}
-                    content = 'Usuwanie Przedmiotu'
-                    ifCloseButtonVisible = {false}
-                />
+                {/*<UniversalHeader*/}
+                {/*    iconP = {[ 'fas', 'exclamation-triangle' ]}*/}
+                {/*    content = 'Usuwanie Przedmiotu'*/}
+                {/*    ifCloseButtonVisible = {false}*/}
+                {/*/>*/}
                 <div className = {modalWarningInfo}>
                     Czy na pewno chcesz usunąć przedmiot
                     <p>{getSearchSubjectTitle()}</p>

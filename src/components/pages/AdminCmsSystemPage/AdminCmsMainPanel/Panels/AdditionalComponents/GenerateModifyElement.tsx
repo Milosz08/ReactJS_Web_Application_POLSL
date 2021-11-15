@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import { updateSections } from '../../../../../../redux/apiReduxStore/types';
 
 const DataLastUpdate = React.lazy(() => import('../../../../../layouts/DataLastUpdate/DataLastUpdate'));
 
@@ -39,10 +40,6 @@ const GenerateModifyElement: React.FC<PropsProvider> = ({ dataID, dateText, coun
     return (
         <p>
             Ostatnia modyfikacja {dateText}: {' '}
-            <DataLastUpdate
-                dataID = {dataID}
-                withoutText = {true}
-            />.
             Ilość {countText} w bazie danych: <strong>{arrayLength}</strong>.
         </p>
     );

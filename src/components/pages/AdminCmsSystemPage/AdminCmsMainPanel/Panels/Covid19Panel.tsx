@@ -14,10 +14,10 @@
 
 import React, { useContext, useState } from 'react';
 import classnames from 'classnames';
-import axiosInstance from '../../../../../helpers/request';
+import axiosInstance from '../../../../../helpers/misc/request';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
-import { CovidDataProvider } from '../../../StartPage/CovidInfo/CovidInfo';
+// import { CovidDataProvider } from '../../../StartPage/CovidInfo/CovidInfo';
 
 const { panelContainer, panelActive } = require('./Panels.module.scss');
 const { covidPanelsContainer, sectionWrapper, submitCovidForm, unwriteChangesCSS } = require('./Covid19Panel.module.scss');
@@ -44,13 +44,13 @@ const Covid19Panel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =>
     const { dataFetchFromServer, setDataFetchFromServer } = useContext<Partial<MainStoreProviderTypes>>(MainStoreContext);
     const { covidData } = dataFetchFromServer;
 
-    const [ riskLevels, setRiskLevel ] = useState<number[]>(covidData.map((object: CovidDataProvider) => object.actualRiskNumber));
+    const [ riskLevels, setRiskLevel ] = useState<number[]>(covidData.map((object: any) => object.actualRiskNumber));
     const [ unwriteChanges, setUnwireChanges ] = useState<boolean>(false);
 
     const handleOnChangeInput = (id: string, target: EventTarget & HTMLSelectElement): void => {
         const copy: number[] = [ ...riskLevels ];
-        const dataCopy: CovidDataProvider[] = [ ...covidData ];
-        const findIndex = dataCopy.findIndex((tile: CovidDataProvider) => tile._id === id);
+        const dataCopy: any[] = [ ...covidData ];
+        const findIndex = dataCopy.findIndex((tile: any) => tile._id === id);
         copy[findIndex] = target === '0' ? 0 : parseInt(target.value);
         dataCopy[findIndex].actualRiskNumber = target === '0' ? 0 : parseInt(target.value);
         setDataFetchFromServer({ ...dataFetchFromServer, covidData: dataCopy })
@@ -60,12 +60,12 @@ const Covid19Panel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =>
 
     const handleSubmitChanges = async (): Promise<any> => {
         setUnwireChanges(false);
-        await Promise.all(covidData.map(async (object: CovidDataProvider) => {
+        await Promise.all(covidData.map(async (object: any) => {
             await axiosInstance.put(`covid-data/${object._id}`, object);
         }));
     }
 
-    const generateRiskTiles = covidData.map((tile: CovidDataProvider): JSX.Element => {
+    const generateRiskTiles = covidData.map((tile: any): JSX.Element => {
         const generateOptions = Array.from({ length: MAX_RISK_NUMBER }, (v, s) => s).map(i => (
             <option key = {i}>{i}</option>
         ));

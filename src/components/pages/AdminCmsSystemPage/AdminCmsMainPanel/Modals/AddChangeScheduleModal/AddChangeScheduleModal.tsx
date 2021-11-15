@@ -19,10 +19,9 @@ import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
 import { FormScheduleModalContext, FormScheduleModalTypes } from '../../../../../../contextStore/FormScheduleModalProvider';
 
-import GROUPS_STATIC from '../../../../../../constants/allGroups';
-import axiosInstance from '../../../../../../helpers/request';
+import GROUPS_STATIC from '../../../../../../helpers/structs/allGroups';
+import axiosInstance from '../../../../../../helpers/misc/request';
 import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
-import { SubjectsProvider } from '../../../../../layouts/Subjects/Subjects';
 
 const UniversalHeader = React.lazy(() => import('../../../../../layouts/UniversalHeader/UniversalHeader'));
 const SelectSubjectList = React.lazy(() => import('./SelectSubjectList'));
@@ -67,7 +66,7 @@ const AddChangeScheduleModal = (): JSX.Element => {
     const editExistValue = async (newObject: NewObjectTypes) => {
         const copy = [ ...dataFetchFromServer.scheduleSubjects ];
         await axiosInstance.put(`subject-schedule/${scheduleModal!.id}`, newObject);
-        const index = copy.findIndex((x: SubjectsProvider) => x._id === scheduleModal!.id);
+        const index = copy.findIndex(x => x._id === scheduleModal!.id);
         if (index >= 0) {
             copy[index] = newObject;
             setDataFetchFromServer({ ...dataFetchFromServer, scheduleSubjects: copy });
@@ -88,7 +87,7 @@ const AddChangeScheduleModal = (): JSX.Element => {
         if (!objErrors.hourStartBool && !objErrors.hourStartEnd) {
             const copy = [ ...allSubjects! ];
             const { title, group, type, start, end, room } = scheduleForm!;
-            const findOneSubject = copy.find((subject: SubjectsProvider) => subject.title === scheduleForm!.title);
+            const findOneSubject = copy.find(subject => subject.title === scheduleForm!.title);
             // eslint-disable-next-line array-callback-return
             const findPzePlatform = findOneSubject!.classesPlatforms.find((platform: { [value: string]: string }) => {
                 if (platform.type === '' || platform.type === 'Wszystkie Zajęcia') {
@@ -120,7 +119,7 @@ const AddChangeScheduleModal = (): JSX.Element => {
     const restoreValues = (): void => {
         setScheduleForm!({
             title: allSubjects![0]?.title,
-            group: GROUPS_STATIC.NORMAL_GROUPS[0].field,
+            group: GROUPS_STATIC.NORMAL_GROUPS[0],
             type: allSubjects![0]?.classesPlatforms[0].type,
             room: '',
             start: '',
@@ -132,12 +131,12 @@ const AddChangeScheduleModal = (): JSX.Element => {
     return (
         <div className = {classnames(modalContainer, ifModalOpen)}>
             <div className = {classnames(modalWrapper, modalAddWrapper)}>
-                <UniversalHeader
-                    iconP = {[ 'fas', scheduleModal!.type !== 'edit' ? 'folder-plus' : 'edit' ]}
-                    content = {headerContent}
-                    ifCloseButtonVisible = {false}
-                    addHeaderDayIndicator = {scheduleModal!.day}
-                />
+                {/*<UniversalHeader*/}
+                {/*    iconP = {[ 'fas', scheduleModal!.type !== 'edit' ? 'folder-plus' : 'edit' ]}*/}
+                {/*    content = {headerContent}*/}
+                {/*    ifCloseButtonVisible = {false}*/}
+                {/*    addHeaderDayIndicator = {scheduleModal!.day}*/}
+                {/*/>*/}
                 <form className = {newChangeEntrie} onSubmit = {handleSubmit} noValidate>
                     <SelectSubjectList/>
                     <div className = {formCalendarButtons}>

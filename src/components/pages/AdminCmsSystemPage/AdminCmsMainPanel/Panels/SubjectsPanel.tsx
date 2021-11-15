@@ -19,7 +19,6 @@ import classnames from 'classnames';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../contextStore/ModalsStateProvider';
-import { SubjectsProvider } from '../../../../layouts/Subjects/Subjects';
 
 const SearchBox = React.lazy(() => import('./AdditionalComponents/SearchBox'));
 
@@ -49,7 +48,7 @@ const SubjectsPanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
     const { subjectsData } = dataFetchFromServer;
 
     // eslint-disable-next-line
-    const filteredArray = subjectsData.filter((subject: SubjectsProvider) => {
+    const filteredArray = subjectsData.filter((subject: any) => {
         if (inputField === '') {
             return subject;
         } else if (subject.title.toLocaleLowerCase().includes(inputField.toLocaleLowerCase())) {
@@ -57,7 +56,7 @@ const SubjectsPanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
         }
     });
 
-    const generateSubjectsList = filteredArray.map((subject: SubjectsProvider, index: number) => {
+    const generateSubjectsList = filteredArray.map((subject: any, index: any) => {
         const toggleClass = subject.ifEnd ? subjectEnd : '';
 
         const semestersWithoutBlanc = subject.semesters.filter((sem: string) => sem !== '');

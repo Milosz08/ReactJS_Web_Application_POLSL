@@ -14,7 +14,7 @@
 
 import React, { useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axiosInstance from '../../../../../../helpers/request';
+import axiosInstance from '../../../../../../helpers/misc/request';
 import updateLogsDateAsync from '../../../../../../constants/updateLogsDateAsync';
 
 import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
@@ -38,7 +38,7 @@ const {
 
 /**
  * @details Modal generating component that allows the administrator to enter a new item/edit the item. The component uses
- *          other components that generate the rest of the form inputs and validate the input by the user. The component uses
+ *          other componentsAndMiddleware that generate the rest of the form inputs and validate the input by the user. The component uses
  *          the main store that stores the data downloaded from the API. After sending the form, the component connects to the
  *          API and, based on appropriate methods, updates or adds a new item.
  */
@@ -149,11 +149,11 @@ const AddChangeSubjectModal = (): JSX.Element => {
     return (
         <div className = {`${modalContainer} ${ifModalOpen}`}>
             <div className = {`${modalWrapper} ${modalAddWrapper}`}>
-                <UniversalHeader
-                    iconP = {[ 'fas', subjectModal!.type !== 'edit' ? 'folder-plus' : 'edit' ]}
-                    content = {`Kreator ${subjectModal!.type !== 'edit' ? 'dodawania' : 'edytowania'} przedmiotu`}
-                    ifCloseButtonVisible = {false}
-                />
+                {/*<UniversalHeader*/}
+                {/*    iconP = {[ 'fas', subjectModal!.type !== 'edit' ? 'folder-plus' : 'edit' ]}*/}
+                {/*    content = {`Kreator ${subjectModal!.type !== 'edit' ? 'dodawania' : 'edytowania'} przedmiotu`}*/}
+                {/*    ifCloseButtonVisible = {false}*/}
+                {/*/>*/}
                 <form onSubmit = {handleSubmitForm} noValidate>
                     <div>
                         <div className = {signleInputsContainer}>

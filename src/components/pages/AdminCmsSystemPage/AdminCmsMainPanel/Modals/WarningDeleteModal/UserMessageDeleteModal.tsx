@@ -14,7 +14,7 @@
 
 import React, { useContext } from 'react';
 import classnames from 'classnames';
-import axiosInstance from '../../../../../../helpers/request';
+import axiosInstance from '../../../../../../helpers/misc/request';
 import { insertUserChoice } from '../../Panels/UserMessagePanel';
 
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
@@ -61,11 +61,11 @@ const UserMessageDeleteModal = (): JSX.Element => {
     return (
         <div className = {classnames(modalContainer, ifModalOpen)}>
             <div className = {classnames(modalWrapper, dangerColorWrapper)}>
-                <UniversalHeader
-                    iconP = {[ 'fas', 'exclamation-triangle' ]}
-                    content = 'Usuwanie Wiadomości'
-                    ifCloseButtonVisible = {false}
-                />
+                {/*<UniversalHeader*/}
+                {/*    iconP = {[ 'fas', 'exclamation-triangle' ]}*/}
+                {/*    content = 'Usuwanie Wiadomości'*/}
+                {/*    ifCloseButtonVisible = {false}*/}
+                {/*/>*/}
                 <div className = {modalWarningInfo}>
                     Czy na pewno chcesz usunąć wiadomość typu <strong>{generateInfos().type}</strong> <br/>
                     od użytkownika <strong>{generateInfos().user}</strong> o treści:

@@ -16,9 +16,7 @@ import React, { useContext, useState } from 'react';
 import classnames from 'classnames';
 
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../contextStore/MainStoreProvider';
-import { SubjectsProvider } from '../../../../layouts/Subjects/Subjects';
 
-import { STATIC_DAYS } from '../../../SchedulePage/SchedulePage';
 
 const SearchBox = React.lazy(() => import('./AdditionalComponents/SearchBox'));
 const OneDaySchedule = React.lazy(() => import('./AdditionalComponents/OneDaySchedule'));
@@ -48,7 +46,7 @@ const SchedulePanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
     const { scheduleSubjects } = dataFetchFromServer;
 
     // eslint-disable-next-line array-callback-return
-    const filteredAllSubjects = scheduleSubjects.filter((subject: any): SubjectsProvider | undefined => {
+    const filteredAllSubjects = scheduleSubjects.filter((subject: any) => {
         const title = subject.title.toLocaleLowerCase();
         const type = subject.type.toLocaleLowerCase();
         const start = subject.start.toLocaleLowerCase();
@@ -61,13 +59,13 @@ const SchedulePanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
         }
     });
 
-    const generateFullDaysStructure = STATIC_DAYS.map((day: string) => (
-        <OneDaySchedule
-            key = {day}
-            dayStr = {day}
-            filteredAllSubjects = {filteredAllSubjects}
-        />
-    ));
+    // const generateFullDaysStructure = STATIC_DAYS.map((day: string) => (
+    //     <OneDaySchedule
+    //         key = {day}
+    //         dayStr = {day}
+    //         filteredAllSubjects = {filteredAllSubjects}
+    //     />
+    // ));
 
     return (
         <div className = {classnames(panelContainer, scheduleContainer, classToggle)}>
@@ -77,7 +75,7 @@ const SchedulePanel: React.FC<PropsProvider> = ({ activeNavElm }): JSX.Element =
                 setInputField = {setInputField}
                 placeholderProp = 'Nazwa/typ/godzina'
             />
-            {generateFullDaysStructure}
+            {/*{generateFullDaysStructure}*/}
             <SetScheduleBreak/>
         </div>
     );

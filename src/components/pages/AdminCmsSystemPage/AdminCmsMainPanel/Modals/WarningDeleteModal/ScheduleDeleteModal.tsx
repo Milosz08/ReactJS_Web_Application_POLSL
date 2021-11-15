@@ -14,7 +14,7 @@
 
 import React, { useContext } from 'react';
 import classnames from 'classnames';
-import axiosInstance from '../../../../../../helpers/request';
+import axiosInstance from '../../../../../../helpers/misc/request';
 
 import { MODAL_TYPES, ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
 import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../contextStore/MainStoreProvider';
@@ -59,11 +59,11 @@ const ScheduleDeleteModal = (): JSX.Element => {
     return (
         <div className = {classnames(modalContainer, ifModalOpen)}>
             <div className = {classnames(modalWrapper, dangerColorWrapper)}>
-                <UniversalHeader
-                    iconP = {[ 'fas', 'exclamation-triangle' ]}
-                    content = 'Usuwanie Wiadomości'
-                    ifCloseButtonVisible = {false}
-                />
+                {/*<UniversalHeader*/}
+                {/*    iconP = {[ 'fas', 'exclamation-triangle' ]}*/}
+                {/*    content = 'Usuwanie Wiadomości'*/}
+                {/*    ifCloseButtonVisible = {false}*/}
+                {/*/>*/}
                 <div className = {modalWarningInfo}>
                     Czy na pewno chcesz usunąć przedmiot z dnia {' '}
                     <strong className = {deleteSchedule}>{generateInfos().day}</strong> o nazwie:

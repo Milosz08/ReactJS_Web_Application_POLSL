@@ -13,10 +13,9 @@
  */
 
 import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
-import axiosInstance from '../helpers/request';
+import axiosInstance from '../helpers/misc/request';
 
-import GROUPS_STATIC from '../constants/allGroups';
-import { SubjectsProvider } from '../components/layouts/Subjects/Subjects';
+import GROUPS_STATIC from '../helpers/structs/allGroups';
 
 /**
  * Interface defining the type of props values.
@@ -47,8 +46,8 @@ export interface FormScheduleModalTypes {
     setErrors: Dispatch<SetStateAction<ValidateProvider>>;
     scheduleForm: ScheduleProvider;
     setScheduleForm: Dispatch<SetStateAction<ScheduleProvider>>;
-    allSubjects: SubjectsProvider[];
-    setAllSubjects: Dispatch<SetStateAction<SubjectsProvider[]>>;
+    allSubjects: any[];
+    setAllSubjects: Dispatch<SetStateAction<any[]>>;
     validateAll: () => ValidateProvider;
 }
 
@@ -65,7 +64,7 @@ export const FormScheduleModalContext = createContext<Partial<FormScheduleModalT
  */
 const FormScheduleModalProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
-    const [ allSubjects, setAllSubjects ] = useState<SubjectsProvider[]>([]);
+    const [ allSubjects, setAllSubjects ] = useState<any[]>([]);
     const [ errors, setErrors ] = useState<ValidateProvider>({ hourStart: false, hourEnd: false });
     const [ scheduleForm, setScheduleForm ] = useState<ScheduleProvider>({
         title: '', group: '', room: '', type: '', start: '', end: ''
@@ -100,7 +99,7 @@ const FormScheduleModalProvider: React.FC<PropsProvider> = ({ children }): JSX.E
             subjectsDataFetch.sort((a: any, b: any) => a.title.localeCompare(b.title));
             setScheduleForm({
                 title: subjectsDataFetch[0]?.title,
-                group: GROUPS_STATIC.NORMAL_GROUPS[0].field,
+                group: GROUPS_STATIC.NORMAL_GROUPS[0],
                 type: subjectsDataFetch[0]?.classesPlatforms[0].type,
                 start: '',
                 end: '',

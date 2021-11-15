@@ -24,7 +24,6 @@ import { insertUserChoice } from '../../Panels/UserMessagePanel';
 const {
     modalContainer, modalWrapper, modalAddWrapper, modalOpen, modalAddHeader, modalAddIcon, modalViewWrapper, marginTopAdd
 } = require('./../WarningDeleteModal/WarningDeleteModal.module.scss');
-const { messageModalCloseButton } = require('./../../../../../layouts/CookiesNotification/CookiesNotification.module.scss');
 const { messageInfoContainer, userInfo, messageInfo } = require('./ViewUserMessageModal.module.scss');
 
 /**
@@ -65,7 +64,6 @@ const ViewUserMessagesModal = (): JSX.Element => {
                         Szczegóły wiadomości
                         <aside/>
                         <button
-                            className = {messageModalCloseButton}
                             onClick = {() => setMessageModal!({ ...messageModal!, ifOpen: false })}
                             title = 'Zamknij okno'
                         >

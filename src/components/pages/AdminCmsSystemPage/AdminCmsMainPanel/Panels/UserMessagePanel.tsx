@@ -70,7 +70,7 @@ interface FooterFormProvider {
 
 /**
  * @details A component that renders the panel in the CMS system, which enables viewing and deleting messages from users.
- *          Uses the global stora and will use asynchronous functions to communicate with the API (delete messages
+ *          Uses the global stora and will use asynchronous functionsAndClasses to communicate with the API (delete messages
  *          from the database).
  *
  * @param activeNavElm { number } - currently active panel.

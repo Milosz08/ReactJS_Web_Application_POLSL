@@ -13,7 +13,6 @@
  */
 
 import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
-import './../styles/index.scss';
 
 /**
  * Constant Object defining methods for modals.

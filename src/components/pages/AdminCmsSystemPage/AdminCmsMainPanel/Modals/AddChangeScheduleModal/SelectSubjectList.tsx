@@ -22,7 +22,7 @@ import { MainStoreContext, MainStoreProviderTypes } from '../../../../../../cont
 import { ModalsStateContext, ModalStateType, MODAL_TYPES } from '../../../../../../contextStore/ModalsStateProvider';
 
 import STATIC_OPTIONS from '../../../../../../constants/inputOptions';
-import GROUPS_STATIC, { NormalGroupsTypes } from '../../../../../../constants/allGroups';
+import GROUPS_STATIC from '../../../../../../helpers/structs/allGroups';
 
 const TimeInputsModal = React.lazy(() => import('./TimeInputsModal'));
 
@@ -71,7 +71,7 @@ const SelectSubjectList = (): JSX.Element => {
 
     const generateGroupsOptions = () => {
         if (scheduleForm!.title?.toLocaleLowerCase() !== 'język angielski') {
-            const generateOptions = NORMAL_GROUPS.map((group: NormalGroupsTypes) => (
+            const generateOptions = NORMAL_GROUPS.map((group: any) => (
                 <option
                     value = {group.field}
                     key = {group.field}
@@ -113,7 +113,7 @@ const SelectSubjectList = (): JSX.Element => {
                 } else if (scheduleModal!.type === MODAL_TYPES.ADD) {
                     setScheduleForm!({
                         title: allSubjects![0].title,
-                        group: GROUPS_STATIC.NORMAL_GROUPS[0].field,
+                        group: GROUPS_STATIC.NORMAL_GROUPS[0],
                         type: allSubjects![0].classesPlatforms[0].type,
                         room: '',
                         start: '',
@@ -129,7 +129,7 @@ const SelectSubjectList = (): JSX.Element => {
         if (scheduleForm!.title?.toLocaleLowerCase() === 'język angielski') {
             return GROUPS_STATIC.ENG_GROUPS[0];
         } else {
-            return GROUPS_STATIC.NORMAL_GROUPS[0].field;
+            return GROUPS_STATIC.NORMAL_GROUPS[0];
         }
     }
 

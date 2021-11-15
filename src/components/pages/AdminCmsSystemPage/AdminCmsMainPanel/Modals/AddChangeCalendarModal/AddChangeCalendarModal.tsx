@@ -16,7 +16,7 @@ import React, { useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
-import axiosInstance from '../../../../../../helpers/request';
+import axiosInstance from '../../../../../../helpers/misc/request';
 
 import { ModalsStateContext, ModalStateType } from '../../../../../../contextStore/ModalsStateProvider';
 import { FormCalendarModalContext, FormCalendarModalType } from '../../../../../../contextStore/FormCalendarModalProvider';
@@ -145,11 +145,11 @@ const AddChangeCalendarModal = (): JSX.Element => {
     return (
         <div className = {classnames(modalContainer, ifModalOpen)}>
             <div className = {classnames(modalWrapper, modalAddWrapper)}>
-                <UniversalHeader
-                    iconP = {[ 'fas', calendarModal!.type !== 'edit' ? 'folder-plus' : 'edit' ]}
-                    content = {`Kreator ${calendarModal!.type !== 'edit' ? 'dodawania' : 'edytowania'} wpisu kalendarza`}
-                    ifCloseButtonVisible = {false}
-                />
+                {/*<UniversalHeader*/}
+                {/*    iconP = {[ 'fas', calendarModal!.type !== 'edit' ? 'folder-plus' : 'edit' ]}*/}
+                {/*    content = {`Kreator ${calendarModal!.type !== 'edit' ? 'dodawania' : 'edytowania'} wpisu kalendarza`}*/}
+                {/*    ifCloseButtonVisible = {false}*/}
+                {/*/>*/}
                 <form className = {newChangeEntrie} onSubmit = {handleSubmit} noValidate>
                     <div className = {dateInputsContainer}>
                         <input
