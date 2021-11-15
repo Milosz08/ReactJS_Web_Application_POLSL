@@ -18,6 +18,7 @@ import { InfiniteLoadVectorUse, InifiteLoadVector, LoadingSystemAnimationContain
 
 interface PropsProvider {
     hideAuth: boolean;
+    content?: string;
 }
 
 /**
@@ -26,7 +27,7 @@ interface PropsProvider {
  *
  * @param ifOpen { boolean } - props deciding whether to show the loading animation.
  */
-const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth }): JSX.Element => (
+const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth, content }): JSX.Element => (
     <LoadingSystemAnimationContainer
         ifActive = {hideAuth}
     >
@@ -41,7 +42,7 @@ const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth }): JSX.Elem
                 strokeDashoffset = '6713px'
             />
         </InifiteLoadVector>
-        Logowanie do systemu...
+        {content ? content : 'Logowanie do systemu...'}
     </LoadingSystemAnimationContainer>
 );
 

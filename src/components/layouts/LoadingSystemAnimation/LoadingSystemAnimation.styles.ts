@@ -14,11 +14,11 @@
 
 import styled from 'styled-components';
 
-export const LoadingSystemAnimationContainer = styled('div')<{ ifActive: boolean }>`
+export const LoadingSystemAnimationContainer = styled('div')<{ ifActive: boolean, ifMargin?: boolean }>`
     position: relative;
-    min-height: 500px;
+    min-height: ${props => props.ifMargin ? 500 : 100}px;
     width: var(--widthVertical);
-    margin-top: 200px;
+    margin-top: ${props => props.ifMargin ? 200 : 0}px;
     display: ${props => props.ifActive ? 'flex' : 'none'};
     flex-direction: column;
     justify-content: center;
@@ -26,6 +26,9 @@ export const LoadingSystemAnimationContainer = styled('div')<{ ifActive: boolean
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--navyBlueColor);
+    @media only screen and (max-width: 1250px) {
+        width: 100%;
+    }
 `;
 
 export const InifiteLoadVector = styled.svg`
