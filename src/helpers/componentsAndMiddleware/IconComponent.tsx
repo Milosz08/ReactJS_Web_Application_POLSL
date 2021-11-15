@@ -20,8 +20,8 @@ import * as AntDesignIcons from "react-icons/ai";
 import * as BoxIcons from 'react-icons/bi';
 import * as IonIcons from 'react-icons/io';
 import * as MaterialDesignIcons from 'react-icons/md';
-
-//import { MdCheckBoxOutlineBlank } from 'react-icons/all';
+import * as SimpleIcons from 'react-icons/si';
+import * as VSCodeIcons from 'react-icons/vsc';
 
 export const IconFamilies = {
     FontAwesomeIcons,
@@ -29,12 +29,16 @@ export const IconFamilies = {
     AntDesignIcons,
     BoxIcons,
     IonIcons,
+    SimpleIcons,
+    VSCodeIcons
 }
 
 export enum IconFamiliesType {
     MaterialDesignIcons = 'MaterialDesignIcons',
     FontAwesomeIcons = 'FontAwesomeIcons',
     AntDesignIcons = 'AntDesignIcons',
+    VSCodeIcons = 'VSCodeIcons',
+    SimpleIcons = 'SimpleIcons',
     BoxIcons = 'BoxIcons',
     IonIcons = 'IonIcons',
 }
