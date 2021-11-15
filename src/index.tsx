@@ -14,29 +14,20 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.scss';
+
 import App from './components/router/App';
+
+import { gsap } from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import 'core-js';
 
-/**
- * Forcing the scroll at position X: 0, Y: 0 every time you reload.
- */
-window.onbeforeunload = () => window.scrollTo(0, 0);
+import ForeunloadFunctions from './helpers/functionsAndClasses/foreunloadFunctions';
 
-/**
- * Turning off the animation while resizing the browser window.
- */
-let resizeTimer: NodeJS.Timeout;
-window.addEventListener('resize', (): void => {
-    document.body.classList.add('stopTransitions');
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout((): void => {
-        document.body.classList.remove('stopTransitions');
-    }, 400)
-});
+ForeunloadFunctions.disableAnimationsOnResize();
+ForeunloadFunctions.setScrollPositionToZero();
 
-/**
- * @details Render entire application.
- */
+gsap.registerPlugin(ScrollTrigger);
+gsap.config({ nullTargetWarn: false });
+
 ReactDOM.render(<App/>, document.getElementById('root'));
