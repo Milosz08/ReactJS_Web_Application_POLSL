@@ -35,7 +35,7 @@ const ScheduleSaveButton: React.FC = (): JSX.Element => {
     const { setCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
     const { chooseGroups }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
-    const { groupSelection, engGroupSelection, skGroupSelection } = COOKIES_OBJECT;
+    const { groupSelection } = COOKIES_OBJECT;
     const { normalGroup, engGroup, skGroup } = chooseGroups;
 
     const dispatcher = useDispatch();
@@ -48,9 +48,7 @@ const ScheduleSaveButton: React.FC = (): JSX.Element => {
 
     const handleSaveButton = (): void => {
         window.scrollTo(0, 0);
-        createRememberCookie(normalGroup, groupSelection);
-        createRememberCookie(engGroup, engGroupSelection);
-        createRememberCookie(skGroup, skGroupSelection);
+        createRememberCookie(`${normalGroup},${engGroup},${skGroup}`, groupSelection);
         dispatcher(toggleSaveScheduleModal(true));
     };
 

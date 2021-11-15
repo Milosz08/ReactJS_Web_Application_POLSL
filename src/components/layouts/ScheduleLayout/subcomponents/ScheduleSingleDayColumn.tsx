@@ -41,9 +41,9 @@ const ScheduleSingleDayColumn: React.FC<PropsProvider> = ({ day }): JSX.Element 
 
     const activeHighlighter: boolean = date.day.toLocaleLowerCase() === day.name.toLocaleLowerCase();
 
-    const generateTiles: JSX.Element[] = filteredArray.map(subject => (
+    const generateTiles: JSX.Element[] = filteredArray.map((subject, idx) => (
         <ScheduleSingleDaySingleTile
-            key = {subject.title}
+            key = {idx}
             tile = {subject}
             ifActive = {activeHighlighter}
         />
