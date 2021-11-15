@@ -33,17 +33,21 @@ const useModalShowHide = (modalListener: boolean, movePX: number = 30) => {
     const isMount = useIsMount();
 
     useEffect(() => {
+        const timeline = tl.current;
         if (modal && background && !isMount) {
             if (modalListener) {
-                tl.current
+                timeline
                     .to(background['current'], { autoAlpha: 1 })
                     .fromTo(modal['current'], { y: movePX }, { autoAlpha: 1, y: 0 });
             } else {
-                tl.current
+                timeline
                     .to(modal['current'], { autoAlpha: 0, y: Number(`-${movePX}`) })
                     .to(background['current'], { autoAlpha: 0 })
             }
         }
+        return () => {
+            timeline.kill();
+        };
     }, [ background, isMount, modal, modalListener, movePX ]);
 
     return [ modal, background ];
