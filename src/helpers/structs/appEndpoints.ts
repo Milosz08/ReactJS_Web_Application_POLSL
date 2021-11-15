@@ -31,4 +31,5 @@ export enum API_ENDPOINTS {
     SUBJECTS_ELMS = '/subject-data',
     SCHEDULE_SUBJECTS = '/schedule-subjects',
     CALENDAR_RECORDS = '/calendar',
+    AUTHENTICATIONS = '/authentications',
 }
