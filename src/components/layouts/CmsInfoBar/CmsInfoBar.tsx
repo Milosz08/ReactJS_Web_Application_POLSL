@@ -16,9 +16,9 @@ import * as React from 'react';
 
 import { CmsInfoBarContainer, CmsInfoBarWrapper, CmsMainInfosContainer } from './CmsInfoBar.styles';
 
-import CmsInfoBarTitle from './subcomponents/CmsInfoBarTitle';
-import CmsSessionInfo from './subcomponents/CmsSessionInfo';
-import CmsInfoLogoutButton from './subcomponents/CmsInfoLogoutButton';
+const CmsInfoBarTitle = React.lazy(() => import('./subcomponents/CmsInfoBarTitle'));
+const CmsSessionInfo = React.lazy(() => import('./subcomponents/CmsSessionInfo'));
+const CmsInfoLogoutButton = React.lazy(() => import('./subcomponents/CmsInfoLogoutButton'));
 
 /**
  * Component that generates the status bar of the administrator's session in the CMS (active session
