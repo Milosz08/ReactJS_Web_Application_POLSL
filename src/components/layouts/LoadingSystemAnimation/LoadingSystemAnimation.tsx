@@ -18,6 +18,7 @@ import { InfiniteLoadVectorUse, InifiteLoadVector, LoadingSystemAnimationContain
 
 interface PropsProvider {
     hideAuth: boolean;
+    ifMargin?: boolean;
     content?: string;
 }
 
@@ -27,9 +28,10 @@ interface PropsProvider {
  *
  * @param ifOpen { boolean } - props deciding whether to show the loading animation.
  */
-const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth, content }): JSX.Element => (
+const LoadingSystemAnimation: React.FC<PropsProvider> = ({ hideAuth, ifMargin, content }): JSX.Element => (
     <LoadingSystemAnimationContainer
         ifActive = {hideAuth}
+        ifMargin = {ifMargin}
     >
         <InifiteLoadVector viewBox = '-2000 -1000 4000 2000'>
             <path

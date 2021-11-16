@@ -18,7 +18,6 @@ export const LoadingSystemAnimationContainer = styled('div')<{ ifActive: boolean
     position: relative;
     min-height: ${props => props.ifMargin ? 500 : 100}px;
     width: var(--widthVertical);
-    margin-top: ${props => props.ifMargin ? 200 : 0}px;
     display: ${props => props.ifActive ? 'flex' : 'none'};
     flex-direction: column;
     justify-content: center;
