@@ -31,7 +31,7 @@ const ROUTING_PATH_NAMES: RoutingTypes = {
     CALENDAR_PAGE: `${_DEFAULT_PREFIX}Kalendarz Studenta`,
     AISD_PAGE: `${_DEFAULT_PREFIX}Pomoce Naukowe`,
     LOGIN_PAGE: `${_DEFAULT_PREFIX}Logowanie do Systemu`,
-    CMS_LOGIN_PAGE: `${_DEFAULT_PREFIX}Logowanie do Panelu CMS`,
+    CMS_LOGIN_PAGE: `${_DEFAULT_PREFIX}Logowanie do Panelu WCMS`,
     CMS_PANEL_PAGE: `${_DEFAULT_PREFIX}Panel Administratora`,
     COOKIES_POLICY: `${_DEFAULT_PREFIX}Polityka Prywatności`,
     SUBJECT_PASS_PAGE: `${_DEFAULT_PREFIX}Przedmioty i Zaliczenia`,
