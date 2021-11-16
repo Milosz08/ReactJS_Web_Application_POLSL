@@ -48,7 +48,6 @@ const SessionEndModal = (): JSX.Element => {
         setTimeout(() => {
             dispatcher(changeAdminLoggedStatus(false));
             removeCookie!(COOKIES_OBJECT.adminSession);
-            removeCookie!(COOKIES_OBJECT.credentialsLevel);
         }, 1500);
     };
 
