@@ -12,18 +12,17 @@
  * governing permissions and limitations under the license.
  */
 
-import loggedTypes from './types';
 import sessionTypes from './types';
-import { AUTH_IDENTITIES } from './initialState';
+import { ROLES } from '../../helpers/functionsAndClasses/LoginValidator';
 
 interface ReturnedToReducer {
-    type: loggedTypes;
+    type: sessionTypes;
     payload?: {
         [name: string]: string | boolean | number;
     };
 }
 
-export const changeAdminLoggedStatus = (status: boolean, role = AUTH_IDENTITIES.UNDEFINED): ReturnedToReducer => ({
+export const changeAdminLoggedStatus = (status: boolean, role = ROLES.UNDEFINED): ReturnedToReducer => ({
     type: sessionTypes.CHANGE_ADMIN_LOGGED_STATUS,
     payload: {
         status, role

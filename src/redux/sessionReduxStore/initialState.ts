@@ -12,17 +12,12 @@
  * governing permissions and limitations under the license.
  */
 
-export enum AUTH_IDENTITIES {
-    USER= 'użytkownik',
-    MODERATOR = 'moderator',
-    ADMIN = 'administrator',
-    UNDEFINED = 'niezdefiniowany'
-}
+import { ROLES } from '../../helpers/functionsAndClasses/LoginValidator';
 
 export interface SessionInitialTypes {
     adminAuthStatus: {
         logged: boolean;
-        identity: AUTH_IDENTITIES;
+        identity: ROLES;
     }
     userLoggedStatus: boolean;
     sessionInfo: {
@@ -34,7 +29,7 @@ export interface SessionInitialTypes {
 export const InitialState: SessionInitialTypes = {
     adminAuthStatus: {
         logged: false,
-        identity: AUTH_IDENTITIES.UNDEFINED,
+        identity: ROLES.UNDEFINED,
     },
     userLoggedStatus: false,
     sessionInfo: {
