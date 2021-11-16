@@ -64,9 +64,11 @@ const AdminCmsLoginForm: React.FC<PropsProvider> = ({ callback, visible }): JSX.
                     }
                 });
             }
-            login.current.value = '';
-            password.current.value = '';
-            token.current.value = '';
+            if (login.current && password.current && token.current) {
+                login.current.value = '';
+                password.current.value = '';
+                token.current.value = '';
+            }
         });
     };
 
