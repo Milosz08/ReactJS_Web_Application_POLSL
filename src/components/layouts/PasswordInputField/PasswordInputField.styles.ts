@@ -19,6 +19,7 @@ import { StandardTextInput } from '../../../styles/mixins.styles';
 export const PasswordInputFieldContainer = styled.div`
     position: relative;
     width: 100%;
+    margin: 5px 0;
 `;
 
 export const PasswordInputFieldInput = styled(input_rs)<{ ifError: boolean }>`

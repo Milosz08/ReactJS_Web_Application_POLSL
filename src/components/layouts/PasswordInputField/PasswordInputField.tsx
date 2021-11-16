@@ -23,6 +23,7 @@ interface PropsProvider {
     ifError: boolean;
     grabber: any;
     changeCallback: () => void;
+    placeholder?: string;
 }
 
 /**
@@ -32,8 +33,9 @@ interface PropsProvider {
  * @param ifError { boolean } - error flag indicator.
  * @param grabber { React.MutableRefObject<any> } - react referential JSX grabber for HTML element.
  * @param changeCallback { () => void } - callback listener function input on every change.
+ * @param placeholder { string } - optional placeholder value, different of "Hasło".
  */
-const PasswordInputField: React.FC<PropsProvider> = ({ ifError, grabber, changeCallback }): JSX.Element => {
+const PasswordInputField: React.FC<PropsProvider> = ({ ifError, grabber, changeCallback, placeholder }): JSX.Element => {
 
     const [ icon, setIcon ] = useState<string>('MdVisibility');
     const [ visibility, setVisibility ] = useState<boolean>(false);
@@ -49,7 +51,7 @@ const PasswordInputField: React.FC<PropsProvider> = ({ ifError, grabber, changeC
         <PasswordInputFieldContainer>
             <PasswordInputFieldInput
                 type = {visibility ? 'text' : 'password'}
-                placeholder = 'Hasło'
+                placeholder = {placeholder ? placeholder : 'Hasło'}
                 ifError = {ifError}
                 onChange = {changeCallback}
                 ref = {grabber}
