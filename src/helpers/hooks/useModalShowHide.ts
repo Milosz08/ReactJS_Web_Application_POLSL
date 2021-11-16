@@ -45,9 +45,6 @@ const useModalShowHide = (modalListener: boolean, movePX: number = 30) => {
                     .to(background['current'], { autoAlpha: 0 })
             }
         }
-        return () => {
-            timeline.kill();
-        };
     }, [ background, isMount, modal, modalListener, movePX ]);
 
     return [ modal, background ];
