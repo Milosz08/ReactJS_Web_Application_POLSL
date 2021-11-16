@@ -21,6 +21,7 @@ import { SessionInitialTypes } from '../../../../redux/sessionReduxStore/initial
 
 import { CmsHamburgerMenuElement } from '../CmsInfoBar.styles';
 import useCountingFromUpToDown from '../../../../helpers/hooks/useCountingFromUpToDown';
+import { RANGS_NAMES } from '../../../../helpers/structs/cmsSystem.config';
 
 /**
  * Component responsible for show basic CMS user session info (auth level, and session estimated time).
@@ -33,7 +34,7 @@ const CmsSessionInfo: React.FC = (): JSX.Element => {
     return (
         <Fragment>
             <CmsHamburgerMenuElement>
-                Zalogowany jako: <strong>{adminAuthStatus.identity}</strong>
+                Zalogowany jako: <strong>{RANGS_NAMES[adminAuthStatus.identity]}</strong>
             </CmsHamburgerMenuElement>
             <CmsHamburgerMenuElement>
                 Pozostały czas sesji: <strong>{upToDown}</strong>
