@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import { CalendarContentTypes } from '../redux/apiReduxStore/dataTypes';
+import { CalendarContentTypes } from '../../redux/apiReduxStore/dataTypes';
 
 export interface SeparateCalendarTiles {
     _id: string,

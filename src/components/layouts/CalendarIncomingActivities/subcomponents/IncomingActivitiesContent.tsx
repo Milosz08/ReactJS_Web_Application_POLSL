@@ -17,7 +17,7 @@ import { Fragment } from 'react';
 
 import { DAYS_INCOME } from '../../../../helpers/structs/calendar.config';
 import ConvertTimeUTC from '../../../../helpers/functionsAndClasses/convertTimeUTC';
-import SeparatingSingleCalendarTiles from '../../../../helpers/separatingCalendarRecords';
+import SeparatingSingleCalendarTiles from '../../../../helpers/functionsAndClasses/separatingCalendarRecords';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
