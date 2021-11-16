@@ -48,7 +48,8 @@ const CookiesObjectsProvider: React.FC<PropsProvider> = ({ children }: PropsProv
         <CookiesObjectsContext.Provider
             value = {{
                 cookie, setCookie, removeCookie
-            }}>
+            }}
+        >
             {children}
         </CookiesObjectsContext.Provider>
     );
