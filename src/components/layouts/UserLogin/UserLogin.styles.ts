@@ -27,19 +27,21 @@ export const UserLoginContainer = styled.section`
     }
 `;
 
-export const UserLoginForm = styled('form')<{ ifVisible: boolean }>`
-    display: ${props => props.ifVisible ? 'block' : 'none'};
-    width: 300px;
-    @media only screen and (max-width: 300px) {
-        width: 100%;
+export const UniversalLoginForm = styled('form')<{ ifVisible: boolean }>`
+    display: ${props => props.ifVisible ? 'flex' : 'none'};
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    @media only screen and (max-width: 375px) {
+        width: calc(100%);
     }
 `;
 
-export const UserCredentialsInput = styled(input_rs)<{ ifError: boolean }>`
+export const UniversalCredentialsInput = styled(input_rs)<{ ifError: boolean }>`
     ${props => StandardTextInput({ _ifError: props.ifError, _paddingRight: 50, _spaceUpDown: 12 })};
     font-size: 1.2rem;
     padding: 8px 11px 10px 15px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 `;
 
 export const UserLoginSubmitButton = styled(button_rs)`
