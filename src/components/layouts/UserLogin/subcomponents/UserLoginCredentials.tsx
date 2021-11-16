@@ -16,9 +16,9 @@ import * as React from 'react';
 import { useState } from 'react';
 
 import useMultipleRef from '../../../../helpers/hooks/useMultipleRef';
-import UserLoginValidator, { ROLES } from '../../../../helpers/functionsAndClasses/LoginValidator';
+import LoginValidator, { ROLES } from '../../../../helpers/functionsAndClasses/LoginValidator';
 
-import { UserCredentialsInput, UserLoginForm, UserLoginSubmitButton } from '../UserLogin.styles';
+import { UniversalCredentialsInput, UniversalLoginForm, UserLoginSubmitButton } from '../UserLogin.styles';
 
 const PasswordInputField = React.lazy(() => import('../../PasswordInputField/PasswordInputField'));
 
@@ -41,7 +41,7 @@ const UserLoginCredentials: React.FC<PropsProvider> = ({ callback, visible }): J
 
     const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        const validate = new UserLoginValidator(login.current.value, password.current.value, ROLES.USER);
+        const validate = new LoginValidator(login.current.value, password.current.value, ROLES.USER);
         validate.initialise().then(() => {
             const validateFields = validate.get__errorFields();
             const { username: usr, password: psw } = validateFields;
@@ -56,12 +56,12 @@ const UserLoginCredentials: React.FC<PropsProvider> = ({ callback, visible }): J
     };
 
     return (
-        <UserLoginForm
+        <UniversalLoginForm
             onSubmit = {handleSubmitForm}
             noValidate = {true}
             ifVisible = {!visible}
         >
-            <UserCredentialsInput
+            <UniversalCredentialsInput
                 type = 'text'
                 placeholder = 'Login'
                 onChange = {() => setValid({ ...valid, username: false })}
@@ -78,7 +78,7 @@ const UserLoginCredentials: React.FC<PropsProvider> = ({ callback, visible }): J
             >
                 Zaloguj
             </UserLoginSubmitButton>
-        </UserLoginForm>
+        </UniversalLoginForm>
     );
 };
 
