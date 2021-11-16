@@ -51,9 +51,15 @@ class LoginValidator {
 
     private async fetchDBrole(): Promise<any> {
         const { data } = await axiosInstance.get(`${API_ENDPOINTS.AUTHENTICATIONS}/${this._role}`);
-        Object.keys(this._databaseFields).forEach(key => {
-            this._databaseFields[key] = data[key];
-        });
+        if(Boolean(data)) {
+            Object.keys(this._databaseFields).forEach(key => {
+                this._databaseFields[key] = data[key];
+            });
+        } else {
+            Object.keys(this._databaseFields).forEach(key => {
+                this._databaseFields[key] = '';
+            });
+        }
     };
 
     private async checkAllGood() {
