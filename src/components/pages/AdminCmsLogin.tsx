@@ -32,7 +32,7 @@ const AdminCmsLoginElements = React.lazy(() => import('../layouts/AdminCmsLoginE
 const AdminCmsLogin: React.FC = (): JSX.Element => {
 
     usePageTitle(ROUTING_PATH_NAMES.CMS_LOGIN_PAGE);
-    
+
     return (
         <Fragment>
             <CookiesNotification/>
