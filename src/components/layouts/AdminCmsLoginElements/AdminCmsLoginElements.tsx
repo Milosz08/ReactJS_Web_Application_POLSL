@@ -41,10 +41,9 @@ const AdminCmsLoginElements: React.FC = (): JSX.Element => {
 
     const successAuth = (role: ROLES): void => {
         setAsyncAnim(true);
-        dispatcher(changeAdminLoggedStatus(true, role));
         setTimeout(() => {
             setCookie!(COOKIES_OBJECT.adminSession, role);
-            setAsyncAnim(false);
+            dispatcher(changeAdminLoggedStatus(true, role));
         }, 3000);
     };
 
