@@ -19,15 +19,16 @@ import ROUTING_PATH_NAMES from '../structs/routingPathNames';
  * Custom hook responsible for setting custom page title on load.
  *
  * @param title { string } - setting page browser title.
+ * @param redir { string } - re-set page browser title
  */
-const usePageTitle = (title: string): null => {
+const usePageTitle = (title: string, redir: string = ROUTING_PATH_NAMES.START_PAGE): null => {
 
     useEffect(() => {
         document.title = title;
         return () => {
-            document.title = ROUTING_PATH_NAMES.START_PAGE
+            document.title = redir;
         };
-    }, [ title ]);
+    }, [ redir, title ]);
 
     return null;
 };
