@@ -19,6 +19,7 @@ import { Redirect, Route } from 'react-router';
  * Interface defining the type of props values.
  */
 interface PropsProvider {
+    children: React.ReactNode;
     auth: boolean;
     setAuth: (value: boolean) => boolean;
     handleCookie: any;
@@ -29,6 +30,7 @@ interface PropsProvider {
 /**
  * @details Locking page routing, if user/administrator has no authentication.
  *
+ * @param children
  * @param auth { boolean } - information on user/administrator authentication.
  * @param setAuth { (value: boolean) => boolean } - function setting authentication for user/administrator.
  * @param handleCookie { any } - function which suppourt the Cookies object (add/delete).
@@ -37,7 +39,7 @@ interface PropsProvider {
  * @param rest - rest of the parameters passed to inherited componentsAndMiddleware.
  */
 const ProtectedLoginRoute: React.FC<PropsProvider | any> = ({
-    auth, setAuth, handleCookie, redirectPath, component: Component, ...rest
+    children, auth, setAuth, handleCookie, redirectPath, component: Component, ...rest
 }): JSX.Element => {
 
     const renderPathStructure = (props: any) => {
@@ -49,7 +51,12 @@ const ProtectedLoginRoute: React.FC<PropsProvider | any> = ({
     }
 
     return (
-        <Route {...rest} render = {(props: any) => renderPathStructure(props)}/>
+        <Route
+            {...rest}
+            render = {(props: any) => renderPathStructure(props)}
+        >
+            {children}
+        </Route>
     );
 }
 
