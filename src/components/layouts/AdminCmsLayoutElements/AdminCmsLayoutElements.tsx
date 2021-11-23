@@ -13,20 +13,44 @@
  */
 
 import * as React from 'react';
+import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
-import { AdminCmsLayoutElementsContainer, AdminCmsLayoutElementsWrapper } from './AdminCmsLayoutElements.styles';
+import {
+    AdminCmsChangeCredentialsWrapper, AdminCmsLayoutElementsContainer, AdminCmsLayoutElementsWrapper
+} from './AdminCmsLayoutElements.styles';
+
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const AdminCmsLayout = React.lazy(() => import('./subcomponents/AdminCmsLayout'));
+const AdminCmsChangeCredentials = React.lazy(() => import('./subcomponents/AdminCmsChangeCredentials'));
 
 /**
- *
+ * Component responsible for showing all content in main CMS panel page component.
  */
-const AdminCmsLayoutElements: React.FC = (): JSX.Element => {
-    return (
+const AdminCmsLayoutElements: React.FC = (): JSX.Element => (
+    <>
         <AdminCmsLayoutElementsContainer>
             <AdminCmsLayoutElementsWrapper>
-                Admin CMS Layout
+                <UniversalHeader
+                    iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaUsersCog' }}
+                    content = 'System Zarządzania Treścią'
+                    ifCloseButtonVisible = {false}
+                    changeIconSize = '1em'
+                />
+                <AdminCmsLayout/>
             </AdminCmsLayoutElementsWrapper>
         </AdminCmsLayoutElementsContainer>
-    );
-};
+        <AdminCmsLayoutElementsContainer>
+            <AdminCmsChangeCredentialsWrapper>
+                <UniversalHeader
+                    iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaUserShield' }}
+                    content = 'Zmiana Danych Logowania'
+                    ifCloseButtonVisible = {false}
+                    changeIconSize = '.9em'
+                />
+                <AdminCmsChangeCredentials/>
+            </AdminCmsChangeCredentialsWrapper>
+        </AdminCmsLayoutElementsContainer>
+    </>
+);
 
 export default AdminCmsLayoutElements;
