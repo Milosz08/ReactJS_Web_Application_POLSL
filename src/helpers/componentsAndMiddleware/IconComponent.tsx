@@ -22,6 +22,7 @@ import * as IonIcons from 'react-icons/io';
 import * as MaterialDesignIcons from 'react-icons/md';
 import * as SimpleIcons from 'react-icons/si';
 import * as VSCodeIcons from 'react-icons/vsc';
+import * as BootStrapIcons from 'react-icons/bs';
 
 export const IconFamilies = {
     FontAwesomeIcons,
@@ -30,12 +31,14 @@ export const IconFamilies = {
     BoxIcons,
     IonIcons,
     SimpleIcons,
-    VSCodeIcons
+    VSCodeIcons,
+    BootStrapIcons,
 }
 
 export enum IconFamiliesType {
     MaterialDesignIcons = 'MaterialDesignIcons',
     FontAwesomeIcons = 'FontAwesomeIcons',
+    BootStrapIcons = 'BootStrapIcons',
     AntDesignIcons = 'AntDesignIcons',
     VSCodeIcons = 'VSCodeIcons',
     SimpleIcons = 'SimpleIcons',
