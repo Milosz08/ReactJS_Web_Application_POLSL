@@ -23,6 +23,7 @@ import GlobalStyle from '../../styles/global.styles';
 import './../../constants/fontAwesomeInject';  // to remove
 
 import LoadingSuspense from '../layouts/LoadingSuspense/LoadingSuspense';
+
 const MainStoreProvider = React.lazy(() => import('../../contextStore/MainStoreProvider'));
 const CookiesObjectsProvider = React.lazy(() => import('../../context/cookiesContext/CookiesObjectsProvider'));
 const ScrollToTop = React.lazy(() => import('../../helpers/componentsAndMiddleware/ScrollToTop'));
@@ -31,14 +32,14 @@ const GotoTopButton = React.lazy(() => import('../layouts/GotoTopButton/GotoTopB
 const LoginSessionProvider = React.lazy(() => import('../../contextStore/LoginSessionProvider'));
 const SessionEndModal = React.lazy(() => import('../layouts/SessionEndModal/SessionEndModal'));
 const SessionSequencer = React.lazy(() => import('../layouts/SessionSequencer/SessionSequencer'));
-const Page = React.lazy(() => import('./Page'));
+const NonProtectedRoute = React.lazy(() => import('./NonProtectedRoute'));
 const DevToolsInfo = React.lazy(() => import('../layouts/DevToolsInfo/DevToolsInfo'));
 const Footer = React.lazy(() => import('../layouts/Footer/Footer'));
 
 /**
  * Main component responsible for rendering the entire application in a root element.
  */
-const App = (): JSX.Element => (
+const App: React.FC = (): JSX.Element => (
     <Provider store = {reduxStore}>
         <Suspense fallback = {<LoadingSuspense/>}>
             <GlobalStyle/>
@@ -52,7 +53,7 @@ const App = (): JSX.Element => (
                                 <LoginSessionProvider>
                                     <SessionEndModal/>
                                     <SessionSequencer/>
-                                    <Page/>
+                                    <NonProtectedRoute/>
                                 </LoginSessionProvider>
                                 <DevToolsInfo/>
                                 <Footer/>
