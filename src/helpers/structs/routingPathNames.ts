@@ -20,12 +20,14 @@ export interface RoutingTypes {
  * Constant prefix on every PATH name constant.
  */
 const _DEFAULT_PREFIX: string = 'Informatyka | ';
+const _CMS_PREFIX: string = 'Panel CMS | ';
 
 /**
  * An object that stores all dependencies related to title names while
  * rendering subsequent page componentsAndMiddleware.
  */
 const ROUTING_PATH_NAMES: RoutingTypes = {
+
     START_PAGE: `${_DEFAULT_PREFIX}Wydział Elektryczny Politechniki Śląskiej`,
     SCHEDULE_PAGE: `${_DEFAULT_PREFIX}Interaktywny Plan Zajęć`,
     CALENDAR_PAGE: `${_DEFAULT_PREFIX}Kalendarz Studenta`,
@@ -35,6 +37,15 @@ const ROUTING_PATH_NAMES: RoutingTypes = {
     CMS_PANEL_PAGE: `${_DEFAULT_PREFIX}Panel Administratora`,
     COOKIES_POLICY: `${_DEFAULT_PREFIX}Polityka Prywatności`,
     SUBJECT_PASS_PAGE: `${_DEFAULT_PREFIX}Przedmioty i Zaliczenia`,
+
+    COVID_CMS_PAGE: `${_CMS_PREFIX}Modyfikuj Zagrożenia Covid 19`,
+    SUBJECT_CMS_PAGE: `${_CMS_PREFIX}Modyfikuj Przedmioty`,
+    SCHEDULE_CMS_PAGE: `${_CMS_PREFIX}Modyfikuj Plan Zajęć`,
+    CALENDAR_CMS_PAGE: `${_CMS_PREFIX}Modyfikuj Kalendarz`,
+    USERS_MESS_CMS_PAGE: `${_CMS_PREFIX}Wiadomości Użytkowników`,
+    HELPS_CMS_PAGE: `${_CMS_PREFIX}Modyfikuj Pomoce Naukowe`,
+    CONTENT_CMS_PAGE: `${_CMS_PREFIX}Modyfikuj Wpisy`,
+
 } as const;
 
 export default ROUTING_PATH_NAMES;
