@@ -39,6 +39,7 @@ export const AdminCmsLayoutRouterContainter = styled.div`
 `;
 
 export const AdminCmsLayoutRouterSingleTile = styled(button_rs)`
+    position: relative;
     flex-basis: calc(100% / 3 - 40px);
     background-color: var(--lightGrayTint1);
     border-radius: 10px;
@@ -116,4 +117,22 @@ export const CmsTileNavigateArrow = styled.aside`
         border-bottom-width: 2px;
         transition: var(--transitionDuration);
     }
+`;
+
+export const CmsTileNavigateMessageIndicator = styled.span`
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0;
+    top: -25px;
+    right: -25px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--redColor);
+    border: 5px solid var(--cleanWhiteColor);
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: var(--whiteColor);
+    font-weight: 600;
 `;

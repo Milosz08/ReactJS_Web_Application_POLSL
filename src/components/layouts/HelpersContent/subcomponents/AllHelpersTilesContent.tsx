@@ -14,12 +14,12 @@
 
 import * as React from 'react';
 
-import TILES_DATA, { TilesDataTypes } from '../../../../helpers/structs/helpers.config';
-
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
 import { SessionInitialTypes } from '../../../../redux/sessionReduxStore/initialState';
 
+import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
+import { HelpersLinksContentTypes } from '../../../../redux/apiReduxStore/dataTypes';
 import { AllHelpersTilesContainer, HelpersForbiddenSection } from '../HelpersContent.styles';
 
 const SingleHelperTileContent = React.lazy(() => import('./SingleHelperTileContent'));
@@ -29,11 +29,12 @@ const SingleHelperTileContent = React.lazy(() => import('./SingleHelperTileConte
  */
 const AllHelpersTilesContent: React.FC = (): JSX.Element => {
 
+    const { helpersLinks }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
     const { userLoggedStatus }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
 
-    const generateAllTiles = TILES_DATA.map((helper: TilesDataTypes): JSX.Element => (
+    const generateAllTiles = helpersLinks.map((helper: HelpersLinksContentTypes): JSX.Element => (
         <SingleHelperTileContent
-            key = {helper.title}
+            key = {helper.helperTitle}
             tile = {helper}
         />
     ));

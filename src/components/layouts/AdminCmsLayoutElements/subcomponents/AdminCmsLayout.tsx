@@ -18,15 +18,23 @@ import IconComponent, { IconFamiliesType } from '../../../../helpers/componentsA
 import { CMS_ENDPOINTS, FRONT_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
 import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/reduxStore';
+import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
+
 import {
     AdminCmsLayoutRouterContainter, AdminCmsLayoutRouterSingleTile, CmsTileArrowContainter, CmsTileDescription,
-    CmsTileLayoutElement, CmsTileLayoutHeader, CmsTileLayoutHeaderAndIconContainer, CmsTileLayoutIconWrapper, CmsTileNavigateArrow
+    CmsTileLayoutElement, CmsTileLayoutHeader, CmsTileLayoutHeaderAndIconContainer, CmsTileLayoutIconWrapper,
+    CmsTileNavigateArrow, CmsTileNavigateMessageIndicator
 } from '../AdminCmsLayoutElements.styles';
 
 /**
  * Component responsible for generating router links for subpages of CMS panel.
  */
 const AdminCmsLayout: React.FC = (): JSX.Element => {
+
+    const { footerFormMessages }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const findAnyMess = footerFormMessages.filter(message => !Boolean(message.ifClicked)).length;
 
     const elements = CMS_ENDPOINTS.map(endpoint => {
 
@@ -53,12 +61,18 @@ const AdminCmsLayout: React.FC = (): JSX.Element => {
         );
 
         return (
-            <AdminCmsLayoutRouterSingleTile>
+            <AdminCmsLayoutRouterSingleTile
+                key = {endpoint.path}
+            >
                 <DelayRouterLink
                     render = {() => singleElementStructure}
                     pathTo = {`${FRONT_ENDPOINTS.ADMIN_PANEL}${endpoint.path}`}
-                    key = {endpoint.path}
                 />
+                {endpoint.title === 'Skrzynka' && findAnyMess > 0 && <CmsTileNavigateMessageIndicator
+                    title = {`W skrzynce odbiorczej znajdują się ${findAnyMess} nowe wiadomości.`}
+                >
+                    {findAnyMess}
+                </CmsTileNavigateMessageIndicator>}
             </AdminCmsLayoutRouterSingleTile>
         );
     });
