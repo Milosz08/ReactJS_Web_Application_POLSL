@@ -34,6 +34,7 @@ export enum API_ENDPOINTS {
     SCHEDULE_SUBJECTS = '/schedule-subjects',
     CALENDAR_RECORDS = '/calendar',
     AUTHENTICATIONS = '/authentications',
+    HELPERS_LINKS = '/helpers-links',
 }
 
 export const CMS_ENDPOINTS = [

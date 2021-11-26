@@ -13,8 +13,8 @@
  */
 
 import {
-    CalendarContentTypes, CovidWarningsTypes, CurrentScheduleContentTypes, FooterFormTypes, LastUpdateTypes,
-    ScheduleContentTypes, SubjectsContentTypes
+    CalendarContentTypes, CovidWarningsTypes, CurrentScheduleContentTypes, FooterFormTypes, HelpersLinksContentTypes,
+    LastUpdateTypes, ScheduleContentTypes, SubjectsContentTypes
 } from './dataTypes';
 
 export interface ScheduleSubjectDays {
@@ -31,6 +31,7 @@ export interface ApiInitialTypes {
         [value: string]: CurrentScheduleContentTypes[];
     };
     calendarContent: CalendarContentTypes[];
+    helpersLinks: HelpersLinksContentTypes[];
     summerBreakActive: boolean;
 }
 
@@ -54,5 +55,6 @@ export const initialState: ApiInitialTypes = {
         friday: []
     },
     calendarContent: [],
+    helpersLinks: [],
     summerBreakActive: false,
 };

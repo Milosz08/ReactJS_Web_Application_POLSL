@@ -17,12 +17,13 @@ import GROUPS_STATIC from '../../helpers/structs/allGroups';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 
 import {
-    addCovidWarningLevel, addFooterMessage, addLastUpdate, addSingleCalendarRecord, addSingleScheduleSubject,
+    addCovidWarningLevel, addFooterMessage, addLastUpdate, addSingleCalendarRecord, addSingleHelpersLink, addSingleScheduleSubject,
     addSingleSubject, filteredScheduleSubjects, sortingIcomingElmsByDate, sortingIncomingElmsByName
 } from './actions';
 
 import {
-    CalendarContentTypes, CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, ScheduleContentTypes, SubjectsContentTypes
+    CalendarContentTypes, CovidWarningsTypes, FooterFormTypes, HelpersLinksContentTypes, LastUpdateTypes,
+    ScheduleContentTypes, SubjectsContentTypes
 } from './dataTypes';
 
 import { sortAvailables } from './types';
@@ -34,6 +35,7 @@ const updateEndpoint: string = API_ENDPOINTS.LAST_UPDATE;
 const subjectsEndpoint: string = API_ENDPOINTS.SUBJECTS_ELMS;
 const scheduleEndpoint: string = API_ENDPOINTS.SCHEDULE_SUBJECTS;
 const calendarEndpoint: string = API_ENDPOINTS.CALENDAR_RECORDS;
+const helpersLinksEndpoint: string = API_ENDPOINTS.HELPERS_LINKS;
 
 /**
  *
@@ -96,5 +98,12 @@ export const getAllCalendarElements = () => {
         const calendar = await fetchElementFromAPI(calendarEndpoint);
         calendar.forEach((element: CalendarContentTypes) => dispatch(addSingleCalendarRecord(element)));
         dispatch(sortingIcomingElmsByDate(sortAvailables.CALENDAR));
+    };
+};
+
+export const getAllHelpersLinks = () => {
+    return async (dispatch: (prop: any) => void) => {
+        const helpersLinks = await fetchElementFromAPI(helpersLinksEndpoint);
+        helpersLinks.forEach((element: HelpersLinksContentTypes) => dispatch(addSingleHelpersLink(element)));
     };
 };

@@ -19,6 +19,7 @@ export interface FooterFormTypes {
     userIdentity: string;
     userChoice: string;
     userMessage: string;
+    ifClicked: boolean;
     servlettTime: {
         fullDate: string;
         fullTime: string;
@@ -102,5 +103,14 @@ export interface CurrentScheduleContentTypes {
         end: number;
         fullStart: string;
         fullEnd: string;
+    }
+}
+
+export interface HelpersLinksContentTypes {
+    helperTitle: string;
+    helperLink: string;
+    helperIcon: {
+        family: string;
+        name: string;
     }
 }

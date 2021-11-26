@@ -15,7 +15,13 @@
 import apiTypes, { sortAvailables, updateSections } from './types';
 
 import {
-    CalendarContentTypes, CovidWarningsTypes, FooterFormTypes, LastUpdateTypes, ScheduleContentTypes, SubjectsContentTypes
+    CalendarContentTypes,
+    CovidWarningsTypes,
+    FooterFormTypes,
+    HelpersLinksContentTypes,
+    LastUpdateTypes,
+    ScheduleContentTypes,
+    SubjectsContentTypes
 } from './dataTypes';
 
 interface ReturnedToReducer {
@@ -99,5 +105,12 @@ export const filteredScheduleSubjects = (normalGroup: string, engGroup: string, 
     type: apiTypes.FILTERED_SCHEDULE_SUBJECTS,
     payload: {
         normalGroup, engGroup, skGroup
+    }
+});
+
+export const addSingleHelpersLink = (singleHelpersLink: HelpersLinksContentTypes): ReturnedToReducer => ({
+    type: apiTypes.GET_SINGLE_HELPERS_LINKS,
+    payload: {
+        singleHelpersLink
     }
 });

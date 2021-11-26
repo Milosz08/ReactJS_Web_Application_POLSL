@@ -24,7 +24,7 @@ import { CurrentScheduleContentTypes } from './dataTypes';
 const {
     GET_SINGLE_FOOTERFORM_DATA, SEND_SINGLE_FOOTERFORM_DATA, GET_SINGLE_COVID_DATA, GET_SINGLE_LAST_UPDATE, SORT_BY_DATE,
     UPDATE_SINGLE_LAST_UPDATE, GET_SINGLE_SUBJECT_DATA, SORT_BY_NAME, GET_SINGLE_SCHEDULE_SUBJECT, GET_SINGLE_CALENDAR_RECORD,
-    FILTERED_SCHEDULE_SUBJECTS
+    FILTERED_SCHEDULE_SUBJECTS, GET_SINGLE_HELPERS_LINKS
 } = apiTypes;
 
 const apiReducer = (state = initialState, action: any) => {
@@ -147,6 +147,11 @@ const apiReducer = (state = initialState, action: any) => {
                 middlewareObject[day].sort((a: any, b: any) => a.hours.start - b.hours.end);
             });
             return { ...state, currentScheduleContent: middlewareObject };
+        }
+
+        case GET_SINGLE_HELPERS_LINKS: {
+            const { singleHelpersLink } = action.payload;
+            return { ...state, helpersLinks: [ ...state.helpersLinks, singleHelpersLink ] };
         }
 
         default: {

@@ -22,7 +22,8 @@ import { useDispatch } from 'react-redux';
 import { changeAdminLoggedStatus } from '../../redux/sessionReduxStore/actions';
 
 import {
-    getAllCalendarElements, getAllFooterFormElements, getAllLastUpdateElements, getAllScheduleElements, getAllSubjectsElements
+    getAllCalendarElements, getAllFooterFormElements, getAllHelpersLinks, getAllLastUpdateElements,
+    getAllScheduleElements, getAllSubjectsElements
 } from '../../redux/apiReduxStore/operations';
 
 /**
@@ -47,7 +48,8 @@ const useFirstPainfullLoad = (): null => {
             dispatcher(getAllLastUpdateElements());
             dispatcher(getAllSubjectsElements());
             dispatcher(getAllScheduleElements(cookie![groupSelection]));
-            dispatcher(getAllCalendarElements());    
+            dispatcher(getAllCalendarElements());
+            dispatcher(getAllHelpersLinks());
         }
     }, [ isMount ]);
     
