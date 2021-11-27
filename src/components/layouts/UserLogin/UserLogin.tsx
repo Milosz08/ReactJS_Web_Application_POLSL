@@ -47,12 +47,11 @@ const UserLogin: React.FC = (): JSX.Element => {
         setTimeout(() => {
             dispatcher(changeUserLoggedStatus(true));
             setCookie!(COOKIES_OBJECT.userSession, generateID('c', 8));
-            setAsyncAnim(false);
         }, 3000);
     };
 
     useEffect(() => {
-        if (Boolean(cookie![COOKIES_OBJECT.userSession]) && isMount) {
+        if (Boolean(cookie![COOKIES_OBJECT.userSession]) && !isMount) {
             dispatcher(changeUserLoggedStatus(true));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
