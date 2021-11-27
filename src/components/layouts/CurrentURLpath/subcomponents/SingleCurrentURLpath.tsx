@@ -13,19 +13,27 @@
  */
 
 import * as React from 'react';
-import { BsArrowRightShort } from 'react-icons/all';
+import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/all';
 
-import CurrentPathIntoString from '../../../../helpers/functionsAndClasses/currentPathIntoString';
+import { FRONT_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
+import useResizeListener from '../../../../helpers/hooks/useResizeListener';
 import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
+import CurrentPathIntoString from '../../../../helpers/functionsAndClasses/currentPathIntoString';
 
 import {
     CurrentURLpathMultipleElement, CurrentURLpathSingleElement, CurrentURLSingleElementArrowWrapper
 } from '../CurrentURLpath.styles';
 
+interface PropsProvider {
+    ifCmsPath: boolean;
+}
+
 /**
  * Component responsible for generating all path taken from browser path properties.
  */
-const SingleCurrentURLpath: React.FC = (): JSX.Element => {
+const SingleCurrentURLpath: React.FC<PropsProvider> = ({ ifCmsPath }): JSX.Element => {
+
+    const width = useResizeListener();
 
     const generateMultiplePathNavElements: JSX.Element[] = new CurrentPathIntoString().convertData().map(element => (
         <CurrentURLpathSingleElement
@@ -41,9 +49,22 @@ const SingleCurrentURLpath: React.FC = (): JSX.Element => {
         </CurrentURLpathSingleElement>
     ));
 
+    const generateCmsReturnSinglePath = (): JSX.Element => (
+        <CurrentURLpathSingleElement>
+            <CurrentURLSingleElementArrowWrapper>
+                <BsArrowLeftShort/>
+            </CurrentURLSingleElementArrowWrapper>
+            <DelayRouterLink
+                render = {() => 'Powrót do Panelu'}
+                pathTo = {FRONT_ENDPOINTS.ADMIN_PANEL}
+            />
+        </CurrentURLpathSingleElement>
+    );
+
     return (
         <CurrentURLpathMultipleElement>
-            {generateMultiplePathNavElements}
+            {width > 1250 && generateMultiplePathNavElements}
+            {ifCmsPath && width <= 1250 && generateCmsReturnSinglePath()}
         </CurrentURLpathMultipleElement>
     );
 };

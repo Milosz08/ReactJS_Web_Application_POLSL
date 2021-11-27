@@ -23,6 +23,7 @@ import SingleCurrentURLpath from './subcomponents/SingleCurrentURLpath';
 
 interface PropsProvider {
     ifImportatHeaderActive: boolean;
+    ifCmsPath?: boolean;
 }
 
 /**
@@ -31,9 +32,10 @@ interface PropsProvider {
  *
  * @params ifImportatHeaderActive { boolean } - decides whether the navigation should be lower than the top of the page.
  */
-const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }): JSX.Element => (
+const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive, ifCmsPath }): JSX.Element => (
     <CurrentURLpathContainer
         changeTop = {ifImportatHeaderActive}
+        ifCmsPath = {ifCmsPath}
     >
         <CurrentURLpathWrapper
             changeTop = {ifImportatHeaderActive}
@@ -44,7 +46,9 @@ const CurrentURLpath: React.FC<PropsProvider> = ({ ifImportatHeaderActive }): JS
                     pathTo = {FRONT_ENDPOINTS.ABSOLUTE}
                 />
             </CurrentURLpathSingleElement>
-            <SingleCurrentURLpath/>
+            <SingleCurrentURLpath
+                ifCmsPath = {Boolean(ifCmsPath)}
+            />
         </CurrentURLpathWrapper>
     </CurrentURLpathContainer>
 );

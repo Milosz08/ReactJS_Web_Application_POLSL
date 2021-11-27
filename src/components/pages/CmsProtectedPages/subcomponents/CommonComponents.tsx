@@ -27,7 +27,10 @@ const CommonComponents: React.FC = (): JSX.Element => (
         <CookiesNotification/>
         <MobileDownNav/>
         <Header ifHeaderHasRedBar = {false}/>
-        <CurrentURLpath ifImportatHeaderActive = {true}/>
+        <CurrentURLpath
+            ifImportatHeaderActive = {true}
+            ifCmsPath = {true}
+        />
     </>
 );
 

@@ -14,7 +14,7 @@
 
 import styled from 'styled-components';
 
-export const CurrentURLpathContainer = styled('section')<{ changeTop: boolean }>`
+export const CurrentURLpathContainer = styled('section')<{ changeTop: boolean, ifCmsPath: boolean }>`
     display: flex;
     justify-content: center;
     position: relative;
@@ -25,7 +25,7 @@ export const CurrentURLpathContainer = styled('section')<{ changeTop: boolean }>
         font-size: .9rem;
     }
     @media only screen and (max-width: 500px) {
-        display: none;
+        display: ${props => props.ifCmsPath ? 'flex' : 'none'};
     }
 `;
 
