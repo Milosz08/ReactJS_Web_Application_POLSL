@@ -12,14 +12,20 @@
  * governing permissions and limitations under the license.
  */
 
-/**
- * All rangs usage in CMS panel header indicator.
- */
-export const RANGS_NAMES: string[] = [
-    'Niezdefiniowany', 'Użytkownik', 'Moderator', 'Administrator'
-];
+import * as React from 'react';
+
+const MultipleCovidElements = React.lazy(() => import('./subcomponents/MultipleCovidElements'));
+const UsageInfoElement = React.lazy(() => import('./subcomponents/UsageInfoElement'));
 
 /**
- * Maximal risk number possibily insert into covid warnings blocks select field.
+ * Component responsible for generating all structure of covid warnings selectors elements
+ * and info about usage this elements.
  */
-export const MAX_RISK_NUMBER: number = 21;
+const CovidCmsPageElements: React.FC = (): JSX.Element => (
+    <>
+        <UsageInfoElement/>
+        <MultipleCovidElements/>
+    </>
+);
+
+export default CovidCmsPageElements;

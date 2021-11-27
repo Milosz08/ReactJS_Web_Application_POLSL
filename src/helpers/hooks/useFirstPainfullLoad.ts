@@ -22,7 +22,7 @@ import { useDispatch } from 'react-redux';
 import { changeAdminLoggedStatus } from '../../redux/sessionReduxStore/actions';
 
 import {
-    getAllCalendarElements, getAllFooterFormElements, getAllHelpersLinks, getAllLastUpdateElements,
+    getAllCalendarElements, getAllCovidWarningElements, getAllFooterFormElements, getAllHelpersLinks, getAllLastUpdateElements,
     getAllScheduleElements, getAllSubjectsElements
 } from '../../redux/apiReduxStore/operations';
 
@@ -44,6 +44,7 @@ const useFirstPainfullLoad = (): null => {
 
     useEffect(() => {
         if(isMount) { //Prevent dispatcher DB on next re-renders
+            dispatcher(getAllCovidWarningElements());
             dispatcher(getAllFooterFormElements());
             dispatcher(getAllLastUpdateElements());
             dispatcher(getAllSubjectsElements());

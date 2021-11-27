@@ -25,6 +25,7 @@ enum apiTypes {
     SORT_BY_NAME = 'SORT_BY_NAME',
     SORT_BY_DATE = 'SORT_BY_DATE',
     FILTERED_SCHEDULE_SUBJECTS = 'FILTERED_SCHEDULE_SUBJECTS',
+    UPDATE_COVID_DATA = 'UPDATE_COVID_DATA',
 }
 
 export enum updateSections {
@@ -37,6 +38,12 @@ export enum sortAvailables {
     SUBJECTS = 'subjectsContent',
     SCHEDULE = 'scheduleContent',
     CALENDAR = 'calendarContent',
+}
+
+export enum covidTypes {
+    LEFT_TILE = 'LEFT_TILE',
+    CENTER_TILE = 'CENTER_TILE',
+    RIGHT_TILE = 'RIGHT_TILE'
 }
 
 export enum sortInputTypes {

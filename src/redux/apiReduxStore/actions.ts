@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import apiTypes, { sortAvailables, updateSections } from './types';
+import apiTypes, { covidTypes, sortAvailables, updateSections } from './types';
 
 import {
     CalendarContentTypes,
@@ -112,5 +112,12 @@ export const addSingleHelpersLink = (singleHelpersLink: HelpersLinksContentTypes
     type: apiTypes.GET_SINGLE_HELPERS_LINKS,
     payload: {
         singleHelpersLink
+    }
+});
+
+export const updateCovidSingleElement = (position: covidTypes, value: number): ReturnedToReducer => ({
+    type: apiTypes.UPDATE_COVID_DATA,
+    payload: {
+        position, value
     }
 });
