@@ -24,7 +24,7 @@ import CmsInfoHamburgerMenu from './CmsInfoHamburgerMenu';
  */
 const CmsInfoBarTitle: React.FC = (): JSX.Element => (
     <CmsInfoBarTitleContainer>
-        <span><strong>WCMS</strong>Panel 1.0 by Miłosz Gilga</span>
+        <span><strong>WCMS</strong>Panel 1.1 by Miłosz Gilga</span>
         <CmsInfoHamburgerButton/>
         <CmsInfoHamburgerMenu/>
     </CmsInfoBarTitleContainer>
