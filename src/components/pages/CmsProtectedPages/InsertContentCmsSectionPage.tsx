@@ -18,6 +18,8 @@ import usePageTitle from '../../../helpers/hooks/usePageTitle';
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
+import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
+import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 
@@ -34,7 +36,12 @@ const InsertContentCmsSectionPage: React.FC = (): JSX.Element => {
             <CommonComponents/>
             <CommonPaginationContainer>
                 <CommonPaginationWrapper>
-                   InsertContentCmsSectionPage
+                    <UniversalHeader
+                        iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaUsersCog' }}
+                        content = 'Modyfikuj Wpisy Redakcji'
+                        ifCloseButtonVisible = {false}
+                        changeIconSize = '1em'
+                    />
                 </CommonPaginationWrapper>
             </CommonPaginationContainer>
         </>

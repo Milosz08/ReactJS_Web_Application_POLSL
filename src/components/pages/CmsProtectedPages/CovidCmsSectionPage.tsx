@@ -18,8 +18,11 @@ import usePageTitle from '../../../helpers/hooks/usePageTitle';
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
+import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
+const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const CovidCmsPageElements = React.lazy(() => import('../../layouts/CovidCmsPageElements/CovidCmsPageElements'));
 
 /**
  * Component responsible for generating CMS subpage for controlled covid section.
@@ -34,7 +37,13 @@ const CovidCmsSectionPage: React.FC = (): JSX.Element => {
             <CommonComponents/>
             <CommonPaginationContainer>
                 <CommonPaginationWrapper>
-                    CovidCmsSectionPage
+                    <UniversalHeader
+                        iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaUsersCog' }}
+                        content = 'Modyfikuj Zagrożenia Covid'
+                        ifCloseButtonVisible = {false}
+                        changeIconSize = '1em'
+                    />
+                    <CovidCmsPageElements/>
                 </CommonPaginationWrapper>
             </CommonPaginationContainer>
         </>
