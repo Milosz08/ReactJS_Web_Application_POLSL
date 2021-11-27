@@ -27,6 +27,10 @@ export const SingleCovidSectionElement = styled.div`
     border: 2px dashed var(--navyBlueColor);
     border-radius: 10px;
     margin: 20px;
+    @media only screen and (max-width: 1250px) {
+        width: 100%;
+        margin: 20px 0;
+    }
 `;
 
 export const SingleCovidSectionWrapper = styled.div`
