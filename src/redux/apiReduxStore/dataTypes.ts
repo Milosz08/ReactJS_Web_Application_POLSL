@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import { updateSections } from './types';
+import { covidTypes, updateSections } from './types';
 
 export interface FooterFormTypes {
     _id: string;
@@ -29,6 +29,7 @@ export interface FooterFormTypes {
 export interface CovidWarningsTypes {
     _id: string;
     description: string;
+    type: covidTypes;
     actualRiskNumber: number;
 }
 

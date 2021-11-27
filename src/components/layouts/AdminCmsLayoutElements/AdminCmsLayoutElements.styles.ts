@@ -134,5 +134,5 @@ export const CmsTileNavigateMessageIndicator = styled.span`
     border-radius: 50%;
     font-size: 1.2rem;
     color: var(--whiteColor);
-    font-weight: 600;
+    font-weight: 500;
 `;

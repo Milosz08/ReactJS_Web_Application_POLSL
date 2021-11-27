@@ -12,8 +12,6 @@
  * governing permissions and limitations under the license.
  */
 
-import { BsBookmarkCheck, BsCalendar, BsChatDots, BsClipboard, BsLightning } from 'react-icons/all';
-
 export enum FRONT_ENDPOINTS {
     ABSOLUTE = '/',
     SCHEDULE = '/interaktywny-plan-zajęć',
@@ -41,7 +39,7 @@ export const CMS_ENDPOINTS = [
     {
         path: '/modyfikuj-zagrożenia-covid',
         icon: 'BsShield',
-        title: 'Ograniczenia Covid 19',
+        title: 'Zagrożenia Covid 19',
         description: 'Przejdź, aby zmodyfikować aktualne ograniczenia związane z wirusem Sars-Cov-2.',
     },
     {
@@ -75,7 +73,7 @@ export const CMS_ENDPOINTS = [
         description: 'Przejdź, aby dodać, usunąć lub zmodyfikować linki do pomocy naukowych.',
     },
     {
-        path: '/modyfikuj-wpisy',
+        path: '/modyfikuj-wpisy-redakcji',
         icon: 'BsFiles',
         title: 'Wpisy z Aktualnościami',
         description: 'Przejdź, aby dodać, usunąć lub zmodyfikować wpisy z aktualnościami.',
