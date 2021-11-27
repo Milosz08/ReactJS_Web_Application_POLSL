@@ -38,12 +38,11 @@ const SingleHelperTileContent: React.FC<PropsProvider> = ({ tile }): JSX.Element
     const { userLoggedStatus }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
 
     const hashKey: string = process.env.REACT_APP_HASH_CODE ? process.env.REACT_APP_HASH_CODE : '';
-    const encryptedPath = AES.decrypt(tile.helperLink, hashKey); //.toString(CryptoJS.enc.Utf8);
-    //console.log(encryptedPath.toString(CryptoJS.enc.Utf8));
+    const encryptedPath: string = CryptoJS.enc.Utf8.stringify(AES.decrypt(tile.helperLink, hashKey));
 
     return (
         <SingleHelperTileAnchor
-            href = {userLoggedStatus ? '/' : '/'}
+            href = {userLoggedStatus ? encryptedPath : '/'}
             target = '_blank'
             rel = 'noreferrer'
         >
