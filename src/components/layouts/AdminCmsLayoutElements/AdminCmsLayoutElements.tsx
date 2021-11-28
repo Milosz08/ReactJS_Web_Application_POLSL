@@ -21,7 +21,7 @@ import {
 
 const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
 const AdminCmsLayout = React.lazy(() => import('./subcomponents/AdminCmsLayout'));
-const AdminCmsChangeCredentials = React.lazy(() => import('./subcomponents/AdminCmsChangeCredentials'));
+const ChangeCredentialsCmsPage = React.lazy(() => import('../ChangeCredentialsCmsPage/ChangeCredentialsCmsPage'));
 
 /**
  * Component responsible for showing all content in main CMS panel page component.
@@ -47,7 +47,7 @@ const AdminCmsLayoutElements: React.FC = (): JSX.Element => (
                     ifCloseButtonVisible = {false}
                     changeIconSize = '.9em'
                 />
-                <AdminCmsChangeCredentials/>
+                <ChangeCredentialsCmsPage/>
             </AdminCmsChangeCredentialsWrapper>
         </AdminCmsLayoutElementsContainer>
     </>
