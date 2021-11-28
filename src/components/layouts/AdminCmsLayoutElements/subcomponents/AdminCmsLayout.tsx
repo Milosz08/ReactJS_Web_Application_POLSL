@@ -41,25 +41,9 @@ const AdminCmsLayout: React.FC = (): JSX.Element => {
         const findUpdateElement = lastUpdate.find(updateElm => updateElm.updateDateFor === endpoint.type);
 
         const singleElementStructure: JSX.Element = (
-            <CmsTileLayoutElement>
-                <CmsTileLayoutHeaderAndIconContainer>
-                    <CmsTileLayoutHeader>
-                        {endpoint.title}
-                    </CmsTileLayoutHeader>
-                    <CmsTileLayoutIconWrapper>
-                        <IconComponent
-                            family = {IconFamiliesType.BootStrapIcons}
-                            name = {endpoint.icon}
-                        />
-                    </CmsTileLayoutIconWrapper>
-                </CmsTileLayoutHeaderAndIconContainer>
-                <CmsTileDescription>
-                    {endpoint.description}
-                </CmsTileDescription>
-                <CmsTileArrowContainter>
-                    <CmsTileNavigateArrow/>
-                </CmsTileArrowContainter>
-            </CmsTileLayoutElement>
+            <AdminCmsLayoutSingleStructureElement
+                endpoint = {endpoint}
+            />
         );
 
         return (

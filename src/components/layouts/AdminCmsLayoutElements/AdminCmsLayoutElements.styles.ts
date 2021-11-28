@@ -29,10 +29,6 @@ export const AdminCmsLayoutElementsWrapper = styled.article`
     }
 `;
 
-export const AdminCmsChangeCredentialsWrapper = styled(AdminCmsLayoutElementsWrapper)`
-    margin-top: 40px;
-`;
-
 export const AdminCmsLayoutRouterContainter = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -66,7 +62,7 @@ export const CmsTileLayoutElement = styled.div`
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding: 30px;
+    padding: 40px 30px 30px;
     width: 100%;
     height: 100%;
 `;
@@ -135,4 +131,18 @@ export const CmsTileNavigateMessageIndicator = styled.span`
     font-size: 1.2rem;
     color: var(--whiteColor);
     font-weight: 500;
+`;
+
+export const AdminCmsLayoutLastUpdateIndicator = styled.span`
+    position: absolute;
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    padding: 0 10px;
+    border-radius: 5px;
+    top: -15px;
+    left: 15px;
+    background-color: var(--darkBlueColor);
+    color: var(--whiteColor);
+    height: 30px;
 `;
