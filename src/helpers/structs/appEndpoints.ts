@@ -12,6 +12,10 @@
  * governing permissions and limitations under the license.
  */
 
+import { updateSections } from '../../redux/apiReduxStore/types';
+
+const { COVID, SUBJECTS, SCHEDULE, CALENDAR, HELPERS, BLOG_INJECTIONS, USER_MESS, AUTH } = updateSections;
+
 export enum FRONT_ENDPOINTS {
     ABSOLUTE = '/',
     SCHEDULE = '/interaktywny-plan-zajęć',
@@ -24,7 +28,6 @@ export enum FRONT_ENDPOINTS {
 }
 
 export enum API_ENDPOINTS {
-    ABSOLUTE = '/',
     FOOTER_FORM = '/footer-form',
     COVID_WARNINGS = '/covid-data',
     LAST_UPDATE = '/last-update',
@@ -35,47 +38,65 @@ export enum API_ENDPOINTS {
     HELPERS_LINKS = '/helpers-links',
 }
 
-export const CMS_ENDPOINTS = [
+export interface CmsEndpointsTypes {
+    [key: string]: string | updateSections;
+}
+
+export const CMS_ENDPOINTS: CmsEndpointsTypes[] = [
     {
         path: '/modyfikuj-zagrożenia-covid',
         icon: 'BsShield',
+        type: COVID,
         title: 'Zagrożenia Covid 19',
         description: 'Przejdź, aby zmodyfikować aktualne ograniczenia związane z wirusem Sars-Cov-2.',
     },
     {
         path: '/modyfikuj-przedmioty',
         icon: 'BsBookmarkCheck',
+        type: SUBJECTS,
         title: 'Przedmioty',
         description: 'Przejdź, aby dodać, usunąć lub zmodyfikować przedmiot.',
     },
     {
         path: '/modyfikuj-plan-zajęć',
         icon: 'BsClipboard',
+        type: SCHEDULE,
         title: 'Plan Zajęć',
         description: 'Przejdź, aby dodać, usunąć lub zmodyfikować plan zajęć.',
     },
     {
         path: '/modyfikuj-kalendarz',
         icon: 'BsCalendar',
+        type: CALENDAR,
         title: 'Kalendarz',
         description: 'Przejdź, aby dodać, usunąć lub zmodyfikować wpis w kalendarzu.',
     },
     {
         path: '/wiadomości-użytkowników',
         icon: 'BsEnvelope',
+        type: USER_MESS,
         title: 'Skrzynka',
         description: 'Przejdź, aby przejrzeć lub usunąć wiadomość od użytkownika.',
     },
     {
         path: '/modyfikuj-pomoce-naukowe',
         icon: 'BsDownload',
+        type: HELPERS,
         title: 'Pomoce Naukowe',
         description: 'Przejdź, aby dodać, usunąć lub zmodyfikować linki do pomocy naukowych.',
     },
     {
         path: '/modyfikuj-wpisy-redakcji',
         icon: 'BsFiles',
+        type: BLOG_INJECTIONS,
         title: 'Wpisy z Aktualnościami',
         description: 'Przejdź, aby dodać, usunąć lub zmodyfikować wpisy z aktualnościami.',
     },
-] as const;
+    {
+        path: '/modyfikuj-dane-logowania',
+        icon: 'BsPeople',
+        type: AUTH,
+        title: 'Dane logowania',
+        description: 'Przejdź, aby zmienić dane logowania dla użytkowników i moderatorów.',
+    },
+];

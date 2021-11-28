@@ -14,7 +14,6 @@
 
 import * as React from 'react';
 
-import IconComponent, { IconFamiliesType } from '../../../../helpers/componentsAndMiddleware/IconComponent';
 import { CMS_ENDPOINTS, FRONT_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
 import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
 
@@ -23,20 +22,23 @@ import { RootState } from '../../../../redux/reduxStore';
 import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
 
 import {
-    AdminCmsLayoutRouterContainter, AdminCmsLayoutRouterSingleTile, CmsTileArrowContainter, CmsTileDescription,
-    CmsTileLayoutElement, CmsTileLayoutHeader, CmsTileLayoutHeaderAndIconContainer, CmsTileLayoutIconWrapper,
-    CmsTileNavigateArrow, CmsTileNavigateMessageIndicator
+    AdminCmsLayoutLastUpdateIndicator, AdminCmsLayoutRouterContainter, AdminCmsLayoutRouterSingleTile,
+    CmsTileNavigateMessageIndicator
 } from '../AdminCmsLayoutElements.styles';
+
+const AdminCmsLayoutSingleStructureElement = React.lazy(() => import('./AdminCmsLayoutSingleStructureElement'));
 
 /**
  * Component responsible for generating router links for subpages of CMS panel.
  */
 const AdminCmsLayout: React.FC = (): JSX.Element => {
 
-    const { footerFormMessages }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const { footerFormMessages, lastUpdate }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+
     const findAnyMess = footerFormMessages.filter(message => !Boolean(message.ifClicked)).length;
 
     const elements = CMS_ENDPOINTS.map(endpoint => {
+        const findUpdateElement = lastUpdate.find(updateElm => updateElm.updateDateFor === endpoint.type);
 
         const singleElementStructure: JSX.Element = (
             <CmsTileLayoutElement>
@@ -64,6 +66,9 @@ const AdminCmsLayout: React.FC = (): JSX.Element => {
             <AdminCmsLayoutRouterSingleTile
                 key = {endpoint.path}
             >
+                {findUpdateElement && <AdminCmsLayoutLastUpdateIndicator>
+                    Aktualizacja: {findUpdateElement.updateDate.fullDate}, {findUpdateElement.updateDate.fullTime}
+                </AdminCmsLayoutLastUpdateIndicator>}
                 <DelayRouterLink
                     render = {() => singleElementStructure}
                     pathTo = {`${FRONT_ENDPOINTS.ADMIN_PANEL}${endpoint.path}`}
