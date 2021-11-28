@@ -42,6 +42,10 @@ class LoginValidator {
         username: false, password: false, token: false
     };
 
+    private _extendedErrorFields: { [key: string]: boolean } = {
+        passRepeat: false, adminPass: false
+    };
+
     public constructor(username: string, password: string, role: ROLES, token = '') {
         this._inputFields.username = username;
         this._inputFields.password = password;
@@ -51,7 +55,7 @@ class LoginValidator {
 
     private async fetchDBrole(): Promise<any> {
         const { data } = await axiosInstance.get(`${API_ENDPOINTS.AUTHENTICATIONS}/${this._role}`);
-        if(Boolean(data)) {
+        if (Boolean(data)) {
             Object.keys(this._databaseFields).forEach(key => {
                 this._databaseFields[key] = data[key];
             });
@@ -62,19 +66,40 @@ class LoginValidator {
         }
     };
 
-    private async checkAllGood() {
+    private async checkAllGood(): Promise<any> {
         Object.keys(this._inputFields).forEach(key => {
             this._errorFields[key] = !bcrypt.compareSync(this._inputFields[key], this._databaseFields[key]);
         });
     };
 
-    public async initialise() {
+    public async initialise(): Promise<any> {
         await this.fetchDBrole();
         await this.checkAllGood();
     };
 
+    public async validateNewFields(adminPass: string, repeatPass: string): Promise<any> {
+        const { data } = await axiosInstance.get(`${API_ENDPOINTS.AUTHENTICATIONS}/${ROLES.ADMIN}`);
+        const validateAdminPass = !bcrypt.compareSync(adminPass, data.password);
+        if (adminPass.length < 4 || validateAdminPass) {
+            this._extendedErrorFields.adminPass = true;
+        }
+        if (repeatPass !== this._inputFields.password) {
+            this._extendedErrorFields.passRepeat = true;
+        }
+        Object.keys(this._inputFields).forEach(key => {
+            if (this._inputFields[key].length < 4) {
+                console.log(this._inputFields[key].length);
+                this._errorFields[key] = true;
+            }
+        });
+    };
+
     public get__errorFields(): { [value: string]: boolean } {
         return this._errorFields;
+    };
+
+    public get__extendedErrorFields(): { [value: string]: boolean } {
+        return this._extendedErrorFields;
     };
 
 }
