@@ -13,17 +13,12 @@
  */
 
 import apiTypes, { covidTypes, sortAvailables, updateSections } from './types';
+import { ROLES } from '../../helpers/functionsAndClasses/LoginValidator';
 
 import {
-    CalendarContentTypes,
-    CovidWarningsTypes,
-    FooterFormTypes,
-    HelpersLinksContentTypes,
-    LastUpdateTypes,
-    ScheduleContentTypes,
-    SubjectsContentTypes
+    CalendarContentTypes, CovidWarningsTypes, FooterFormTypes, HelpersLinksContentTypes, LastUpdateTypes,
+    ScheduleContentTypes, SubjectsContentTypes
 } from './dataTypes';
-import { ROLES } from '../../helpers/functionsAndClasses/LoginValidator';
 
 interface ReturnedToReducer {
     type: apiTypes;
@@ -127,5 +122,12 @@ export const updateCredentialsElement = (role: ROLES, credentialFields: { [key: 
     type: apiTypes.UPDATE_CREDENTIALS,
     payload: {
         role, credentialFields
+    }
+});
+
+export const updateSectionDates = (section: updateSections): ReturnedToReducer => ({
+    type: apiTypes.UPDATE_ELEMENTS_DATE,
+    payload: {
+        section
     }
 });

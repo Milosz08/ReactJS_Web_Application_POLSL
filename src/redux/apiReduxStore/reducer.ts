@@ -24,7 +24,7 @@ import { CurrentScheduleContentTypes } from './dataTypes';
 const {
     GET_SINGLE_FOOTERFORM_DATA, SEND_SINGLE_FOOTERFORM_DATA, GET_SINGLE_COVID_DATA, GET_SINGLE_LAST_UPDATE, SORT_BY_DATE,
     UPDATE_SINGLE_LAST_UPDATE, GET_SINGLE_SUBJECT_DATA, SORT_BY_NAME, GET_SINGLE_SCHEDULE_SUBJECT, GET_SINGLE_CALENDAR_RECORD,
-    FILTERED_SCHEDULE_SUBJECTS, GET_SINGLE_HELPERS_LINKS, UPDATE_COVID_DATA, UPDATE_CREDENTIALS
+    FILTERED_SCHEDULE_SUBJECTS, GET_SINGLE_HELPERS_LINKS, UPDATE_COVID_DATA, UPDATE_CREDENTIALS, UPDATE_ELEMENTS_DATE
 } = apiTypes;
 
 const apiReducer = (state = initialState, action: any) => {
@@ -162,10 +162,10 @@ const apiReducer = (state = initialState, action: any) => {
                 throw new Error(`ERROR! Redux reducer error! Set new state not found!`);
             } else {
                 newState[findIndexType].actualRiskNumber = value;
-                const updateDatabaseClaster = async () => {
+                const updateDatabaseCluster = async () => {
                     await axiosInstance.put(`${API_ENDPOINTS.COVID_WARNINGS}/${position}`, newState[findIndexType]);
                 };
-                updateDatabaseClaster();
+                updateDatabaseCluster();
             }
             return { ...state, covidWarningLevels: newState };
         }
@@ -186,6 +186,23 @@ const apiReducer = (state = initialState, action: any) => {
             };
             updateDatabaseClaster();
             return state;
+        }
+
+        case UPDATE_ELEMENTS_DATE: {
+            const { section } = action.payload;
+            let newState = [ ...state.lastUpdate ];
+            const findSectionIndex = newState.findIndex(el => el.updateDateFor === section);
+            if (findSectionIndex === -1) {
+                throw new Error(`ERROR! Redux reducer error! Set new state not found!`);
+            } else {
+                const updateDatabaseCluster = async () => {
+                    const sendObj = { updateDateFor: section };
+                    const { data } = await axiosInstance.put(`${API_ENDPOINTS.LAST_UPDATE}/${section}`, sendObj);
+                    newState[findSectionIndex] = data;
+                };
+                updateDatabaseCluster();
+            }
+            return { ...state, lastUpdate: newState };
         }
 
         default: {

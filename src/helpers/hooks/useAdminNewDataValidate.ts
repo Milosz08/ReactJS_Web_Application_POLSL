@@ -16,13 +16,15 @@ import * as React from 'react';
 import { useContext } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { updateCredentialsElement } from '../../redux/apiReduxStore/actions';
+import { updateCredentialsElement, updateSectionDates } from '../../redux/apiReduxStore/actions';
 
 import LoginValidator, { ROLES } from '../functionsAndClasses/LoginValidator';
 
 import {
-    ChangeCredentialsContext, ChangeCredentialsContextTypes
+    ChangeCredentialsContext,
+    ChangeCredentialsContextTypes
 } from '../../components/layouts/ChangeCredentialsCmsPage/ChangeCredentialsStoreProvider';
+import { updateSections } from '../../redux/apiReduxStore/types';
 
 /**
  * Custom hook responsible for validate and send new data about credentials (user/admin/moderator).
@@ -60,6 +62,7 @@ const useAdminNewDataValidate = (allRef: { [value: string]: React.MutableRefObje
                     username: login.current.value, password: passF.current.value, token: token.current.value
                 }));
             }
+            dispatcher(updateSectionDates(updateSections.AUTH));
             clearFields();
         } else {
             err!.setErrors({ login: lg, pass, passRepeat: passR, token: tk, adminPass: passA });
