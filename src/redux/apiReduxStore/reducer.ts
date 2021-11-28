@@ -24,7 +24,7 @@ import { CurrentScheduleContentTypes } from './dataTypes';
 const {
     GET_SINGLE_FOOTERFORM_DATA, SEND_SINGLE_FOOTERFORM_DATA, GET_SINGLE_COVID_DATA, GET_SINGLE_LAST_UPDATE, SORT_BY_DATE,
     UPDATE_SINGLE_LAST_UPDATE, GET_SINGLE_SUBJECT_DATA, SORT_BY_NAME, GET_SINGLE_SCHEDULE_SUBJECT, GET_SINGLE_CALENDAR_RECORD,
-    FILTERED_SCHEDULE_SUBJECTS, GET_SINGLE_HELPERS_LINKS, UPDATE_COVID_DATA
+    FILTERED_SCHEDULE_SUBJECTS, GET_SINGLE_HELPERS_LINKS, UPDATE_COVID_DATA, UPDATE_CREDENTIALS
 } = apiTypes;
 
 const apiReducer = (state = initialState, action: any) => {
@@ -168,6 +168,24 @@ const apiReducer = (state = initialState, action: any) => {
                 updateDatabaseClaster();
             }
             return { ...state, covidWarningLevels: newState };
+        }
+
+        case UPDATE_CREDENTIALS: {
+            const { role, credentialFields } = action.payload;
+            const { username, password, token } = credentialFields;
+            const updateDatabaseClaster = async () => {
+                const { data } = await axiosInstance.get(`${API_ENDPOINTS.AUTHENTICATIONS}/${role}`);
+                const toSend = {
+                    _id: data._id,
+                    role: Number(role),
+                    username,
+                    password,
+                    token: token || '',
+                };
+                await axiosInstance.put(`${API_ENDPOINTS.AUTHENTICATIONS}/${role}`, toSend);
+            };
+            updateDatabaseClaster();
+            return state;
         }
 
         default: {

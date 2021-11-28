@@ -23,6 +23,7 @@ import {
     ScheduleContentTypes,
     SubjectsContentTypes
 } from './dataTypes';
+import { ROLES } from '../../helpers/functionsAndClasses/LoginValidator';
 
 interface ReturnedToReducer {
     type: apiTypes;
@@ -119,5 +120,12 @@ export const updateCovidSingleElement = (position: covidTypes, value: number): R
     type: apiTypes.UPDATE_COVID_DATA,
     payload: {
         position, value
+    }
+});
+
+export const updateCredentialsElement = (role: ROLES, credentialFields: { [key: string]: string }): ReturnedToReducer => ({
+    type: apiTypes.UPDATE_CREDENTIALS,
+    payload: {
+        role, credentialFields
     }
 });
