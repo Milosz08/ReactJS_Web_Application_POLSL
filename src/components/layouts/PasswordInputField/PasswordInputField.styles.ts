@@ -16,19 +16,19 @@ import styled from 'styled-components';
 import { button_rs, input_rs } from '../../../styles/reset.styles';
 import { StandardTextInput } from '../../../styles/mixins.styles';
 
-export const PasswordInputFieldContainer = styled.div`
+export const PasswordInputFieldContainer = styled('div')<{ maxWidthCSS: string }>`
     position: relative;
-    width: 100%;
+    width: ${({ maxWidthCSS }) => maxWidthCSS ? maxWidthCSS : '100%'};
     margin: 5px 0;
 `;
 
-export const PasswordInputFieldInput = styled(input_rs)<{ ifError: boolean }>`
-    ${props => StandardTextInput({ _ifError: props.ifError, _paddingRight: 50, _spaceUpDown: 12 })};
-    font-size: 1.2rem;
+export const PasswordInputFieldInput = styled(input_rs)<{ ifError: boolean, fontSizeCSS: string }>`
+    ${({ ifError }) => StandardTextInput({ _ifError: ifError, _paddingRight: 50, _spaceUpDown: 12 })};
+    font-size: ${({ fontSizeCSS }) => fontSizeCSS ? fontSizeCSS : '1.2rem'};
     padding: 8px 11px 10px 15px;
 `;
 
-export const PasswordToggleButton = styled(button_rs)`
+export const PasswordToggleButton = styled(button_rs)<{ ifError: boolean }>`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -37,5 +37,5 @@ export const PasswordToggleButton = styled(button_rs)`
     height: 80%;
     width: 35px;
     font-size: 1.3rem;
-    color: var(--darkGrayTint1);
+    color: var(${({ ifError }) => ifError ? '--redColor' : '--darkGrayTint1'});
 `;

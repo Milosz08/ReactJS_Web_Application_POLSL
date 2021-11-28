@@ -13,8 +13,9 @@
  */
 
 import styled from 'styled-components';
-import { button_rs, input_rs } from '../../../styles/reset.styles';
+
 import { DefaultButton, StandardTextInput } from '../../../styles/mixins.styles';
+import { button_rs, input_rs } from '../../../styles/reset.styles';
 
 export const UserLoginContainer = styled.section`
     display: flex;
@@ -37,9 +38,10 @@ export const UniversalLoginForm = styled('form')<{ ifVisible: boolean }>`
     }
 `;
 
-export const UniversalCredentialsInput = styled(input_rs)<{ ifError: boolean }>`
+export const UniversalCredentialsInput = styled(input_rs)<{ ifError: boolean, maxWidth?: number, fontSize?: number }>`
     ${props => StandardTextInput({ _ifError: props.ifError, _paddingRight: 50, _spaceUpDown: 12 })};
-    font-size: 1.2rem;
+    width: ${({ maxWidth }) => maxWidth ? `${maxWidth}px` : '100%'};
+    font-size: ${({ fontSize }) => fontSize ? `${fontSize}rem` : '1.2rem'};
     padding: 8px 11px 10px 15px;
     margin-bottom: 5px;
 `;

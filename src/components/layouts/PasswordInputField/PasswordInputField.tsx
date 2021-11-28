@@ -22,8 +22,11 @@ import { PasswordInputFieldContainer, PasswordInputFieldInput, PasswordToggleBut
 interface PropsProvider {
     ifError: boolean;
     grabber: any;
-    changeCallback: () => void;
+    changeCallback?: () => void;
     placeholder?: string;
+    fontSize?: string;
+    maxWidth?: string;
+    disabled?: boolean;
 }
 
 /**
@@ -34,8 +37,13 @@ interface PropsProvider {
  * @param grabber { React.MutableRefObject<any> } - react referential JSX grabber for HTML element.
  * @param changeCallback { () => void } - callback listener function input on every change.
  * @param placeholder { string } - optional placeholder value, different of "Hasło".
+ * @param fontSize { string } - css font size inside placeholer and input element.
+ * @param maxWidth { string } - css max width of input element.
+ * @param disabled
  */
-const PasswordInputField: React.FC<PropsProvider> = ({ ifError, grabber, changeCallback, placeholder }): JSX.Element => {
+const PasswordInputField: React.FC<PropsProvider> = ({
+    ifError, grabber, changeCallback, placeholder, fontSize, maxWidth, disabled
+}): JSX.Element => {
 
     const [ icon, setIcon ] = useState<string>('MdVisibility');
     const [ visibility, setVisibility ] = useState<boolean>(false);
@@ -48,18 +56,24 @@ const PasswordInputField: React.FC<PropsProvider> = ({ ifError, grabber, changeC
     };
 
     return (
-        <PasswordInputFieldContainer>
+        <PasswordInputFieldContainer
+            maxWidthCSS = {maxWidth}
+        >
             <PasswordInputFieldInput
                 type = {visibility ? 'text' : 'password'}
-                placeholder = {placeholder ? placeholder : 'Hasło'}
+                placeholder = {placeholder || 'Hasło'}
                 ifError = {ifError}
                 onChange = {changeCallback}
                 ref = {grabber}
+                fontSizeCSS = {fontSize}
+                maxLength = {20}
+                disabled = {disabled}
             />
             <PasswordToggleButton
                 onClick = {handleToggleVisiblePassword}
                 title = {`${visibility ? 'Ukryj' : 'Pokaż'} hasło`}
                 type = 'button'
+                ifError = {ifError}
             >
                 <IconComponent
                     family = {IconFamiliesType.MaterialDesignIcons}
