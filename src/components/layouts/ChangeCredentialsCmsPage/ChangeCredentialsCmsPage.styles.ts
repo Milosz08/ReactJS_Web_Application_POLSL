@@ -38,11 +38,12 @@ export const ChangeCredentialsCmsPageContainer = styled('section')<{ disabled: b
 
 export const ChangeCredentialsDisabledArea = styled('div')<{ disabled: boolean }>`
     position: absolute;
+    display: ${({ disabled }) => disabled ? 'block' : 'none'};
     width: 100%;
     height: 100%;
     top: 0;
     z-index: 3;
-    background-color: rgba(255, 255, 255, .2);
+    background-color: ${({ disabled }) => disabled ? 'rgba(255, 255, 255, .2)' : 'transparent'};
     border-radius: 10px;
 `;
 

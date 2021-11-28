@@ -13,10 +13,14 @@
  */
 
 import * as React from 'react';
-import { createContext, Dispatch, SetStateAction, useState } from 'react';
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import useMultipleRef from '../../../helpers/hooks/useMultipleRef';
 import { ROLES } from '../../../helpers/functionsAndClasses/LoginValidator';
+
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/reduxStore';
+import { SessionInitialTypes } from '../../../redux/sessionReduxStore/initialState';
 
 export interface ChangeCredentialsContextTypes {
     roles: {
@@ -41,11 +45,17 @@ interface PropsProvider {
  */
 const ChangeCredentialsStoreProvider: React.FC<PropsProvider> = ({ children }): JSX.Element => {
 
-    const [ role, setRole ] = useState<ROLES>(ROLES.MODERATOR);
+    const { adminAuthStatus }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
+
+    const [ role, setRole ] = useState<ROLES>(adminAuthStatus.identity);
     const [ login, pass, passRepeat, token, adminPass ] = useMultipleRef(6);
     const [ errors, setErrors ] = useState<{ [key: string]: boolean }>({
         login: false, pass: false, passRepeat: false, token: false, adminPass: false
     });
+
+    useEffect(() => {
+        setRole(adminAuthStatus.identity);
+    }, [ adminAuthStatus.identity ]);
 
     return (
         <ChangeCredentialsContext.Provider
