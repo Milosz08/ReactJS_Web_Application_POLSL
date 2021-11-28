@@ -198,3 +198,47 @@ export const BorderWithPseudoElement = ({ _color, _titleBgc, _fontSize, _fontWei
         padding: 0 10px;
     }
 `;
+
+interface StandardRadioInputElementTypes {
+    _size: number;
+    _color: string;
+}
+
+export const StandardRadioInputElement = ({ _size }: StandardRadioInputElementTypes) => css`
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+    width: ${_size}px;
+    height: ${_size}px;
+    cursor: pointer;
+    :checked ~ div {
+        border: none;
+        ::after {
+            transition: .2s;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+`;
+
+export const StandardRadiomarkSelector = ({ _size, _color }: StandardRadioInputElementTypes) => css`
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: ${_size}px;
+    height: ${_size}px;
+    border: 1px solid var(--darkGray);
+    border-radius: 50%;
+    ::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 40%;
+        height: 40%;
+        border: 6px solid ${_color};
+        border-radius: 100%;
+        background-color: var(--cleanWhiteColor);
+        transition: .2s;
+    }
+`;
