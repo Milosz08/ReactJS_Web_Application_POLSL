@@ -45,6 +45,7 @@ const ROUTING_PATH_NAMES: RoutingTypes = {
     USERS_MESS_CMS_PAGE: `${_CMS_PREFIX}Wiadomości Użytkowników`,
     HELPS_CMS_PAGE: `${_CMS_PREFIX}Modyfikuj Pomoce Naukowe`,
     CONTENT_CMS_PAGE: `${_CMS_PREFIX}Modyfikuj Wpisy`,
+    AUTH_CMS_PAGE: `${_CMS_PREFIX}Modyfikuj Dane Logowania`,
 
 } as const;
 

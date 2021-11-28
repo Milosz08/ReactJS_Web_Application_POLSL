@@ -15,42 +15,26 @@
 import * as React from 'react';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
-import {
-    AdminCmsChangeCredentialsWrapper, AdminCmsLayoutElementsContainer, AdminCmsLayoutElementsWrapper
-} from './AdminCmsLayoutElements.styles';
+import { AdminCmsLayoutElementsContainer, AdminCmsLayoutElementsWrapper } from './AdminCmsLayoutElements.styles';
 
 const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
 const AdminCmsLayout = React.lazy(() => import('./subcomponents/AdminCmsLayout'));
-const ChangeCredentialsCmsPage = React.lazy(() => import('../ChangeCredentialsCmsPage/ChangeCredentialsCmsPage'));
 
 /**
  * Component responsible for showing all content in main CMS panel page component.
  */
 const AdminCmsLayoutElements: React.FC = (): JSX.Element => (
-    <>
-        <AdminCmsLayoutElementsContainer>
-            <AdminCmsLayoutElementsWrapper>
-                <UniversalHeader
-                    iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaUsersCog' }}
-                    content = 'System Zarządzania Treścią'
-                    ifCloseButtonVisible = {false}
-                    changeIconSize = '1em'
-                />
-                <AdminCmsLayout/>
-            </AdminCmsLayoutElementsWrapper>
-        </AdminCmsLayoutElementsContainer>
-        <AdminCmsLayoutElementsContainer>
-            <AdminCmsChangeCredentialsWrapper>
-                <UniversalHeader
-                    iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaUserShield' }}
-                    content = 'Zmiana Danych Logowania'
-                    ifCloseButtonVisible = {false}
-                    changeIconSize = '.9em'
-                />
-                <ChangeCredentialsCmsPage/>
-            </AdminCmsChangeCredentialsWrapper>
-        </AdminCmsLayoutElementsContainer>
-    </>
+    <AdminCmsLayoutElementsContainer>
+        <AdminCmsLayoutElementsWrapper>
+            <UniversalHeader
+                iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaUsersCog' }}
+                content = 'System Zarządzania Treścią'
+                ifCloseButtonVisible = {false}
+                changeIconSize = '1em'
+            />
+            <AdminCmsLayout/>
+        </AdminCmsLayoutElementsWrapper>
+    </AdminCmsLayoutElementsContainer>
 );
 
 export default AdminCmsLayoutElements;
