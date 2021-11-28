@@ -18,7 +18,7 @@ import { useContext } from 'react';
 import { ROLES } from '../../../../helpers/functionsAndClasses/LoginValidator';
 import { ChangeCredentialsContext, ChangeCredentialsContextTypes } from '../ChangeCredentialsStoreProvider';
 
-import PasswordInputField from '../../PasswordInputField/PasswordInputField';
+const PasswordInputField = React.lazy(() => import('../../PasswordInputField/PasswordInputField'));
 
 interface PropsProvider {
     ifUser: boolean;

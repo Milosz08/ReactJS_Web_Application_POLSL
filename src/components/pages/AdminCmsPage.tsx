@@ -12,7 +12,8 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { Fragment, useContext, useEffect } from 'react';
+import * as React from 'react';
+import { Fragment, useContext, useEffect } from 'react';
 
 import useIsMount from '../../helpers/hooks/useIsMount';
 import usePageTitle from '../../helpers/hooks/usePageTitle';
@@ -50,13 +51,13 @@ const AdminCmsPage = (): JSX.Element => {
     }, [ cookie, dispatcher, isMount ]);
 
     return (
-        <Fragment>
+        <>
             <CookiesNotification/>
             <MobileDownNav/>
             <Header ifHeaderHasRedBar = {false}/>
             <CurrentURLpath ifImportatHeaderActive = {true}/>
             <AdminCmsLayoutElements/>
-        </Fragment>
+        </>
     );
 }
 
