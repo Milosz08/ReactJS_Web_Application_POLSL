@@ -19,9 +19,10 @@ import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
-import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
+const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const ChangeSubjectsCmsPage = React.lazy(() => import('../../layouts/ChangeSubjectsCmsPage/ChangeSubjectsCmsPage'));
 
 /**
  * Component responsible for generating CMS subpage for controlled subjects.
@@ -42,6 +43,7 @@ const SubjectsCmsSectionPage: React.FC = (): JSX.Element => {
                         ifCloseButtonVisible = {false}
                         changeIconSize = '1em'
                     />
+                    <ChangeSubjectsCmsPage/>
                 </CommonPaginationWrapper>
             </CommonPaginationContainer>
         </>
