@@ -15,7 +15,7 @@
 import styled from 'styled-components';
 import { button_rs, input_rs } from '../../../styles/reset.styles';
 import { StandardTextInput } from '../../../styles/mixins.styles';
-import { FaTrashAlt } from 'react-icons/all';
+import { FaRegTrashAlt } from 'react-icons/all';
 
 export const UniversalSearchContainer = styled.div`
     display: flex;
@@ -55,7 +55,7 @@ export const CleanInputButtonIconWrapper = styled.div`
     font-size: 1.3rem;
 `;
 
-export const TrashAlIconStyles = styled(FaTrashAlt)<{ $ifError: boolean }>`
+export const TrashAlIconStyles = styled(FaRegTrashAlt)<{ $ifError: boolean }>`
     color: var(${props => props.$ifError ? '--redColor' : '--navyBlueColor'});
     flex-grow: 1;
 `;
