@@ -39,10 +39,10 @@ export const SubjectContext = createContext<Partial<SubjectContextProvider>>({ }
  */
 const SubjectInfoContent: React.FC = (): JSX.Element => {
 
-    const { subjectsNewState } = useContext<Partial<SearchingTypes>>(SearchingContext);
+    const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
     const { activeSubjectPanelID }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
-    const subjectObject = subjectsNewState!.find((_, idx) => idx === activeSubjectPanelID);
+    const subjectObject = filteredState!.find((_, idx) => idx === activeSubjectPanelID);
 
     const generateSubjectOrNotFound: JSX.Element = Boolean(subjectObject) ? (
         <SingleSubjectInfoContent/>

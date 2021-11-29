@@ -23,7 +23,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reduxStore';
 
 export interface SearchingTypes {
-    subjectsNewState: any[];
+    filteredState: any[];
 }
 
 interface PropsProvider {
@@ -45,11 +45,11 @@ export const SearchingContext = createContext<Partial<SearchingTypes>>({ });
 const SearchingProvider: React.FC<PropsProvider> = ({ children, sortType, arrayType }): JSX.Element => {
 
     const initialState: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
-    const subjectsNewState = useInputFilter(initialState[arrayType], sortType);
+    const filteredState = useInputFilter(initialState[arrayType], sortType);
 
     return (
         <SearchingContext.Provider
-            value = {{ subjectsNewState }}
+            value = {{ filteredState }}
         >
             {children}
         </SearchingContext.Provider>

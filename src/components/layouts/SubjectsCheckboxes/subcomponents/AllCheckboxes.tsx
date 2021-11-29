@@ -31,11 +31,11 @@ import { SearchingContext, SearchingTypes } from '../../../../context/searchingC
  */
 const AllCheckboxes: React.FC = (): JSX.Element => {
 
-    const { subjectsNewState } = useContext<Partial<SearchingTypes>>(SearchingContext);
+    const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
 
     const dispatcher = useDispatch();
 
-    const subjects = subjectsNewState!.map((el, idx) => (
+    const subjects = filteredState!.map((el, idx) => (
         <SingleSubjectElements
             key = {idx}
             tile = {el}
@@ -44,8 +44,8 @@ const AllCheckboxes: React.FC = (): JSX.Element => {
     ));
 
     useEffect(() => {
-        dispatcher(setErrorsSearchInputs(searchInputs.SUBJECT_SEARCH, subjectsNewState!.length === 0));
-    }, [ dispatcher, subjectsNewState ]);
+        dispatcher(setErrorsSearchInputs(searchInputs.SUBJECT_SEARCH, filteredState!.length === 0));
+    }, [ dispatcher, filteredState ]);
 
     return (
         <Fragment>
@@ -53,7 +53,7 @@ const AllCheckboxes: React.FC = (): JSX.Element => {
                 {subjects}
             </SubjectsTilesContainer>
             <NotFindContent
-                ifVisible = {subjectsNewState!.length === 0}
+                ifVisible = {filteredState!.length === 0}
                 content = 'przedmiotu'
             />
         </Fragment>

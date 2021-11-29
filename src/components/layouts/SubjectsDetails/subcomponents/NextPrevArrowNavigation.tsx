@@ -37,14 +37,14 @@ interface PropsProvider {
  */
 const NextPrevArrowNavigation: React.FC<PropsProvider> = ({ dir }): JSX.Element => {
 
-    const { subjectsNewState } = useContext<Partial<SearchingTypes>>(SearchingContext);
+    const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
     const dispatcher = useDispatch();
 
     const handleButtonClick = (): void => {
-        dispatcher(prevNextSubjectActivePanel(dir, subjectsNewState!.length));
+        dispatcher(prevNextSubjectActivePanel(dir, filteredState!.length));
     };
 
-    const renderedArrow: JSX.Element | null = subjectsNewState!.length > 1 ? (
+    const renderedArrow: JSX.Element | null = filteredState!.length > 1 ? (
         <NavigateArrowButton
             onClick = {handleButtonClick}
             ifLeft = {dir === arrowDirs.PREV}
