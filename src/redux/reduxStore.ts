@@ -18,13 +18,15 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import preferencesReducer from './preferencesReduxStore/reducer';
 import sessionReducer from './sessionReduxStore/reducer';
 import apiReducer from './apiReduxStore/reducer';
+import modalsReducer from './modalsReduxStore/reducer';
 
 import thunk from 'redux-thunk';
 
 const rootReducers = combineReducers({
     preferencesReducer,
     apiReducer,
-    sessionReducer
+    sessionReducer,
+    modalsReducer
 });
 
 const reduxStore = createStore(

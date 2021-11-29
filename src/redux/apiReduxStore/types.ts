@@ -55,6 +55,7 @@ export enum covidTypes {
 
 export enum sortInputTypes {
     SUBJECT_SEARCH = 'subjectSearch',
+    CMS_SUBJECT_SEARCH = 'cmsSubjectsSearch',
 }
 
 export default apiTypes;

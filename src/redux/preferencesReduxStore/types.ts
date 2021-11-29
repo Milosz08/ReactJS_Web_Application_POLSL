@@ -33,6 +33,7 @@ enum preferencesTypes {
 export enum searchInputs {
     SUBJECT_SEARCH = 'subjectSearch',
     SCHEDULE_SEARCH = 'scheduleSearch',
+    CMS_SUBJECTS_SEARCH = 'cmsSubjectsSearch',
 }
 
 export enum groupsTypes {
