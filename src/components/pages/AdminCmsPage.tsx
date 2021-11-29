@@ -13,17 +13,11 @@
  */
 
 import * as React from 'react';
-import { Fragment, useContext, useEffect } from 'react';
 
-import useIsMount from '../../helpers/hooks/useIsMount';
 import usePageTitle from '../../helpers/hooks/usePageTitle';
+import useInsertSessionAdminCookie from '../../helpers/hooks/useInsertSessionAdminCookie';
+
 import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
-
-import COOKIES_OBJECT from '../../context/cookiesContext/allCookies.config';
-import { CookiesObjectsContext, CookiesObjectsTypes } from '../../context/cookiesContext/CookiesObjectsProvider';
-
-import { useDispatch } from 'react-redux';
-import { changeAdminLoggedStatus } from '../../redux/sessionReduxStore/actions';
 
 const CookiesNotification = React.lazy(() => import('../layouts/CookiesNotification/CookiesNotification'));
 const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
@@ -38,17 +32,8 @@ const AdminCmsLayoutElements = React.lazy(() => import('../layouts/AdminCmsLayou
  */
 const AdminCmsPage = (): JSX.Element => {
 
-    const { cookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
-    const dispatcher = useDispatch();
-    const isMount = useIsMount();
-
+    useInsertSessionAdminCookie();
     usePageTitle(ROUTING_PATH_NAMES.CMS_PANEL_PAGE);
-
-    useEffect(() => {
-        if (Boolean(cookie![COOKIES_OBJECT.adminSession]) && isMount) {
-            dispatcher(changeAdminLoggedStatus(true, Number(cookie![COOKIES_OBJECT.adminSession])));
-        }
-    }, [ cookie, dispatcher, isMount ]);
 
     return (
         <>
