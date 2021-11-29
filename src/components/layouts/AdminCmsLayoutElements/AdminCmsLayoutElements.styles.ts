@@ -39,7 +39,7 @@ export const AdminCmsLayoutRouterSingleTile = styled(button_rs)`
     flex-basis: calc(100% / 3 - 40px);
     background-color: var(--lightGrayTint1);
     border-radius: 10px;
-    margin: 20px;
+    margin: 30px 20px;
     a {
         text-decoration: none !important;
     }
@@ -62,7 +62,7 @@ export const CmsTileLayoutElement = styled.div`
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding: 40px 30px 30px;
+    padding: 30px;
     width: 100%;
     height: 100%;
 `;
@@ -140,9 +140,9 @@ export const AdminCmsLayoutLastUpdateIndicator = styled.span`
     line-height: 0;
     padding: 0 10px;
     border-radius: 5px;
-    top: -15px;
+    bottom: -15px;
     left: 15px;
-    background-color: var(--darkBlueColor);
+    background-color: var(--navyBlueColor);
     color: var(--whiteColor);
     height: 30px;
 `;
