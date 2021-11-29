@@ -14,10 +14,11 @@
 
 import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
 import GROUPS_STATIC from '../../helpers/structs/allGroups';
-import { groupsTypes } from './types';
+import { groupsTypes, searchInputs } from './types';
 
 const { USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
 const { NORMAL, ENGLISH, SK } = groupsTypes;
+const { SUBJECT_SEARCH, SCHEDULE_SEARCH, CMS_SUBJECTS_SEARCH } = searchInputs;
 
 export interface PreferencesInitialTypes {
     hamburgerToggle: boolean;
@@ -67,12 +68,14 @@ export const initialState = {
     routePathActive: false,
     cmsHamburgerToggle: false,
     searchInputs: {
-        subjectSearch: '',
-        scheduleSearch: '',
+        [SUBJECT_SEARCH]: '',
+        [SCHEDULE_SEARCH]: '',
+        [CMS_SUBJECTS_SEARCH]: '',
     },
     searchInputsErrors: {
-        subjectSearch: false,
-        scheduleSearch: false,
+        [SUBJECT_SEARCH]: false,
+        [SCHEDULE_SEARCH]: false,
+        [CMS_SUBJECTS_SEARCH]: false,
     },
     activeSubjectPanelID: 0,
     chooseGroups: {
