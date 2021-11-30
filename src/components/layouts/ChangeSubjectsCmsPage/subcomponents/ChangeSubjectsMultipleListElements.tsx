@@ -22,6 +22,8 @@ import { searchInputs } from '../../../../redux/preferencesReduxStore/types';
 import { setErrorsSearchInputs } from '../../../../redux/preferencesReduxStore/actions';
 
 import { ChangeSubjectsUnorderedList } from '../ChangeSubjectsCmsPage.styles';
+import CmsAddNewContentButton from '../../CmsAddNewContentButton/CmsAddNewContentButton';
+import { allModals } from '../../../../redux/modalsReduxStore/types';
 
 const ChangeSubjectsSingleListElement = React.lazy(() => import('./ChangeSubjectsSingleListElement'));
 const NotFindContent = React.lazy(() => import('../../NotFindContent/NotFindContent'));
@@ -51,6 +53,10 @@ const ChangeSubjectsMultipleListElements: React.FC = (): JSX.Element => {
             <ChangeSubjectsUnorderedList>
                 {generateListElements}
             </ChangeSubjectsUnorderedList>
+            <CmsAddNewContentButton
+                modalType = {allModals.SUBJECT_MODAL}
+                content = 'przedmiot'
+            />
             <NotFindContent
                 ifVisible = {filteredState?.length === 0}
                 content = 'przedmiotu'
