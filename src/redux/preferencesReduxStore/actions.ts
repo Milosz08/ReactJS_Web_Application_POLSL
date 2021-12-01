@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import preferencesTypes, { groupsTypes, searchInputs } from './types';
+import preferencesTypes, { cmsListIndicators, groupsTypes, searchInputs } from './types';
 import { arrowDirs } from '../../components/layouts/SubjectsDetails/subcomponents/NextPrevArrowNavigation';
 
 export interface ReturnedToReducer {
@@ -116,5 +116,12 @@ export const toggleUserLogoutModal = (toggleState: boolean): ReturnedToReducer =
     type: preferencesTypes.TOGGLE_USER_LOGOUT_MODAL,
     payload: {
         toggleState
+    }
+});
+
+export const changeCmsListPageNumber = (type: cmsListIndicators, page: number): ReturnedToReducer => ({
+    type: preferencesTypes.CHANGE_CMS_LIST_PAGE_NUMBER,
+    payload: {
+        page, type
     }
 });

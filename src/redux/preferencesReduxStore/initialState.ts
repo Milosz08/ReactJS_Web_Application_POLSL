@@ -14,11 +14,12 @@
 
 import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
 import GROUPS_STATIC from '../../helpers/structs/allGroups';
-import { groupsTypes, searchInputs } from './types';
+import { cmsListIndicators, groupsTypes, searchInputs } from './types';
 
 const { USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
 const { NORMAL, ENGLISH, SK } = groupsTypes;
 const { SUBJECT_SEARCH, SCHEDULE_SEARCH, CMS_SUBJECTS_SEARCH } = searchInputs;
+const { SUBJECTS } = cmsListIndicators;
 
 export interface PreferencesInitialTypes {
     hamburgerToggle: boolean;
@@ -48,6 +49,7 @@ export interface PreferencesInitialTypes {
         dateInfo: Date,
     };
     userLogoutModalOpen: boolean;
+    currentActivePage: { [key: string]: number };
 }
 
 export const initialState = {
@@ -90,4 +92,7 @@ export const initialState = {
         dateInfo: new Date()
     },
     userLogoutModalOpen: false,
+    currentActivePage: {
+        [SUBJECTS]: 1,
+    }
 } as const;

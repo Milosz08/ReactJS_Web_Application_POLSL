@@ -20,7 +20,7 @@ const {
     TOGGLE_HAMBURGER, INSERT_FOOTER_INPUTS, ERRORS_FOOTER_INPUTS, MOBILE_NAV_SET_ELM, ROUTE_PATH_TOGGLE,
     TOGGLE_CMS_HAMBURGER, INSERT_SEARCH_INPUT, ERRORS_SEARCH_INPUTS, CHANGE_ACTIVE_PANEL, PREV_NEXT_ACTIVE_PANEL,
     CHANGE_CHOOSE_SCHEDULE_GROUP, TOGGLE_SCHEDULE_MODAL, TOGGLE_SCHEDULE_CLEAR_MODAL, TOGGLE_CALENDAR_MOBILE_MODAL,
-    TOGGLE_USER_LOGOUT_MODAL
+    TOGGLE_USER_LOGOUT_MODAL, CHANGE_CMS_LIST_PAGE_NUMBER
 } = preferencesTypes;
 
 const preferencesReducer = (state = initialState, action: any) => {
@@ -113,6 +113,11 @@ const preferencesReducer = (state = initialState, action: any) => {
         case TOGGLE_USER_LOGOUT_MODAL: {
             const { toggleState } = action.payload;
             return { ...state, userLogoutModalOpen: toggleState };
+        }
+
+        case CHANGE_CMS_LIST_PAGE_NUMBER: {
+            const { page, type } = action.payload;
+            return { ...state, currentActivePage: { [type]: page } };
         }
 
         default: {
