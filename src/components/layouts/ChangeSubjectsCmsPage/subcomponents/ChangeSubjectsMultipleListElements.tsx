@@ -27,6 +27,7 @@ import { allModals } from '../../../../redux/modalsReduxStore/types';
 
 const ChangeSubjectsSingleListElement = React.lazy(() => import('./ChangeSubjectsSingleListElement'));
 const NotFindContent = React.lazy(() => import('../../NotFindContent/NotFindContent'));
+const UniversalListNavigate = React.lazy(() => import('../../UniversalListNavigate/UniversalListNavigate'));
 
 /**
  * Component responsible for generating all filtered subjects list (based context api).
@@ -53,6 +54,7 @@ const ChangeSubjectsMultipleListElements: React.FC = (): JSX.Element => {
             <ChangeSubjectsUnorderedList>
                 {generateListElements}
             </ChangeSubjectsUnorderedList>
+            <UniversalListNavigate/>
             <CmsAddNewContentButton
                 modalType = {allModals.SUBJECT_MODAL}
                 content = 'przedmiot'
