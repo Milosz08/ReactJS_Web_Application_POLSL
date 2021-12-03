@@ -20,6 +20,8 @@ import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 import axiosInstance from '../../helpers/misc/request';
 import ConvertTimeUTC from '../../helpers/functionsAndClasses/convertTimeUTC';
 import { CurrentScheduleContentTypes } from './dataTypes';
+import CryptoJS, { AES } from 'crypto-js';
+import { FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
 
 const {
     GET_SINGLE_FOOTERFORM_DATA, SEND_SINGLE_FOOTERFORM_DATA, GET_SINGLE_COVID_DATA, GET_SINGLE_LAST_UPDATE, SORT_BY_DATE,
@@ -32,18 +34,33 @@ const apiReducer = (state = initialState, action: any) => {
 
         case GET_SINGLE_FOOTERFORM_DATA: {
             const { footerMessageObject } = action.payload;
-            return { ...state, footerFormMessages: [ ...state.footerFormMessages, footerMessageObject ] };
+            const decryptedData = {
+                _id: footerMessageObject.userIdentity._id,
+                ifClicked: footerMessageObject.userIdentity.ifClicked,
+                userIdentity: CryptoJS.enc.Utf8.stringify(AES.decrypt(footerMessageObject.userIdentity, '')),
+                userMessage: CryptoJS.enc.Utf8.stringify(AES.decrypt(footerMessageObject.userMessage, '')),
+                userChoice: FOOTER_OPTIONS.find(option => option.value === footerMessageObject.userChoice)!.name,
+                servletTime: footerMessageObject.servletTime,
+            };
+            return { ...state, footerFormMessages: [ ...state.footerFormMessages, decryptedData ] };
         }
 
         case SEND_SINGLE_FOOTERFORM_DATA: {
             const { getfooterMessage } = action.payload;
             const postData = async (): Promise<any> => {
                 const { userNickname: userIdentity, userMessage, typeOfMessage: userChoice } = getfooterMessage;
-                const sendObject = {
-                    userIdentity, userChoice, userMessage
+                const sendObjectEncrypted = {
+                    userIdentity: AES.encrypt(userIdentity, '').toString(),
+                    userChoice,
+                    userMessage: AES.encrypt(userMessage, '').toString(),
                 };
-                const { data } = await axiosInstance.post(API_ENDPOINTS.FOOTER_FORM, sendObject);
-                state.footerFormMessages.push(data);
+                const { data } = await axiosInstance.post(API_ENDPOINTS.FOOTER_FORM, sendObjectEncrypted);
+                state.footerFormMessages.push({
+                    ...data,
+                    userIdentity: CryptoJS.enc.Utf8.stringify(AES.decrypt(data.userIdentity, '')),
+                    userMessage: CryptoJS.enc.Utf8.stringify(AES.decrypt(data.userMessage, '')),
+                    userChoice: FOOTER_OPTIONS.find(option => option.value === data.userChoice)!.name
+                });
             };
             postData();
             return state;
