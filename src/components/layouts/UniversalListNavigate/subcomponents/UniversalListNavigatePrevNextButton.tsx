@@ -15,6 +15,7 @@
 import * as React from 'react';
 import { useContext } from 'react';
 
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/all';
 import { PropsProviderAndListNavigateContext, UniversalListNavigateContext } from '../UniversalListNavigate';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,7 +57,7 @@ const UniversalListNavigatePrevNextButton: React.FC<PropsProvider> = ({ dir }): 
             title = {`${dir === directions.NEXT ? 'Następna' : 'Poprzednia'} strona`}
             disabled = {dir === directions.NEXT ? activePage === countOfSingleList : activePage === 1}
         >
-            {dir === directions.PREV ? 'PREV' : 'NEXT'}
+            {dir === directions.PREV ? <AiOutlineArrowLeft/> : <AiOutlineArrowRight/>}
         </UniversalListNavigateButton>
     );
 };
