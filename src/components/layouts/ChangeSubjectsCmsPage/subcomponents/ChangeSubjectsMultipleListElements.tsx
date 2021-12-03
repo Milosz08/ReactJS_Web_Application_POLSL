@@ -18,12 +18,13 @@ import { useContext, useEffect } from 'react';
 import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
 
 import { useDispatch } from 'react-redux';
-import { searchInputs } from '../../../../redux/preferencesReduxStore/types';
+import { cmsListIndicators, searchInputs } from '../../../../redux/preferencesReduxStore/types';
 import { setErrorsSearchInputs } from '../../../../redux/preferencesReduxStore/actions';
 
 import { ChangeSubjectsUnorderedList } from '../ChangeSubjectsCmsPage.styles';
 import CmsAddNewContentButton from '../../CmsAddNewContentButton/CmsAddNewContentButton';
 import { allModals } from '../../../../redux/modalsReduxStore/types';
+import useFilteredDivideList from '../../../../helpers/hooks/useFilteredDivideList';
 
 const ChangeSubjectsSingleListElement = React.lazy(() => import('./ChangeSubjectsSingleListElement'));
 const NotFindContent = React.lazy(() => import('../../NotFindContent/NotFindContent'));
@@ -34,16 +35,13 @@ const UniversalListNavigate = React.lazy(() => import('../../UniversalListNaviga
  */
 const ChangeSubjectsMultipleListElements: React.FC = (): JSX.Element => {
 
-    const dispatcher = useDispatch();
     const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
 
-    const generateListElements: JSX.Element[] = filteredState!.map((subject, idx) => (
-        <ChangeSubjectsSingleListElement
-            key = {subject._id}
-            element = {subject}
-            index = {idx}
-        />
-    ));
+    const [ disableOnFinding, generateListElements ] = useFilteredDivideList(
+        searchInputs.CMS_SUBJECTS_SEARCH, cmsListIndicators.SUBJECTS, ChangeSubjectsSingleListElement
+    );
+
+    const dispatcher = useDispatch();
 
     useEffect(() => {
         dispatcher(setErrorsSearchInputs(searchInputs.CMS_SUBJECTS_SEARCH, filteredState!.length === 0));
@@ -54,11 +52,15 @@ const ChangeSubjectsMultipleListElements: React.FC = (): JSX.Element => {
             <ChangeSubjectsUnorderedList>
                 {generateListElements}
             </ChangeSubjectsUnorderedList>
-            <UniversalListNavigate/>
-            <CmsAddNewContentButton
+            <UniversalListNavigate
+                type = {cmsListIndicators.SUBJECTS}
+                listItemsLength = {filteredState!.length}
+                visibilityOnSearch = {disableOnFinding}
+            />
+            {filteredState?.length !== 0 && <CmsAddNewContentButton
                 modalType = {allModals.SUBJECT_MODAL}
                 content = 'przedmiot'
-            />
+            />}
             <NotFindContent
                 ifVisible = {filteredState?.length === 0}
                 content = 'przedmiotu'
