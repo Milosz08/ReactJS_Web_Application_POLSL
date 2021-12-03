@@ -20,7 +20,7 @@ export interface FooterFormTypes {
     userChoice: string;
     userMessage: string;
     ifClicked: boolean;
-    servlettTime: {
+    servletTime: {
         fullDate: string;
         fullTime: string;
     }
