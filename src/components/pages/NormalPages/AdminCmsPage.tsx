@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -14,16 +14,16 @@
 
 import * as React from 'react';
 
-import usePageTitle from '../../helpers/hooks/usePageTitle';
-import useInsertSessionAdminCookie from '../../helpers/hooks/useInsertSessionAdminCookie';
+import usePageTitle from '../../../helpers/hooks/usePageTitle';
+import useInsertSessionAdminCookie from '../../../helpers/hooks/useInsertSessionAdminCookie';
 
-import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
+import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
-const CookiesNotification = React.lazy(() => import('../layouts/CookiesNotification/CookiesNotification'));
-const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
-const Header = React.lazy(() => import('../layouts/Header/Header'));
-const CurrentURLpath = React.lazy(() => import('../layouts/CurrentURLpath/CurrentURLpath'));
-const AdminCmsLayoutElements = React.lazy(() => import('../layouts/AdminCmsLayoutElements/AdminCmsLayoutElements'));
+const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
+const AdminCmsLayoutElements = React.lazy(() => import('../../layouts/AdminCmsLayoutElements/AdminCmsLayoutElements'));
 
 /**
  * Component responsible for generating the entire structure of the content management system

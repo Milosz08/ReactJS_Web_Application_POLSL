@@ -17,7 +17,7 @@ import { useContext } from 'react';
 
 import { searchInputs } from '../../../redux/preferencesReduxStore/types';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
-import { ExecuteScrollContext, ExecuteScrollContextTypes } from '../../pages/SchedulePage';
+import { ExecuteScrollContext, ExecuteScrollContextTypes } from '../../pages/NormalPages/SchedulePage';
 
 import {
     ScheduleAsideHeaderContainer, ScheduleAsideHeaderParamsContainer, ScheduleAsideHeaderWrapper

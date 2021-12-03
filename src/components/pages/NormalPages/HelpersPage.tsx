@@ -14,15 +14,15 @@
 
 import React, { Fragment } from 'react';
 
-import HelpersContent from '../layouts/HelpersContent/HelpersContent';
-import usePageTitle from '../../helpers/hooks/usePageTitle';
-import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
+import HelpersContent from '../../layouts/HelpersContent/HelpersContent';
+import usePageTitle from '../../../helpers/hooks/usePageTitle';
+import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
-const CookiesNotification = React.lazy(() => import('../layouts/CookiesNotification/CookiesNotification'));
-const UserLogoutModal = React.lazy(() => import('../layouts/UserLogoutModal/UserLogoutModal'));
-const Header = React.lazy(() => import('../layouts/Header/Header'));
-const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
-const CurrentURLpath = React.lazy(() => import('../layouts/CurrentURLpath/CurrentURLpath'));
+const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
+const UserLogoutModal = React.lazy(() => import('../../layouts/UserLogoutModal/UserLogoutModal'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
 
 /**
  * Component responsible for generates a page with Learning Aids.

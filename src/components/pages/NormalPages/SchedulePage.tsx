@@ -16,22 +16,22 @@ import * as React from 'react';
 import { createContext } from 'react';
 import { Fragment } from 'react';
 
-import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
+import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
-import ScheduleTypeManagement from '../layouts/ScheduleTypeManagement/ScheduleTypeManagement';
-import ScheduleSaveModal from '../layouts/ScheduleSaveModal/ScheduleSaveModal';
-import ScheduleClearModal from '../layouts/ScheduleClearModal/ScheduleClearModal';
-import ScheduleAsideHeader from '../layouts/ScheduleAsideHeader/ScheduleAsideHeader';
-import ScheduleLayout from '../layouts/ScheduleLayout/ScheduleLayout';
-import ScheduleDateUpdate from '../layouts/ScheduleDateUpdate/ScheduleDateUpdate';
-import SchedulePdfGenerator from '../layouts/SchedulePdfGenerator/SchedulePdfGenerator';
-import useOnScrollMove from '../../helpers/hooks/useOnScrollMove';
-import usePageTitle from '../../helpers/hooks/usePageTitle';
+import ScheduleTypeManagement from '../../layouts/ScheduleTypeManagement/ScheduleTypeManagement';
+import ScheduleSaveModal from '../../layouts/ScheduleSaveModal/ScheduleSaveModal';
+import ScheduleClearModal from '../../layouts/ScheduleClearModal/ScheduleClearModal';
+import ScheduleAsideHeader from '../../layouts/ScheduleAsideHeader/ScheduleAsideHeader';
+import ScheduleLayout from '../../layouts/ScheduleLayout/ScheduleLayout';
+import ScheduleDateUpdate from '../../layouts/ScheduleDateUpdate/ScheduleDateUpdate';
+import SchedulePdfGenerator from '../../layouts/SchedulePdfGenerator/SchedulePdfGenerator';
+import useOnScrollMove from '../../../helpers/hooks/useOnScrollMove';
+import usePageTitle from '../../../helpers/hooks/usePageTitle';
 
-const CookiesNotification = React.lazy(() => import('../layouts/CookiesNotification/CookiesNotification'));
-const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
-const Header = React.lazy(() => import('../layouts/Header/Header'));
-const CurrentURLpath = React.lazy(() => import('../layouts/CurrentURLpath/CurrentURLpath'));
+const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
 
 export interface ExecuteScrollContextTypes {
     executeScrollRef: React.MutableRefObject<any>;

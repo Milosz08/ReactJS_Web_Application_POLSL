@@ -15,14 +15,14 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 
-import usePageTitle from '../../helpers/hooks/usePageTitle';
-import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
+import usePageTitle from '../../../helpers/hooks/usePageTitle';
+import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
-const CookiesNotification = React.lazy(() => import('../layouts/CookiesNotification/CookiesNotification'));
-const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
-const Header = React.lazy(() => import('../layouts/Header/Header'));
-const CurrentURLpath = React.lazy(() => import('../layouts/CurrentURLpath/CurrentURLpath'));
-const AdminCmsLoginElements = React.lazy(() => import('../layouts/AdminCmsLoginElements/AdminCmsLoginElements'));
+const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
+const AdminCmsLoginElements = React.lazy(() => import('../../layouts/AdminCmsLoginElements/AdminCmsLoginElements'));
 
 /**
  * Component responsible for generating the input field for the user name, password and token in order to log in to

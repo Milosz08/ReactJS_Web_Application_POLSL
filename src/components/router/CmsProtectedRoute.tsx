@@ -23,7 +23,7 @@ import { RootState } from '../../redux/reduxStore';
 import { SessionInitialTypes } from '../../redux/sessionReduxStore/initialState';
 
 const ProtectedLoginRoute = React.lazy(() => import('../../helpers/componentsAndMiddleware/ProtectedLoginRoute'));
-const AdminCmsMainPanel = React.lazy(() => import('../pages/AdminCmsPage'));
+const AdminCmsMainPanel = React.lazy(() => import('../pages/NormalPages/AdminCmsPage'));
 
 const CovidCmsSectionPage = React.lazy(() => import('../pages/CmsProtectedPages/CovidCmsSectionPage'));
 const SubjectsCmsSectionPage = React.lazy(() => import('../pages/CmsProtectedPages/SubjectsCmsSectionPage'));

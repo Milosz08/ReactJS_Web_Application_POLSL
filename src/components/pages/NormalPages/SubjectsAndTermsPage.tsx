@@ -13,20 +13,20 @@
  */
 
 import React, { Fragment } from 'react';
-import usePageTitle from '../../helpers/hooks/usePageTitle';
+import usePageTitle from '../../../helpers/hooks/usePageTitle';
 
-import SearchingProvider from '../../context/searchingContext/SearchingProvider';
-import { sortAvailables, sortInputTypes } from '../../redux/apiReduxStore/types';
-import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
+import SearchingProvider from '../../../context/searchingContext/SearchingProvider';
+import { sortAvailables, sortInputTypes } from '../../../redux/apiReduxStore/types';
+import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
-import SubjectsAndTerms from '../layouts/SubjectsAndTerms/SubjectsAndTerms';
-import SubjectCheckboxes from '../layouts/SubjectsCheckboxes/SubjectCheckboxes';
-import SubjectsDetails from '../layouts/SubjectsDetails/SubjectsDetails';
+import SubjectsAndTerms from '../../layouts/SubjectsAndTerms/SubjectsAndTerms';
+import SubjectCheckboxes from '../../layouts/SubjectsCheckboxes/SubjectCheckboxes';
+import SubjectsDetails from '../../layouts/SubjectsDetails/SubjectsDetails';
 
-const CookiesNotification = React.lazy(() => import('../layouts/CookiesNotification/CookiesNotification'));
-const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
-const Header = React.lazy(() => import('../layouts/Header/Header'));
-const CurrentURLpath = React.lazy(() => import('../layouts/CurrentURLpath/CurrentURLpath'));
+const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
 
 /**
  * Component responsible for generating a page with the guidelines of the opinion of individual items.

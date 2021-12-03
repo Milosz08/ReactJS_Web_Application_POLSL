@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -13,23 +13,23 @@
  */
 
 import React, { Fragment } from 'react';
-import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
+import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
-import CovidInfoSection from '../layouts/CovidInfoSection/CovidInfoSection';
-import EstimateCounter from '../layouts/EstimateCounter/EstimateCounter';
-import ImagesSlider from '../layouts/ImagesSlider/ImagesSlider';
-import SubjectCheckboxes from '../layouts/SubjectsCheckboxes/SubjectCheckboxes';
-import SubjectsDetails from '../layouts/SubjectsDetails/SubjectsDetails';
-import SearchingProvider from '../../context/searchingContext/SearchingProvider';
-import { sortAvailables, sortInputTypes } from '../../redux/apiReduxStore/types';
-import usePageTitle from '../../helpers/hooks/usePageTitle';
-import CalendarIncomingActivites from '../layouts/CalendarIncomingActivities/CalendarIncomingActivites';
-import CurrentSubjectActive from '../layouts/CurrentSubjectActive/CurrentSubjectActive';
+import CovidInfoSection from '../../layouts/CovidInfoSection/CovidInfoSection';
+import EstimateCounter from '../../layouts/EstimateCounter/EstimateCounter';
+import ImagesSlider from '../../layouts/ImagesSlider/ImagesSlider';
+import SubjectCheckboxes from '../../layouts/SubjectsCheckboxes/SubjectCheckboxes';
+import SubjectsDetails from '../../layouts/SubjectsDetails/SubjectsDetails';
+import SearchingProvider from '../../../context/searchingContext/SearchingProvider';
+import { sortAvailables, sortInputTypes } from '../../../redux/apiReduxStore/types';
+import usePageTitle from '../../../helpers/hooks/usePageTitle';
+import CalendarIncomingActivites from '../../layouts/CalendarIncomingActivities/CalendarIncomingActivites';
+import CurrentSubjectActive from '../../layouts/CurrentSubjectActive/CurrentSubjectActive';
 
-const CookiesNotification = React.lazy(() => import('../layouts/CookiesNotification/CookiesNotification'));
-const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
-const Header = React.lazy(() => import('../layouts/Header/Header'));
-const Navigation = React.lazy(() => import('../layouts/NavigationStart/NavigationStart'));
+const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const Navigation = React.lazy(() => import('../../layouts/NavigationStart/NavigationStart'));
 
 /**
  * Component responsible for generating the start page (absolute address - "/").

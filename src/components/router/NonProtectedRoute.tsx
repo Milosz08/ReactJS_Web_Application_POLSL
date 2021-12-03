@@ -27,13 +27,13 @@ import useFirstPainfullLoad from '../../helpers/hooks/useFirstPainfullLoad';
 import { FRONT_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 import NAVIGATION_ELEMENTS from '../../helpers/structs/navigationElements';
 
-const StartPage = React.lazy(() => import('../pages/StartPage'));
-const AdminCmsLogin = React.lazy(() => import('../pages/AdminCmsLogin'));
-const CookiesPolicy = React.lazy(() => import('../pages/PrivacyPolicyPage'));
-const SchedulePage = React.lazy(() => import('../pages/SchedulePage'));
-const CalendarPage = React.lazy(() => import('../pages/CalendarPage'));
-const SubjectsPassPage = React.lazy(() => import('../pages/SubjectsAndTermsPage'));
-const HelpersPage = React.lazy(() => import('../pages/HelpersPage'));
+const StartPage = React.lazy(() => import('../pages/NormalPages/StartPage'));
+const AdminCmsLogin = React.lazy(() => import('../pages/NormalPages/AdminCmsLogin'));
+const CookiesPolicy = React.lazy(() => import('../pages/NormalPages/PrivacyPolicyPage'));
+const SchedulePage = React.lazy(() => import('../pages/NormalPages/SchedulePage'));
+const CalendarPage = React.lazy(() => import('../pages/NormalPages/CalendarPage'));
+const SubjectsPassPage = React.lazy(() => import('../pages/NormalPages/SubjectsAndTermsPage'));
+const HelpersPage = React.lazy(() => import('../pages/NormalPages/HelpersPage'));
 const CmsProtectedRoute = React.lazy(() => import('./CmsProtectedRoute'));
 
 /**

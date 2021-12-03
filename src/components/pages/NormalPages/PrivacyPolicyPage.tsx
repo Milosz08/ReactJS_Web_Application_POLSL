@@ -13,14 +13,14 @@
  */
 
 import React, { Fragment } from 'react';
-import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
+import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
-import usePageTitle from '../../helpers/hooks/usePageTitle';
-import PrivacyPolicy from '../layouts/PrivacyPolicy/PrivacyPolicy';
+import usePageTitle from '../../../helpers/hooks/usePageTitle';
+import PrivacyPolicy from '../../layouts/PrivacyPolicy/PrivacyPolicy';
 
-const MobileDownNav = React.lazy(() => import('../layouts/MobileDownNav/MobileDownNav'));
-const Header = React.lazy(() => import('../layouts/Header/Header'));
-const CurrentURLpath = React.lazy(() => import('../layouts/CurrentURLpath/CurrentURLpath'));
+const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
+const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
 
 /**
  * Component generates a privacy policy document.
