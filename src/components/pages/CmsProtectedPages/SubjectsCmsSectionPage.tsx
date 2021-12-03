@@ -22,7 +22,7 @@ import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconC
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
-const ChangeSubjectsCmsPage = React.lazy(() => import('../../layouts/ChangeSubjectsCmsPage/ChangeSubjectsCmsPage'));
+const ChangeSubjectsCmsPage = React.lazy(() => import('../../layouts/CmsPanelsComponentsGroup/ChangeSubjectsCmsPage/ChangeSubjectsCmsPage'));
 
 /**
  * Component responsible for generating CMS subpage for controlled subjects.
