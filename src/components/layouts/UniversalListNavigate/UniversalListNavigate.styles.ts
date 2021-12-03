@@ -47,17 +47,18 @@ export const UniversalListNavigateLabel = styled.div`
 
 export const UniversalListNaviagteSelect = styled(select_rs)<{ ifExtraMargin?: boolean }>`
     appearance: none;
-    border: none;
-    border-bottom: 3px solid var(--navyBlueColor);
+    border: 1px solid var(--darkGrayTint2);
     font-size: 1.1rem;
     font-weight: 500;
+    padding: 2px 6px 2px 5px;
+    border-radius: 5px;
     min-width: 10px;
     text-align: center;
+    line-height: 1;
     color: var(--navyBlueColor);
-    margin: 0 3px 0 ${({ ifExtraMargin }) => ifExtraMargin ? '10px' : '3px'};
+    margin: 0 6px;
     :disabled {
         cursor: not-allowed;
         color: var(--darkGrayTint2);
-        border: none;
     }
 `;
