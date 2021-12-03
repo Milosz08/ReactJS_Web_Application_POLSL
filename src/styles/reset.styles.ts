@@ -30,6 +30,9 @@ export const button_rs = styled.button`
     font-size: inherit;
     font-weight: inherit;
     color: inherit;
+    :disabled {
+        cursor: not-allowed;
+    }
 `;
 
 export const ul_rs = styled.ul`
