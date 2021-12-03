@@ -52,6 +52,7 @@ const StartPage = (): JSX.Element => {
             <SearchingProvider
                 sortType = {sortInputTypes.SUBJECT_SEARCH}
                 arrayType = {sortAvailables.SUBJECTS}
+                sortByType = 'title'
             >
                 <SubjectCheckboxes/>
                 <SubjectsDetails/>
