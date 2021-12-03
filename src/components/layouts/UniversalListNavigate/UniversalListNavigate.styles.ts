@@ -21,7 +21,7 @@ export const UniversalListNavigateContainer = styled.nav`
     margin: 20px 0;
 `;
 
-export const UniversalListNavigateSingleElement = styled('div')<{ ifExtraMargin: boolean }>`
+export const UniversalListNavigateSingleElement = styled('div')<{ ifExtraMargin?: boolean }>`
     margin-left: ${({ ifExtraMargin }) => ifExtraMargin ? '40px' : 0};
 `;
 
