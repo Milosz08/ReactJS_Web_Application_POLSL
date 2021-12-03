@@ -39,7 +39,7 @@ const useFilteredDivideList = (
 
     const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
 
-    const { activePage, maxShowingElms } = currentActivePage[pageType!];
+    const { activePage, maxShowingElms } = currentActivePage[pageType];
 
     const [ disableOnFinding, setDisableOnFinding ] = useState<boolean>(false);
 
@@ -47,14 +47,14 @@ const useFilteredDivideList = (
         !disableOnFinding ? (
             idx >= (activePage - 1) * maxShowingElms && idx < activePage * maxShowingElms ? (
                 <RenderComponent
-                    key = {element._id}
+                    key = {idx}
                     element = {element}
                     index = {idx}
                 />
             ) : null
         ) : (
             <RenderComponent
-                key = {element._id}
+                key = {idx}
                 element = {element}
                 index = {idx}
             />
