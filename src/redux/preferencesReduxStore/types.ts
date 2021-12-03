@@ -36,6 +36,7 @@ export enum searchInputs {
     SUBJECT_SEARCH = 'subjectSearch',
     SCHEDULE_SEARCH = 'scheduleSearch',
     CMS_SUBJECTS_SEARCH = 'cmsSubjectsSearch',
+    CMS_USER_MESSAGES = 'cmsUserMessagesSearch',
 }
 
 export enum groupsTypes {
@@ -46,6 +47,7 @@ export enum groupsTypes {
 
 export enum cmsListIndicators {
     SUBJECTS = 'subjectsContent',
+    USER_MESSAGES = 'footerFormMessages',
 }
 
 export default preferencesTypes;

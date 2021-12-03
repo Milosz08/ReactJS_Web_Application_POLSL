@@ -45,6 +45,7 @@ export enum sortAvailables {
     SUBJECTS = 'subjectsContent',
     SCHEDULE = 'scheduleContent',
     CALENDAR = 'calendarContent',
+    USER_MESSAGES = 'footerFormMessages',
 }
 
 export enum covidTypes {
@@ -56,6 +57,7 @@ export enum covidTypes {
 export enum sortInputTypes {
     SUBJECT_SEARCH = 'subjectSearch',
     CMS_SUBJECT_SEARCH = 'cmsSubjectsSearch',
+    CMS_USER_MESSAGES_SEARCH = 'cmsUserMessagesSearch',
 }
 
 export default apiTypes;

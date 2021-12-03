@@ -21,8 +21,8 @@ import GROUPS_STATIC from '../../helpers/structs/allGroups';
 
 const { USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
 const { NORMAL, ENGLISH, SK } = groupsTypes;
-const { SUBJECT_SEARCH, SCHEDULE_SEARCH, CMS_SUBJECTS_SEARCH } = searchInputs;
-const { SUBJECTS } = cmsListIndicators;
+const { SUBJECT_SEARCH, SCHEDULE_SEARCH, CMS_SUBJECTS_SEARCH, CMS_USER_MESSAGES } = searchInputs;
+const { SUBJECTS, USER_MESSAGES } = cmsListIndicators;
 
 export interface PreferencesInitialTypes {
     hamburgerToggle: boolean;
@@ -79,11 +79,13 @@ export const initialState = {
         [SUBJECT_SEARCH]: '',
         [SCHEDULE_SEARCH]: '',
         [CMS_SUBJECTS_SEARCH]: '',
+        [CMS_USER_MESSAGES]: '',
     },
     searchInputsErrors: {
         [SUBJECT_SEARCH]: false,
         [SCHEDULE_SEARCH]: false,
         [CMS_SUBJECTS_SEARCH]: false,
+        [CMS_USER_MESSAGES]: false,
     },
     activeSubjectPanelID: 0,
     chooseGroups: {
@@ -100,6 +102,10 @@ export const initialState = {
     userLogoutModalOpen: false,
     currentActivePage: {
         [SUBJECTS]: {
+            activePage: 1,
+            maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
+        },
+        [USER_MESSAGES]: {
             activePage: 1,
             maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
         },

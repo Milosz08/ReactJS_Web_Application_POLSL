@@ -18,10 +18,12 @@ export enum modalsTypes {
 
 export enum allModals {
     SUBJECT_MODAL = 'subjectsModal',
+    USER_MESSAGES_MODAL = 'userMessagesModal',
 }
 
 export enum allModalsActions {
     ADD_ELEMENT = 'ADD_ELEMENT',
     EDIT_ELEMENT = 'EDIT_ELEMENT',
     REMOVE_ELEMENT = 'REMOVE_ELEMENT',
+    VIEW_ELEMENT = 'VIEW_ELEMENT',
 }
