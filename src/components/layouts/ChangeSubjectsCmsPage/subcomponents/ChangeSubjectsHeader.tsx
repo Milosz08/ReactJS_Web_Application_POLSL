@@ -33,7 +33,7 @@ const ChangeSubjectsHeader: React.FC = (): JSX.Element => {
         <>
             {filteredState?.length !== 0 && <ChangeSubjectsHeaderContainer>
                 <ChangeSubjectsIdElement>
-                    id
+                    lp
                 </ChangeSubjectsIdElement>
                 <ChangeSubjectsTitleElement>
                     nazwa przedmiotu
