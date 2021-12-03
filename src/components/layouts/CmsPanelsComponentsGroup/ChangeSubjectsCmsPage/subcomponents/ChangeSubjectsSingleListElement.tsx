@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -14,15 +14,16 @@
 
 import * as React from 'react';
 
-import { SubjectsContentTypes } from '../../../../redux/apiReduxStore/dataTypes';
-import { AllSemesters } from '../../../../helpers/structs/allSemesters';
+import { AllSemesters } from '../../../../../helpers/structs/allSemesters';
+
+import { allModals } from '../../../../../redux/modalsReduxStore/types';
+import { SubjectsContentTypes } from '../../../../../redux/apiReduxStore/dataTypes';
 
 import {
-    ChangeSubjectsIdElement, ChangeSubjectsSemesterElement, ChangeSubjectsStatusElement, ChangeSubjectsTitleElement,
-    ChangeSubjectsUnorderedListElement
-} from '../ChangeSubjectsCmsPage.styles';
+    CmsUnorderedListElement, CmsIdElement, CmsSingleListNormalElement
+} from '../../HighOrderComponents/HighOrderComponents.styles';
 
-const ChangeSubjectSingleListButtons = React.lazy(() => import('./ChangeSubjectSingleListButtons'));
+const SingleElementButtons = React.lazy(() => import('../../HighOrderComponents/SingleElementButtons'));
 
 interface PropsProvider {
     element: SubjectsContentTypes;
@@ -44,28 +45,28 @@ const ChangeSubjectsSingleListElement: React.FC<PropsProvider> = ({ element, ind
     ));
 
     return (
-        <ChangeSubjectsUnorderedListElement>
-            <ChangeSubjectsIdElement
-                ifNotHeader = {true}
-            >
+        <CmsUnorderedListElement>
+            <CmsIdElement ifNotHeader = {true}>
                 {index + 1}
-            </ChangeSubjectsIdElement>
-            <ChangeSubjectsTitleElement>
+            </CmsIdElement>
+            <CmsSingleListNormalElement>
                 {element.title}
-            </ChangeSubjectsTitleElement>
-            <ChangeSubjectsSemesterElement>
+            </CmsSingleListNormalElement>
+            <CmsSingleListNormalElement flexBasis = '220px'>
                 {semestersCount}
-            </ChangeSubjectsSemesterElement>
-            <ChangeSubjectsStatusElement
-                ifNotHeader = {true}
+            </CmsSingleListNormalElement>
+            <CmsSingleListNormalElement
+                flexBasis = '210px'
                 color = {element.ifEnd ? 'green' : 'red'}
             >
                 {element.ifEnd ? 'zakończony' : 'w trakcie'}
-            </ChangeSubjectsStatusElement>
-            <ChangeSubjectSingleListButtons
+            </CmsSingleListNormalElement>
+            <SingleElementButtons
                 dataID = {element._id}
+                modalTypeEnum = {allModals.SUBJECT_MODAL}
+                ifViewmodeActive = {false}
             />
-        </ChangeSubjectsUnorderedListElement>
+        </CmsUnorderedListElement>
     );
 };
 

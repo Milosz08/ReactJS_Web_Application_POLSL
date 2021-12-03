@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -15,12 +15,11 @@
 import * as React from 'react';
 import { useContext } from 'react';
 
-import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
+import { SearchingContext, SearchingTypes } from '../../../../../context/searchingContext/SearchingProvider';
 
 import {
-    ChangeSubjectsHeaderContainer, ChangeSubjectsIdElement, ChangeSubjectsSemesterElement,
-    ChangeSubjectsStatusElement, ChangeSubjectsTitleElement
-} from '../ChangeSubjectsCmsPage.styles';
+    CmsIdElement, CmsListHeaderContainer, CmsSingleListNormalElement
+} from '../../HighOrderComponents/HighOrderComponents.styles';
 
 /**
  * Component responsible for generating header content elements for subjects list.
@@ -31,20 +30,20 @@ const ChangeSubjectsHeader: React.FC = (): JSX.Element => {
 
     return (
         <>
-            {filteredState?.length !== 0 && <ChangeSubjectsHeaderContainer>
-                <ChangeSubjectsIdElement>
+            {filteredState?.length !== 0 && <CmsListHeaderContainer>
+                <CmsIdElement>
                     lp
-                </ChangeSubjectsIdElement>
-                <ChangeSubjectsTitleElement>
+                </CmsIdElement>
+                <CmsSingleListNormalElement>
                     nazwa przedmiotu
-                </ChangeSubjectsTitleElement>
-                <ChangeSubjectsSemesterElement>
+                </CmsSingleListNormalElement>
+                <CmsSingleListNormalElement flexBasis = '220px'>
                     semestry
-                </ChangeSubjectsSemesterElement>
-                <ChangeSubjectsStatusElement>
+                </CmsSingleListNormalElement>
+                <CmsSingleListNormalElement flexBasis = '310px'>
                     status
-                </ChangeSubjectsStatusElement>
-            </ChangeSubjectsHeaderContainer>}
+                </CmsSingleListNormalElement>
+            </CmsListHeaderContainer>}
         </>
     );
 };
