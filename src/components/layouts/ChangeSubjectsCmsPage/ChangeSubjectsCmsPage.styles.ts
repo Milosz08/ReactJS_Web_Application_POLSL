@@ -60,6 +60,7 @@ export const ChangeSubjectsUnorderedListElement = styled.li`
     border-radius: 10px;
     padding: 10px 15px;
     margin-bottom: 10px;
+    min-height: 55px;
 `;
 
 export const ChangeSubjectSingleListButtonsContainer = styled.div`
