@@ -29,6 +29,7 @@ import useFilteredDivideList from '../../../../helpers/hooks/useFilteredDivideLi
 const ChangeSubjectsSingleListElement = React.lazy(() => import('./ChangeSubjectsSingleListElement'));
 const NotFindContent = React.lazy(() => import('../../NotFindContent/NotFindContent'));
 const UniversalListNavigate = React.lazy(() => import('../../UniversalListNavigate/UniversalListNavigate'));
+const ChangeSubjectsHeader = React.lazy(() => import('./ChangeSubjectsHeader'));
 
 /**
  * Component responsible for generating all filtered subjects list (based context api).
@@ -49,14 +50,15 @@ const ChangeSubjectsMultipleListElements: React.FC = (): JSX.Element => {
 
     return (
         <>
-            <ChangeSubjectsUnorderedList>
-                {generateListElements}
-            </ChangeSubjectsUnorderedList>
             <UniversalListNavigate
                 type = {cmsListIndicators.SUBJECTS}
                 listItemsLength = {filteredState!.length}
                 visibilityOnSearch = {disableOnFinding}
             />
+            <ChangeSubjectsHeader/>
+            <ChangeSubjectsUnorderedList>
+                {generateListElements}
+            </ChangeSubjectsUnorderedList>
             {filteredState?.length !== 0 && <CmsAddNewContentButton
                 modalType = {allModals.SUBJECT_MODAL}
                 content = 'przedmiot'

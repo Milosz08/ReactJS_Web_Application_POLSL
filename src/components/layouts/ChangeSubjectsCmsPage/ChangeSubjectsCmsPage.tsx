@@ -21,7 +21,6 @@ import { ChangeSubjectsCmsPageContainer } from './ChangeSubjectsCmsPage.styles';
 
 const UniversalSearch = React.lazy(() => import('../UniversalSearch/UniversalSearch'));
 const ChangeSubjectsMultipleListElements = React.lazy(() => import('./subcomponents/ChangeSubjectsMultipleListElements'));
-const ChangeSubjectsHeader = React.lazy(() => import('./subcomponents/ChangeSubjectsHeader'));
 const SearchingProvider = React.lazy(() => import('../../../context/searchingContext/SearchingProvider'));
 
 /**
@@ -37,7 +36,6 @@ const ChangeSubjectsCmsPage: React.FC = (): JSX.Element => (
                 type = {searchInputs.CMS_SUBJECTS_SEARCH}
                 placeholder = 'Nazwa przedmiotu'
             />
-            <ChangeSubjectsHeader/>
             <ChangeSubjectsMultipleListElements/>
         </SearchingProvider>
     </ChangeSubjectsCmsPageContainer>
