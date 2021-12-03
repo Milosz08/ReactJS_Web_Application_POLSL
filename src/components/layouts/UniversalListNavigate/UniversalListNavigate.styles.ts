@@ -13,14 +13,51 @@
  */
 
 import styled from 'styled-components';
-import { button_rs } from '../../../styles/reset.styles';
+import { button_rs, select_rs } from '../../../styles/reset.styles';
 
 export const UniversalListNavigateContainer = styled.nav`
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     margin: 20px 0;
 `;
 
-export const UniversalListNavigateButton = styled('button')`
-    
+export const UniversalListNavigateSingleElement = styled('div')<{ ifExtraMargin: boolean }>`
+    margin-left: ${({ ifExtraMargin }) => ifExtraMargin ? '40px' : 0};
+`;
+
+export const UniversalListNavigateButton = styled(button_rs)`
+    font-size: 1.1rem;
+    margin: 0 10px;
+    color: var(--navyBlueColor);
+    :disabled {
+        color: var(--darkGrayTint2);
+    }
+`;
+
+export const UniversalListNavigateText = styled.span`
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--navyBlueColor);
+`;
+
+export const UniversalListNavigateLabel = styled.div`
+    display: inline-block;
+    position: relative;
+`;
+
+export const UniversalListNaviagteSelect = styled(select_rs)<{ ifExtraMargin?: boolean }>`
+    appearance: none;
+    border: none;
+    border-bottom: 3px solid var(--navyBlueColor);
+    font-size: 1.1rem;
+    font-weight: 500;
+    min-width: 10px;
+    text-align: center;
+    color: var(--navyBlueColor);
+    margin: 0 3px 0 ${({ ifExtraMargin }) => ifExtraMargin ? '10px' : '3px'};
+    :disabled {
+        cursor: not-allowed;
+        color: var(--darkGrayTint2);
+        border: none;
+    }
 `;
