@@ -21,6 +21,6 @@ export const UniversalListNavigateContainer = styled.nav`
     margin: 20px 0;
 `;
 
-export const UniversalListNavigateButton = styled(button_rs)`
+export const UniversalListNavigateButton = styled('button')`
     
 `;

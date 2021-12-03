@@ -13,7 +13,10 @@
  */
 
 import * as React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+
+import useIsMount from '../../../../helpers/hooks/useIsMount';
+import useMultipleRef from '../../../../helpers/hooks/useMultipleRef';
 
 import { PropsProviderAndListNavigateContext, UniversalListNavigateContext } from '../UniversalListNavigate';
 
@@ -22,43 +25,49 @@ import { RootState } from '../../../../redux/reduxStore';
 import { changeCmsListPageNumber } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
-import { UniversalListNavigateButton } from '../UniversalListNavigate.styles';
-
-export enum directions {
-    PREV, NEXT
-}
-
-interface PropsProvider {
-    dir: directions;
-}
-
 /**
  *
- * @param dir { directions } -
  */
-const UniversalListNavigatePrevNextButton: React.FC<PropsProvider> = ({ dir }): JSX.Element => {
+const UniversalListNavigateSelectPageInput: React.FC = (): JSX.Element => {
 
     const { type, listItemsLength } = useContext<Partial<PropsProviderAndListNavigateContext>>(UniversalListNavigateContext);
     const { currentActivePage }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
-    const { activePage, maxShowingElms } = currentActivePage[type!];
+    const dispatcher = useDispatch();
+    const [ grabber ] = useMultipleRef(1);
+    const isMount = useIsMount();
+
+    const { maxShowingElms } = currentActivePage[type!];
     const countOfSingleList: number = Math.floor(listItemsLength! / maxShowingElms) + 1;
 
-    const dispatcher = useDispatch();
+    const generateOptions = Array.from({ length: countOfSingleList }).map((_, idx) => (
+        <option key = {idx}>
+            {idx + 1}
+        </option>
+    ));
 
-    const handleClickPrevOrNextPage = (): void => {
-        dispatcher(changeCmsListPageNumber(type!, activePage, countOfSingleList, dir));
+    const handleSelectCurrentPage = ({ target }: React.ChangeEvent<HTMLSelectElement>): void => {
+        dispatcher(changeCmsListPageNumber(type!, Number(target.value), countOfSingleList));
     };
 
+    useEffect(() => {
+        if (!isMount) {
+            grabber.current.value = currentActivePage[type!].activePage;
+        }
+    }, [ currentActivePage, grabber, isMount, type ]);
+
     return (
-        <UniversalListNavigateButton
-            onClick = {handleClickPrevOrNextPage}
-            title = {`${dir === directions.NEXT ? 'Następna' : 'Poprzednia'} strona`}
-            disabled = {dir === directions.NEXT ? activePage === countOfSingleList : activePage === 1}
-        >
-            {dir === directions.PREV ? 'PREV' : 'NEXT'}
-        </UniversalListNavigateButton>
+        <div>
+            Strona
+            <select
+                onChange = {handleSelectCurrentPage}
+                ref = {grabber}
+            >
+                {generateOptions}
+            </select>
+             z {countOfSingleList}
+        </div>
     );
 };
 
-export default UniversalListNavigatePrevNextButton;
+export default UniversalListNavigateSelectPageInput;

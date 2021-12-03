@@ -13,26 +13,56 @@
  */
 
 import * as React from 'react';
+import { createContext } from 'react';
 
 import { UniversalListNavigateContainer } from './UniversalListNavigate.styles';
-import UniversalListNavigatePrevNextButton, { directions } from './subcomponents/UniversalListNavigatePrevNextButton';
+import { cmsListIndicators } from '../../../redux/preferencesReduxStore/types';
+import { directions } from './subcomponents/UniversalListNavigatePrevNextButton';
+
+const UniversalListNavigatePrevNextButton = React.lazy(() => import('./subcomponents/UniversalListNavigatePrevNextButton'));
+const UniversalListNavigateSelectPageInput = React.lazy(() => import('./subcomponents/UniversalListNavigateSelectPageInput'));
+const UniversalListNavigateChangeQuantity = React.lazy(() => import('./subcomponents/UniversalListNavigateChangeQuantity'));
+
+export interface PropsProviderAndListNavigateContext {
+    type: cmsListIndicators;
+    listItemsLength: number;
+    visibilityOnSearch: boolean;
+}
+
+export const UniversalListNavigateContext = createContext<Partial<PropsProviderAndListNavigateContext>>({});
 
 /**
  *
+ *
+ * @param type { cmsListIndicators } -
+ * @param listItemsLength { number } -
+ * @param visibilityOnSearch { boolean } -
  */
-const UniversalListNavigate: React.FC = (): JSX.Element => {
+const UniversalListNavigate: React.FC<PropsProviderAndListNavigateContext> = ({
+    type, listItemsLength, visibilityOnSearch
+}): JSX.Element => {
 
     const { PREV, NEXT } = directions;
 
     return (
-        <UniversalListNavigateContainer>
-            <UniversalListNavigatePrevNextButton
-                dir = {PREV}
-            />
-            <UniversalListNavigatePrevNextButton
-                dir = {NEXT}
-            />
-        </UniversalListNavigateContainer>
+        <>
+            {!visibilityOnSearch && <UniversalListNavigateContainer>
+                <UniversalListNavigateContext.Provider
+                    value = {{
+                        type, listItemsLength
+                    }}
+                >
+                    <UniversalListNavigatePrevNextButton
+                        dir = {PREV}
+                    />
+                    <UniversalListNavigateSelectPageInput/>
+                    <UniversalListNavigatePrevNextButton
+                        dir = {NEXT}
+                    />
+                    <UniversalListNavigateChangeQuantity/>
+                </UniversalListNavigateContext.Provider>
+            </UniversalListNavigateContainer>}
+        </>
     );
 };
 
