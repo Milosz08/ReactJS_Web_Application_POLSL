@@ -127,12 +127,16 @@ const preferencesReducer = (state = initialState, action: any) => {
             } else if(dir === null) {
                 increment = page;
             }
-            return { ...state, currentActivePage: { [type]: { ...state.currentActivePage[type], activePage: increment } } };
+            return { ...state, currentActivePage: {
+                ...state.currentActivePage, [type]: { ...state.currentActivePage[type], activePage: increment
+            }}};
         }
 
         case CHANGE_MAX_SHOWING_CMS_LIST_ELMS: {
             const { type, maxShowingElms } = action.payload;
-            return { ...state, currentActivePage: { [type]: { ...state.currentActivePage[type], maxShowingElms } } };
+            return { ...state, currentActivePage: {
+                ...state.currentActivePage, [type]: { ...state.currentActivePage[type], maxShowingElms
+            }}};
         }
 
         default: {
