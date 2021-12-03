@@ -14,13 +14,15 @@
 
 import preferencesTypes from './types';
 import { initialState } from './initialState';
+
 import { arrowDirs } from '../../components/layouts/SubjectsDetails/subcomponents/NextPrevArrowNavigation';
+import { directions } from '../../components/layouts/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
 
 const {
     TOGGLE_HAMBURGER, INSERT_FOOTER_INPUTS, ERRORS_FOOTER_INPUTS, MOBILE_NAV_SET_ELM, ROUTE_PATH_TOGGLE,
     TOGGLE_CMS_HAMBURGER, INSERT_SEARCH_INPUT, ERRORS_SEARCH_INPUTS, CHANGE_ACTIVE_PANEL, PREV_NEXT_ACTIVE_PANEL,
     CHANGE_CHOOSE_SCHEDULE_GROUP, TOGGLE_SCHEDULE_MODAL, TOGGLE_SCHEDULE_CLEAR_MODAL, TOGGLE_CALENDAR_MOBILE_MODAL,
-    TOGGLE_USER_LOGOUT_MODAL, CHANGE_CMS_LIST_PAGE_NUMBER
+    TOGGLE_USER_LOGOUT_MODAL, CHANGE_CMS_LIST_PAGE_NUMBER, CHANGE_MAX_SHOWING_CMS_LIST_ELMS
 } = preferencesTypes;
 
 const preferencesReducer = (state = initialState, action: any) => {
@@ -116,8 +118,21 @@ const preferencesReducer = (state = initialState, action: any) => {
         }
 
         case CHANGE_CMS_LIST_PAGE_NUMBER: {
-            const { page, type } = action.payload;
-            return { ...state, currentActivePage: { [type]: page } };
+            const { page, type, maxPage, dir } = action.payload;
+            let increment: number = state.currentActivePage[type].activePage;
+            if(page !== maxPage && dir === Number(directions.NEXT)) {
+                ++increment;
+            } else if(page !== 1 && dir === Number(directions.PREV)) {
+                --increment;
+            } else if(dir === null) {
+                increment = page;
+            }
+            return { ...state, currentActivePage: { [type]: { ...state.currentActivePage[type], activePage: increment } } };
+        }
+
+        case CHANGE_MAX_SHOWING_CMS_LIST_ELMS: {
+            const { type, maxShowingElms } = action.payload;
+            return { ...state, currentActivePage: { [type]: { ...state.currentActivePage[type], maxShowingElms } } };
         }
 
         default: {

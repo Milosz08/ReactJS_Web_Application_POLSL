@@ -14,6 +14,7 @@
 
 import preferencesTypes, { cmsListIndicators, groupsTypes, searchInputs } from './types';
 import { arrowDirs } from '../../components/layouts/SubjectsDetails/subcomponents/NextPrevArrowNavigation';
+import { directions } from '../../components/layouts/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
 
 export interface ReturnedToReducer {
     type: preferencesTypes;
@@ -119,9 +120,18 @@ export const toggleUserLogoutModal = (toggleState: boolean): ReturnedToReducer =
     }
 });
 
-export const changeCmsListPageNumber = (type: cmsListIndicators, page: number): ReturnedToReducer => ({
+export const changeCmsListPageNumber = (
+    type: cmsListIndicators, page: number, maxPage: number, dir: directions | null = null
+): ReturnedToReducer => ({
     type: preferencesTypes.CHANGE_CMS_LIST_PAGE_NUMBER,
     payload: {
-        page, type
+        page, type, maxPage, dir
+    }
+});
+
+export const changeCmsListShowingElementsCount = (type: cmsListIndicators, maxShowingElms: number): ReturnedToReducer => ({
+    type: preferencesTypes.CHANGE_MAX_SHOWING_CMS_LIST_ELMS,
+    payload: {
+        type, maxShowingElms
     }
 });

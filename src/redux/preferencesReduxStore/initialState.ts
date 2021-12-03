@@ -12,9 +12,12 @@
  * governing permissions and limitations under the license.
  */
 
-import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
-import GROUPS_STATIC from '../../helpers/structs/allGroups';
 import { cmsListIndicators, groupsTypes, searchInputs } from './types';
+
+import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
+import { CMS_LIST_QUANTITY_VALUES } from '../../helpers/structs/cmsSystem.config';
+
+import GROUPS_STATIC from '../../helpers/structs/allGroups';
 
 const { USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
 const { NORMAL, ENGLISH, SK } = groupsTypes;
@@ -49,7 +52,10 @@ export interface PreferencesInitialTypes {
         dateInfo: Date,
     };
     userLogoutModalOpen: boolean;
-    currentActivePage: { [key: string]: number };
+    currentActivePage: {
+        activePage: number;
+        maxShowingElms: number;
+    };
 }
 
 export const initialState = {
@@ -89,10 +95,13 @@ export const initialState = {
     clearScheduleOptionModalOpen: false,
     calendarMobileModalOpen: {
         toggleState: false,
-        dateInfo: new Date()
+        dateInfo: new Date(),
     },
     userLogoutModalOpen: false,
     currentActivePage: {
-        [SUBJECTS]: 1,
+        [SUBJECTS]: {
+            activePage: 1,
+            maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
+        },
     }
 } as const;

@@ -29,6 +29,7 @@ enum preferencesTypes {
     TOGGLE_CALENDAR_MOBILE_MODAL = 'TOGGLE_CALENDAR_MOBILE_MODAL',
     TOGGLE_USER_LOGOUT_MODAL = 'TOGGLE_USER_LOGOUT_MODAL',
     CHANGE_CMS_LIST_PAGE_NUMBER = 'CHANGE_CMS_LIST_PAGE_NUMBER',
+    CHANGE_MAX_SHOWING_CMS_LIST_ELMS = 'CHANGE_MAX_SHOWING_CMS_LIST_ELMS',
 }
 
 export enum searchInputs {
@@ -44,7 +45,7 @@ export enum groupsTypes {
 }
 
 export enum cmsListIndicators {
-    SUBJECTS = 'SUBJECTS',
+    SUBJECTS = 'subjectsContent',
 }
 
 export default preferencesTypes;
