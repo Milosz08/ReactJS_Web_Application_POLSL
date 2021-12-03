@@ -19,8 +19,7 @@ export const CmsAddNewContentButtonStyles = styled(button_rs)`
     border: 2px dashed var(--navyBlueColor);
     color: var(--navyBlueColor);
     border-radius: 10px;
-    margin-top: 10px;
-    padding: 12px;
+    padding: 10px;
     width: 100%;
     text-align: center;
     font-size: 1.2rem;
