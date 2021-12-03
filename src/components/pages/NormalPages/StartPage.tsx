@@ -15,21 +15,21 @@
 import React, { Fragment } from 'react';
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
-import CovidInfoSection from '../../layouts/CovidInfoSection/CovidInfoSection';
-import EstimateCounter from '../../layouts/EstimateCounter/EstimateCounter';
-import ImagesSlider from '../../layouts/ImagesSlider/ImagesSlider';
-import SubjectCheckboxes from '../../layouts/SubjectsCheckboxes/SubjectCheckboxes';
-import SubjectsDetails from '../../layouts/SubjectsDetails/SubjectsDetails';
 import SearchingProvider from '../../../context/searchingContext/SearchingProvider';
-import { sortAvailables, sortInputTypes } from '../../../redux/apiReduxStore/types';
 import usePageTitle from '../../../helpers/hooks/usePageTitle';
-import CalendarIncomingActivites from '../../layouts/CalendarIncomingActivities/CalendarIncomingActivites';
-import CurrentSubjectActive from '../../layouts/CurrentSubjectActive/CurrentSubjectActive';
+import { sortAvailables, sortInputTypes } from '../../../redux/apiReduxStore/types';
 
 const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotification/CookiesNotification'));
 const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
 const Header = React.lazy(() => import('../../layouts/Header/Header'));
+const ImagesSlider = React.lazy(() => import('../../layouts/ImagesSlider/ImagesSlider'));
+const CovidInfoSection = React.lazy(() => import('../../layouts/CovidInfoSection/CovidInfoSection'));
+const EstimateCounter = React.lazy(() => import('../../layouts/EstimateCounter/EstimateCounter'));
+const CurrentSubjectActive = React.lazy(() => import('../../layouts/CurrentSubjectActive/CurrentSubjectActive'));
+const CalendarIncomingActivites = React.lazy(() => import('../../layouts/CalendarIncomingActivities/CalendarIncomingActivites'));
 const Navigation = React.lazy(() => import('../../layouts/NavigationStart/NavigationStart'));
+const SubjectCheckboxes = React.lazy(() => import('../../layouts/SubjectsCheckboxes/SubjectCheckboxes'));
+const SubjectsDetails = React.lazy(() => import('../../layouts/SubjectsDetails/SubjectsDetails'));
 
 /**
  * Component responsible for generating the start page (absolute address - "/").
