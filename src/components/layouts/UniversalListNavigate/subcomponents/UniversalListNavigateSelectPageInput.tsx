@@ -25,6 +25,10 @@ import { RootState } from '../../../../redux/reduxStore';
 import { changeCmsListPageNumber } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
+import {
+    UniversalListNaviagteSelect, UniversalListNavigateLabel, UniversalListNavigateSingleElement, UniversalListNavigateText
+} from '../UniversalListNavigate.styles';
+
 /**
  *
  */
@@ -57,16 +61,21 @@ const UniversalListNavigateSelectPageInput: React.FC = (): JSX.Element => {
     }, [ currentActivePage, grabber, isMount, type ]);
 
     return (
-        <div>
-            Strona
-            <select
-                onChange = {handleSelectCurrentPage}
-                ref = {grabber}
+        <UniversalListNavigateSingleElement>
+            <UniversalListNavigateText>Strona</UniversalListNavigateText>
+            <UniversalListNavigateLabel
+                htmlFor = 'selectField'
             >
-                {generateOptions}
-            </select>
-             z {countOfSingleList}
-        </div>
+                <UniversalListNaviagteSelect
+                    onChange = {handleSelectCurrentPage}
+                    ref = {grabber}
+                    name = 'selectField'
+                >
+                    {generateOptions}
+                </UniversalListNaviagteSelect>
+            </UniversalListNavigateLabel>
+            <UniversalListNavigateText>z {countOfSingleList}</UniversalListNavigateText>
+        </UniversalListNavigateSingleElement>
     );
 };
 

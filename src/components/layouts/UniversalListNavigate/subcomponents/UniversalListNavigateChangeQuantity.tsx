@@ -24,6 +24,10 @@ import { changeCmsListShowingElementsCount } from '../../../../redux/preferences
 
 import { PropsProviderAndListNavigateContext, UniversalListNavigateContext } from '../UniversalListNavigate';
 
+import {
+    UniversalListNaviagteSelect, UniversalListNavigateSingleElement, UniversalListNavigateText
+} from '../UniversalListNavigate.styles';
+
 /**
  *
  */
@@ -47,15 +51,18 @@ const UniversalListNavigateChangeQuantity: React.FC = (): JSX.Element => {
     };
 
     return (
-        <div>
-            Elementów na stronie:
-            <select
+        <UniversalListNavigateSingleElement
+            ifExtraMargin = {true}
+        >
+            <UniversalListNavigateText>Elementów na stronie:</UniversalListNavigateText>
+            <UniversalListNaviagteSelect
                 onChange = {handleChangeListElementsQuantity}
                 disabled = {currentActivePage[type!].activePage !== 1}
+                ifExtraMargin = {true}
             >
                 {generateOptions}
-            </select>
-        </div>
+            </UniversalListNaviagteSelect>
+        </UniversalListNavigateSingleElement>
     );
 };
 
