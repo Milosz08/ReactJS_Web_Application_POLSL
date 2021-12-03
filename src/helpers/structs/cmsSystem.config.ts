@@ -23,3 +23,10 @@ export const RANGS_NAMES: string[] = [
  * Maximal risk number possibily insert into covid warnings blocks select field.
  */
 export const MAX_RISK_NUMBER: number = 21;
+
+/**
+ *
+ */
+export const CMS_LIST_QUANTITY_VALUES: number[] = [
+   5, 10, 15, 20, 25, 50
+];
