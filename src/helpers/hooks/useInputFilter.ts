@@ -20,12 +20,14 @@ import { sortInputTypes } from '../../redux/apiReduxStore/types';
 import { PreferencesInitialTypes } from '../../redux/preferencesReduxStore/initialState';
 
 /**
+ * Custom hook reponsible for filtering array based on string stored in inputs values
+ * in Redux store. Also sort based on object property type (props).
  *
- *
- * @param preArray
- * @param typeofInput
+ * @param preArray { any[] } - array before soring.
+ * @param typeofInput { sortInputTypes } - usage input field in Redux store.
+ * @param sortByType { string } - sorting based on object string key value.
  */
-const useInputFilter = (preArray: any, typeofInput: sortInputTypes): any[] => {
+const useInputFilter = (preArray: any, typeofInput: sortInputTypes, sortByType: string): any[] => {
 
     const { searchInputs: inpts }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
@@ -38,12 +40,12 @@ const useInputFilter = (preArray: any, typeofInput: sortInputTypes): any[] => {
             preArray.filter((el: any) => {
                 if (input === '') {
                     return el;
-                } else if (el.title.toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
+                } else if (el[sortByType].toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
                     return el;
                 }
             })
         );
-    }, [ input, preArray ])
+    }, [ input, preArray, sortByType ]);
 
     return filtered;
 };
