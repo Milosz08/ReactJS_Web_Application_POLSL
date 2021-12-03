@@ -30,6 +30,7 @@ interface PropsProvider {
     children: React.ReactNode;
     sortType: sortInputTypes;
     arrayType: sortAvailables;
+    sortByType: string;
 }
 
 export const SearchingContext = createContext<Partial<SearchingTypes>>({ });
@@ -39,13 +40,14 @@ export const SearchingContext = createContext<Partial<SearchingTypes>>({ });
  * React pseudoDOM components.
  *
  * @param children { React.ReactNode } - all nodes of the virtual DOM React tree covered by the Provider.
- * @param sortType { sortInputTypes } -
- * @param arrayType
+ * @param sortType { sortInputTypes } - get input string value from Redux state.
+ * @param arrayType { sortAvailables } - specific object from Redux initial state.
+ * @param sortByType { string } - based on string key object sorting array list.
  */
-const SearchingProvider: React.FC<PropsProvider> = ({ children, sortType, arrayType }): JSX.Element => {
+const SearchingProvider: React.FC<PropsProvider> = ({ children, sortType, arrayType, sortByType }): JSX.Element => {
 
     const initialState: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
-    const filteredState = useInputFilter(initialState[arrayType], sortType);
+    const filteredState = useInputFilter(initialState[arrayType], sortType, sortByType);
 
     return (
         <SearchingContext.Provider
