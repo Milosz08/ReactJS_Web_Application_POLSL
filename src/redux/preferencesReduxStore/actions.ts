@@ -135,3 +135,10 @@ export const changeCmsListShowingElementsCount = (type: cmsListIndicators, maxSh
         type, maxShowingElms
     }
 });
+
+export const changeUniversalListSortingType = (type: cmsListIndicators): ReturnedToReducer => ({
+    type: preferencesTypes.CHANGE_CMS_LIST_SORTING_TYPE,
+    payload: {
+        type
+    }
+});

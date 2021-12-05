@@ -12,8 +12,8 @@
  * governing permissions and limitations under the license.
  */
 
-import preferencesTypes from './types';
-import { initialState } from './initialState';
+import preferencesTypes, { sortingTypes } from './types';
+import { PrefInitialState } from './initialState';
 
 import { arrowDirs } from '../../components/layouts/SubjectsDetails/subcomponents/NextPrevArrowNavigation';
 import { directions } from '../../components/layouts/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
@@ -22,10 +22,10 @@ const {
     TOGGLE_HAMBURGER, INSERT_FOOTER_INPUTS, ERRORS_FOOTER_INPUTS, MOBILE_NAV_SET_ELM, ROUTE_PATH_TOGGLE,
     TOGGLE_CMS_HAMBURGER, INSERT_SEARCH_INPUT, ERRORS_SEARCH_INPUTS, CHANGE_ACTIVE_PANEL, PREV_NEXT_ACTIVE_PANEL,
     CHANGE_CHOOSE_SCHEDULE_GROUP, TOGGLE_SCHEDULE_MODAL, TOGGLE_SCHEDULE_CLEAR_MODAL, TOGGLE_CALENDAR_MOBILE_MODAL,
-    TOGGLE_USER_LOGOUT_MODAL, CHANGE_CMS_LIST_PAGE_NUMBER, CHANGE_MAX_SHOWING_CMS_LIST_ELMS
+    TOGGLE_USER_LOGOUT_MODAL, CHANGE_CMS_LIST_PAGE_NUMBER, CHANGE_MAX_SHOWING_CMS_LIST_ELMS, CHANGE_CMS_LIST_SORTING_TYPE
 } = preferencesTypes;
 
-const preferencesReducer = (state = initialState, action: any) => {
+const preferencesReducer = (state = PrefInitialState, action: any) => {
     switch(action.type) {
 
         case TOGGLE_HAMBURGER: {
@@ -136,6 +136,15 @@ const preferencesReducer = (state = initialState, action: any) => {
             const { type, maxShowingElms } = action.payload;
             return { ...state, currentActivePage: {
                 ...state.currentActivePage, [type]: { ...state.currentActivePage[type], maxShowingElms
+            }}};
+        }
+
+        case CHANGE_CMS_LIST_SORTING_TYPE: {
+            const { type } = action.payload;
+            const { DECREASE, INCREASE } = sortingTypes;
+            const sortingMode = state.currentActivePage[type].sortingMode === DECREASE ? INCREASE : DECREASE;
+            return { ...state, currentActivePage: {
+                ...state.currentActivePage, [type]: { ...state.currentActivePage[type], sortingMode
             }}};
         }
 

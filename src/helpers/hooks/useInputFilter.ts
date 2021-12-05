@@ -26,8 +26,9 @@ import { PreferencesInitialTypes } from '../../redux/preferencesReduxStore/initi
  * @param preArray { any[] } - array before soring.
  * @param typeofInput { sortInputTypes } - usage input field in Redux store.
  * @param sortByType { string } - sorting based on object string key value.
+ * @param ifReversed { boolean } - flag decided, if initial array should be reversed.
  */
-const useInputFilter = (preArray: any, typeofInput: sortInputTypes, sortByType: string): any[] => {
+const useInputFilter = (preArray: any, typeofInput: sortInputTypes, sortByType: string, ifReversed: boolean): any[] => {
 
     const { searchInputs: inpts }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
@@ -35,17 +36,16 @@ const useInputFilter = (preArray: any, typeofInput: sortInputTypes, sortByType: 
     const input = inpts[typeofInput];
 
     useEffect(() => {
-        setFiltered(
-            // eslint-disable-next-line array-callback-return
-            preArray.filter((el: any) => {
-                if (input === '') {
-                    return el;
-                } else if (el[sortByType].toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
-                    return el;
-                }
-            })
-        );
-    }, [ input, preArray, sortByType ]);
+        // eslint-disable-next-line array-callback-return
+        const setArray = preArray.filter((el: any) => {
+            if (input === '') {
+                return el;
+            } else if (String(el[sortByType]).toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
+                return el;
+            }
+        });
+        setFiltered(ifReversed ? setArray.reverse() : setArray);
+    }, [ input, preArray, sortByType, ifReversed ]);
 
     return filtered;
 };

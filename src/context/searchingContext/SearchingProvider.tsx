@@ -31,6 +31,7 @@ interface PropsProvider {
     sortType: sortInputTypes;
     arrayType: sortAvailables;
     sortByType: string;
+    ifReversed?: boolean;
 }
 
 export const SearchingContext = createContext<Partial<SearchingTypes>>({ });
@@ -43,11 +44,12 @@ export const SearchingContext = createContext<Partial<SearchingTypes>>({ });
  * @param sortType { sortInputTypes } - get input string value from Redux state.
  * @param arrayType { sortAvailables } - specific object from Redux initial state.
  * @param sortByType { string } - based on string key object sorting array list.
+ * @param ifReversed { boolean } - flag decided, if initial array should be reversed.
  */
-const SearchingProvider: React.FC<PropsProvider> = ({ children, sortType, arrayType, sortByType }): JSX.Element => {
+const SearchingProvider: React.FC<PropsProvider> = ({ children, sortType, arrayType, sortByType, ifReversed }): JSX.Element => {
 
     const initialState: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
-    const filteredState = useInputFilter(initialState[arrayType], sortType, sortByType);
+    const filteredState = useInputFilter(initialState[arrayType], sortType, sortByType, Boolean(ifReversed));
 
     return (
         <SearchingContext.Provider

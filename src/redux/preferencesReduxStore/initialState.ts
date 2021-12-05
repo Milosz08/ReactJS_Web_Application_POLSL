@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import { cmsListIndicators, groupsTypes, searchInputs } from './types';
+import { cmsListIndicators, groupsTypes, searchInputs, sortingTypes } from './types';
 
 import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
 import { CMS_LIST_QUANTITY_VALUES } from '../../helpers/structs/cmsSystem.config';
@@ -21,8 +21,8 @@ import GROUPS_STATIC from '../../helpers/structs/allGroups';
 
 const { USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
 const { NORMAL, ENGLISH, SK } = groupsTypes;
-const { SUBJECT_SEARCH, SCHEDULE_SEARCH, CMS_SUBJECTS_SEARCH, CMS_USER_MESSAGES } = searchInputs;
-const { SUBJECTS, USER_MESSAGES } = cmsListIndicators;
+const { SUBJECT_SEARCH, SCHEDULE_SEARCH, CMS_SUBJECTS_SEARCH, CMS_USER_MESSAGES, CMS_HELPERS_LINKS, CMS_CALENDAR } = searchInputs;
+const { SUBJECTS, USER_MESSAGES, HELPERS_LINKS, CALENDAR } = cmsListIndicators;
 
 export interface PreferencesInitialTypes {
     hamburgerToggle: boolean;
@@ -55,10 +55,11 @@ export interface PreferencesInitialTypes {
     currentActivePage: {
         activePage: number;
         maxShowingElms: number;
+        sortingMode: sortingTypes;
     };
 }
 
-export const initialState = {
+export const PrefInitialState = {
     hamburgerToggle: false,
     footerForm: {
         [USER_NICKNAME]: '',
@@ -80,12 +81,16 @@ export const initialState = {
         [SCHEDULE_SEARCH]: '',
         [CMS_SUBJECTS_SEARCH]: '',
         [CMS_USER_MESSAGES]: '',
+        [CMS_HELPERS_LINKS]: '',
+        [CMS_CALENDAR]: '',
     },
     searchInputsErrors: {
         [SUBJECT_SEARCH]: false,
         [SCHEDULE_SEARCH]: false,
         [CMS_SUBJECTS_SEARCH]: false,
         [CMS_USER_MESSAGES]: false,
+        [CMS_HELPERS_LINKS]: false,
+        [CMS_CALENDAR]: false,
     },
     activeSubjectPanelID: 0,
     chooseGroups: {
@@ -104,10 +109,22 @@ export const initialState = {
         [SUBJECTS]: {
             activePage: 1,
             maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
+            sortingMode: sortingTypes.INCREASE,
         },
         [USER_MESSAGES]: {
             activePage: 1,
             maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
+            sortingMode: sortingTypes.DECREASE,
+        },
+        [HELPERS_LINKS]: {
+            activePage: 1,
+            maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
+            sortingMode: sortingTypes.INCREASE,
+        },
+        [CALENDAR]: {
+            activePage: 1,
+            maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
+            sortingMode: sortingTypes.DECREASE,
         },
     }
 } as const;

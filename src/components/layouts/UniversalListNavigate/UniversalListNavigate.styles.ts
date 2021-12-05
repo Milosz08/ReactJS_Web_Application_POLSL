@@ -62,3 +62,16 @@ export const UniversalListNaviagteSelect = styled(select_rs)<{ ifExtraMargin?: b
         color: var(--darkGrayTint2);
     }
 `;
+
+export const UniversalListNavigateSortingButton = styled(UniversalListNavigateButton)`
+    margin-right: 30px;
+    display: flex;
+`;
+
+export const UniversalListNavigateSortingIcons = styled.div`
+    position: relative;
+    color: var(--darkGrayTint2);
+    top: 2px;
+    margin-left: 6px;
+    font-size: 1.2rem;
+`;

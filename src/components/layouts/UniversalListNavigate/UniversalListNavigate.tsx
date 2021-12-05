@@ -22,6 +22,7 @@ import { directions } from './subcomponents/UniversalListNavigatePrevNextButton'
 const UniversalListNavigatePrevNextButton = React.lazy(() => import('./subcomponents/UniversalListNavigatePrevNextButton'));
 const UniversalListNavigateSelectPageInput = React.lazy(() => import('./subcomponents/UniversalListNavigateSelectPageInput'));
 const UniversalListNavigateChangeQuantity = React.lazy(() => import('./subcomponents/UniversalListNavigateChangeQuantity'));
+const UniversalListNavigateSoringTypes = React.lazy(() => import('./subcomponents/UniversalListNavigateSoringTypes'));
 
 export interface PropsProviderAndListNavigateContext {
     type: cmsListIndicators;
@@ -32,11 +33,12 @@ export interface PropsProviderAndListNavigateContext {
 export const UniversalListNavigateContext = createContext<Partial<PropsProviderAndListNavigateContext>>({});
 
 /**
+ * Component responsible for generating universal navigate buttons used mostly in
+ * CMS system array lists for navigate and sorting elements.
  *
- *
- * @param type { cmsListIndicators } -
- * @param listItemsLength { number } -
- * @param visibilityOnSearch { boolean } -
+ * @param type { cmsListIndicators } - type of array list.
+ * @param listItemsLength { number } - length of selected array list.
+ * @param visibilityOnSearch { boolean } - if navigate is visible.
  */
 const UniversalListNavigate: React.FC<PropsProviderAndListNavigateContext> = ({
     type, listItemsLength, visibilityOnSearch
@@ -52,6 +54,7 @@ const UniversalListNavigate: React.FC<PropsProviderAndListNavigateContext> = ({
                         type, listItemsLength
                     }}
                 >
+                    <UniversalListNavigateSoringTypes/>
                     <UniversalListNavigatePrevNextButton
                         dir = {PREV}
                     />

@@ -48,6 +48,13 @@ export enum groupsTypes {
 export enum cmsListIndicators {
     SUBJECTS = 'subjectsContent',
     USER_MESSAGES = 'footerFormMessages',
+    HELPERS_LINKS = 'helpersLinks',
+    CALENDAR = 'calendarContent',
+}
+
+export enum sortingTypes {
+    INCREASE = 'INCREASE',
+    DECREASE = 'DECREASE',
 }
 
 export default preferencesTypes;
