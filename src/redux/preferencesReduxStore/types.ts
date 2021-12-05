@@ -37,6 +37,8 @@ export enum searchInputs {
     SCHEDULE_SEARCH = 'scheduleSearch',
     CMS_SUBJECTS_SEARCH = 'cmsSubjectsSearch',
     CMS_USER_MESSAGES = 'cmsUserMessagesSearch',
+    CMS_HELPERS_LINKS = 'cmsHelpersLinksSearch',
+    CMS_CALENDAR = 'cmsCalendarSearch',
 }
 
 export enum groupsTypes {
