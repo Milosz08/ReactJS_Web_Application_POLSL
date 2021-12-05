@@ -46,6 +46,7 @@ export enum sortAvailables {
     SCHEDULE = 'scheduleContent',
     CALENDAR = 'calendarContent',
     USER_MESSAGES = 'footerFormMessages',
+    HELPERS_LINKS = 'helpersLinks',
 }
 
 export enum covidTypes {
@@ -58,6 +59,15 @@ export enum sortInputTypes {
     SUBJECT_SEARCH = 'subjectSearch',
     CMS_SUBJECT_SEARCH = 'cmsSubjectsSearch',
     CMS_USER_MESSAGES_SEARCH = 'cmsUserMessagesSearch',
+    CMS_HELPERS_LINKS_SEARCH = 'cmsHelpersLinksSearch',
+    CMS_CALENDAR_SEARCH = 'cmsCalendarSearch',
+}
+
+export enum apiReducerTypes {
+    USER_MESSAGES = 'footerFormMessages',
+    SUBJECTS = 'subjectsContent',
+    HELPERS_LINKS = 'helpersLinks',
+    CALENDAR = 'calendarContent'
 }
 
 export default apiTypes;
