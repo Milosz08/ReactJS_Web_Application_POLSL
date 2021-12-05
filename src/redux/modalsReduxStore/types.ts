@@ -19,6 +19,8 @@ export enum modalsTypes {
 export enum allModals {
     SUBJECT_MODAL = 'subjectsModal',
     USER_MESSAGES_MODAL = 'userMessagesModal',
+    HELPERS_LINKS_MODAL = 'helpersLinksModal',
+    CALENDAR_MODAL = 'calendarModal',
 }
 
 export enum allModalsActions {
