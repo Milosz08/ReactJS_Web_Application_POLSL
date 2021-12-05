@@ -14,10 +14,13 @@
 
 import * as React from 'react';
 
-import { cmsListIndicators, searchInputs } from '../../../../redux/preferencesReduxStore/types';
+import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../redux/preferencesReduxStore/types';
 import { sortAvailables, sortInputTypes } from '../../../../redux/apiReduxStore/types';
 
 import { CmsPageContainer } from '../HighOrderComponents/HighOrderComponents.styles';
+import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/reduxStore';
 
 const SearchingProvider = React.lazy(() => import('../../../../context/searchingContext/SearchingProvider'));
 const UniversalSearch = React.lazy(() => import('../../UniversalSearch/UniversalSearch'));
@@ -28,27 +31,33 @@ const MessageManagementHeader = React.lazy(() => import('./subcomponents/Message
 /**
  * Component responsible for generating basic structure of cms user messages section.
  */
-const MessagesManagementCmsPage: React.FC = (): JSX.Element => (
-    <CmsPageContainer>
-        <SearchingProvider
-            sortType = {sortInputTypes.CMS_USER_MESSAGES_SEARCH}
-            arrayType = {sortAvailables.USER_MESSAGES}
-            sortByType = 'userChoice'
-        >
-            <UniversalSearch
-                type = {searchInputs.CMS_USER_MESSAGES}
-                placeholder = 'Typ wiadomości'
-            />
-            <MultipleElementsList
-                inputType = {searchInputs.CMS_USER_MESSAGES}
-                cmsListIndicator = {cmsListIndicators.USER_MESSAGES}
-                components = {{
-                    ListRender: MessageManagementSingleListElement,
-                    HeaderRender: MessageManagementHeader
-                }}
-            />
-        </SearchingProvider>
-    </CmsPageContainer>
-);
+const MessagesManagementCmsPage: React.FC = (): JSX.Element => {
+
+    const { currentActivePage }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
+
+    return (
+        <CmsPageContainer>
+            <SearchingProvider
+                sortType = {sortInputTypes.CMS_USER_MESSAGES_SEARCH}
+                arrayType = {sortAvailables.USER_MESSAGES}
+                sortByType = 'userChoice'
+                ifReversed = {currentActivePage[cmsListIndicators.USER_MESSAGES].sortingMode === sortingTypes.DECREASE}
+            >
+                <UniversalSearch
+                    type = {searchInputs.CMS_USER_MESSAGES}
+                    placeholder = 'Typ wiadomości'
+                />
+                <MultipleElementsList
+                    inputType = {searchInputs.CMS_USER_MESSAGES}
+                    cmsListIndicator = {cmsListIndicators.USER_MESSAGES}
+                    components = {{
+                        ListRender: MessageManagementSingleListElement,
+                        HeaderRender: MessageManagementHeader
+                    }}
+                />
+            </SearchingProvider>
+        </CmsPageContainer>
+    );
+};
 
 export default MessagesManagementCmsPage;

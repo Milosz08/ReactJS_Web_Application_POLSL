@@ -14,10 +14,14 @@
 
 import * as React from 'react';
 
-import { cmsListIndicators, searchInputs } from '../../../../redux/preferencesReduxStore/types';
+import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../redux/preferencesReduxStore/types';
 import { sortAvailables, sortInputTypes } from '../../../../redux/apiReduxStore/types';
 
 import { CmsPageContainer } from '../HighOrderComponents/HighOrderComponents.styles';
+import { allModals } from '../../../../redux/modalsReduxStore/types';
+import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/reduxStore';
 
 const SearchingProvider = React.lazy(() => import('../../../../context/searchingContext/SearchingProvider'));
 const UniversalSearch = React.lazy(() => import('../../UniversalSearch/UniversalSearch'));
@@ -26,29 +30,37 @@ const ChangeSubjectsSingleListElement = React.lazy(() => import('./subcomponents
 const ChangeSubjectsHeader = React.lazy(() => import('./subcomponents/ChangeSubjectsHeader'));
 
 /**
- * Component responsible for generating basic structure of cms subjects section.
+ * Component responsible for generating subjects page basic structure of high order components.
  */
-const ChangeSubjectsCmsPage: React.FC = (): JSX.Element => (
-    <CmsPageContainer>
-        <SearchingProvider
-            sortType = {sortInputTypes.CMS_SUBJECT_SEARCH}
-            arrayType = {sortAvailables.SUBJECTS}
-            sortByType = 'title'
-        >
-            <UniversalSearch
-                type = {searchInputs.CMS_SUBJECTS_SEARCH}
-                placeholder = 'Nazwa przedmiotu'
-            />
-            <MultipleElementsList
-                inputType = {searchInputs.CMS_SUBJECTS_SEARCH}
-                cmsListIndicator = {cmsListIndicators.SUBJECTS}
-                components = {{
-                    ListRender: ChangeSubjectsSingleListElement,
-                    HeaderRender: ChangeSubjectsHeader
-                }}
-            />
-        </SearchingProvider>
-    </CmsPageContainer>
-);
+const ChangeSubjectsCmsPage: React.FC = (): JSX.Element => {
+
+    const { currentActivePage }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
+
+    return (
+        <CmsPageContainer>
+            <SearchingProvider
+                sortType = {sortInputTypes.CMS_SUBJECT_SEARCH}
+                arrayType = {sortAvailables.SUBJECTS}
+                sortByType = 'title'
+                ifReversed = {currentActivePage[cmsListIndicators.SUBJECTS].sortingMode === sortingTypes.DECREASE}
+            >
+                <UniversalSearch
+                    type = {searchInputs.CMS_SUBJECTS_SEARCH}
+                    placeholder = 'Nazwa przedmiotu'
+                />
+                <MultipleElementsList
+                    inputType = {searchInputs.CMS_SUBJECTS_SEARCH}
+                    cmsListIndicator = {cmsListIndicators.SUBJECTS}
+                    modalType = {allModals.SUBJECT_MODAL}
+                    buttonNewContent = 'przedmiot'
+                    components = {{
+                        ListRender: ChangeSubjectsSingleListElement,
+                        HeaderRender: ChangeSubjectsHeader
+                    }}
+                />
+            </SearchingProvider>
+        </CmsPageContainer>
+    );
+};
 
 export default ChangeSubjectsCmsPage;
