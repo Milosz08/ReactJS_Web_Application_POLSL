@@ -19,6 +19,7 @@ import useFilteredDivideList from '../../../../helpers/hooks/useFilteredDivideLi
 import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
 
 import { useDispatch } from 'react-redux';
+import { allModals } from '../../../../redux/modalsReduxStore/types';
 import { setErrorsSearchInputs } from '../../../../redux/preferencesReduxStore/actions';
 import { cmsListIndicators, searchInputs } from '../../../../redux/preferencesReduxStore/types';
 
@@ -26,11 +27,14 @@ import { CmsUnorderedList } from './HighOrderComponents.styles';
 
 const UniversalListNavigate = React.lazy(() => import('../../UniversalListNavigate/UniversalListNavigate'));
 const NotFindContent = React.lazy(() => import('../../NotFindContent/NotFindContent'));
+const CmsAddNewContentButton = React.lazy(() => import('../../CmsAddNewContentButton/CmsAddNewContentButton'));
 
 interface PropsProvider {
     inputType: searchInputs;
     cmsListIndicator: cmsListIndicators;
     notFind?: string;
+    modalType?: allModals;
+    buttonNewContent?: string;
     components: {
         ListRender: React.FC<PropsProvider> | any;
         HeaderRender: React.FC<PropsProvider> | any;
@@ -45,8 +49,12 @@ interface PropsProvider {
  * @param cmsListIndicator { cmsListIndicator } - used specific list enum type.
  * @param notFind { ?string } - alternative text, if not find elements.
  * @param components { ListRender: React.FC<PropsProvider>, HeaderRender: React.FC<PropsProvider> } - JSX components.
+ * @param modalType { ?allModals } - usable modal type for adding new content button.
+ * @param buttonNewContent { ?string } - content string in button adding new content.
  */
-const MultipleElementsList: React.FC<PropsProvider> = ({ inputType, cmsListIndicator, notFind, components }): JSX.Element => {
+const MultipleElementsList: React.FC<PropsProvider> = ({
+    inputType, cmsListIndicator, notFind, modalType, buttonNewContent, components
+}): JSX.Element => {
 
     const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
     const { ListRender, HeaderRender } = components;
@@ -72,9 +80,13 @@ const MultipleElementsList: React.FC<PropsProvider> = ({ inputType, cmsListIndic
             <CmsUnorderedList>
                 {generateListElements}
             </CmsUnorderedList>
+            {Boolean(modalType) && <CmsAddNewContentButton
+                modalType = {modalType!}
+                content = {buttonNewContent}
+            />}
             <NotFindContent
                 ifVisible = {filteredState?.length === 0}
-                content = {notFind}
+                content = {notFind || 'elementu'}
             />
         </>
     );
