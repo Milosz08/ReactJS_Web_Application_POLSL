@@ -62,6 +62,11 @@ class ConvertTimeUTC {
         return Boolean(day) ? day!.name : '';
     };
 
+    public static getMonthPolishNameParam(monthParam: number): string {
+        const month = MONTHS.find((day: { id: number, name: string }): {} => day.id === monthParam);
+        return Boolean(month) ? month!.name : '';
+    }
+
     public getDayEnglishName(): string {
         const dayEng = STATIC_DAYS.find((day: { id: number, name: string, eng: string }): {} => day.id === this._day - 1);
         return Boolean(dayEng) ? dayEng!.eng : '';
