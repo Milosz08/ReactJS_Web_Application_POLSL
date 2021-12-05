@@ -37,11 +37,6 @@ const scheduleEndpoint: string = API_ENDPOINTS.SCHEDULE_SUBJECTS;
 const calendarEndpoint: string = API_ENDPOINTS.CALENDAR_RECORDS;
 const helpersLinksEndpoint: string = API_ENDPOINTS.HELPERS_LINKS;
 
-/**
- *
- *
- * @param endpoint
- */
 const fetchElementFromAPI = async (endpoint: string) => {
     const { data } = await axiosInstance.get(String(endpoint));
     return data;

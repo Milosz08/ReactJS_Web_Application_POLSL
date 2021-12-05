@@ -22,7 +22,7 @@ import {
 } from '../../HighOrderComponents/HighOrderComponents.styles';
 
 /**
- * Component responsible for generating header content elements for subjects list.
+ * Component responsible for generating header structure for subjects CMS page list.
  */
 const ChangeSubjectsHeader: React.FC = (): JSX.Element => {
 

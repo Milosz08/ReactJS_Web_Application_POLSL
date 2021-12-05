@@ -24,4 +24,5 @@ export const CmsAddNewContentButtonStyles = styled(button_rs)`
     text-align: center;
     font-size: 1.2rem;
     font-weight: 500;
+    margin-top: 15px;
 `;

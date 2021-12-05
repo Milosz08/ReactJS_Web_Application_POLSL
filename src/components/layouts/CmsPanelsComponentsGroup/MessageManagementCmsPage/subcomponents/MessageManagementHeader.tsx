@@ -22,7 +22,7 @@ import {
 } from '../../HighOrderComponents/HighOrderComponents.styles';
 
 /**
- * Component responsible for generate header list for user messages CMS panel section.
+ * Component responsible for generating header structure for user messages CMS page list.
  */
 const MessageManagementHeader: React.FC = (): JSX.Element => {
 
