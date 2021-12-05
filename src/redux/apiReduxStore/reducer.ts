@@ -35,8 +35,8 @@ const apiReducer = (state = apiInitialState, action: any) => {
         case GET_SINGLE_FOOTERFORM_DATA: {
             const { footerMessageObject } = action.payload;
             const decryptedData = {
-                _id: footerMessageObject.userIdentity._id,
-                ifClicked: footerMessageObject.userIdentity.ifClicked,
+                _id: footerMessageObject._id,
+                ifClicked: footerMessageObject.ifClicked,
                 userIdentity: CryptoJS.enc.Utf8.stringify(AES.decrypt(footerMessageObject.userIdentity, '')),
                 userMessage: CryptoJS.enc.Utf8.stringify(AES.decrypt(footerMessageObject.userMessage, '')),
                 userChoice: FOOTER_OPTIONS.find(option => option.value === footerMessageObject.userChoice)!.name,
