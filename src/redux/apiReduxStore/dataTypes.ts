@@ -108,6 +108,7 @@ export interface CurrentScheduleContentTypes {
 }
 
 export interface HelpersLinksContentTypes {
+    _id: string;
     helperTitle: string;
     helperLink: string;
     helperIcon: {
