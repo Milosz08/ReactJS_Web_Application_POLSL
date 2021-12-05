@@ -19,9 +19,10 @@ import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
-import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
+const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const ChangeCalendarCmsPage = React.lazy(() => import('../../layouts/CmsPanelsComponentsGroup/ChangeCalendarCmsPage/ChangeCalendarCmsPage'));
 
 /**
  * Component responsible for generating CMS subpage for controlled calendar.
@@ -42,6 +43,7 @@ const CalendarCmsSectionPage: React.FC = (): JSX.Element => {
                         ifCloseButtonVisible = {false}
                         changeIconSize = '1em'
                     />
+                    <ChangeCalendarCmsPage/>
                 </CommonPaginationWrapper>
             </CommonPaginationContainer>
         </>
