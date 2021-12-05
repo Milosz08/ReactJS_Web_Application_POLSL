@@ -14,7 +14,7 @@
 
 import apiTypes from './types';
 
-import { initialState } from './initialState';
+import { apiInitialState } from './initialState';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 
 import axiosInstance from '../../helpers/misc/request';
@@ -29,7 +29,7 @@ const {
     FILTERED_SCHEDULE_SUBJECTS, GET_SINGLE_HELPERS_LINKS, UPDATE_COVID_DATA, UPDATE_CREDENTIALS, UPDATE_ELEMENTS_DATE
 } = apiTypes;
 
-const apiReducer = (state = initialState, action: any) => {
+const apiReducer = (state = apiInitialState, action: any) => {
     switch (action.type) {
 
         case GET_SINGLE_FOOTERFORM_DATA: {

@@ -35,7 +35,7 @@ export interface ApiInitialTypes {
     summerBreakActive: boolean;
 }
 
-export const initialState: ApiInitialTypes = {
+export const apiInitialState: ApiInitialTypes = {
     footerFormMessages: [],
     covidWarningLevels: [],
     lastUpdate: [],

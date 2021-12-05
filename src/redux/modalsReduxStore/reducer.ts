@@ -12,17 +12,17 @@
  * governing permissions and limitations under the license.
  */
 
-import { InitialState } from './initialState';
+import { modalsInitialState } from './initialState';
 import { modalsTypes } from './types';
 
 const { CHANGE_MODAL_STATE } = modalsTypes;
 
-const modalsReducer = (state = InitialState, action: any) => {
+const modalsReducer = (state = modalsInitialState, action: any) => {
     switch(action.type) {
 
         case CHANGE_MODAL_STATE: {
             const { ifOpen, type, id, modal } = action.payload;
-            return { ...state, [modal]: { ifOpen, action: type, dataID: id } };
+            return { ...state, [modal]: { ...state[modal], ifOpen, action: type, dataID: id } };
         }
 
         default: {

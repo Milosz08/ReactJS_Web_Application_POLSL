@@ -26,7 +26,7 @@ export interface ModalsInitialTypes {
     [SUBJECT_MODAL]: ModalParametersProvider,
 }
 
-export const InitialState: ModalsInitialTypes = {
+export const modalsInitialState: ModalsInitialTypes = {
     [SUBJECT_MODAL]: {
         ifOpen: false,
         action: allModalsActions.EDIT_ELEMENT,

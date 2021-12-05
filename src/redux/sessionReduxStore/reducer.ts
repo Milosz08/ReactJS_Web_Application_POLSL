@@ -13,7 +13,7 @@
  */
 
 import sessionTypes from './types';
-import { InitialState } from './initialState';
+import { sessInitialState } from './initialState';
 
 import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
 
@@ -21,7 +21,7 @@ const {
     CHANGE_ADMIN_LOGGED_STATUS, CHANGE_USER_LOGGED_STATUS, INCREASE_SESSION_COUNER, TOGGLE_WARNING_SESSION_MODAL
 } = sessionTypes;
 
-const sessionReducer = (state = InitialState, action: any) => {
+const sessionReducer = (state = sessInitialState, action: any) => {
     switch(action.type) {
 
         case CHANGE_ADMIN_LOGGED_STATUS: {

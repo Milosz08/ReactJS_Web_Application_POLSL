@@ -26,7 +26,7 @@ export interface SessionInitialTypes {
     }
 }
 
-export const InitialState: SessionInitialTypes = {
+export const sessInitialState: SessionInitialTypes = {
     adminAuthStatus: {
         logged: false,
         identity: ROLES.UNDEFINED,
