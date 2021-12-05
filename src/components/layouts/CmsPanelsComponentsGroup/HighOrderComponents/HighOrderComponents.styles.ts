@@ -86,3 +86,16 @@ export const CmsSingleListRemoveButtonTime = styled.span`
         transform: translateX(-50%) rotate(90deg);
     }
 `;
+
+export const ChangeCalendarDotsContainer = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+export const ChangeCalendarSingleColorDotElement = styled('div')<{ colorCSS: string }>`
+    background-color: ${({ colorCSS }) => `var(--${colorCSS}Color)`};
+    width: 13px;
+    height: 13px;
+    margin-right: 8px;
+    border-radius: 50%;
+`;
