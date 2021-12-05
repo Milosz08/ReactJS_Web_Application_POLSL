@@ -16,8 +16,8 @@ import * as React from 'react';
 import { FiEdit, FiMessageSquare } from 'react-icons/all';
 
 import { useDispatch } from 'react-redux';
-import { allModals, allModalsActions } from '../../../../redux/modalsReduxStore/types';
 import { changeModalStateElements } from '../../../../redux/modalsReduxStore/actions';
+import { allModals, allModalsActions } from '../../../../redux/modalsReduxStore/types';
 
 import {
     CmsSingleListActionButton, CmsSingleListButtonsContainer, CmsSingleListRemoveButtonTime
@@ -42,7 +42,7 @@ const SingleElementButtons: React.FC<PropsProvider> = ({ dataID, modalTypeEnum, 
     const dispatcher = useDispatch();
 
     const handleModalButtons = (modalType: allModalsActions): void => {
-        dispatcher(changeModalStateElements(true, allModals[modalTypeEnum], dataID, modalType));
+        dispatcher(changeModalStateElements(true, modalTypeEnum, dataID, modalType));
     };
 
     return (
