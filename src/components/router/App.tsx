@@ -29,6 +29,7 @@ const CookiesObjectsProvider = React.lazy(() => import('../../context/cookiesCon
 const ScrollToTop = React.lazy(() => import('../../helpers/componentsAndMiddleware/ScrollToTop'));
 const GlobalModalsStateProvider = React.lazy(() => import('../../contextStore/GlobalModalsStateProvider'));
 const GotoTopButton = React.lazy(() => import('../layouts/GotoTopButton/GotoTopButton'));
+const AllModalsStructure = React.lazy(() => import('../../helpers/componentsAndMiddleware/AllModalsStructure'));
 const LoginSessionProvider = React.lazy(() => import('../../contextStore/LoginSessionProvider'));
 const SessionEndModal = React.lazy(() => import('../layouts/SessionEndModal/SessionEndModal'));
 const SessionSequencer = React.lazy(() => import('../layouts/SessionSequencer/SessionSequencer'));
@@ -50,6 +51,7 @@ const App: React.FC = (): JSX.Element => (
                             <ScrollToTop/>
                             <GlobalModalsStateProvider>
                                 <GotoTopButton/>
+                                <AllModalsStructure/>
                                 <LoginSessionProvider>
                                     <SessionEndModal/>
                                     <SessionSequencer/>
