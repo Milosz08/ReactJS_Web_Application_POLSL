@@ -14,22 +14,47 @@
 
 import { allModals, allModalsActions } from './types';
 
-const { SUBJECT_MODAL } = allModals;
+const { SUBJECT_MODAL, USER_MESSAGES_MODAL, HELPERS_LINKS_MODAL, CALENDAR_MODAL } = allModals;
 
 interface ModalParametersProvider {
-    ifOpen: boolean,
-    action: allModalsActions,
-    dataID: string | null,
+    ifOpen: boolean;
+    action: allModalsActions;
+    dataID: string | null;
+    iconComponent: string;
+    titleContent: string;
 }
 
 export interface ModalsInitialTypes {
-    [SUBJECT_MODAL]: ModalParametersProvider,
+    [key: string]: ModalParametersProvider,
 }
 
 export const modalsInitialState: ModalsInitialTypes = {
     [SUBJECT_MODAL]: {
         ifOpen: false,
         action: allModalsActions.EDIT_ELEMENT,
-        dataID: null
+        dataID: null,
+        iconComponent: 'BsBookmarkCheck',
+        titleContent: 'przemiot',
+    },
+    [USER_MESSAGES_MODAL]: {
+        ifOpen: false,
+        action: allModalsActions.EDIT_ELEMENT,
+        dataID: null,
+        iconComponent: 'BsEnvelope',
+        titleContent: 'wiadomość użytkownika',
+    },
+    [HELPERS_LINKS_MODAL]: {
+        ifOpen: false,
+        action: allModalsActions.EDIT_ELEMENT,
+        dataID: null,
+        iconComponent: 'BsDownload',
+        titleContent: 'link do pomocy',
+    },
+    [CALENDAR_MODAL]: {
+        ifOpen: false,
+        action: allModalsActions.EDIT_ELEMENT,
+        dataID: null,
+        iconComponent: 'BsCalendar',
+        titleContent: 'wpisy kalendarza',
     }
 };
