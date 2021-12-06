@@ -73,13 +73,13 @@ export const DeleteContentButtonsContainer = styled('div')<{ ifExtraMargin?: boo
     width: 80%;
 `;
 
-export const DeleteContentButton = styled(button_rs)`
+export const NotDeleteContentButton = styled(button_rs)`
     ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 400, _ifEmpty: false })};
     width: 300px;
     margin-bottom: 20px;
 `;
 
-export const NotDeleteContentButton = styled(button_rs)`
+export const DeleteContentButton = styled(button_rs)`
     ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 400, _ifEmpty: true })};
     width: 300px;
     margin-bottom: 20px;
@@ -151,4 +151,9 @@ export const DeleteSingleCalendarDateElement = styled('div')<{ colorCSS: string 
     color: var(--cleanWhiteColor);
     font-weight: 400;
     font-size: 1.1rem;
+`;
+
+export const DeleteUserMessagesNotReadableIndicator = styled('strong')<{ colorCSS: string }>`
+    color: var(${({ colorCSS }) => `--${colorCSS}Color`});
+    font-weight: 500;
 `;

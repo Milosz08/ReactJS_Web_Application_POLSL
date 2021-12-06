@@ -21,7 +21,8 @@ import { apiReducerTypes } from '../../../../redux/apiReduxStore/types';
 import { FooterFormTypes } from '../../../../redux/apiReduxStore/dataTypes';
 
 import {
-    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElementContent, CustomContentRemoveElementTitle
+    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElementContent, CustomContentRemoveElementTitle,
+    DeleteUserMessagesNotReadableIndicator
 } from '../DeleteContentModal/DeleteContentModal.styles';
 
 /**
@@ -37,7 +38,13 @@ const CustomContentForUserMessages: React.FC = (): JSX.Element => {
         <>
             {Boolean(matchElm) && <CustomContentContainer>
                 <CustomContentAsideText>
-                    Czy na pewno chcesz usunąć wiadomość od:
+                    Czy na pewno chcesz usunąć
+                    <DeleteUserMessagesNotReadableIndicator
+                        colorCSS = {matchElm.ifClicked ? 'green' : 'red'}
+                    >
+                        {matchElm.ifClicked ? ' odczytaną ' : ' nieodczytaną '}
+                    </DeleteUserMessagesNotReadableIndicator>
+                    wiadomość od:
                 </CustomContentAsideText>
                 <CustomContentRemoveElementTitle>
                     {matchElm.userIdentity}
