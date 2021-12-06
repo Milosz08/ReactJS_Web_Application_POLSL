@@ -22,7 +22,7 @@ const ButtonsMediaQueries = () => css`
     font-size: .9rem;
 `;
 
-export const CookiesNotificationContainer = styled.div`
+export const CookiesNotificationContainer = styled.section`
     ${ModalBackground({ _width: 800 })};
 `;
 
