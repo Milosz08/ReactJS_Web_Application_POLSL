@@ -52,7 +52,7 @@ const ChangeCalendarCmsPage: React.FC = (): JSX.Element => {
                     inputType = {searchInputs.CMS_CALENDAR}
                     cmsListIndicator = {cmsListIndicators.CALENDAR}
                     modalType = {allModals.SUBJECT_MODAL}
-                    buttonNewContent = 'wpis aktywności do kalendarza'
+                    buttonNewContent = 'wpis'
                     components = {{
                         ListRender: ChangeCalendarSingleListElement,
                         HeaderRender: ChangeCalendarHeader
