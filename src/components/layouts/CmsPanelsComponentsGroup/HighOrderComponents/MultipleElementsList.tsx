@@ -24,6 +24,7 @@ import { setErrorsSearchInputs } from '../../../../redux/preferencesReduxStore/a
 import { cmsListIndicators, searchInputs } from '../../../../redux/preferencesReduxStore/types';
 
 import { CmsUnorderedList } from './HighOrderComponents.styles';
+import EmptyContent from './EmptyContent';
 
 const UniversalListNavigate = React.lazy(() => import('../../UniversalListNavigate/UniversalListNavigate'));
 const NotFindContent = React.lazy(() => import('../../NotFindContent/NotFindContent'));
@@ -56,7 +57,8 @@ const MultipleElementsList: React.FC<PropsProvider> = ({
     inputType, cmsListIndicator, notFind, modalType, buttonNewContent, components
 }): JSX.Element => {
 
-    const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
+    const { filteredState, ifLengthIsNull } = useContext<Partial<SearchingTypes>>(SearchingContext);
+
     const { ListRender, HeaderRender } = components;
 
     const dispatcher = useDispatch();
@@ -66,26 +68,29 @@ const MultipleElementsList: React.FC<PropsProvider> = ({
     );
     
     useEffect(() => {
-        dispatcher(setErrorsSearchInputs(inputType, filteredState!.length === 0));
-    }, [ dispatcher, filteredState, inputType ]);
+        dispatcher(setErrorsSearchInputs(inputType, filteredState!.length === 0 && !ifLengthIsNull!));
+    }, [ dispatcher, filteredState, ifLengthIsNull, inputType ]);
     
     return (
         <>
-            <UniversalListNavigate
+            {!ifLengthIsNull! && <UniversalListNavigate
                 type = {cmsListIndicator}
                 listItemsLength = {filteredState!.length}
-                visibilityOnSearch = {disableOnFinding}
-            />
+                visibilityOnSearch = {disableOnFinding && !ifLengthIsNull!}
+            />}
             <HeaderRender/>
             <CmsUnorderedList>
                 {generateListElements}
             </CmsUnorderedList>
-            {Boolean(modalType) && <CmsAddNewContentButton
+            {ifLengthIsNull! && <EmptyContent
+                content = {notFind || 'elementu'}
+            />}
+            {Boolean(modalType) && ((filteredState?.length !== 0) || ifLengthIsNull!) && <CmsAddNewContentButton
                 modalType = {modalType!}
                 content = {buttonNewContent}
             />}
             <NotFindContent
-                ifVisible = {filteredState?.length === 0}
+                ifVisible = {filteredState?.length === 0 && !ifLengthIsNull!}
                 content = {notFind || 'elementu'}
             />
         </>

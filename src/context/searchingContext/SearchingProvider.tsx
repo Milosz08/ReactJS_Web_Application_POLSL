@@ -24,6 +24,7 @@ import { RootState } from '../../redux/reduxStore';
 
 export interface SearchingTypes {
     filteredState: any[];
+    ifLengthIsNull: boolean;
 }
 
 interface PropsProvider {
@@ -50,10 +51,13 @@ const SearchingProvider: React.FC<PropsProvider> = ({ children, sortType, arrayT
 
     const initialState: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
     const filteredState = useInputFilter(initialState[arrayType], sortType, sortByType, Boolean(ifReversed));
+    const ifLengthIsNull = initialState[arrayType].length === 0;
 
     return (
         <SearchingContext.Provider
-            value = {{ filteredState }}
+            value = {{
+                ifLengthIsNull, filteredState
+            }}
         >
             {children}
         </SearchingContext.Provider>
