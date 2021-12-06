@@ -15,7 +15,7 @@
 import * as React from 'react';
 import { Fragment, useRef } from 'react';
 
-import useGeneratePdfLine from '../../../../helpers/hooks/useGeneratePdfLine';
+import useGeneratePdfLine from '../../../../helpers/hooks/useGenerateLoadingLine';
 import { useReactToPrint } from 'react-to-print';
 
 import { useSelector } from 'react-redux';
@@ -24,8 +24,8 @@ import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
 
 import { SchedulePdfButtonGenerator, SchedulePdfInfoText } from '../SchedulePdfGenerator.styles';
 
-import GeneratePdfComponent from './GeneratePdfComponent';
-import GeneratePdfCounterLine from './GeneratePdfCounterLine';
+const GeneratePdfComponent = React.lazy(() => import('./GeneratePdfComponent'));
+const EstimateTimeCounterBar = React.lazy(() => import('../../EstimateTimeCounterBar/EstimateTimeCounterBar'));
 
 /**
  * Component responsible for generating button, which generate pdf schedule
@@ -63,7 +63,7 @@ const GeneratePdfButton: React.FC = (): JSX.Element => {
                 grabber = {componentRef}
                 date = {date}
             />
-            <GeneratePdfCounterLine
+            <EstimateTimeCounterBar
                 visibility = {show}
                 width = {widthState}
             />

@@ -56,37 +56,3 @@ export const SchedulePdfInfoText = styled.p`
 export const GenerateComponentHide = styled.div`
     display: none;
 `;
-
-export const SchedulePdfGenerateBarContainer = styled('aside')<{ ifActive: boolean }>`
-    position: relative;
-    width: 100%;
-    height: 7px;
-    border-radius: 10px;
-    background-color: var(--lightGray);
-    font-size: 1.2rem;
-    color: var(--navyBlueColor);
-    font-weight: 500;
-    text-align: center;
-    display: ${props => props.ifActive ? 'block' : 'none'};
-    margin-top: ${props => props.ifActive ? '15px' : 0};
-`;
-
-export const SchedulePdfGenerateBarLine = styled.span`
-    display: block;
-    margin-top: 15px;
-`;
-
-export const SchedulePdfGenerateActiveBar = styled('div').attrs<{ widthCSS: number }>(props => ({
-    style: {
-        width: `${props.widthCSS}%`
-    }
-}))`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    border-radius: 10px;
-    background-color: var(--navyBlueColor);
-    transition: .5s;
-`;

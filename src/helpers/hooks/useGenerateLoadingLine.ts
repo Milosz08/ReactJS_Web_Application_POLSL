@@ -18,19 +18,24 @@ import ROUTING_PATH_NAMES from '../structs/routingPathNames';
 import ConvertTimeUTC, { DATE_OR_TIME } from '../functionsAndClasses/convertTimeUTC';
 
 /**
- * Custom hook responsible for custom logic for generate schedule of subjects pdf and
- * progress bar filled.
+ * Reusable Custom hook responsible for custom logic for generate progress bar filled.
  *
  * @param generateCallback { (() => void) | undefined } - callback function run on end clock intervals.
+ * @param estimateTime { ?number } - counting time value (in seconds).
+ * @param content { ?string } - custom browser title.
+ * @param restorePathname { ?string } - browser title after reset timer.
  */
-const useGeneratePdfLine = (generateCallback: (() => void) | undefined) => {
+const useGenerateLoadingLine = (
+    generateCallback: (() => void) | undefined, estimateTime: number = 100, content: string = 'Generowanie Planu',
+    restorePathname: string = ROUTING_PATH_NAMES.SCHEDULE_PAGE
+) => {
 
     const [ date, setDate ] = useState<string>('');
     const [ show, setShow ] = useState<boolean>(false);
     const [ widthState, setWidthState ] = useState<number>(0);
 
     const reset = (): void => {
-        document.title = ROUTING_PATH_NAMES.SCHEDULE_PAGE;
+        document.title = restorePathname;
         setShow(false);
         setWidthState(0);
     };
@@ -41,8 +46,8 @@ const useGeneratePdfLine = (generateCallback: (() => void) | undefined) => {
         const date = new ConvertTimeUTC();
         const asyncLoadingBar = (): void => {
             setWidthState(++count);
-            document.title = `${count}% | Generowanie Planu`;
-            if (count === 100) {
+            document.title = `${Math.floor(count / estimateTime * 100)}% | ${content}`;
+            if (count === estimateTime) {
                 clearInterval(index);
                 if (generateCallback) {
                     generateCallback();
@@ -57,4 +62,4 @@ const useGeneratePdfLine = (generateCallback: (() => void) | undefined) => {
     return { date, widthState, show, reset, generatingCounter };
 };
 
-export default useGeneratePdfLine;
+export default useGenerateLoadingLine;
