@@ -17,8 +17,10 @@ import { button_rs, select_rs } from '../../../styles/reset.styles';
 
 export const UniversalListNavigateContainer = styled.nav`
     display: flex;
-    justify-content: flex-end;
-    margin: 20px 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 20px auto;
 `;
 
 export const UniversalListNavigateSingleElement = styled('div')<{ ifExtraMargin?: boolean }>`
@@ -74,4 +76,18 @@ export const UniversalListNavigateSortingIcons = styled.div`
     top: 2px;
     margin-left: 6px;
     font-size: 1.2rem;
+`;
+
+export const UniversalListNavigateListElementsCounter = styled.div`
+    color: var(--darkGrayTint2);
+    font-size: 1.1rem;
+    margin-right: 30px;
+    strong {
+        font-weight: 500;
+        color: var(--navyBlueColor);
+    }
+`;
+
+export const UniversalListNavigateArrowsContainer = styled.div`
+    display: flex;
 `;

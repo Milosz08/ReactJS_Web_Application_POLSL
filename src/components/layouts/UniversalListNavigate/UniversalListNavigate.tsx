@@ -15,7 +15,9 @@
 import * as React from 'react';
 import { createContext } from 'react';
 
-import { UniversalListNavigateContainer } from './UniversalListNavigate.styles';
+import {
+    UniversalListNavigateArrowsContainer, UniversalListNavigateContainer, UniversalListNavigateListElementsCounter
+} from './UniversalListNavigate.styles';
 import { cmsListIndicators } from '../../../redux/preferencesReduxStore/types';
 import { directions } from './subcomponents/UniversalListNavigatePrevNextButton';
 
@@ -54,14 +56,19 @@ const UniversalListNavigate: React.FC<PropsProviderAndListNavigateContext> = ({
                         type, listItemsLength
                     }}
                 >
+                    <UniversalListNavigateListElementsCounter>
+                        Elementów na liście: <strong>{listItemsLength}</strong>
+                    </UniversalListNavigateListElementsCounter>
                     <UniversalListNavigateSoringTypes/>
-                    <UniversalListNavigatePrevNextButton
-                        dir = {PREV}
-                    />
-                    <UniversalListNavigateSelectPageInput/>
-                    <UniversalListNavigatePrevNextButton
-                        dir = {NEXT}
-                    />
+                    <UniversalListNavigateArrowsContainer>
+                        <UniversalListNavigatePrevNextButton
+                            dir = {PREV}
+                        />
+                        <UniversalListNavigateSelectPageInput/>
+                        <UniversalListNavigatePrevNextButton
+                            dir = {NEXT}
+                        />
+                    </UniversalListNavigateArrowsContainer>
                     <UniversalListNavigateChangeQuantity/>
                 </UniversalListNavigateContext.Provider>
             </UniversalListNavigateContainer>}
