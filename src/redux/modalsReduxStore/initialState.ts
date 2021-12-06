@@ -13,9 +13,18 @@
  */
 
 import { allModals, allModalsActions } from './types';
+
 import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
+import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
+import { apiReducerTypes, updateSections } from '../apiReduxStore/types';
 
 const { SUBJECT_MODAL, USER_MESSAGES_MODAL, HELPERS_LINKS_MODAL, CALENDAR_MODAL } = allModals;
+const { EDIT_ELEMENT } = allModalsActions;
+
+const { SUBJECT_CMS_PAGE, USERS_MESS_CMS_PAGE, HELPS_CMS_PAGE, CALENDAR_CMS_PAGE } = ROUTING_PATH_NAMES;
+const { SUBJECTS_ELMS, FOOTER_FORM, HELPERS_LINKS, CALENDAR_RECORDS } = API_ENDPOINTS;
+const { USER_MESSAGES, SUBJECTS, CALENDAR, HELPERS_LINKS: HELPERS } = apiReducerTypes;
+const { SUBJECTS: UP_SUBJECTS, CALENDAR: UP_CALENDAR, USER_MESS: UP_USER_MESS, HELPERS: UP_HELPS } = updateSections;
 
 interface ModalParametersProvider {
     ifOpen: boolean;
@@ -24,6 +33,9 @@ interface ModalParametersProvider {
     iconComponent: string;
     titleContent: string;
     pageTitle: string;
+    apiActionsPath: string;
+    apiReducerObjectKey: string;
+    updateApiParam: string;
 }
 
 export interface ModalsInitialTypes {
@@ -33,34 +45,46 @@ export interface ModalsInitialTypes {
 export const modalsInitialState: ModalsInitialTypes = {
     [SUBJECT_MODAL]: {
         ifOpen: false,
-        action: allModalsActions.EDIT_ELEMENT,
+        action: EDIT_ELEMENT,
         dataID: null,
         iconComponent: 'BsBookmarkCheck',
         titleContent: 'przemiot',
-        pageTitle: ROUTING_PATH_NAMES.SUBJECT_CMS_PAGE,
+        pageTitle: SUBJECT_CMS_PAGE,
+        apiActionsPath: SUBJECTS_ELMS,
+        apiReducerObjectKey: SUBJECTS,
+        updateApiParam: UP_SUBJECTS,
     },
     [USER_MESSAGES_MODAL]: {
         ifOpen: false,
-        action: allModalsActions.EDIT_ELEMENT,
+        action: EDIT_ELEMENT,
         dataID: null,
         iconComponent: 'BsEnvelope',
         titleContent: 'wiadomość użytkownika',
-        pageTitle: ROUTING_PATH_NAMES.USERS_MESS_CMS_PAGE,
+        pageTitle: USERS_MESS_CMS_PAGE,
+        apiActionsPath: FOOTER_FORM,
+        apiReducerObjectKey: USER_MESSAGES,
+        updateApiParam: UP_USER_MESS,
     },
     [HELPERS_LINKS_MODAL]: {
         ifOpen: false,
-        action: allModalsActions.EDIT_ELEMENT,
+        action: EDIT_ELEMENT,
         dataID: null,
         iconComponent: 'BsDownload',
         titleContent: 'link do pomocy',
-        pageTitle: ROUTING_PATH_NAMES.HELPS_CMS_PAGE,
+        pageTitle: HELPS_CMS_PAGE,
+        apiActionsPath: HELPERS_LINKS,
+        apiReducerObjectKey: HELPERS,
+        updateApiParam: UP_HELPS,
     },
     [CALENDAR_MODAL]: {
         ifOpen: false,
-        action: allModalsActions.EDIT_ELEMENT,
+        action: EDIT_ELEMENT,
         dataID: null,
         iconComponent: 'BsCalendar',
         titleContent: 'wpis/y kalendarza',
-        pageTitle: ROUTING_PATH_NAMES.CALENDAR_CMS_PAGE,
+        pageTitle: CALENDAR_CMS_PAGE,
+        apiActionsPath: CALENDAR_RECORDS,
+        apiReducerObjectKey: CALENDAR,
+        updateApiParam: UP_CALENDAR,
     }
 };

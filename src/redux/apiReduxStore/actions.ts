@@ -13,12 +13,15 @@
  */
 
 import apiTypes, { covidTypes, sortAvailables, updateSections } from './types';
-import { ROLES } from '../../helpers/functionsAndClasses/LoginValidator';
+import { allModals } from '../modalsReduxStore/types';
 
 import {
     CalendarContentTypes, CovidWarningsTypes, FooterFormTypes, HelpersLinksContentTypes, LastUpdateTypes,
     ScheduleContentTypes, SubjectsContentTypes
 } from './dataTypes';
+
+import { ROLES } from '../../helpers/functionsAndClasses/LoginValidator';
+import { ModalsInitialTypes } from '../modalsReduxStore/initialState';
 
 interface ReturnedToReducer {
     type: apiTypes;
@@ -129,5 +132,12 @@ export const updateSectionDates = (section: updateSections): ReturnedToReducer =
     type: apiTypes.UPDATE_ELEMENTS_DATE,
     payload: {
         section
+    }
+});
+
+export const removingCmsContent = (elementID: string, modalType: allModals, modState: ModalsInitialTypes): ReturnedToReducer => ({
+    type: apiTypes.REMOVING_CMS_CONTENT,
+    payload: {
+        elementID, modalType, modState
     }
 });
