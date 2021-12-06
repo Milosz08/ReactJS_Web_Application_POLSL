@@ -16,9 +16,13 @@ import * as React from 'react';
 
 import useGenerateLoadingLine from '../../../../../helpers/hooks/useGenerateLoadingLine';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../../redux/reduxStore';
 import { allModals } from '../../../../../redux/modalsReduxStore/types';
+import { updateSections } from '../../../../../redux/apiReduxStore/types';
+import { ModalsInitialTypes } from '../../../../../redux/modalsReduxStore/initialState';
 import { changeModalStateElements } from '../../../../../redux/modalsReduxStore/actions';
+import { removingCmsContent, updateSectionDates } from '../../../../../redux/apiReduxStore/actions';
 
 import { DeleteContentButton, DeleteContentButtonsContainer, NotDeleteContentButton } from '../DeleteContentModal.styles';
 
@@ -41,6 +45,7 @@ interface PropsProvider {
  */
 const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, modalType, dataID, title }): JSX.Element => {
 
+    const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const dispatcher = useDispatch();
 
     const handleNotRemoveContentButton = (): void => {
@@ -51,7 +56,11 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
         document.title = 'Zawartość usunięta';
         setTimeout(() => {
             handleNotRemoveContentButton();
-            setTimeout(reset, 1000);
+            setTimeout(() => {
+                reset();
+                dispatcher(removingCmsContent(dataID!, modalType, modalsInitialState));
+                dispatcher(updateSectionDates(updateSections[modalsInitialState[modalType].updateApiParam]));
+            }, 1000);
         }, 2000);
     };
 
@@ -59,25 +68,21 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
         afterAsyncCountingCallback, 20, 'Usuwanie zawartości', title
     );
 
-    const handleRemoveContentButton = (): void => {
-        generatingCounter();
-    };
-
     return (
         <>
             <DeleteContentButtonsContainer
                 ifExtraMargin = {show}
             >
-                <NotDeleteContentButton
-                    onClick = {handleRemoveContentButton}
+                <DeleteContentButton
+                    onClick = {generatingCounter}
                 >
                     Usuń {buttonContent}
-                </NotDeleteContentButton>
-                <DeleteContentButton
+                </DeleteContentButton>
+                <NotDeleteContentButton
                     onClick = {handleNotRemoveContentButton}
                 >
                     Pozostaw {buttonContent}
-                </DeleteContentButton>
+                </NotDeleteContentButton>
                 <EstimateTimeCounterBar
                     visibility = {show}
                     width = {Math.floor(widthState / 20 * 100)}
