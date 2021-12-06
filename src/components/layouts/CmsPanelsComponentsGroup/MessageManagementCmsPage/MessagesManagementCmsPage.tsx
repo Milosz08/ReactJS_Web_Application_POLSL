@@ -14,13 +14,13 @@
 
 import * as React from 'react';
 
-import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../redux/preferencesReduxStore/types';
-import { sortAvailables, sortInputTypes } from '../../../../redux/apiReduxStore/types';
-
-import { CmsPageContainer } from '../HighOrderComponents/HighOrderComponents.styles';
-import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
+import { sortAvailables, sortInputTypes } from '../../../../redux/apiReduxStore/types';
+import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
+import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../redux/preferencesReduxStore/types';
+
+import { CmsPageContainer } from '../HighOrderComponents/HighOrderComponents.styles';
 
 const SearchingProvider = React.lazy(() => import('../../../../context/searchingContext/SearchingProvider'));
 const UniversalSearch = React.lazy(() => import('../../UniversalSearch/UniversalSearch'));

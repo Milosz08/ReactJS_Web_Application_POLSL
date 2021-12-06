@@ -57,7 +57,7 @@ const ChangeSubjectsSingleListElement: React.FC<PropsProvider> = ({ element, ind
             </CmsSingleListNormalElement>
             <CmsSingleListNormalElement
                 flexBasis = '210px'
-                color = {element.ifEnd ? 'green' : 'red'}
+                colorCSS = {element.ifEnd ? 'green' : 'red'}
             >
                 {element.ifEnd ? 'zakończony' : 'w trakcie'}
             </CmsSingleListNormalElement>

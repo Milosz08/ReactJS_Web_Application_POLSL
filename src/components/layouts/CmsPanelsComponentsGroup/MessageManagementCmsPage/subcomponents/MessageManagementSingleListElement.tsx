@@ -47,7 +47,7 @@ const MessageManagementSingleListElement: React.FC<PropsProvider> = ({ element, 
         </CmsSingleListNormalElement>
         <CmsSingleListNormalElement
             flexBasis = '310px'
-            color = {element.ifClicked ? 'green' : 'red'}
+            colorCSS = {element.ifClicked ? 'green' : 'red'}
         >
             {element.ifClicked ? 'odczytana' : 'nieodczytana'}
         </CmsSingleListNormalElement>
