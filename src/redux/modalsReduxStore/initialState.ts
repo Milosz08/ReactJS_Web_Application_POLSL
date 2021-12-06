@@ -13,6 +13,7 @@
  */
 
 import { allModals, allModalsActions } from './types';
+import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
 
 const { SUBJECT_MODAL, USER_MESSAGES_MODAL, HELPERS_LINKS_MODAL, CALENDAR_MODAL } = allModals;
 
@@ -22,6 +23,7 @@ interface ModalParametersProvider {
     dataID: string | null;
     iconComponent: string;
     titleContent: string;
+    pageTitle: string;
 }
 
 export interface ModalsInitialTypes {
@@ -35,6 +37,7 @@ export const modalsInitialState: ModalsInitialTypes = {
         dataID: null,
         iconComponent: 'BsBookmarkCheck',
         titleContent: 'przemiot',
+        pageTitle: ROUTING_PATH_NAMES.SUBJECT_CMS_PAGE,
     },
     [USER_MESSAGES_MODAL]: {
         ifOpen: false,
@@ -42,6 +45,7 @@ export const modalsInitialState: ModalsInitialTypes = {
         dataID: null,
         iconComponent: 'BsEnvelope',
         titleContent: 'wiadomość użytkownika',
+        pageTitle: ROUTING_PATH_NAMES.USERS_MESS_CMS_PAGE,
     },
     [HELPERS_LINKS_MODAL]: {
         ifOpen: false,
@@ -49,12 +53,14 @@ export const modalsInitialState: ModalsInitialTypes = {
         dataID: null,
         iconComponent: 'BsDownload',
         titleContent: 'link do pomocy',
+        pageTitle: ROUTING_PATH_NAMES.HELPS_CMS_PAGE,
     },
     [CALENDAR_MODAL]: {
         ifOpen: false,
         action: allModalsActions.EDIT_ELEMENT,
         dataID: null,
         iconComponent: 'BsCalendar',
-        titleContent: 'wpisy kalendarza',
+        titleContent: 'wpis/y kalendarza',
+        pageTitle: ROUTING_PATH_NAMES.CALENDAR_CMS_PAGE,
     }
 };

@@ -15,7 +15,10 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reduxStore';
 import { allModals } from '../../redux/modalsReduxStore/types';
+import { ModalsInitialTypes } from '../../redux/modalsReduxStore/initialState';
 
 const DeleteContentModal = React.lazy(() => import('../../components/layouts/CmsDeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
 const CustomContentForSubjects = React.lazy(() => import('../../components/layouts/CmsDeleteModalsGroup/CutomComponents/CustomContentForSubjects'));
@@ -28,6 +31,8 @@ const CustomContentForCalendar = React.lazy(() => import('../../components/layou
  */
 const AllModalsStructure: React.FC = (): JSX.Element => {
 
+    const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+
     const allCustomComponent = [
         CustomContentForSubjects, CustomContentForUserMessages, CustomContentForHelpersLinks, CustomContentForCalendar
     ];
@@ -37,6 +42,7 @@ const AllModalsStructure: React.FC = (): JSX.Element => {
             <DeleteContentModal
                 modalType = {allModals[key]}
                 RenderCustomComponent = {allCustomComponent[idx]}
+                pageTitle = {modalsInitialState[allModals[key]].pageTitle}
             />
         </Fragment>
     ));

@@ -30,6 +30,7 @@ const DeleteContentModalButtons = React.lazy(() => import('./subcomponents/Delet
 
 interface PropsProvider {
     modalType: allModals;
+    pageTitle: string;
     RenderCustomComponent: React.FC;
 }
 
@@ -37,9 +38,10 @@ interface PropsProvider {
  * High order component responsible for generating universal modal responsible for deleting content from CMS.
  *
  * @param modalType { allModals } - deleting content type (based modal type).
+ * @param pageTitle { string } - page title setting after finished removed data.
  * @param RenderCustomComponent { React.FC } - rendering component with custom structure for different elements.
  */
-const DeleteContentModal: React.FC<PropsProvider> = ({ modalType, RenderCustomComponent }): JSX.Element => {
+const DeleteContentModal: React.FC<PropsProvider> = ({ modalType, pageTitle, RenderCustomComponent }): JSX.Element => {
 
     const initialTypes: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
 
@@ -69,6 +71,7 @@ const DeleteContentModal: React.FC<PropsProvider> = ({ modalType, RenderCustomCo
                     buttonContent = {modalObject.titleContent}
                     modalType = {modalType}
                     dataID = {modalObject.dataID}
+                    title = {pageTitle}
                 />
             </DeleteContentModalWrapper>
         </DeleteContentModalContainer>
