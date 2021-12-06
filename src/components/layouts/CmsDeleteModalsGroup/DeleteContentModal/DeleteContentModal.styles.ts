@@ -65,22 +65,24 @@ export const DeleteContentDatabaseID = styled.p`
     font-weight: 400;
 `;
 
-export const DeleteContentButtonsContainer = styled.div`
+export const DeleteContentButtonsContainer = styled('div')<{ ifExtraMargin?: boolean }>`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 40px auto 0;
+    margin: 40px auto ${({ ifExtraMargin }) => ifExtraMargin ? '30px' : 0};
     width: 80%;
 `;
 
 export const DeleteContentButton = styled(button_rs)`
     ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 400, _ifEmpty: false })};
     width: 300px;
+    margin-bottom: 20px;
 `;
 
 export const NotDeleteContentButton = styled(button_rs)`
     ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 400, _ifEmpty: true })};
     width: 300px;
+    margin-bottom: 20px;
 `;
 
 export const CustomContentContainer = styled.div`
@@ -96,12 +98,20 @@ export const CustomContentAsideText = styled.p`
 
 export const CustomContentRemoveElementTitle = styled.h3`
     font-size: 1.5rem;
-    padding: 0 30px;
     text-align: center;
     color: var(--navyBlueColor);
     font-weight: 500;
     margin: 10px 0;
+`;
+
+export const CustomContentRemoveElementContent = styled.p`
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0 30px;
+    text-align: center;
+    color: var(--navyBlueColor);
     overflow-wrap: break-word;
+    margin: 10px 0;
     width: 100%;
 `;
 
