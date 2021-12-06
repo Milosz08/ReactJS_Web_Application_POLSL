@@ -58,13 +58,6 @@ export const addLastUpdate = (lastUpdate: LastUpdateTypes): ReturnedToReducer =>
     }
 });
 
-export const updateSelectedState = (updateStateType: updateSections): ReturnedToReducer => ({
-    type: apiTypes.UPDATE_SINGLE_LAST_UPDATE,
-    payload: {
-        updateStateType
-    }
-});
-
 export const addSingleSubject = (singleSubjectData: SubjectsContentTypes): ReturnedToReducer => ({
     type: apiTypes.GET_SINGLE_SUBJECT_DATA,
     payload: {

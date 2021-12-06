@@ -18,16 +18,14 @@ import { apiInitialState } from './initialState';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 
 import axiosInstance from '../../helpers/misc/request';
-import ConvertTimeUTC from '../../helpers/functionsAndClasses/convertTimeUTC';
 import { CurrentScheduleContentTypes } from './dataTypes';
 import CryptoJS, { AES } from 'crypto-js';
 import { FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
 
 const {
     GET_SINGLE_FOOTERFORM_DATA, SEND_SINGLE_FOOTERFORM_DATA, GET_SINGLE_COVID_DATA, GET_SINGLE_LAST_UPDATE, SORT_BY_DATE,
-    UPDATE_SINGLE_LAST_UPDATE, GET_SINGLE_SUBJECT_DATA, SORT_BY_NAME, GET_SINGLE_SCHEDULE_SUBJECT, GET_SINGLE_CALENDAR_RECORD,
-    FILTERED_SCHEDULE_SUBJECTS, GET_SINGLE_HELPERS_LINKS, UPDATE_COVID_DATA, UPDATE_CREDENTIALS, UPDATE_ELEMENTS_DATE,
-    REMOVING_CMS_CONTENT
+    GET_SINGLE_SUBJECT_DATA, SORT_BY_NAME, GET_SINGLE_SCHEDULE_SUBJECT, GET_SINGLE_CALENDAR_RECORD, FILTERED_SCHEDULE_SUBJECTS,
+    GET_SINGLE_HELPERS_LINKS, UPDATE_COVID_DATA, UPDATE_CREDENTIALS, UPDATE_ELEMENTS_DATE, REMOVING_CMS_CONTENT
 } = apiTypes;
 
 const apiReducer = (state = apiInitialState, action: any) => {
@@ -78,22 +76,6 @@ const apiReducer = (state = apiInitialState, action: any) => {
         case GET_SINGLE_LAST_UPDATE: {
             const { lastUpdate } = action.payload;
             return { ...state, lastUpdate: [ ...state.lastUpdate, lastUpdate ] };
-        }
-
-        case UPDATE_SINGLE_LAST_UPDATE: {
-            const { updateStateType } = action.payload;
-            let newState = [ ...state.lastUpdate ];
-            const findIndexType = newState.findIndex(el => el.updateDateFor === updateStateType);
-            if (findIndexType === -1) {
-                throw new Error(`ERROR! Redux reducer error! Set new state not found!`);
-            } else {
-                newState[findIndexType].updateDate = new ConvertTimeUTC().getAllDateElms();
-                const updateDatabaseClaster = async () => {
-                    await axiosInstance.put(`${API_ENDPOINTS.LAST_UPDATE}/${updateStateType}`, newState[findIndexType]);
-                };
-                updateDatabaseClaster();
-            }
-            return { ...state, lastUpdate: newState };
         }
 
         case GET_SINGLE_SUBJECT_DATA: {
