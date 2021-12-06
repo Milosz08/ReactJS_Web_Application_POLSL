@@ -94,7 +94,7 @@ export const CustomContentAsideText = styled.p`
     color: var(--darkGrayTint1);
 `;
 
-export const CustomContentRemoveElemenetTitle = styled.h3`
+export const CustomContentRemoveElementTitle = styled.h3`
     font-size: 1.5rem;
     padding: 0 30px;
     text-align: center;

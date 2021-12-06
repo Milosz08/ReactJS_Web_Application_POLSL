@@ -21,7 +21,7 @@ import { apiReducerTypes } from '../../../../redux/apiReduxStore/types';
 import { HelpersLinksContentTypes } from '../../../../redux/apiReduxStore/dataTypes';
 
 import {
-    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElemenetTitle
+    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElementTitle
 } from '../DeleteContentModal/DeleteContentModal.styles';
 
 /**
@@ -39,9 +39,9 @@ const CustomContentForHelpersLinks: React.FC = (): JSX.Element => {
                 <CustomContentAsideText>
                     Czy na pewno chcesz usunąć link pomocy naukowej:
                 </CustomContentAsideText>
-                <CustomContentRemoveElemenetTitle>
+                <CustomContentRemoveElementTitle>
                     {matchElm.helperTitle}
-                </CustomContentRemoveElemenetTitle>
+                </CustomContentRemoveElementTitle>
             </CustomContentContainer>}
         </>
     );

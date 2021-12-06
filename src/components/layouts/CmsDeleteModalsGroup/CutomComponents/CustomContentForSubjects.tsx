@@ -21,7 +21,7 @@ import { apiReducerTypes } from '../../../../redux/apiReduxStore/types';
 import { SubjectsContentTypes } from '../../../../redux/apiReduxStore/dataTypes';
 
 import {
-    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElemenetTitle
+    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElementTitle
 } from '../DeleteContentModal/DeleteContentModal.styles';
 
 /**
@@ -37,9 +37,9 @@ const CustomContentForSubjects: React.FC = (): JSX.Element => {
                 <CustomContentAsideText>
                     Czy na pewno chcesz usunąć przemiot:
                 </CustomContentAsideText>
-                <CustomContentRemoveElemenetTitle>
+                <CustomContentRemoveElementTitle>
                     {matchElm.title}
-                </CustomContentRemoveElemenetTitle>
+                </CustomContentRemoveElementTitle>
             </CustomContentContainer>}
         </>
     );

@@ -21,7 +21,7 @@ import { apiReducerTypes } from '../../../../redux/apiReduxStore/types';
 import { FooterFormTypes } from '../../../../redux/apiReduxStore/dataTypes';
 
 import {
-    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElemenetTitle
+    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElementContent, CustomContentRemoveElementTitle
 } from '../DeleteContentModal/DeleteContentModal.styles';
 
 /**
@@ -39,15 +39,15 @@ const CustomContentForUserMessages: React.FC = (): JSX.Element => {
                 <CustomContentAsideText>
                     Czy na pewno chcesz usunąć wiadomość od:
                 </CustomContentAsideText>
-                <CustomContentRemoveElemenetTitle>
+                <CustomContentRemoveElementTitle>
                     {matchElm.userIdentity}
-                </CustomContentRemoveElemenetTitle>
+                </CustomContentRemoveElementTitle>
                 <CustomContentAsideText>
                     o treści:
                 </CustomContentAsideText>
-                <CustomContentRemoveElemenetTitle>
+                <CustomContentRemoveElementContent>
                     {matchElm.userMessage}
-                </CustomContentRemoveElemenetTitle>
+                </CustomContentRemoveElementContent>
             </CustomContentContainer>}
         </>
     );
