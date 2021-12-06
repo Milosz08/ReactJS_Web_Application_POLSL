@@ -14,6 +14,7 @@
 
 import styled from 'styled-components';
 import { button_rs, ul_rs } from '../../../../styles/reset.styles';
+import { ImFilesEmpty } from 'react-icons/all';
 
 export const CmsPageContainer = styled.section`
     width: calc(100% - 60px);
@@ -50,8 +51,8 @@ export const CmsIdElement = styled('div')<{ ifNotHeader?: boolean }>`
     flex-basis: 60px;
 `;
 
-export const CmsSingleListNormalElement = styled('div')<{ flexBasis?: string, color?: string }>`
-    color: var(${({ color }) => color ? `--${color}Color` : 'inherit'});
+export const CmsSingleListNormalElement = styled('div')<{ flexBasis?: string, colorCSS?: string }>`
+    color: var(${({ colorCSS }) => colorCSS ? `--${colorCSS}Color` : 'inherit'});
     flex-basis: ${({ flexBasis }) => flexBasis ? flexBasis : 'none'};
     flex-grow: ${({ flexBasis }) => flexBasis ? 'none' : 1};
 `;
@@ -98,4 +99,29 @@ export const ChangeCalendarSingleColorDotElement = styled('div')<{ colorCSS: str
     height: 13px;
     margin-right: 8px;
     border-radius: 50%;
+`;
+
+export const EmptyContentContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+`;
+
+export const EmptyContentIcon = styled(ImFilesEmpty)`
+    color: var(--navyBlueColor);
+    font-size: 5rem;
+`;
+
+export const EmptyContentBasicMessage = styled.p`
+    font-weight: 400;
+    color: var(--navyBlueColor);
+    text-align: center;
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin: 30px 0 60px;
+    strong {
+        font-weight: 500;
+        color: var(--darkOrangeColor);
+    }
 `;
