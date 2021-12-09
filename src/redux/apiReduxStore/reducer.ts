@@ -173,6 +173,7 @@ const apiReducer = (state = apiInitialState, action: any) => {
                 await axiosInstance.put(`${API_ENDPOINTS.FOOTER_FORM}/${elementID}`, singleMess);
             };
             updateDatabaseCluster();
+            singleMess.userChoice = FOOTER_OPTIONS.find(option => option.value === singleMess.userChoice)!.name;
             return { ...state, footerFormMessages: newState };
         }
 
