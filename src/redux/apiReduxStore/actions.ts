@@ -12,13 +12,8 @@
  * governing permissions and limitations under the license.
  */
 
-import apiTypes, { covidTypes, sortAvailables, updateSections } from './types';
+import apiTypes, { apiGetContentFromDB, covidTypes, sortAvailables, updateSections } from './types';
 import { allModals } from '../modalsReduxStore/types';
-
-import {
-    CalendarContentTypes, CovidWarningsTypes, FooterFormTypes, HelpersLinksContentTypes, LastUpdateTypes,
-    ScheduleContentTypes, SubjectsContentTypes
-} from './dataTypes';
 
 import { ROLES } from '../../helpers/functionsAndClasses/LoginValidator';
 import { ModalsInitialTypes } from '../modalsReduxStore/initialState';
@@ -30,10 +25,10 @@ interface ReturnedToReducer {
     };
 }
 
-export const addFooterMessage = (footerMessageObject: FooterFormTypes): ReturnedToReducer => ({
-    type: apiTypes.GET_SINGLE_FOOTERFORM_DATA,
+export const getSingleElementFromDB = (value: object, elementType: apiGetContentFromDB): ReturnedToReducer => ({
+    type: apiTypes.GET_SINGLE_ELEMENT_FROM_DB,
     payload: {
-        footerMessageObject
+        value, elementType
     }
 });
 
@@ -44,45 +39,10 @@ export const sendFooterMessage = (getfooterMessage: { [value: string]: string })
     }
 });
 
-export const addCovidWarningLevel = (covidWarningLevels: CovidWarningsTypes): ReturnedToReducer => ({
-    type: apiTypes.GET_SINGLE_COVID_DATA,
-    payload: {
-        covidWarningLevels
-    }
-});
-
-export const addLastUpdate = (lastUpdate: LastUpdateTypes): ReturnedToReducer => ({
-    type: apiTypes.GET_SINGLE_LAST_UPDATE,
-    payload: {
-        lastUpdate
-    }
-});
-
-export const addSingleSubject = (singleSubjectData: SubjectsContentTypes): ReturnedToReducer => ({
-    type: apiTypes.GET_SINGLE_SUBJECT_DATA,
-    payload: {
-        singleSubjectData
-    }
-});
-
 export const sortingIncomingElmsByName = (...typeElmsArray: sortAvailables[]): ReturnedToReducer => ({
     type: apiTypes.SORT_BY_NAME,
     payload: {
         typeElmsArray
-    }
-});
-
-export const addSingleScheduleSubject = (singleScheduleSubject: ScheduleContentTypes): ReturnedToReducer => ({
-    type: apiTypes.GET_SINGLE_SCHEDULE_SUBJECT,
-    payload: {
-        singleScheduleSubject
-    }
-});
-
-export const addSingleCalendarRecord = (singleCalendarRecord: CalendarContentTypes): ReturnedToReducer => ({
-    type: apiTypes.GET_SINGLE_CALENDAR_RECORD,
-    payload: {
-        singleCalendarRecord
     }
 });
 
@@ -97,13 +57,6 @@ export const filteredScheduleSubjects = (normalGroup: string, engGroup: string, 
     type: apiTypes.FILTERED_SCHEDULE_SUBJECTS,
     payload: {
         normalGroup, engGroup, skGroup
-    }
-});
-
-export const addSingleHelpersLink = (singleHelpersLink: HelpersLinksContentTypes): ReturnedToReducer => ({
-    type: apiTypes.GET_SINGLE_HELPERS_LINKS,
-    payload: {
-        singleHelpersLink
     }
 });
 
@@ -132,5 +85,12 @@ export const removingCmsContent = (elementID: string, modalType: allModals, modS
     type: apiTypes.REMOVING_CMS_CONTENT,
     payload: {
         elementID, modalType, modState
+    }
+});
+
+export const updateFooterFormClicked = (elementID: string, ifClicked: boolean): ReturnedToReducer => ({
+    type: apiTypes.UPDATE_FOOTERFORM_CLICKED,
+    payload: {
+        elementID, ifClicked
     }
 });
