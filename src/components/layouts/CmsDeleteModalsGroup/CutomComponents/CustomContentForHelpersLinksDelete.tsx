@@ -27,7 +27,7 @@ import {
 /**
  * Component responsible for generating custom content for delete helpers links single record modal.
  */
-const CustomContentForHelpersLinks: React.FC = (): JSX.Element => {
+const CustomContentForHelpersLinksDelete: React.FC = (): JSX.Element => {
 
     const matchElm: HelpersLinksContentTypes | any = useFindMatchingElement(
         allModals.HELPERS_LINKS_MODAL, apiReducerTypes.HELPERS_LINKS
@@ -47,4 +47,4 @@ const CustomContentForHelpersLinks: React.FC = (): JSX.Element => {
     );
 };
 
-export default CustomContentForHelpersLinks;
+export default CustomContentForHelpersLinksDelete;

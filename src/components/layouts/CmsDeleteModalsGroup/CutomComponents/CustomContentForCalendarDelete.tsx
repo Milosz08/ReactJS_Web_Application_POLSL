@@ -30,7 +30,7 @@ import {
 /**
  * Component responsible for generating custom content for delete calendar single record modal.
  */
-const CustomContentForCalendar: React.FC = (): JSX.Element => {
+const CustomContentForCalendarDelete: React.FC = (): JSX.Element => {
 
     const { LOW, MEDIUM } = LEVELS;
 
@@ -67,4 +67,4 @@ const CustomContentForCalendar: React.FC = (): JSX.Element => {
     );
 };
 
-export default CustomContentForCalendar;
+export default CustomContentForCalendarDelete;

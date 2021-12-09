@@ -18,46 +18,31 @@ import useFindMatchingElement from '../../../../helpers/hooks/useFindMatchingEle
 
 import { allModals } from '../../../../redux/modalsReduxStore/types';
 import { apiReducerTypes } from '../../../../redux/apiReduxStore/types';
-import { FooterFormTypes } from '../../../../redux/apiReduxStore/dataTypes';
+import { SubjectsContentTypes } from '../../../../redux/apiReduxStore/dataTypes';
 
 import {
-    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElementContent, CustomContentRemoveElementTitle,
-    DeleteUserMessagesNotReadableIndicator
+    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElementTitle
 } from '../DeleteContentModal/DeleteContentModal.styles';
 
 /**
- * Component responsible for generating custom content for delete user message single record modal.
+ * Component responsible for generating custom content for delete subject single record modal.
  */
-const CustomContentForUserMessages: React.FC = (): JSX.Element => {
+const CustomContentForSubjectsDelete: React.FC = (): JSX.Element => {
 
-    const matchElm: FooterFormTypes | any  = useFindMatchingElement(
-        allModals.USER_MESSAGES_MODAL, apiReducerTypes.USER_MESSAGES
-    );
+    const matchElm: SubjectsContentTypes | any = useFindMatchingElement(allModals.SUBJECT_MODAL, apiReducerTypes.SUBJECTS);
 
     return (
         <>
             {Boolean(matchElm) && <CustomContentContainer>
                 <CustomContentAsideText>
-                    Czy na pewno chcesz usunąć
-                    <DeleteUserMessagesNotReadableIndicator
-                        colorCSS = {matchElm.ifClicked ? 'green' : 'red'}
-                    >
-                        {matchElm.ifClicked ? ' odczytaną ' : ' nieodczytaną '}
-                    </DeleteUserMessagesNotReadableIndicator>
-                    wiadomość od:
+                    Czy na pewno chcesz usunąć przemiot:
                 </CustomContentAsideText>
                 <CustomContentRemoveElementTitle>
-                    {matchElm.userIdentity}
+                    {matchElm.title}
                 </CustomContentRemoveElementTitle>
-                <CustomContentAsideText>
-                    o treści:
-                </CustomContentAsideText>
-                <CustomContentRemoveElementContent>
-                    {matchElm.userMessage}
-                </CustomContentRemoveElementContent>
             </CustomContentContainer>}
         </>
     );
 };
 
-export default CustomContentForUserMessages;
+export default CustomContentForSubjectsDelete;
