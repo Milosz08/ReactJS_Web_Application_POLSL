@@ -21,15 +21,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import 'core-js';
-import { AES } from 'crypto-js';
 
-import ForeunloadFunctions from './helpers/functionsAndClasses/foreunloadFunctions';
+import ForeunloadFunctions from './helpers/functionsAndClasses/utils';
 
 ForeunloadFunctions.disableAnimationsOnResize();
 ForeunloadFunctions.setScrollPositionToZero();
-
-const hash = process.env['REACT_APP_HASH_CODE '] ? process.env['REACT_APP_HASH_CODE '] : '';
-const encrypted = AES.encrypt('https://mega.nz/folder/QiwEXSJK#btpZcXAhqPX4MjKh3mAngQ', hash).toString();
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.config({ nullTargetWarn: false });
