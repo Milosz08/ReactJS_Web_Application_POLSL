@@ -57,9 +57,11 @@ const MultipleElementsList: React.FC<PropsProvider> = ({
     inputType, cmsListIndicator, notFind, modalType, buttonNewContent, components
 }): JSX.Element => {
 
+    const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const { filteredState, ifLengthIsNull } = useContext<Partial<SearchingTypes>>(SearchingContext);
 
     const { ListRender, HeaderRender } = components;
+    const modalListener = modalsInitialState[modalType!];
 
     const dispatcher = useDispatch();
 
@@ -69,8 +71,8 @@ const MultipleElementsList: React.FC<PropsProvider> = ({
     
     useEffect(() => {
         dispatcher(setErrorsSearchInputs(inputType, filteredState!.length === 0 && !ifLengthIsNull!));
-    }, [ dispatcher, filteredState, ifLengthIsNull, inputType ]);
-    
+    }, [ dispatcher, filteredState, ifLengthIsNull, inputType, modalListener ]);
+
     return (
         <>
             {!ifLengthIsNull! && <UniversalListNavigate
