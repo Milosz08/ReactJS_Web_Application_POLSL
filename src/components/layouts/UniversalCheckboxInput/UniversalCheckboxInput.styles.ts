@@ -21,12 +21,13 @@ export const UniversalCheckboxInputContainer = styled.div`
     align-items: center;
 `;
 
-export const CheckboxInput = styled(input_rs)<{ checkboxSize?: number, checkboxColor?: string }>`
+export const CheckboxInput = styled(input_rs)<{ checkboxSize?: number, checkboxColor?: string, ifExtraMargin?: boolean }>`
     position: relative;
     width: ${({ checkboxSize }) => checkboxSize || 35}px;
     height: ${({ checkboxSize }) => checkboxSize || 35}px;
     z-index: 3;
     opacity: 0;
+    margin-left: ${({ ifExtraMargin }) => ifExtraMargin ? '15px' : 0};
     cursor: pointer;
     :checked ~ div {
         border-radius: 5px;
