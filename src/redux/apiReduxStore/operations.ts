@@ -12,13 +12,14 @@
  * governing permissions and limitations under the license.
  */
 
+import { decrypt } from 'react-crypt-gsm';
 import axiosInstance from '../../helpers/misc/request';
+
 import GROUPS_STATIC from '../../helpers/structs/allGroups';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 
 import {
-    addCovidWarningLevel, addFooterMessage, addLastUpdate, addSingleCalendarRecord, addSingleHelpersLink, addSingleScheduleSubject,
-    addSingleSubject, filteredScheduleSubjects, sortingIcomingElmsByDate, sortingIncomingElmsByName
+    filteredScheduleSubjects, getSingleElementFromDB, sortingIcomingElmsByDate, sortingIncomingElmsByName
 } from './actions';
 
 import {
@@ -26,8 +27,9 @@ import {
     ScheduleContentTypes, SubjectsContentTypes
 } from './dataTypes';
 
-import { sortAvailables } from './types';
-import { decrypt } from 'react-crypt-gsm';
+import { apiGetContentFromDB, sortAvailables } from './types';
+
+const { COVID, LAST_UPDATE, SUBJECTS, CALENDAR, HELPERS, SCHEDULE, USER_MESSAGES } = apiGetContentFromDB;
 
 const footerEndpoint: string = API_ENDPOINTS.FOOTER_FORM;
 const covidEndpoint: string = API_ENDPOINTS.COVID_WARNINGS;
@@ -45,28 +47,28 @@ const fetchElementFromAPI = async (endpoint: string) => {
 export const getAllFooterFormElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const footerFormMessages = await fetchElementFromAPI(footerEndpoint);
-        footerFormMessages.forEach((element: FooterFormTypes) => dispatch(addFooterMessage(element)));
+        footerFormMessages.forEach((element: FooterFormTypes) => dispatch(getSingleElementFromDB(element, USER_MESSAGES)));
     };
 };
 
 export const getAllCovidWarningElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const covidWarningLevels = await fetchElementFromAPI(covidEndpoint);
-        covidWarningLevels.forEach((element: CovidWarningsTypes) => dispatch(addCovidWarningLevel(element)));
+        covidWarningLevels.forEach((element: CovidWarningsTypes) => dispatch(getSingleElementFromDB(element, COVID)));
     };
 };
 
 export const getAllLastUpdateElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const lastUpdates = await fetchElementFromAPI(updateEndpoint);
-        lastUpdates.forEach((element: LastUpdateTypes) => dispatch(addLastUpdate(element)));
+        lastUpdates.forEach((element: LastUpdateTypes) => dispatch(getSingleElementFromDB(element, LAST_UPDATE)));
     };
 };
 
 export const getAllSubjectsElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const subjects = await fetchElementFromAPI(subjectsEndpoint);
-        subjects.forEach((element: SubjectsContentTypes) => dispatch(addSingleSubject(element)));
+        subjects.forEach((element: SubjectsContentTypes) => dispatch(getSingleElementFromDB(element, SUBJECTS)));
         dispatch(sortingIncomingElmsByName(sortAvailables.SUBJECTS));
     };
 };
@@ -74,7 +76,7 @@ export const getAllSubjectsElements = () => {
 export const getAllScheduleElements = (groupCookies: any) => {
     return async (dispatch: (prop: any) => void) => {
         const scheduleSubjects = await fetchElementFromAPI(scheduleEndpoint);
-        scheduleSubjects.forEach((element: ScheduleContentTypes) => dispatch(addSingleScheduleSubject(element)));
+        scheduleSubjects.forEach((element: ScheduleContentTypes) => dispatch(getSingleElementFromDB(element, SCHEDULE)));
         const cookieDecryptData = ({ content, tag }: any) => (
             decrypt({ content, tag: new Uint8Array(tag.data) })
         );
@@ -91,7 +93,7 @@ export const getAllScheduleElements = (groupCookies: any) => {
 export const getAllCalendarElements = () => {
     return async (dispatch: (prop: any) => void) => {
         const calendar = await fetchElementFromAPI(calendarEndpoint);
-        calendar.forEach((element: CalendarContentTypes) => dispatch(addSingleCalendarRecord(element)));
+        calendar.forEach((element: CalendarContentTypes) => dispatch(getSingleElementFromDB(element, CALENDAR)));
         dispatch(sortingIcomingElmsByDate(sortAvailables.CALENDAR));
     };
 };
@@ -99,6 +101,6 @@ export const getAllCalendarElements = () => {
 export const getAllHelpersLinks = () => {
     return async (dispatch: (prop: any) => void) => {
         const helpersLinks = await fetchElementFromAPI(helpersLinksEndpoint);
-        helpersLinks.forEach((element: HelpersLinksContentTypes) => dispatch(addSingleHelpersLink(element)));
+        helpersLinks.forEach((element: HelpersLinksContentTypes) => dispatch(getSingleElementFromDB(element, HELPERS)));
     };
 };
