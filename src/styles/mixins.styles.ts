@@ -52,45 +52,6 @@ export const StandardTextInput = ({ _paddingRight, _spaceUpDown, _ifError }: Sta
     }
 `;
 
-export const StandardCheckbox = ({ _size, _color }: { _size: number, _color: string }) => css`
-    position: relative;
-    width: ${`${_size}px`};
-    height: ${`${_size}px`};
-    margin-right: 15px;
-    z-index: 3;
-    opacity: 0;
-    cursor: pointer;
-    :checked ~ div {
-        border-radius: 5px;
-        border: 1px solid ${_color};
-        background-color: ${_color};
-        ::after {
-            display: block;
-        }
-    }
-`;
-
-export const StandardCheckmark = ({ _size, _ifError }: { _size: number, _ifError: boolean }) => css`
-    position: absolute;
-    height: ${`${_size}px`};
-    width: ${`${_size}px`};
-    border-radius: 5px;
-    border: 1px solid var(${_ifError ? '--redColor' : '--darkGray'});
-    transition: .2s;
-    ::after {
-        content: '';
-        position: absolute;
-        display: none;
-        left: 6px;
-        top: 2px;
-        width: 4px;
-        height: 8px;
-        border: solid var(--cleanWhiteColor);
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-    }
-`;
-
 export const ModalBackground = ({ _width }: { _width: number }) => css`
     position: fixed;
     display: flex;
