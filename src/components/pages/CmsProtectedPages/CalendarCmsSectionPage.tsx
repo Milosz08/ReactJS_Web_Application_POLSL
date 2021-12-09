@@ -16,9 +16,15 @@ import * as React from 'react';
 import usePageTitle from '../../../helpers/hooks/usePageTitle';
 
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
+import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
+
+import { allModals } from '../../../redux/modalsReduxStore/types';
+import { modalsInitialState } from '../../../redux/modalsReduxStore/initialState';
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
-import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
+
+const DeleteContentModal = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
+const CustomContentForCalendarDelete = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/CutomComponents/CustomContentForCalendarDelete'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
@@ -34,6 +40,11 @@ const CalendarCmsSectionPage: React.FC = (): JSX.Element => {
 
     return (
         <>
+            <DeleteContentModal
+                modalType = {allModals.CALENDAR_MODAL}
+                RenderCustomComponent = {CustomContentForCalendarDelete}
+                pageTitle = {modalsInitialState[allModals.CALENDAR_MODAL].pageTitle}
+            />
             <CommonComponents/>
             <CommonPaginationContainer>
                 <CommonPaginationWrapper>
