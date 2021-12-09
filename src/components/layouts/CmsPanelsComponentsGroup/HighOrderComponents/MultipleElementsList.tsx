@@ -18,14 +18,16 @@ import { useContext, useEffect } from 'react';
 import useFilteredDivideList from '../../../../helpers/hooks/useFilteredDivideList';
 import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/reduxStore';
 import { allModals } from '../../../../redux/modalsReduxStore/types';
+import { ModalsInitialTypes } from '../../../../redux/modalsReduxStore/initialState';
 import { setErrorsSearchInputs } from '../../../../redux/preferencesReduxStore/actions';
 import { cmsListIndicators, searchInputs } from '../../../../redux/preferencesReduxStore/types';
 
 import { CmsUnorderedList } from './HighOrderComponents.styles';
-import EmptyContent from './EmptyContent';
 
+const EmptyContent = React.lazy(() => import('./EmptyContent'));
 const UniversalListNavigate = React.lazy(() => import('../../UniversalListNavigate/UniversalListNavigate'));
 const NotFindContent = React.lazy(() => import('../../NotFindContent/NotFindContent'));
 const CmsAddNewContentButton = React.lazy(() => import('../../CmsAddNewContentButton/CmsAddNewContentButton'));

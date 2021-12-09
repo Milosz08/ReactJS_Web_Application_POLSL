@@ -23,11 +23,12 @@ import { cmsListIndicators, searchInputs } from '../../redux/preferencesReduxSto
 import { SearchingContext, SearchingTypes } from '../../context/searchingContext/SearchingProvider';
 
 /**
+ * Custom hook responsible for generate universal filtered list based props parameters.
+ * Mostly usable in CMS panel.
  *
- *
- * @param searchType { searchInputs } -
- * @param pageType { cmsListIndicators } -
- * @param RenderComponent { any } -
+ * @param searchType { searchInputs } - enum of usable input.
+ * @param pageType { cmsListIndicators } - enum of usable CMS path.
+ * @param RenderComponent { any } - object stored header and single element components.
  */
 const useFilteredDivideList = (
     searchType: searchInputs, pageType: cmsListIndicators, RenderComponent: any

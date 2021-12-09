@@ -22,7 +22,7 @@ const CurrentSubjectContent = React.lazy(() => import('./subcomponents/CurrentSu
 const CurrentSubjectImportantInfo = React.lazy(() => import('./subcomponents/CurrentSubjectImportantInfo'));
 
 /**
- * Component responsible for generating all structure of current subject active subcomponent (with header).
+ * Component responsible for generating all structure of current subject active subcomponents (with header).
  */
 const CurrentSubjectActive: React.FC = (): JSX.Element => (
     <CurrentSubjectActiveContainer>
