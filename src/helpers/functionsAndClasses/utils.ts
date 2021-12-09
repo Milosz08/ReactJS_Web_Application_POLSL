@@ -12,10 +12,12 @@
  * governing permissions and limitations under the license.
  */
 
+import CryptoJS, { AES } from 'crypto-js';
+
 /**
- * Class responsible for storing "pure JS" methods load separately from React App.
+ * Class responsible for storing "pure JS" utils methods.
  */
-class ForeunloadFunctions {
+class Utils {
 
     public static setScrollPositionToZero(): void {
         window.onbeforeunload = () => window.scrollTo(0, 0);
@@ -28,10 +30,14 @@ class ForeunloadFunctions {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout((): void => {
                 document.body.classList.remove('stopTransitions');
-            }, 400)
+            }, 400);
         });
+    };
+
+    public static decrData(data: string, salt: string = '') {
+        return CryptoJS.enc.Utf8.stringify(AES.decrypt(data, salt));
     };
 
 }
 
-export default ForeunloadFunctions;
+export default Utils;
