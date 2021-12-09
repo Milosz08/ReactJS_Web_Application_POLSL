@@ -15,7 +15,7 @@
 import styled from 'styled-components';
 
 import { button_rs, input_rs, select_rs, textarea_rs } from '../../../styles/reset.styles';
-import { StandardCheckbox, StandardCheckmark, StandardTextInput } from '../../../styles/mixins.styles';
+import { StandardTextInput } from '../../../styles/mixins.styles';
 
 export const FooterFormWrapper = styled.form``;
 
@@ -75,35 +75,7 @@ export const TextareaCharsQuantity = styled.div`
     font-size: .9rem;
     padding: 3px 10px 0;
     color: var(--darkGrayTint2);
-`;
-
-export const CheckFieldContainer = styled.div`
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-`;
-
-export const CheckFieldLabel = styled.label`
-    flex-grow: 1;
-    font-size: 1rem;
-    line-height: 1.2;
-    color: var(--darkGray);
-    cursor: pointer;
-`;
-
-export const CheckboxInput = styled(input_rs)`
-    ${StandardCheckbox({
-        _size: 35,
-        _color: 'var(--navyBlueColor)'
-    })};
-`;
-
-export const CheckboxCheckmark = styled('div')<{ ifError: boolean }>`
-    ${props => StandardCheckmark({
-        _size: 20,
-        _ifError: props.ifError        
-    })};
+    margin-bottom: 20px;
 `;
 
 export const FormSubmitButtonContainer = styled.div`

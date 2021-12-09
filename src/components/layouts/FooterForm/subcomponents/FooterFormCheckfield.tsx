@@ -21,7 +21,7 @@ import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore
 
 import { FOOTER_INPUTS } from '../../../../helpers/structs/footerOptions.config';
 
-import { CheckboxCheckmark, CheckboxInput, CheckFieldContainer, CheckFieldLabel } from '../FooterForm.styles';
+const UniversalCheckboxInput = React.lazy(() => import('../../UniversalCheckboxInput/UniversalCheckboxInput'));
 
 /**
  * Component responsible for generating footer form checkfield.
@@ -39,20 +39,14 @@ const FooterFormCheckfield: React.FC = (): JSX.Element => {
     };
 
     return (
-        <CheckFieldContainer>
-            <CheckboxInput
-                type = 'checkbox'
-                id = 'agreeCheckfield'
-                onChange = {handleCheckboxInput}
-                checked = {footerForm[IF_ACCEPTED_TERMS]}
-            />
-            <CheckboxCheckmark
-                ifError = {footerFormErrors[IF_ACCEPTED_TERMS]}
-            />
-            <CheckFieldLabel htmlFor = 'agreeCheckfield'>
-                Wyrażam zgodę na przetwarzanie wyżej podanych przeze mnie informacji.
-            </CheckFieldLabel>
-        </CheckFieldContainer>
+        <UniversalCheckboxInput
+            ifChecked = {Boolean(footerForm[IF_ACCEPTED_TERMS])}
+            changeCheckedCallback = {handleCheckboxInput}
+            ifError = {footerFormErrors[IF_ACCEPTED_TERMS]}
+            id = 'agreeCheckfield'
+            labelContent = 'Wyrażam zgodę na przetwarzanie wyżej podanych przeze mnie informacji.'
+            ifExtraMargin = {true}
+        />
     );
 };
 
