@@ -23,8 +23,10 @@ import { modalsInitialState } from '../../../redux/modalsReduxStore/initialState
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
 
+const AddEditContentModal = React.lazy(() => import('../../layouts/CmsAddEditModalsGroup/AddEditContentModal/AddEditContentModal'));
 const DeleteContentModal = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
-const CustomContentForUserMessagesDelete = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/CutomComponents/CustomContentForUserMessagesDelete'));
+const CustomContentForHelpersLinksAddEdit = React.lazy(() => import('../../layouts/CmsAddEditModalsGroup/Custom Components/CustomContentForHelpersLinksAddEdit/CustomContentForHelpersLinksAddEdit'));
+const CustomContentForHelpersLinksDelete = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/CutomComponents/CustomContentForHelpersLinksDelete'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
@@ -42,8 +44,12 @@ const HelperLinksCmsSectionPage: React.FC = (): JSX.Element => {
         <>
             <DeleteContentModal
                 modalType = {allModals.HELPERS_LINKS_MODAL}
-                RenderCustomComponent = {CustomContentForUserMessagesDelete}
+                RenderCustomComponent = {CustomContentForHelpersLinksDelete}
                 pageTitle = {modalsInitialState[allModals.HELPERS_LINKS_MODAL].pageTitle}
+            />
+            <AddEditContentModal
+                modalType = {allModals.HELPERS_LINKS_MODAL}
+                RenderCustomComponent = {CustomContentForHelpersLinksAddEdit}
             />
             <CommonComponents/>
             <CommonPaginationContainer>
