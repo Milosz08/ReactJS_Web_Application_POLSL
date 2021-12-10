@@ -23,7 +23,7 @@ export const DeleteContentModalContainer = styled.section`
 
 export const DeleteContentModalWrapper = styled.div`
     ${ModalContainer({ _width: 1000 })};
-    padding: 40px;
+    padding: 40px 40px 20px;
     @media only screen and (max-width: 1030px) {
         margin: 0 20px 20px;
         padding: 30px;
@@ -80,7 +80,7 @@ export const NotDeleteContentButton = styled(button_rs)`
 `;
 
 export const DeleteContentButton = styled(button_rs)`
-    ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 400, _ifEmpty: true })};
+    ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 500, _ifEmpty: true })};
     width: 300px;
     margin-bottom: 20px;
 `;
