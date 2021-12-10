@@ -13,7 +13,7 @@
  */
 
 import { modalsInitialState } from './initialState';
-import { modalsTypes } from './types';
+import { allModalsActions, modalsTypes } from './types';
 
 const { CHANGE_MODAL_STATE } = modalsTypes;
 
@@ -22,7 +22,11 @@ const modalsReducer = (state = modalsInitialState, action: any) => {
 
         case CHANGE_MODAL_STATE: {
             const { ifOpen, type, id, modal } = action.payload;
-            return { ...state, [modal]: { ...state[modal], ifOpen, action: type, dataID: id } };
+            let newType: allModalsActions = state[modal].action;
+            if(Boolean(type)) {
+                newType = type;
+            }
+            return { ...state, [modal]: { ...state[modal], ifOpen, action: newType, dataID: id } };
         }
 
         default: {

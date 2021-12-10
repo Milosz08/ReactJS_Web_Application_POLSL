@@ -22,7 +22,7 @@ interface ReturnedToReducer {
 }
 
 export const changeModalStateElements = (
-    ifOpen: boolean, modal: allModals, id: string | null = null, type: allModalsActions = allModalsActions.EDIT_ELEMENT
+    ifOpen: boolean, modal: allModals, id: string | null = null, type?: allModalsActions
 ): ReturnedToReducer => ({
     type: modalsTypes.CHANGE_MODAL_STATE,
     payload: {
