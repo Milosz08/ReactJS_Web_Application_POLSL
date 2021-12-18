@@ -19,6 +19,7 @@ export const UniversalCheckboxInputContainer = styled.div`
     position: relative;
     display: flex;
     align-items: center;
+    cursor: ${({ disabledCSS }) => disabledCSS ? 'not-allowed' : 'pointer'};
 `;
 
 export const CheckboxInput = styled(input_rs)<{ checkboxSize?: number, checkboxColor?: string, ifExtraMargin?: boolean }>`
@@ -36,6 +37,9 @@ export const CheckboxInput = styled(input_rs)<{ checkboxSize?: number, checkboxC
         ::after {
             display: block;
         }
+    }
+    :disabled {
+        cursor: not-allowed;
     }
 `;
 
@@ -60,10 +64,10 @@ export const CheckboxCheckmark = styled('div')<{ ifError: boolean, checkmarkSize
     }
 `;
 
-export const CheckFieldLabel = styled.label`
+export const CheckFieldLabel = styled('label')<{ disabledCSS: boolean }>`
     flex-grow: 1;
     font-size: 1rem;
     line-height: 1.2;
     color: var(--darkGray);
-    cursor: pointer;
+    cursor: ${({ disabledCSS }) => disabledCSS ? 'not-allowed' : 'pointer'};
 `;
