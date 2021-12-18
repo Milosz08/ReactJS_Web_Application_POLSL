@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import { RootState } from '../../redux/reduxStore';
 import { sortInputTypes } from '../../redux/apiReduxStore/types';
 import { PreferencesInitialTypes } from '../../redux/preferencesReduxStore/initialState';
+import { ApiInitialTypes } from '../../redux/apiReduxStore/initialState';
 
 /**
  * Custom hook reponsible for filtering array based on string stored in inputs values
@@ -31,6 +32,7 @@ import { PreferencesInitialTypes } from '../../redux/preferencesReduxStore/initi
 const useInputFilter = (preArray: any, typeofInput: sortInputTypes, sortByType: string, ifReversed: boolean): any[] => {
 
     const { searchInputs: inpts }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
+    const initialState: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
 
     const [ filtered, setFiltered ] = useState<any[]>(preArray);
     const input = inpts[typeofInput];
@@ -45,7 +47,7 @@ const useInputFilter = (preArray: any, typeofInput: sortInputTypes, sortByType: 
             }
         });
         setFiltered(ifReversed ? setArray.reverse() : setArray);
-    }, [ input, preArray, sortByType, ifReversed ]);
+    }, [ input, preArray, sortByType, ifReversed, initialState ]);
 
     return filtered;
 };
