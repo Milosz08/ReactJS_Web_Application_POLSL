@@ -13,15 +13,12 @@
  */
 
 import * as React from 'react';
-import { useEffect } from 'react';
 
-import useIsMount from '../../../helpers/hooks/useIsMount';
 import generateID from '../../../helpers/functionsAndClasses/generateID';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reduxStore';
 import { ApiInitialTypes } from '../../../redux/apiReduxStore/initialState';
-import { getAllCovidWarningElements } from '../../../redux/apiReduxStore/operations';
 import { CovidWarningsTypes } from '../../../redux/apiReduxStore/dataTypes';
 
 import {
@@ -36,9 +33,6 @@ const CovidInfoSection: React.FC = (): JSX.Element => {
 
     const { covidWarningLevels }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
 
-    const isMount = useIsMount();
-    const dispatcher = useDispatch();
-
     const generateCovidBlocks = covidWarningLevels.map((covidBlock: CovidWarningsTypes) => (
         <CovidSingleInfoBlock
             key = {generateID()}
@@ -51,12 +45,6 @@ const CovidInfoSection: React.FC = (): JSX.Element => {
             </CovidSingleInfoRiskNumber>
         </CovidSingleInfoBlock>
     ));
-
-    useEffect(() => {
-        if (isMount) {
-            dispatcher(getAllCovidWarningElements());
-        }
-    }, [ dispatcher, isMount ]);
 
     return (
         <CovidInfoContainer>
