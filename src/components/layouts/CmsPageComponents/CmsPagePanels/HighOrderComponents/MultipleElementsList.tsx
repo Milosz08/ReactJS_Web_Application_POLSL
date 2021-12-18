@@ -65,12 +65,9 @@ const MultipleElementsList: React.FC<PropsProvider> = ({
     const { ListRender, HeaderRender } = components;
     const modalListener = modalsInitialState[modalType!];
 
+    const [ disableOnFinding, generateListElements ] = useFilteredDivideList(inputType, cmsListIndicator, ListRender);
     const dispatcher = useDispatch();
 
-    const [ disableOnFinding, generateListElements ] = useFilteredDivideList(
-        inputType, cmsListIndicator, ListRender
-    );
-    
     useEffect(() => {
         dispatcher(setErrorsSearchInputs(inputType, filteredState!.length === 0 && !ifLengthIsNull!));
     }, [ dispatcher, filteredState, ifLengthIsNull, inputType, modalListener ]);

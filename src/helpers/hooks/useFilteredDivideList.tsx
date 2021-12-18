@@ -39,7 +39,6 @@ const useFilteredDivideList = (
     }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
     const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
-
     const { activePage, maxShowingElms } = currentActivePage[pageType];
 
     const [ disableOnFinding, setDisableOnFinding ] = useState<boolean>(false);

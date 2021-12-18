@@ -17,14 +17,16 @@ import { sessInitialState } from './initialState';
 
 import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
 
-const {
-    CHANGE_ADMIN_LOGGED_STATUS, CHANGE_USER_LOGGED_STATUS, INCREASE_SESSION_COUNER, TOGGLE_WARNING_SESSION_MODAL
-} = sessionTypes;
-
+/**
+ * The reducer function responsible for managing state for the ReduxSession tree.
+ *
+ * @param state { apiInitialState } - ReduxSession tree state.
+ * @param action { any } - object stored action: type and payload.
+ */
 const sessionReducer = (state = sessInitialState, action: any) => {
     switch(action.type) {
 
-        case CHANGE_ADMIN_LOGGED_STATUS: {
+        case sessionTypes.CHANGE_ADMIN_LOGGED_STATUS: {
             const { status: logged, role: identity } = action.payload;
             if(!logged) {
                 document.title = ROUTING_PATH_NAMES.CMS_LOGIN_PAGE;
@@ -32,7 +34,7 @@ const sessionReducer = (state = sessInitialState, action: any) => {
             return { ...state, adminAuthStatus: { logged, identity } };
         }
 
-        case CHANGE_USER_LOGGED_STATUS: {
+        case sessionTypes.CHANGE_USER_LOGGED_STATUS: {
             const { status: userLoggedStatus } = action.payload;
             if(!userLoggedStatus) {
                 document.title = ROUTING_PATH_NAMES.CMS_LOGIN_PAGE;
@@ -40,12 +42,12 @@ const sessionReducer = (state = sessInitialState, action: any) => {
             return { ...state, userLoggedStatus };
         }
 
-        case INCREASE_SESSION_COUNER: {
+        case sessionTypes.INCREASE_SESSION_COUNER: {
             const { counter: adminSessionCounter } = action.payload;
             return { ...state, sessionInfo: { ...state.sessionInfo, adminSessionCounter } };
         }
 
-        case TOGGLE_WARNING_SESSION_MODAL: {
+        case sessionTypes.TOGGLE_WARNING_SESSION_MODAL: {
             const { toggleModal: ifModalOpen } = action.payload;
             return { ...state, sessionInfo: { ...state.sessionInfo, ifModalOpen } };
         }

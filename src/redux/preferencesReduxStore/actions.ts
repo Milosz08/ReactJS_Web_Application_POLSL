@@ -13,6 +13,7 @@
  */
 
 import preferencesTypes, { cmsListIndicators, groupsTypes, searchInputs } from './types';
+
 import { arrowDirs } from '../../components/layouts/SubjectsDetails/subcomponents/NextPrevArrowNavigation';
 import { directions } from '../../components/layouts/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
 
