@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import { allModals, allModalsActions, modalsTypes } from './types';
+import { allModals, allModalsActions, allModalsInputs, modalsTypes } from './types';
 
 interface ReturnedToReducer {
     type: modalsTypes;
@@ -21,11 +21,63 @@ interface ReturnedToReducer {
     };
 }
 
-export const changeModalStateElements = (
-    ifOpen: boolean, modal: allModals, id: string | null = null, type?: allModalsActions
-): ReturnedToReducer => ({
-    type: modalsTypes.CHANGE_MODAL_STATE,
-    payload: {
-        ifOpen, type, id, modal
-    }
-});
+/**
+ * Static class that stores methods responsible for basic handling of app modals (mostly in CMS panel).
+ */
+export class ModalsActions {
+
+    /**
+     * Method responsible for calling the reducer function that change modal state.
+     *
+     * @param ifOpen { boolean } - flag decided, if modal is open or closed.
+     * @param modal { allModals } - modal currently supported.
+     * @param id { string } - element ID (necessary in EDIT_ELEMENT modal action).
+     * @param type { allModalsActions? } - modal action type (by default is EDIT_MODE).
+     */
+    public static changeModalStateElements = (
+        ifOpen: boolean, modal: allModals, id: string | null = null, type?: allModalsActions
+    ): ReturnedToReducer => ({
+        type: modalsTypes.CHANGE_MODAL_STATE,
+        payload: {
+            ifOpen, type, id, modal
+        }
+    });
+
+    /**
+     * Method responsible for calling the reducer function that change modal selected input property.
+     *
+     * @param modalType { allModals } - modal currently supported.
+     * @param inputType { allModalsInputs } - input in currently supported modal.
+     * @param value { any } - primitive type to change state.
+     */
+    public static changeModalSelectedInput = (modalType: allModals, inputType: allModalsInputs, value: any): ReturnedToReducer => ({
+        type: modalsTypes.CHANGE_MODAL_SELECTED_INPUT,
+        payload: {
+            modalType, inputType, value
+        }
+    });
+
+    /**
+     * Method responsible for calling the reducer function that clear all inputs in selected modal.
+     *
+     * @param modalType { allModals } - modal currently supported.
+     */
+    public static clearAllInputs = (modalType: allModals): ReturnedToReducer => ({
+        type: modalsTypes.CLEAR_ALL_SINGLE_MODAL_INPUTS,
+        payload: {
+            modalType
+        }
+    });
+
+    /**
+     * Method responsible for calling the reducer function that check all inputs in selected modal.
+     *
+     * @param modalType { allModals } - modal currently supported.
+     */
+    public static checkAllInputs = (modalType: allModals): ReturnedToReducer => ({
+        type: modalsTypes.CHECK_ALL_INPUTS_ERR,
+        payload: {
+            modalType
+        }
+    });
+}

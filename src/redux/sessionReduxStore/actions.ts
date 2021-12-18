@@ -22,30 +22,58 @@ interface ReturnedToReducer {
     };
 }
 
-export const changeAdminLoggedStatus = (status: boolean, role = ROLES.UNDEFINED): ReturnedToReducer => ({
-    type: sessionTypes.CHANGE_ADMIN_LOGGED_STATUS,
-    payload: {
-        status, role
-    }
-});
+/**
+ * Class that stores methods responsible for managing a user session.
+ */
+export class SessActions {
 
-export const changeUserLoggedStatus = (status: boolean) => ({
-    type: sessionTypes.CHANGE_USER_LOGGED_STATUS,
-    payload: {
-        status
-    }
-});
+    /**
+     * Method responsible for changing the login status for CMS administrator/moderator.
+     *
+     * @param status { boolean } - logged status.
+     * @param role { ROLES } - current role (moderator/administrator).
+     */
+    public static changeAdminLoggedStatus = (status: boolean, role = ROLES.UNDEFINED): ReturnedToReducer => ({
+        type: sessionTypes.CHANGE_ADMIN_LOGGED_STATUS,
+        payload: {
+            status, role
+        }
+    });
 
-export const increaseSessionCounter = (counter: number) => ({
-    type: sessionTypes.INCREASE_SESSION_COUNER,
-    payload: {
-        counter
-    }
-});
+    /**
+     * The method responsible for changing the login state for the user.
+     *
+     * @param status { boolean } - logged status.
+     */
+    public static changeUserLoggedStatus = (status: boolean) => ({
+        type: sessionTypes.CHANGE_USER_LOGGED_STATUS,
+        payload: {
+            status
+        }
+    });
 
-export const toggleWarningSessionModal = (toggleModal: boolean) => ({
-    type: sessionTypes.TOGGLE_WARNING_SESSION_MODAL,
-    payload: {
-        toggleModal
-    }
-});
+    /**
+     * Method responsible for incrementing the active session counter.
+     *
+     * @param counter { number } - consecutive numbers of the counter.
+     */
+    public static increaseSessionCounter = (counter: number) => ({
+        type: sessionTypes.INCREASE_SESSION_COUNER,
+        payload: {
+            counter
+        }
+    });
+
+    /**
+     * Method responsible for showing the modal when the entire user session ends.
+     *
+     * @param toggleModal { boolean } - decided, if modal is open or closed.
+     */
+    public static toggleWarningSessionModal = (toggleModal: boolean) => ({
+        type: sessionTypes.TOGGLE_WARNING_SESSION_MODAL,
+        payload: {
+            toggleModal
+        }
+    });
+
+}
