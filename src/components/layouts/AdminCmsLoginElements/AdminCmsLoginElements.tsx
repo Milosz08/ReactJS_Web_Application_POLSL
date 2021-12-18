@@ -16,7 +16,7 @@ import * as React from 'react';
 import { useContext, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { changeAdminLoggedStatus } from '../../../redux/sessionReduxStore/actions';
+import { SessActions } from '../../../redux/sessionReduxStore/actions';
 
 import { ROLES } from '../../../helpers/functionsAndClasses/LoginValidator';
 
@@ -43,7 +43,7 @@ const AdminCmsLoginElements: React.FC = (): JSX.Element => {
         setAsyncAnim(true);
         setTimeout(() => {
             setCookie!(COOKIES_OBJECT.adminSession, role);
-            dispatcher(changeAdminLoggedStatus(true, role));
+            dispatcher(SessActions.changeAdminLoggedStatus(true, role));
         }, 3000);
     };
 

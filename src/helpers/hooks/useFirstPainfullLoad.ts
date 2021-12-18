@@ -19,12 +19,9 @@ import useIsMount from './useIsMount';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../context/cookiesContext/CookiesObjectsProvider';
 
 import { useDispatch } from 'react-redux';
-import { changeAdminLoggedStatus } from '../../redux/sessionReduxStore/actions';
-
-import {
-    getAllCalendarElements, getAllCovidWarningElements, getAllFooterFormElements, getAllHelpersLinks, getAllLastUpdateElements,
-    getAllScheduleElements, getAllSubjectsElements
-} from '../../redux/apiReduxStore/operations';
+import { SessActions } from '../../redux/sessionReduxStore/actions';
+import { DbNonModalOp } from '../../redux/apiReduxStore/operationsForNonModals';
+import { apiGetContentFromDB, sortAvailables } from '../../redux/apiReduxStore/types';
 
 /**
  * Custom hook responsible for load first painfull content (big data from DB and cech authentication cookie).
@@ -39,7 +36,7 @@ const useFirstPainfullLoad = (): null => {
     const isMount = useIsMount();
     
     useEffect(() => {
-        dispatcher(changeAdminLoggedStatus(Boolean(cookie![adminSession])))
+        dispatcher(SessActions.changeAdminLoggedStatus(Boolean(cookie![adminSession])))
     }, [ adminSession, cookie, dispatcher ]);
 
     useEffect(() => {

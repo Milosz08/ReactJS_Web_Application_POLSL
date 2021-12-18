@@ -16,7 +16,7 @@ import { useContext, useEffect } from 'react';
 import useIsMount from './useIsMount';
 
 import { useDispatch } from 'react-redux';
-import { changeAdminLoggedStatus } from '../../redux/sessionReduxStore/actions';
+import { SessActions } from '../../redux/sessionReduxStore/actions';
 
 import COOKIES_OBJECT from '../../context/cookiesContext/allCookies.config';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../context/cookiesContext/CookiesObjectsProvider';
@@ -32,7 +32,7 @@ const useInsertSessionAdminCookie = (): null => {
 
     useEffect(() => {
         if (Boolean(cookie![COOKIES_OBJECT.adminSession]) && isMount) {
-            dispatcher(changeAdminLoggedStatus(true, Number(cookie![COOKIES_OBJECT.adminSession])));
+            dispatcher(SessActions.changeAdminLoggedStatus(true, Number(cookie![COOKIES_OBJECT.adminSession])));
         }
     }, [ cookie, dispatcher, isMount ]);
 

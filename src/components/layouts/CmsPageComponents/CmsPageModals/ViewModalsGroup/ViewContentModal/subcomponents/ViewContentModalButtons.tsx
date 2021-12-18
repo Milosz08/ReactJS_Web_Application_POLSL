@@ -19,10 +19,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/reduxStore';
 import { allModals } from '../../../../../../../redux/modalsReduxStore/types';
 import { ApiInitialTypes } from '../../../../../../../redux/apiReduxStore/initialState';
-import { updateFooterFormClicked } from '../../../../../../../redux/apiReduxStore/actions';
-import { changeModalStateElements } from '../../../../../../../redux/modalsReduxStore/actions';
+import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
 
 import { CloseModalContentButton, ViewContentButtonsContainer } from '../ViewContentModal.styles';
+import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
+import { FooterFormTypes } from '../../../../../../../redux/apiReduxStore/dataTypes';
 
 const UniversalCheckboxInput = React.lazy(() => import('../../../../../UniversalCheckboxInput/UniversalCheckboxInput'));
 
@@ -40,7 +41,7 @@ interface PropsProvider {
 const ViewContentModalButtons: React.FC<PropsProvider> = ({ modalType, dataID }): JSX.Element => {
 
     const { footerFormMessages }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
-    const formMessage = footerFormMessages.find(el => el._id === dataID);
+    const formMessage: FooterFormTypes | undefined = footerFormMessages.find(el => el._id === dataID);
 
     const dispatcher = useDispatch();
     const [ checkboxChecked, setCheckboxChecked ] = useState<boolean>(true);
@@ -50,9 +51,9 @@ const ViewContentModalButtons: React.FC<PropsProvider> = ({ modalType, dataID })
     };
 
     const handleCloseModal = (): void => {
-        dispatcher(changeModalStateElements(false, modalType, dataID));
+        dispatcher(ModalsActions.changeModalStateElements(false, modalType, dataID));
         if (!formMessage!.ifClicked) {
-            dispatcher(updateFooterFormClicked(dataID!, checkboxChecked));
+            dispatcher(DbNonModalOp.editReadFooterFormMessageIndicator(dataID!, formMessage!, checkboxChecked));
         }
         setTimeout(() => setCheckboxChecked(true), 2000);
     };

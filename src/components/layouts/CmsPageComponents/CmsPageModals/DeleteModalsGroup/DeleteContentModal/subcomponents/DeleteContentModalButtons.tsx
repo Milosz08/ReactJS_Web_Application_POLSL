@@ -20,9 +20,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/reduxStore';
 import { allModals } from '../../../../../../../redux/modalsReduxStore/types';
 import { updateSections } from '../../../../../../../redux/apiReduxStore/types';
+import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
+import { DbModalOp } from '../../../../../../../redux/apiReduxStore/operationsForModals';
 import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
-import { changeModalStateElements } from '../../../../../../../redux/modalsReduxStore/actions';
-import { removingCmsContent, updateSectionDates } from '../../../../../../../redux/apiReduxStore/actions';
+import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
 
 import { DeleteContentButton, DeleteContentButtonsContainer, NotDeleteContentButton } from '../DeleteContentModal.styles';
 
@@ -49,7 +50,7 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
     const dispatcher = useDispatch();
 
     const handleNotRemoveContentButton = (): void => {
-        dispatcher(changeModalStateElements(false, modalType, dataID));
+        dispatcher(ModalsActions.changeModalStateElements(false, modalType, dataID));
     };
 
     const afterAsyncCountingCallback = (): void => {
@@ -58,14 +59,14 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
             handleNotRemoveContentButton();
             setTimeout(() => {
                 reset();
-                dispatcher(removingCmsContent(dataID!, modalType, modalsInitialState));
-                dispatcher(updateSectionDates(updateSections[modalsInitialState[modalType].updateApiParam]));
+                dispatcher(DbModalOp.deleteSingleElementFromCms(modalsInitialState, modalType, dataID!));
+                dispatcher(DbNonModalOp.updateSectionDateFromCms(updateSections[modalsInitialState[modalType].updateApiParam]));
             }, 1000);
         }, 2000);
     };
 
     const { widthState, show, reset, generatingCounter } = useGenerateLoadingLine(
-        afterAsyncCountingCallback, 20, 'Usuwanie zawartości', title
+        afterAsyncCountingCallback, null, 20, 'Usuwanie zawartości', title
     );
 
     return (

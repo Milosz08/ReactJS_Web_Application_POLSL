@@ -22,7 +22,7 @@ import COOKIES_OBJECT from '../../../context/cookiesContext/allCookies.config';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../context/cookiesContext/CookiesObjectsProvider';
 
 import { useDispatch } from 'react-redux';
-import { changeUserLoggedStatus } from '../../../redux/sessionReduxStore/actions';
+import { SessActions } from '../../../redux/sessionReduxStore/actions';
 
 import { UserLoginContainer } from './UserLogin.styles';
 
@@ -45,14 +45,14 @@ const UserLogin: React.FC = (): JSX.Element => {
     const successAuth = (): void => {
         setAsyncAnim(true);
         setTimeout(() => {
-            dispatcher(changeUserLoggedStatus(true));
+            dispatcher(SessActions.changeUserLoggedStatus(true));
             setCookie!(COOKIES_OBJECT.userSession, generateID('c', 8));
         }, 3000);
     };
 
     useEffect(() => {
         if (Boolean(cookie![COOKIES_OBJECT.userSession]) && !isMount) {
-            dispatcher(changeUserLoggedStatus(true));
+            dispatcher(SessActions.changeUserLoggedStatus(true));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ isMount ]);

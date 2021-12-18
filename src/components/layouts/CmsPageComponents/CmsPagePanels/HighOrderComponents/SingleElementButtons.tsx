@@ -16,7 +16,7 @@ import * as React from 'react';
 import { FiEdit, FiMessageSquare } from 'react-icons/all';
 
 import { useDispatch } from 'react-redux';
-import { changeModalStateElements } from '../../../../../redux/modalsReduxStore/actions';
+import { ModalsActions } from '../../../../../redux/modalsReduxStore/actions';
 import { allModals, allModalsActions } from '../../../../../redux/modalsReduxStore/types';
 
 import {
@@ -42,7 +42,7 @@ const SingleElementButtons: React.FC<PropsProvider> = ({ dataID, modalTypeEnum, 
     const dispatcher = useDispatch();
 
     const handleModalButtons = (modalType: allModalsActions): void => {
-        dispatcher(changeModalStateElements(true, modalTypeEnum, dataID, modalType));
+        dispatcher(ModalsActions.changeModalStateElements(true, modalTypeEnum, dataID, modalType));
     };
 
     return (

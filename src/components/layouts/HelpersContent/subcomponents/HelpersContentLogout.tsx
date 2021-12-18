@@ -19,7 +19,7 @@ import COOKIES_OBJECT from '../../../../context/cookiesContext/allCookies.config
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../context/cookiesContext/CookiesObjectsProvider';
 
 import { useDispatch } from 'react-redux';
-import { changeUserLoggedStatus } from '../../../../redux/sessionReduxStore/actions';
+import { SessActions } from '../../../../redux/sessionReduxStore/actions';
 import { toggleUserLogoutModal } from '../../../../redux/preferencesReduxStore/actions';
 
 import { HelpersContentLogoutButton } from '../HelpersContent.styles';
@@ -34,7 +34,7 @@ const HelpersContentLogout: React.FC = (): JSX.Element => {
 
     const handleLogoutButton = (): void => {
         window.scrollTo(0, 0);
-        dispatcher(changeUserLoggedStatus(false));
+        dispatcher(SessActions.changeUserLoggedStatus(false));
         dispatcher(toggleUserLogoutModal(true));
         removeCookie!(COOKIES_OBJECT.userSession);
     };

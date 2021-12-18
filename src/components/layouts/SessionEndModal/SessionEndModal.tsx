@@ -16,9 +16,9 @@ import * as React from 'react';
 import { useContext } from 'react';
 import useModalShowHide from '../../../helpers/hooks/useModalShowHide';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reduxStore';
-import { changeAdminLoggedStatus, toggleWarningSessionModal } from '../../../redux/sessionReduxStore/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { SessActions } from '../../../redux/sessionReduxStore/actions';
 import { SessionInitialTypes } from '../../../redux/sessionReduxStore/initialState';
 
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../context/cookiesContext/CookiesObjectsProvider';
@@ -44,9 +44,9 @@ const SessionEndModal = (): JSX.Element => {
     const dispatcher = useDispatch();
 
     const handleLogout = (): void => {
-        dispatcher(toggleWarningSessionModal(false));
+        dispatcher(SessActions.toggleWarningSessionModal(false));
         setTimeout(() => {
-            dispatcher(changeAdminLoggedStatus(false));
+            dispatcher(SessActions.changeAdminLoggedStatus(false));
             removeCookie!(COOKIES_OBJECT.adminSession);
         }, 1500);
     };

@@ -48,7 +48,8 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title 
     const dispatcher = useDispatch();
 
     const handleUnsaveChangesOnCloseModal = (): void => {
-        dispatcher(changeModalStateElements(false, modalType));
+        dispatcher(ModalsActions.changeModalStateElements(false, modalType));
+        setTimeout(() => dispatcher(ModalsActions.clearAllInputs(modalType)), 500);
     };
 
     const afterAsyncCountingCallback = (): void => {

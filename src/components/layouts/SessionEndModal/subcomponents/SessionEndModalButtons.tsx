@@ -16,8 +16,8 @@ import * as React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
+import { SessActions } from '../../../../redux/sessionReduxStore/actions';
 import { SessionInitialTypes } from '../../../../redux/sessionReduxStore/initialState';
-import { changeAdminLoggedStatus, toggleWarningSessionModal } from '../../../../redux/sessionReduxStore/actions';
 
 import ROUTING_PATH_NAMES from '../../../../helpers/structs/routingPathNames';
 
@@ -40,8 +40,8 @@ const SessionEndModalButtons: React.FC<PropsProvider> = ({ logoutCallback }): JS
 
     const handleStaysession = (): void => {
         document.title = ROUTING_PATH_NAMES.CMS_PANEL_PAGE;
-        dispatcher(changeAdminLoggedStatus(true, adminAuthStatus.identity));
-        dispatcher(toggleWarningSessionModal(false));
+        dispatcher(SessActions.changeAdminLoggedStatus(true, adminAuthStatus.identity));
+        dispatcher(SessActions.toggleWarningSessionModal(false));
     };
 
     return (

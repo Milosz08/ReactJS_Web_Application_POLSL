@@ -21,13 +21,13 @@ import COOKIES_OBJECT from '../../../../context/cookiesContext/allCookies.config
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../context/cookiesContext/CookiesObjectsProvider';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/reduxStore';
+import { ApiActionsSort } from '../../../../redux/apiReduxStore/actions';
 import { groupsTypes } from '../../../../redux/preferencesReduxStore/types';
+import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 import { setSelectedGroup, toggleClearScheduleModal } from '../../../../redux/preferencesReduxStore/actions';
 
 import { ScheduleClearInputsButton } from '../ScheduleForm.styles';
-import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
-import { RootState } from '../../../../redux/reduxStore';
-import { filteredScheduleSubjects } from '../../../../redux/apiReduxStore/actions';
 
 /**
  * Component responsible for generating clear all schedule preferences button.
@@ -54,7 +54,7 @@ const ScheduleClearButton: React.FC = (): JSX.Element => {
     };
 
     useEffect(() => {
-        dispatcher(filteredScheduleSubjects(normalGroup, engGroup, skGroup));
+        dispatcher(ApiActionsSort.filteredScheduleSubjects(normalGroup, engGroup, skGroup));
     }, [ normalGroup, engGroup, skGroup, dispatcher ]);
 
     return (

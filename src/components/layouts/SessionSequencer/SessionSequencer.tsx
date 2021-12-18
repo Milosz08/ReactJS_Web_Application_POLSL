@@ -15,10 +15,10 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reduxStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { SessActions } from '../../../redux/sessionReduxStore/actions';
 import { SessionInitialTypes } from '../../../redux/sessionReduxStore/initialState';
-import { increaseSessionCounter, toggleWarningSessionModal } from '../../../redux/sessionReduxStore/actions';
 
 import { ACTIVITY_EVENTS, MAX_INACTIVITY_TIME } from './SessionSequencer.config';
 
@@ -41,9 +41,9 @@ const SessionSequencer: React.FC = (): null => {
         ACTIVITY_EVENTS.forEach((eventName: string) => document.addEventListener(eventName, activity, true));
 
         const asyncCountingSession = () => {
-            //dispatcher(increaseSessionCounter(++secondsSinceLastActivity));
+            //dispatcher(SessActions.increaseSessionCounter(++secondsSinceLastActivity));
             if (secondsSinceLastActivity > maxInactivity) {
-                dispatcher(toggleWarningSessionModal(true));
+                dispatcher(SessActions.toggleWarningSessionModal(true));
                 secondsSinceLastActivity = 0;
                 clearInterval(index);
             }

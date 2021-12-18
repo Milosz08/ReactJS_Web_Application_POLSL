@@ -15,8 +15,8 @@
 import * as React from 'react';
 
 import { useDispatch } from 'react-redux';
+import { ModalsActions } from '../../../../redux/modalsReduxStore/actions';
 import { allModals, allModalsActions } from '../../../../redux/modalsReduxStore/types';
-import { changeModalStateElements } from '../../../../redux/modalsReduxStore/actions';
 
 import { CmsAddNewContentButtonStyles } from './CmsAddNewContentButton.styles';
 
@@ -37,7 +37,7 @@ const CmsAddNewContentButton: React.FC<PropsProvider> = ({ modalType, content })
     const dispatcher = useDispatch();
 
     const handleAddNewContent = (): void => {
-        dispatcher(changeModalStateElements(true, modalType, null, allModalsActions.ADD_ELEMENT));
+        dispatcher(ModalsActions.changeModalStateElements(true, modalType, null, allModalsActions.ADD_ELEMENT));
     };
 
     return (

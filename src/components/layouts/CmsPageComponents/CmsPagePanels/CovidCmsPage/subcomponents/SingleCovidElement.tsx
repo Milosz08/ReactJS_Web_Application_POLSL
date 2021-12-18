@@ -14,11 +14,13 @@
 
 import * as React from 'react';
 
+import { API_ENDPOINTS } from '../../../../../../helpers/structs/appEndpoints';
 import { MAX_RISK_NUMBER } from '../../../../../../helpers/structs/cmsSystem.config';
 
 import { useDispatch } from 'react-redux';
 import { CovidWarningsTypes } from '../../../../../../redux/apiReduxStore/dataTypes';
-import { updateCovidSingleElement } from '../../../../../../redux/apiReduxStore/actions';
+import { DbNonModalOp } from '../../../../../../redux/apiReduxStore/operationsForNonModals';
+import { apiGetContentFromDB, updateSections } from '../../../../../../redux/apiReduxStore/types';
 
 import {
     SingleCovidSectionElement, SingleCovidSectionHeader, SingleCovidSectionWrapper, SingleCovidSelect
@@ -38,7 +40,10 @@ const SingleCovidElement: React.FC<PropsProvider> = ({ tile }): JSX.Element => {
     const dispatcher = useDispatch();
 
     const handleSelectChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-        dispatcher(updateCovidSingleElement(tile.type, Number(target.value)));
+        dispatcher(DbNonModalOp.editSingleNonModalElement({
+            ...tile, actualRiskNumber: Number(target.value)
+        }, apiGetContentFromDB.COVID, tile.type, API_ENDPOINTS.COVID_WARNINGS));
+        dispatcher(DbNonModalOp.updateSectionDateFromCms(updateSections.COVID));
     };
 
     const generateSelectOptions = Array.from({ length: MAX_RISK_NUMBER }, (v, s) => s).map(i => (

@@ -16,15 +16,14 @@ import * as React from 'react';
 import { useContext } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { updateCredentialsElement, updateSectionDates } from '../../redux/apiReduxStore/actions';
+import { updateSections } from '../../redux/apiReduxStore/types';
+import { DbNonModalOp } from '../../redux/apiReduxStore/operationsForNonModals';
 
 import LoginValidator, { ROLES } from '../functionsAndClasses/LoginValidator';
 
 import {
-    ChangeCredentialsContext,
-    ChangeCredentialsContextTypes
-} from '../../components/layouts/ChangeCredentialsCmsPage/ChangeCredentialsStoreProvider';
-import { updateSections } from '../../redux/apiReduxStore/types';
+    ChangeCredentialsContext, ChangeCredentialsContextTypes
+} from '../../components/layouts/CmsPageComponents/CmsPagePanels/ChangeCredentialsCmsPage/ChangeCredentialsStoreProvider';
 
 /**
  * Custom hook responsible for validate and send new data about credentials (user/admin/moderator).
@@ -54,15 +53,15 @@ const useAdminNewDataValidate = (allRef: { [value: string]: React.MutableRefObje
         const valid: boolean = ifUser ? !lg && !pass && !passR && !passA : !lg && !pass && !tk && !passR && !passA;
         if (valid) {
             if(ifUser) {
-                dispatcher(updateCredentialsElement(ROLES.USER, {
+                dispatcher(DbNonModalOp.updateCredentialsFromCms(ROLES.USER, {
                     username: login.current.value, password: passF.current.value
                 }));
             } else {
-                dispatcher(updateCredentialsElement(roles!.role, {
+                dispatcher(DbNonModalOp.updateCredentialsFromCms(roles!.role, {
                     username: login.current.value, password: passF.current.value, token: token.current.value
                 }));
             }
-            dispatcher(updateSectionDates(updateSections.AUTH));
+            dispatcher(DbNonModalOp.updateSectionDateFromCms(updateSections.AUTH));
             clearFields();
         } else {
             err!.setErrors({ login: lg, pass, passRepeat: passR, token: tk, adminPass: passA });
