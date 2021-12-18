@@ -13,14 +13,18 @@
  */
 
 import * as React from 'react';
+import CryptoJS, { AES } from 'crypto-js';
 
 import useFindMatchingElement from '../../../../../../../helpers/hooks/useFindMatchingElement';
+import useAutoFilledModalEdit from '../../../../../../../helpers/hooks/useAutoFilledModalEdit';
 
-import { allModals, allModalsActions } from '../../../../../../../redux/modalsReduxStore/types';
 import { apiReducerTypes } from '../../../../../../../redux/apiReduxStore/types';
 import { HelpersLinksContentTypes } from '../../../../../../../redux/apiReduxStore/dataTypes';
+import { allModals, allModalsInputs } from '../../../../../../../redux/modalsReduxStore/types';
 
-import { CustomContentForHelpersLinksAddEditContainer } from './HelpersLinksAddEdit.styles';
+import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
+
+import HelpersLinksInputs from './subcomponents/HelpersLinksInputs';
 
 interface PropsProvider {
     modalData: any;
@@ -30,18 +34,26 @@ interface PropsProvider {
  * Component reponsible for generating custom content for high order component for
  * helpers links CMS section page.
  */
-const HelpersLinksAddEdit: React.FC<PropsProvider> = ({ modalData }): JSX.Element => {
+const HelpersLinksAddEdit: React.FC<PropsProvider> = (): JSX.Element => {
 
     const matchElm: HelpersLinksContentTypes | any = useFindMatchingElement(
         allModals.HELPERS_LINKS_MODAL, apiReducerTypes.HELPERS_LINKS
     );
 
+    const hashKey: string = process.env.REACT_APP_HASH_CODE ? process.env.REACT_APP_HASH_CODE : '';
+    const { TITLE, ICON, LINK } = allModalsInputs;
+
+    const filledArr = matchElm ? [
+        matchElm!.helperTitle, matchElm!.helperIcon.name,
+        CryptoJS.enc.Utf8.stringify(AES.decrypt(matchElm!.helperLink, hashKey))
+    ] : [ '', '', '' ];
+
+    useAutoFilledModalEdit(allModals.HELPERS_LINKS_MODAL, [ TITLE, ICON, LINK ], filledArr);
+
     return (
-        <>
-            {Boolean(matchElm || modalData.action === allModalsActions.ADD_ELEMENT) && <CustomContentForHelpersLinksAddEditContainer>
-                custom content for heleprs links
-            </CustomContentForHelpersLinksAddEditContainer>}
-        </>
+        <AddEditCustomContentContainer>
+            <HelpersLinksInputs/>
+        </AddEditCustomContentContainer>
     );
 };
 

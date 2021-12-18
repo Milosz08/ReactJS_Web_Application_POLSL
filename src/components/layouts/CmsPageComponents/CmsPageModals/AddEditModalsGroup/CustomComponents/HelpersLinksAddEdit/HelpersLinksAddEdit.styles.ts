@@ -14,6 +14,13 @@
 
 import styled from 'styled-components';
 
-export const CustomContentForHelpersLinksAddEditContainer = styled.div`
-    margin: 40px 0;
+export const TitleAndIconContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+`;
+
+export const HelperSingleLinkModalElement = styled.div`
+    flex-grow: 1;
+    flex-basis: 55%;
 `;
