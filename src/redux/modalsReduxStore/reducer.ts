@@ -12,21 +12,87 @@
  * governing permissions and limitations under the license.
  */
 
-import { modalsInitialState } from './initialState';
-import { allModalsActions, modalsTypes } from './types';
+import { modalsInitialState, START_ICON } from './initialState';
+import { allModalsActions, allModalsInputs, modalsTypes } from './types';
 
-const { CHANGE_MODAL_STATE } = modalsTypes;
-
+/**
+ * The reducer function responsible for managing state for the ReduxModals tree.
+ *
+ * @param state { apiInitialState } - ReduxModals tree state.
+ * @param action { any } - object stored action: type and payload.
+ */
 const modalsReducer = (state = modalsInitialState, action: any) => {
-    switch(action.type) {
+    switch (action.type) {
 
-        case CHANGE_MODAL_STATE: {
+        case modalsTypes.CHANGE_MODAL_STATE: {
             const { ifOpen, type, id, modal } = action.payload;
             let newType: allModalsActions = state[modal].action;
-            if(Boolean(type)) {
+            if (Boolean(type)) {
                 newType = type;
             }
-            return { ...state, [modal]: { ...state[modal], ifOpen, action: newType, dataID: id } };
+            return {
+                ...state, [modal]: {
+                    ...state[modal], ifOpen, action: newType, dataID: id
+                }
+            };
+        }
+
+        case modalsTypes.CHANGE_MODAL_SELECTED_INPUT: {
+            const { modalType: modal, inputType: input, value } = action.payload;
+            return {
+                ...state, [modal]: {
+                    ...state[modal], modalInputFields: {
+                        ...state[modal].modalInputFields, [input]: value
+                    }, modalInputErrorsFields: {
+                        ...state[modal].modalInputErrorsFields, initialFields: false,
+                    }
+                }
+            };
+        }
+
+        case modalsTypes.CHECK_ALL_INPUTS_ERR: {
+            const { modalType } = action.payload;
+            const modalFieldsState = state[modalType].modalInputFields!;
+            const newModalState = state[modalType].modalInputErrorsFields!;
+            Object.keys(modalFieldsState).forEach(input => {
+                if (input in newModalState && input !== 'initialFields') {
+                    const inputField = modalFieldsState[input];
+                    if (inputField.length < 3 && typeof inputField === 'string') {
+                        newModalState[input] = true;
+                    } else {
+                        if (input === allModalsInputs.LINK && !inputField.includes('https://')) {
+                            newModalState[allModalsInputs.LINK] = true;
+                        } else {
+                            newModalState[input] = false;
+                        }
+                    }
+                }
+            });
+            return {
+                ...state, [modalType]: {
+                    ...state[modalType], modalInputErrorsFields: newModalState
+                }
+            };
+        }
+
+        case modalsTypes.CLEAR_ALL_SINGLE_MODAL_INPUTS: {
+            const { modalType } = action.payload;
+            const newSelectedModalState = state[modalType];
+            Object.keys(newSelectedModalState.modalInputFields!).forEach(input => {
+                if (input !== allModalsInputs.ICON) {
+                    newSelectedModalState.modalInputFields![input] = '';
+                } else {
+                    newSelectedModalState.modalInputFields![input] = START_ICON;
+                }
+            });
+            Object.keys(newSelectedModalState.modalInputErrorsFields!).forEach(errInput => {
+                if (errInput !== 'initialFields') {
+                    newSelectedModalState.modalInputErrorsFields![errInput] = false;
+                } else {
+                    newSelectedModalState.modalInputErrorsFields![errInput] = true;
+                }
+            });
+            return { ...state, [modalType]: newSelectedModalState };
         }
 
         default: {

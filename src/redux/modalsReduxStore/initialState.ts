@@ -17,6 +17,8 @@ import { allModals, allModalsActions } from './types';
 import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 import { apiReducerTypes, updateSections } from '../apiReduxStore/types';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { LEVELS } from '../../helpers/structs/calendar.config';
 
 const { SUBJECT_MODAL, USER_MESSAGES_MODAL, HELPERS_LINKS_MODAL, CALENDAR_MODAL } = allModals;
 const { EDIT_ELEMENT } = allModalsActions;
@@ -25,6 +27,8 @@ const { SUBJECT_CMS_PAGE, USERS_MESS_CMS_PAGE, HELPS_CMS_PAGE, CALENDAR_CMS_PAGE
 const { SUBJECTS_ELMS, FOOTER_FORM, HELPERS_LINKS, CALENDAR_RECORDS } = API_ENDPOINTS;
 const { USER_MESSAGES, SUBJECTS, CALENDAR, HELPERS_LINKS: HELPERS } = apiReducerTypes;
 const { SUBJECTS: UP_SUBJECTS, CALENDAR: UP_CALENDAR, USER_MESS: UP_USER_MESS, HELPERS: UP_HELPS } = updateSections;
+
+export const START_ICON: IconProp | any = 'FaBorderNone';
 
 interface ModalParametersProvider {
     ifOpen: boolean;
@@ -36,10 +40,22 @@ interface ModalParametersProvider {
     apiActionsPath: string;
     apiReducerObjectKey: string;
     updateApiParam: string;
+    modalInputFields?: {
+        [key: string]: string | CalendarSingleItem[] | any;
+    };
+    modalInputErrorsFields?: {
+        [key: string]: boolean | { [key: string]: boolean }[] | any;
+    };
 }
 
 export interface ModalsInitialTypes {
     [key: string]: ModalParametersProvider,
+}
+
+export interface CalendarSingleItem {
+    start: string;
+    message: string;
+    importantLevel: LEVELS
 }
 
 export const modalsInitialState: ModalsInitialTypes = {
@@ -75,6 +91,16 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: HELPERS_LINKS,
         apiReducerObjectKey: HELPERS,
         updateApiParam: UP_HELPS,
+        modalInputFields: {
+            title: '',
+            icon: START_ICON,
+            link: '',
+        },
+        modalInputErrorsFields: {
+            initialFields: true,
+            title: false,
+            link: false,
+        }
     },
     [CALENDAR_MODAL]: {
         ifOpen: false,
@@ -86,5 +112,14 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: CALENDAR_RECORDS,
         apiReducerObjectKey: CALENDAR,
         updateApiParam: UP_CALENDAR,
+        modalInputFields: {
+            date: '',
+            items: [],
+        },
+        modalInputErrorsFields: {
+            initialFields: true,
+            date: false,
+            items: [],
+        }
     }
 };
