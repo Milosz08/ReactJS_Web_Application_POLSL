@@ -67,6 +67,8 @@ const AddEditContentModal: React.FC<PropsProvider> = ({ modalType, RenderCustomC
                 <AddEditContentModalButtons
                     modalType = {modalType}
                     title = {modalObject.pageTitle}
+                    mode = {modalObject.action}
+                    id = {modalObject.dataID}
                 />
             </AddEditContentModalWrapper>
         </AddEditContentModalContainer>

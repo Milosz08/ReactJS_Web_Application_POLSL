@@ -15,14 +15,16 @@
 import * as React from 'react';
 
 import useGenerateLoadingLine from '../../../../../../../helpers/hooks/useGenerateLoadingLine';
+import useGenerateDatabaseObjects from '../../../../../../../helpers/hooks/useGenerateDatabaseObjects';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/reduxStore';
-import { allModals } from '../../../../../../../redux/modalsReduxStore/types';
 import { updateSections } from '../../../../../../../redux/apiReduxStore/types';
-import { updateSectionDates } from '../../../../../../../redux/apiReduxStore/actions';
+import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
+import { DbModalOp } from '../../../../../../../redux/apiReduxStore/operationsForModals';
 import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
-import { changeModalStateElements } from '../../../../../../../redux/modalsReduxStore/actions';
+import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
+import { allModals, allModalsActions } from '../../../../../../../redux/modalsReduxStore/types';
 
 import {
     AddEditContentModalButtonsContainer, AddEditContentSaveChangesButton, AddEditContentUnsaveChangesButton
@@ -33,6 +35,8 @@ const EstimateTimeCounterBar = React.lazy(() => import('../../../../../EstimateT
 interface PropsProvider {
     modalType: allModals;
     title: string;
+    mode: allModalsActions;
+    id: string | null;
 }
 
 /**
@@ -41,10 +45,14 @@ interface PropsProvider {
  *
  * @param modalType { allModals } - enum type of modal.
  * @param title { string } - title text content from redux initial state.
+ * @param mode { allModalsActions } - current selected action (add/update).
+ * @param id {  }
  */
-const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title  }): JSX.Element => {
+const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title, mode, id }): JSX.Element => {
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+
+    const generatedObject = useGenerateDatabaseObjects(modalType, mode, id);
     const dispatcher = useDispatch();
 
     const handleUnsaveChangesOnCloseModal = (): void => {
@@ -55,17 +63,26 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title 
     const afterAsyncCountingCallback = (): void => {
         document.title = 'Zawartość zapisana';
         setTimeout(() => {
-            handleUnsaveChangesOnCloseModal();
-            setTimeout(() => {
-                reset();
-                // dispatcher function here
-                dispatcher(updateSectionDates(updateSections[modalsInitialState[modalType].updateApiParam]));
-            }, 1000);
+            if (Object.values(modalsInitialState[modalType].modalInputErrorsFields!).every(v => !v)) {
+                const object = generatedObject();
+                handleUnsaveChangesOnCloseModal();
+                setTimeout(() => {
+                    reset();
+                    if(mode === allModalsActions.ADD_ELEMENT) {
+                        dispatcher(DbModalOp.addSingleElementFromCms(modalsInitialState, modalType, object));
+                    } else {
+                        dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id));
+                    }
+                    dispatcher(DbNonModalOp.updateSectionDateFromCms(
+                        updateSections[modalsInitialState[modalType].updateApiParam]
+                    ));
+                }, 1000);
+            }
         }, 2000);
     };
 
     const { widthState, show, reset, generatingCounter } = useGenerateLoadingLine(
-        afterAsyncCountingCallback, 20, 'Zapisywanie zawartości', title
+        afterAsyncCountingCallback, allModals.HELPERS_LINKS_MODAL, 20, 'Zapisywanie zawartości', title
     );
 
     return (

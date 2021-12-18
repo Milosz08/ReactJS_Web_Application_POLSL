@@ -50,3 +50,9 @@ export const AddEditContentSaveChangesButton = styled(button_rs)`
     width: 300px;
     margin-bottom: 20px;
 `;
+
+export const AddEditCustomContentContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
