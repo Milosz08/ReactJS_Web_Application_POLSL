@@ -23,12 +23,15 @@ import { modalsInitialState } from '../../../redux/modalsReduxStore/initialState
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
 
-const DeleteContentModal = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
-const CustomContentForCalendarDelete = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/CutomComponents/CustomContentForCalendarDelete'));
+const DeleteContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
+const CalendarDelete = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/CustomComponents/CalendarDelete'));
+
+const AddEditContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/AddEditModalsGroup/AddEditContentModal/AddEditContentModal'));
+const CalendarAddEdit = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/AddEditModalsGroup/CustomComponents/CalendarAddEdit/CalendarAddEdit'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
-const ChangeCalendarCmsPage = React.lazy(() => import('../../layouts/CmsPanelsComponentsGroup/ChangeCalendarCmsPage/ChangeCalendarCmsPage'));
+const ChangeCalendarCmsPage = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/ChangeCalendarCmsPage/ChangeCalendarCmsPage'));
 
 /**
  * Component responsible for generating CMS subpage for controlled calendar.
@@ -42,8 +45,12 @@ const CalendarCmsSectionPage: React.FC = (): JSX.Element => {
         <>
             <DeleteContentModal
                 modalType = {allModals.CALENDAR_MODAL}
-                RenderCustomComponent = {CustomContentForCalendarDelete}
+                RenderCustomComponent = {CalendarDelete}
                 pageTitle = {modalsInitialState[allModals.CALENDAR_MODAL].pageTitle}
+            />
+            <AddEditContentModal
+                modalType = {allModals.CALENDAR_MODAL}
+                RenderCustomComponent = {CalendarAddEdit}
             />
             <CommonComponents/>
             <CommonPaginationContainer>

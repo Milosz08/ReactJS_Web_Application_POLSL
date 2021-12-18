@@ -23,12 +23,15 @@ import { modalsInitialState } from '../../../redux/modalsReduxStore/initialState
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
 
-const CustomContentForSubjectsDelete = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/CutomComponents/CustomContentForSubjectsDelete'));
-const DeleteContentModal = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
+const DeleteContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
+const SubjectsDelete = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/CustomComponents/SubjectsDelete'));
+
+const AddEditContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/AddEditModalsGroup/AddEditContentModal/AddEditContentModal'));
+const SubjectsAddEdit = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/AddEditModalsGroup/CustomComponents/SubjectsAddEdit/SubjectsAddEdit'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
-const ChangeSubjectsCmsPage = React.lazy(() => import('../../layouts/CmsPanelsComponentsGroup/ChangeSubjectsCmsPage/ChangeSubjectsCmsPage'));
+const ChangeSubjectsCmsPage = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/ChangeSubjectsCmsPage/ChangeSubjectsCmsPage'));
 
 /**
  * Component responsible for generating CMS subpage for controlled subjects.
@@ -42,8 +45,12 @@ const SubjectsCmsSectionPage: React.FC = (): JSX.Element => {
         <>
             <DeleteContentModal
                 modalType = {allModals.SUBJECT_MODAL}
-                RenderCustomComponent = {CustomContentForSubjectsDelete}
+                RenderCustomComponent = {SubjectsDelete}
                 pageTitle = {modalsInitialState[allModals.SUBJECT_MODAL].pageTitle}
+            />
+            <AddEditContentModal
+                modalType = {allModals.SUBJECT_MODAL}
+                RenderCustomComponent = {SubjectsAddEdit}
             />
             <CommonComponents/>
             <CommonPaginationContainer>
