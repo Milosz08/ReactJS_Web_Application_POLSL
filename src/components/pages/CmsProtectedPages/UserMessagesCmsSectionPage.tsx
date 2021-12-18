@@ -23,14 +23,14 @@ import { modalsInitialState } from '../../../redux/modalsReduxStore/initialState
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
 
-const DeleteContentModal = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
-const ViewContentModal = React.lazy(() => import('../../layouts/CmsViewModalsGroup/ViewContentModal/ViewContentModal'));
-const CustomContentForUserMessagesDelete = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/CutomComponents/CustomContentForUserMessagesDelete'));
-const CustomContentForUserMessagesView = React.lazy(() => import('../../layouts/CmsViewModalsGroup/CustomComponents/CustomContentForUserMessagesView'));
+const DeleteContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
+const ViewContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/ViewModalsGroup/ViewContentModal/ViewContentModal'));
+const UserMessagesDelete = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/CustomComponents/UserMessagesDelete'));
+const UserMessagesView = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/ViewModalsGroup/CustomComponents/UserMessagesView'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
-const MessagesManagementCmsPage = React.lazy(() => import('../../layouts/CmsPanelsComponentsGroup/MessageManagementCmsPage/MessagesManagementCmsPage'));
+const MessagesManagementCmsPage = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/MessageManagementCmsPage/MessagesManagementCmsPage'));
 
 /**
  * Component responsible for generating CMS subpage for controlled user messages.
@@ -44,12 +44,12 @@ const UserMessagesCmsSectionPage: React.FC = (): JSX.Element => {
         <>
             <DeleteContentModal
                 modalType = {allModals.USER_MESSAGES_MODAL}
-                RenderCustomComponent = {CustomContentForUserMessagesDelete}
+                RenderCustomComponent = {UserMessagesDelete}
                 pageTitle = {modalsInitialState[allModals.USER_MESSAGES_MODAL].pageTitle}
             />
             <ViewContentModal
                 modalType = {allModals.USER_MESSAGES_MODAL}
-                RenderCustomComponent = {CustomContentForUserMessagesView}
+                RenderCustomComponent = {UserMessagesView}
             />
             <CommonComponents/>
             <CommonPaginationContainer>
