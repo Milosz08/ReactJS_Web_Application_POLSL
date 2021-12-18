@@ -18,31 +18,30 @@ import { PrefInitialState } from './initialState';
 import { arrowDirs } from '../../components/layouts/SubjectsDetails/subcomponents/NextPrevArrowNavigation';
 import { directions } from '../../components/layouts/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
 
-const {
-    TOGGLE_HAMBURGER, INSERT_FOOTER_INPUTS, ERRORS_FOOTER_INPUTS, MOBILE_NAV_SET_ELM, ROUTE_PATH_TOGGLE,
-    TOGGLE_CMS_HAMBURGER, INSERT_SEARCH_INPUT, ERRORS_SEARCH_INPUTS, CHANGE_ACTIVE_PANEL, PREV_NEXT_ACTIVE_PANEL,
-    CHANGE_CHOOSE_SCHEDULE_GROUP, TOGGLE_SCHEDULE_MODAL, TOGGLE_SCHEDULE_CLEAR_MODAL, TOGGLE_CALENDAR_MOBILE_MODAL,
-    TOGGLE_USER_LOGOUT_MODAL, CHANGE_CMS_LIST_PAGE_NUMBER, CHANGE_MAX_SHOWING_CMS_LIST_ELMS, CHANGE_CMS_LIST_SORTING_TYPE
-} = preferencesTypes;
-
+/**
+ * The reducer function responsible for managing state for the ReduxPreferences tree.
+ *
+ * @param state { apiInitialState } - ReduxPreferences tree state.
+ * @param action { any } - object stored action: type and payload.
+ */
 const preferencesReducer = (state = PrefInitialState, action: any) => {
     switch(action.type) {
 
-        case TOGGLE_HAMBURGER: {
+        case preferencesTypes.TOGGLE_HAMBURGER: {
             return { ...state, hamburgerToggle: !state.hamburgerToggle };
         }
 
-        case INSERT_FOOTER_INPUTS: {
+        case preferencesTypes.INSERT_FOOTER_INPUTS: {
             const { inputType, value } = action.payload;
             return { ...state, footerForm: { ...state.footerForm, [inputType]: value } };
         }
 
-        case ERRORS_FOOTER_INPUTS: {
+        case preferencesTypes.ERRORS_FOOTER_INPUTS: {
             const { inputType, error } = action.payload;
             return { ...state, footerFormErrors: { ...state.footerFormErrors, [inputType]: error } };
         }
 
-        case MOBILE_NAV_SET_ELM: {
+        case preferencesTypes.MOBILE_NAV_SET_ELM: {
             const { activeElement, maxElms } = action.payload;
             if(activeElement > maxElms) {
                 return state;
@@ -50,31 +49,31 @@ const preferencesReducer = (state = PrefInitialState, action: any) => {
             return { ...state, mobileNavActiveElement: activeElement };
         }
 
-        case ROUTE_PATH_TOGGLE: {
+        case preferencesTypes.ROUTE_PATH_TOGGLE: {
             const { toggleState } = action.payload;
             return { ...state, routePathActive: toggleState };
         }
 
-        case TOGGLE_CMS_HAMBURGER: {
+        case preferencesTypes.TOGGLE_CMS_HAMBURGER: {
             return { ...state, cmsHamburgerToggle: !state.cmsHamburgerToggle };
         }
 
-        case INSERT_SEARCH_INPUT: {
+        case preferencesTypes.INSERT_SEARCH_INPUT: {
             const { inputType, value } = action.payload;
             return { ...state, searchInputs: { ...state.searchInputs, [inputType]: value } };
         }
 
-        case ERRORS_SEARCH_INPUTS: {
+        case preferencesTypes.ERRORS_SEARCH_INPUTS: {
             const { inputType, error } = action.payload;
             return { ...state, searchInputsErrors: { ...state.searchInputsErrors, [inputType]: error } };
         }
 
-        case CHANGE_ACTIVE_PANEL: {
+        case preferencesTypes.CHANGE_ACTIVE_PANEL: {
             const { dbID } = action.payload;
             return { ...state, activeSubjectPanelID: dbID };
         }
 
-        case PREV_NEXT_ACTIVE_PANEL: {
+        case preferencesTypes.PREV_NEXT_ACTIVE_PANEL: {
             const { dir, length } = action.payload;
             let activeID: number = state.activeSubjectPanelID;
             switch(dir) {
@@ -92,32 +91,32 @@ const preferencesReducer = (state = PrefInitialState, action: any) => {
             return { ...state, activeSubjectPanelID: activeID };
         }
 
-        case CHANGE_CHOOSE_SCHEDULE_GROUP: {
+        case preferencesTypes.CHANGE_CHOOSE_SCHEDULE_GROUP: {
             const { type, group } = action.payload;
             return { ...state, chooseGroups: { ...state.chooseGroups, [type]: group.toLocaleLowerCase() } };
         }
 
-        case TOGGLE_SCHEDULE_MODAL: {
+        case preferencesTypes.TOGGLE_SCHEDULE_MODAL: {
             const { toggleState } = action.payload;
             return { ...state, saveScheduleOptionModalOpen: toggleState };
         }
 
-        case TOGGLE_SCHEDULE_CLEAR_MODAL: {
+        case preferencesTypes.TOGGLE_SCHEDULE_CLEAR_MODAL: {
             const { toggleState } = action.payload;
             return { ...state, clearScheduleOptionModalOpen: toggleState };
         }
 
-        case TOGGLE_CALENDAR_MOBILE_MODAL: {
+        case preferencesTypes.TOGGLE_CALENDAR_MOBILE_MODAL: {
             const { toggleState, dateInfo } = action.payload;
             return { ...state, calendarMobileModalOpen: { toggleState, dateInfo } };
         }
 
-        case TOGGLE_USER_LOGOUT_MODAL: {
+        case preferencesTypes.TOGGLE_USER_LOGOUT_MODAL: {
             const { toggleState } = action.payload;
             return { ...state, userLogoutModalOpen: toggleState };
         }
 
-        case CHANGE_CMS_LIST_PAGE_NUMBER: {
+        case preferencesTypes.CHANGE_CMS_LIST_PAGE_NUMBER: {
             const { page, type, maxPage, dir } = action.payload;
             let increment: number = state.currentActivePage[type].activePage;
             if(page !== maxPage && dir === Number(directions.NEXT)) {
@@ -132,14 +131,14 @@ const preferencesReducer = (state = PrefInitialState, action: any) => {
             }}};
         }
 
-        case CHANGE_MAX_SHOWING_CMS_LIST_ELMS: {
+        case preferencesTypes.CHANGE_MAX_SHOWING_CMS_LIST_ELMS: {
             const { type, maxShowingElms } = action.payload;
             return { ...state, currentActivePage: {
                 ...state.currentActivePage, [type]: { ...state.currentActivePage[type], maxShowingElms
             }}};
         }
 
-        case CHANGE_CMS_LIST_SORTING_TYPE: {
+        case preferencesTypes.CHANGE_CMS_LIST_SORTING_TYPE: {
             const { type } = action.payload;
             const { DECREASE, INCREASE } = sortingTypes;
             const sortingMode = state.currentActivePage[type].sortingMode === DECREASE ? INCREASE : DECREASE;

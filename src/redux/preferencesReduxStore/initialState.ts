@@ -109,7 +109,7 @@ export const PrefInitialState = {
         [SUBJECTS]: {
             activePage: 1,
             maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
-            sortingMode: sortingTypes.INCREASE,
+            sortingMode: sortingTypes.DECREASE,
         },
         [USER_MESSAGES]: {
             activePage: 1,
@@ -119,7 +119,7 @@ export const PrefInitialState = {
         [HELPERS_LINKS]: {
             activePage: 1,
             maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
-            sortingMode: sortingTypes.INCREASE,
+            sortingMode: sortingTypes.DECREASE,
         },
         [CALENDAR]: {
             activePage: 1,
