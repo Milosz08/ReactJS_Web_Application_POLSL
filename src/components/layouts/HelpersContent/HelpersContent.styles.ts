@@ -53,6 +53,7 @@ export const SingleHelperTileAnchor = styled(a_rs)`
         text-decoration: none;
         span {
             right: 30px;
+            border-color: var(--darkOrangeColor);
         }
     }
     @media only screen and (max-width: 750px) {
