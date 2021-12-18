@@ -12,11 +12,13 @@
  * governing permissions and limitations under the license.
  */
 
-import COOKIES_OBJECT from '../../context/cookiesContext/allCookies.config';
 import { useContext, useEffect } from 'react';
-
 import useIsMount from './useIsMount';
+
+import COOKIES_OBJECT from '../../context/cookiesContext/allCookies.config';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../context/cookiesContext/CookiesObjectsProvider';
+
+import { API_ENDPOINTS } from '../structs/appEndpoints';
 
 import { useDispatch } from 'react-redux';
 import { SessActions } from '../../redux/sessionReduxStore/actions';
@@ -29,9 +31,16 @@ import { apiGetContentFromDB, sortAvailables } from '../../redux/apiReduxStore/t
 const useFirstPainfullLoad = (): null => {
 
     const { cookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
-    
     const { adminSession, groupSelection } = COOKIES_OBJECT;
-    
+
+    const {
+        COVID_WARNINGS, LAST_UPDATE: LAST_UPDATE_END, SUBJECTS_ELMS, CALENDAR_RECORDS, HELPERS_LINKS, FOOTER_FORM,
+        SCHEDULE_SUBJECTS
+    } = API_ENDPOINTS;
+
+    const { COVID, LAST_UPDATE, SUBJECTS, CALENDAR, HELPERS, USER_MESSAGES, SCHEDULE } = apiGetContentFromDB;
+    const { SUBJECTS: SUB_SORT, CALENDAR: CAL_SORT } = sortAvailables;
+
     const dispatcher = useDispatch();
     const isMount = useIsMount();
     
@@ -40,14 +49,14 @@ const useFirstPainfullLoad = (): null => {
     }, [ adminSession, cookie, dispatcher ]);
 
     useEffect(() => {
-        if(isMount) { //Prevent dispatcher DB on next re-renders
-            dispatcher(getAllCovidWarningElements());
-            dispatcher(getAllFooterFormElements());
-            dispatcher(getAllLastUpdateElements());
-            dispatcher(getAllSubjectsElements());
-            dispatcher(getAllScheduleElements(cookie![groupSelection]));
-            dispatcher(getAllCalendarElements());
-            dispatcher(getAllHelpersLinks());
+        if(isMount) { //Prevent usage dispatcher DB on next re-renders
+            dispatcher(DbNonModalOp.getAllUniversalElements(COVID_WARNINGS, COVID));
+            dispatcher(DbNonModalOp.getAllUniversalElements(LAST_UPDATE_END, LAST_UPDATE));
+            dispatcher(DbNonModalOp.getAllUniversalElements(SUBJECTS_ELMS, SUBJECTS, SUB_SORT));
+            dispatcher(DbNonModalOp.getAllUniversalElements(CALENDAR_RECORDS, CALENDAR, CAL_SORT));
+            dispatcher(DbNonModalOp.getAllUniversalElements(HELPERS_LINKS, HELPERS));
+            dispatcher(DbNonModalOp.getAllUniversalElements(FOOTER_FORM, USER_MESSAGES));
+            dispatcher(DbNonModalOp.getAllUniversalElements(SCHEDULE_SUBJECTS, SCHEDULE, cookie![groupSelection]));
         }
     }, [ isMount ]);
     
