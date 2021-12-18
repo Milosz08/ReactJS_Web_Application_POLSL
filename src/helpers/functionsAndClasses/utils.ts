@@ -13,6 +13,7 @@
  */
 
 import CryptoJS, { AES } from 'crypto-js';
+import { decrypt } from 'react-crypt-gsm';
 
 /**
  * Class responsible for storing "pure JS" utils methods.
@@ -37,6 +38,10 @@ class Utils {
     public static decrData(data: string, salt: string = '') {
         return CryptoJS.enc.Utf8.stringify(AES.decrypt(data, salt));
     };
+
+    public static cookieDecrData({ content, tag }: any) {
+        return decrypt({ content, tag: new Uint8Array(tag.data) });
+    }
 
 }
 
