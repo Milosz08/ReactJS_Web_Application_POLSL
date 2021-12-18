@@ -22,7 +22,7 @@ import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconC
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
-const CovidCmsPageElements = React.lazy(() => import('../../layouts/CovidCmsPageElements/CovidCmsPageElements'));
+const CovidCmsPageElements = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/CovidCmsPage/CovidCmsPageElements'));
 
 /**
  * Component responsible for generating CMS subpage for controlled covid section.

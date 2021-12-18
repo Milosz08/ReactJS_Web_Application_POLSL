@@ -26,7 +26,7 @@ const MainHeaderNavigation = React.lazy(() => import('./subcomponents/MainHeader
 const MainHeaderContent = React.lazy(() => import('./subcomponents/MainHeaderContent'));
 const UnofficialInfo = React.lazy(() => import('./subcomponents/UnofficialInfo'));
 const LoadingBigBar = React.lazy(() => import('../LoadingSuspenseBar/LoadingSuspenseBar'));
-const CmsInfoBar = React.lazy(() => import('../CmsInfoBar/CmsInfoBar'));
+const CmsInfoBar = React.lazy(() => import('../CmsPageComponents/CmsInfoBar/CmsInfoBar'));
 
 interface PropsProvider {
     ifHeaderHasRedBar: boolean;

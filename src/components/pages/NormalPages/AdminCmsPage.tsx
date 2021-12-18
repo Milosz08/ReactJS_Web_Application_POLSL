@@ -23,7 +23,7 @@ const CookiesNotification = React.lazy(() => import('../../layouts/CookiesNotifi
 const MobileDownNav = React.lazy(() => import('../../layouts/MobileDownNav/MobileDownNav'));
 const Header = React.lazy(() => import('../../layouts/Header/Header'));
 const CurrentURLpath = React.lazy(() => import('../../layouts/CurrentURLpath/CurrentURLpath'));
-const AdminCmsLayoutElements = React.lazy(() => import('../../layouts/AdminCmsLayoutElements/AdminCmsLayoutElements'));
+const AdminCmsLayoutElements = React.lazy(() => import('../../layouts/CmsPageComponents/CmsLayoutElements/AdminCmsLayoutElements'));
 
 /**
  * Component responsible for generating the entire structure of the content management system

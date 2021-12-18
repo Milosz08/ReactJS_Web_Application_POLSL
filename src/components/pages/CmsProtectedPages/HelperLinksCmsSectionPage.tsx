@@ -23,14 +23,14 @@ import { modalsInitialState } from '../../../redux/modalsReduxStore/initialState
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
 
-const AddEditContentModal = React.lazy(() => import('../../layouts/CmsAddEditModalsGroup/AddEditContentModal/AddEditContentModal'));
-const DeleteContentModal = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
-const CustomContentForHelpersLinksAddEdit = React.lazy(() => import('../../layouts/CmsAddEditModalsGroup/Custom Components/CustomContentForHelpersLinksAddEdit/CustomContentForHelpersLinksAddEdit'));
-const CustomContentForHelpersLinksDelete = React.lazy(() => import('../../layouts/CmsDeleteModalsGroup/CutomComponents/CustomContentForHelpersLinksDelete'));
+const AddEditContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/AddEditModalsGroup/AddEditContentModal/AddEditContentModal'));
+const DeleteContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
+const CustomContentForHelpersLinksAddEdit = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/AddEditModalsGroup/CustomComponents/HelpersLinksAddEdit/HelpersLinksAddEdit'));
+const CustomContentForHelpersLinksDelete = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/CustomComponents/HelpersLinksDelete'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
-const HelpersLinksCmsPage = React.lazy(() => import('../../layouts/CmsPanelsComponentsGroup/HelpersLinksCmsPage/HelpersLinksCmsPage'));
+const HelpersLinksCmsPage = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/HelpersLinksCmsPage/HelpersLinksCmsPage'));
 
 /**
  * Component responsible for generating CMS subpage for controlled helpers.

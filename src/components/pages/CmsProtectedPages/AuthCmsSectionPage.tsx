@@ -20,7 +20,7 @@ import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
-import ChangeCredentialsCmsPage from '../../layouts/ChangeCredentialsCmsPage/ChangeCredentialsCmsPage';
+import ChangeCredentialsCmsPage from '../../layouts/CmsPageComponents/CmsPagePanels/ChangeCredentialsCmsPage/ChangeCredentialsCmsPage';
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 
