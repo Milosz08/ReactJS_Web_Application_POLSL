@@ -56,7 +56,9 @@ const ItemsListMultipleInjection: React.FC<PropsProvider> = ({
 }): JSX.Element => {
 
     const modals: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+
     const elements = modals[modalType].modalInputFields![elementKey];
+    const maxInj: boolean = MAX_INJECTIONS - elements.length === 0;
 
     const dispatcher = useDispatch();
 
@@ -93,9 +95,9 @@ const ItemsListMultipleInjection: React.FC<PropsProvider> = ({
         <MultipleInjectionContainer>
             {generateSingleInjection}
             <CmsAddNewContentButtonStyles
-                title = {`Kliknij, aby dodać nowy wpis`}
+                title = {maxInj ? `Wprowadzono maksymalną liczbę elementów.` : `Kliknij, aby dodać nowy ${addContent}`}
                 onClick = {handleAddNewContent}
-                disabled = {MAX_INJECTIONS - elements.length === 0}
+                disabled = {maxInj}
             >
                 Dodaj nowy {addContent} ({MAX_INJECTIONS - elements.length}/{MAX_INJECTIONS})
             </CmsAddNewContentButtonStyles>
