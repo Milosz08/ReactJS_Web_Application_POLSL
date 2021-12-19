@@ -25,4 +25,9 @@ export const CmsAddNewContentButtonStyles = styled(button_rs)`
     font-size: 1.2rem;
     font-weight: 500;
     margin-top: 15px;
+    :disabled {
+        border-color: var(--darkGrayTint3);
+        color: var(--darkGrayTint3);
+        font-weight: 400;
+    }
 `;
