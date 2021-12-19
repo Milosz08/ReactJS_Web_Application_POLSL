@@ -24,12 +24,9 @@ import './../../constants/fontAwesomeInject';  // to remove
 
 import LoadingSuspense from '../layouts/LoadingSuspense/LoadingSuspense';
 
-const MainStoreProvider = React.lazy(() => import('../../contextStore/MainStoreProvider'));
 const CookiesObjectsProvider = React.lazy(() => import('../../context/cookiesContext/CookiesObjectsProvider'));
 const ScrollToTop = React.lazy(() => import('../../helpers/componentsAndMiddleware/ScrollToTop'));
-const GlobalModalsStateProvider = React.lazy(() => import('../../contextStore/GlobalModalsStateProvider'));
 const GotoTopButton = React.lazy(() => import('../layouts/GotoTopButton/GotoTopButton'));
-const LoginSessionProvider = React.lazy(() => import('../../contextStore/LoginSessionProvider'));
 const SessionEndModal = React.lazy(() => import('../layouts/SessionEndModal/SessionEndModal'));
 const SessionSequencer = React.lazy(() => import('../layouts/SessionSequencer/SessionSequencer'));
 const NonProtectedRoute = React.lazy(() => import('./NonProtectedRoute'));
@@ -43,25 +40,19 @@ const App: React.FC = (): JSX.Element => (
     <Provider store = {reduxStore}>
         <Suspense fallback = {<LoadingSuspense/>}>
             <GlobalStyle/>
-            <MainStoreProvider>
-                <CookiesProvider>
-                    <CookiesObjectsProvider>
-                        <Router>
-                            <ScrollToTop/>
-                            <GlobalModalsStateProvider>
-                                <GotoTopButton/>
-                                <LoginSessionProvider>
-                                    <SessionEndModal/>
-                                    <SessionSequencer/>
-                                    <NonProtectedRoute/>
-                                </LoginSessionProvider>
-                                <DevToolsInfo/>
-                                <Footer/>
-                            </GlobalModalsStateProvider>
-                        </Router>
-                    </CookiesObjectsProvider>
-                </CookiesProvider>
-            </MainStoreProvider>
+            <CookiesProvider>
+                <CookiesObjectsProvider>
+                    <Router>
+                        <ScrollToTop/>
+                        <GotoTopButton/>
+                        <SessionEndModal/>
+                        <SessionSequencer/>
+                        <NonProtectedRoute/>
+                        <DevToolsInfo/>
+                        <Footer/>
+                    </Router>
+                </CookiesObjectsProvider>
+            </CookiesProvider>
         </Suspense>
     </Provider>
 );
