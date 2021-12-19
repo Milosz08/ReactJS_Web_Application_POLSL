@@ -27,7 +27,7 @@ import { DateCalendarIcon, DateInputContainer, DateInputElement } from '../Calen
  * Component responsible for generating date picker input for multiple or
  * single calendar record/records.
  */
-const CalendarAddEditTimeInput: React.FC = (): JSX.Element => {
+const CalendarAddEditDateInput: React.FC = (): JSX.Element => {
 
     const { calendarModal }: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
 
@@ -54,4 +54,4 @@ const CalendarAddEditTimeInput: React.FC = (): JSX.Element => {
     );
 };
 
-export default CalendarAddEditTimeInput;
+export default CalendarAddEditDateInput;

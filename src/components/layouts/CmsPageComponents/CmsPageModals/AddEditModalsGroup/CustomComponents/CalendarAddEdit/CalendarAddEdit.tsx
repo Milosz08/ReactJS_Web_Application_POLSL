@@ -19,7 +19,7 @@ import { allModals, allModalsInputs } from '../../../../../../../redux/modalsRed
 
 import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
 
-const CalendarAddEditTimeInput = React.lazy(() => import('./subcomponents/CalendarAddEditTimeInput'));
+const CalendarAddEditDateInput = React.lazy(() => import('./subcomponents/CalendarAddEditDateInput'));
 const ItemsListMultipleInjection = React.lazy(() => import('../../HighOrderComponents/ItemsListMultipleInjection'));
 const CalendarSingleInject = React.lazy(() => import('./subcomponents/CalendarSingleInject'));
 
@@ -28,7 +28,7 @@ const CalendarSingleInject = React.lazy(() => import('./subcomponents/CalendarSi
  */
 const CalendarAddEdit: React.FC = (): JSX.Element => (
     <AddEditCustomContentContainer>
-        <CalendarAddEditTimeInput/>
+        <CalendarAddEditDateInput/>
         <ItemsListMultipleInjection
             modalType = {allModals.CALENDAR_MODAL}
             elementKey = {allModalsInputs.ITEMS}
