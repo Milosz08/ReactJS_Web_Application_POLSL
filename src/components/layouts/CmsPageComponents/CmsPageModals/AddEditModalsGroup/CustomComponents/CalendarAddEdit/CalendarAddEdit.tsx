@@ -13,17 +13,31 @@
  */
 
 import * as React from 'react';
+
+import { LEVELS } from '../../../../../../../helpers/structs/calendar.config';
+import { allModals, allModalsInputs } from '../../../../../../../redux/modalsReduxStore/types';
+
 import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
 
+const CalendarAddEditTimeInput = React.lazy(() => import('./subcomponents/CalendarAddEditTimeInput'));
+const ItemsListMultipleInjection = React.lazy(() => import('../../HighOrderComponents/ItemsListMultipleInjection'));
+const CalendarSingleInject = React.lazy(() => import('./subcomponents/CalendarSingleInject'));
+
 /**
- *
+ * Component responsible for generating all calendar modal add/edit custom structure.
  */
-const CalendarAddEdit: React.FC = (): JSX.Element => {
-    return (
-        <AddEditCustomContentContainer>
-            CalendarAddEdit
-        </AddEditCustomContentContainer>
-    );
-};
+const CalendarAddEdit: React.FC = (): JSX.Element => (
+    <AddEditCustomContentContainer>
+        <CalendarAddEditTimeInput/>
+        <ItemsListMultipleInjection
+            modalType = {allModals.CALENDAR_MODAL}
+            elementKey = {allModalsInputs.ITEMS}
+            insertObj = {{ start: '', message: '', importantLevel: LEVELS.LOW, }}
+            insertErrObj = {{ start: false, message: false }}
+            CustomComponent = {CalendarSingleInject}
+            addContent = 'wpis'
+        />
+    </AddEditCustomContentContainer>
+);
 
 export default CalendarAddEdit;
