@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import { allModals, allModalsActions, allModalsInputs, modalsTypes } from './types';
+import { allModals, allModalsActions, allModalsInputs, modalInputHeader, modalsTypes } from './types';
 
 interface ReturnedToReducer {
     type: modalsTypes;
@@ -48,21 +48,35 @@ export class ModalsActions {
      *
      * @param modalType { allModals } - modal currently supported.
      * @param inputType { allModalsInputs } - input in currently supported modal.
+     * @param valueInput { modalInputHeader } - enum type decided if is normal or error inputs.
      * @param value { any } - primitive type to change state.
      */
-    public static changeModalSelectedInput = (modalType: allModals, inputType: allModalsInputs, value: any): ReturnedToReducer => ({
+    public static changeModalSelectedInput = (
+        modalType: allModals, inputType: allModalsInputs, value: any, valueInput = modalInputHeader.NORMAL
+    ): ReturnedToReducer => ({
         type: modalsTypes.CHANGE_MODAL_SELECTED_INPUT,
         payload: {
-            modalType, inputType, value
+            modalType, inputType, value, valueInput
         }
     });
 
+    /**
+     * Method responsible for change selected input in array.
+     *
+     * @param modalType { allModals } - modal currently supported.
+     * @param arrayType { allModalsInputs } - selected array in supported modal.
+     * @param inputType { allModalsInputs } - input in currently supported modal.
+     * @param arrayIdx { number } - array element index.
+     * @param value { any } - primitive type to change state.
+     * @param valueInput { modalInputHeader } - enum type decided if is normal or error inputs.
+     */
     public static changeModalSelectedInputArray = (
-        modalType: allModals, arrayType: allModalsInputs, inputType: allModalsInputs, arrayIdx: number, value: any
+        modalType: allModals, arrayType: allModalsInputs, inputType: allModalsInputs,
+        arrayIdx: number, value: any, valueInput = modalInputHeader.NORMAL
     ): ReturnedToReducer => ({
         type: modalsTypes.CHANGE_MODAL_SELECTED_ARRAY,
         payload: {
-            modalType, arrayType, inputType, arrayIdx, value
+            modalType, arrayType, inputType, arrayIdx, value, valueInput
         }
     });
 
@@ -79,31 +93,19 @@ export class ModalsActions {
     });
 
     /**
-     * Method responsible for calling the reducer function that check all inputs in selected modal.
-     *
-     * @param modalType { allModals } - modal currently supported.
-     */
-    public static checkAllInputs = (modalType: allModals): ReturnedToReducer => ({
-        type: modalsTypes.CHECK_ALL_INPUTS_ERR,
-        payload: {
-            modalType
-        }
-    });
-
-    /**
      * Method responsible for adding element into redux modal data elements array.
      *
      * @param modalType { allModals } - modal currently supported.
      * @param inputType { allModalsInputs } - input in currently supported modal.
      * @param elementToAdd { object } - object values added into array.
-     * @param errorElements { object } - object errors indicators added into array.
+     * @param valueInput
      */
     public static addElementIntoArray = (
-        modalType: allModals, inputType: allModalsInputs, elementToAdd: object, errorElements: object
+        modalType: allModals, inputType: allModalsInputs, elementToAdd: object, valueInput = modalInputHeader.NORMAL
     ): ReturnedToReducer => ({
         type: modalsTypes.ADD_ELEMENT_INTO_ARRAY,
         payload: {
-            modalType, inputType, elementToAdd, errorElements
+            modalType, inputType, elementToAdd, valueInput
         }
     });
 
