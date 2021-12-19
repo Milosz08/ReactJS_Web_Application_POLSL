@@ -15,7 +15,7 @@
 import styled from 'styled-components';
 import { AiOutlineCalendar } from 'react-icons/all';
 
-import { input_rs } from '../../../../../../../styles/reset.styles';
+import { input_rs, textarea_rs } from '../../../../../../../styles/reset.styles';
 import { StandardTextInput } from '../../../../../../../styles/mixins.styles';
 
 export const DateInputContainer = styled.div`
@@ -43,4 +43,23 @@ export const DateCalendarIcon = styled(AiOutlineCalendar)<{ $ifError: boolean }>
     font-size: 1.6rem;
     top: 7px;
     right: 16px;
+`;
+
+export const CalendarTextinputAreaContainer = styled.div`
+    position: relative;
+    flex-basis: 100%;
+    margin-top: 20px;
+`;
+
+export const CalendarTextinputArea = styled(textarea_rs)<{ $ifError: boolean }>`
+    ${({ $ifError }) => StandardTextInput({ _ifError: $ifError, _paddingRight: 50, _spaceUpDown: 10 })};
+    font-size: 1.1rem;
+    padding: 6px 12px 8px 15px;
+`;
+
+export const CalendarTextinputAreaCharsCounter = styled.div`
+    position: absolute;
+    right: 10px;
+    bottom: 12px;
+    color: var(--darkGrayTint2);
 `;
