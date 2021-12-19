@@ -44,6 +44,14 @@ const useGenerateDatabaseObjects = (modalType: allModals, actionType: allModalsA
                         family: 'FontAwesomeIcons', name: fields.icon
                     }
                 };
+            case allModals.CALENDAR_MODAL:
+                const [ year, month, day ] = fields.date.split('-');
+                return {
+                    day: Number(day),
+                    month: Number(month),
+                    year: Number(year),
+                    items: fields.items
+                }
             default:
                 return {};
         }
