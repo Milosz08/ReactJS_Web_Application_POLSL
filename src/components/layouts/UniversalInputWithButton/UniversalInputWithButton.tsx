@@ -59,7 +59,6 @@ const UniversalInputWithButton: React.FC<PropsProvider> = ({
 
     const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
         dispatcher(ModalsActions.changeModalSelectedInput(modalType, inputType, target.value));
-        dispatcher(ModalsActions.checkAllInputs(modalType));
     };
 
     const handleClearInput = () => {
