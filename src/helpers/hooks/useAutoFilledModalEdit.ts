@@ -18,7 +18,7 @@ import { RootState } from '../../redux/reduxStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { ModalsActions } from '../../redux/modalsReduxStore/actions';
 import { ModalsInitialTypes } from '../../redux/modalsReduxStore/initialState';
-import { allModals, allModalsInputs } from '../../redux/modalsReduxStore/types';
+import { allModals, allModalsActions, allModalsInputs } from '../../redux/modalsReduxStore/types';
 
 /**
  * Custom hook responsible for auto filled content elements in EDIT_MODAL.
@@ -26,8 +26,11 @@ import { allModals, allModalsInputs } from '../../redux/modalsReduxStore/types';
  * @param modalType { allModals } - modal selected type.
  * @param modalInputArr { allModalsInputs[] } - all modal inputs.
  * @param inputValuesArr { any[] } - all modal inputs values.
+ * @param loadCallbackAddtlValues { () => void? } - callback function loading additional content.
  */
-const useAutoFilledModalEdit = (modalType: allModals, modalInputArr: allModalsInputs[], inputValuesArr: any[]): void => {
+const useAutoFilledModalEdit = (
+    modalType: allModals, modalInputArr: allModalsInputs[], inputValuesArr: any[], loadCallbackAddtlValues?: () => void
+): void => {
 
     const modal: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const dispatcher = useDispatch();
@@ -38,7 +41,10 @@ const useAutoFilledModalEdit = (modalType: allModals, modalInputArr: allModalsIn
         if(modalInputArr.length !== inputValuesArr.length) {
             throw new Error('Both of arrays must be same length!');
         } else {
-            if(selectedModal.ifOpen) {
+            if(selectedModal.ifOpen && selectedModal.action === allModalsActions.EDIT_ELEMENT) {
+                if(loadCallbackAddtlValues) {
+                    loadCallbackAddtlValues!();
+                }
                 for(let i = 0; i < modalInputArr.length; i++) {
                     dispatcher(ModalsActions.changeModalSelectedInput(modalType, modalInputArr[i], inputValuesArr[i]));
                 }
