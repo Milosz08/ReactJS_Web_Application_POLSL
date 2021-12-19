@@ -50,7 +50,10 @@ export const SingleInjectionContainer = styled('li')<{ ifBorderInactive: boolean
 
 export const SingleInjectionCustomContentWrapper = styled.div`
     flex-grow: 1;
-    padding: 15px 20px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 `;
 
 export const SingleInjectionRemoveElementButton = styled(button_rs)`
