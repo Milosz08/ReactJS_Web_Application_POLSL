@@ -13,7 +13,34 @@
  */
 
 import styled from 'styled-components';
+import { AiOutlineCalendar } from 'react-icons/all';
 
-export const _ = styled.div`
-    
+import { input_rs } from '../../../../../../../styles/reset.styles';
+import { StandardTextInput } from '../../../../../../../styles/mixins.styles';
+
+export const DateInputContainer = styled.div`
+    position: relative;
+`;
+
+export const DateInputElement = styled(input_rs)<{ ifError: boolean }>`
+    ${({ ifError }) => StandardTextInput({ _ifError: ifError, _paddingRight: 50, _spaceUpDown: 10 })};
+    position: relative;
+    z-index: 2;
+    font-size: 1.1rem;
+    padding: 6px 12px 8px 15px;
+    appearance: none;
+    background-color: transparent;
+    ::-webkit-calendar-picker-indicator {
+        opacity: 0;
+        cursor: pointer;
+    }
+`;
+
+export const DateCalendarIcon = styled(AiOutlineCalendar)<{ $ifError: boolean }>`
+    position: absolute;
+    z-index: 0;
+    color: var(${({ $ifError }) => $ifError ? '--redColor' : '--navyBlueColor'});
+    font-size: 1.6rem;
+    top: 7px;
+    right: 16px;
 `;
