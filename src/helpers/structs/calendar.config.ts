@@ -51,3 +51,8 @@ export const DAYS_INCOME: number = 8;
  * Constant that defines how many single element can be in single day.
  */
 export const MAX_INJECTIONS: number = 5;
+
+/**
+ * Constant that defines how many characters can be in calendar activity message.
+ */
+export const MAX_MESSAGE_LENGTH: number = 100;
