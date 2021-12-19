@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../redux/reduxStore';
 import { ModalsActions } from '../../../../../../redux/modalsReduxStore/actions';
 import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/initialState';
-import { allModals, allModalsInputs } from '../../../../../../redux/modalsReduxStore/types';
+import { allModals, allModalsInputs, modalInputHeader } from '../../../../../../redux/modalsReduxStore/types';
 
 import {
     MultipleInjectionContainer, SingleInjectionContainer, SingleInjectionCustomContentWrapper,
@@ -64,7 +64,8 @@ const ItemsListMultipleInjection: React.FC<PropsProvider> = ({
 
     const handleAddNewContent = () => {
         if (elements.length < MAX_INJECTIONS) {
-            dispatcher(ModalsActions.addElementIntoArray(modalType, elementKey, insertObj, insertErrObj));
+            dispatcher(ModalsActions.addElementIntoArray(modalType, elementKey, insertObj));
+            dispatcher(ModalsActions.addElementIntoArray(modalType, elementKey, insertErrObj, modalInputHeader.ERROR));
         }
     };
 
