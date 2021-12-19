@@ -29,6 +29,10 @@ const ChangeCredentialType: React.FC = (): JSX.Element => {
 
     const { roles } = useContext<Partial<ChangeCredentialsContextTypes>>(ChangeCredentialsContext);
 
+    const handleRadioInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+        roles!.setRole(target.id as unknown as ROLES);
+    };
+
     const generateRadioInputs = [ ROLES.MODERATOR, ROLES.ADMIN ].map(el => (
         <UniversalRadioInput
             key = {el}
@@ -37,7 +41,7 @@ const ChangeCredentialType: React.FC = (): JSX.Element => {
                 id: el,
                 name: 'rangeFields',
                 checked: Number(roles!.role) === el,
-                onChangeCallback: (type: ROLES) => roles!.setRole(type)
+                onChangeCallback: handleRadioInput
             }}
         />
     ));

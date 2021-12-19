@@ -14,8 +14,6 @@
 
 import * as React from 'react';
 
-import { ROLES } from '../../../helpers/functionsAndClasses/LoginValidator';
-
 import {
     UniversalRadioInputContainer, UniversalRadioInputElement, UniversalRadioInputLabel, UniversalRadiomarkElement
 } from './UniversalRadioInput.styles';
@@ -26,7 +24,7 @@ interface PropsProvider {
         id: number | string;
         name: string;
         checked: boolean;
-        onChangeCallback: (type: ROLES) => void;
+        onChangeCallback: ({ target }: React.ChangeEvent<HTMLInputElement>) => void;
     }
     size?: number;
     color?: string;
@@ -49,7 +47,7 @@ const UniversalRadioInput: React.FC<PropsProvider> = ({ content, radioProps, siz
             id = {radioProps.id}
             name = {radioProps.name}
             checked = {radioProps.checked}
-            onChange = {({ target }: any) => radioProps.onChangeCallback(target.id)}
+            onChange = {radioProps.onChangeCallback}
             sizeCSS = {size}
             colorCSS = {color}
         />
