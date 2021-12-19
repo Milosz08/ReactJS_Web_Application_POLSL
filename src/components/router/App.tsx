@@ -20,7 +20,6 @@ import { Provider } from 'react-redux';
 import reduxStore from '../../redux/reduxStore';
 
 import GlobalStyle from '../../styles/global.styles';
-import './../../constants/fontAwesomeInject';  // to remove
 
 import LoadingSuspense from '../layouts/LoadingSuspense/LoadingSuspense';
 
