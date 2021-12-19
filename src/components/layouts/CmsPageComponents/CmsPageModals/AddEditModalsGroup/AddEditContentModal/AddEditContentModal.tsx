@@ -56,10 +56,10 @@ const AddEditContentModal: React.FC<PropsProvider> = ({ modalType, RenderCustomC
                 ref = {modal}
             >
                 <UniversalHeader
-                    iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaUsersCog' }}
+                    iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaFileSignature' }}
                     ifCloseButtonVisible = {false}
                     content = {`${currentModeIsAdd ? 'Dodaj' : 'Modyfikuj'} ${modalObject.titleContent}`}
-                    changeIconSize = '1em'
+                    changeIconSize = '.8em'
                 />
                 <RenderCustomComponent
                     modalData = {modalObject}
