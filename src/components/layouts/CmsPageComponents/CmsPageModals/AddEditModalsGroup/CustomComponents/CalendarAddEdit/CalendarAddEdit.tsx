@@ -15,7 +15,15 @@
 import * as React from 'react';
 
 import { LEVELS } from '../../../../../../../helpers/structs/calendar.config';
-import { allModals, allModalsInputs } from '../../../../../../../redux/modalsReduxStore/types';
+import useAutoFilledModalEdit from '../../../../../../../helpers/hooks/useAutoFilledModalEdit';
+import useFindMatchingElement from '../../../../../../../helpers/hooks/useFindMatchingElement';
+
+import { useDispatch } from 'react-redux';
+import { apiReducerTypes } from '../../../../../../../redux/apiReduxStore/types';
+import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
+import { CalendarContentTypes } from '../../../../../../../redux/apiReduxStore/dataTypes';
+import { initialStateForModalsInputs } from '../../../../../../../redux/modalsReduxStore/singleInitialStates';
+import { allModals, allModalsInputs, modalInputHeader } from '../../../../../../../redux/modalsReduxStore/types';
 
 import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
 
@@ -26,18 +34,46 @@ const CalendarSingleInject = React.lazy(() => import('./subcomponents/CalendarSi
 /**
  * Component responsible for generating all calendar modal add/edit custom structure.
  */
-const CalendarAddEdit: React.FC = (): JSX.Element => (
-    <AddEditCustomContentContainer>
-        <CalendarAddEditDateInput/>
-        <ItemsListMultipleInjection
-            modalType = {allModals.CALENDAR_MODAL}
-            elementKey = {allModalsInputs.ITEMS}
-            insertObj = {{ start: '', message: '', importantLevel: LEVELS.LOW, }}
-            insertErrObj = {{ start: false, message: false }}
-            CustomComponent = {CalendarSingleInject}
-            addContent = 'wpis'
-        />
-    </AddEditCustomContentContainer>
-);
+const CalendarAddEdit: React.FC = (): JSX.Element => {
+
+    const { CALENDAR_MODAL } = allModals;
+
+    const itemSchema = initialStateForModalsInputs[CALENDAR_MODAL].normal.items[0];
+    const itemErrSchema = initialStateForModalsInputs[CALENDAR_MODAL].errors.items[0];
+
+    const dispatcher = useDispatch();
+    const matchElm: CalendarContentTypes | any = useFindMatchingElement(
+        allModals.CALENDAR_MODAL, apiReducerTypes.CALENDAR
+    );
+
+    const loadAdditionalContent = (): void => {
+        if(matchElm) {
+            for(let i = 0; i < matchElm!.items.length - 1; i++) {
+                dispatcher(ModalsActions.addElementIntoArray(CALENDAR_MODAL, allModalsInputs.ITEMS, itemSchema));
+                dispatcher(ModalsActions.addElementIntoArray(
+                    CALENDAR_MODAL, allModalsInputs.ITEMS, itemErrSchema, modalInputHeader.ERROR
+                ));
+            }
+        }
+    };
+
+    const { DATE, ITEMS } = allModalsInputs;
+    const filledArr = matchElm ? [ matchElm!.dateString, matchElm!.items ] : [ '', '' ];
+    useAutoFilledModalEdit(CALENDAR_MODAL, [ DATE, ITEMS ], filledArr, loadAdditionalContent);
+
+    return (
+        <AddEditCustomContentContainer>
+            <CalendarAddEditDateInput/>
+            <ItemsListMultipleInjection
+                modalType = {CALENDAR_MODAL}
+                elementKey = {allModalsInputs.ITEMS}
+                insertObj = {{ start: '', message: '', importantLevel: LEVELS.LOW, }}
+                insertErrObj = {{ start: false, message: false }}
+                CustomComponent = {CalendarSingleInject}
+                addContent = 'wpis'
+            />
+        </AddEditCustomContentContainer>
+    );
+};
 
 export default CalendarAddEdit;
