@@ -46,3 +46,8 @@ export enum LEVELS {
  * Constant that defines how many days in advance upcoming events should show up.
  */
 export const DAYS_INCOME: number = 8;
+
+/**
+ * Constant that defines how many single element can be in single day.
+ */
+export const MAX_INJECTIONS: number = 5;
