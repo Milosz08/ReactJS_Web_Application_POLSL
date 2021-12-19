@@ -29,6 +29,7 @@ import { allModals, allModalsActions } from '../../../../../../../redux/modalsRe
 import {
     AddEditContentModalButtonsContainer, AddEditContentSaveChangesButton, AddEditContentUnsaveChangesButton
 } from '../AddEditContentModal.styles';
+import useValidateAddEditCmsModal from '../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
 
 const EstimateTimeCounterBar = React.lazy(() => import('../../../../../EstimateTimeCounterBar/EstimateTimeCounterBar'));
 
@@ -53,6 +54,8 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
 
     const generatedObject = useGenerateDatabaseObjects(modalType, mode, id);
+    const { validateReducer } = useValidateAddEditCmsModal(modalType);
+
     const dispatcher = useDispatch();
 
     const handleUnsaveChangesOnCloseModal = (): void => {
@@ -63,27 +66,31 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
     const afterAsyncCountingCallback = (): void => {
         document.title = 'Zawartość zapisana';
         setTimeout(() => {
-            if (Object.values(modalsInitialState[modalType].modalInputErrorsFields!).every(v => !v)) {
-                const object = generatedObject();
-                handleUnsaveChangesOnCloseModal();
-                setTimeout(() => {
-                    reset();
-                    if(mode === allModalsActions.ADD_ELEMENT) {
-                        dispatcher(DbModalOp.addSingleElementFromCms(modalsInitialState, modalType, object));
-                    } else {
-                        dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id));
-                    }
-                    dispatcher(DbNonModalOp.updateSectionDateFromCms(
-                        updateSections[modalsInitialState[modalType].updateApiParam]
-                    ));
-                }, 1000);
-            }
+            const object = generatedObject();
+            handleUnsaveChangesOnCloseModal();
+            setTimeout(() => {
+                reset();
+                if (mode === allModalsActions.ADD_ELEMENT) {
+                    dispatcher(DbModalOp.addSingleElementFromCms(modalsInitialState, modalType, object));
+                } else {
+                    dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id));
+                }
+                dispatcher(DbNonModalOp.updateSectionDateFromCms(
+                    updateSections[modalsInitialState[modalType].updateApiParam]
+                ));
+            }, 1000);
         }, 2000);
     };
 
     const { widthState, show, reset, generatingCounter } = useGenerateLoadingLine(
         afterAsyncCountingCallback, allModals.HELPERS_LINKS_MODAL, 20, 'Zapisywanie zawartości', title
     );
+
+    const handleSubmitElement = (): void => {
+        if (!validateReducer()) {
+            generatingCounter();
+        }
+    };
 
     return (
         <AddEditContentModalButtonsContainer
@@ -95,7 +102,7 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
                 Zamknij bez zapisu
             </AddEditContentUnsaveChangesButton>
             <AddEditContentSaveChangesButton
-                onClick = {generatingCounter}
+                onClick = {handleSubmitElement}
             >
                 Zapisz zmiany
             </AddEditContentSaveChangesButton>
