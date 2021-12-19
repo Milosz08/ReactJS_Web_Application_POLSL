@@ -50,6 +50,19 @@ const modalsReducer = (state = modalsInitialState, action: any) => {
             };
         }
 
+        case modalsTypes.CHANGE_MODAL_SELECTED_ARRAY: {
+            const { modalType, arrayType, inputType, arrayIdx, value } = action.payload;
+            const arrayCopy = state[modalType].modalInputFields![arrayType];
+            arrayCopy[arrayIdx][inputType] = value;
+            return {
+                ...state, [modalType]: {
+                    ...state[modalType], modalInputFields: {
+                        ...state[modalType].modalInputFields, [arrayType]: arrayCopy
+                    }
+                }
+            };
+        }
+
         case modalsTypes.CHECK_ALL_INPUTS_ERR: {
             const { modalType } = action.payload;
             const modalFieldsState = state[modalType].modalInputFields!;

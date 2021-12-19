@@ -57,6 +57,15 @@ export class ModalsActions {
         }
     });
 
+    public static changeModalSelectedInputArray = (
+        modalType: allModals, arrayType: allModalsInputs, inputType: allModalsInputs, arrayIdx: number, value: any
+    ): ReturnedToReducer => ({
+        type: modalsTypes.CHANGE_MODAL_SELECTED_ARRAY,
+        payload: {
+            modalType, arrayType, inputType, arrayIdx, value
+        }
+    });
+
     /**
      * Method responsible for calling the reducer function that clear all inputs in selected modal.
      *
