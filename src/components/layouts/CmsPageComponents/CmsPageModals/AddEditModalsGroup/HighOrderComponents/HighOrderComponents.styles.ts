@@ -13,6 +13,7 @@
  */
 
 import styled from 'styled-components';
+import { button_rs, ul_rs } from '../../../../../../styles/reset.styles';
 
 export const IconSelectorContainer = styled.div`
     display: flex;
@@ -32,4 +33,28 @@ export const IconSelectorLabel = styled.div`
     padding: 0 15px;
     font-size: 1.1rem;
     color: var(--darkGrayTint3);
+`;
+
+export const MultipleInjectionContainer = styled(ul_rs)`
+    width: 100%;
+    max-width: 1000px;
+`;
+
+export const SingleInjectionContainer = styled('li')<{ ifBorderInactive: boolean }>`
+    display: flex;
+    border: ${({ ifBorderInactive }) => ifBorderInactive ? 'none' : '1px solid var(--darkGrayTint3)'}; 
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 20px;
+`;
+
+export const SingleInjectionCustomContentWrapper = styled.div`
+    flex-grow: 1;
+    padding: 15px 20px;
+`;
+
+export const SingleInjectionRemoveElementButton = styled(button_rs)`
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
 `;
