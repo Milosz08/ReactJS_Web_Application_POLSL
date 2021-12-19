@@ -14,18 +14,75 @@
 
 import * as React from 'react';
 
+import { MAX_MESSAGE_LENGTH } from '../../../../../../../../helpers/structs/calendar.config';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../../../../../redux/reduxStore';
+import { ModalsActions } from '../../../../../../../../redux/modalsReduxStore/actions';
+import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxStore/initialState';
+import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
+
+import {
+    CalendarTextinputArea, CalendarTextinputAreaCharsCounter, CalendarTextinputAreaContainer
+} from '../CalendarAddEdit.styles';
+
+const UniversalTimeInput = React.lazy(() => import('../../../../../../UniversalTimeInput/UniversalTimeInput'));
+const CalendarSingleInjectRadioButtons = React.lazy(() => import('./CalendarSingleInjectRadioButtons'));
+
 interface PropsProvider {
     tileIdx: number;
 }
 
 /**
+ * Component responsible for generating all content in single tile providing insert calendar activity
+ * properties.
  *
+ * @param tileIdx { number } - calendar message redux state array index.
  */
 const CalendarSingleInject: React.FC<PropsProvider> = ({ tileIdx }): JSX.Element => {
 
+    const { calendarModal }: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+
+    const selectedItem = calendarModal.modalInputFields!.items[tileIdx];
+    const selectedErrFields = calendarModal.modalInputErrorsFields!.items[tileIdx];
+
+    const dispatcher = useDispatch();
+
+    const handleChangeTime = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+        dispatcher(ModalsActions.changeModalSelectedInputArray(
+            allModals.CALENDAR_MODAL, allModalsInputs.ITEMS, allModalsInputs.START, tileIdx, target.value
+        ));
+    };
+
+    const handleChangeMessage = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+        dispatcher(ModalsActions.changeModalSelectedInputArray(
+            allModals.CALENDAR_MODAL, allModalsInputs.ITEMS, allModalsInputs.MESSAGE, tileIdx, target.value
+        ));
+    };
+
     return (
         <>
-            to jest id elementu: {tileIdx}
+            <UniversalTimeInput
+                timeValue = {selectedItem.start}
+                changeCallback = {handleChangeTime}
+                ifError = {selectedErrFields.start}
+            />
+            <CalendarSingleInjectRadioButtons
+                itemIdx = {tileIdx}
+            />
+            <CalendarTextinputAreaContainer>
+                <CalendarTextinputArea
+                    type = 'text'
+                    value = {selectedItem.message}
+                    onChange = {handleChangeMessage}
+                    $ifError = {selectedErrFields.message}
+                    placeholder = 'Wprowadź opis wydarzenia'
+                    maxLength = {MAX_MESSAGE_LENGTH}
+                />
+                <CalendarTextinputAreaCharsCounter>
+                    {selectedItem.message.length} / {MAX_MESSAGE_LENGTH}
+                </CalendarTextinputAreaCharsCounter>
+            </CalendarTextinputAreaContainer>
         </>
     )
 };
