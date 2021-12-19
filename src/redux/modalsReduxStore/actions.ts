@@ -80,4 +80,37 @@ export class ModalsActions {
             modalType
         }
     });
+
+    /**
+     * Method responsible for adding element into redux modal data elements array.
+     *
+     * @param modalType { allModals } - modal currently supported.
+     * @param inputType { allModalsInputs } - input in currently supported modal.
+     * @param elementToAdd { object } - object values added into array.
+     * @param errorElements { object } - object errors indicators added into array.
+     */
+    public static addElementIntoArray = (
+        modalType: allModals, inputType: allModalsInputs, elementToAdd: object, errorElements: object
+    ): ReturnedToReducer => ({
+        type: modalsTypes.ADD_ELEMENT_INTO_ARRAY,
+        payload: {
+            modalType, inputType, elementToAdd, errorElements
+        }
+    });
+
+    /**
+     * Method responsible for deleting element from redux modal data elements array.
+     *
+     * @param modalType { allModals } - modal currently supported.
+     * @param inputType { allModalsInputs } - input in currently supported modal.
+     * @param elmIdx { number } - array element index.
+     */
+    public static removeElementFromArray = (
+        modalType: allModals, inputType: allModalsInputs, elmIdx: number
+    ): ReturnedToReducer => ({
+        type: modalsTypes.REMOVE_ELEMENT_FROM_ARRAY,
+        payload: {
+            modalType, inputType, elmIdx
+        }
+    });
 }

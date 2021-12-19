@@ -19,6 +19,7 @@ import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 import { apiReducerTypes, updateSections } from '../apiReduxStore/types';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { LEVELS } from '../../helpers/structs/calendar.config';
+import moment from 'moment';
 
 const { SUBJECT_MODAL, USER_MESSAGES_MODAL, HELPERS_LINKS_MODAL, CALENDAR_MODAL } = allModals;
 const { EDIT_ELEMENT } = allModalsActions;
@@ -113,13 +114,24 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiReducerObjectKey: CALENDAR,
         updateApiParam: UP_CALENDAR,
         modalInputFields: {
-            date: '',
-            items: [],
+            date: moment().format('yyyy-MM-DD'),
+            items: [
+                {
+                    start: '',
+                    message: '',
+                    importantLevel: LEVELS.LOW,
+                }
+            ],
         },
         modalInputErrorsFields: {
             initialFields: true,
             date: false,
-            items: [],
+            items: [
+                {
+                    start: false,
+                    message: false,
+                }
+            ],
         }
     }
 };

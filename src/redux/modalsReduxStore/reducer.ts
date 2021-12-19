@@ -79,20 +79,66 @@ const modalsReducer = (state = modalsInitialState, action: any) => {
             const { modalType } = action.payload;
             const newSelectedModalState = state[modalType];
             Object.keys(newSelectedModalState.modalInputFields!).forEach(input => {
-                if (input !== allModalsInputs.ICON) {
+                if (input !== allModalsInputs.ICON && input !== allModalsInputs.ITEMS) {
                     newSelectedModalState.modalInputFields![input] = '';
-                } else {
+                } else if (input === allModalsInputs.ICON) {
                     newSelectedModalState.modalInputFields![input] = START_ICON;
+                } else {
+                    newSelectedModalState.modalInputFields![input].length = 1;
                 }
             });
             Object.keys(newSelectedModalState.modalInputErrorsFields!).forEach(errInput => {
                 if (errInput !== 'initialFields') {
-                    newSelectedModalState.modalInputErrorsFields![errInput] = false;
+                    if (errInput !== allModalsInputs.ITEMS) {
+                        newSelectedModalState.modalInputErrorsFields![errInput] = false;
+                    } else {
+                        newSelectedModalState.modalInputErrorsFields![errInput].length = 1;
+                    }
                 } else {
                     newSelectedModalState.modalInputErrorsFields![errInput] = true;
                 }
             });
             return { ...state, [modalType]: newSelectedModalState };
+        }
+
+        case modalsTypes.ADD_ELEMENT_INTO_ARRAY: {
+            const { modalType, inputType, elementToAdd, errorElements } = action.payload;
+            if (errorElements) {
+                return {
+                    ...state, [modalType]: {
+                        ...state[modalType], modalInputFields: {
+                            ...state[modalType].modalInputFields,
+                            [inputType]: [ ...state[modalType].modalInputFields![inputType], elementToAdd ]
+                        }, modalInputErrorsFields: {
+                            ...state[modalType].modalInputErrorsFields,
+                            [inputType]: [ ...state[modalType].modalInputErrorsFields![inputType], errorElements ]
+                        }
+                    }
+                };
+            }
+            return {
+                ...state, [modalType]: {
+                    ...state[modalType], modalInputFields: {
+                        [inputType]: [ ...state.modalInputFields[inputType], elementToAdd ]
+                    }
+                }
+            };
+        }
+
+        case modalsTypes.REMOVE_ELEMENT_FROM_ARRAY: {
+            const { modalType, inputType, elmIdx } = action.payload;
+            const modal = state[modalType];
+            const findAllWithoutSearch = modal.modalInputFields![inputType].filter((_: any, idx: number) => idx !== elmIdx);
+            const findAllErrWithoutSearch = modal.modalInputErrorsFields![inputType].filter((_: any, idx: number) => idx !== elmIdx);
+            return {
+                ...state, [modalType]: {
+                    ...state[modalType], modalInputFields: {
+                        ...state[modalType].modalInputFields, [inputType]: findAllWithoutSearch
+                    }, modalInputErrorsFields: {
+                        ...state[modalType].modalInputErrorsFields, [inputType]: findAllErrWithoutSearch
+                    }
+                }
+            };
         }
 
         default: {

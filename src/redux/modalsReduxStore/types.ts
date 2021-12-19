@@ -17,6 +17,8 @@ export enum modalsTypes {
     CHANGE_MODAL_SELECTED_INPUT = 'CHANGE_MODAL_SELECTED_INPUT',
     CLEAR_ALL_SINGLE_MODAL_INPUTS = 'CLEAR_ALL_SINGLE_MODAL_INPUTS',
     CHECK_ALL_INPUTS_ERR = 'CHECK_ALL_INPUTS_ERR',
+    ADD_ELEMENT_INTO_ARRAY = 'ADD_ELEMENT_INTO_ARRAY',
+    REMOVE_ELEMENT_FROM_ARRAY = 'REMOVE_ELEMENT_FROM_ARRAY',
 }
 
 export enum allModals {
@@ -37,4 +39,6 @@ export enum allModalsInputs {
     TITLE = 'title',
     LINK = 'link',
     ICON = 'icon',
+    DATE = 'date',
+    ITEMS = 'items',
 }
