@@ -12,8 +12,10 @@
  * governing permissions and limitations under the license.
  */
 
-import { modalsInitialState, START_ICON } from './initialState';
-import { allModalsActions, allModalsInputs, modalsTypes } from './types';
+import { modalsInitialState } from './initialState';
+
+import { allModalsActions, modalsTypes } from './types';
+import { initialStateForModalsInputs } from './singleInitialStates';
 
 /**
  * The reducer function responsible for managing state for the ReduxModals tree.
@@ -38,101 +40,47 @@ const modalsReducer = (state = modalsInitialState, action: any) => {
         }
 
         case modalsTypes.CHANGE_MODAL_SELECTED_INPUT: {
-            const { modalType: modal, inputType: input, value } = action.payload;
+            const { modalType, inputType, value, valueInput } = action.payload;
             return {
-                ...state, [modal]: {
-                    ...state[modal], modalInputFields: {
-                        ...state[modal].modalInputFields, [input]: value
-                    }, modalInputErrorsFields: {
-                        ...state[modal].modalInputErrorsFields, initialFields: false,
+                ...state, [modalType]: {
+                    ...state[modalType], [valueInput]: {
+                        ...state[modalType][valueInput], [inputType]: value
                     }
                 }
             };
         }
 
         case modalsTypes.CHANGE_MODAL_SELECTED_ARRAY: {
-            const { modalType, arrayType, inputType, arrayIdx, value } = action.payload;
-            const arrayCopy = state[modalType].modalInputFields![arrayType];
+            const { modalType, arrayType, inputType, valueInput, arrayIdx, value } = action.payload;
+            const arrayCopy = state[modalType][valueInput]![arrayType];
             arrayCopy[arrayIdx][inputType] = value;
             return {
                 ...state, [modalType]: {
-                    ...state[modalType], modalInputFields: {
-                        ...state[modalType].modalInputFields, [arrayType]: arrayCopy
+                    ...state[modalType], [valueInput]: {
+                        ...state[modalType][valueInput], [arrayType]: arrayCopy
                     }
-                }
-            };
-        }
-
-        case modalsTypes.CHECK_ALL_INPUTS_ERR: {
-            const { modalType } = action.payload;
-            const modalFieldsState = state[modalType].modalInputFields!;
-            const newModalState = state[modalType].modalInputErrorsFields!;
-            Object.keys(modalFieldsState).forEach(input => {
-                if (input in newModalState && input !== 'initialFields') {
-                    const inputField = modalFieldsState[input];
-                    if (inputField.length < 3 && typeof inputField === 'string') {
-                        newModalState[input] = true;
-                    } else {
-                        if (input === allModalsInputs.LINK && !inputField.includes('https://')) {
-                            newModalState[allModalsInputs.LINK] = true;
-                        } else {
-                            newModalState[input] = false;
-                        }
-                    }
-                }
-            });
-            return {
-                ...state, [modalType]: {
-                    ...state[modalType], modalInputErrorsFields: newModalState
                 }
             };
         }
 
         case modalsTypes.CLEAR_ALL_SINGLE_MODAL_INPUTS: {
             const { modalType } = action.payload;
-            const newSelectedModalState = state[modalType];
-            Object.keys(newSelectedModalState.modalInputFields!).forEach(input => {
-                if (input !== allModalsInputs.ICON && input !== allModalsInputs.ITEMS) {
-                    newSelectedModalState.modalInputFields![input] = '';
-                } else if (input === allModalsInputs.ICON) {
-                    newSelectedModalState.modalInputFields![input] = START_ICON;
-                } else {
-                    newSelectedModalState.modalInputFields![input].length = 1;
+            const copyInitialState = JSON.parse(JSON.stringify(initialStateForModalsInputs[modalType]));
+            return {
+                ...state, [modalType]: { ...state[modalType],
+                    modalInputFields: copyInitialState.normal,
+                    modalInputErrorsFields: copyInitialState.errors,
                 }
-            });
-            Object.keys(newSelectedModalState.modalInputErrorsFields!).forEach(errInput => {
-                if (errInput !== 'initialFields') {
-                    if (errInput !== allModalsInputs.ITEMS) {
-                        newSelectedModalState.modalInputErrorsFields![errInput] = false;
-                    } else {
-                        newSelectedModalState.modalInputErrorsFields![errInput].length = 1;
-                    }
-                } else {
-                    newSelectedModalState.modalInputErrorsFields![errInput] = true;
-                }
-            });
-            return { ...state, [modalType]: newSelectedModalState };
+            };
         }
 
         case modalsTypes.ADD_ELEMENT_INTO_ARRAY: {
-            const { modalType, inputType, elementToAdd, errorElements } = action.payload;
-            if (errorElements) {
-                return {
-                    ...state, [modalType]: {
-                        ...state[modalType], modalInputFields: {
-                            ...state[modalType].modalInputFields,
-                            [inputType]: [ ...state[modalType].modalInputFields![inputType], elementToAdd ]
-                        }, modalInputErrorsFields: {
-                            ...state[modalType].modalInputErrorsFields,
-                            [inputType]: [ ...state[modalType].modalInputErrorsFields![inputType], errorElements ]
-                        }
-                    }
-                };
-            }
+            const { modalType, inputType, elementToAdd, valueInput } = action.payload;
             return {
                 ...state, [modalType]: {
-                    ...state[modalType], modalInputFields: {
-                        [inputType]: [ ...state.modalInputFields[inputType], elementToAdd ]
+                    ...state[modalType], [valueInput]: {
+                        ...state[modalType][valueInput],
+                        [inputType]: [ ...state[modalType][valueInput]![inputType], elementToAdd ]
                     }
                 }
             };
@@ -141,14 +89,14 @@ const modalsReducer = (state = modalsInitialState, action: any) => {
         case modalsTypes.REMOVE_ELEMENT_FROM_ARRAY: {
             const { modalType, inputType, elmIdx } = action.payload;
             const modal = state[modalType];
-            const findAllWithoutSearch = modal.modalInputFields![inputType].filter((_: any, idx: number) => idx !== elmIdx);
-            const findAllErrWithoutSearch = modal.modalInputErrorsFields![inputType].filter((_: any, idx: number) => idx !== elmIdx);
+            const matchNormal = modal.modalInputFields![inputType].filter((_: any, idx: number) => idx !== elmIdx);
+            const matchErrors = modal.modalInputErrorsFields![inputType].filter((_: any, idx: number) => idx !== elmIdx);
             return {
                 ...state, [modalType]: {
                     ...state[modalType], modalInputFields: {
-                        ...state[modalType].modalInputFields, [inputType]: findAllWithoutSearch
+                        ...state[modalType].modalInputFields, [inputType]: matchNormal
                     }, modalInputErrorsFields: {
-                        ...state[modalType].modalInputErrorsFields, [inputType]: findAllErrWithoutSearch
+                        ...state[modalType].modalInputErrorsFields, [inputType]: matchErrors
                     }
                 }
             };

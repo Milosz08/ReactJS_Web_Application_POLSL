@@ -17,9 +17,8 @@ import { allModals, allModalsActions } from './types';
 import ROUTING_PATH_NAMES from '../../helpers/structs/routingPathNames';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 import { apiReducerTypes, updateSections } from '../apiReduxStore/types';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { LEVELS } from '../../helpers/structs/calendar.config';
-import moment from 'moment';
+import { initialStateForModalsInputs } from './singleInitialStates';
 
 const { SUBJECT_MODAL, USER_MESSAGES_MODAL, HELPERS_LINKS_MODAL, CALENDAR_MODAL } = allModals;
 const { EDIT_ELEMENT } = allModalsActions;
@@ -28,8 +27,6 @@ const { SUBJECT_CMS_PAGE, USERS_MESS_CMS_PAGE, HELPS_CMS_PAGE, CALENDAR_CMS_PAGE
 const { SUBJECTS_ELMS, FOOTER_FORM, HELPERS_LINKS, CALENDAR_RECORDS } = API_ENDPOINTS;
 const { USER_MESSAGES, SUBJECTS, CALENDAR, HELPERS_LINKS: HELPERS } = apiReducerTypes;
 const { SUBJECTS: UP_SUBJECTS, CALENDAR: UP_CALENDAR, USER_MESS: UP_USER_MESS, HELPERS: UP_HELPS } = updateSections;
-
-export const START_ICON: IconProp | any = 'FaBorderNone';
 
 interface ModalParametersProvider {
     ifOpen: boolean;
@@ -59,6 +56,8 @@ export interface CalendarSingleItem {
     importantLevel: LEVELS
 }
 
+const copyInitialState = JSON.parse(JSON.stringify(initialStateForModalsInputs));
+
 export const modalsInitialState: ModalsInitialTypes = {
     [SUBJECT_MODAL]: {
         ifOpen: false,
@@ -70,6 +69,8 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: SUBJECTS_ELMS,
         apiReducerObjectKey: SUBJECTS,
         updateApiParam: UP_SUBJECTS,
+        modalInputFields: copyInitialState[CALENDAR_MODAL].normal,
+        modalInputErrorsFields: copyInitialState[CALENDAR_MODAL].errors,
     },
     [USER_MESSAGES_MODAL]: {
         ifOpen: false,
@@ -81,6 +82,8 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: FOOTER_FORM,
         apiReducerObjectKey: USER_MESSAGES,
         updateApiParam: UP_USER_MESS,
+        modalInputFields: copyInitialState[CALENDAR_MODAL].normal,
+        modalInputErrorsFields: copyInitialState[CALENDAR_MODAL].errors,
     },
     [HELPERS_LINKS_MODAL]: {
         ifOpen: false,
@@ -92,16 +95,8 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: HELPERS_LINKS,
         apiReducerObjectKey: HELPERS,
         updateApiParam: UP_HELPS,
-        modalInputFields: {
-            title: '',
-            icon: START_ICON,
-            link: '',
-        },
-        modalInputErrorsFields: {
-            initialFields: true,
-            title: false,
-            link: false,
-        }
+        modalInputFields: copyInitialState[HELPERS_LINKS_MODAL].normal,
+        modalInputErrorsFields: copyInitialState[HELPERS_LINKS_MODAL].errors,
     },
     [CALENDAR_MODAL]: {
         ifOpen: false,
@@ -113,25 +108,7 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: CALENDAR_RECORDS,
         apiReducerObjectKey: CALENDAR,
         updateApiParam: UP_CALENDAR,
-        modalInputFields: {
-            date: moment().format('yyyy-MM-DD'),
-            items: [
-                {
-                    start: '',
-                    message: '',
-                    importantLevel: LEVELS.LOW,
-                }
-            ],
-        },
-        modalInputErrorsFields: {
-            initialFields: true,
-            date: false,
-            items: [
-                {
-                    start: false,
-                    message: false,
-                }
-            ],
-        }
+        modalInputFields: copyInitialState[CALENDAR_MODAL].normal,
+        modalInputErrorsFields: copyInitialState[CALENDAR_MODAL].errors,
     }
 };

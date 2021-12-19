@@ -17,7 +17,6 @@ export enum modalsTypes {
     CHANGE_MODAL_SELECTED_INPUT = 'CHANGE_MODAL_SELECTED_INPUT',
     CHANGE_MODAL_SELECTED_ARRAY = 'CHANGE_MODAL_SELECTED_ARRAY',
     CLEAR_ALL_SINGLE_MODAL_INPUTS = 'CLEAR_ALL_SINGLE_MODAL_INPUTS',
-    CHECK_ALL_INPUTS_ERR = 'CHECK_ALL_INPUTS_ERR',
     ADD_ELEMENT_INTO_ARRAY = 'ADD_ELEMENT_INTO_ARRAY',
     REMOVE_ELEMENT_FROM_ARRAY = 'REMOVE_ELEMENT_FROM_ARRAY',
 }
@@ -45,4 +44,9 @@ export enum allModalsInputs {
     START = 'start',
     LEVEL = 'importantLevel',
     MESSAGE = 'message',
+}
+
+export enum modalInputHeader {
+    NORMAL = 'modalInputFields',
+    ERROR = 'modalInputErrorsFields',
 }

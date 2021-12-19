@@ -13,7 +13,6 @@
  */
 
 import * as React from 'react';
-import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../../redux/reduxStore';
@@ -22,6 +21,7 @@ import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxSto
 import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
 
 import { DateCalendarIcon, DateInputContainer, DateInputElement } from '../CalendarAddEdit.styles';
+import useValidateAddEditCmsModal from '../../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
 
 /**
  * Component responsible for generating date picker input for multiple or
@@ -31,19 +31,19 @@ const CalendarAddEditDateInput: React.FC = (): JSX.Element => {
 
     const { calendarModal }: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
 
-    const [ date, setDate ] = useState<string>(calendarModal.modalInputFields!.date);
+    const { clearSelectedInput } = useValidateAddEditCmsModal(allModals.CALENDAR_MODAL);
     const dispatcher = useDispatch();
 
     const handleDate = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        setDate(target.value);
         dispatcher(ModalsActions.changeModalSelectedInput(allModals.CALENDAR_MODAL, allModalsInputs.DATE, target.value));
+        clearSelectedInput(allModalsInputs.DATE);
     };
 
     return (
         <DateInputContainer>
             <DateInputElement
                 type = 'date'
-                value = {date}
+                value = {calendarModal.modalInputFields!.date}
                 onChange = {handleDate}
                 ifError = {calendarModal.modalInputErrorsFields!.date}
             />

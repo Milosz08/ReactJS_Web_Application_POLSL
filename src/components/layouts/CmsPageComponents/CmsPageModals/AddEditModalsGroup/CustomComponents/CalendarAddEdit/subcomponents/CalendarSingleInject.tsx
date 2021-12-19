@@ -23,8 +23,11 @@ import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxSto
 import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
 
 import {
-    CalendarTextinputArea, CalendarTextinputAreaCharsCounter, CalendarTextinputAreaContainer
+    CalendarTextinputArea,
+    CalendarTextinputAreaCharsCounter,
+    CalendarTextinputAreaContainer
 } from '../CalendarAddEdit.styles';
+import useValidateAddEditCmsModal from '../../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
 
 const UniversalTimeInput = React.lazy(() => import('../../../../../../UniversalTimeInput/UniversalTimeInput'));
 const CalendarSingleInjectRadioButtons = React.lazy(() => import('./CalendarSingleInjectRadioButtons'));
@@ -46,15 +49,18 @@ const CalendarSingleInject: React.FC<PropsProvider> = ({ tileIdx }): JSX.Element
     const selectedItem = calendarModal.modalInputFields!.items[tileIdx];
     const selectedErrFields = calendarModal.modalInputErrorsFields!.items[tileIdx];
 
+    const { clearSelectedArrayInput } = useValidateAddEditCmsModal(allModals.CALENDAR_MODAL);
     const dispatcher = useDispatch();
 
     const handleChangeTime = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+        clearSelectedArrayInput(allModalsInputs.ITEMS, allModalsInputs.START, tileIdx);
         dispatcher(ModalsActions.changeModalSelectedInputArray(
             allModals.CALENDAR_MODAL, allModalsInputs.ITEMS, allModalsInputs.START, tileIdx, target.value
         ));
     };
 
     const handleChangeMessage = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+        clearSelectedArrayInput(allModalsInputs.ITEMS, allModalsInputs.MESSAGE, tileIdx);
         dispatcher(ModalsActions.changeModalSelectedInputArray(
             allModals.CALENDAR_MODAL, allModalsInputs.ITEMS, allModalsInputs.MESSAGE, tileIdx, target.value
         ));
