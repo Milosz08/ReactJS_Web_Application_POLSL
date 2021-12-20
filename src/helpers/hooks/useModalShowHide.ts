@@ -36,10 +36,12 @@ const useModalShowHide = (modalListener: boolean, movePX: number = 30) => {
         const timeline = tl.current;
         if (modal && background && !isMount) {
             if (modalListener) {
+                document.body.style.overflowY = 'hidden';
                 timeline
                     .to(background['current'], { autoAlpha: 1 })
                     .fromTo(modal['current'], { y: movePX }, { autoAlpha: 1, y: 0 });
             } else {
+                document.body.style.overflowY = 'scroll';
                 timeline
                     .to(modal['current'], { autoAlpha: 0, y: Number(`-${movePX}`) })
                     .to(background['current'], { autoAlpha: 0 })
