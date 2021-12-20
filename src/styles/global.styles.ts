@@ -28,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Barlow Semi Condensed', sans-serif;
     }
 
+    body {
+        overflow-x: hidden;
+    }
+    
     body.disable-scroll {
         position: fixed;
         width: 100%;
