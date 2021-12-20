@@ -29,8 +29,8 @@ const useValidateAddEditCmsModal = (modalType: allModals) => {
     const modal: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const selModal = modal[modalType].modalInputFields;
 
-    const { CALENDAR_MODAL } = allModals;
-    const { DATE, ITEMS, START, MESSAGE } = allModalsInputs;
+    const { CALENDAR_MODAL, HELPERS_LINKS_MODAL } = allModals;
+    const { DATE, ITEMS, START, MESSAGE, TITLE, LINK } = allModalsInputs;
     const { ERROR } = modalInputHeader;
 
     const dispatcher = useDispatch();
@@ -52,23 +52,39 @@ const useValidateAddEditCmsModal = (modalType: allModals) => {
 
     const validateReducer = () => {
         switch(modalType) {
-            case allModals.CALENDAR_MODAL:
+
+            case allModals.HELPERS_LINKS_MODAL: {
                 let nonValid = false;
-                if(selModal!.date.length === 0) {
+                if(selModal!.title.length < 3) {
+                    dispatcher(changeModalSelectedInput(HELPERS_LINKS_MODAL, TITLE, true, ERROR));
+                    nonValid = true;
+                }
+                if(selModal!.link.length < 5 || !selModal!.link.toLowerCase().includes('https://')) {
+                    dispatcher(changeModalSelectedInput(HELPERS_LINKS_MODAL, LINK, true, ERROR));
+                    nonValid = true;
+                }
+                return nonValid;
+            }
+
+            case allModals.CALENDAR_MODAL: {
+                let nonValid = false;
+                if (selModal!.date.length === 0) {
                     dispatcher(changeModalSelectedInput(CALENDAR_MODAL, DATE, true, ERROR));
                     nonValid = true;
                 }
                 selModal!.items.forEach((item: any, idx: number) => {
-                    if(item.start.length === 0) {
+                    if (item.start.length === 0) {
                         dispatcher(changeModalSelectedInputArray(CALENDAR_MODAL, ITEMS, START, idx, true, ERROR));
                         nonValid = true;
                     }
-                    if(item.message.length === 0) {
+                    if (item.message.length === 0) {
                         dispatcher(changeModalSelectedInputArray(CALENDAR_MODAL, ITEMS, MESSAGE, idx, true, ERROR));
                         nonValid = true;
                     }
                 });
                 return nonValid;
+            }
+
         }
     };
 
