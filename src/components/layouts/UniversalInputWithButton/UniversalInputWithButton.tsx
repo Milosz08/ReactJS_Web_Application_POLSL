@@ -15,6 +15,8 @@
 import * as React from 'react';
 import { FaRegTrashAlt } from 'react-icons/all';
 
+import useValidateAddEditCmsModal from '../../../helpers/hooks/useValidateAddEditCmsModal';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reduxStore';
 import { ModalsActions } from '../../../redux/modalsReduxStore/actions';
@@ -50,6 +52,7 @@ const UniversalInputWithButton: React.FC<PropsProvider> = ({
     placeholder, modalType, inputType, CustomIcon, CustomContent, inputMaxLength
 }): JSX.Element => {
 
+    const { clearSelectedInput } = useValidateAddEditCmsModal(modalType);
     const dispatcher = useDispatch();
 
     const initialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
@@ -58,7 +61,9 @@ const UniversalInputWithButton: React.FC<PropsProvider> = ({
     const errorField = initialState[modalType].modalInputErrorsFields![inputType];
 
     const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-        dispatcher(ModalsActions.changeModalSelectedInput(modalType, inputType, target.value));
+        const modifiedInput = target.value.replaceAll(' ', '').toLowerCase();
+        dispatcher(ModalsActions.changeModalSelectedInput(modalType, inputType, modifiedInput));
+        clearSelectedInput(inputType);
     };
 
     const handleClearInput = () => {
