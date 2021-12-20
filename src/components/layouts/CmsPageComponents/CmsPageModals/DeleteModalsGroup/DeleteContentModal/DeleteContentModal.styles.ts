@@ -13,7 +13,7 @@
  */
 
 import styled from 'styled-components';
-import { DefaultButton, ModalBackground, ModalContainer } from '../../../../../../styles/mixins.styles';
+import { DefaultButton, ModalBackground, ModalContainer, ModalScrollWrapper } from '../../../../../../styles/mixins.styles';
 import { BsArrowRight, BsTrash } from 'react-icons/all';
 import { button_rs } from '../../../../../../styles/reset.styles';
 
@@ -23,11 +23,10 @@ export const DeleteContentModalContainer = styled.section`
 
 export const DeleteContentModalWrapper = styled.div`
     ${ModalContainer({ _width: 1000 })};
-    padding: 40px 40px 20px;
-    @media only screen and (max-width: 1030px) {
-        margin: 0 20px 20px;
-        padding: 30px;
-    }
+`;
+
+export const DeleteModalScrollWrapper = styled.div`
+    ${ModalScrollWrapper({ _width: 1000 })};
 `;
 
 export const DeleteContentIconsContainer = styled.div`
@@ -35,6 +34,7 @@ export const DeleteContentIconsContainer = styled.div`
     justify-content: center;
     font-size: 4.5rem;
     color: var(--darkGrayTint1);
+    margin-top: 20px;
 `;
 
 export const DeleteContentIconsTrash = styled(BsTrash)`
@@ -71,18 +71,29 @@ export const DeleteContentButtonsContainer = styled('div')<{ ifExtraMargin?: boo
     justify-content: space-around;
     margin: 40px auto ${({ ifExtraMargin }) => ifExtraMargin ? '30px' : 0};
     width: 80%;
+    @media only screen and (max-width: 677px) {
+        width: 100%;
+        margin: 0;
+    }
 `;
 
 export const NotDeleteContentButton = styled(button_rs)`
     ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 400, _ifEmpty: false })};
     width: 300px;
     margin-bottom: 20px;
+    @media only screen and (max-width: 677px) {
+        width: 100%;
+    }
 `;
 
 export const DeleteContentButton = styled(button_rs)`
     ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 500, _ifEmpty: true })};
     width: 300px;
     margin-bottom: 20px;
+    @media only screen and (max-width: 677px) {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 `;
 
 export const CustomContentContainer = styled.div`
@@ -94,6 +105,7 @@ export const CustomContentContainer = styled.div`
 export const CustomContentAsideText = styled.p`
     font-size: 1.2rem;
     color: var(--darkGrayTint1);
+    text-align: center;
 `;
 
 export const CustomContentRemoveElementTitle = styled.h3`
@@ -102,6 +114,9 @@ export const CustomContentRemoveElementTitle = styled.h3`
     color: var(--navyBlueColor);
     font-weight: 500;
     margin: 10px 0;
+    @media only screen and (max-width: 677px) {
+        margin-bottom: 40px;
+    }
 `;
 
 export const CustomContentRemoveElementContent = styled.p`
@@ -113,6 +128,9 @@ export const CustomContentRemoveElementContent = styled.p`
     overflow-wrap: break-word;
     margin: 10px 0;
     width: 100%;
+    @media only screen and (max-width: 677px) {
+        margin-bottom: 40px;
+    }
 `;
 
 export const DeleteMultipleCalendarElementsContainer = styled.div`
@@ -121,6 +139,9 @@ export const DeleteMultipleCalendarElementsContainer = styled.div`
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 20px;
+    @media only screen and (max-width: 677px) {
+        margin-bottom: 50px;
+    }
 `;
 
 export const DeleteSingleCalendarElement = styled('div')<{ colorCSS: string }>`
@@ -135,6 +156,10 @@ export const DeleteSingleCalendarElement = styled('div')<{ colorCSS: string }>`
     margin: 40px 30px 0;
     max-width: 500px;
     width: 100%;
+    @media only screen and (max-width: 677px) {
+        flex-basis: 100%;
+        margin-top: 40px;
+    }
 `;
 
 export const DeleteSingleCalendarDateElement = styled('div')<{ colorCSS: string }>`
@@ -151,6 +176,10 @@ export const DeleteSingleCalendarDateElement = styled('div')<{ colorCSS: string 
     color: var(--cleanWhiteColor);
     font-weight: 400;
     font-size: 1.1rem;
+    @media only screen and (max-width: 677px) {
+        font-size: .9rem;
+        padding: 4px 10px 5px;
+    }
 `;
 
 export const DeleteUserMessagesNotReadableIndicator = styled('strong')<{ colorCSS: string }>`

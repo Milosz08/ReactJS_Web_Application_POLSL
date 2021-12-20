@@ -16,7 +16,7 @@ import styled from 'styled-components';
 import { button_rs } from '../../../styles/reset.styles';
 
 export const UniversalHeaderContainer = styled.header`
-    width: 100%;
+    width: calc(100% - 10px);
     margin: 30px 0;
     @media only screen and (max-width: 1250px) {
         width: 100%;

@@ -15,6 +15,7 @@
 import * as React from 'react';
 
 import { MAX_MESSAGE_LENGTH } from '../../../../../../../../helpers/structs/calendar.config';
+import useValidateAddEditCmsModal from '../../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../../redux/reduxStore';
@@ -23,11 +24,8 @@ import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxSto
 import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
 
 import {
-    CalendarTextinputArea,
-    CalendarTextinputAreaCharsCounter,
-    CalendarTextinputAreaContainer
+    CalendarModalTimeInputWrapper, CalendarTextinputArea, CalendarTextinputAreaCharsCounter, CalendarTextinputAreaContainer
 } from '../CalendarAddEdit.styles';
-import useValidateAddEditCmsModal from '../../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
 
 const UniversalTimeInput = React.lazy(() => import('../../../../../../UniversalTimeInput/UniversalTimeInput'));
 const CalendarSingleInjectRadioButtons = React.lazy(() => import('./CalendarSingleInjectRadioButtons'));
@@ -68,11 +66,13 @@ const CalendarSingleInject: React.FC<PropsProvider> = ({ tileIdx }): JSX.Element
 
     return (
         <>
-            <UniversalTimeInput
-                timeValue = {selectedItem.start}
-                changeCallback = {handleChangeTime}
-                ifError = {selectedErrFields.start}
-            />
+            <CalendarModalTimeInputWrapper>
+                <UniversalTimeInput
+                    timeValue = {selectedItem.start}
+                    changeCallback = {handleChangeTime}
+                    ifError = {selectedErrFields.start}
+                />
+            </CalendarModalTimeInputWrapper>
             <CalendarSingleInjectRadioButtons
                 itemIdx = {tileIdx}
             />

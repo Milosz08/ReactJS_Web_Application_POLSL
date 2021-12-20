@@ -15,14 +15,16 @@
 import * as React from 'react';
 
 import useModalShowHide from '../../../../../../helpers/hooks/useModalShowHide';
+import { IconFamiliesType } from '../../../../../../helpers/componentsAndMiddleware/IconComponent';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../redux/reduxStore';
 import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/initialState';
 import { allModals, allModalsActions } from '../../../../../../redux/modalsReduxStore/types';
 
-import { AddEditContentModalContainer, AddEditContentModalWrapper } from './AddEditContentModal.styles';
-import { IconFamiliesType } from '../../../../../../helpers/componentsAndMiddleware/IconComponent';
+import {
+    AddEditContentModalContainer, AddEditContentModalWrapper, AddEditModalScrollWrapper
+} from './AddEditContentModal.styles';
 
 const UniversalHeader = React.lazy(() => import('../../../../UniversalHeader/UniversalHeader'));
 const AddEditContentModalButtons = React.lazy(() => import('./subcomponents/AddEditContentModalButtons'));
@@ -55,21 +57,23 @@ const AddEditContentModal: React.FC<PropsProvider> = ({ modalType, RenderCustomC
             <AddEditContentModalWrapper
                 ref = {modal}
             >
-                <UniversalHeader
-                    iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaFileSignature' }}
-                    ifCloseButtonVisible = {false}
-                    content = {`${currentModeIsAdd ? 'Dodaj' : 'Modyfikuj'} ${modalObject.titleContent}`}
-                    changeIconSize = '.8em'
-                />
-                <RenderCustomComponent
-                    modalData = {modalObject}
-                />
-                <AddEditContentModalButtons
-                    modalType = {modalType}
-                    title = {modalObject.pageTitle}
-                    mode = {modalObject.action}
-                    id = {modalObject.dataID}
-                />
+                <AddEditModalScrollWrapper>
+                    <UniversalHeader
+                        iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaFileSignature' }}
+                        ifCloseButtonVisible = {false}
+                        content = {`${currentModeIsAdd ? 'Dodaj' : 'Modyfikuj'} ${modalObject.titleContent}`}
+                        changeIconSize = '.8em'
+                    />
+                    <RenderCustomComponent
+                        modalData = {modalObject}
+                    />
+                    <AddEditContentModalButtons
+                        modalType = {modalType}
+                        title = {modalObject.pageTitle}
+                        mode = {modalObject.action}
+                        id = {modalObject.dataID}
+                    />
+                </AddEditModalScrollWrapper>
             </AddEditContentModalWrapper>
         </AddEditContentModalContainer>
     );

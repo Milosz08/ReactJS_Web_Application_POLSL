@@ -19,6 +19,10 @@ import { ImFilesEmpty } from 'react-icons/all';
 export const CmsPageContainer = styled.section`
     width: calc(100% - 60px);
     margin: 0 30px;
+    @media only screen and (max-width: 500px) {
+        width: 100%;
+        margin: 0;
+    }
 `;
 
 export const CmsListHeaderContainer = styled.header`
@@ -49,18 +53,25 @@ export const CmsUnorderedListElement = styled.li`
 export const CmsIdElement = styled('div')<{ ifNotHeader?: boolean }>`
     color: var(${({ ifNotHeader }) => ifNotHeader ? '--darkGrayTint1' : 'inherit'});
     flex-basis: 60px;
+    @media only screen and (max-width: 500px) {
+        flex-basis: 30px;
+    }
 `;
 
-export const CmsSingleListNormalElement = styled('div')<{ flexBasis?: string, colorCSS?: string }>`
+export const CmsSingleListNormalElement = styled('div')<{ flexBasis?: string, colorCSS?: string, ifNotVisible?: boolean }>`
     color: var(${({ colorCSS }) => colorCSS ? `--${colorCSS}Color` : 'inherit'});
     flex-basis: ${({ flexBasis }) => flexBasis ? flexBasis : 'none'};
     flex-grow: ${({ flexBasis }) => flexBasis ? 'none' : 1};
+    display: ${({ ifNotVisible }) => ifNotVisible ? 'none' : 'block'};
 `;
 
 export const CmsSingleListButtonsContainer = styled.div`
     display: flex;
     justify-content: space-around;
     flex-basis: 100px;
+    @media only screen and (max-width: 500px) {
+        flex-basis: 70px;
+    }
 `;
 
 export const CmsSingleListActionButton = styled(button_rs)`

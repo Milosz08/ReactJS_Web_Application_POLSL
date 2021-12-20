@@ -20,6 +20,7 @@ import { FooterFormTypes } from '../../../../../../redux/apiReduxStore/dataTypes
 import {
     CmsIdElement, CmsSingleListNormalElement, CmsUnorderedListElement
 } from '../../HighOrderComponents/HighOrderComponents.styles';
+import useResizeListener from '../../../../../../helpers/hooks/useResizeListener';
 
 const SingleElementButtons = React.lazy(() => import('../../HighOrderComponents/SingleElementButtons'));
 
@@ -34,29 +35,39 @@ interface PropsProvider {
  * @param element { FooterFormTypes } - object represent single row.
  * @param index { number } - row index.
  */
-const MessageManagementSingleListElement: React.FC<PropsProvider> = ({ element, index }): JSX.Element => (
-    <CmsUnorderedListElement>
-        <CmsIdElement ifNotHeader = {true}>
-            {index + 1}
-        </CmsIdElement>
-        <CmsSingleListNormalElement flexBasis = '250px'>
-            {element.userIdentity}
-        </CmsSingleListNormalElement>
-        <CmsSingleListNormalElement>
-            {element.userChoice}
-        </CmsSingleListNormalElement>
-        <CmsSingleListNormalElement
-            flexBasis = '310px'
-            colorCSS = {element.ifClicked ? 'green' : 'red'}
-        >
-            {element.ifClicked ? 'odczytana' : 'nieodczytana'}
-        </CmsSingleListNormalElement>
-        <SingleElementButtons
-            dataID = {element._id}
-            modalTypeEnum = {allModals.USER_MESSAGES_MODAL}
-            ifViewmodeActive = {true}
-        />
-    </CmsUnorderedListElement>
-);
+const MessageManagementSingleListElement: React.FC<PropsProvider> = ({ element, index }): JSX.Element => {
+
+    const width = useResizeListener();
+
+    return (
+        <CmsUnorderedListElement>
+            <CmsIdElement ifNotHeader = {true}>
+                {index + 1}
+            </CmsIdElement>
+            <CmsSingleListNormalElement
+                flexBasis = {width < 680 ? false : '250px'}
+            >
+                {element.userIdentity}
+            </CmsSingleListNormalElement>
+            <CmsSingleListNormalElement
+                ifNotVisible = {width < 680}
+            >
+                {element.userChoice}
+            </CmsSingleListNormalElement>
+            <CmsSingleListNormalElement
+                flexBasis = '310px'
+                colorCSS = {element.ifClicked ? 'green' : 'red'}
+                ifNotVisible = {width < 1080}
+            >
+                {element.ifClicked ? 'odczytana' : 'nieodczytana'}
+            </CmsSingleListNormalElement>
+            <SingleElementButtons
+                dataID = {element._id}
+                modalTypeEnum = {allModals.USER_MESSAGES_MODAL}
+                ifViewmodeActive = {true}
+            />
+        </CmsUnorderedListElement>
+    );
+};
 
 export default MessageManagementSingleListElement;

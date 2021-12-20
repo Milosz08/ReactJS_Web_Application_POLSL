@@ -22,6 +22,8 @@ import { ModalsActions } from '../../../../../../../../redux/modalsReduxStore/ac
 import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxStore/initialState';
 import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
 
+import { CalendarModalRadioInputsWrapper } from '../CalendarAddEdit.styles';
+
 const UniversalRadioInput = React.lazy(() => import('../../../../../../UniversalRadioInput/UniversalRadioInput'));
 
 interface PropsProvider {
@@ -61,9 +63,9 @@ const CalendarSingleInjectRadioButtons: React.FC<PropsProvider> = ({ itemIdx }):
     ));
 
     return (
-        <>
+        <CalendarModalRadioInputsWrapper>
             {generateRadioButtons}
-        </>
+        </CalendarModalRadioInputsWrapper>
     );
 };
 

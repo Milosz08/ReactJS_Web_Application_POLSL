@@ -63,3 +63,23 @@ export const CalendarTextinputAreaCharsCounter = styled.div`
     bottom: 12px;
     color: var(--darkGrayTint2);
 `;
+
+export const CalendarModalTimeInputWrapper = styled.div`
+    @media only screen and (max-width: 1200px) {
+        flex-basis: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+`;
+
+export const CalendarModalRadioInputsWrapper = styled.div`
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    @media only screen and (max-width: 428px) {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-left: 20px;
+    }
+`;

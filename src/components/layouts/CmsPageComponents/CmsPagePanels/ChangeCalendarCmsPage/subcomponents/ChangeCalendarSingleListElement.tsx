@@ -17,6 +17,7 @@ import * as React from 'react';
 import { LEVELS } from '../../../../../../helpers/structs/calendar.config';
 import generateID from '../../../../../../helpers/functionsAndClasses/generateID';
 import ConvertTimeUTC from '../../../../../../helpers/functionsAndClasses/convertTimeUTC';
+import useResizeListener from '../../../../../../helpers/hooks/useResizeListener';
 
 import { allModals } from '../../../../../../redux/modalsReduxStore/types';
 import { CalendarContentTypes } from '../../../../../../redux/apiReduxStore/dataTypes';
@@ -41,7 +42,11 @@ interface PropsProvider {
  */
 const ChangeCalendarSingleListElement: React.FC<PropsProvider> = ({ element, index }): JSX.Element => {
 
+    const width = useResizeListener();
     const { LOW, MEDIUM } = LEVELS;
+
+    const generateTime = width < 880
+        ? `/${element.month}/` : ` ${ConvertTimeUTC.getMonthPolishNameParam(element.month - 1).toLowerCase()} `;
 
     const generateColorCalendarDots = element.items.map(item => (
         <ChangeCalendarSingleColorDotElement
@@ -57,12 +62,18 @@ const ChangeCalendarSingleListElement: React.FC<PropsProvider> = ({ element, ind
                     {index + 1}
                 </CmsIdElement>
                 <CmsSingleListNormalElement>
-                    {element.day} {ConvertTimeUTC.getMonthPolishNameParam(element.month - 1).toLowerCase()} {element.year}
+                    {element.day}{generateTime}{element.year}
                 </CmsSingleListNormalElement>
-                <CmsSingleListNormalElement flexBasis = '210px'>
+                <CmsSingleListNormalElement
+                    flexBasis = '210px'
+                    ifNotVisible = {width < 1080}
+                >
                     {element.items.length}
                 </CmsSingleListNormalElement>
-                <CmsSingleListNormalElement flexBasis = '360px'>
+                <CmsSingleListNormalElement
+                    flexBasis = {width < 880 ? '60px' :'360px'}
+                    ifNotVisible = {width < 880}
+                >
                     <ChangeCalendarDotsContainer>
                         {generateColorCalendarDots}
                     </ChangeCalendarDotsContainer>

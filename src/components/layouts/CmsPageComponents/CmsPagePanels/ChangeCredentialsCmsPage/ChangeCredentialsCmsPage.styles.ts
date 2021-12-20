@@ -71,6 +71,7 @@ export const ChangeCredentialsCmsFormHeader = styled.h3`
     font-weight: 500;
     color: var(--navyBlueColor);
     margin: 20px 0;
+    text-align: center;
 `;
 
 export const InsertAdmiAuthPasswordParagraph = styled.p`

@@ -17,7 +17,9 @@ import styled from 'styled-components';
 import { button_rs } from '../../../../../../styles/reset.styles';
 import { BsArrowRight, BsEnvelopeOpen } from 'react-icons/all';
 
-import { BorderWithPseudoElement, DefaultButton, ModalBackground, ModalContainer } from '../../../../../../styles/mixins.styles';
+import {
+    BorderWithPseudoElement, DefaultButton, ModalBackground, ModalContainer, ModalScrollWrapper
+} from '../../../../../../styles/mixins.styles';
 
 export const ViewContentModalContainer = styled.section`
     ${ModalBackground({ _width: 1000 })};
@@ -25,11 +27,10 @@ export const ViewContentModalContainer = styled.section`
 
 export const ViewContentModalWrapper = styled.div`
     ${ModalContainer({ _width: 1000 })};
-    padding: 40px;
-    @media only screen and (max-width: 1030px) {
-        margin: 0 20px 20px;
-        padding: 30px;
-    }
+`;
+
+export const ViewModalScrollWrapper = styled.div`
+    ${ModalScrollWrapper({ _width: 1000 })};
 `;
 
 export const ViewContentIconsContainer = styled.div`
@@ -37,6 +38,7 @@ export const ViewContentIconsContainer = styled.div`
     justify-content: center;
     font-size: 4.5rem;
     color: var(--darkGrayTint1);
+    margin-top: 20px;
 `;
 
 export const ViewContentIconsOpenMail = styled(BsEnvelopeOpen)`
@@ -98,11 +100,17 @@ export const ViewContentButtonsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 20px auto 0;
+    margin: 20px auto;
     width: 80%;
 `;
 
 export const CloseModalContentButton = styled(button_rs)`
     ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 400, _ifEmpty: false })};
     width: 300px;
+`;
+
+export const ViewContentCheckboxWrapper = styled.div`
+    @media only screen and (max-width: 677px) {
+        margin-top: 20px;
+    }
 `;

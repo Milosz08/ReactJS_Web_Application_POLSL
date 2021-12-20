@@ -14,7 +14,7 @@
 
 import styled from 'styled-components';
 
-import { DefaultButton, ModalBackground, ModalContainer } from '../../../../../../styles/mixins.styles';
+import { DefaultButton, ModalBackground, ModalContainer, ModalScrollWrapper } from '../../../../../../styles/mixins.styles';
 import { button_rs } from '../../../../../../styles/reset.styles';
 
 export const AddEditContentModalContainer = styled.section`
@@ -23,11 +23,10 @@ export const AddEditContentModalContainer = styled.section`
 
 export const AddEditContentModalWrapper = styled.div`
     ${ModalContainer({ _width: 1200 })};
-    padding: 10px 40px 20px;
-    @media only screen and (max-width: 1230px) {
-        margin: 0 20px 20px;
-        padding: 30px;
-    }
+`;
+
+export const AddEditModalScrollWrapper = styled.div`
+    ${ModalScrollWrapper({ _width: 1200 })};
 `;
 
 export const AddEditContentModalButtonsContainer = styled('div')<{ ifExtraMargin?: boolean }>`
@@ -43,12 +42,19 @@ export const AddEditContentUnsaveChangesButton = styled(button_rs)`
     ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 500, _ifEmpty: true })};
     width: 300px;
     margin-bottom: 20px;
+    @media only screen and (max-width: 677px) {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 `;
 
 export const AddEditContentSaveChangesButton = styled(button_rs)`
     ${DefaultButton({ _fontSize: '1.2rem', _fontWeight: 400, _ifEmpty: false })};
     width: 300px;
     margin-bottom: 20px;
+    @media only screen and (max-width: 677px) {
+        width: 100%;
+    }
 `;
 
 export const AddEditCustomContentContainer = styled.div`

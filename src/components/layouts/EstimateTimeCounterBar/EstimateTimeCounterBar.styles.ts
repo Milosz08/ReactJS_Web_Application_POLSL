@@ -26,6 +26,7 @@ export const EstimateTimeCounterBarContainer = styled('aside')<{ ifActive: boole
     text-align: center;
     display: ${props => props.ifActive ? 'block' : 'none'};
     margin-top: ${props => props.ifActive ? '15px' : 0};
+    margin-bottom: 20px;
 `;
 
 export const EstimateTimeCounterBarLine = styled.span`

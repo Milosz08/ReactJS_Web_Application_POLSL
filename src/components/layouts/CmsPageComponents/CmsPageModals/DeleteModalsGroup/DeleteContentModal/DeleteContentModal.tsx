@@ -22,7 +22,7 @@ import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/ini
 import { allModals, allModalsActions } from '../../../../../../redux/modalsReduxStore/types';
 
 import {
-    DeleteContentDatabaseID, DeleteContentModalContainer, DeleteContentModalWrapper, DeleteContentTitle
+    DeleteContentDatabaseID, DeleteContentModalContainer, DeleteContentModalWrapper, DeleteContentTitle, DeleteModalScrollWrapper
 } from './DeleteContentModal.styles';
 
 const DeleteContentModalIconsComponent = React.lazy(() => import('./subcomponents/DeleteContentModalIconsComponent'));
@@ -57,22 +57,24 @@ const DeleteContentModal: React.FC<PropsProvider> = ({ modalType, pageTitle, Ren
             <DeleteContentModalWrapper
                 ref = {modal}
             >
-                <DeleteContentModalIconsComponent
-                    deleteContentIcon = {modalObject.iconComponent}
-                />
-                <DeleteContentTitle>
-                    Usuwanie zawartości <strong>{modalObject.titleContent}</strong> z bazy danych
-                </DeleteContentTitle>
-                <DeleteContentDatabaseID>
-                    Database identifier: {modalObject.dataID || 'Not Find Database Identifier'}
-                </DeleteContentDatabaseID>
-                <RenderCustomComponent/>
-                <DeleteContentModalButtons
-                    buttonContent = {modalObject.titleContent}
-                    modalType = {modalType}
-                    dataID = {modalObject.dataID}
-                    title = {pageTitle}
-                />
+                <DeleteModalScrollWrapper>
+                    <DeleteContentModalIconsComponent
+                        deleteContentIcon = {modalObject.iconComponent}
+                    />
+                    <DeleteContentTitle>
+                        Usuwanie zawartości <strong>{modalObject.titleContent}</strong> z bazy danych
+                    </DeleteContentTitle>
+                    <DeleteContentDatabaseID>
+                        Database identifier: {modalObject.dataID || 'Not Find Database Identifier'}
+                    </DeleteContentDatabaseID>
+                    <RenderCustomComponent/>
+                    <DeleteContentModalButtons
+                        buttonContent = {modalObject.titleContent}
+                        modalType = {modalType}
+                        dataID = {modalObject.dataID}
+                        title = {pageTitle}
+                    />
+                </DeleteModalScrollWrapper>
             </DeleteContentModalWrapper>
         </DeleteContentModalContainer>
     );

@@ -14,15 +14,17 @@
 
 import * as React from 'react';
 
-import { ViewContentModalContainer, ViewContentModalWrapper } from './ViewContentModal.styles';
+import useModalShowHide from '../../../../../../helpers/hooks/useModalShowHide';
 
-import { allModals, allModalsActions } from '../../../../../../redux/modalsReduxStore/types';
-import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/initialState';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../redux/reduxStore';
-import useModalShowHide from '../../../../../../helpers/hooks/useModalShowHide';
-import ViewContentModalIconsComponent from './subcomponents/ViewContentModalIconsComponent';
-import ViewContentModalButtons from './subcomponents/ViewContentModalButtons';
+import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/initialState';
+import { allModals, allModalsActions } from '../../../../../../redux/modalsReduxStore/types';
+
+import { ViewContentModalContainer, ViewContentModalWrapper, ViewModalScrollWrapper } from './ViewContentModal.styles';
+
+const ViewContentModalIconsComponent = React.lazy(() => import('./subcomponents/ViewContentModalIconsComponent'));
+const ViewContentModalButtons = React.lazy(() => import('./subcomponents/ViewContentModalButtons'));
 
 interface PropsProvider {
     modalType: allModals;
@@ -51,14 +53,16 @@ const ViewContentModal: React.FC<PropsProvider> = ({ modalType, RenderCustomComp
             <ViewContentModalWrapper
                 ref = {modal}
             >
-                <ViewContentModalIconsComponent
-                    viewContentIcon = {modalObject.iconComponent}
-                />
-                <RenderCustomComponent/>
-                <ViewContentModalButtons
-                    modalType = {modalType}
-                    dataID = {modalObject.dataID}
-                />
+                <ViewModalScrollWrapper>
+                    <ViewContentModalIconsComponent
+                        viewContentIcon = {modalObject.iconComponent}
+                    />
+                    <RenderCustomComponent/>
+                    <ViewContentModalButtons
+                        modalType = {modalType}
+                        dataID = {modalObject.dataID}
+                    />
+                </ViewModalScrollWrapper>
             </ViewContentModalWrapper>
         </ViewContentModalContainer>
     );

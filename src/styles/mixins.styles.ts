@@ -59,6 +59,7 @@ export const ModalBackground = ({ _width }: { _width: number }) => css`
     visibility: hidden;
     opacity: 0;
     justify-content: center;
+    align-items: center;
     top: 0;
     left: 0;
     width: 100%;
@@ -72,17 +73,34 @@ export const ModalBackground = ({ _width }: { _width: number }) => css`
 export const ModalContainer = ({ _width }: { _width: number }) => css`
     width: ${`${_width}px`};
     height: fit-content;
+    max-height: 80vh;
     border-radius: 10px;
-    padding: 10px 40px 40px;
-    margin-top: 100px;
     opacity: 0;
     visibility: hidden;
     background-color: var(--cleanWhiteColor);
     box-shadow: var(--boxShadowLight);
     @media only screen and (max-width: ${`${_width + 30}px`}) {
+        margin: 0 10px 20px;
+    }
+`;
+
+export const ModalScrollWrapper = ({ _width }: { _width: number }) => css`
+    width: calc(100% - 50px);
+    margin: 10px 10px 10px 40px;
+    height: fit-content;
+    max-height: calc(80vh - 20px);
+    overflow-y: auto;
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--lightGrayTint4);
+        border-radius: 30px;
+    }
+    @media only screen and (max-width: ${`${_width + 30}px`}) {
+        margin: 10px 10px 10px 30px;
+        padding-right: 20px;
         width: calc(100% - 40px);
-        margin: 0 20px 20px;
-        padding: 10px 30px 20px;
     }
 `;
 

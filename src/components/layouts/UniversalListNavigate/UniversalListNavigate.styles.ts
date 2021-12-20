@@ -25,6 +25,13 @@ export const UniversalListNavigateContainer = styled.nav`
 
 export const UniversalListNavigateSingleElement = styled('div')<{ ifExtraMargin?: boolean }>`
     margin-left: ${({ ifExtraMargin }) => ifExtraMargin ? '40px' : 0};
+    @media only screen and (max-width: 940px) {
+        display: flex;
+        justify-content: flex-end;
+    }
+    @media only screen and (max-width: 602px) {
+        margin: 0 auto;
+    }
 `;
 
 export const UniversalListNavigateButton = styled(button_rs)`
@@ -68,6 +75,16 @@ export const UniversalListNaviagteSelect = styled(select_rs)<{ ifExtraMargin?: b
 export const UniversalListNavigateSortingButton = styled(UniversalListNavigateButton)`
     margin-right: 30px;
     display: flex;
+    @media only screen and (max-width: 940px) {
+        flex-basis: 40%;
+        justify-content: flex-end;
+        margin-right: 0;
+    }
+    @media only screen and (max-width: 602px) {
+        flex-basis: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
 `;
 
 export const UniversalListNavigateSortingIcons = styled.div`
@@ -86,8 +103,23 @@ export const UniversalListNavigateListElementsCounter = styled.div`
         font-weight: 500;
         color: var(--navyBlueColor);
     }
+    @media only screen and (max-width: 940px) {
+        flex-basis: 40%;
+        margin-bottom: 15px;
+    }
+    @media only screen and (max-width: 602px) {
+        display: none;
+    }
 `;
 
 export const UniversalListNavigateArrowsContainer = styled.div`
     display: flex;
+    @media only screen and (max-width: 940px) {
+        flex-basis: 40%;
+    }
+    @media only screen and (max-width: 602px) {
+        flex-basis: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
 `;

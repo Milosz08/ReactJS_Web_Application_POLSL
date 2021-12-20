@@ -15,6 +15,7 @@
 import * as React from 'react';
 import { useContext } from 'react';
 
+import useResizeListener from '../../../../../../helpers/hooks/useResizeListener';
 import { SearchingContext, SearchingTypes } from '../../../../../../context/searchingContext/SearchingProvider';
 
 import {
@@ -28,6 +29,8 @@ const ChangeSubjectsHeader: React.FC = (): JSX.Element => {
 
     const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
 
+    const width = useResizeListener();
+
     return (
         <>
             {filteredState?.length !== 0 && <CmsListHeaderContainer>
@@ -37,10 +40,16 @@ const ChangeSubjectsHeader: React.FC = (): JSX.Element => {
                 <CmsSingleListNormalElement>
                     nazwa przedmiotu
                 </CmsSingleListNormalElement>
-                <CmsSingleListNormalElement flexBasis = '220px'>
+                <CmsSingleListNormalElement
+                    flexBasis = '220px'
+                    ifNotVisible = {width < 1025}
+                >
                     semestry
                 </CmsSingleListNormalElement>
-                <CmsSingleListNormalElement flexBasis = '310px'>
+                <CmsSingleListNormalElement
+                    flexBasis = '310px'
+                    ifNotVisible = {width < 1025}
+                >
                     status
                 </CmsSingleListNormalElement>
             </CmsListHeaderContainer>}

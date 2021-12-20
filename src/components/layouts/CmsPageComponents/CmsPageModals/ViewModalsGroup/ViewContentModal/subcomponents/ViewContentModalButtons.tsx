@@ -21,7 +21,7 @@ import { allModals } from '../../../../../../../redux/modalsReduxStore/types';
 import { ApiInitialTypes } from '../../../../../../../redux/apiReduxStore/initialState';
 import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
 
-import { CloseModalContentButton, ViewContentButtonsContainer } from '../ViewContentModal.styles';
+import { CloseModalContentButton, ViewContentButtonsContainer, ViewContentCheckboxWrapper } from '../ViewContentModal.styles';
 import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
 import { FooterFormTypes } from '../../../../../../../redux/apiReduxStore/dataTypes';
 
@@ -65,13 +65,15 @@ const ViewContentModalButtons: React.FC<PropsProvider> = ({ modalType, dataID })
             >
                 Zamnij okno
             </CloseModalContentButton>
-            <UniversalCheckboxInput
-                changeCheckedCallback = {handleUncheckReadMessage}
-                id = 'confirmViewMessage'
-                ifChecked = {checkboxChecked}
-                labelContent = 'Oznacz wiadomość jako przeczytaną'
-                disabledProp = {formMessage ? formMessage!.ifClicked : true}
-            />
+            <ViewContentCheckboxWrapper>
+                <UniversalCheckboxInput
+                    changeCheckedCallback = {handleUncheckReadMessage}
+                    id = 'confirmViewMessage'
+                    ifChecked = {checkboxChecked}
+                    labelContent = 'Oznacz wiadomość jako przeczytaną'
+                    disabledProp = {formMessage ? formMessage!.ifClicked : true}
+                />
+            </ViewContentCheckboxWrapper>
         </ViewContentButtonsContainer>
     );
 };

@@ -15,6 +15,8 @@
 import * as React from 'react';
 import { useContext } from 'react';
 
+import useResizeListener from '../../../../../../helpers/hooks/useResizeListener';
+
 import { SearchingContext, SearchingTypes } from '../../../../../../context/searchingContext/SearchingProvider';
 
 import {
@@ -28,6 +30,8 @@ const ChangeCalendarHeader: React.FC = (): JSX.Element => {
 
     const { filteredState } = useContext<Partial<SearchingTypes>>(SearchingContext);
 
+    const width = useResizeListener();
+
     return (
         <>
             {filteredState?.length !== 0 && <CmsListHeaderContainer>
@@ -37,10 +41,16 @@ const ChangeCalendarHeader: React.FC = (): JSX.Element => {
                 <CmsSingleListNormalElement>
                     data wpisu/wspisów
                 </CmsSingleListNormalElement>
-                <CmsSingleListNormalElement flexBasis = '210px'>
+                <CmsSingleListNormalElement
+                    flexBasis = '210px'
+                    ifNotVisible = {width < 1080}
+                >
                     ilość wpisów
                 </CmsSingleListNormalElement>
-                <CmsSingleListNormalElement flexBasis = '460px'>
+                <CmsSingleListNormalElement
+                    flexBasis = {width < 880 ? '160px' :'460px'}
+                    ifNotVisible = {width < 880}
+                >
                     ważność wpisu/wpisów
                 </CmsSingleListNormalElement>
             </CmsListHeaderContainer>}

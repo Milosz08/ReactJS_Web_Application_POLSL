@@ -21,6 +21,7 @@ export const UniversalRadioInputContainer = styled.div`
     position: relative;
     display: flex;
     align-items: center;
+    margin-bottom: 5px;
 `;
 
 export const UniversalRadioInputElement = styled(input_rs)<{ sizeCSS: number, colorCSS: string }>`

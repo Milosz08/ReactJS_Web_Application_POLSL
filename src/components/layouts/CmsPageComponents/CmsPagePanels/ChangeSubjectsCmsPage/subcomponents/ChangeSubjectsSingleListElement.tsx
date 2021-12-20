@@ -15,6 +15,7 @@
 import * as React from 'react';
 
 import { AllSemesters } from '../../../../../../helpers/structs/allSemesters';
+import useResizeListener from '../../../../../../helpers/hooks/useResizeListener';
 
 import { allModals } from '../../../../../../redux/modalsReduxStore/types';
 import { SubjectsContentTypes } from '../../../../../../redux/apiReduxStore/dataTypes';
@@ -38,6 +39,8 @@ interface PropsProvider {
  */
 const ChangeSubjectsSingleListElement: React.FC<PropsProvider> = ({ element, index }): JSX.Element => {
 
+    const width = useResizeListener();
+
     const semestersCount = element.semesters.map((semester, idx) => (
         <span key = {semester}>
             {`${idx > 0 ? ', ' : ''}${AllSemesters[semester - 1]}`}
@@ -52,12 +55,16 @@ const ChangeSubjectsSingleListElement: React.FC<PropsProvider> = ({ element, ind
             <CmsSingleListNormalElement>
                 {element.title}
             </CmsSingleListNormalElement>
-            <CmsSingleListNormalElement flexBasis = '220px'>
+            <CmsSingleListNormalElement
+                flexBasis = '220px'
+                ifNotVisible = {width < 1025}
+            >
                 {semestersCount}
             </CmsSingleListNormalElement>
             <CmsSingleListNormalElement
                 flexBasis = '210px'
                 colorCSS = {element.ifEnd ? 'green' : 'red'}
+                ifNotVisible = {width < 1025}
             >
                 {element.ifEnd ? 'zakończony' : 'w trakcie'}
             </CmsSingleListNormalElement>
