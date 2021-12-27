@@ -25,6 +25,9 @@ const IconPickerComponent = React.lazy(() => import('../../../HighOrderComponent
  */
 const HelpersLinksInputs: React.FC = (): JSX.Element => (
     <TitleAndIconContainer>
+        <IconPickerComponent
+            modalType = {allModals.HELPERS_LINKS_MODAL}
+        />
         <HelperSingleLinkModalElement>
             <UniversalInputWithButton
                 modalType = {allModals.HELPERS_LINKS_MODAL}
@@ -33,15 +36,13 @@ const HelpersLinksInputs: React.FC = (): JSX.Element => (
                 placeholder = 'Wyświetlany tytuł linku (min 3 znaki)'
             />
         </HelperSingleLinkModalElement>
-        <IconPickerComponent
-            modalType = {allModals.HELPERS_LINKS_MODAL}
-        />
         <HelperSingleLinkModalElement>
             <UniversalInputWithButton
                 modalType = {allModals.HELPERS_LINKS_MODAL}
                 inputType = {allModalsInputs.LINK}
                 inputMaxLength = {200}
                 placeholder = 'Link z adresem szyfrowanym https://'
+                ifRemoveWhiteSpaces = {true}
             />
         </HelperSingleLinkModalElement>
     </TitleAndIconContainer>
