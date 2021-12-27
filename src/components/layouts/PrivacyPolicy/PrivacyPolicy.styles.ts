@@ -99,3 +99,13 @@ export const PrivacyPolicyExternalAnchorIcon = styled(FiExternalLink)`
     margin-left: 5px;
     font-size: 1.1rem;
 `;
+
+export const PrivacyPolicyAsideParagraphIcon = styled.div`
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    top: 50px;
+    line-height: .8;
+    font-size: 50em;
+    color: var(--lightGrayTint1);
+`;

@@ -14,7 +14,7 @@
 
 import * as React from 'react';
 
-import { PrivacyPolicyContainer, PrivacyPolicyWrapper } from './PrivacyPolicy.styles';
+import { PrivacyPolicyAsideParagraphIcon, PrivacyPolicyContainer, PrivacyPolicyWrapper } from './PrivacyPolicy.styles';
 
 import PrivacyPolicyHeader from './subcomponents/PrivacyPolicyHeader';
 import PrivacyPolicyListStructure from './subcomponents/PrivacyPolicyListStructure';
@@ -29,6 +29,9 @@ import PrivacyPolicyHashingInfo from './subcomponents/PrivacyPolicyHashingInfo';
 const PrivacyPolicy: React.FC = (): JSX.Element => (
     <PrivacyPolicyContainer>
         <PrivacyPolicyWrapper>
+            <PrivacyPolicyAsideParagraphIcon>
+                &sect;
+            </PrivacyPolicyAsideParagraphIcon>
             <PrivacyPolicyHeader/>
             <PrivacyPolicyListStructure/>
             <PrivacyPolicyOuterServices/>
