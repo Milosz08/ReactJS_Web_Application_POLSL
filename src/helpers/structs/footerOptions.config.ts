@@ -23,7 +23,7 @@ export const FOOTER_OPTIONS: { [name: string]: string }[] = [
     },
     {
         name: 'Modyfikacja Planu Zajęć',
-        value: 'SHEDULE_MODIFY',
+        value: 'SCHEDULE_MODIFY',
     },
     {
         name: 'Modyfikacja/dodanie ważnego terminu',

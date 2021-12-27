@@ -90,7 +90,7 @@ class ConvertTimeUTC {
             case DAYMONTH:
                 return this._dayMonth;
             case DAY:
-                return convertingSingleValue(this._currTime.getDay());
+                return convertingSingleValue(this._currTime.getDate());
             case MONTH:
                 return this._month;
             case YEAR:

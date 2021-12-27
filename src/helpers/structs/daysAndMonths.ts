@@ -33,7 +33,7 @@ const DAYS_AND_MONTHS: DaysAndMonthsTypes = {
         },
         {
             id: 1,
-            name: 'Podziedziałek'
+            name: 'Poniedziałek'
         },
         {
             id: 2,
