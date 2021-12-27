@@ -80,9 +80,6 @@ export const SingleSubjectNavigationButtonContainer = styled.div`
     justify-content: space-around;
     width: 90%;
     margin-top: 30px;
-    a, span {
-        margin: 0 10px;
-    }
     @media only screen and (max-width: 772px) {
         flex-wrap: wrap;
         width: 100%;
