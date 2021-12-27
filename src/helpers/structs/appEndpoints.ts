@@ -28,14 +28,14 @@ export enum FRONT_ENDPOINTS {
 }
 
 export enum API_ENDPOINTS {
-    FOOTER_FORM = '/footer-form',
-    COVID_WARNINGS = '/covid-data',
-    LAST_UPDATE = '/last-update',
-    SUBJECTS_ELMS = '/subject-data',
-    SCHEDULE_SUBJECTS = '/schedule-subjects',
+    FOOTER_FORM = '/messages',
+    COVID_WARNINGS = '/covid',
+    LAST_UPDATE = '/updates',
+    SUBJECTS_ELMS = '/subjects',
+    SCHEDULE_SUBJECTS = '/schedule',
     CALENDAR_RECORDS = '/calendar',
-    AUTHENTICATIONS = '/authentications',
-    HELPERS_LINKS = '/helpers-links',
+    AUTHENTICATIONS = '/credentials',
+    HELPERS_LINKS = '/helpers',
 }
 
 export interface CmsEndpointsTypes {
