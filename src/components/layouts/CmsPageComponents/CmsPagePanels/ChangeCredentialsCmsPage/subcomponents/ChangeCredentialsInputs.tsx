@@ -35,7 +35,6 @@ const ChangeCredentialsInputs: React.FC<PropsProvider> = ({ ifUser }): JSX.Eleme
 
     const { errors: err, credentialsRef, roles } = useContext<Partial<ChangeCredentialsContextTypes>>(ChangeCredentialsContext);
     const disabledInput: boolean = roles!.role !== ROLES.ADMIN;
-    console.log(roles!.role, ROLES.ADMIN)
 
     return (
         <>

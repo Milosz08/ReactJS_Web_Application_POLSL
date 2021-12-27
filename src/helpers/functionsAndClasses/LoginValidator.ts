@@ -88,7 +88,6 @@ class LoginValidator {
         }
         Object.keys(this._inputFields).forEach(key => {
             if (this._inputFields[key].length < 4) {
-                console.log(this._inputFields[key].length);
                 this._errorFields[key] = true;
             }
         });
