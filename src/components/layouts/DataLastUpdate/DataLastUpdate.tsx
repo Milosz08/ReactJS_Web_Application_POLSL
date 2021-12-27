@@ -37,7 +37,7 @@ const DataLastUpdate: React.FC< PropsProvider> = ({ type, content }): JSX.Elemen
 
     const { lastUpdate }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
     const findMathUpdateType = lastUpdate.find(el => el.updateDateFor === type);
-    const updateDate = findMathUpdateType ? findMathUpdateType.updateDate : undefined;
+    const updateDate = findMathUpdateType ? findMathUpdateType.servletTime : undefined;
 
     const generateStructure = content ? (
         <DataLastUpdateContainer>

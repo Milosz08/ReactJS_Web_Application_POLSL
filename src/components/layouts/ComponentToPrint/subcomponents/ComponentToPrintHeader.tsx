@@ -40,7 +40,8 @@ const ComponentToPrintHeaderData: React.FC<PropsProvider> = ({ date }): JSX.Elem
 
     const scheduleUpdate: LastUpdateTypes | undefined = lastUpdate.find(el => el.updateDateFor === updateSections.SCHEDULE);
     const group: string = chooseGroups.normalGroup === 'pierwsza' ? 'I' : 'II';
-    const { fullDate, fullTime } = scheduleUpdate!.updateDate;
+
+    const { fullDate, fullTime } = scheduleUpdate!.servletTime;
 
     const [ , month, year ]: string[] = fullDate.split('/');
 

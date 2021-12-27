@@ -51,7 +51,7 @@ const AdminCmsLayout: React.FC = (): JSX.Element => {
                 key = {endpoint.path}
             >
                 {findUpdateElement && <AdminCmsLayoutLastUpdateIndicator>
-                    Aktualizacja: {findUpdateElement.updateDate.fullDate}, {findUpdateElement.updateDate.fullTime}
+                    Aktualizacja: {findUpdateElement.servletTime.fullDate}, {findUpdateElement.servletTime.fullTime}
                 </AdminCmsLayoutLastUpdateIndicator>}
                 <DelayRouterLink
                     render = {() => singleElementStructure}
