@@ -109,7 +109,7 @@ export const PrefInitialState = {
         [SUBJECTS]: {
             activePage: 1,
             maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
-            sortingMode: sortingTypes.DECREASE,
+            sortingMode: sortingTypes.INCREASE,
         },
         [USER_MESSAGES]: {
             activePage: 1,
