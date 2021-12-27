@@ -50,7 +50,7 @@ const useFilteredSchedule = (weekDay: string): ScheduleContentTypes[] => {
                     }
                 })
                 .sort((prevH: ScheduleContentTypes, secH: ScheduleContentTypes): number => (
-                    parseInt(prevH.subjectHours.start.replace(':', '')) - parseInt(secH.subjectHours.start.replace(':', ''))
+                    parseInt(prevH.startHour.replace(':', '')) - parseInt(secH.endHour.replace(':', ''))
                 ))
         );
     }, [ chooseGroups, engGroup, normalGroup, singleDayOfWeek, skGroup ]);

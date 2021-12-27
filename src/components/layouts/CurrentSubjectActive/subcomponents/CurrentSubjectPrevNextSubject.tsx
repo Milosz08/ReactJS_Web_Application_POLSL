@@ -32,8 +32,8 @@ const CurrentSubjectNextSubject: React.FC = (): JSX.Element => {
 
     const subject = Boolean(singleDayCurrentSchedule) ? singleDayCurrentSchedule![duringSubjectIdx! + 1] : undefined;
 
-    const ifDistanceLearning: string = subject?.place === 'Kontaktowy' ? 'w sposób' : 'poprzez komunikator';
-    const roomClosely: string = subject?.place === 'Kontaktowy' ? `Sala ${subject?.room.toLocaleUpperCase()}` : '';
+    const ifDistanceLearning: string = subject?.classesInfo.place === 'kontaktowy' ? 'w sposób' : 'poprzez komunikator';
+    const roomClosely: string = subject?.classesInfo.place === 'kontaktowy' ? `Sala ${subject?.room.toLocaleUpperCase()}` : '';
 
     return (
         <CurrentSubjectPrevAndNextContainer>
@@ -45,8 +45,8 @@ const CurrentSubjectNextSubject: React.FC = (): JSX.Element => {
                     {subject?.title}
                 </CurrentSubjectPrevAndNextRightTitle>
                 <CurrentSubjectPrevAndNextRightInfo>
-                    {subject?.type}, odbywany {ifDistanceLearning} {subject?.place}, {roomClosely}<br/>
-                    Czas trwania: {subject?.hours.fullStart} - {subject?.hours.fullEnd}
+                    {subject?.classesInfo.type}, odbywany {ifDistanceLearning} {subject?.classesInfo.place}, {roomClosely}<br/>
+                    Czas trwania: {subject?.hours.startHour} - {subject?.hours.endHour}
                 </CurrentSubjectPrevAndNextRightInfo>
             </CurrentSubjectPrevAndNextRight>
         </CurrentSubjectPrevAndNextContainer>

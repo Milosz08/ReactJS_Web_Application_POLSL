@@ -47,7 +47,7 @@ const SingleSubjectNavigationButton: React.FC = (): JSX.Element => {
             target = '_blank'
             rel = 'noreferrer'
         >
-            Link do PZE (Wszystkie zajęcia)
+            Link do PZE ({subject!.classesPlatforms[0].type})
             <ExternalIconLink/>
         </PzePlatformLinkAnchor>
     );

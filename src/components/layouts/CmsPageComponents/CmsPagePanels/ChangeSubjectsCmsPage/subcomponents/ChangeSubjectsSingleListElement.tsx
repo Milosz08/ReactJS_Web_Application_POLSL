@@ -42,8 +42,8 @@ const ChangeSubjectsSingleListElement: React.FC<PropsProvider> = ({ element, ind
     const width = useResizeListener();
 
     const semestersCount = element.semesters.map((semester, idx) => (
-        <span key = {semester}>
-            {`${idx > 0 ? ', ' : ''}${AllSemesters[semester - 1]}`}
+        <span key = {semester.name}>
+            {`${idx > 0 ? ', ' : ''}${AllSemesters[semester.identity - 1]}`}
         </span>
     ));
 

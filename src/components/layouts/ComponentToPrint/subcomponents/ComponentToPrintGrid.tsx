@@ -46,7 +46,7 @@ const ComponentToPrintGrid: React.FC = (): JSX.Element => {
                 return prop.group === engGroup || prop.group === normalGroup || prop.group === ALL_GROUPS
             }
         }).sort((prevH: ScheduleContentTypes, secH: ScheduleContentTypes): number => (
-            parseInt(prevH.subjectHours.start.replace(':', '')) - parseInt(secH.subjectHours.start.replace(':', ''))
+            parseInt(prevH.startHour.replace(':', '')) - parseInt(secH.startHour.replace(':', ''))
         )));
 
         return daysAndSubjects.map((day, idx) => (
@@ -60,16 +60,16 @@ const ComponentToPrintGrid: React.FC = (): JSX.Element => {
                             {STATIC_DAYS[idx].name}
                         </ComponentToPrintWeekDays>}
                         <ComponentToPrintTd>
-                            {subject.subjectHours.start} - {subject.subjectHours.end}
+                            {subject.startHour} - {subject.endHour}
                         </ComponentToPrintTd>
                         <ComponentToPrintTd>
                             {subject.title}
                         </ComponentToPrintTd>
                         <ComponentToPrintTd>
-                            {subject.subjectInfo.type}, {subject.subjectInfo.room.toLocaleUpperCase()}
+                            {subject.classesInfo.type}, {subject.room.toLocaleUpperCase()}
                         </ComponentToPrintTd>
                         <ComponentToPrintTd>
-                            {subject.subjectInfo.subjectsPze.place}
+                            {subject.classesInfo.place}
                         </ComponentToPrintTd>
                     </tr>
                 ))}

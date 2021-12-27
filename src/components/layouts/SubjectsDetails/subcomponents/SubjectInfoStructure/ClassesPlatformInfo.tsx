@@ -33,14 +33,14 @@ const ClassesPlatformInfo: React.FC = () => {
             <ClassesPlatformInfoSingleElement
                 key = {generateID()}
             >
-                {`${platform.type} ${classesIfEnd} się
-                ${platform.place !== 'Kontaktowy' ? 'poprzed komunikator ' : 'w sposób '}`}
+                {`${platform.type.charAt(0).toUpperCase() + platform.type.substring(1, platform.type.length)} ${classesIfEnd} się
+                ${platform.place !== 'kontaktowy' ? 'poprzed komunikator ' : 'w sposób '}`}
                 <strong>{`${platform.place}`}</strong>.
             </ClassesPlatformInfoSingleElement>
         )) : (
             <ClassesPlatformInfoSingleElement>
                 {`Zajęcia ${classesIfEnd} się 
-                ${subject!.classesPlatforms[0].place !== 'Kontaktowy' ? 'poprzed komunikator ' : 'w sposób '}`}
+                ${subject!.classesPlatforms[0].place !== 'kontaktowy' ? 'poprzed komunikator ' : 'w sposób '}`}
                 <strong>{`${subject!.classesPlatforms[0].place}`}</strong>.
             </ClassesPlatformInfoSingleElement>
         );

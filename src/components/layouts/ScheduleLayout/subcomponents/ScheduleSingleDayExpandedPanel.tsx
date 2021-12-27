@@ -54,15 +54,15 @@ const ScheduleSingleDayExpandedPanel: React.FC<PropsProvider> = ({ tile, subject
             >
                 <ScheduleExpandedPanelInfo>
                     <ScheduleExpandedPanelRoomContainer>
-                        Aula: <strong>{tile.subjectInfo.room.toLocaleUpperCase()}</strong>
+                        Sala: <strong>{tile.room.toLocaleUpperCase()}</strong>
                     </ScheduleExpandedPanelRoomContainer>
-                    <span>{tile.subjectInfo.type === 'Wykład' ? 'wykłady' : tile.subjectInfo.type} </span>
-                    {subject!.ifEnd ? 'odbywały' : 'odbywają'} się
-                    {tile.subjectInfo.subjectsPze.place !== 'Kontaktowy' ? ' przez komunikator ' : ' w sposób '}
-                    <strong> {tile.subjectInfo.subjectsPze.place}</strong>. Wszystkie linki znajdziesz na PZE.
+                    <span>{tile.classesInfo.type === 'wykład' ? 'wykłady' : tile.classesInfo.type} </span>
+                    {subject?.ifEnd ? 'odbywały' : 'odbywają'} się
+                    {tile.classesInfo.place !== 'kontaktowy' ? ' przez komunikator ' : ' w sposób '}
+                    <strong> {tile.classesInfo.place}</strong>. Wszystkie linki znajdziesz na PZE.
                 </ScheduleExpandedPanelInfo>
                 <ScheduleExpandedPanelPzeAnchor
-                    href = {tile.subjectInfo.subjectsPze.link}
+                    href = {tile.classesInfo.link}
                     target = '_blank'
                     rel = 'noreferrer'
                 >

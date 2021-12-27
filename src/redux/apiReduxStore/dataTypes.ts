@@ -36,7 +36,7 @@ export interface CovidWarningsTypes {
 export interface LastUpdateTypes {
     _id: string;
     updateDateFor: updateSections;
-    updateDate: {
+    servletTime: {
         fullDate: string;
         fullTime: string;
     }
@@ -46,8 +46,15 @@ export interface SubjectsContentTypes {
     _id: string;
     title: string;
     ifEnd: boolean;
-    semesters: number[];
-    departments: string[];
+    semesters: {
+        identity: number;
+        name: string;
+    }[];
+    departments: {
+        title: string;
+        shortName: string;
+        link: string;
+    }[];
     icon: {
         family: string;
         name: string;
@@ -64,47 +71,50 @@ export interface ScheduleContentTypes {
     title: string;
     day: number;
     group: string;
-    subjectHours: {
-        start: string;
-        end: string;
-    },
-    subjectInfo: {
+    startHour: string;
+    endHour: string;
+    room: string;
+    classesInfo: {
         type: string;
-        room: string;
-        subjectsPze: {
-            place: string;
-            link: string;
-        }
-    }
+        place: string;
+        link: string;
+    };
+    icon: {
+        family: string;
+        name: string;
+    };
 }
 
 export interface CalendarContentTypes {
     _id: string;
-    day: number,
-    month: number,
-    year: number,
+    day: number;
+    month: number;
+    year: number;
     items: {
-        start: string,
-        message: string,
-        importantLevel: string
-    }[]
+        start: string;
+        message: string;
+        importantLevel: string;
+    }[];
 }
 
 export interface CurrentScheduleContentTypes {
     title: string;
-    type: string;
-    place: string;
     room: string;
-    pzeLink: {
+    classesInfo: {
+        type: string;
         place: string;
         link: string;
+    };
+    icon: {
+        family: string;
+        name: string;
     };
     hours: {
         start: number;
         end: number;
-        fullStart: string;
-        fullEnd: string;
-    }
+        startHour: string;
+        endHour: string;
+    };
 }
 
 export interface HelpersLinksContentTypes {

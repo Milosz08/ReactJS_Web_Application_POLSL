@@ -30,12 +30,12 @@ const StatusEndAndSemesters: React.FC = (): JSX.Element => {
     const { subject } = useContext<Partial<SubjectContextProvider>>(SubjectContext);
 
     const semestersCount = subject!.semesters.map(semester => {
-        const toggleOnEndOfString = semester - 1 === subject!.semesters.length - 1 ? '.' : ', ';
+        const toggleOnEndOfString = semester.identity - 1 === subject!.semesters.length - 1 ? '.' : ', ';
         return (
             <span
                 key = {generateID()}
             >
-                {`${AllSemesters[semester - 1]}${toggleOnEndOfString}`}
+                {`${AllSemesters[semester.identity - 1]}${toggleOnEndOfString}`}
             </span>
         )
     });

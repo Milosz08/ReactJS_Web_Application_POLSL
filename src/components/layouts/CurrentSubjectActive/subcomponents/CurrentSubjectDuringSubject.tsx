@@ -34,14 +34,14 @@ const CurrentSubjectDuringSubject: React.FC<{ counter: number }> = ({ counter })
 
     const time: number = (counter - Number(subject?.hours.start)) * 100 / ((Number(subject?.hours.end) - 37) - Number(subject?.hours.start));
 
-    const ifDistanceLearning: string = subject?.place === 'Kontaktowy' ? 'w sposób' : 'poprzez komunikator';
-    const roomClosely: string = subject?.place === 'Kontaktowy' ? `Sala ${subject?.room.toLocaleUpperCase()}` : '';
+    const ifDistanceLearning: string = subject?.classesInfo.place === 'kontaktowy' ? 'w sposób' : 'poprzez komunikator';
+    const roomClosely: string = subject?.classesInfo.place === 'kontaktowy' ? `Sala ${subject?.room.toLocaleUpperCase()}` : '';
 
     return (
         <CurrentSubjectDuringSubjectContainer>
             <CurrentSubjectDuringSubjectTitlesContent>
                 <CurrentSubjectDuringSubjectPlatformAnchor
-                    href = {subject?.pzeLink.link}
+                    href = {subject?.classesInfo.link}
                     target = '_blank'
                     rel = 'noreferrer'
                     title = 'Przejdź do Platformy Zdalnej Edukacji'
@@ -57,8 +57,8 @@ const CurrentSubjectDuringSubject: React.FC<{ counter: number }> = ({ counter })
                         {subject?.title}
                     </CurrentSubjectDuringSubjectTitle>
                     <CurrentSubjectDuringSubjectInfo>
-                        {subject?.type}, odbywany {ifDistanceLearning} {subject?.place}, {roomClosely}<br/>
-                        Czas trwania: {subject?.hours.fullStart} - {subject?.hours.fullEnd}
+                        {subject?.classesInfo.type}, odbywany {ifDistanceLearning} {subject?.classesInfo.place}, {roomClosely}<br/>
+                        Czas trwania: {subject?.hours.startHour} - {subject?.hours.endHour}
                     </CurrentSubjectDuringSubjectInfo>
                 </CurrentSubjectDuringSubjectRight>
             </CurrentSubjectDuringSubjectTitlesContent>

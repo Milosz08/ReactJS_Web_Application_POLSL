@@ -51,20 +51,20 @@ const ScheduleSingleDaySingleTile: React.FC<PropsProvider> = ({ tile, ifActive }
 
     return (
         <ScheduleSingleDayTileContainer
-            ifActive = {false}
+            ifActive = {ifActive}
             ifGrayscale = {searching}
         >
             <ScheduleSingleDayTileType>
-                {tile.subjectInfo.type}
+                {tile.classesInfo.type === 'wykłady' ? 'wykład' : tile.classesInfo.type}
             </ScheduleSingleDayTileType>
             <ScheduleSingleDayTileSubjectHeader>
                 {tile.title}
             </ScheduleSingleDayTileSubjectHeader>
             <ScheduleSingleDaySingleTileSeparator
-                icon = {subject!.icon}
+                icon = {tile.icon}
             />
             <ScheduleSingleDayTileSubjectHeader>
-                {tile.subjectHours.start} - {tile.subjectHours.end}
+                {tile.startHour} - {tile.endHour}
             </ScheduleSingleDayTileSubjectHeader>
             <ScheduleSingleDayExpandedPanel
                 tile = {tile}

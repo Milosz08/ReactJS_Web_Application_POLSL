@@ -58,18 +58,15 @@ class ApiReducerUtils {
                 el.group === normalAndSkGroup || el.group === normal || el.group === eng || el.group === 'wszyscy'
             ));
             middlewareArray.forEach(el => {
-                const { title, subjectInfo, subjectHours } = el;
-                const { type, subjectsPze: pzeLink, room } = subjectInfo;
-                const { place } = pzeLink;
-                const { start: fullStart, end: fullEnd } = subjectHours;
-                const [ hourStart, minuteStart ] = el.subjectHours.start.split(':');
-                const [ hourEnd, minuteEnd ] = el.subjectHours.end.split(':');
+                const { title, room, classesInfo, icon, startHour, endHour } = el;
+                const [ hourStart, minuteStart ] = el.startHour.split(':');
+                const [ hourEnd, minuteEnd ] = el.endHour.split(':');
                 middlewareObject[day].push({
-                    title, type, place, room, pzeLink,
+                    title, room, classesInfo, icon,
                     hours: {
                         start: Number(hourStart + minuteStart + '00'),
                         end: Number(hourEnd + minuteEnd + '00'),
-                        fullStart, fullEnd,
+                        startHour, endHour,
                     }
                 });
             });
