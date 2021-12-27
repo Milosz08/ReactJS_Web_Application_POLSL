@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import apiTypes, { searchByType, sortAvailables } from './types';
+import apiTypes, { searchByType } from './types';
 
 interface ReturnedToReducer {
     type: apiTypes;
@@ -79,30 +79,6 @@ export class ApiActionsGet {
  * Static class that stores methods responsible for sorting retrieved items from the database.
  */
 export class ApiActionsSort {
-
-    /**
-     * Method responsible for calling the reducer function that sorts the selected item based on the title.
-     *
-     * @param typeElmsArray { sortAvailables[] } - all sorts to implements.
-     */
-    public static sortingIncomingElmsByName = (...typeElmsArray: sortAvailables[]): ReturnedToReducer => ({
-        type: apiTypes.SORT_BY_NAME,
-        payload: {
-            typeElmsArray
-        }
-    });
-
-    /**
-     * Method responsible for calling the reducer function that sorts the selected item based on the date.
-     *
-     * @param typeElmsArray { sortAvailables[] } - all sorts to implements.
-     */
-    public static sortingIcomingElmsByDate = (...typeElmsArray: sortAvailables[]): ReturnedToReducer => ({
-        type: apiTypes.SORT_BY_DATE,
-        payload: {
-            typeElmsArray
-        }
-    });
 
     /**
      * Method responsible for calling the reducer function that sorts the subjects in the schedule.

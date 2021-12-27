@@ -23,7 +23,7 @@ import { API_ENDPOINTS } from '../structs/appEndpoints';
 import { useDispatch } from 'react-redux';
 import { SessActions } from '../../redux/sessionReduxStore/actions';
 import { DbNonModalOp } from '../../redux/apiReduxStore/operationsForNonModals';
-import { apiGetContentFromDB, sortAvailables } from '../../redux/apiReduxStore/types';
+import { apiGetContentFromDB } from '../../redux/apiReduxStore/types';
 
 /**
  * Custom hook responsible for load first painfull content (big data from DB and cech authentication cookie).
@@ -39,7 +39,6 @@ const useFirstPainfullLoad = (): null => {
     } = API_ENDPOINTS;
 
     const { COVID, LAST_UPDATE, SUBJECTS, CALENDAR, HELPERS, USER_MESSAGES, SCHEDULE } = apiGetContentFromDB;
-    const { SUBJECTS: SUB_SORT, CALENDAR: CAL_SORT } = sortAvailables;
 
     const dispatcher = useDispatch();
     const isMount = useIsMount();
@@ -52,8 +51,8 @@ const useFirstPainfullLoad = (): null => {
         if(isMount) { //Prevent usage dispatcher DB on next re-renders
             dispatcher(DbNonModalOp.getAllUniversalElements(COVID_WARNINGS, COVID));
             dispatcher(DbNonModalOp.getAllUniversalElements(LAST_UPDATE_END, LAST_UPDATE));
-            dispatcher(DbNonModalOp.getAllUniversalElements(SUBJECTS_ELMS, SUBJECTS, SUB_SORT));
-            dispatcher(DbNonModalOp.getAllUniversalElements(CALENDAR_RECORDS, CALENDAR, CAL_SORT));
+            dispatcher(DbNonModalOp.getAllUniversalElements(SUBJECTS_ELMS, SUBJECTS));
+            dispatcher(DbNonModalOp.getAllUniversalElements(CALENDAR_RECORDS, CALENDAR));
             dispatcher(DbNonModalOp.getAllUniversalElements(HELPERS_LINKS, HELPERS));
             dispatcher(DbNonModalOp.getAllUniversalElements(FOOTER_FORM, USER_MESSAGES));
             dispatcher(DbNonModalOp.getAllUniversalElements(SCHEDULE_SUBJECTS, SCHEDULE, cookie![groupSelection]));

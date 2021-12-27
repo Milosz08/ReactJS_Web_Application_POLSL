@@ -53,23 +53,6 @@ const apiReducer = (state = apiInitialState, action: any) => {
             return { ...state, [elementType]: elementsWithoutRemoving };
         }
 
-        case apiTypes.SORT_BY_NAME: {
-            const { typeElmsArray } = action.payload;
-            typeElmsArray.forEach((el: any) => {
-                state[el].sort((a: any, b: any) => a.title.localeCompare(b.title));
-            });
-            return state;
-        }
-
-        case apiTypes.SORT_BY_DATE: {
-            const { typeElmsArray } = action.payload;
-            state[typeElmsArray]
-                .sort((a: any, b: any) => a.day - b.day)
-                .sort((a: any, b: any) => a.month - b.month)
-                .sort((a: any, b: any) => a.year - b.year);
-            return state;
-        }
-
         case apiTypes.FILTERED_SCHEDULE_SUBJECTS: {
             const { normalGroup, engGroup, skGroup } = action.payload;
             const sheduleSubjectsIntoSeparateDays = ApiReducerUtils.moveSheduleSubjectsIntoSeparateDays(
