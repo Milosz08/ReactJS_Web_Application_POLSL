@@ -72,7 +72,7 @@ export const SubjectIconWrapper = styled.div`
 `;
 
 export const SubjectTitleContainer = styled.div`
-    margin: 0 20px 0 30px;
+    margin: 0 40px 0 30px;
     flex-grow: 1;
     transition: .2s;
     @media only screen and (max-width: 450px) {
