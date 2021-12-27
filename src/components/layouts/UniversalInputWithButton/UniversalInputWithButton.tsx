@@ -33,6 +33,7 @@ interface PropsProvider {
     inputType: allModalsInputs;
     inputMaxLength: number;
     placeholder?: string;
+    ifRemoveWhiteSpaces?: boolean
     CustomIcon?: any;
     CustomContent?: React.FC;
 }
@@ -47,9 +48,10 @@ interface PropsProvider {
  * @param CustomIcon { any? } - custom icon component.
  * @param CustomContent { React.FC } - custom react content.
  * @param inputMaxLength { number } - max length of input.
+ * @param ifRemoveWhiteSpaces { boolean } - flag decided, if before saving in redux store dispatcher should remove white spaces.
  */
 const UniversalInputWithButton: React.FC<PropsProvider> = ({
-    placeholder, modalType, inputType, CustomIcon, CustomContent, inputMaxLength
+    placeholder, modalType, inputType, CustomIcon, CustomContent, inputMaxLength, ifRemoveWhiteSpaces
 }): JSX.Element => {
 
     const { clearSelectedInput } = useValidateAddEditCmsModal(modalType);
@@ -62,7 +64,7 @@ const UniversalInputWithButton: React.FC<PropsProvider> = ({
 
     const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
         const modifiedInput = target.value.replaceAll(' ', '').toLowerCase();
-        dispatcher(ModalsActions.changeModalSelectedInput(modalType, inputType, modifiedInput));
+        dispatcher(ModalsActions.changeModalSelectedInput(modalType, inputType, ifRemoveWhiteSpaces ? modifiedInput : target.value));
         clearSelectedInput(inputType);
     };
 
