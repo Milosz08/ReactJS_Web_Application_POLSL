@@ -51,7 +51,7 @@ export const UserLogoutModalLogoutInfo = styled.div`
 
 export const UserLogoutModalEstimateCounter = styled.div`
     font-size: 1.7rem;
-    margin-top: 30px;
+    margin: 30px 0 40px;
     color: var(--navyBlueColor);
     font-weight: 400;
     strong {
