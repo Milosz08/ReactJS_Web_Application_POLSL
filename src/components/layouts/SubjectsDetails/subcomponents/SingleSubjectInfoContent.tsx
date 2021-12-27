@@ -36,8 +36,8 @@ const SingleSubjectInfoContent: React.FC = (): JSX.Element => {
     const { subject } = useContext<Partial<SubjectContextProvider>>(SubjectContext);
 
     const multipleDepartment = subject!.departments.length !== 1
-        ? subject!.departments.map(department => <span key = {generateID()}>wydział {department}</span>)
-        : `wydział ${subject!.departments[0]}`;
+        ? subject!.departments.map(department => <div key = {generateID()}>{department.title} ({department.shortName})</div>)
+        : `${subject!.departments[0].title} (${subject!.departments[0].shortName})`;
 
     return (
         <SingleSubjectInfoContentContainer>

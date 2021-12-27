@@ -69,6 +69,7 @@ export const ClassesPlatformInfoSingleElement = styled.div`
     strong {
         color: var(--darkOrangeColor);
         font-weight: 500;
+        text-transform: capitalize;
     }
 `;
 
@@ -77,15 +78,18 @@ export const SingleSubjectNavigationButtonContainer = styled.div`
     line-height: 1;
     display: flex;
     justify-content: space-around;
-    width: 80%;
+    width: 90%;
     margin-top: 30px;
+    a, span {
+        margin: 0 10px;
+    }
     @media only screen and (max-width: 772px) {
         flex-wrap: wrap;
         width: 100%;
     }
 `;
 
-export const SubjectsTermsLinkWrapper = styled.div`
+export const SubjectsTermsLinkWrapper = styled.span`
     ${DefaultButton({ _fontSize: '1.1rem', _fontWeight: 500, _ifEmpty: true })};
     padding: 10px 20px 12px;
     @media only screen and (max-width: 772px) {

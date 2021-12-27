@@ -160,6 +160,7 @@ export const ScheduleExpandedPanelInfo = styled.div`
     strong {
         color: var(--orangeColor);
         font-weight: 500;
+        text-transform: capitalize;
     }
 `;
 
