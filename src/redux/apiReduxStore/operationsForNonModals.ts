@@ -22,13 +22,13 @@ import GROUPS_STATIC from '../../helpers/structs/allGroups';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 import { FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
 
-import { apiGetContentFromDB, covidTypes, searchByType, sortAvailables, updateSections } from './types';
+import { apiGetContentFromDB, covidTypes, searchByType, updateSections } from './types';
 import { FooterFormTypes } from './dataTypes';
 
 import { ApiActionsGet, ApiActionsSort } from './actions';
 
 const { addReduxStoreElement, updateReduxStoreElement } = ApiActionsGet;
-const { sortingIncomingElmsByName, sortingIcomingElmsByDate, filteredScheduleSubjects } = ApiActionsSort;
+const { filteredScheduleSubjects } = ApiActionsSort;
 
 /**
  * Class responsible for providing methods that communicate with the database
@@ -44,11 +44,10 @@ export class DbNonModalOp {
      *
      * @param endpoint { API_ENDPOINTS } - api element endpoint.
      * @param elementKey { apiGetContentFromDB } - added element key in store object.
-     * @param sortedType { sortAvailables? } - optional sorting.
      * @param groupCookies { any? } - optional cookies handler (for schedule elements).
      */
     public static getAllUniversalElements = (
-        endpoint: API_ENDPOINTS, elementKey: apiGetContentFromDB, sortedType?: sortAvailables, groupCookies?: any
+        endpoint: API_ENDPOINTS | string, elementKey: apiGetContentFromDB, groupCookies?: any
     ) => {
         return async (dispatch: (prop: any) => void) => {
             const { data } = await axiosInstance.get(endpoint);
@@ -61,7 +60,6 @@ export class DbNonModalOp {
                 dispatch(addReduxStoreElement(element, elementKey, elementKey === apiGetContentFromDB.SCHEDULE));
             });
             DbNonModalOp.cookiesScheduleHandler(groupCookies, dispatch, elementKey);
-            DbNonModalOp.soringAvailables(sortedType!, dispatch);
         };
     };
 
@@ -81,23 +79,6 @@ export class DbNonModalOp {
                 const { NORMAL_GROUPS, ENG_GROUPS, SK_GROUPS } = GROUPS_STATIC;
                 dispatcherCallback(filteredScheduleSubjects(NORMAL_GROUPS[0], ENG_GROUPS[0], SK_GROUPS[0]));
             }
-        }
-    }
-
-    /**
-     * Method responsible for handling additional sorting depending on the selected parameter.
-     *
-     * @param sortedType { any } - redux dispatcher callback function.
-     * @param dispatcherCallback { sortAvailables } - optional sorting.
-     */
-    private static soringAvailables(sortedType: sortAvailables, dispatcherCallback: any,) {
-        switch(sortedType) {
-            case sortAvailables.SUBJECTS:
-                dispatcherCallback(sortingIncomingElmsByName(sortedType!));
-                break;
-            case sortAvailables.CALENDAR:
-                dispatcherCallback(sortingIcomingElmsByDate(sortedType!));
-                break;
         }
     }
 

@@ -19,11 +19,9 @@ import useGenerateLoadingLine from '../../../../../../../helpers/hooks/useGenera
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/reduxStore';
 import { allModals } from '../../../../../../../redux/modalsReduxStore/types';
-import { updateSections } from '../../../../../../../redux/apiReduxStore/types';
 import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
 import { DbModalOp } from '../../../../../../../redux/apiReduxStore/operationsForModals';
 import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
-import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
 
 import { DeleteContentButton, DeleteContentButtonsContainer, NotDeleteContentButton } from '../DeleteContentModal.styles';
 
@@ -60,7 +58,6 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
             setTimeout(() => {
                 reset();
                 dispatcher(DbModalOp.deleteSingleElementFromCms(modalsInitialState, modalType, dataID!));
-                dispatcher(DbNonModalOp.updateSectionDateFromCms(updateSections[modalsInitialState[modalType].updateApiParam]));
             }, 1000);
         }, 2000);
     };

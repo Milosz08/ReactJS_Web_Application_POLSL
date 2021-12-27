@@ -19,11 +19,9 @@ import useGenerateDatabaseObjects from '../../../../../../../helpers/hooks/useGe
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/reduxStore';
-import { updateSections } from '../../../../../../../redux/apiReduxStore/types';
 import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
 import { DbModalOp } from '../../../../../../../redux/apiReduxStore/operationsForModals';
 import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
-import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
 import { allModals, allModalsActions } from '../../../../../../../redux/modalsReduxStore/types';
 
 import {
@@ -47,7 +45,7 @@ interface PropsProvider {
  * @param modalType { allModals } - enum type of modal.
  * @param title { string } - title text content from redux initial state.
  * @param mode { allModalsActions } - current selected action (add/update).
- * @param id {  }
+ * @param id { string } - element id from rest api database.
  */
 const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title, mode, id }): JSX.Element => {
 
@@ -75,9 +73,6 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
                 } else {
                     dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id));
                 }
-                dispatcher(DbNonModalOp.updateSectionDateFromCms(
-                    updateSections[modalsInitialState[modalType].updateApiParam]
-                ));
             }, 1000);
         }, 2000);
     };

@@ -16,7 +16,6 @@ import * as React from 'react';
 import { useContext } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { updateSections } from '../../redux/apiReduxStore/types';
 import { DbNonModalOp } from '../../redux/apiReduxStore/operationsForNonModals';
 
 import LoginValidator, { ROLES } from '../functionsAndClasses/LoginValidator';
@@ -61,7 +60,6 @@ const useAdminNewDataValidate = (allRef: { [value: string]: React.MutableRefObje
                     username: login.current.value, password: passF.current.value, token: token.current.value
                 }));
             }
-            dispatcher(DbNonModalOp.updateSectionDateFromCms(updateSections.AUTH));
             clearFields();
         } else {
             err!.setErrors({ login: lg, pass, passRepeat: passR, token: tk, adminPass: passA });
