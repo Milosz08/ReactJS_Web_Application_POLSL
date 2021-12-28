@@ -13,15 +13,49 @@
  */
 
 import * as React from 'react';
+import { useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../../../../../redux/reduxStore';
+import { ModalsActions } from '../../../../../../../../redux/modalsReduxStore/actions';
+import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxStore/initialState';
+import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
+
 import { StatusElementsWrapper } from '../SubjectsAddEdit.styles';
+
+const UniversalRadioInput = React.lazy(() => import('../../../../../../UniversalRadioInput/UniversalRadioInput'));
 
 /**
  * Component responsible for generating subcomponents provides change subject state.
  */
 const StatusSubjectRadioInputs: React.FC = (): JSX.Element => {
+
+    const { subjectsModal }: ModalsInitialTypes = useSelector(((state: RootState) => state.modalsReducer));
+    const dispatcher = useDispatch();
+
+    const [ checked, setChecked ] = useState<boolean>(subjectsModal.modalInputFields!.ifEnd);
+
+    const handleRadioInput = (): void => {
+        setChecked(prevState => !prevState);
+        dispatcher(ModalsActions.changeModalSelectedInput(allModals.SUBJECT_MODAL, allModalsInputs.IF_END, checked));
+    };
+
+    const generateRadioInputs = [ false, true ].map((el, idx) => (
+        <UniversalRadioInput
+            key = {idx}
+            content = {el ? 'zakończony' : 'w trakcie'}
+            radioProps = {{
+                id: el ? 'zakończony' : 'w trakcie',
+                name: 'subjectStatusFields',
+                checked: checked === el,
+                onChangeCallback: handleRadioInput
+            }}
+        />
+    ));
+
     return (
         <StatusElementsWrapper>
-            status
+            {generateRadioInputs}
         </StatusElementsWrapper>
     );
 };

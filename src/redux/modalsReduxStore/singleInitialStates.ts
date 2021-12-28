@@ -59,6 +59,7 @@ export const initialStateForModalsInputs = {
         normal: {
             title: '',
             icon: 'FaBorderNone',
+            ifEnd: false,
             semesters: [
                 {
                     identity: 1,

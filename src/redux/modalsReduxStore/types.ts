@@ -44,6 +44,7 @@ export enum allModalsInputs {
     START = 'start',
     LEVEL = 'importantLevel',
     MESSAGE = 'message',
+    IF_END = 'ifEnd',
 }
 
 export enum modalInputHeader {
