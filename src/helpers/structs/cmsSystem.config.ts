@@ -37,3 +37,16 @@ export const CMS_LIST_QUANTITY_VALUES: number[] = [
 export const SUBJECTS_SEMESTERS: string[] = [
     'pierwszy', 'drugi', 'trzeci', 'czwarty', 'piąty', 'szósty', 'siódmy'
 ];
+
+/**
+ *
+ */
+export const CLASSES_OPTIONS: { TYPES: string[], PLATFORMS: string[] } = {
+    TYPES: [
+        'wykłady', 'ćwiczenia', 'laboratoria', 'konwersatoria', 'seminaria', 'warsztaty', 'repetytoria', 'wszystkie zajęcia'
+    ],
+    PLATFORMS: [
+        'microsoft teams', 'google classroom', 'hangouts meet', 'zoom', 'skype', 'slack', 'facebook', 'whatsapp',
+        'big blue button', 'cisco webed teams', 'kontaktowy'
+    ]
+}

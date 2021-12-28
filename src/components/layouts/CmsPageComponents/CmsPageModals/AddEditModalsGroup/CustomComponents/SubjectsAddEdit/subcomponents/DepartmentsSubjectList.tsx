@@ -14,19 +14,30 @@
 
 import * as React from 'react';
 
+import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
+
 import { DepartmentsElementsWrapper } from '../SubjectsAddEdit.styles';
+
+const ItemsListMultipleInjection = React.lazy(() => import('../../../HighOrderComponents/ItemsListMultipleInjection'));
+const SubjectDepartmentsSingleListElement = React.lazy(() => import('./SubjectDepartmentsSingleListElement'));
 
 /**
  * Component reponsible for generate subcomponents provides adding departments into selected/added subject.
  */
-const DepartmentsSubjectList: React.FC = (): JSX.Element => {
-    return (
-        <DepartmentsElementsWrapper
-            $ifError = {false}
-        >
-            departments
-        </DepartmentsElementsWrapper>
-    );
-};
+const DepartmentsSubjectList: React.FC = (): JSX.Element => (
+    <DepartmentsElementsWrapper>
+        <ItemsListMultipleInjection
+            modalType = {allModals.SUBJECT_MODAL}
+            elementKey = {allModalsInputs.DEPARTMENTS}
+            insertObj = {{ title: '', shortName: '', link: '' }}
+            insertErrObj = {{ title: false, shortName: false, link: false }}
+            CustomComponent = {SubjectDepartmentsSingleListElement}
+            addContent = 'wydział'
+            ifBorderInactive = {true}
+            ifSmallMargins = {true}
+            maxInjcts = {3}
+        />
+    </DepartmentsElementsWrapper>
+);
 
 export default DepartmentsSubjectList;

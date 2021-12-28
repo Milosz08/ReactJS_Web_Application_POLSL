@@ -13,19 +13,32 @@
  */
 
 import * as React from 'react';
+
+import { CLASSES_OPTIONS } from '../../../../../../../../helpers/structs/cmsSystem.config';
+import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
+
 import { SubjectsTypesElementsWrapper } from '../SubjectsAddEdit.styles';
+
+const ItemsListMultipleInjection = React.lazy(() => import('../../../HighOrderComponents/ItemsListMultipleInjection'));
+const SubjectClassesSingleListElement = React.lazy(() => import('./SubjectClassesSingleListElement'));
 
 /**
  * Component responsible for generate subcomponents which provides add classes types into selected/added subject.
  */
-const ClassesTypesSubjectList: React.FC = (): JSX.Element => {
-    return (
-        <SubjectsTypesElementsWrapper
-            $ifError = {false}
-        >
-            types
-        </SubjectsTypesElementsWrapper>
-    );
-};
+const ClassesTypesSubjectList: React.FC = (): JSX.Element => (
+    <SubjectsTypesElementsWrapper>
+        <ItemsListMultipleInjection
+            modalType = {allModals.SUBJECT_MODAL}
+            elementKey = {allModalsInputs.CLASSES}
+            insertObj = {{ type: 'typ zajęć', place: 'miejsce', link: '' }}
+            insertErrObj = {{ type: false, place: false, link: false }}
+            CustomComponent = {SubjectClassesSingleListElement}
+            addContent = 'typ zajęć'
+            ifBorderInactive = {true}
+            ifSmallMargins = {true}
+            maxInjcts = {CLASSES_OPTIONS.TYPES.length}
+        />
+    </SubjectsTypesElementsWrapper>
+);
 
 export default ClassesTypesSubjectList;
