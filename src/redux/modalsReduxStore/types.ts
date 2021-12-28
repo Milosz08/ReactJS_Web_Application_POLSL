@@ -46,6 +46,11 @@ export enum allModalsInputs {
     MESSAGE = 'message',
     IF_END = 'ifEnd',
     SEMESTERS = 'semesters',
+    DEPARTMENTS = 'departments',
+    CLASSES = 'classesPlatforms',
+    TYPE = 'type',
+    PLACE = 'place',
+    SHORT = 'shortName',
 }
 
 export enum modalInputHeader {
