@@ -37,6 +37,8 @@ interface PropsProvider {
     CustomComponent: React.FC<{ tileIdx: number }>;
     addContent?: string;
     ifBorderInactive?: boolean;
+    ifSmallMargins?: boolean;
+    maxInjcts?: number;
 }
 
 /**
@@ -49,20 +51,24 @@ interface PropsProvider {
  * @param CustomComponent { React.FC<{ tileIdx: number }>> } - generating custom React component.
  * @param addContent { string? } - additional text value in button.
  * @param ifBorderInactive { boolean? } - show or hide border aroung custom element.
+ * @param ifSmallMargins
+ * @param maxInjcts
  */
 const ItemsListMultipleInjection: React.FC<PropsProvider> = ({
-    modalType, elementKey, insertObj, insertErrObj, CustomComponent, addContent, ifBorderInactive
+    modalType, elementKey, insertObj, insertErrObj, CustomComponent, addContent, ifBorderInactive, ifSmallMargins, maxInjcts
 }): JSX.Element => {
 
     const modals: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
 
     const elements = modals[modalType].modalInputFields![elementKey];
-    const maxInj: boolean = MAX_INJECTIONS - elements.length === 0;
+
+    const maxInjections = maxInjcts || MAX_INJECTIONS;
+    const maxInj: boolean = maxInjections - elements.length === 0;
 
     const dispatcher = useDispatch();
 
     const handleAddNewContent = () => {
-        if (elements.length < MAX_INJECTIONS) {
+        if (elements.length < maxInjections) {
             dispatcher(ModalsActions.addElementIntoArray(modalType, elementKey, insertObj));
             dispatcher(ModalsActions.addElementIntoArray(modalType, elementKey, insertErrObj, modalInputHeader.ERROR));
         }
@@ -76,9 +82,12 @@ const ItemsListMultipleInjection: React.FC<PropsProvider> = ({
     const generateSingleInjection = Boolean(elements) ? elements.map((tile: any, idx: number) => (
         <SingleInjectionContainer
             ifBorderInactive = {ifBorderInactive}
+            ifSmallMargins = {ifSmallMargins}
             key = {idx}
         >
-            <SingleInjectionCustomContentWrapper>
+            <SingleInjectionCustomContentWrapper
+                ifSmallMargins = {ifSmallMargins}
+            >
                 <CustomComponent
                     tileIdx = {idx}
                 />
@@ -99,8 +108,9 @@ const ItemsListMultipleInjection: React.FC<PropsProvider> = ({
                 title = {maxInj ? `Wprowadzono maksymalną liczbę elementów.` : `Kliknij, aby dodać nowy ${addContent}`}
                 onClick = {handleAddNewContent}
                 disabled = {maxInj}
+                ifSmallMargins = {ifSmallMargins}
             >
-                Dodaj nowy {addContent} ({MAX_INJECTIONS - elements.length}/{MAX_INJECTIONS})
+                Dodaj nowy {addContent} ({maxInjections - elements.length}/{maxInjections})
             </CmsAddNewContentButtonStyles>
         </MultipleInjectionContainer>
     );
