@@ -13,13 +13,12 @@
  */
 
 import * as React from 'react';
-import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../redux/reduxStore';
 import { ModalsActions } from '../../../../../../redux/modalsReduxStore/actions';
 import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/initialState';
-import { allModals, allModalsActions, allModalsInputs } from '../../../../../../redux/modalsReduxStore/types';
+import { allModals, allModalsInputs } from '../../../../../../redux/modalsReduxStore/types';
 
 import { IconSelectorContainer, IconSelectorLabel } from './HighOrderComponents.styles';
 
@@ -39,19 +38,11 @@ const IconPickerComponent: React.FC<PropsProvider> = ({ modalType }): JSX.Elemen
     const modal: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const modalIcon: any = modal[modalType].modalInputFields!.icon;
 
-    const [ iconName, setIconName ] = useState<any>(modalIcon);
     const dispatcher = useDispatch();
 
     const handleSettingIcon = (iconName: string): void => {
         dispatcher(ModalsActions.changeModalSelectedInput(modalType, allModalsInputs.ICON, iconName));
-        setIconName(iconName);
     };
-
-    useEffect(() => {
-        if (modal[modalType].action === allModalsActions.EDIT_ELEMENT) {
-            setIconName(modalIcon);
-        }
-    }, [ modalIcon ]);
 
     return (
         <IconSelectorContainer>
@@ -59,7 +50,7 @@ const IconPickerComponent: React.FC<PropsProvider> = ({ modalType }): JSX.Elemen
                 Niestandardowa ikona:
             </IconSelectorLabel>
             <IconPicker
-                value = {iconName}
+                value = {modalIcon}
                 onChange = {(iconName: any) => handleSettingIcon(iconName)}
                 buttonStyles = {{
                     border: '2px solid var(--darkGrayTint3)',
