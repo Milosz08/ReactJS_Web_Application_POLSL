@@ -101,6 +101,9 @@ export const SubjectSingleListTitleAndShortWrapper = styled.div`
     margin-bottom: 10px;
     display: flex;
     width: 100%;
+    @media only screen and (max-width: 540px) {
+        display: block;
+    }
 `;
 
 export const SubjectSingleListElementWrapper = styled('div')<{ widthCSS?: string, extraMargin?: boolean }>`

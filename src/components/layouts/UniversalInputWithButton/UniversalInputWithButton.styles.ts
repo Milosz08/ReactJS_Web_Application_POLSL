@@ -34,6 +34,12 @@ export const UniversalInputForArraysContainer = styled('div')<{ ifExtraRightLeft
     flex-grow: ${({ ifExtraRightLeft }) => ifExtraRightLeft ? 'initial' : 1};
     margin-left: ${({ ifExtraRightLeft }) => ifExtraRightLeft ? '10px' : 0};
     flex-basis: ${({ ifExtraRightLeft }) => ifExtraRightLeft ? '130px' : 'initial'};
+    @media only screen and (max-width: 800px) {
+        margin: 10px 0 10px ${({ ifExtraRightLeft }) => ifExtraRightLeft ? '10px' : 0};
+    }
+    @media only screen and (max-width: 540px) {
+        margin: 10px 0;
+    }
 `;
 
 export const UniversalInputWithButtonLabel = styled.label`
