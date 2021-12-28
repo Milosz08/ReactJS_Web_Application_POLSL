@@ -29,8 +29,8 @@ const useValidateAddEditCmsModal = (modalType: allModals) => {
     const modal: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const selModal = modal[modalType].modalInputFields;
 
-    const { CALENDAR_MODAL, HELPERS_LINKS_MODAL } = allModals;
-    const { DATE, ITEMS, START, MESSAGE, TITLE, LINK } = allModalsInputs;
+    const { CALENDAR_MODAL, HELPERS_LINKS_MODAL, SUBJECT_MODAL } = allModals;
+    const { DATE, ITEMS, START, MESSAGE, TITLE, LINK, SEMESTERS, DEPARTMENTS, SHORT, TYPE, PLACE, CLASSES } = allModalsInputs;
     const { ERROR } = modalInputHeader;
 
     const dispatcher = useDispatch();
@@ -53,7 +53,7 @@ const useValidateAddEditCmsModal = (modalType: allModals) => {
     const validateReducer = () => {
         switch(modalType) {
 
-            case allModals.HELPERS_LINKS_MODAL: {
+            case HELPERS_LINKS_MODAL: {
                 let nonValid = false;
                 if(selModal!.title.length < 3) {
                     dispatcher(changeModalSelectedInput(HELPERS_LINKS_MODAL, TITLE, true, ERROR));
@@ -66,7 +66,7 @@ const useValidateAddEditCmsModal = (modalType: allModals) => {
                 return nonValid;
             }
 
-            case allModals.CALENDAR_MODAL: {
+            case CALENDAR_MODAL: {
                 let nonValid = false;
                 if (selModal!.date.length === 0) {
                     dispatcher(changeModalSelectedInput(CALENDAR_MODAL, DATE, true, ERROR));
@@ -79,6 +79,47 @@ const useValidateAddEditCmsModal = (modalType: allModals) => {
                     }
                     if (item.message.length === 0) {
                         dispatcher(changeModalSelectedInputArray(CALENDAR_MODAL, ITEMS, MESSAGE, idx, true, ERROR));
+                        nonValid = true;
+                    }
+                });
+                return nonValid;
+            }
+
+            case SUBJECT_MODAL: {
+                let nonValid = false;
+                if(selModal!.title.length < 3) {
+                    dispatcher(changeModalSelectedInput(SUBJECT_MODAL, TITLE, true, ERROR));
+                    nonValid = true;
+                }
+                if(selModal!.semesters.length === 0) {
+                    dispatcher(changeModalSelectedInput(SUBJECT_MODAL, SEMESTERS, true, ERROR));
+                    nonValid = true;
+                }
+                selModal!.departments.forEach((item: any, idx: number) => {
+                    if(item.title.length === 0) {
+                        dispatcher(changeModalSelectedInputArray(SUBJECT_MODAL, DEPARTMENTS, TITLE, idx, true, ERROR));
+                        nonValid = true;
+                    }
+                    if(item.shortName.length === 0) {
+                        dispatcher(changeModalSelectedInputArray(SUBJECT_MODAL, DEPARTMENTS, SHORT, idx, true, ERROR));
+                        nonValid = true;
+                    }
+                    if(item.link.length < 5 || !item.link.toLowerCase().includes('https://')) {
+                        dispatcher(changeModalSelectedInputArray(SUBJECT_MODAL, DEPARTMENTS, LINK, idx, true, ERROR));
+                        nonValid = true;
+                    }
+                });
+                selModal!.classesPlatforms.forEach((item: any, idx: number) => {
+                    if(item.type === 'typ zajęć') {
+                        dispatcher(changeModalSelectedInputArray(SUBJECT_MODAL, CLASSES, TYPE, idx, true, ERROR));
+                        nonValid = true;
+                    }
+                    if(item.place === 'miejsce') {
+                        dispatcher(changeModalSelectedInputArray(SUBJECT_MODAL, CLASSES, PLACE, idx, true, ERROR));
+                        nonValid = true;
+                    }
+                    if(item.link.length < 5 || !item.link.toLowerCase().includes('https://')) {
+                        dispatcher(changeModalSelectedInputArray(SUBJECT_MODAL, CLASSES, LINK, idx, true, ERROR));
                         nonValid = true;
                     }
                 });
