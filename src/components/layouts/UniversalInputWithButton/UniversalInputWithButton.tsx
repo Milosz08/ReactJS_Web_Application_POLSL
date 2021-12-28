@@ -33,16 +33,15 @@ interface PropsProvider {
     inputType: allModalsInputs;
     inputMaxLength: number;
     placeholder?: string;
-    ifRemoveWhiteSpaces?: boolean
+    ifRemoveWhiteSpaces?: boolean;
     CustomIcon?: any;
     CustomContent?: React.FC;
 }
 
 /**
- * Component responsible for generating custom input with clear button. Mostly
- * used in CMS panels and modals.
+ * Component responsible for generating custom input with clear button. Mostly used in CMS panels and modals.
  *
- * @param placeholder { string? } - input placeholder ().
+ * @param placeholder { string? } - input placeholder.
  * @param modalType { allModals } - selected modal.
  * @param inputType { allModalsInputs } - selected modal input.
  * @param CustomIcon { any? } - custom icon component.
@@ -63,8 +62,8 @@ const UniversalInputWithButton: React.FC<PropsProvider> = ({
     const errorField = initialState[modalType].modalInputErrorsFields![inputType];
 
     const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-        const modifiedInput = target.value.replaceAll(' ', '').toLowerCase();
-        dispatcher(ModalsActions.changeModalSelectedInput(modalType, inputType, ifRemoveWhiteSpaces ? modifiedInput : target.value));
+        const modifiedInput = ifRemoveWhiteSpaces ? target.value.replaceAll(' ', '').toLowerCase() : target.value;
+        dispatcher(ModalsActions.changeModalSelectedInput(modalType, inputType, modifiedInput));
         clearSelectedInput(inputType);
     };
 
