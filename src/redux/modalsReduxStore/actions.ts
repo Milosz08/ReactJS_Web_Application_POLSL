@@ -115,13 +115,14 @@ export class ModalsActions {
      * @param modalType { allModals } - modal currently supported.
      * @param inputType { allModalsInputs } - input in currently supported modal.
      * @param elmIdx { number } - array element index.
+     * @param valueInput { boolean? } - flag decided, if errors fields together with normal fields should removed
      */
     public static removeElementFromArray = (
-        modalType: allModals, inputType: allModalsInputs, elmIdx: number
+        modalType: allModals, inputType: allModalsInputs, elmIdx: number, valueInput = modalInputHeader.NORMAL
     ): ReturnedToReducer => ({
         type: modalsTypes.REMOVE_ELEMENT_FROM_ARRAY,
         payload: {
-            modalType, inputType, elmIdx
+            modalType, inputType, elmIdx, valueInput
         }
     });
 }
