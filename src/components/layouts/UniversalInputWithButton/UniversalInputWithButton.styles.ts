@@ -28,16 +28,25 @@ export const UniversalInputWithButtonContainer = styled.div`
     }
 `;
 
+export const UniversalInputForArraysContainer = styled('div')<{ ifExtraRightLeft: boolean }>`
+    display: flex;
+    justify-content: center;
+    flex-grow: ${({ ifExtraRightLeft }) => ifExtraRightLeft ? 'initial' : 1};
+    margin-left: ${({ ifExtraRightLeft }) => ifExtraRightLeft ? '10px' : 0};
+    flex-basis: ${({ ifExtraRightLeft }) => ifExtraRightLeft ? '130px' : 'initial'};
+`;
+
 export const UniversalInputWithButtonLabel = styled.label`
     width: 100%;
     position: relative;
 `;
 
-export const UniversalInputWithButtonInput = styled(input_rs)<{ ifError: boolean }>`
-    ${props => StandardTextInput({ _ifError: props.ifError, _paddingRight: 50, _spaceUpDown: 10 })};
+export const UniversalInputWithButtonInput = styled(input_rs)<{ ifError: boolean, removeRightSpace?: boolean }>`
+    ${props => StandardTextInput({ _ifError: props.ifError, _paddingRight: props.removeRightSpace ? 0 : 50, _spaceUpDown: 10 })};
     transition: ${props => props.ifError ? 'none' : 'var(--transitionDuration)'};
     font-size: 1.1rem;
 `;
+
 
 export const UniversalInputWithButtonCustomButton = styled(button_rs)`
 `;
