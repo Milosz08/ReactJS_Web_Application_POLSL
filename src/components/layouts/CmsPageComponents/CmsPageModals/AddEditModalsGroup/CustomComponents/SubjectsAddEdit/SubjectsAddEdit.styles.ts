@@ -77,15 +77,31 @@ export const StatusElementsWrapper = styled.div`
     flex: 1;
 `;
 
-export const DepartmentsElementsWrapper = styled('div')<{ $ifError: boolean }>`
-    ${({ $ifError }) => AllSingleModalElementsBorder('wydziały', $ifError)};
+export const DepartmentsElementsWrapper = styled.div`
+    ${AllSingleModalElementsBorder('wydziały', false)};
     flex-grow: 1;
 `;
 
-export const SubjectsTypesElementsWrapper = styled('div')<{ $ifError: boolean }>`
-    ${({ $ifError }) => AllSingleModalElementsBorder('typy zajęć', $ifError)};
+export const SubjectsTypesElementsWrapper = styled.div`
+    ${AllSingleModalElementsBorder('typy zajęć', false)};
     width: calc(100% - 40px);
     @media only screen and (max-width: 677px) {
         width: 100%;
     }
+`;
+
+export const SubjectSingleListElementContainer = styled('div')<{ disableFlex?: boolean }>`
+    margin-top: 10px;
+    display: ${({ disableFlex }) => disableFlex ? 'block' : 'flex'};
+    width: 100%;
+`;
+
+export const SubjectSingleListTitleAndShortWrapper = styled.div`
+    margin-bottom: 10px;
+    display: flex;
+`;
+
+export const SubjectSingleListElementWrapper = styled('div')<{ widthCSS?: string, extraMargin?: boolean }>`
+    flex-grow: 1;
+    margin-top: ${({ extraMargin }) => extraMargin ? '10px' : 0};
 `;

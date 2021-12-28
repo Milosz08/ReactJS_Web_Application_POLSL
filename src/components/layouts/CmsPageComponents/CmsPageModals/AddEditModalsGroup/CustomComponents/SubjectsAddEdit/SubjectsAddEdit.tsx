@@ -14,6 +14,16 @@
 
 import * as React from 'react';
 
+import useFindMatchingElement from '../../../../../../../helpers/hooks/useFindMatchingElement';
+import useAutoFilledModalEdit from '../../../../../../../helpers/hooks/useAutoFilledModalEdit';
+
+import { useDispatch } from 'react-redux';
+import { apiReducerTypes } from '../../../../../../../redux/apiReduxStore/types';
+import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
+import { SubjectsContentTypes } from '../../../../../../../redux/apiReduxStore/dataTypes';
+import { initialStateForModalsInputs } from '../../../../../../../redux/modalsReduxStore/singleInitialStates';
+import { allModals, allModalsInputs, modalInputHeader } from '../../../../../../../redux/modalsReduxStore/types';
+
 import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
 import { SemestersAndStatusWrapper, SemestersStatusAndDepartmentsWrapper } from './SubjectsAddEdit.styles';
 
@@ -27,6 +37,38 @@ const ClassesTypesSubjectList = React.lazy(() => import('./subcomponents/Classes
  * Component responsible for generating structure of all subject modal subcomponent.
  */
 const SubjectsAddEdit: React.FC = (): JSX.Element => {
+
+    const matchElm: SubjectsContentTypes | any = useFindMatchingElement(allModals.SUBJECT_MODAL, apiReducerTypes.SUBJECTS);
+    const dispatcher = useDispatch();
+
+    const { addElementIntoArray } = ModalsActions;
+    const { SUBJECT_MODAL } = allModals;
+    const { TITLE, ICON, IF_END, SEMESTERS, CLASSES, DEPARTMENTS } = allModalsInputs;
+
+    const { semesters: sm, departments: dpt, classesPlatforms: clp } = initialStateForModalsInputs[SUBJECT_MODAL].normal;
+    const { departments: dptE, classesPlatforms: clpE } = initialStateForModalsInputs[SUBJECT_MODAL].errors;
+
+    const loadAdditionalContent = (): void => {
+        if(matchElm) {
+            matchElm!.semesters.forEach((_: any) => {
+                dispatcher(ModalsActions.addElementIntoArray(SUBJECT_MODAL, SEMESTERS, sm[0]));
+            });
+            matchElm!.departments.forEach((_: any) => {
+                dispatcher(addElementIntoArray(SUBJECT_MODAL, DEPARTMENTS, dpt[0]));
+                dispatcher(addElementIntoArray(SUBJECT_MODAL, DEPARTMENTS, dptE[0], modalInputHeader.ERROR));
+            });
+            matchElm!.classesPlatforms.forEach((_: any) => {
+                dispatcher(addElementIntoArray(SUBJECT_MODAL, CLASSES, clp[0]));
+                dispatcher(addElementIntoArray(SUBJECT_MODAL, CLASSES, clpE[0], modalInputHeader.ERROR));
+            });
+        }
+    };
+
+    const filledArr = matchElm ? [
+        matchElm.title, matchElm.icon.name, matchElm.ifEnd, matchElm.semesters, matchElm.departments, matchElm.classesPlatforms
+    ] : [ '', '', '', '', '', '' ];
+    useAutoFilledModalEdit(SUBJECT_MODAL, [ TITLE, ICON, IF_END, SEMESTERS, DEPARTMENTS, CLASSES ], filledArr, loadAdditionalContent);
+
     return (
         <AddEditCustomContentContainer>
             <TitleAndIconSubjectInputs/>
