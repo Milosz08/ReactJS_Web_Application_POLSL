@@ -45,6 +45,7 @@ export enum allModalsInputs {
     LEVEL = 'importantLevel',
     MESSAGE = 'message',
     IF_END = 'ifEnd',
+    SEMESTERS = 'semesters',
 }
 
 export enum modalInputHeader {

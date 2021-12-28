@@ -22,6 +22,7 @@ interface PropsProvider {
     ifChecked: boolean;
     changeCheckedCallback: ({ target }: React.ChangeEvent<HTMLInputElement>) => void;
     id: string | number;
+    name?: string;
     size?: number;
     color?: string;
     labelContent?: string;
@@ -43,9 +44,10 @@ interface PropsProvider {
  * @param ifError { boolean? } - checkbox validate field flag.
  * @param ifExtraMargin { boolean? } - add separating margin between checkbox and text label.
  * @param disabledProp { boolean? } - checkbox disabled flag.
+ * @param name { string? } - optional input name.
  */
 const UniversalCheckboxInput: React.FC<PropsProvider> = ({
-    ifChecked, changeCheckedCallback, id, size, color, labelContent, ifError, ifExtraMargin, disabledProp
+    ifChecked, changeCheckedCallback, id, size, color, labelContent, ifError, ifExtraMargin, disabledProp, name
 }): JSX.Element => (
     <UniversalCheckboxInputContainer>
         <CheckboxInput
@@ -57,6 +59,7 @@ const UniversalCheckboxInput: React.FC<PropsProvider> = ({
             checkboxColor = {disabledProp ? 'var(--lightGrayTint4)' : color}
             ifExtraMargin = {ifExtraMargin}
             disabled = {disabledProp}
+            name = {name}
         />
         <CheckboxCheckmark
             ifError = {ifError || false}

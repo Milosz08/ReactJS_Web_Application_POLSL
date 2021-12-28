@@ -13,15 +13,58 @@
  */
 
 import * as React from 'react';
-import { SemestersElementsWrapper } from '../SubjectsAddEdit.styles';
+
+import { SemestersElementsWrapper, SingleSemesterElementWrapper } from '../SubjectsAddEdit.styles';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../../../../../redux/reduxStore';
+import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxStore/initialState';
+import { ModalsActions } from '../../../../../../../../redux/modalsReduxStore/actions';
+import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
+import { SUBJECTS_SEMESTERS } from '../../../../../../../../helpers/structs/cmsSystem.config';
+
+const UniversalCheckboxInput = React.lazy(() => import('../../../../../../UniversalCheckboxInput/UniversalCheckboxInput'));
 
 /**
  * Component reponsible for generating subcomponents provides adding all semesters into added/editing subject.
  */
 const SemestersSubjectCheckboxes: React.FC = (): JSX.Element => {
+
+    const { subjectsModal }: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+    const { semesters } = subjectsModal.modalInputFields!;
+
+    const dispatcher = useDispatch();
+
+    const findElms = semesters.map((el: any) => el.identity);
+
+    const handleCheckboxInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+        if(target.checked) {
+            dispatcher(ModalsActions.addElementIntoArray(allModals.SUBJECT_MODAL, allModalsInputs.SEMESTERS, {
+                identity: target.id, name: target.name
+            }));
+        } else {
+            const findIdx = semesters.findIndex((el: any) => el.identity === target.id && el.name === target.name);
+            dispatcher(ModalsActions.removeElementFromArray(allModals.SUBJECT_MODAL, allModalsInputs.SEMESTERS, findIdx));
+        }
+    };
+
+    const generateSemesters = Array.from(Array(7).keys()).map(el => (
+        <SingleSemesterElementWrapper
+            key = {el}
+        >
+            <UniversalCheckboxInput
+                ifChecked = {findElms.find((idx: number) => idx - 1 === el)}
+                changeCheckedCallback = {handleCheckboxInput}
+                id = {el + 1}
+                name = {SUBJECTS_SEMESTERS[el]}
+                labelContent = {`Semestr ${el + 1}`}
+            />
+        </SingleSemesterElementWrapper>
+    ));
+
     return (
         <SemestersElementsWrapper>
-            semesters
+            {generateSemesters}
         </SemestersElementsWrapper>
     );
 };

@@ -30,3 +30,10 @@ export const MAX_RISK_NUMBER: number = 21;
 export const CMS_LIST_QUANTITY_VALUES: number[] = [
    5, 10, 15, 20, 25, 50
 ];
+
+/**
+ *
+ */
+export const SUBJECTS_SEMESTERS: string[] = [
+    'pierwszy', 'drugi', 'trzeci', 'czwarty', 'piąty', 'szósty', 'siódmy'
+];

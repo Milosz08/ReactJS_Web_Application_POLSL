@@ -62,8 +62,12 @@ export const SemestersAndStatusWrapper = styled.div`
 export const SemestersElementsWrapper = styled.div`
     ${AllSingleModalElementsBorder('semestry')};
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
     flex: 1;
+`;
+
+export const SingleSemesterElementWrapper = styled.div`
+    margin-right: 20px;
 `;
 
 export const StatusElementsWrapper = styled.div`
