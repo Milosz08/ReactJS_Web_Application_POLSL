@@ -16,9 +16,9 @@ import styled, { css } from 'styled-components';
 
 import { BorderWithPseudoElement } from '../../../../../../../styles/mixins.styles';
 
-const AllSingleModalElementsBorder = (_content: string) => css`
+const AllSingleModalElementsBorder = (_content: string, _ifError: boolean) => css`
     ${BorderWithPseudoElement({
-        _color: 'var(--darkGrayTint2)',
+        _color: _ifError ? 'var(--redColor)' : 'var(--darkGrayTint2)',
         _titleBgc: 'var(--cleanWhiteColor)',
         _content: _content,
         _fontSize: '1rem',
@@ -59,8 +59,8 @@ export const SemestersAndStatusWrapper = styled.div`
     }
 `;
 
-export const SemestersElementsWrapper = styled.div`
-    ${AllSingleModalElementsBorder('semestry')};
+export const SemestersElementsWrapper = styled('div')<{ $ifError: boolean }>`
+    ${({ $ifError }) => AllSingleModalElementsBorder('semestry', $ifError)};
     display: flex;
     flex-wrap: wrap;
     flex: 1;
@@ -71,19 +71,19 @@ export const SingleSemesterElementWrapper = styled.div`
 `;
 
 export const StatusElementsWrapper = styled.div`
-    ${AllSingleModalElementsBorder('status')};
+    ${AllSingleModalElementsBorder('status', false)};
     display: flex;
     justify-content: space-around;
     flex: 1;
 `;
 
-export const DepartmentsElementsWrapper = styled.div`
-    ${AllSingleModalElementsBorder('wydziały')};
+export const DepartmentsElementsWrapper = styled('div')<{ $ifError: boolean }>`
+    ${({ $ifError }) => AllSingleModalElementsBorder('wydziały', $ifError)};
     flex-grow: 1;
 `;
 
-export const SubjectsTypesElementsWrapper = styled.div`
-    ${AllSingleModalElementsBorder('typy zajęć')};
+export const SubjectsTypesElementsWrapper = styled('div')<{ $ifError: boolean }>`
+    ${({ $ifError }) => AllSingleModalElementsBorder('typy zajęć', $ifError)};
     width: calc(100% - 40px);
     @media only screen and (max-width: 677px) {
         width: 100%;

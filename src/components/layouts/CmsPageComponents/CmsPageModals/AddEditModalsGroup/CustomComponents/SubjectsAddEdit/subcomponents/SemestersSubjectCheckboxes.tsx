@@ -63,7 +63,9 @@ const SemestersSubjectCheckboxes: React.FC = (): JSX.Element => {
     ));
 
     return (
-        <SemestersElementsWrapper>
+        <SemestersElementsWrapper
+            $ifError = {errorField}
+        >
             {generateSemesters}
         </SemestersElementsWrapper>
     );

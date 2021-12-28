@@ -20,7 +20,9 @@ import { SubjectsTypesElementsWrapper } from '../SubjectsAddEdit.styles';
  */
 const ClassesTypesSubjectList: React.FC = (): JSX.Element => {
     return (
-        <SubjectsTypesElementsWrapper>
+        <SubjectsTypesElementsWrapper
+            $ifError = {false}
+        >
             types
         </SubjectsTypesElementsWrapper>
     );

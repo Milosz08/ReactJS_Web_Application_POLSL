@@ -54,7 +54,9 @@ const StatusSubjectRadioInputs: React.FC = (): JSX.Element => {
     ));
 
     return (
-        <StatusElementsWrapper>
+        <StatusElementsWrapper
+            $ifError = {false}
+        >
             {generateRadioInputs}
         </StatusElementsWrapper>
     );

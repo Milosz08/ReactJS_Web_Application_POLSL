@@ -21,7 +21,9 @@ import { DepartmentsElementsWrapper } from '../SubjectsAddEdit.styles';
  */
 const DepartmentsSubjectList: React.FC = (): JSX.Element => {
     return (
-        <DepartmentsElementsWrapper>
+        <DepartmentsElementsWrapper
+            $ifError = {false}
+        >
             departments
         </DepartmentsElementsWrapper>
     );
