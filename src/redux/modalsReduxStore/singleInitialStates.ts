@@ -17,7 +17,7 @@ import moment from 'moment';
 import { allModals } from './types';
 import { LEVELS } from '../../helpers/structs/calendar.config';
 
-const { HELPERS_LINKS_MODAL, CALENDAR_MODAL } = allModals;
+const { HELPERS_LINKS_MODAL, CALENDAR_MODAL, SUBJECT_MODAL } = allModals;
 
 /**
  * Object that stores all initial states for modals inputs.
@@ -54,5 +54,34 @@ export const initialStateForModalsInputs = {
                 }
             ],
         }
-    }
+    },
+    [SUBJECT_MODAL]: {
+        normal: {
+            title: '',
+            icon: 'FaBorderNone',
+            semesters: [
+                {
+                    identity: 1,
+                    name: 'pierwszy'
+                }
+            ],
+            departments: [
+                {
+                    title: '',
+                    shortName: '',
+                    link: ''
+                }
+            ],
+            classesPlatforms: [
+                {
+                    type: '',
+                    place: '',
+                    link: ''
+                }
+            ]
+        },
+        errors: {
+
+        }
+    },
 };

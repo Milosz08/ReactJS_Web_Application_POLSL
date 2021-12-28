@@ -69,8 +69,8 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: SUBJECTS_ELMS,
         apiReducerObjectKey: SUBJECTS,
         updateApiParam: UP_SUBJECTS,
-        modalInputFields: copyInitialState[CALENDAR_MODAL].normal,
-        modalInputErrorsFields: copyInitialState[CALENDAR_MODAL].errors,
+        modalInputFields: copyInitialState[SUBJECT_MODAL].normal,
+        modalInputErrorsFields: copyInitialState[SUBJECT_MODAL].errors,
     },
     [USER_MESSAGES_MODAL]: {
         ifOpen: false,
