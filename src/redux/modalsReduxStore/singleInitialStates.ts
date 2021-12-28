@@ -82,7 +82,21 @@ export const initialStateForModalsInputs = {
             ]
         },
         errors: {
-
+            title: false,
+            departments: [
+                {
+                    title: false,
+                    shortName: false,
+                    link: false
+                }
+            ],
+            classesPlatforms: [
+                {
+                    type: false,
+                    place: false,
+                    link: false,
+                }
+            ]
         }
     },
 };
