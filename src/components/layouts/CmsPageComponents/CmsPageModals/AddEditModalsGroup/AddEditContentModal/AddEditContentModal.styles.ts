@@ -61,4 +61,8 @@ export const AddEditCustomContentContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: 20px;
+    @media only screen and (max-width: 1250px) {
+        margin-right: 0;
+    }
 `;

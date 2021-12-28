@@ -22,6 +22,10 @@ export const UniversalInputWithButtonContainer = styled.div`
     justify-content: center;
     margin: 10px 20px;
     width: calc(100% - 40px);
+    @media only screen and (max-width: 677px) {
+        margin: 10px 0;
+        width: 100%;
+    }
 `;
 
 export const UniversalInputWithButtonLabel = styled.label`

@@ -18,6 +18,9 @@ import { button_rs, ul_rs } from '../../../../../../styles/reset.styles';
 export const IconSelectorContainer = styled.div`
     display: flex;
     margin: 10px 20px;
+    @media only screen and (max-width: 677px) {
+        margin: 10px 0;
+    }
 `;
 
 export const IconSelectorLabel = styled.div`
