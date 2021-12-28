@@ -13,15 +13,31 @@
  */
 
 import * as React from 'react';
+
 import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
+import { SemestersAndStatusWrapper, SemestersStatusAndDepartmentsWrapper } from './SubjectsAddEdit.styles';
+
+const TitleAndIconSubjectInputs = React.lazy(() => import('./subcomponents/TitleAndIconSubjectInputs'));
+const SemestersSubjectCheckboxes = React.lazy(() => import('./subcomponents/SemestersSubjectCheckboxes'));
+const StatusSubjectRadioInputs = React.lazy(() => import('./subcomponents/StatusSubjectRadioInputs'));
+const DepartmentsSubjectList = React.lazy(() => import('./subcomponents/DepartmentsSubjectList'));
+const ClassesTypesSubjectList = React.lazy(() => import('./subcomponents/ClassesTypesSubjectList'));
 
 /**
- *
+ * Component responsible for generating structure of all subject modal subcomponent.
  */
 const SubjectsAddEdit: React.FC = (): JSX.Element => {
     return (
         <AddEditCustomContentContainer>
-            SubjectsAddEdit
+            <TitleAndIconSubjectInputs/>
+            <SemestersStatusAndDepartmentsWrapper>
+                <SemestersAndStatusWrapper>
+                    <SemestersSubjectCheckboxes/>
+                    <StatusSubjectRadioInputs/>
+                </SemestersAndStatusWrapper>
+                <DepartmentsSubjectList/>
+            </SemestersStatusAndDepartmentsWrapper>
+            <ClassesTypesSubjectList/>
         </AddEditCustomContentContainer>
     );
 };

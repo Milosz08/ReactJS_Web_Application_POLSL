@@ -12,8 +12,76 @@
  * governing permissions and limitations under the license.
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const _ = styled.div`
-    
+import { BorderWithPseudoElement } from '../../../../../../../styles/mixins.styles';
+
+const AllSingleModalElementsBorder = (_content: string) => css`
+    ${BorderWithPseudoElement({
+        _color: 'var(--darkGrayTint2)',
+        _titleBgc: 'var(--cleanWhiteColor)',
+        _content: _content,
+        _fontSize: '1rem',
+        _fontWeight: 400
+    })};
+    margin-top: 30px;
+    ::before {
+        top: -11px;
+        text-transform: uppercase;
+    }
+    @media only screen and (max-width: 677px) {
+        margin: 30px 0 0;
+    }
+`;
+
+export const SubjectSingleModalAutoGrowElement = styled.div`
+    flex-grow: 1;
+    flex-basis: 55%;
+`;
+
+export const SemestersStatusAndDepartmentsWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% - 20px);
+    @media only screen and (max-width: 677px) {
+        width: 100%;
+    }
+`;
+
+export const SemestersAndStatusWrapper = styled.div`
+    width: 40%;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    @media only screen and (max-width: 1250px) {
+        width: 100%;
+        margin-right: 0;
+    }
+`;
+
+export const SemestersElementsWrapper = styled.div`
+    ${AllSingleModalElementsBorder('semestry')};
+    display: flex;
+    justify-content: center;
+    flex: 1;
+`;
+
+export const StatusElementsWrapper = styled.div`
+    ${AllSingleModalElementsBorder('status')};
+    display: flex;
+    justify-content: center;
+    flex: 1;
+`;
+
+export const DepartmentsElementsWrapper = styled.div`
+    ${AllSingleModalElementsBorder('wydziały')};
+    flex-grow: 1;
+`;
+
+export const SubjectsTypesElementsWrapper = styled.div`
+    ${AllSingleModalElementsBorder('typy zajęć')};
+    width: calc(100% - 40px);
+    @media only screen and (max-width: 677px) {
+        width: 100%;
+    }
 `;
