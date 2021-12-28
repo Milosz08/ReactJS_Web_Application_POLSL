@@ -37,6 +37,7 @@ const CalendarSingleInject = React.lazy(() => import('./subcomponents/CalendarSi
 const CalendarAddEdit: React.FC = (): JSX.Element => {
 
     const { CALENDAR_MODAL } = allModals;
+    const { DATE, ITEMS } = allModalsInputs;
 
     const itemSchema = initialStateForModalsInputs[CALENDAR_MODAL].normal.items[0];
     const itemErrSchema = initialStateForModalsInputs[CALENDAR_MODAL].errors.items[0];
@@ -48,16 +49,13 @@ const CalendarAddEdit: React.FC = (): JSX.Element => {
 
     const loadAdditionalContent = (): void => {
         if(matchElm) {
-            for(let i = 0; i < matchElm!.items.length - 1; i++) {
-                dispatcher(ModalsActions.addElementIntoArray(CALENDAR_MODAL, allModalsInputs.ITEMS, itemSchema));
-                dispatcher(ModalsActions.addElementIntoArray(
-                    CALENDAR_MODAL, allModalsInputs.ITEMS, itemErrSchema, modalInputHeader.ERROR
-                ));
-            }
+            matchElm!.items.forEach((_: any) => {
+                dispatcher(ModalsActions.addElementIntoArray(CALENDAR_MODAL, ITEMS, itemSchema));
+                dispatcher(ModalsActions.addElementIntoArray(CALENDAR_MODAL, ITEMS, itemErrSchema, modalInputHeader.ERROR));
+            });
         }
     };
 
-    const { DATE, ITEMS } = allModalsInputs;
     const filledArr = matchElm ? [ matchElm!.dateString, matchElm!.items ] : [ '', '' ];
     useAutoFilledModalEdit(CALENDAR_MODAL, [ DATE, ITEMS ], filledArr, loadAdditionalContent);
 
