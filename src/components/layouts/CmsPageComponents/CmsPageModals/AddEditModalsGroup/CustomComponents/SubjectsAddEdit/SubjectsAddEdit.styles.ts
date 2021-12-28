@@ -94,11 +94,13 @@ export const SubjectSingleListElementContainer = styled('div')<{ disableFlex?: b
     margin-top: 10px;
     display: ${({ disableFlex }) => disableFlex ? 'block' : 'flex'};
     width: 100%;
+    flex-wrap: wrap;
 `;
 
 export const SubjectSingleListTitleAndShortWrapper = styled.div`
     margin-bottom: 10px;
     display: flex;
+    width: 100%;
 `;
 
 export const SubjectSingleListElementWrapper = styled('div')<{ widthCSS?: string, extraMargin?: boolean }>`
