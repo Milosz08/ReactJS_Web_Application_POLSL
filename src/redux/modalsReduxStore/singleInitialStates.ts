@@ -60,7 +60,12 @@ export const initialStateForModalsInputs = {
             title: '',
             icon: 'FaBorderNone',
             ifEnd: false,
-            semesters: [],
+            semesters: [
+                {
+                    identity: 1,
+                    name: 'pierwszy'
+                }
+            ],
             departments: [
                 {
                     title: '',
@@ -70,8 +75,8 @@ export const initialStateForModalsInputs = {
             ],
             classesPlatforms: [
                 {
-                    type: '',
-                    place: '',
+                    type: 'typ zajęć',
+                    place: 'miejsce',
                     link: ''
                 }
             ]
