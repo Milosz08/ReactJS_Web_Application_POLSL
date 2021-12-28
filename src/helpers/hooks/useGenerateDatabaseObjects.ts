@@ -17,24 +17,22 @@ import { AES } from 'crypto-js';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reduxStore';
 import { ModalsInitialTypes } from '../../redux/modalsReduxStore/initialState';
-import { allModals, allModalsActions } from '../../redux/modalsReduxStore/types';
+import { allModals } from '../../redux/modalsReduxStore/types';
 
 /**
  * Custom hook responsible for generating an object to communicate with the database
  * API based on the passed parameter.
  *
  * @param modalType { allModals } - type of object to be generated
- * @param actionType { allModalsActions } - database action.
- * @param elementID { string | null } - element ID (used onlu in EDIT_MODE).
  */
-const useGenerateDatabaseObjects = (modalType: allModals, actionType: allModalsActions, elementID: string | null) => {
+const useGenerateDatabaseObjects = (modalType: allModals) => {
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
 
     const fields = modalsInitialState[modalType].modalInputFields!;
     const hashKey: string = process.env.REACT_APP_HASH_CODE || '';
 
-    const generateObject = () => {
+    return () => {
         switch (modalType) {
             case allModals.HELPERS_LINKS_MODAL:
                 return {
@@ -51,20 +49,23 @@ const useGenerateDatabaseObjects = (modalType: allModals, actionType: allModalsA
                     month: Number(month),
                     year: Number(year),
                     items: fields.items
-                }
+                };
+            case allModals.SUBJECT_MODAL:
+                return {
+                    title: fields.title,
+                    ifEnd: fields.ifEnd,
+                    icon: {
+                        family: 'FontAwesomeIcons', name: fields.icon
+                    },
+                    semesters: fields.semesters,
+                    departments: fields.departments,
+                    classesPlatforms: fields.classesPlatforms
+                };
             default:
                 return {};
         }
     };
 
-    return () => {
-        if (actionType === allModalsActions.EDIT_ELEMENT) {
-            const data = generateObject();
-            data['_id'] = elementID;
-            return data;
-        }
-        return generateObject();
-    }
 };
 
 export default useGenerateDatabaseObjects;

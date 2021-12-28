@@ -51,7 +51,7 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
 
-    const generatedObject = useGenerateDatabaseObjects(modalType, mode, id);
+    const generatedObject = useGenerateDatabaseObjects(modalType);
     const { validateReducer } = useValidateAddEditCmsModal(modalType);
 
     const dispatcher = useDispatch();
