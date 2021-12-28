@@ -48,6 +48,7 @@ const SubjectClassesSingleListElement: React.FC<PropsProvider> = ({ tileIdx }): 
             arrayFieldType = {allModalsInputs.CLASSES}
             inputFieldType = {allModalsInputs.PLACE}
             itemIndex = {tileIdx}
+            extraTopBottomMargin = {true}
         />
         <UniversalInputForArrays
             modalType = {allModals.SUBJECT_MODAL}

@@ -31,6 +31,7 @@ interface PropsProvider {
     arrayFieldType: allModalsInputs;
     inputFieldType: allModalsInputs;
     itemIndex: number;
+    extraTopBottomMargin?: boolean;
 }
 
 /**
@@ -42,9 +43,10 @@ interface PropsProvider {
  * @param arrayFieldType { allModalsInputs } - selected input in array modal.
  * @param inputFieldType { allModalsInputs } - selected array in modal.
  * @param itemIndex { number } - array index element.
+ * @param extraTopBottomMargin { boolean? } - flag decided to show margin on small devices.
  */
 const UniversalSelectInput: React.FC<PropsProvider> = ({
-    allOptions, defaultOption, modalType, arrayFieldType, inputFieldType, itemIndex
+    allOptions, defaultOption, modalType, arrayFieldType, inputFieldType, itemIndex, extraTopBottomMargin
 }): JSX.Element => {
 
     const modals: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
@@ -66,7 +68,9 @@ const UniversalSelectInput: React.FC<PropsProvider> = ({
     };
 
     return (
-        <UniversalSelectInputContainer>
+        <UniversalSelectInputContainer
+            extraTopBottomMargin = {extraTopBottomMargin}
+        >
             <UniversalSelectInputElement
                 ifError = {modalError}
                 value = {modalInput}

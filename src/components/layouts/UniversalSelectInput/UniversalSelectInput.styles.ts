@@ -18,10 +18,11 @@ import { MdKeyboardArrowDown } from 'react-icons/all';
 import { select_rs } from '../../../styles/reset.styles';
 import { StandardTextInput } from '../../../styles/mixins.styles';
 
-export const UniversalSelectInputContainer = styled.label`
+export const UniversalSelectInputContainer = styled.label<{ extraTopBottomMargin: boolean }>`
     position: relative;
     z-index: 0;
-    margin-right: 10px;
+    margin: ${({ extraTopBottomMargin }) => extraTopBottomMargin ? '10px' : 0} 10px 
+            ${({ extraTopBottomMargin }) => extraTopBottomMargin ? '10px' : 0} 0
 `;
 
 export const UniversalSelectInputElement = styled(select_rs)<{ ifError: boolean }>`
