@@ -15,7 +15,7 @@
 import styled from 'styled-components';
 import { button_rs } from '../../../../styles/reset.styles';
 
-export const CmsAddNewContentButtonStyles = styled(button_rs)`
+export const CmsAddNewContentButtonStyles = styled(button_rs)<{ ifSmallMargins?: boolean }>`
     border: 2px dashed var(--navyBlueColor);
     color: var(--navyBlueColor);
     border-radius: 10px;
@@ -24,7 +24,7 @@ export const CmsAddNewContentButtonStyles = styled(button_rs)`
     text-align: center;
     font-size: 1.2rem;
     font-weight: 500;
-    margin-top: 15px;
+    margin-top: ${({ ifSmallMargins }) => ifSmallMargins ? 10 : 15}px;
     :disabled {
         border-color: var(--darkGrayTint3);
         color: var(--darkGrayTint3);

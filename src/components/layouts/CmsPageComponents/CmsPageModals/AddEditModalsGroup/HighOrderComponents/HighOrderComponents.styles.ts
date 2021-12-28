@@ -40,20 +40,20 @@ export const IconSelectorLabel = styled.div`
 
 export const MultipleInjectionContainer = styled(ul_rs)`
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
 `;
 
-export const SingleInjectionContainer = styled('li')<{ ifBorderInactive: boolean }>`
+export const SingleInjectionContainer = styled('li')<{ ifBorderInactive: boolean, ifSmallMargins: boolean }>`
     display: flex;
     border: ${({ ifBorderInactive }) => ifBorderInactive ? 'none' : '1px solid var(--darkGrayTint3)'}; 
     border-radius: 10px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: ${({ ifSmallMargins }) => ifSmallMargins ? 0 : '20px'};
 `;
 
-export const SingleInjectionCustomContentWrapper = styled.div`
+export const SingleInjectionCustomContentWrapper = styled('div')<{ ifSmallMargins: boolean }>`
     flex-grow: 1;
-    padding: 20px;
+    padding: ${({ ifSmallMargins }) => ifSmallMargins ? 0 : '20px'};
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
