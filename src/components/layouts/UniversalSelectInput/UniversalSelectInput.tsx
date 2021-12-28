@@ -14,6 +14,8 @@
 
 import * as React from 'react';
 
+import useValidateAddEditCmsModal from '../../../helpers/hooks/useValidateAddEditCmsModal';
+
 import { RootState } from '../../../redux/reduxStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { ModalsActions } from '../../../redux/modalsReduxStore/actions';
@@ -50,6 +52,8 @@ const UniversalSelectInput: React.FC<PropsProvider> = ({
 }): JSX.Element => {
 
     const modals: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+
+    const { clearSelectedArrayInput } = useValidateAddEditCmsModal(modalType);
     const dispatcher = useDispatch();
 
     const modalInput = modals[modalType].modalInputFields![arrayFieldType][itemIndex][inputFieldType];
@@ -65,6 +69,7 @@ const UniversalSelectInput: React.FC<PropsProvider> = ({
 
     const handleChangeInputOptions = ({ target }: React.ChangeEvent<HTMLSelectElement>): void => {
         dispatcher(ModalsActions.changeModalSelectedInputArray(modalType, arrayFieldType, inputFieldType, itemIndex, target.value));
+        clearSelectedArrayInput(arrayFieldType, inputFieldType, itemIndex);
     };
 
     return (

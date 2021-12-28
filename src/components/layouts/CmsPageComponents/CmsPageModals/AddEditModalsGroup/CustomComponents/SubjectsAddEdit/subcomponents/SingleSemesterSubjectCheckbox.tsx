@@ -15,6 +15,7 @@
 import * as React from 'react';
 
 import { SUBJECTS_SEMESTERS } from '../../../../../../../../helpers/structs/cmsSystem.config';
+import useValidateAddEditCmsModal from '../../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../../redux/reduxStore';
@@ -42,6 +43,7 @@ const SingleSemesterSubjectCheckbox: React.FC<PropsProvider> = ({ idx, ifActive 
     const { subjectsModal }: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const { semesters } = subjectsModal.modalInputFields!;
 
+    const { clearSelectedInput } = useValidateAddEditCmsModal(allModals.SUBJECT_MODAL);
     const dispatcher = useDispatch();
 
     const handleCheckboxInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
@@ -53,6 +55,7 @@ const SingleSemesterSubjectCheckbox: React.FC<PropsProvider> = ({ idx, ifActive 
             const findMathIdx = semesters.findIndex((el: any) => el.identity === Number(target.id) + 1);
             dispatcher(ModalsActions.removeElementFromArray(allModals.SUBJECT_MODAL, allModalsInputs.SEMESTERS, findMathIdx));
         }
+        clearSelectedInput(allModalsInputs.SEMESTERS);
     };
 
     return (
