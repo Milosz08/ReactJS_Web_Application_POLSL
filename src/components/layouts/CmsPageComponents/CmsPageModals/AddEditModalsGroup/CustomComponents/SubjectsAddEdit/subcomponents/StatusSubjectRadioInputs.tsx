@@ -37,7 +37,7 @@ const StatusSubjectRadioInputs: React.FC = (): JSX.Element => {
 
     const handleRadioInput = (): void => {
         setChecked(prevState => !prevState);
-        dispatcher(ModalsActions.changeModalSelectedInput(allModals.SUBJECT_MODAL, allModalsInputs.IF_END, checked));
+        dispatcher(ModalsActions.changeModalSelectedInput(allModals.SUBJECT_MODAL, allModalsInputs.IF_END, !checked));
     };
 
     const generateRadioInputs = [ false, true ].map((el, idx) => (
