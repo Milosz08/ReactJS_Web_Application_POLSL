@@ -78,7 +78,9 @@ const UniversalSelectInput: React.FC<PropsProvider> = ({
             >
                 {generateOptions}
             </UniversalSelectInputElement>
-            <UniversalSelectInputArrow/>
+            <UniversalSelectInputArrow
+                $ifError = {modalError}
+            />
         </UniversalSelectInputContainer>
     );
 };

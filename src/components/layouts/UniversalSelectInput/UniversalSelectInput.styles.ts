@@ -35,11 +35,11 @@ export const UniversalSelectInputElement = styled(select_rs)<{ ifError: boolean 
     background-color: transparent;
 `;
 
-export const UniversalSelectInputArrow = styled(MdKeyboardArrowDown)`
+export const UniversalSelectInputArrow = styled(MdKeyboardArrowDown)<{ $ifError: boolean }>`
     position: absolute;
     z-index: -1;
     top: 7px;
     right: 7px;
     font-size: 2rem;
-    color: var(--navyBlueColor);
+    color: var(--${({ $ifError }) => $ifError ? 'red' : 'navyBlue'}Color);
 `;
