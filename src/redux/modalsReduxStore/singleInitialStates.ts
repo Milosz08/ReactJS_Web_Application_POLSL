@@ -60,12 +60,7 @@ export const initialStateForModalsInputs = {
             title: '',
             icon: 'FaBorderNone',
             ifEnd: false,
-            semesters: [
-                {
-                    identity: 1,
-                    name: 'pierwszy'
-                }
-            ],
+            semesters: [],
             departments: [
                 {
                     title: '',
@@ -83,6 +78,7 @@ export const initialStateForModalsInputs = {
         },
         errors: {
             title: false,
+            semesters: false,
             departments: [
                 {
                     title: false,
