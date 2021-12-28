@@ -23,8 +23,7 @@ import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/ini
 import { allModals, allModalsInputs, modalInputHeader } from '../../../../../../redux/modalsReduxStore/types';
 
 import {
-    MultipleInjectionContainer, SingleInjectionContainer, SingleInjectionCustomContentWrapper,
-    SingleInjectionRemoveElementButton
+    MultipleInjectionContainer, SingleInjectionContainer, SingleInjectionCustomContentWrapper, SingleInjectionRemoveElementButton
 } from './HighOrderComponents.styles';
 
 import { CmsAddNewContentButtonStyles } from '../../../CmsAddNewContentButton/CmsAddNewContentButton.styles';
@@ -71,6 +70,7 @@ const ItemsListMultipleInjection: React.FC<PropsProvider> = ({
 
     const handleRemoveContent = (idx: number) => {
         dispatcher(ModalsActions.removeElementFromArray(modalType, elementKey, idx));
+        dispatcher(ModalsActions.removeElementFromArray(modalType, elementKey, idx, modalInputHeader.ERROR));
     };
 
     const generateSingleInjection = Boolean(elements) ? elements.map((tile: any, idx: number) => (
