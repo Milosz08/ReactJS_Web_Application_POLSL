@@ -33,10 +33,9 @@ const GlobalStyle = createGlobalStyle`
     }
     
     body.disable-scroll {
-        position: fixed;
-        width: 100%;
+        overflow-y: hidden;
     }
-
+    
     * [role = 'link'] {
         cursor: pointer;
     }
