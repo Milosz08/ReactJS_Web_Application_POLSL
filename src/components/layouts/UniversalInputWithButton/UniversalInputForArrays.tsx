@@ -47,7 +47,7 @@ interface PropsProvider {
  * @param arrayIdx { number } - array index element.
  * @param inputMaxLength { number } - max length of input.
  * @param ifRemoveWhiteSpaces { boolean } - flag decided, if before saving in redux store dispatcher should remove white spaces.
- * @param ifExtraRightLeft { boolean? } -
+ * @param ifExtraRightLeft { boolean? } - flag decided, if component should have extra margin on left and right.
  */
 const UniversalInputForArrays: React.FC<PropsProvider> = ({
     placeholder, modalType, inputType, arrayType, arrayIdx, inputMaxLength, ifRemoveWhiteSpaces, ifExtraRightLeft
