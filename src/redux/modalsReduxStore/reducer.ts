@@ -89,7 +89,6 @@ const modalsReducer = (state = modalsInitialState, action: any) => {
         case modalsTypes.REMOVE_ELEMENT_FROM_ARRAY: {
             const { modalType, inputType, elmIdx, valueInput } = action.payload;
             const match = state[modalType][valueInput]![inputType].filter((_: any, idx: number) => idx !== elmIdx);
-            console.log(match);
             return {
                 ...state, [modalType]: {
                     ...state[modalType], [valueInput]: {
