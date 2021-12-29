@@ -39,12 +39,20 @@ export const ChangeScheduleSingleDayHeader = styled(button_rs)`
     text-align: left;
 `;
 
-export const ChangeScheduleSingleDayIcon = styled(FiArrowRight)<{ ifActive: boolean }>`
+export const ChangeScheduleSingleDayIcon = styled(FiArrowRight)<{ $ifActive: boolean }>`
     margin-right: 20px;
-    transform: rotate(${({ ifActive }) => ifActive ? '90deg' : 0});
+    transform: rotate(${({ $ifActive }) => $ifActive ? '90deg' : 0});
     transition: var(--transitionDuration);
 `;
 
 export const ChangeScheduleSingleDayTitle = styled.div``;
 
-export const ChangeScheduleSingleDayCount = styled.div``;
+export const ChangeScheduleSingleDayCount = styled.div`
+    @media only screen and (max-width: 667px) {
+        display: none;
+    }
+`;
+
+export const SingleScheduleSingleDayElementContainer = styled.div`
+    margin: 30px 0;
+`;

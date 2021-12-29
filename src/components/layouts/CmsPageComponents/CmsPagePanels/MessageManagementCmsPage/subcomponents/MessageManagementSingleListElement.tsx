@@ -14,13 +14,14 @@
 
 import * as React from 'react';
 
+import useResizeListener from '../../../../../../helpers/hooks/useResizeListener';
+
 import { allModals } from '../../../../../../redux/modalsReduxStore/types';
 import { FooterFormTypes } from '../../../../../../redux/apiReduxStore/dataTypes';
 
 import {
     CmsIdElement, CmsSingleListNormalElement, CmsUnorderedListElement
 } from '../../HighOrderComponents/HighOrderComponents.styles';
-import useResizeListener from '../../../../../../helpers/hooks/useResizeListener';
 
 const SingleElementButtons = React.lazy(() => import('../../HighOrderComponents/SingleElementButtons'));
 
