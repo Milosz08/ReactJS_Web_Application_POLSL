@@ -20,18 +20,21 @@ import { apiReducerTypes, updateSections } from '../apiReduxStore/types';
 import { LEVELS } from '../../helpers/structs/calendar.config';
 import { initialStateForModalsInputs } from './singleInitialStates';
 
-const { SUBJECT_MODAL, USER_MESSAGES_MODAL, HELPERS_LINKS_MODAL, CALENDAR_MODAL } = allModals;
+const { SUBJECT_MODAL, USER_MESSAGES_MODAL, HELPERS_LINKS_MODAL, CALENDAR_MODAL, SCHEDULE_MODAL } = allModals;
 const { EDIT_ELEMENT } = allModalsActions;
 
-const { SUBJECT_CMS_PAGE, USERS_MESS_CMS_PAGE, HELPS_CMS_PAGE, CALENDAR_CMS_PAGE } = ROUTING_PATH_NAMES;
-const { SUBJECTS_ELMS, FOOTER_FORM, HELPERS_LINKS, CALENDAR_RECORDS } = API_ENDPOINTS;
-const { USER_MESSAGES, SUBJECTS, CALENDAR, HELPERS_LINKS: HELPERS } = apiReducerTypes;
-const { SUBJECTS: UP_SUBJECTS, CALENDAR: UP_CALENDAR, USER_MESS: UP_USER_MESS, HELPERS: UP_HELPS } = updateSections;
+const { SUBJECT_CMS_PAGE, USERS_MESS_CMS_PAGE, HELPS_CMS_PAGE, CALENDAR_CMS_PAGE, SCHEDULE_CMS_PAGE } = ROUTING_PATH_NAMES;
+const { SUBJECTS_ELMS, FOOTER_FORM, HELPERS_LINKS, CALENDAR_RECORDS, SCHEDULE_SUBJECTS } = API_ENDPOINTS;
+const { USER_MESSAGES, SUBJECTS, CALENDAR, HELPERS_LINKS: HELPERS, SCHEDULE } = apiReducerTypes;
+const {
+    SUBJECTS: UP_SUBJECTS, CALENDAR: UP_CALENDAR, USER_MESS: UP_USER_MESS, HELPERS: UP_HELPS, SCHEDULE: UP_SCHEDULE
+} = updateSections;
 
 interface ModalParametersProvider {
     ifOpen: boolean;
     action: allModalsActions;
     dataID: string | null;
+    day?: string;
     iconComponent: string;
     titleContent: string;
     pageTitle: string;
@@ -106,6 +109,20 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: CALENDAR_RECORDS,
         apiReducerObjectKey: CALENDAR,
         updateApiParam: UP_CALENDAR,
+        modalInputFields: copyInitialState[CALENDAR_MODAL].normal,
+        modalInputErrorsFields: copyInitialState[CALENDAR_MODAL].errors,
+    },
+    [SCHEDULE_MODAL]: {
+        ifOpen: false,
+        action: EDIT_ELEMENT,
+        dataID: null,
+        day: 'poniedziałek',
+        iconComponent: 'BsClipboard',
+        titleContent: 'przedmiot w dniu:',
+        pageTitle: SCHEDULE_CMS_PAGE,
+        apiActionsPath: SCHEDULE_SUBJECTS,
+        apiReducerObjectKey: SCHEDULE,
+        updateApiParam: UP_SCHEDULE,
         modalInputFields: copyInitialState[CALENDAR_MODAL].normal,
         modalInputErrorsFields: copyInitialState[CALENDAR_MODAL].errors,
     }

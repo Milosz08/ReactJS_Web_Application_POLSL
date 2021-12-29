@@ -44,6 +44,20 @@ export class ModalsActions {
     });
 
     /**
+     * Method reponsible for change root element in selected modal
+     *
+     * @param modal { allModals } - modal currently supported.
+     * @param rootElement { allModalsInputs } - input in currently supported modal.
+     * @param rootValue { any } - primitive type to change state.
+     */
+    public static changeModalRootElement = (modal: allModals, rootElement: allModalsInputs, rootValue: any): ReturnedToReducer => ({
+        type: modalsTypes.CHANGE_MODAL_ROOT_ELEMENT,
+        payload: {
+            modal, rootElement, rootValue
+        }
+    });
+
+    /**
      * Method responsible for calling the reducer function that change modal selected input property.
      *
      * @param modalType { allModals } - modal currently supported.

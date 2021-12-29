@@ -22,7 +22,8 @@ import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/ini
 import { allModals, allModalsActions } from '../../../../../../redux/modalsReduxStore/types';
 
 import {
-    DeleteContentDatabaseID, DeleteContentModalContainer, DeleteContentModalWrapper, DeleteContentTitle, DeleteModalScrollWrapper
+    DeleteContentDatabaseID, DeleteContentModalContainer, DeleteContentModalWrapper, DeleteContentTitle,
+    DeleteModalScrollWrapper
 } from './DeleteContentModal.styles';
 
 const DeleteContentModalIconsComponent = React.lazy(() => import('./subcomponents/DeleteContentModalIconsComponent'));
@@ -47,6 +48,7 @@ const DeleteContentModal: React.FC<PropsProvider> = ({ modalType, pageTitle, Ren
 
     const modalObject = initialTypes[modalType];
     const checkIfCurrentModeIsRemove: boolean = modalObject.action === allModalsActions.REMOVE_ELEMENT
+    const customContent = modalType === allModals.SCHEDULE_MODAL ? <><br/>{modalObject.day}</> : '';
 
     const [ modal, background ] = useModalShowHide(modalObject.ifOpen && checkIfCurrentModeIsRemove);
 
@@ -62,7 +64,7 @@ const DeleteContentModal: React.FC<PropsProvider> = ({ modalType, pageTitle, Ren
                         deleteContentIcon = {modalObject.iconComponent}
                     />
                     <DeleteContentTitle>
-                        Usuwanie zawartości <strong>{modalObject.titleContent}</strong> z bazy danych
+                        Usuwanie zawartości <strong>{modalObject.titleContent} {customContent}</strong> z bazy danych
                     </DeleteContentTitle>
                     <DeleteContentDatabaseID>
                         Database identifier: {modalObject.dataID || 'Not Find Database Identifier'}

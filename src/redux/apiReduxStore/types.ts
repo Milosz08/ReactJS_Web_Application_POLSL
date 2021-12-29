@@ -25,7 +25,6 @@ export enum updateSections {
     SCHEDULE = 'SCHEDULE',
     HELPERS = 'HELPERS',
     COVID = 'COVID',
-    BLOG_INJECTIONS = 'BLOG_INJECTIONS',
     USER_MESS = 'USER_MESS',
     AUTH = 'AUTH',
 }
@@ -50,13 +49,15 @@ export enum sortInputTypes {
     CMS_USER_MESSAGES_SEARCH = 'cmsUserMessagesSearch',
     CMS_HELPERS_LINKS_SEARCH = 'cmsHelpersLinksSearch',
     CMS_CALENDAR_SEARCH = 'cmsCalendarSearch',
+    CMS_SCHEDULE_SEARCH = 'cmsScheduleSearch',
 }
 
 export enum apiReducerTypes {
     USER_MESSAGES = 'footerFormMessages',
     SUBJECTS = 'subjectsContent',
     HELPERS_LINKS = 'helpersLinks',
-    CALENDAR = 'calendarContent'
+    CALENDAR = 'calendarContent',
+    SCHEDULE = 'scheduleContent',
 }
 
 export enum apiGetContentFromDB {

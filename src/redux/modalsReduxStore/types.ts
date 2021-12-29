@@ -14,6 +14,7 @@
 
 export enum modalsTypes {
     CHANGE_MODAL_STATE = 'CHANGE_MODAL_STATE',
+    CHANGE_MODAL_ROOT_ELEMENT = 'CHANGE_MODAL_ROOT_ELEMENT',
     CHANGE_MODAL_SELECTED_INPUT = 'CHANGE_MODAL_SELECTED_INPUT',
     CHANGE_MODAL_SELECTED_ARRAY = 'CHANGE_MODAL_SELECTED_ARRAY',
     CLEAR_ALL_SINGLE_MODAL_INPUTS = 'CLEAR_ALL_SINGLE_MODAL_INPUTS',
@@ -26,6 +27,7 @@ export enum allModals {
     USER_MESSAGES_MODAL = 'userMessagesModal',
     HELPERS_LINKS_MODAL = 'helpersLinksModal',
     CALENDAR_MODAL = 'calendarModal',
+    SCHEDULE_MODAL = 'scheduleModal',
 }
 
 export enum allModalsActions {
@@ -51,6 +53,7 @@ export enum allModalsInputs {
     TYPE = 'type',
     PLACE = 'place',
     SHORT = 'shortName',
+    DAY = 'day',
 }
 
 export enum modalInputHeader {

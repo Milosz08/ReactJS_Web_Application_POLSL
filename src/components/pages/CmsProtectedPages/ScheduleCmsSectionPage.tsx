@@ -16,9 +16,17 @@ import * as React from 'react';
 
 import usePageTitle from '../../../helpers/hooks/usePageTitle';
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
+import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
+
+import { allModals } from '../../../redux/modalsReduxStore/types';
+import { modalsInitialState } from '../../../redux/modalsReduxStore/initialState';
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
-import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
+
+const ScheduleDelete = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/CustomComponents/ScheduleDelete'));
+const DeleteContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/DeleteContentModal/DeleteContentModal'));
+const ScheduleAddEdit = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/AddEditModalsGroup/CustomComponents/ScheduleAddEdit/ScheduleAddEdit'));
+const AddEditContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/AddEditModalsGroup/AddEditContentModal/AddEditContentModal'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
 const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
@@ -34,6 +42,15 @@ const ScheduleCmsSectionPage: React.FC = (): JSX.Element => {
 
     return (
         <>
+            <DeleteContentModal
+                modalType = {allModals.SCHEDULE_MODAL}
+                RenderCustomComponent = {ScheduleDelete}
+                pageTitle = {modalsInitialState[allModals.SCHEDULE_MODAL].pageTitle}
+            />
+            <AddEditContentModal
+                modalType = {allModals.SCHEDULE_MODAL}
+                RenderCustomComponent = {ScheduleAddEdit}
+            />
             <CommonComponents/>
             <CommonPaginationContainer>
                 <CommonPaginationWrapper>

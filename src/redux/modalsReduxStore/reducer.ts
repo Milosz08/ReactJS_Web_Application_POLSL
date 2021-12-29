@@ -39,6 +39,15 @@ const modalsReducer = (state = modalsInitialState, action: any) => {
             };
         }
 
+        case modalsTypes.CHANGE_MODAL_ROOT_ELEMENT: {
+            const { modal, rootElement, rootValue } = action.payload;
+            return {
+                ...state, [modal]: {
+                    ...state[modal], [rootElement]: rootValue
+                }
+            };
+        }
+
         case modalsTypes.CHANGE_MODAL_SELECTED_INPUT: {
             const { modalType, inputType, value, valueInput } = action.payload;
             return {
@@ -67,7 +76,8 @@ const modalsReducer = (state = modalsInitialState, action: any) => {
             const { modalType } = action.payload;
             const copyInitialState = JSON.parse(JSON.stringify(initialStateForModalsInputs[modalType]));
             return {
-                ...state, [modalType]: { ...state[modalType],
+                ...state, [modalType]: {
+                    ...state[modalType],
                     modalInputFields: copyInitialState.normal,
                     modalInputErrorsFields: copyInitialState.errors,
                 }

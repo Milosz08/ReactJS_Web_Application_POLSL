@@ -33,6 +33,7 @@ interface PropsProvider {
     arrayType: sortAvailables;
     sortByType: string;
     ifReversed?: boolean;
+    additionalMark?: string;
 }
 
 export const SearchingContext = createContext<Partial<SearchingTypes>>({ });
@@ -45,13 +46,18 @@ export const SearchingContext = createContext<Partial<SearchingTypes>>({ });
  * @param sortType { sortInputTypes } - get input string value from Redux state.
  * @param arrayType { sortAvailables } - specific object from Redux initial state.
  * @param sortByType { string } - based on string key object sorting array list.
- * @param ifReversed { boolean } - flag decided, if initial array should be reversed.
+ * @param ifReversed { boolean? } - flag decided, if initial array should be reversed.
+ * @param additionalMark { string? }
  */
-const SearchingProvider: React.FC<PropsProvider> = ({ children, sortType, arrayType, sortByType, ifReversed }): JSX.Element => {
+const SearchingProvider: React.FC<PropsProvider> = ({
+    children, sortType, arrayType, sortByType, ifReversed, additionalMark
+}): JSX.Element => {
 
     const initialState: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
-    const filteredState = useInputFilter(initialState[arrayType], sortType, sortByType, Boolean(ifReversed));
-    const ifLengthIsNull = initialState[arrayType].length === 0;
+    const addtlMark = Boolean(additionalMark) ?  initialState[arrayType][additionalMark!] : initialState[arrayType];
+
+    const filteredState = useInputFilter(addtlMark, sortType, sortByType, Boolean(ifReversed));
+    const ifLengthIsNull = addtlMark!.length === 0;
 
     return (
         <SearchingContext.Provider
