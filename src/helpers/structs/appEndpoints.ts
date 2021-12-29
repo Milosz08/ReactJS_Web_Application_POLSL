@@ -14,7 +14,7 @@
 
 import { updateSections } from '../../redux/apiReduxStore/types';
 
-const { COVID, SUBJECTS, SCHEDULE, CALENDAR, HELPERS, BLOG_INJECTIONS, USER_MESS, AUTH } = updateSections;
+const { COVID, SUBJECTS, SCHEDULE, CALENDAR, HELPERS, USER_MESS, AUTH } = updateSections;
 
 export enum FRONT_ENDPOINTS {
     ABSOLUTE = '/',
@@ -84,13 +84,6 @@ export const CMS_ENDPOINTS: CmsEndpointsTypes[] = [
         type: HELPERS,
         title: 'Pomoce Naukowe',
         description: 'Przejdź, aby dodać, usunąć lub zmodyfikować linki do pomocy naukowych.',
-    },
-    {
-        path: '/modyfikuj-wpisy-redakcji',
-        icon: 'BsFiles',
-        type: BLOG_INJECTIONS,
-        title: 'Wpisy z Aktualnościami',
-        description: 'Przejdź, aby dodać, usunąć lub zmodyfikować wpisy z aktualnościami.',
     },
     {
         path: '/modyfikuj-dane-logowania',

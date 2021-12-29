@@ -31,7 +31,6 @@ const ScheduleCmsSectionPage = React.lazy(() => import('../pages/CmsProtectedPag
 const CalendarCmsSectionPage = React.lazy(() => import('../pages/CmsProtectedPages/CalendarCmsSectionPage'));
 const UserMessagesCmsSectionPage = React.lazy(() => import('../pages/CmsProtectedPages/UserMessagesCmsSectionPage'));
 const HelperLinksCmsSectionPage = React.lazy(() => import('../pages/CmsProtectedPages/HelperLinksCmsSectionPage'));
-const InsertContentCmsSectionPage = React.lazy(() => import('../pages/CmsProtectedPages/InsertContentCmsSectionPage'));
 const AuthCmsSectionPage = React.lazy(() => import('../pages/CmsProtectedPages/AuthCmsSectionPage'));
 
 /**
@@ -39,7 +38,7 @@ const AuthCmsSectionPage = React.lazy(() => import('../pages/CmsProtectedPages/A
  */
 const allRoutesComponents: React.FC[] = [
     CovidCmsSectionPage, SubjectsCmsSectionPage, ScheduleCmsSectionPage, CalendarCmsSectionPage,
-    UserMessagesCmsSectionPage, HelperLinksCmsSectionPage, InsertContentCmsSectionPage, AuthCmsSectionPage
+    UserMessagesCmsSectionPage, HelperLinksCmsSectionPage, AuthCmsSectionPage
 ];
 
 /**
