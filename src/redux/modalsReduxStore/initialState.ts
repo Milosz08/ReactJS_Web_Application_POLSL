@@ -82,8 +82,6 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: FOOTER_FORM,
         apiReducerObjectKey: USER_MESSAGES,
         updateApiParam: UP_USER_MESS,
-        modalInputFields: copyInitialState[CALENDAR_MODAL].normal,
-        modalInputErrorsFields: copyInitialState[CALENDAR_MODAL].errors,
     },
     [HELPERS_LINKS_MODAL]: {
         ifOpen: false,
