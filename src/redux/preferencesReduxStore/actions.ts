@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import preferencesTypes, { cmsListIndicators, groupsTypes, searchInputs } from './types';
+import preferencesTypes, { cmsListIndicators, prefFields } from './types';
 
 import { arrowDirs } from '../../components/layouts/SubjectsDetails/subcomponents/NextPrevArrowNavigation';
 import { directions } from '../../components/layouts/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
@@ -22,124 +22,107 @@ export interface ReturnedToReducer {
     payload?: any;
 }
 
-export const toggleHamburger = (): ReturnedToReducer => ({
-    type: preferencesTypes.TOGGLE_HAMBURGER
-});
+/**
+ * Static class that stores methods responsible for basic handling of app preferences.
+ */
+export class PrefActions {
 
-export const insertInFooterInputs = (inputType: string, value: string | boolean): ReturnedToReducer => ({
-    type: preferencesTypes.INSERT_FOOTER_INPUTS,
-    payload: {
-        inputType, value
-    }
-});
+    /**
+     * Method responsible for changing the state properties at the first level.
+     *
+     * @param field { prefFields } - type of field to change (1st level).
+     * @param value { any } - primitive or object type to change state.
+     */
+    public static changeRootPrefField = (field: prefFields, value: any): ReturnedToReducer => ({
+        type: preferencesTypes.CHANGE_ROOT_PREF_FIELD,
+        payload: {
+            field, value
+        }
+    });
 
-export const setErrorsFooterInputs = (inputType: string, error: boolean): ReturnedToReducer => ({
-    type: preferencesTypes.ERRORS_FOOTER_INPUTS,
-    payload: {
-        inputType, error
-    }
-});
+    /**
+     * Method responsible for changing state properties at the first and second level.
+     *
+     * @param fieldObject { prefFields } - type of field to change (1st level).
+     * @param field { prefFields } - type of field to change (2nd level).
+     * @param value { any } - primitive or object type to change state.
+     */
+    public static changeSecondRootPrefField = (
+        fieldObject: prefFields, field: prefFields | string, value: any
+    ): ReturnedToReducer => ({
+        type: preferencesTypes.CHANGE_SECOND_ROOT_PREF_FIELD,
+        payload: {
+            fieldObject, field, value
+        }
+    });
 
-export const setMobileNavActiveElm = (activeElement: number, maxElms: number): ReturnedToReducer => ({
-    type: preferencesTypes.MOBILE_NAV_SET_ELM,
-    payload: {
-        activeElement, maxElms
-    }
-});
+    /**
+     * Method responsible for changing the active element in the navigation bar (only on small devices).
+     *
+     * @param activeElement { number } - element indicator to change into active in state.
+     * @param maxElms { number } - max elements.
+     */
+    public static setMobileNavActiveElm = (activeElement: number, maxElms: number): ReturnedToReducer => ({
+        type: preferencesTypes.MOBILE_NAV_SET_ELM,
+        payload: {
+            activeElement, maxElms
+        }
+    });
 
-export const changeRoutePath = (toggleState: boolean): ReturnedToReducer => ({
-    type: preferencesTypes.ROUTE_PATH_TOGGLE,
-    payload: {
-        toggleState,
-    }
-});
+    /**
+     * Method responsible for changing the state of the active item tile. If the last one is selected,
+     * the next in order is the first element of the array.
+     *
+     * @param dir { arrowDirs } - direction (left/right).
+     * @param length { number } - count of subjects.
+     */
+    public static prevNextSubjectActivePanel = (dir: arrowDirs, length: number):ReturnedToReducer => ({
+        type: preferencesTypes.PREV_NEXT_ACTIVE_PANEL,
+        payload: {
+            dir, length
+        }
+    });
 
-export const toggleCmsHamburger = (): ReturnedToReducer => ({
-    type: preferencesTypes.TOGGLE_CMS_HAMBURGER
-});
+    /**
+     * Method responsible for changing the page in the navigation of a specific item list (based on a parameter).
+     *
+     * @param type { cmsListIndicators } - selected CMS panel list navigation.
+     * @param page { number } - page number.
+     * @param maxPage { number } - max pages in number.
+     * @param dir { directions | null } - direction.
+     */
+    public static changeCmsListPageNumber = (
+        type: cmsListIndicators, page: number, maxPage: number, dir: directions | null = null
+    ): ReturnedToReducer => ({
+        type: preferencesTypes.CHANGE_CMS_LIST_PAGE_NUMBER,
+        payload: {
+            page, type, maxPage, dir
+        }
+    });
 
-export const insertInSearchInput = (inputType: searchInputs, value: string): ReturnedToReducer => ({
-    type: preferencesTypes.INSERT_SEARCH_INPUT,
-    payload: {
-        inputType, value
-    }
-});
+    /**
+     * Method responsible for changing the page in the navigation of a specific item list (based on a parameter).
+     *
+     * @param type { cmsListIndicators } - selected CMS panel list navigation.
+     * @param maxShowingElms { number } - max of showing nagivation elements.
+     */
+    public static changeCmsListShowingElementsCount = (type: cmsListIndicators, maxShowingElms: number): ReturnedToReducer => ({
+        type: preferencesTypes.CHANGE_MAX_SHOWING_CMS_LIST_ELMS,
+        payload: {
+            type, maxShowingElms
+        }
+    });
 
-export const setErrorsSearchInputs = (inputType: searchInputs, error: boolean): ReturnedToReducer => ({
-    type: preferencesTypes.ERRORS_SEARCH_INPUTS,
-    payload: {
-        inputType, error
-    }
-});
+    /**
+     * Method responsible for changing the sorting mode of the items in the list.
+     *
+     * @param type { cmsListIndicators } - selected CMS panel list navigation.
+     */
+    public static changeUniversalListSortingType = (type: cmsListIndicators): ReturnedToReducer => ({
+        type: preferencesTypes.CHANGE_CMS_LIST_SORTING_TYPE,
+        payload: {
+            type
+        }
+    });
 
-export const setSubjectActivePanel = (dbID: number): ReturnedToReducer => ({
-    type: preferencesTypes.CHANGE_ACTIVE_PANEL,
-    payload: {
-        dbID
-    }
-});
-
-export const prevNextSubjectActivePanel = (dir: arrowDirs, length: number):ReturnedToReducer => ({
-    type: preferencesTypes.PREV_NEXT_ACTIVE_PANEL,
-    payload: {
-        dir, length
-    }
-});
-
-export const setSelectedGroup = (type: groupsTypes, group: string): ReturnedToReducer => ({
-    type: preferencesTypes.CHANGE_CHOOSE_SCHEDULE_GROUP,
-    payload: {
-        type, group
-    }
-});
-
-export const toggleSaveScheduleModal = (toggleState: boolean): ReturnedToReducer => ({
-    type: preferencesTypes.TOGGLE_SCHEDULE_MODAL,
-    payload: {
-        toggleState
-    }
-});
-
-export const toggleClearScheduleModal = (toggleState: boolean): ReturnedToReducer => ({
-    type: preferencesTypes.TOGGLE_SCHEDULE_CLEAR_MODAL,
-    payload: {
-        toggleState
-    }
-});
-
-export const toggleCalendarMobileModal = (toggleState: boolean, dateInfo: Date): ReturnedToReducer => ({
-    type: preferencesTypes.TOGGLE_CALENDAR_MOBILE_MODAL,
-    payload: {
-        toggleState, dateInfo
-    }
-});
-
-export const toggleUserLogoutModal = (toggleState: boolean): ReturnedToReducer => ({
-    type: preferencesTypes.TOGGLE_USER_LOGOUT_MODAL,
-    payload: {
-        toggleState
-    }
-});
-
-export const changeCmsListPageNumber = (
-    type: cmsListIndicators, page: number, maxPage: number, dir: directions | null = null
-): ReturnedToReducer => ({
-    type: preferencesTypes.CHANGE_CMS_LIST_PAGE_NUMBER,
-    payload: {
-        page, type, maxPage, dir
-    }
-});
-
-export const changeCmsListShowingElementsCount = (type: cmsListIndicators, maxShowingElms: number): ReturnedToReducer => ({
-    type: preferencesTypes.CHANGE_MAX_SHOWING_CMS_LIST_ELMS,
-    payload: {
-        type, maxShowingElms
-    }
-});
-
-export const changeUniversalListSortingType = (type: cmsListIndicators): ReturnedToReducer => ({
-    type: preferencesTypes.CHANGE_CMS_LIST_SORTING_TYPE,
-    payload: {
-        type
-    }
-});
+}

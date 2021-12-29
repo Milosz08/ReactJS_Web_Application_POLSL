@@ -19,15 +19,18 @@ import { CMS_LIST_QUANTITY_VALUES } from '../../helpers/structs/cmsSystem.config
 
 import GROUPS_STATIC from '../../helpers/structs/allGroups';
 
-const { USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
 const { NORMAL, ENGLISH, SK } = groupsTypes;
-const { SUBJECT_SEARCH, SCHEDULE_SEARCH, CMS_SUBJECTS_SEARCH, CMS_USER_MESSAGES, CMS_HELPERS_LINKS, CMS_CALENDAR } = searchInputs;
-const { SUBJECTS, USER_MESSAGES, HELPERS_LINKS, CALENDAR } = cmsListIndicators;
+const { USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
+const { SUBJECTS, USER_MESSAGES, HELPERS_LINKS, CALENDAR, SCHEDULE } = cmsListIndicators;
+
+const {
+    SUBJECT_SEARCH, SCHEDULE_SEARCH, CMS_SUBJECTS_SEARCH, CMS_USER_MESSAGES, CMS_HELPERS_LINKS, CMS_CALENDAR, CMS_SCHEDULE
+} = searchInputs;
 
 export interface PreferencesInitialTypes {
     hamburgerToggle: boolean;
     footerForm: {
-        [value: string]: string;
+        [value: string]: string | any;
     };
     footerFormErrors: {
         [value: string]: boolean;
@@ -53,13 +56,16 @@ export interface PreferencesInitialTypes {
     };
     userLogoutModalOpen: boolean;
     currentActivePage: {
-        activePage: number;
-        maxShowingElms: number;
-        sortingMode: sortingTypes;
+        [key: string]: {
+            activePage: number;
+            maxShowingElms: number;
+            sortingMode: sortingTypes;
+        }
     };
+    currentOpenScheduleSection: number;
 }
 
-export const PrefInitialState = {
+export const PrefInitialState: PreferencesInitialTypes = {
     hamburgerToggle: false,
     footerForm: {
         [USER_NICKNAME]: '',
@@ -83,6 +89,7 @@ export const PrefInitialState = {
         [CMS_USER_MESSAGES]: '',
         [CMS_HELPERS_LINKS]: '',
         [CMS_CALENDAR]: '',
+        [CMS_SCHEDULE]: '',
     },
     searchInputsErrors: {
         [SUBJECT_SEARCH]: false,
@@ -91,6 +98,7 @@ export const PrefInitialState = {
         [CMS_USER_MESSAGES]: false,
         [CMS_HELPERS_LINKS]: false,
         [CMS_CALENDAR]: false,
+        [CMS_SCHEDULE]: false
     },
     activeSubjectPanelID: 0,
     chooseGroups: {
@@ -126,5 +134,11 @@ export const PrefInitialState = {
             maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
             sortingMode: sortingTypes.DECREASE,
         },
-    }
-} as const;
+        [SCHEDULE]: {
+            activePage: 1,
+            maxShowingElms: CMS_LIST_QUANTITY_VALUES[0],
+            sortingMode: sortingTypes.INCREASE,
+        }
+    },
+    currentOpenScheduleSection: -1,
+};

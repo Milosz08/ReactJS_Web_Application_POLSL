@@ -27,18 +27,14 @@ import { directions } from '../../components/layouts/UniversalListNavigate/subco
 const preferencesReducer = (state = PrefInitialState, action: any) => {
     switch(action.type) {
 
-        case preferencesTypes.TOGGLE_HAMBURGER: {
-            return { ...state, hamburgerToggle: !state.hamburgerToggle };
+        case preferencesTypes.CHANGE_ROOT_PREF_FIELD: {
+            const { field, value } = action.payload;
+            return { ...state, [field]: value };
         }
 
-        case preferencesTypes.INSERT_FOOTER_INPUTS: {
-            const { inputType, value } = action.payload;
-            return { ...state, footerForm: { ...state.footerForm, [inputType]: value } };
-        }
-
-        case preferencesTypes.ERRORS_FOOTER_INPUTS: {
-            const { inputType, error } = action.payload;
-            return { ...state, footerFormErrors: { ...state.footerFormErrors, [inputType]: error } };
+        case preferencesTypes.CHANGE_SECOND_ROOT_PREF_FIELD: {
+            const { fieldObject, field, value } = action.payload;
+            return { ...state, [fieldObject]: { ...state[fieldObject], [field]: value } };
         }
 
         case preferencesTypes.MOBILE_NAV_SET_ELM: {
@@ -47,30 +43,6 @@ const preferencesReducer = (state = PrefInitialState, action: any) => {
                 return state;
             }
             return { ...state, mobileNavActiveElement: activeElement };
-        }
-
-        case preferencesTypes.ROUTE_PATH_TOGGLE: {
-            const { toggleState } = action.payload;
-            return { ...state, routePathActive: toggleState };
-        }
-
-        case preferencesTypes.TOGGLE_CMS_HAMBURGER: {
-            return { ...state, cmsHamburgerToggle: !state.cmsHamburgerToggle };
-        }
-
-        case preferencesTypes.INSERT_SEARCH_INPUT: {
-            const { inputType, value } = action.payload;
-            return { ...state, searchInputs: { ...state.searchInputs, [inputType]: value } };
-        }
-
-        case preferencesTypes.ERRORS_SEARCH_INPUTS: {
-            const { inputType, error } = action.payload;
-            return { ...state, searchInputsErrors: { ...state.searchInputsErrors, [inputType]: error } };
-        }
-
-        case preferencesTypes.CHANGE_ACTIVE_PANEL: {
-            const { dbID } = action.payload;
-            return { ...state, activeSubjectPanelID: dbID };
         }
 
         case preferencesTypes.PREV_NEXT_ACTIVE_PANEL: {
@@ -89,31 +61,6 @@ const preferencesReducer = (state = PrefInitialState, action: any) => {
                 }
             }
             return { ...state, activeSubjectPanelID: activeID };
-        }
-
-        case preferencesTypes.CHANGE_CHOOSE_SCHEDULE_GROUP: {
-            const { type, group } = action.payload;
-            return { ...state, chooseGroups: { ...state.chooseGroups, [type]: group.toLocaleLowerCase() } };
-        }
-
-        case preferencesTypes.TOGGLE_SCHEDULE_MODAL: {
-            const { toggleState } = action.payload;
-            return { ...state, saveScheduleOptionModalOpen: toggleState };
-        }
-
-        case preferencesTypes.TOGGLE_SCHEDULE_CLEAR_MODAL: {
-            const { toggleState } = action.payload;
-            return { ...state, clearScheduleOptionModalOpen: toggleState };
-        }
-
-        case preferencesTypes.TOGGLE_CALENDAR_MOBILE_MODAL: {
-            const { toggleState, dateInfo } = action.payload;
-            return { ...state, calendarMobileModalOpen: { toggleState, dateInfo } };
-        }
-
-        case preferencesTypes.TOGGLE_USER_LOGOUT_MODAL: {
-            const { toggleState } = action.payload;
-            return { ...state, userLogoutModalOpen: toggleState };
         }
 
         case preferencesTypes.CHANGE_CMS_LIST_PAGE_NUMBER: {

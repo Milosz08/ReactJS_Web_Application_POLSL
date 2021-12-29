@@ -13,21 +13,10 @@
  */
 
 enum preferencesTypes {
-    TOGGLE_HAMBURGER = 'TOGGLE_HAMBURGER',
-    INSERT_FOOTER_INPUTS = 'INSERT_FOOTER_INPUTS',
-    ERRORS_FOOTER_INPUTS = 'ERRORS_FOOTER_INPUTS',
+    CHANGE_ROOT_PREF_FIELD = 'CHANGE_ROOT_PREF_FIELD',
+    CHANGE_SECOND_ROOT_PREF_FIELD = 'CHANGE_SECOND_ROOT_PREF_FIELD',
     MOBILE_NAV_SET_ELM = 'MOBILE_NAV_SET_ELM',
-    ROUTE_PATH_TOGGLE = 'ROUTE_PATH_TOGGLE',
-    TOGGLE_CMS_HAMBURGER = 'TOGGLE_CMS_HAMBURGER',
-    INSERT_SEARCH_INPUT = 'INSERT_SEARCH_INPUT',
-    ERRORS_SEARCH_INPUTS = 'ERRORS_SEARCH_INPUTS',
-    CHANGE_ACTIVE_PANEL = 'CHANGE_ACTIVE_PANEL',
     PREV_NEXT_ACTIVE_PANEL = 'PREV_NEXT_ACTIVE_PANEL',
-    CHANGE_CHOOSE_SCHEDULE_GROUP = 'CHANGE_CHOOSE_SCHEDULE_GROUP',
-    TOGGLE_SCHEDULE_MODAL = 'TOGGLE_SCHEDULE_MODAL',
-    TOGGLE_SCHEDULE_CLEAR_MODAL = 'TOGGLE_SCHEDULE_CLEAR_MODAL',
-    TOGGLE_CALENDAR_MOBILE_MODAL = 'TOGGLE_CALENDAR_MOBILE_MODAL',
-    TOGGLE_USER_LOGOUT_MODAL = 'TOGGLE_USER_LOGOUT_MODAL',
     CHANGE_CMS_LIST_PAGE_NUMBER = 'CHANGE_CMS_LIST_PAGE_NUMBER',
     CHANGE_MAX_SHOWING_CMS_LIST_ELMS = 'CHANGE_MAX_SHOWING_CMS_LIST_ELMS',
     CHANGE_CMS_LIST_SORTING_TYPE = 'CHANGE_CMS_LIST_SORTING_TYPE',
@@ -40,6 +29,24 @@ export enum searchInputs {
     CMS_USER_MESSAGES = 'cmsUserMessagesSearch',
     CMS_HELPERS_LINKS = 'cmsHelpersLinksSearch',
     CMS_CALENDAR = 'cmsCalendarSearch',
+    CMS_SCHEDULE = 'cmsScheduleSearch'
+}
+
+export enum prefFields {
+    SCHEDULE_SECTION = 'currentOpenScheduleSection',
+    HAMBURGER_TOGGLE = 'hamburgerToggle',
+    FOOTER_FORM = 'footerForm',
+    FOOTER_FORM_ERRORS = 'footerFormErrors',
+    ROUTE_PATH = 'routePathActive',
+    CMS_HAMBURGER_TOGGLE = 'cmsHamburgerToggle',
+    SEARCH_INPUTS = 'searchInputs',
+    SEARCH_INPUTS_ERRORS = 'searchInputsErrors',
+    ACTIVE_SUB_PANEL = 'activeSubjectPanelID',
+    CHOOSE_GROUP = 'chooseGroups',
+    SCHEDULE_SAVE_MODAL = 'saveScheduleOptionModalOpen',
+    SCHEDULE_CLEAR_MODAL = 'clearScheduleOptionModalOpen',
+    CALENDAR_MODAL = 'calendarMobileModalOpen',
+    USER_LOGOUT_MODAL = 'userLogoutModalOpen',
 }
 
 export enum groupsTypes {
@@ -53,6 +60,7 @@ export enum cmsListIndicators {
     USER_MESSAGES = 'footerFormMessages',
     HELPERS_LINKS = 'helpersLinks',
     CALENDAR = 'calendarContent',
+    SCHEDULE = 'scheduleContent',
 }
 
 export enum sortingTypes {
