@@ -65,11 +65,14 @@ export class ApiActionsGet {
      *
      * @param elementType { string } - object key, informs where redux should delete element.
      * @param elementID { string | null } - element ID (from database).
+     * @param day { string? } - subject delete day indicator.
      */
-    public static deleteReduxStoreElement = (elementType: string, elementID: string | null): ReturnedToReducer => ({
+    public static deleteReduxStoreElement = (
+        elementType: string, elementID: string | null, day: string = ''
+    ): ReturnedToReducer => ({
         type: apiTypes.DELETE_DB_ELEMENT_THUNK,
         payload: {
-            elementType, elementID
+            elementType, elementID, day
         }
     });
 }

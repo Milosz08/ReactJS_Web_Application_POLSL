@@ -14,6 +14,7 @@
 
 import * as React from 'react';
 
+import { STATIC_DAYS } from '../../../../../../../helpers/structs/schedule.config';
 import useGenerateLoadingLine from '../../../../../../../helpers/hooks/useGenerateLoadingLine';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,6 +46,8 @@ interface PropsProvider {
 const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, modalType, dataID, title }): JSX.Element => {
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+    const day = STATIC_DAYS.find(el => el.name === modalsInitialState.scheduleModal.day)!.eng;
+
     const dispatcher = useDispatch();
 
     const handleNotRemoveContentButton = (): void => {
@@ -57,7 +60,7 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
             handleNotRemoveContentButton();
             setTimeout(() => {
                 reset();
-                dispatcher(DbModalOp.deleteSingleElementFromCms(modalsInitialState, modalType, dataID!));
+                dispatcher(DbModalOp.deleteSingleElementFromCms(modalsInitialState, modalType, dataID!, day));
             }, 1000);
         }, 2000);
     };
@@ -74,12 +77,12 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
                 <DeleteContentButton
                     onClick = {generatingCounter}
                 >
-                    Usuń {buttonContent}
+                    Usuń {modalType === allModals.SCHEDULE_MODAL ? 'przedmiot' : buttonContent}
                 </DeleteContentButton>
                 <NotDeleteContentButton
                     onClick = {handleNotRemoveContentButton}
                 >
-                    Pozostaw {buttonContent}
+                    Pozostaw {modalType === allModals.SCHEDULE_MODAL ? 'przedmiot' : buttonContent}
                 </NotDeleteContentButton>
                 <EstimateTimeCounterBar
                     visibility = {show}

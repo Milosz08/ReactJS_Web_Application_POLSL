@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import apiTypes from './types';
+import apiTypes, { sortAvailables } from './types';
 
 import { apiInitialState } from './initialState';
 import ApiReducerUtils from './apiReducerUtils';
@@ -47,9 +47,15 @@ const apiReducer = (state = apiInitialState, action: any) => {
         }
 
         case apiTypes.DELETE_DB_ELEMENT_THUNK: {
-            const { elementType, elementID } = action.payload;
-            const apiStateElement = state[elementType];
-            const elementsWithoutRemoving = apiStateElement.filter((el: any) => el._id !== elementID);
+            const { elementType, elementID, day } = action.payload;
+            let deletedState = state[elementType];
+            if(elementType === sortAvailables.SCHEDULE) {
+                deletedState = state[elementType][day];
+            }
+            const elementsWithoutRemoving = deletedState.filter((el: any) => el._id !== elementID);
+            if(elementType === sortAvailables.SCHEDULE) {
+                return { ...state, [elementType]: { ...state[elementType], [day]: elementsWithoutRemoving } };
+            }
             return { ...state, [elementType]: elementsWithoutRemoving };
         }
 
