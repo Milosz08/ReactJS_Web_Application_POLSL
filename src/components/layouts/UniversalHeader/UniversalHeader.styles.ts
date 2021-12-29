@@ -41,7 +41,16 @@ export const UniversalHeaderTitleSection = styled.div`
     align-items: center;
 `;
 
-export const UniversalHeaderMainContent = styled.span``;
+export const UniversalHeaderMainContent = styled.span`
+    strong {
+        font-weight: inherit;
+        color: var(--darkOrangeColor);
+        margin-left: 6px;
+        @media only screen and (max-width: 600px) {
+            margin-left: 0;
+        }
+    }
+`;
 
 export const AdditionalHeaderTitle = styled.span`
     text-decoration: underline;

@@ -50,6 +50,9 @@ const AddEditContentModal: React.FC<PropsProvider> = ({ modalType, RenderCustomC
 
     const [ modal, background ] = useModalShowHide(modalObject.ifOpen && (currentModeIsEdit || currentModeIsAdd));
 
+    const insertDay = modalType === allModals.SCHEDULE_MODAL ? <strong>{modalObject.day}</strong> : '';
+    const customContent = <>{currentModeIsAdd ? 'Dodaj' : 'Modyfikuj'} {modalObject.titleContent} {insertDay}</>;
+
     return (
         <AddEditContentModalContainer
             ref = {background}
@@ -61,7 +64,7 @@ const AddEditContentModal: React.FC<PropsProvider> = ({ modalType, RenderCustomC
                     <UniversalHeader
                         iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaFileSignature' }}
                         ifCloseButtonVisible = {false}
-                        content = {`${currentModeIsAdd ? 'Dodaj' : 'Modyfikuj'} ${modalObject.titleContent}`}
+                        content = {customContent}
                         changeIconSize = '.8em'
                     />
                     <RenderCustomComponent

@@ -26,7 +26,7 @@ interface PropsProvider {
         family: string;
         name: string;
     };
-    content: string;
+    content: string | JSX.Element;
     ifCloseButtonVisible: boolean;
     changeIconSize?: string;
     addHeaderDayIndicator?: string;
