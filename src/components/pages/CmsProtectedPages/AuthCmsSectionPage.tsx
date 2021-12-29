@@ -19,10 +19,10 @@ import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
 import { CommonPaginationContainer, CommonPaginationWrapper } from './subcomponents/CommonPagination.styles';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
-import UniversalHeader from '../../layouts/UniversalHeader/UniversalHeader';
-import ChangeCredentialsCmsPage from '../../layouts/CmsPageComponents/CmsPagePanels/ChangeCredentialsCmsPage/ChangeCredentialsCmsPage';
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
+const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const ChangeCredentialsCmsPage = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/ChangeCredentialsCmsPage/ChangeCredentialsCmsPage'));
 
 /**
  * Component responsible for generating CMS subpage for controlled auth forms using for change credentials.
