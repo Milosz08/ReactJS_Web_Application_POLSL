@@ -14,14 +14,20 @@
 
 import * as React from 'react';
 import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
+import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../../../redux/reduxStore';
 
 /**
  *
  */
 const ScheduleAddEdit: React.FC = (): JSX.Element => {
+
+    const { scheduleModal }: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+
     return (
         <AddEditCustomContentContainer>
-            ScheduleAddEdit
+            ScheduleAddEdit {scheduleModal.day}
         </AddEditCustomContentContainer>
     );
 };
