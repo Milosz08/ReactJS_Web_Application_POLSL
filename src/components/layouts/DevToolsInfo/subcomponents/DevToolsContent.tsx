@@ -28,9 +28,9 @@ const DevToolsContent: React.FC = (): JSX.Element => (
             Aplikacja oparta o bibliotekę <strong>ReactJS</strong> została napisana w
             standardzie <strong>SPA (Single Page Application)</strong>. Za zarządzanie stanem komponentów odpowiada
             system <strong>Redux</strong> wraz z oprogramowaniem middleware umożliwiającym pracę w
-            bibliotece <strong>ReactJS. </strong> Aplikacja korzysta z Restowego API działającym na silniku
-            <strong> Java Spring Boot </strong> wraz z komunikującą się z nim nierelacyjną bazą danych <strong>MongoDB</strong>. Całość
-            warstwy front-end aplikacji została napisana w języku <strong>TypeScript</strong>. Kod projektu znajdziesz na moim
+            bibliotece <strong>ReactJS. </strong> Aplikacja korzysta z autorskiego Restowego API działającym na silniku
+            <strong> Java Spring Boot </strong> oraz <strong>JPA</strong> wraz z komunikującą się z nim bazą danych <strong>mySQL</strong>.
+            Całość warstwy front-end aplikacji została napisana w języku <strong>TypeScript</strong>. Kod projektu znajdziesz na moim
             repozytorium:{' '}
             <DevToolsGithubLink
                 href = 'https://github.com/Milosz08/ReactJS_Web_Application_POLSL'
