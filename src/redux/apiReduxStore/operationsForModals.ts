@@ -67,11 +67,14 @@ export class DbModalOp {
      * @param modState { ModalsInitialTypes } - initial state of modal redux store.
      * @param modalType { allModals } - type of modal.
      * @param elementID { string } - deleted element database identifier.
+     * @param day { string? } - subject delete day indicator.
      */
-    public static deleteSingleElementFromCms = (modState: ModalsInitialTypes, modalType: allModals, elementID: string | null) => {
+    public static deleteSingleElementFromCms = (
+        modState: ModalsInitialTypes, modalType: allModals, elementID: string | null, day: string = ''
+    ) => {
         return async (dispatch: (prop: any) => void) => {
             await axiosInstance.delete(`${modState[modalType].apiActionsPath}/${elementID}`);
-            dispatch(deleteReduxStoreElement(modState[modalType].apiReducerObjectKey, elementID));
+            dispatch(deleteReduxStoreElement(modState[modalType].apiReducerObjectKey, elementID, day));
         };
     };
 }

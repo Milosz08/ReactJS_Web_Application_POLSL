@@ -29,9 +29,10 @@ import { SearchingContext, SearchingTypes } from '../../context/searchingContext
  * @param searchType { searchInputs } - enum of usable input.
  * @param pageType { cmsListIndicators } - enum of usable CMS path.
  * @param RenderComponent { any } - object stored header and single element components.
+ * @param currDay { string } - current day (used in schedule modal).
  */
 const useFilteredDivideList = (
-    searchType: searchInputs, pageType: cmsListIndicators, RenderComponent: any
+    searchType: searchInputs, pageType: cmsListIndicators, RenderComponent: any, currDay: string
 ): [ boolean, (JSX.Element | null)[] ] => {
 
     const {
@@ -50,6 +51,7 @@ const useFilteredDivideList = (
                     key = {idx}
                     element = {element}
                     index = {idx}
+                    day = {currDay}
                 />
             ) : null
         ) : (
@@ -57,6 +59,7 @@ const useFilteredDivideList = (
                 key = {idx}
                 element = {element}
                 index = {idx}
+                day = {currDay}
             />
         )
     ));

@@ -38,6 +38,7 @@ interface PropsProvider {
     notFind?: string;
     modalType?: allModals;
     buttonNewContent?: string;
+    currDay?: string;
     components: {
         ListRender: React.FC<PropsProvider> | any;
         HeaderRender: React.FC<PropsProvider> | any;
@@ -54,9 +55,10 @@ interface PropsProvider {
  * @param components { ListRender: React.FC<PropsProvider>, HeaderRender: React.FC<PropsProvider> } - JSX components.
  * @param modalType { ?allModals } - usable modal type for adding new content button.
  * @param buttonNewContent { ?string } - content string in button adding new content.
+ * @param currDay { string? } - subject single day list indicator.
  */
 const MultipleElementsList: React.FC<PropsProvider> = ({
-    inputType, cmsListIndicator, notFind, modalType, buttonNewContent, components
+    inputType, cmsListIndicator, notFind, modalType, buttonNewContent, currDay, components
 }): JSX.Element => {
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
@@ -65,7 +67,7 @@ const MultipleElementsList: React.FC<PropsProvider> = ({
     const { ListRender, HeaderRender } = components;
     const modalListener = modalsInitialState[modalType!];
 
-    const [ disableOnFinding, generateListElements ] = useFilteredDivideList(inputType, cmsListIndicator, ListRender);
+    const [ disableOnFinding, generateListElements ] = useFilteredDivideList(inputType, cmsListIndicator, ListRender, currDay!);
     const dispatcher = useDispatch();
 
     useEffect(() => {
@@ -91,6 +93,7 @@ const MultipleElementsList: React.FC<PropsProvider> = ({
             {Boolean(modalType) && ((filteredState?.length !== 0) || ifLengthIsNull!) && <CmsAddNewContentButton
                 modalType = {modalType!}
                 content = {buttonNewContent}
+                currDay = {currDay}
             />}
             <NotFindContent
                 ifVisible = {filteredState?.length === 0 && !ifLengthIsNull!}

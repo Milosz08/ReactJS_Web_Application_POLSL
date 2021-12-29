@@ -17,7 +17,7 @@ import { FiEdit, FiMessageSquare } from 'react-icons/all';
 
 import { useDispatch } from 'react-redux';
 import { ModalsActions } from '../../../../../redux/modalsReduxStore/actions';
-import { allModals, allModalsActions } from '../../../../../redux/modalsReduxStore/types';
+import { allModals, allModalsActions, allModalsInputs } from '../../../../../redux/modalsReduxStore/types';
 
 import {
     CmsSingleListActionButton, CmsSingleListButtonsContainer, CmsSingleListRemoveButtonTime
@@ -27,6 +27,7 @@ interface PropsProvider {
     dataID: string;
     modalTypeEnum: allModals;
     ifViewmodeActive: boolean;
+    day?: string;
 }
 
 /**
@@ -35,14 +36,18 @@ interface PropsProvider {
  * @param dataID { string } - element ID from database.
  * @param modalTypeEnum { allModals } - actual using modal.
  * @param ifViewmodeActive { boolean } - flag, decided if view mode or edit mode is active.
+ * @param day { string } - current schedule modal day configuration.
  */
-const SingleElementButtons: React.FC<PropsProvider> = ({ dataID, modalTypeEnum, ifViewmodeActive }): JSX.Element => {
+const SingleElementButtons: React.FC<PropsProvider> = ({ dataID, modalTypeEnum, ifViewmodeActive, day }): JSX.Element => {
 
     const { EDIT_ELEMENT, VIEW_ELEMENT, REMOVE_ELEMENT } = allModalsActions;
     const dispatcher = useDispatch();
 
     const handleModalButtons = (modalType: allModalsActions): void => {
         dispatcher(ModalsActions.changeModalStateElements(true, modalTypeEnum, dataID, modalType));
+        if (modalTypeEnum === allModals.SCHEDULE_MODAL) {
+            dispatcher(ModalsActions.changeModalRootElement(allModals.SCHEDULE_MODAL, allModalsInputs.DAY, day));
+        }
     };
 
     return (

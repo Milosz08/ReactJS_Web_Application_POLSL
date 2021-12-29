@@ -24,13 +24,15 @@ import { ApiInitialTypes } from '../../redux/apiReduxStore/initialState';
 /**
  * Custom hook responsible for finding exact resource based modalType, apiType and resource _id property.
  */
-const useFindMatchingElement = (modalType: allModals, apiType: apiReducerTypes) => {
+const useFindMatchingElement = (modalType: allModals, apiType: apiReducerTypes, day: string = '') => {
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const apiInitialState: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
 
-    const findIndexElm: number = apiInitialState[apiType].findIndex(el => el._id === modalsInitialState[modalType].dataID);
-    return apiInitialState[apiType][findIndexElm];
+    const additionalMark = modalType === allModals.SCHEDULE_MODAL ? apiInitialState[apiType][day] : apiInitialState[apiType];
+    const findIndexElm: number = additionalMark.findIndex((el: any) => el._id === modalsInitialState[modalType].dataID);
+
+    return additionalMark[findIndexElm];
 };
 
 export default useFindMatchingElement;
