@@ -14,20 +14,62 @@
 
 import * as React from 'react';
 
-import { ScheduleContentTypes } from '../../../../../../redux/apiReduxStore/dataTypes';
+import SearchingProvider from '../../../../../../context/searchingContext/SearchingProvider';
+import { StaticDaysTypes } from '../../../../../../helpers/structs/schedule.config';
+
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../../redux/reduxStore';
+import { allModals } from '../../../../../../redux/modalsReduxStore/types';
+import { sortAvailables, sortInputTypes } from '../../../../../../redux/apiReduxStore/types';
+import { PreferencesInitialTypes } from '../../../../../../redux/preferencesReduxStore/initialState';
+import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../../../redux/preferencesReduxStore/types';
+
+import { SingleScheduleSingleDayElementContainer } from '../ChangeScheduleCmsPage.styles';
+
+const UniversalSearch = React.lazy(() => import('../../../../UniversalSearch/UniversalSearch'));
+const MultipleElementsList = React.lazy(() => import('../../HighOrderComponents/MultipleElementsList'));
+const ChangeScheduleSingleListElement = React.lazy(() => import('./ChangeScheduleSingleListElement'));
+const ChangeScheduleHeader = React.lazy(() => import('./ChangeScheduleHeader'));
 
 interface PropsProvider {
-    subjectsArray: ScheduleContentTypes[];
+    day: StaticDaysTypes;
 }
 
 /**
+ * Component responsible for generating all basic high-order components structure for single day list.
  *
+ * @param day { StaticDaysTypes } - used day object.
  */
-const SingleScheduleSingleDayElement: React.FC<PropsProvider> = ({ subjectsArray }): JSX.Element => {
+const SingleScheduleSingleDayElement: React.FC<PropsProvider> = ({ day }): JSX.Element => {
+
+    const { currentActivePage }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
+
     return (
-        <>
-            {subjectsArray.map(el => <div>{el.title}</div>)}
-        </>
+        <SingleScheduleSingleDayElementContainer>
+            <SearchingProvider
+                sortType = {sortInputTypes.CMS_SCHEDULE_SEARCH}
+                arrayType = {sortAvailables.SCHEDULE}
+                additionalMark = {day.eng}
+                sortByType = 'title'
+                ifReversed = {currentActivePage[cmsListIndicators.SCHEDULE].sortingMode === sortingTypes.DECREASE}
+            >
+                <UniversalSearch
+                    type = {searchInputs.CMS_SCHEDULE}
+                    placeholder = 'Nazwa przedmiotu'
+                />
+                <MultipleElementsList
+                    inputType = {searchInputs.CMS_SCHEDULE}
+                    cmsListIndicator = {cmsListIndicators.SCHEDULE}
+                    modalType = {allModals.SCHEDULE_MODAL}
+                    buttonNewContent = 'przedmiot'
+                    currDay = {day.name}
+                    components = {{
+                        ListRender: ChangeScheduleSingleListElement,
+                        HeaderRender: ChangeScheduleHeader
+                    }}
+                />
+            </SearchingProvider>
+        </SingleScheduleSingleDayElementContainer>
     );
 };
 
