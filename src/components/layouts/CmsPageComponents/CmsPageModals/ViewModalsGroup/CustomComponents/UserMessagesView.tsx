@@ -39,7 +39,7 @@ const UserMessagesView: React.FC = (): JSX.Element => {
                     Przeglądasz wiadomość od użytkownika: <strong>{matchElm.userIdentity}</strong>
                 </ViewContentTitleHeader>
                 <ViewContentElement>
-                    Data wysłania wiadomości: <strong>{matchElm.servletTime.fullDate}, {matchElm.servletTime.fullTime}</strong>
+                    Data wysłania wiadomości: <strong>{matchElm.servletTime}</strong>
                 </ViewContentElement>
                 <ViewContentElement>
                     Typ wiadomości: <strong>{matchElm.userChoice}</strong>
