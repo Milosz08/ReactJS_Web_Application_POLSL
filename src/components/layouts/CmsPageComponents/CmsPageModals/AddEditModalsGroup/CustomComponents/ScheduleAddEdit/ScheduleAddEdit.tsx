@@ -13,10 +13,12 @@
  */
 
 import * as React from 'react';
-import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
-import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/reduxStore';
+import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
+
+import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
 
 /**
  *
