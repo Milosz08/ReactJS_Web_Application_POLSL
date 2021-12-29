@@ -19,7 +19,8 @@ import useAutoHideModal from '../../../helpers/hooks/useAutoHideModal';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reduxStore';
-import { toggleSaveScheduleModal } from '../../../redux/preferencesReduxStore/actions';
+import { prefFields } from '../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../redux/preferencesReduxStore/initialState';
 
 import {
@@ -34,9 +35,11 @@ import ScheduleSaveModalInfo from './subcomponents/ScheduleSaveModalInfo';
 const ScheduleSaveModal: React.FC = (): JSX.Element => {
 
     const { saveScheduleOptionModalOpen }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
-
     const [ modal, background ] = useModalShowHide(saveScheduleOptionModalOpen);
-    const estimate = useAutoHideModal(3, toggleSaveScheduleModal, saveScheduleOptionModalOpen);
+
+    const estimate = useAutoHideModal(
+        3, PrefActions.changeRootPrefField, saveScheduleOptionModalOpen, prefFields.SCHEDULE_SAVE_MODAL
+    );
 
     return (
         <ScheduleSaveModalContainer

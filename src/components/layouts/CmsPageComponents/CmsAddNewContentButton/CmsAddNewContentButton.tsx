@@ -16,13 +16,14 @@ import * as React from 'react';
 
 import { useDispatch } from 'react-redux';
 import { ModalsActions } from '../../../../redux/modalsReduxStore/actions';
-import { allModals, allModalsActions } from '../../../../redux/modalsReduxStore/types';
+import { allModals, allModalsActions, allModalsInputs } from '../../../../redux/modalsReduxStore/types';
 
 import { CmsAddNewContentButtonStyles } from './CmsAddNewContentButton.styles';
 
 interface PropsProvider {
     modalType: allModals;
     content?: string;
+    currDay?: string;
 }
 
 /**
@@ -30,14 +31,18 @@ interface PropsProvider {
  * CMS subpage component. Connected with Redux dispatcher function.
  *
  * @param modalType { allModals } - passed modal enum type element.
- * @param content { ?string } - string aside text content.
+ * @param content { string? } - string aside text content.
+ * @param currDay { string? } - subject single day list indicator.
  */
-const CmsAddNewContentButton: React.FC<PropsProvider> = ({ modalType, content }): JSX.Element => {
+const CmsAddNewContentButton: React.FC<PropsProvider> = ({ modalType, content, currDay }): JSX.Element => {
 
     const dispatcher = useDispatch();
 
     const handleAddNewContent = (): void => {
         dispatcher(ModalsActions.changeModalStateElements(true, modalType, null, allModalsActions.ADD_ELEMENT));
+        if(modalType === allModals.SCHEDULE_MODAL) {
+            dispatcher(ModalsActions.changeModalRootElement(allModals.SCHEDULE_MODAL, allModalsInputs.DAY, currDay));
+        }
     };
 
     return (

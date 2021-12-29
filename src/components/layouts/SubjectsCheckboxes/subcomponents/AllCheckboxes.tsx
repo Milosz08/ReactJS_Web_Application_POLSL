@@ -16,8 +16,8 @@ import * as React from 'react';
 import { Fragment, useContext, useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { searchInputs } from '../../../../redux/preferencesReduxStore/types';
-import { setErrorsSearchInputs } from '../../../../redux/preferencesReduxStore/actions';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
+import { prefFields, searchInputs } from '../../../../redux/preferencesReduxStore/types';
 
 import { SubjectsTilesContainer } from '../SubjectsCheckboxes.styles';
 
@@ -44,7 +44,9 @@ const AllCheckboxes: React.FC = (): JSX.Element => {
     ));
 
     useEffect(() => {
-        dispatcher(setErrorsSearchInputs(searchInputs.SUBJECT_SEARCH, filteredState!.length === 0));
+        dispatcher(PrefActions.changeSecondRootPrefField(
+            prefFields.SEARCH_INPUTS_ERRORS, searchInputs.SUBJECT_SEARCH, filteredState!.length === 0
+        ));
     }, [ dispatcher, filteredState ]);
 
     return (

@@ -16,8 +16,8 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../redux/reduxStore';
-import { searchInputs } from '../../../redux/preferencesReduxStore/types';
-import { insertInSearchInput, setSubjectActivePanel } from '../../../redux/preferencesReduxStore/actions';
+import { PrefActions } from '../../../redux/preferencesReduxStore/actions';
+import { prefFields, searchInputs } from '../../../redux/preferencesReduxStore/types';
 import { PreferencesInitialTypes } from '../../../redux/preferencesReduxStore/initialState';
 
 import {
@@ -47,14 +47,14 @@ const UniversalSearch: React.FC<PropsProvider> = ({ type, placeholder }): JSX.El
     ));
 
     const handleInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-        dispatcher(insertInSearchInput(type, target.value));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.SEARCH_INPUTS, type, target.value));
         if (type === searchInputs.SUBJECT_SEARCH) {
-            dispatcher(setSubjectActivePanel(0));
+            dispatcher(PrefActions.changeRootPrefField(prefFields.ACTIVE_SUB_PANEL, 0));
         }
     };
 
     const handleClearInput = () => {
-        dispatcher(insertInSearchInput(type, ''));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.SEARCH_INPUTS, type, ''));
     };
 
     return (

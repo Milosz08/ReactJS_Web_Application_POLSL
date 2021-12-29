@@ -19,14 +19,15 @@ import useAutoHideModal from '../../../helpers/hooks/useAutoHideModal';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reduxStore';
-import { toggleUserLogoutModal } from '../../../redux/preferencesReduxStore/actions';
+import { prefFields } from '../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../redux/preferencesReduxStore/initialState';
 
 import {
     UserLogoutModalContainer, UserLogoutModalSections, UserLogoutModalWrapper, VscUnlockIconComponent
 } from './UserLogoutModal.styles';
 
-import UserLogoutModalInfo from './subcomponents/UserLogoutModalInfo';
+const UserLogoutModalInfo = React.lazy(() => import('./subcomponents/UserLogoutModalInfo'));
 
 /**
  * Component responsible for showing user logout modal info preferences.
@@ -36,7 +37,7 @@ const UserLogoutModal: React.FC = (): JSX.Element => {
     const { userLogoutModalOpen }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
     const [ modal, background ] = useModalShowHide(userLogoutModalOpen);
-    const estimate = useAutoHideModal(3, toggleUserLogoutModal, userLogoutModalOpen);
+    const estimate = useAutoHideModal(3, PrefActions.changeRootPrefField, userLogoutModalOpen, prefFields.USER_LOGOUT_MODAL);
 
     return (
         <UserLogoutModalContainer

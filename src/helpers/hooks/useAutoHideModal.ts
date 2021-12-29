@@ -15,6 +15,7 @@
 import { useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
+import { prefFields } from '../../redux/preferencesReduxStore/types';
 import { ReturnedToReducer } from '../../redux/preferencesReduxStore/actions';
 
 /**
@@ -23,8 +24,12 @@ import { ReturnedToReducer } from '../../redux/preferencesReduxStore/actions';
  * @param esimateTime { number } - time to close modal (is seconds).
  * @param callbackDispatcher { (value: boolean) => ReturnedToReducer } - redux reducer function closing modal.
  * @param listener { boolean } - modal redux listener boolean value.
+ * @param prefType { prefFields } - current modal (save/clear data).
  */
-const useAutoHideModal = (esimateTime: number, callbackDispatcher: (value: boolean) => ReturnedToReducer, listener: boolean) => {
+const useAutoHideModal = (
+    esimateTime: number, callbackDispatcher: (field: prefFields, value: any) => ReturnedToReducer, listener: boolean,
+    prefType: prefFields
+) => {
 
     const [ estimate, setEstimate ] = useState<number>(esimateTime);
     const dispatcher = useDispatch();
@@ -36,7 +41,7 @@ const useAutoHideModal = (esimateTime: number, callbackDispatcher: (value: boole
             const asyncCounting = (): void => {
                 setEstimate(counter--);
                 if (counter < 0) {
-                    dispatcher(callbackDispatcher(false));
+                    dispatcher(callbackDispatcher(prefType, false));
                     setEstimate(0);
                     clearInterval(intervalIndex);
                 }

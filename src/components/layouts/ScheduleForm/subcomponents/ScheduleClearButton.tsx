@@ -23,9 +23,9 @@ import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../context/
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
 import { ApiActionsSort } from '../../../../redux/apiReduxStore/actions';
-import { groupsTypes } from '../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
+import { groupsTypes, prefFields } from '../../../../redux/preferencesReduxStore/types';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
-import { setSelectedGroup, toggleClearScheduleModal } from '../../../../redux/preferencesReduxStore/actions';
 
 import { ScheduleClearInputsButton } from '../ScheduleForm.styles';
 
@@ -46,10 +46,10 @@ const ScheduleClearButton: React.FC = (): JSX.Element => {
 
     const handleClearButton = (): void => {
         window.scrollTo(0, 0);
-        dispatcher(toggleClearScheduleModal(true));
-        dispatcher(setSelectedGroup(NORMAL, NORMAL_GROUPS[0]));
-        dispatcher(setSelectedGroup(ENGLISH, ENG_GROUPS[0]));
-        dispatcher(setSelectedGroup(SK, SK_GROUPS[0]));
+        dispatcher(PrefActions.changeRootPrefField(prefFields.SCHEDULE_CLEAR_MODAL, true));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.CHOOSE_GROUP, NORMAL, NORMAL_GROUPS[0]));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.CHOOSE_GROUP, ENGLISH, ENG_GROUPS[0]));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.CHOOSE_GROUP, SK, SK_GROUPS[0]));
         removeCookie!(groupSelection);
     };
 

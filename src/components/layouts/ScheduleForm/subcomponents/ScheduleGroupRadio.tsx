@@ -14,12 +14,13 @@
 
 import * as React from 'react';
 import { useEffect } from 'react';
+
 import GROUPS_STATIC from '../../../../helpers/structs/allGroups';
 
-import { RootState } from '../../../../redux/reduxStore';
 import { useDispatch, useSelector } from 'react-redux';
-import { groupsTypes } from '../../../../redux/preferencesReduxStore/types';
-import { setSelectedGroup } from '../../../../redux/preferencesReduxStore/actions';
+import { RootState } from '../../../../redux/reduxStore';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
+import { groupsTypes, prefFields } from '../../../../redux/preferencesReduxStore/types';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
 import {
@@ -48,12 +49,12 @@ const ScheduleGroupRadio: React.FC<PropsProvider> = ({ groupArray, groupType, co
     const { NORMAL_GROUPS, SK_GROUPS } = GROUPS_STATIC;
 
     const handleChangeGroup = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-        dispatcher(setSelectedGroup(groupType, target.value));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.CHOOSE_GROUP, groupType, target.value.toLocaleLowerCase()));
     };
 
     useEffect(() => {
         if (normalGroup === NORMAL_GROUPS[0] && skGroup === SK_GROUPS[1]) {
-            dispatcher(setSelectedGroup(groupsTypes.SK, SK_GROUPS[0]));
+            dispatcher(PrefActions.changeSecondRootPrefField(prefFields.CHOOSE_GROUP, groupsTypes.SK, SK_GROUPS[0]));
         }
     }, [ NORMAL_GROUPS, SK_GROUPS, dispatcher, normalGroup, skGroup ])
 

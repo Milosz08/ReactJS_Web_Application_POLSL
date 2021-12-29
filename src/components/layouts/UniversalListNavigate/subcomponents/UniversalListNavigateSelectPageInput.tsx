@@ -22,7 +22,7 @@ import { PropsProviderAndListNavigateContext, UniversalListNavigateContext } fro
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
-import { changeCmsListPageNumber } from '../../../../redux/preferencesReduxStore/actions';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
 import {
@@ -30,7 +30,7 @@ import {
 } from '../UniversalListNavigate.styles';
 
 /**
- *
+ * Component responsible for generating controls to select current active page in list elements.
  */
 const UniversalListNavigateSelectPageInput: React.FC = (): JSX.Element => {
 
@@ -51,7 +51,7 @@ const UniversalListNavigateSelectPageInput: React.FC = (): JSX.Element => {
     ));
 
     const handleSelectCurrentPage = ({ target }: React.ChangeEvent<HTMLSelectElement>): void => {
-        dispatcher(changeCmsListPageNumber(type!, Number(target.value), countOfSingleList));
+        dispatcher(PrefActions.changeCmsListPageNumber(type!, Number(target.value), countOfSingleList));
     };
 
     useEffect(() => {

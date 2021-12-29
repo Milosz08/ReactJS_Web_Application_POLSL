@@ -21,8 +21,8 @@ import { PropsProviderAndListNavigateContext, UniversalListNavigateContext } fro
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
 import { sortingTypes } from '../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
-import { changeUniversalListSortingType } from '../../../../redux/preferencesReduxStore/actions';
 
 import {
     UniversalListNavigateSortingButton, UniversalListNavigateSortingIcons, UniversalListNavigateText
@@ -42,7 +42,7 @@ const UniversalListNavigateSoringTypes: React.FC = (): JSX.Element => {
     const currentSortingMode: sortingTypes = currentActivePage[type!].sortingMode;
 
     const handleSettingSortingMode = (): void => {
-        dispatcher(changeUniversalListSortingType(type!));
+        dispatcher(PrefActions.changeUniversalListSortingType(type!));
     };
 
     return (

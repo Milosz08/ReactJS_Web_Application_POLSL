@@ -20,7 +20,7 @@ import { PropsProviderAndListNavigateContext, UniversalListNavigateContext } fro
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
-import { changeCmsListPageNumber } from '../../../../redux/preferencesReduxStore/actions';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
 import { UniversalListNavigateButton } from '../UniversalListNavigate.styles';
@@ -34,8 +34,9 @@ interface PropsProvider {
 }
 
 /**
+ * Component responsible for generating buttons for prev and next page navigation.
  *
- * @param dir { directions } -
+ * @param dir { directions } - current direction (left/right).
  */
 const UniversalListNavigatePrevNextButton: React.FC<PropsProvider> = ({ dir }): JSX.Element => {
 
@@ -48,7 +49,7 @@ const UniversalListNavigatePrevNextButton: React.FC<PropsProvider> = ({ dir }): 
     const dispatcher = useDispatch();
 
     const handleClickPrevOrNextPage = (): void => {
-        dispatcher(changeCmsListPageNumber(type!, activePage, countOfSingleList, dir));
+        dispatcher(PrefActions.changeCmsListPageNumber(type!, activePage, countOfSingleList, dir));
     };
 
     return (

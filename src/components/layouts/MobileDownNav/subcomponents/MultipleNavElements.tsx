@@ -19,8 +19,8 @@ import MOBILE_NAV_ELMS, { MobileNavElmsProvider } from '../../../../helpers/stru
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
-import { setMobileNavActiveElm } from '../../../../redux/preferencesReduxStore/actions';
 
 import SingleNavigationElement from './SingleNavigationElement';
 import useChangeRoutePath from '../../../../helpers/hooks/useChangeRoutePath';
@@ -46,7 +46,7 @@ const MultipleNavElements: React.FC<PropsProvider> = ({ setPosition }): JSX.Elem
         const chooseActiveElm: string = mobileNavActiveElement === id ? 'Fill' : 'Outline';
 
         const handleNavigationClick = (clickedElement: number) => {
-            dispatcher(setMobileNavActiveElm(clickedElement, MOBILE_NAV_ELMS.length));
+            dispatcher(PrefActions.setMobileNavActiveElm(clickedElement, MOBILE_NAV_ELMS.length));
             setPosition(clickedElement * 100);
             timeoutRoutePath(navElm.path);
         };

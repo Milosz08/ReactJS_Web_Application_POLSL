@@ -16,8 +16,9 @@ import * as React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
+import { prefFields } from '../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
-import { toggleHamburger } from '../../../../redux/preferencesReduxStore/actions';
 
 import { HamburgerBars, HamburgerButtonContainer } from '../Hamburger.styles';
 
@@ -30,7 +31,7 @@ const HamburgerButton: React.FC = (): JSX.Element => {
     const dispatcher = useDispatch();
 
     const handleHamburgerButton = () => {
-        dispatcher(toggleHamburger());
+        dispatcher(PrefActions.changeRootPrefField(prefFields.HAMBURGER_TOGGLE, !hamburgerToggle));
     };
 
     return (

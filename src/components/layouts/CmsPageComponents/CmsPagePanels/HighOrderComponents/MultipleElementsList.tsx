@@ -21,9 +21,9 @@ import { SearchingContext, SearchingTypes } from '../../../../../context/searchi
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/reduxStore';
 import { allModals } from '../../../../../redux/modalsReduxStore/types';
+import { PrefActions } from '../../../../../redux/preferencesReduxStore/actions';
 import { ModalsInitialTypes } from '../../../../../redux/modalsReduxStore/initialState';
-import { setErrorsSearchInputs } from '../../../../../redux/preferencesReduxStore/actions';
-import { cmsListIndicators, searchInputs } from '../../../../../redux/preferencesReduxStore/types';
+import { cmsListIndicators, prefFields, searchInputs } from '../../../../../redux/preferencesReduxStore/types';
 
 import { CmsUnorderedList } from './HighOrderComponents.styles';
 
@@ -69,7 +69,9 @@ const MultipleElementsList: React.FC<PropsProvider> = ({
     const dispatcher = useDispatch();
 
     useEffect(() => {
-        dispatcher(setErrorsSearchInputs(inputType, filteredState!.length === 0 && !ifLengthIsNull!));
+        dispatcher(PrefActions.changeSecondRootPrefField(
+            prefFields.SEARCH_INPUTS_ERRORS, inputType, filteredState!.length === 0 && !ifLengthIsNull!
+        ));
     }, [ dispatcher, filteredState, ifLengthIsNull, inputType, modalListener ]);
 
     return (

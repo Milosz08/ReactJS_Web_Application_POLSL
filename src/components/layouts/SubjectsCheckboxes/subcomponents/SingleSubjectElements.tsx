@@ -16,15 +16,16 @@ import * as React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
+import { prefFields } from '../../../../redux/preferencesReduxStore/types';
 import { SubjectsContentTypes } from '../../../../redux/apiReduxStore/dataTypes';
-import { setSubjectActivePanel } from '../../../../redux/preferencesReduxStore/actions';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
 import {
-    SubjectTileButton, SubjectTileActiveElement, SubjectTitleContainer, SubjectIconWrapper
+    SubjectIconWrapper, SubjectTileActiveElement, SubjectTileButton, SubjectTitleContainer
 } from '../SubjectsCheckboxes.styles';
 
-import IconComponent from '../../../../helpers/componentsAndMiddleware/IconComponent';
+const IconComponent = React.lazy(() => import('../../../../helpers/componentsAndMiddleware/IconComponent'));
 
 interface PropsProvider {
     tile: SubjectsContentTypes;
@@ -44,7 +45,7 @@ const SingleSubjectElements: React.FC<PropsProvider> = ({ tile, id }): JSX.Eleme
     const dispatcher = useDispatch();
 
     const handleToggleSubject = (): void => {
-        dispatcher(setSubjectActivePanel(id));
+        dispatcher(PrefActions.changeRootPrefField(prefFields.ACTIVE_SUB_PANEL, id));
     };
 
     return (

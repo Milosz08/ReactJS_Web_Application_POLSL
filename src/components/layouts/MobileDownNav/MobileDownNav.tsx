@@ -16,13 +16,13 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { setMobileNavActiveElm } from '../../../redux/preferencesReduxStore/actions';
+import { PrefActions } from '../../../redux/preferencesReduxStore/actions';
 
 import MOBILE_NAV_ELMS from '../../../helpers/structs/mobileNavElements';
 
 import { MobileDownNavContainer, ActiveIndicator, ActiveIndicatorContainer } from './MobileDownNav.styles';
 
-import MultipleNavElements from './subcomponents/MultipleNavElements';
+const MultipleNavElements = React.lazy(() => import('./subcomponents/MultipleNavElements'));
 
 interface PropsProvider {
     id?: number;
@@ -40,7 +40,7 @@ const MobileDownNav: React.FC<PropsProvider> = ({ id }): JSX.Element => {
     const dispatcher = useDispatch();
 
     useEffect(() => {
-        dispatcher(setMobileNavActiveElm(Boolean(id) || id === 0 ? id! : -1, MOBILE_NAV_ELMS.length));
+        dispatcher(PrefActions.setMobileNavActiveElm(Boolean(id) || id === 0 ? id! : -1, MOBILE_NAV_ELMS.length));
     }, [ dispatcher, id ]);
 
     return (

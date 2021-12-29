@@ -14,18 +14,18 @@
 
 import * as React from 'react';
 
-import {
-    CalendarModalButton, CalendarModalDateInfo, CalendarModalHeader, CalendarPageModalContainer
-} from '../CalendarPageElements.styles';
+import ConvertTimeUTC, { DATE_OR_TIME } from '../../../../helpers/functionsAndClasses/convertTimeUTC';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
-import { toggleCalendarMobileModal } from '../../../../redux/preferencesReduxStore/actions';
-
-import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
+import { prefFields } from '../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
+import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
-import ConvertTimeUTC, { DATE_OR_TIME } from '../../../../helpers/functionsAndClasses/convertTimeUTC';
+import {
+    CalendarModalButton, CalendarModalDateInfo, CalendarModalHeader, CalendarPageModalContainer
+} from '../CalendarPageElements.styles';
 
 const CalendarSingleTaskPerDay = React.lazy(() => import('./CalendarSingleTaskPerDay'));
 
@@ -44,7 +44,7 @@ const CalendarModal: React.FC = (): JSX.Element => {
     const { dateInfo } = calendarMobileModalOpen;
 
     const handleCloseModal = (): void => {
-        dispatcher(toggleCalendarMobileModal(false, new Date()));
+        dispatcher(PrefActions.changeRootPrefField(prefFields.CALENDAR_MODAL, { toggleState: false, dateInfo: new Date() }));
     };
 
     const filteredRecord = calendarContent.find((record: any) => (

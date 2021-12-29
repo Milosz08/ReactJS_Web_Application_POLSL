@@ -13,10 +13,13 @@
  */
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/reduxStore';
-import { PreferencesInitialTypes } from '../../redux/preferencesReduxStore/initialState';
-import { insertInFooterInputs, setErrorsFooterInputs } from '../../redux/preferencesReduxStore/actions';
+
 import { FOOTER_INPUTS, FOOTER_OPTIONS, FOOTER_TEXTAREA_PROPS } from '../structs/footerOptions.config';
+
+import { RootState } from '../../redux/reduxStore';
+import { prefFields } from '../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../redux/preferencesReduxStore/actions';
+import { PreferencesInitialTypes } from '../../redux/preferencesReduxStore/initialState';
 
 /**
  *
@@ -27,19 +30,20 @@ const useFooterForm = (): [ () => boolean, () => void ] => {
     const dispatcher = useDispatch();
 
     const { MIN_LENGTH_TEXTAREA, MAX_LENGTH_TEXTAREA } = FOOTER_TEXTAREA_PROPS;
+    const { FOOTER_FORM, FOOTER_FORM_ERRORS } = prefFields;
 
     const clearAllInputs = (): void => {
         const { USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
         [ USER_NICKNAME, USER_MESSAGE, TYPEOF_MESSAGE, IF_ACCEPTED_TERMS ].forEach(key => {
             switch(key) {
                 case IF_ACCEPTED_TERMS:
-                    dispatcher(insertInFooterInputs(key, false));
+                    dispatcher(PrefActions.changeSecondRootPrefField(FOOTER_FORM, key, false));
                     break;
                 case TYPEOF_MESSAGE:
-                    dispatcher(insertInFooterInputs(key, FOOTER_OPTIONS[0].value));
+                    dispatcher(PrefActions.changeSecondRootPrefField(FOOTER_FORM, key, FOOTER_OPTIONS[0].value));
                     break;
                 default:
-                    dispatcher(insertInFooterInputs(key, ''));
+                    dispatcher(PrefActions.changeSecondRootPrefField(FOOTER_FORM, key, ''));
             }
         });
     };
@@ -51,22 +55,22 @@ const useFooterForm = (): [ () => boolean, () => void ] => {
 
         if (userNickname.length < 5 || userNickname.indexOf(' ') !== -1 || userNickname.length > 20) {
             userNameBool = true;
-            dispatcher(setErrorsFooterInputs(USER_NICKNAME, true));
+            dispatcher(PrefActions.changeSecondRootPrefField(FOOTER_FORM_ERRORS, USER_NICKNAME, true));
         }
 
         if (typeOfMessage === FOOTER_OPTIONS[0].value) {
             userChoose = true;
-            dispatcher(setErrorsFooterInputs(TYPEOF_MESSAGE, true));
+            dispatcher(PrefActions.changeSecondRootPrefField(FOOTER_FORM_ERRORS, TYPEOF_MESSAGE, true));
         }
 
         if (userMessage.length < MIN_LENGTH_TEXTAREA || userMessage.length > MAX_LENGTH_TEXTAREA) {
             messageAreaBool = true;
-            dispatcher(setErrorsFooterInputs(USER_MESSAGE, true));
+            dispatcher(PrefActions.changeSecondRootPrefField(FOOTER_FORM_ERRORS, USER_MESSAGE, true));
         }
 
         if (!ifAcceptedTerms) {
             acceptTermsBool = true;
-            dispatcher(setErrorsFooterInputs(IF_ACCEPTED_TERMS, true));
+            dispatcher(PrefActions.changeSecondRootPrefField(FOOTER_FORM_ERRORS, IF_ACCEPTED_TERMS, true));
         }
 
         return !userNameBool && !userChoose && !messageAreaBool && !acceptTermsBool;

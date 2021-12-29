@@ -15,11 +15,12 @@
 import * as React from 'react';
 import { Fragment, useContext } from 'react';
 
+import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
+
 import { useDispatch } from 'react-redux';
-import { prevNextSubjectActivePanel } from '../../../../redux/preferencesReduxStore/actions';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 
 import { NavigateArrowButton } from '../SubjectsDetails.styles';
-import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
 
 export enum arrowDirs {
     PREV, NEXT
@@ -41,7 +42,7 @@ const NextPrevArrowNavigation: React.FC<PropsProvider> = ({ dir }): JSX.Element 
     const dispatcher = useDispatch();
 
     const handleButtonClick = (): void => {
-        dispatcher(prevNextSubjectActivePanel(dir, filteredState!.length));
+        dispatcher(PrefActions.prevNextSubjectActivePanel(dir, filteredState!.length));
     };
 
     const renderedArrow: JSX.Element | null = filteredState!.length > 1 ? (

@@ -20,9 +20,10 @@ import cookieExpires from '../../../../context/cookiesContext/cookieExpires';
 import COOKIES_OBJECT from '../../../../context/cookiesContext/allCookies.config';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../context/cookiesContext/CookiesObjectsProvider';
 
-import { RootState } from '../../../../redux/reduxStore';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSaveScheduleModal } from '../../../../redux/preferencesReduxStore/actions';
+import { RootState } from '../../../../redux/reduxStore';
+import { prefFields } from '../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
 import { ScheduleSaveInputButton } from '../ScheduleForm.styles';
@@ -49,7 +50,7 @@ const ScheduleSaveButton: React.FC = (): JSX.Element => {
     const handleSaveButton = (): void => {
         window.scrollTo(0, 0);
         createRememberCookie(`${normalGroup},${engGroup},${skGroup}`, groupSelection);
-        dispatcher(toggleSaveScheduleModal(true));
+        dispatcher(PrefActions.changeRootPrefField(prefFields.SCHEDULE_SAVE_MODAL, true));
     };
 
     return (

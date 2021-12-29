@@ -16,7 +16,8 @@ import * as React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/reduxStore';
-import { toggleCmsHamburger } from '../../../../../redux/preferencesReduxStore/actions';
+import { prefFields } from '../../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../../redux/preferencesReduxStore/initialState';
 
 import { CmsHamburgerBars, CmsHamburgerButton, CmsHamburgerButtonContainer } from '../CmsInfoBar.styles';
@@ -31,7 +32,7 @@ const CmsInfoHamburgerButton: React.FC = (): JSX.Element => {
     const dispatcher = useDispatch();
 
     const handleHamburgerButtonClick = (): void => {
-        dispatcher(toggleCmsHamburger());
+        dispatcher(PrefActions.changeRootPrefField(prefFields.CMS_HAMBURGER_TOGGLE, !cmsHamburgerToggle));
     };
 
     return (

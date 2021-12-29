@@ -18,8 +18,8 @@ import { decrypt } from 'react-crypt-gsm';
 import GROUPS_STATIC from '../structs/allGroups';
 
 import { useDispatch } from 'react-redux';
-import { groupsTypes } from '../../redux/preferencesReduxStore/types';
-import { setSelectedGroup } from '../../redux/preferencesReduxStore/actions';
+import { PrefActions } from '../../redux/preferencesReduxStore/actions';
+import { groupsTypes, prefFields } from '../../redux/preferencesReduxStore/types';
 
 import COOKIES_OBJECT from '../../context/cookiesContext/allCookies.config';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../context/cookiesContext/CookiesObjectsProvider';
@@ -45,9 +45,9 @@ const useScheduleCookiesOnload = (): void => {
         const setDecryptedCookieValue = (): void => {
             if (Boolean(cookie![groupSelection])) {
                 const [ normal, eng, sk ] = cookieDecryptData(cookie![groupSelection]).split(',');
-                dispatcher(setSelectedGroup(NORMAL, normal));
-                dispatcher(setSelectedGroup(ENGLISH, eng));
-                dispatcher(setSelectedGroup(SK, sk));
+                dispatcher(PrefActions.changeSecondRootPrefField(prefFields.CHOOSE_GROUP, NORMAL, normal.toLocaleLowerCase()));
+                dispatcher(PrefActions.changeSecondRootPrefField(prefFields.CHOOSE_GROUP, ENGLISH, eng.toLocaleLowerCase()));
+                dispatcher(PrefActions.changeSecondRootPrefField(prefFields.CHOOSE_GROUP, SK, sk.toLocaleLowerCase()));
             }
         };
         setDecryptedCookieValue();

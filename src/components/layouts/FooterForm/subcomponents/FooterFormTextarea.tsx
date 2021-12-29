@@ -13,14 +13,14 @@
  */
 
 import * as React from 'react';
-import { Fragment } from 'react';
+
+import { FOOTER_INPUTS, FOOTER_TEXTAREA_PROPS } from '../../../../helpers/structs/footerOptions.config';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
-import { insertInFooterInputs, setErrorsFooterInputs } from '../../../../redux/preferencesReduxStore/actions';
+import { prefFields } from '../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
-
-import { FOOTER_INPUTS, FOOTER_TEXTAREA_PROPS } from '../../../../helpers/structs/footerOptions.config';
 
 import { FooterFormTextareaStyled, TextareaCharsQuantity } from '../FooterForm.styles';
 
@@ -37,12 +37,12 @@ const FooterFormTextarea: React.FC = (): JSX.Element => {
     const { USER_MESSAGE } = FOOTER_INPUTS;
 
     const handleTextareaInput = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
-        dispatcher(insertInFooterInputs(USER_MESSAGE, target.value));
-        dispatcher(setErrorsFooterInputs(USER_MESSAGE, false));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.FOOTER_FORM, USER_MESSAGE, target.value));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.FOOTER_FORM_ERRORS, USER_MESSAGE, false));
     };
 
     return (
-        <Fragment>
+        <>
             <FooterFormTextareaStyled
                 placeholder = 'Wpisz tutaj swoją wiadomość'
                 rows = {TEXTAREA_ROWS}
@@ -55,7 +55,7 @@ const FooterFormTextarea: React.FC = (): JSX.Element => {
             <TextareaCharsQuantity>
                 {footerForm[USER_MESSAGE].length} / {MAX_LENGTH_TEXTAREA}
             </TextareaCharsQuantity>
-        </Fragment>
+        </>
     );
 };
 

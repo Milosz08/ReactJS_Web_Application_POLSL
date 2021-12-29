@@ -13,9 +13,10 @@
  */
 
 import { useDispatch } from 'react-redux';
-import { changeRoutePath } from '../../redux/preferencesReduxStore/actions';
+import { PrefActions } from '../../redux/preferencesReduxStore/actions';
 
 import { FRONT_ENDPOINTS } from '../structs/appEndpoints';
+import { prefFields } from '../../redux/preferencesReduxStore/types';
 
 /**
  * Constant that defines the time after which routing on the page is to take place (in seconds).
@@ -31,9 +32,9 @@ const useChangeRoutePath = (): (gotoPath: FRONT_ENDPOINTS | string) => void => {
 
     return (gotoPath: FRONT_ENDPOINTS | string): void => {
         if (gotoPath !== decodeURIComponent(document.location.pathname)) {
-            dispatcher(changeRoutePath(true));
+            dispatcher(PrefActions.changeRootPrefField(prefFields.ROUTE_PATH, true));
             setTimeout(() => {
-                dispatcher(changeRoutePath(false));
+                dispatcher(PrefActions.changeRootPrefField(prefFields.ROUTE_PATH, false));
             }, (ROUTER_INTERVAL_TIME + .3) * 1000);
         }
     };

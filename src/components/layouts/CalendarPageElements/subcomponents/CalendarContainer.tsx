@@ -21,9 +21,10 @@ import { MAX_WIDTH_CLICK_ACTION } from '../../../../helpers/structs/calendar.con
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
+import { prefFields } from '../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { ApiInitialTypes } from '../../../../redux/apiReduxStore/initialState';
 import { CalendarContentTypes } from '../../../../redux/apiReduxStore/dataTypes';
-import { toggleCalendarMobileModal } from '../../../../redux/preferencesReduxStore/actions';
 
 import './../CalendarStyles.scss';
 
@@ -67,7 +68,7 @@ const CalendarContainer: React.FC = (): JSX.Element => {
 
     const handleClickDay = (value: Date) => {
         if (offsetWidth < MAX_WIDTH_CLICK_ACTION) {
-            dispatcher(toggleCalendarMobileModal(true, value));
+            dispatcher(PrefActions.changeRootPrefField(prefFields.CALENDAR_MODAL, { toggleState: true, dateInfo: value }));
         }
     };
 

@@ -19,8 +19,8 @@ import { CMS_LIST_QUANTITY_VALUES } from '../../../../helpers/structs/cmsSystem.
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
-import { changeCmsListShowingElementsCount } from '../../../../redux/preferencesReduxStore/actions';
 
 import { PropsProviderAndListNavigateContext, UniversalListNavigateContext } from '../UniversalListNavigate';
 
@@ -29,7 +29,7 @@ import {
 } from '../UniversalListNavigate.styles';
 
 /**
- *
+ * Component responsible for generating controls for change quantity of max elements in single page.
  */
 const UniversalListNavigateChangeQuantity: React.FC = (): JSX.Element => {
 
@@ -46,7 +46,7 @@ const UniversalListNavigateChangeQuantity: React.FC = (): JSX.Element => {
 
     const handleChangeListElementsQuantity = ({ target }: React.ChangeEvent<HTMLSelectElement>): void => {
         if (currentActivePage[type!].activePage === 1) {
-            dispatcher(changeCmsListShowingElementsCount(type!, Number(target.value)));
+            dispatcher(PrefActions.changeCmsListShowingElementsCount(type!, Number(target.value)));
         }
     };
 

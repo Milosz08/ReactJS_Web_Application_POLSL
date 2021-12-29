@@ -19,14 +19,15 @@ import useAutoHideModal from '../../../helpers/hooks/useAutoHideModal';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reduxStore';
-import { toggleClearScheduleModal } from '../../../redux/preferencesReduxStore/actions';
+import { prefFields } from '../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../redux/preferencesReduxStore/initialState';
 
 import {
     MdSettingsBackupRestoreIconComponent, ScheduleClearModalContainer, ScheduleClearModalSections, ScheduleClearModalWrapper
 } from './ScheduleClearModal.styles';
 
-import ScheduleClearModalInfo from './subcomponents/ScheduleClearModalInfo';
+const ScheduleClearModalInfo = React.lazy(() => import('./subcomponents/ScheduleClearModalInfo'));
 
 /**
  * Component responsible for showing clear modal info preferences.
@@ -34,9 +35,11 @@ import ScheduleClearModalInfo from './subcomponents/ScheduleClearModalInfo';
 const ScheduleClearModal: React.FC = (): JSX.Element => {
 
     const { clearScheduleOptionModalOpen }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
-
     const [ modal, background ] = useModalShowHide(clearScheduleOptionModalOpen);
-    const estimate = useAutoHideModal(3, toggleClearScheduleModal, clearScheduleOptionModalOpen);
+
+    const estimate = useAutoHideModal(
+        3, PrefActions.changeRootPrefField, clearScheduleOptionModalOpen, prefFields.SCHEDULE_CLEAR_MODAL
+    );
 
     return (
         <ScheduleClearModalContainer

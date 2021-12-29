@@ -14,12 +14,13 @@
 
 import * as React from 'react';
 
+import { FOOTER_INPUTS } from '../../../../helpers/structs/footerOptions.config';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
-import { insertInFooterInputs, setErrorsFooterInputs } from '../../../../redux/preferencesReduxStore/actions';
+import { prefFields } from '../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
-
-import { FOOTER_INPUTS } from '../../../../helpers/structs/footerOptions.config';
 
 const UniversalCheckboxInput = React.lazy(() => import('../../UniversalCheckboxInput/UniversalCheckboxInput'));
 
@@ -34,8 +35,8 @@ const FooterFormCheckfield: React.FC = (): JSX.Element => {
     const { IF_ACCEPTED_TERMS } = FOOTER_INPUTS;
 
     const handleCheckboxInput = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-        dispatcher(insertInFooterInputs(IF_ACCEPTED_TERMS, target.checked));
-        dispatcher(setErrorsFooterInputs(IF_ACCEPTED_TERMS, false));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.FOOTER_FORM, IF_ACCEPTED_TERMS, target.checked));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.FOOTER_FORM_ERRORS, IF_ACCEPTED_TERMS, false));
     };
 
     return (

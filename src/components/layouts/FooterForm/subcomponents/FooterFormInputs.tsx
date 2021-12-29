@@ -13,16 +13,16 @@
  */
 
 import * as React from 'react';
-import { Fragment } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/all';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/reduxStore';
-import { insertInFooterInputs, setErrorsFooterInputs } from '../../../../redux/preferencesReduxStore/actions';
-import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
 import generateID from '../../../../helpers/functionsAndClasses/generateID';
 import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../../../helpers/structs/footerOptions.config';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/reduxStore';
+import { prefFields } from '../../../../redux/preferencesReduxStore/types';
+import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
+import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
 import { FooterFormInput, FooterFormSelect, FooterFormSelectContainer, ShowOptionsArrowWrapper } from '../FooterForm.styles';
 
@@ -43,12 +43,12 @@ const FooterFormInputs: React.FC = (): JSX.Element => {
     ));
 
     const handleInputsChange = ({ target }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
-        dispatcher(insertInFooterInputs(target.id, target.value));
-        dispatcher(setErrorsFooterInputs(target.id, false));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.FOOTER_FORM, target.id, target.value));
+        dispatcher(PrefActions.changeSecondRootPrefField(prefFields.FOOTER_FORM_ERRORS, target.id, false));
     };
 
     return (
-        <Fragment>
+        <>
             <FooterFormInput
                 type = 'text'
                 placeholder = 'Imię lub nick (bez spacji)'
@@ -72,7 +72,7 @@ const FooterFormInputs: React.FC = (): JSX.Element => {
                     <MdKeyboardArrowDown/>
                 </ShowOptionsArrowWrapper>
             </FooterFormSelectContainer>
-        </Fragment>
+        </>
     );
 };
 
