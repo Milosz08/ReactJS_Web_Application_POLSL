@@ -23,7 +23,8 @@ const UsageInfoElement: React.FC = (): JSX.Element => (
     <UsageInfoContainer>
         Bezpośrednio po modyfikacji jednego elementu, dane zapisywane są asynchronicznie w bazie danych. Nie musisz potwierdzać
         żadnym przyciskiem, a przy kolejnym przeładowaniu strony aplikacja pobierze i wstawi zmienione przez Ciebie informacje
-        w tej sekcji oraz w sekcji głównej na stronie startowej.
+        w tej sekcji oraz w sekcji głównej na stronie startowej. Należy jednak po wprowadzeniu zmian chwilę odczekać, aż zmieniona
+        wartość zostanie umieszczona w polu wprowadzania.
     </UsageInfoContainer>
 );
 
