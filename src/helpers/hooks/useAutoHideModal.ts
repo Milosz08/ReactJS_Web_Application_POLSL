@@ -52,6 +52,7 @@ const useAutoHideModal = (
         return () => {
             clearInterval(intervalIndex);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ callbackDispatcher, dispatcher, esimateTime, listener ]);
 
     return estimate;

@@ -54,6 +54,7 @@ const useDate = (intervalRule = true) => {
         counting();
         const interval = setInterval(counting, 1000 * (intervalRule ? 60 * INTERVAL_RESET_DATE : 1));
         return () => clearInterval(interval);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return date;

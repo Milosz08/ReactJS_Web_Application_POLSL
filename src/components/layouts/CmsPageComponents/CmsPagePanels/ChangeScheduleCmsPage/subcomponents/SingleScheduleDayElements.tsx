@@ -63,6 +63,7 @@ const SingleScheduleDayElements: React.FC<PropsProvider> = ({ day }): JSX.Elemen
             dispatcher(PrefActions.changeSecondRootPrefField(prefFields.SEARCH_INPUTS, CMS_SCHEDULE, ''));
             dispatcher(PrefActions.changeSecondRootPrefField(prefFields.SEARCH_INPUTS_ERRORS, CMS_SCHEDULE, false));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ preferences.currentOpenScheduleSection ]);
 
     return (

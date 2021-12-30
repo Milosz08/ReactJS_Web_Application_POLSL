@@ -57,6 +57,7 @@ const useFirstPainfullLoad = (): null => {
             dispatcher(DbNonModalOp.getAllUniversalElements(FOOTER_FORM, USER_MESSAGES));
             dispatcher(DbNonModalOp.getAllUniversalElements(SCHEDULE_SUBJECTS, SCHEDULE, cookie![groupSelection]));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ isMount ]);
     
     return null;

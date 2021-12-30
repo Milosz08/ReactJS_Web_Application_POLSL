@@ -50,6 +50,7 @@ const useAutoFilledModalEdit = (
                 }
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ dispatcher, selectedModal.ifOpen ]);
 };
 

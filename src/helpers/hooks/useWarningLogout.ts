@@ -67,6 +67,7 @@ const useWarningLogout = (modalListener: boolean, initialValue: number, logoutCa
             clearInterval(hourglassIntervalIndex);
             setTimeout(() => setTimer(initialValue), 1000);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ logoutCallback, modalListener ]);
 
     return [ timer, hourGlassFill ];
