@@ -19,7 +19,7 @@ import { ApiActionsGet } from './actions';
 import { allModals } from '../modalsReduxStore/types';
 import { ModalsInitialTypes } from '../modalsReduxStore/initialState';
 
-const {  addReduxStoreElement, updateReduxStoreElement, deleteReduxStoreElement } = ApiActionsGet;
+const {  addReduxStoreElement, updateReduxStoreElement, deleteReduxStoreElement, addReduxScheduleStoreElement } = ApiActionsGet;
 
 /**
  * Class responsible for providing methods that communicate with the database
@@ -34,11 +34,18 @@ export class DbModalOp {
      * @param modState { ModalsInitialTypes } - initial state of modal redux store.
      * @param modalType { allModals } - type of modal.
      * @param elementToAdd { object } - object element to add.
+     * @param day { string? } - subject add day indicator.
      */
-    public static addSingleElementFromCms = (modState: ModalsInitialTypes, modalType: allModals, elementToAdd: object) => {
+    public static addSingleElementFromCms = (
+        modState: ModalsInitialTypes, modalType: allModals, elementToAdd: object, day: string = ''
+    ) => {
         return async (dispatch: (prop: any) => void) => {
             const { data } = await axiosInstance.post(modState[modalType].apiActionsPath, elementToAdd);
-            dispatch(addReduxStoreElement(data, modState[modalType].apiReducerObjectKey));
+            if(modalType !== allModals.SCHEDULE_MODAL) {
+                dispatch(addReduxStoreElement(data, modState[modalType].apiReducerObjectKey));
+            } else {
+                dispatch(addReduxScheduleStoreElement(data, day))
+            }
         };
     };
 
@@ -50,13 +57,14 @@ export class DbModalOp {
      * @param modalType { allModals } - type of modal.
      * @param elementToUpdate { object } - object element to updated.
      * @param elementID { string } - updated element database identifier.
+     * @param day { string } - subject updated day indicator.
      */
     public static editSingleElementFromCms = (
-        modState: ModalsInitialTypes, modalType: allModals, elementToUpdate: object, elementID: string | null
+        modState: ModalsInitialTypes, modalType: allModals, elementToUpdate: object, elementID: string | null, day: string = ''
     ) => {
         return async (dispatch: (prop: any) => void) => {
             const { data } = await axiosInstance.put(`${modState[modalType].apiActionsPath}/${elementID}`, elementToUpdate);
-            dispatch(updateReduxStoreElement(data, modState[modalType].apiReducerObjectKey, elementID));
+            dispatch(updateReduxStoreElement(data, modState[modalType].apiReducerObjectKey, elementID, day));
         };
     };
 

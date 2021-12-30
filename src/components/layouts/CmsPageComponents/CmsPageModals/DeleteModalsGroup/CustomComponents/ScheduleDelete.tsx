@@ -13,22 +13,23 @@
  */
 
 import * as React from 'react';
-import { ScheduleContentTypes } from '../../../../../../redux/apiReduxStore/dataTypes';
+
 import useFindMatchingElement from '../../../../../../helpers/hooks/useFindMatchingElement';
-import { allModals } from '../../../../../../redux/modalsReduxStore/types';
-import { apiReducerTypes } from '../../../../../../redux/apiReduxStore/types';
-import {
-    CustomContentAsideText,
-    CustomContentContainer,
-    CustomContentRemoveElementTitle
-} from '../DeleteContentModal/DeleteContentModal.styles';
-import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/initialState';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../../../redux/reduxStore';
 import { STATIC_DAYS } from '../../../../../../helpers/structs/schedule.config';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../../redux/reduxStore';
+import { allModals } from '../../../../../../redux/modalsReduxStore/types';
+import { apiReducerTypes } from '../../../../../../redux/apiReduxStore/types';
+import { ScheduleContentTypes } from '../../../../../../redux/apiReduxStore/dataTypes';
+import { ModalsInitialTypes } from '../../../../../../redux/modalsReduxStore/initialState';
+
+import {
+    CustomContentAsideText, CustomContentContainer, CustomContentRemoveElementTitle
+} from '../DeleteContentModal/DeleteContentModal.styles';
+
 /**
- *
+ * Component responsible for generating custom content for schedule delete subject button.
  */
 const ScheduleDelete: React.FC = (): JSX.Element => {
 
@@ -36,7 +37,7 @@ const ScheduleDelete: React.FC = (): JSX.Element => {
     const findDay = STATIC_DAYS.find(el => el.name === scheduleModal.day);
 
     const matchElm: ScheduleContentTypes | any = useFindMatchingElement(
-        allModals.SCHEDULE_MODAL, apiReducerTypes.SCHEDULE, findDay!.eng
+        allModals.SCHEDULE_MODAL, apiReducerTypes.SCHEDULE, Boolean(findDay) ? findDay!.eng : STATIC_DAYS[0].eng
     );
 
     return (

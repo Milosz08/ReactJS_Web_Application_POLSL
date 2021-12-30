@@ -61,6 +61,16 @@ const useGenerateDatabaseObjects = (modalType: allModals) => {
                     departments: fields.departments,
                     classesPlatforms: fields.classesPlatforms
                 };
+            case allModals.SCHEDULE_MODAL:
+                return {
+                    title: fields.title,
+                    day: fields.day,
+                    group: fields.group,
+                    startHour: fields.startHour,
+                    endHour: fields.endHour,
+                    room: fields.room,
+                    type: fields.type
+                };
             default:
                 return {};
         }

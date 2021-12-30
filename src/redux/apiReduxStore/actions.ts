@@ -44,19 +44,33 @@ export class ApiActionsGet {
     });
 
     /**
+     * Method responsible for add single schedule subject element into global redux state.
+     *
+     * @param elementToSend { object } - element to include into state.
+     * @param day { string } - subject day in schedule all days object.
+     */
+    public static addReduxScheduleStoreElement = (elementToSend: object, day: string): ReturnedToReducer => ({
+        type: apiTypes.ADD_SCHEDULE_ELEMENT,
+        payload: {
+            elementToSend, day
+        }
+    });
+
+    /**
      * Method responsible for calling the reducer function that edits the selected list item.
      *
      * @param elementToSend { object } - element to include into state.
      * @param elementType { string } - object key, informs where redux should update element.
      * @param elementID { string | null } - element ID (from database).
+     * @param day
      * @param searchBy { searchByType? } - search element in redux reducer (by default, search by ID).
      */
     public static updateReduxStoreElement = (
-        elementToSend: object, elementType: string, elementID: string | null, searchBy = searchByType.ID
+        elementToSend: object, elementType: string, elementID: string | null, day: string, searchBy = searchByType.ID
     ): ReturnedToReducer => ({
         type: apiTypes.EDIT_DB_ELEMENT_THUNK,
         payload: {
-            elementToSend, elementType, elementID, searchBy
+            elementToSend, elementType, elementID, searchBy, day
         }
     });
 

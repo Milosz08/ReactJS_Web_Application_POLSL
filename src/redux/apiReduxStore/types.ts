@@ -14,6 +14,7 @@
 
 enum apiTypes {
     ADD_DB_ELEMENT_THUNK = 'ADD_DB_ELEMENT_THUNK',
+    ADD_SCHEDULE_ELEMENT = 'ADD_SCHEDULE_ELEMENT',
     EDIT_DB_ELEMENT_THUNK = 'UPDATE_DB_ELEMENT_THUNK',
     DELETE_DB_ELEMENT_THUNK = 'DELETE_DB_ELEMENT_THUNK',
     FILTERED_SCHEDULE_SUBJECTS = 'FILTERED_SCHEDULE_SUBJECTS',
@@ -72,7 +73,6 @@ export enum apiGetContentFromDB {
 
 export enum searchByType {
     ID = '_id',
-    UPDATE_SECTION = 'updateDateFor',
     COVID_TYPE = 'type'
 }
 

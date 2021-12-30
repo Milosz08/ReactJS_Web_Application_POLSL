@@ -22,7 +22,7 @@ import GROUPS_STATIC from '../../helpers/structs/allGroups';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 import { FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
 
-import { apiGetContentFromDB, covidTypes, searchByType, updateSections } from './types';
+import { apiGetContentFromDB, covidTypes, searchByType } from './types';
 import { FooterFormTypes } from './dataTypes';
 
 import { ApiActionsGet, ApiActionsSort } from './actions';
@@ -136,18 +136,6 @@ export class DbNonModalOp {
     };
 
     /**
-     * Method responsible for updating exist date element to the redux state, unrelated to the modal.
-     *
-     * @param section { updateSections } - section of last updating date element.
-     */
-    public static updateSectionDateFromCms = (section: updateSections) => {
-        return async (dispatch: (prop: any) => void) => {
-            const { data } = await axiosInstance.put(`${API_ENDPOINTS.LAST_UPDATE}/${section}`, { updateDateFor: section });
-            dispatch(updateReduxStoreElement(data, apiGetContentFromDB.LAST_UPDATE, section, searchByType.UPDATE_SECTION));
-        };
-    };
-
-    /**
      * Method responsible for marking a message from the user as read.
      *
      * @param elementID { string } - single footer form object ID.
@@ -160,7 +148,7 @@ export class DbNonModalOp {
             formContent.userChoice = FOOTER_OPTIONS.find(option => option.name === formContent.userChoice)!.value;
             await axiosInstance.put(`${API_ENDPOINTS.FOOTER_FORM}/${elementID}`, formContent);
             formContent.userChoice = FOOTER_OPTIONS.find(option => option.value === formContent.userChoice)!.name;
-            dispatch(updateReduxStoreElement(formContent, apiGetContentFromDB.USER_MESSAGES, elementID));
+            dispatch(updateReduxStoreElement(formContent, apiGetContentFromDB.USER_MESSAGES, elementID, ''));
         };
     };
 }

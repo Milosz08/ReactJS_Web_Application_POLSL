@@ -28,32 +28,46 @@ const apiReducer = (state = apiInitialState, action: any) => {
 
         case apiTypes.ADD_DB_ELEMENT_THUNK: {
             const { elementToSend, elementType, addSchedule } = action.payload;
-            if(addSchedule) {
+            if (addSchedule) {
                 const schedules = ApiReducerUtils.subjectsInSeparateArrays(state.scheduleContent, elementToSend);
                 return { ...state, [elementType]: schedules };
             }
             return { ...state, [elementType]: [ ...state[elementType], elementToSend ] };
         }
 
+        case apiTypes.ADD_SCHEDULE_ELEMENT: {
+            const { elementToSend, day } = action.payload;
+            return { ...state, scheduleContent: {
+                ...state.scheduleContent, [day]: [ ...state.scheduleContent[day], elementToSend ]
+                }
+            };
+        }
+
         case apiTypes.EDIT_DB_ELEMENT_THUNK: {
-            const { elementToSend, elementType, elementID, searchBy } = action.payload;
-            const newState = state[elementType];
-            const findSearchIdx = state[elementType].findIndex((el: typeof elementType) => el[searchBy] === elementID);
-            if(findSearchIdx === -1) {
+            const { elementToSend, elementType, elementID, searchBy, day } = action.payload;
+            let updatedState = state[elementType];
+            if (elementType === sortAvailables.SCHEDULE) {
+                updatedState = state[elementType][day];
+            }
+            const findSearchIdx = updatedState.findIndex((el: typeof elementType) => el[searchBy] === elementID);
+            if (findSearchIdx === -1) {
                 return state;
             }
-            newState[findSearchIdx] = elementToSend;
-            return { ...state, [elementType]: newState };
+            updatedState[findSearchIdx] = elementToSend;
+            if (elementType === sortAvailables.SCHEDULE) {
+                return { ...state, [elementType]: { ...state[elementType], [day]: updatedState } };
+            }
+            return { ...state, [elementType]: updatedState };
         }
 
         case apiTypes.DELETE_DB_ELEMENT_THUNK: {
             const { elementType, elementID, day } = action.payload;
             let deletedState = state[elementType];
-            if(elementType === sortAvailables.SCHEDULE) {
+            if (elementType === sortAvailables.SCHEDULE) {
                 deletedState = state[elementType][day];
             }
             const elementsWithoutRemoving = deletedState.filter((el: any) => el._id !== elementID);
-            if(elementType === sortAvailables.SCHEDULE) {
+            if (elementType === sortAvailables.SCHEDULE) {
                 return { ...state, [elementType]: { ...state[elementType], [day]: elementsWithoutRemoving } };
             }
             return { ...state, [elementType]: elementsWithoutRemoving };

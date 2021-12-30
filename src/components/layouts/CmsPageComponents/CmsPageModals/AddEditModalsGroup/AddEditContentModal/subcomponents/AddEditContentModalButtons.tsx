@@ -28,6 +28,7 @@ import {
     AddEditContentModalButtonsContainer, AddEditContentSaveChangesButton, AddEditContentUnsaveChangesButton
 } from '../AddEditContentModal.styles';
 import useValidateAddEditCmsModal from '../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
+import { STATIC_DAYS } from '../../../../../../../helpers/structs/schedule.config';
 
 const EstimateTimeCounterBar = React.lazy(() => import('../../../../../EstimateTimeCounterBar/EstimateTimeCounterBar'));
 
@@ -50,6 +51,7 @@ interface PropsProvider {
 const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title, mode, id }): JSX.Element => {
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+    const day = STATIC_DAYS.find(el => el.name === modalsInitialState.scheduleModal.day)!.eng;
 
     const generatedObject = useGenerateDatabaseObjects(modalType);
     const { validateReducer } = useValidateAddEditCmsModal(modalType);
@@ -69,9 +71,9 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
             setTimeout(() => {
                 reset();
                 if (mode === allModalsActions.ADD_ELEMENT) {
-                    dispatcher(DbModalOp.addSingleElementFromCms(modalsInitialState, modalType, object));
+                    dispatcher(DbModalOp.addSingleElementFromCms(modalsInitialState, modalType, object, day));
                 } else {
-                    dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id));
+                    dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id, day));
                 }
             }, 1000);
         }, 2000);
