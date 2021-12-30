@@ -18,6 +18,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reduxStore';
 import { ModalsInitialTypes } from '../../redux/modalsReduxStore/initialState';
 import { allModals } from '../../redux/modalsReduxStore/types';
+import { STATIC_DAYS } from '../structs/schedule.config';
 
 /**
  * Custom hook responsible for generating an object to communicate with the database
@@ -28,6 +29,7 @@ import { allModals } from '../../redux/modalsReduxStore/types';
 const useGenerateDatabaseObjects = (modalType: allModals) => {
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+    const selectedDay = STATIC_DAYS.find(day => day.name === modalsInitialState.scheduleModal.day)!.id;
 
     const fields = modalsInitialState[modalType].modalInputFields!;
     const hashKey: string = process.env.REACT_APP_HASH_CODE || '';
@@ -64,7 +66,7 @@ const useGenerateDatabaseObjects = (modalType: allModals) => {
             case allModals.SCHEDULE_MODAL:
                 return {
                     title: fields.title,
-                    day: fields.day,
+                    day: selectedDay,
                     group: fields.group,
                     startHour: fields.startHour,
                     endHour: fields.endHour,
