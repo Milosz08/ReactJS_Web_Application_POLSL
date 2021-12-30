@@ -16,6 +16,10 @@ import * as React from 'react';
 
 import useGenerateLoadingLine from '../../../../../../../helpers/hooks/useGenerateLoadingLine';
 import useGenerateDatabaseObjects from '../../../../../../../helpers/hooks/useGenerateDatabaseObjects';
+import useValidateAddEditCmsModal from '../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
+import useRemoveScheduleOnChangeSubject from '../../../../../../../helpers/hooks/useRemoveScheduleOnChangeSubject';
+
+import { STATIC_DAYS } from '../../../../../../../helpers/structs/schedule.config';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/reduxStore';
@@ -27,8 +31,6 @@ import { allModals, allModalsActions } from '../../../../../../../redux/modalsRe
 import {
     AddEditContentModalButtonsContainer, AddEditContentSaveChangesButton, AddEditContentUnsaveChangesButton
 } from '../AddEditContentModal.styles';
-import useValidateAddEditCmsModal from '../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
-import { STATIC_DAYS } from '../../../../../../../helpers/structs/schedule.config';
 
 const EstimateTimeCounterBar = React.lazy(() => import('../../../../../EstimateTimeCounterBar/EstimateTimeCounterBar'));
 
@@ -56,6 +58,7 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
     const generatedObject = useGenerateDatabaseObjects(modalType);
     const { validateReducer } = useValidateAddEditCmsModal(modalType);
 
+    const removeScheduleSubject = useRemoveScheduleOnChangeSubject(modalType, id!);
     const dispatcher = useDispatch();
 
     const handleUnsaveChangesOnCloseModal = (): void => {
@@ -74,6 +77,7 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
                     dispatcher(DbModalOp.addSingleElementFromCms(modalsInitialState, modalType, object, day));
                 } else {
                     dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id, day));
+                    removeScheduleSubject();
                 }
             }, 1000);
         }, 2000);

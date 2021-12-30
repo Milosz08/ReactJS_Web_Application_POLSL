@@ -15,7 +15,9 @@
 import * as React from 'react';
 
 import { STATIC_DAYS } from '../../../../../../../helpers/structs/schedule.config';
+
 import useGenerateLoadingLine from '../../../../../../../helpers/hooks/useGenerateLoadingLine';
+import useRemoveScheduleOnChangeSubject from '../../../../../../../helpers/hooks/useRemoveScheduleOnChangeSubject';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/reduxStore';
@@ -48,6 +50,7 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const day = STATIC_DAYS.find(el => el.name === modalsInitialState.scheduleModal.day)!.eng;
 
+    const removeScheduleSubject = useRemoveScheduleOnChangeSubject(modalType, dataID!);
     const dispatcher = useDispatch();
 
     const handleNotRemoveContentButton = (): void => {
@@ -61,6 +64,7 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
             setTimeout(() => {
                 reset();
                 dispatcher(DbModalOp.deleteSingleElementFromCms(modalsInitialState, modalType, dataID!, day));
+                removeScheduleSubject();
             }, 1000);
         }, 2000);
     };
