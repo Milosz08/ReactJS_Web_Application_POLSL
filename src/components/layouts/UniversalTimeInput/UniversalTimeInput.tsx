@@ -20,6 +20,7 @@ interface PropsProvider {
     timeValue: string;
     changeCallback: ({ target }: React.ChangeEvent<HTMLInputElement>) => void;
     ifError: boolean;
+    disabledInput?: boolean;
 }
 
 /**
@@ -28,14 +29,16 @@ interface PropsProvider {
  * @param timeValue { string } - time string value in HH-MM.
  * @param changeCallback { ({ target }: React.ChangeEvent<HTMLInputElement>) => void } - callback changing state function.
  * @param ifError { boolean } - flag, decided if input has errors.
+ * @param disabledInput { boolean? } - flag, decided if input should be disabled.
  */
-const UniversalTimeInput: React.FC<PropsProvider> = ({ timeValue, changeCallback, ifError }): JSX.Element => (
+const UniversalTimeInput: React.FC<PropsProvider> = ({ timeValue, changeCallback, ifError, disabledInput }): JSX.Element => (
     <UniversalTimeInputContainer>
         <UniversalTimeInputElement
             type = 'time'
             $ifError = {ifError}
             value = {timeValue}
             onChange = {changeCallback}
+            disabled = {disabledInput}
         />
         <UniversalTimeClockIcon
             $ifError = {ifError}
