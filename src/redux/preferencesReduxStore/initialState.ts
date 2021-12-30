@@ -140,5 +140,5 @@ export const PrefInitialState: PreferencesInitialTypes = {
             sortingMode: sortingTypes.INCREASE,
         }
     },
-    currentOpenScheduleSection: -1,
+    currentOpenScheduleSection: 0,
 };
