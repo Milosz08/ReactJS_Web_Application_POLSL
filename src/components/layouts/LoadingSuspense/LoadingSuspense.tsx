@@ -29,7 +29,6 @@ const LoadingSuspense = (): JSX.Element => {
         setIsVisible(true);
         return () => {
             setIsVisible(false);
-            console.log('React has finished rendering the application.');
         }
     }, []);
 
