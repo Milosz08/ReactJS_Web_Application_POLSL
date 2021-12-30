@@ -102,13 +102,13 @@ export const initialStateForModalsInputs = {
     },
     [SCHEDULE_MODAL]: {
         normal: {
-            title: 'Sieci Komputerowe',
+            title: 'wybierz przedmiot',
             day: 0,
-            group: 'pierwsza',
-            startHour: '20:45',
-            endHour: '21:15',
-            room: 'b120',
-            type: 'ćwiczenia',
+            group: 'wybierz grupę',
+            startHour: '',
+            endHour: '',
+            room: '',
+            type: 'wybierz typ zajęć',
         },
         errors: {
             title: false,
