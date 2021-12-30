@@ -13,63 +13,60 @@
  */
 
 import * as React from 'react';
-
-import useValidateAddEditCmsModal from '../../../helpers/hooks/useValidateAddEditCmsModal';
-
-import { RootState } from '../../../redux/reduxStore';
-import { useDispatch, useSelector } from 'react-redux';
-import { ModalsActions } from '../../../redux/modalsReduxStore/actions';
-import { ModalsInitialTypes } from '../../../redux/modalsReduxStore/initialState';
-import { allModals, allModalsInputs } from '../../../redux/modalsReduxStore/types';
-
 import {
     UniversalSelectInputArrow, UniversalSelectInputContainer, UniversalSelectInputElement
 } from './UniversalSelectInput.styles';
+import { allModals, allModalsInputs } from '../../../redux/modalsReduxStore/types';
+import { ModalsInitialTypes } from '../../../redux/modalsReduxStore/initialState';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/reduxStore';
+import useValidateAddEditCmsModal from '../../../helpers/hooks/useValidateAddEditCmsModal';
+import { ModalsActions } from '../../../redux/modalsReduxStore/actions';
 
 interface PropsProvider {
     allOptions: string[];
     defaultOption: string;
     modalType: allModals;
-    arrayFieldType: allModalsInputs;
     inputFieldType: allModalsInputs;
-    itemIndex: number;
     extraTopBottomMargin?: boolean;
+    disableInput?: boolean;
 }
 
 /**
- * Universal component responsible for generating select input based on options array given in props.
+ * Universal component responsible for generating select input with options for single 1st root elements.
  *
  * @param allOptions { string[] } - all options inserting into select input.
  * @param defaultOption { string } - default option inserting in options input array.
  * @param modalType { allModals } - selected modal.
- * @param arrayFieldType { allModalsInputs } - selected input in array modal.
  * @param inputFieldType { allModalsInputs } - selected array in modal.
- * @param itemIndex { number } - array index element.
  * @param extraTopBottomMargin { boolean? } - flag decided to show margin on small devices.
+ * @param disableInput { boolean? } - flag decided, if input should be disabled.
  */
 const UniversalSelectInput: React.FC<PropsProvider> = ({
-    allOptions, defaultOption, modalType, arrayFieldType, inputFieldType, itemIndex, extraTopBottomMargin
+    allOptions, defaultOption, modalType, inputFieldType, extraTopBottomMargin, disableInput
 }): JSX.Element => {
 
     const modals: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
 
-    const { clearSelectedArrayInput } = useValidateAddEditCmsModal(modalType);
+    const { clearSelectedInput } = useValidateAddEditCmsModal(modalType);
     const dispatcher = useDispatch();
 
-    const modalInput = modals[modalType].modalInputFields![arrayFieldType][itemIndex][inputFieldType];
-    const modalError = modals[modalType].modalInputErrorsFields![arrayFieldType][itemIndex][inputFieldType];
+    const modalInput = modals[modalType].modalInputFields![inputFieldType];
+    const modalError = modals[modalType].modalInputErrorsFields![inputFieldType];
 
-    const addDefaultOption = [defaultOption].concat(allOptions);
+    const addDefaultOption = [ defaultOption ].concat(allOptions);
 
-    const generateOptions = addDefaultOption.map(el => (
-        <option key = {el} value = {el}>
+    const generateOptions = addDefaultOption.map((el, idx) => (
+        <option key = {idx} value = {el}>
             {el}
         </option>
     ));
 
     const handleChangeInputOptions = ({ target }: React.ChangeEvent<HTMLSelectElement>): void => {
-        dispatcher(ModalsActions.changeModalSelectedInputArray(modalType, arrayFieldType, inputFieldType, itemIndex, target.value));
-        clearSelectedArrayInput(arrayFieldType, inputFieldType, itemIndex);
+        if (!disableInput) {
+            dispatcher(ModalsActions.changeModalSelectedInput(modalType, inputFieldType, target.value));
+            clearSelectedInput(inputFieldType);
+        }
     };
 
     return (
@@ -80,6 +77,7 @@ const UniversalSelectInput: React.FC<PropsProvider> = ({
                 ifError = {modalError}
                 value = {modalInput}
                 onChange = {handleChangeInputOptions}
+                disabled = {disableInput}
             >
                 {generateOptions}
             </UniversalSelectInputElement>
