@@ -51,7 +51,7 @@ const useEstimateCounter = (expTime: number) => {
 
         const index = setInterval(counting, 1000);
         return () => clearInterval(index);
-    });
+    }, [ expTime ]);
 
     return date;
 };
