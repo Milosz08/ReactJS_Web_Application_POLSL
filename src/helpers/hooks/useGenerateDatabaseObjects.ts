@@ -70,7 +70,7 @@ const useGenerateDatabaseObjects = (modalType: allModals) => {
                     group: fields.group,
                     startHour: fields.startHour,
                     endHour: fields.endHour,
-                    room: fields.room,
+                    room: fields.room === '' ? 'empty' : fields.room,
                     type: fields.type
                 };
             default:

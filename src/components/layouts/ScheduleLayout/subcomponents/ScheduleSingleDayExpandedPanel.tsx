@@ -55,9 +55,9 @@ const ScheduleSingleDayExpandedPanel: React.FC<PropsProvider> = ({ tile, subject
                 ifActive = {ifIsExpanded}
             >
                 <ScheduleExpandedPanelInfo>
-                    <ScheduleExpandedPanelRoomContainer>
-                        Sala: <strong>{tile.room.toLocaleUpperCase()}</strong>
-                    </ScheduleExpandedPanelRoomContainer>
+                    {tile.room !== 'EMPTY' && <ScheduleExpandedPanelRoomContainer>
+                        Sala: <strong>{tile.room}</strong>
+                    </ScheduleExpandedPanelRoomContainer>}
                     <span>{tile.classesInfo.type === 'wykład' ? 'wykłady' : tile.classesInfo.type} </span>
                     {subject?.ifEnd ? 'odbywały' : 'odbywają'} się
                     {tile.classesInfo.place !== 'kontaktowy' ? ' przez komunikator ' : ' w sposób '}
