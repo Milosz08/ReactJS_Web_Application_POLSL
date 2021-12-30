@@ -41,7 +41,7 @@ const SessionSequencer: React.FC = (): null => {
         ACTIVITY_EVENTS.forEach((eventName: string) => document.addEventListener(eventName, activity, true));
 
         const asyncCountingSession = () => {
-            //dispatcher(SessActions.increaseSessionCounter(++secondsSinceLastActivity));
+            dispatcher(SessActions.increaseSessionCounter(++secondsSinceLastActivity));
             if (secondsSinceLastActivity > maxInactivity) {
                 dispatcher(SessActions.toggleWarningSessionModal(true));
                 secondsSinceLastActivity = 0;
