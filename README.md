@@ -9,7 +9,7 @@ Advanced, full-stack web application written using the ReactJS library and other
 </p>
 
 > See this website at [informatyka-pol-elektr.pl](https://informatyka-pol-elektr.pl/) <br>
-> See API for this website written in Java Spring Boot in my repo: [Spring_RestFullApi_POLSL](https://github.com/Milosz08/Spring_RestFullApi_POLSL)
+> See API for this website written in Java Spring Boot in my repo: [Spring_RestFullApi_POLSL](https://github.com/Milosz08/SpringBoot_RestfullApi_POLSL)
 
 <hr/>
 
