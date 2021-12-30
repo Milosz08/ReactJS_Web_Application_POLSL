@@ -17,7 +17,7 @@ import * as React from 'react';
 import useValidateAddEditCmsModal from '../../../helpers/hooks/useValidateAddEditCmsModal';
 
 import {
-    UniversalInputForArraysContainer, UniversalInputWithButtonInput, UniversalInputWithButtonLabel
+    UniversalInputContainer, UniversalInputWithButtonInput, UniversalInputWithButtonLabel
 } from './UniversalInputWithButton.styles';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -68,7 +68,7 @@ const UniversalInputForArrays: React.FC<PropsProvider> = ({
     };
 
     return (
-        <UniversalInputForArraysContainer
+        <UniversalInputContainer
             ifExtraRightLeft = {ifExtraRightLeft}
         >
             <UniversalInputWithButtonLabel>
@@ -82,7 +82,7 @@ const UniversalInputForArrays: React.FC<PropsProvider> = ({
                     maxLength = {inputMaxLength}
                 />
             </UniversalInputWithButtonLabel>
-        </UniversalInputForArraysContainer>
+        </UniversalInputContainer>
     );
 };
 

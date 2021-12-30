@@ -28,7 +28,7 @@ export const UniversalInputWithButtonContainer = styled.div`
     }
 `;
 
-export const UniversalInputForArraysContainer = styled('div')<{ ifExtraRightLeft: boolean }>`
+export const UniversalInputContainer = styled('div')<{ ifExtraRightLeft: boolean }>`
     display: flex;
     justify-content: center;
     flex-grow: ${({ ifExtraRightLeft }) => ifExtraRightLeft ? 'initial' : 1};

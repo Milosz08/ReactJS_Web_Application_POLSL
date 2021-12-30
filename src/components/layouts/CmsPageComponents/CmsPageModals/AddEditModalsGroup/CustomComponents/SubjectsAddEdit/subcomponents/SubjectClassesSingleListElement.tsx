@@ -19,7 +19,7 @@ import { allModals, allModalsInputs } from '../../../../../../../../redux/modals
 
 import { SubjectSingleListElementContainer } from '../SubjectsAddEdit.styles';
 
-const UniversalSelectInput = React.lazy(() => import('../../../../../../UniversalSelectInput/UniversalSelectInput'));
+const UniversalSelectInputForArrays = React.lazy(() => import('../../../../../../UniversalSelectInput/UniversalSelectInputForArrays'));
 const UniversalInputForArrays = React.lazy(() => import('../../../../../../UniversalInputWithButton/UniversalInputForArrays'));
 
 interface PropsProvider {
@@ -33,7 +33,7 @@ interface PropsProvider {
  */
 const SubjectClassesSingleListElement: React.FC<PropsProvider> = ({ tileIdx }): JSX.Element => (
     <SubjectSingleListElementContainer>
-        <UniversalSelectInput
+        <UniversalSelectInputForArrays
             allOptions = {CLASSES_OPTIONS.TYPES}
             defaultOption = 'typ zajęć'
             modalType = {allModals.SUBJECT_MODAL}
@@ -41,7 +41,7 @@ const SubjectClassesSingleListElement: React.FC<PropsProvider> = ({ tileIdx }): 
             inputFieldType = {allModalsInputs.TYPE}
             itemIndex = {tileIdx}
         />
-        <UniversalSelectInput
+        <UniversalSelectInputForArrays
             allOptions = {CLASSES_OPTIONS.PLATFORMS}
             defaultOption = 'miejsce'
             modalType = {allModals.SUBJECT_MODAL}
