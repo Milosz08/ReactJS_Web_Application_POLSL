@@ -33,11 +33,10 @@ const EstimateTimeCounterBar = React.lazy(() => import('../../EstimateTimeCounte
  */
 const GeneratePdfButton: React.FC = (): JSX.Element => {
 
-    const initialTypes: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const { currentScheduleContent }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
     const componentRef: React.MutableRefObject<any> = useRef<HTMLElement>();
 
-    const emptySch: boolean = Object.keys(initialTypes.scheduleContent).filter(el => el.length === 0).length !== 0
-                              || initialTypes.summerBreakActive;
+    const emptySch: boolean = Object.values(currentScheduleContent).every(day => day.length === 0);
 
     const handlePrint: (() => void) | undefined = useReactToPrint({
         content: () => componentRef.current,

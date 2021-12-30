@@ -15,7 +15,6 @@
 import * as React from 'react';
 
 import { STATIC_DAYS } from '../../../helpers/structs/schedule.config';
-import generateID from '../../../helpers/functionsAndClasses/generateID';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reduxStore';
@@ -23,34 +22,33 @@ import { ApiInitialTypes } from '../../../redux/apiReduxStore/initialState';
 
 import { ScheduleLayoutContainer, ScheduleLayoutWrapper } from './ScheduleLayout.styles';
 
-import ScheduleSummerBreak from './subcomponents/ScheduleSummerBreak';
-import ScheduleSingleDayColumn from './subcomponents/ScheduleSingleDayColumn';
+const ScheduleSummerBreak = React.lazy(() => import('./subcomponents/ScheduleSummerBreak'));
+const ScheduleSingleDayColumn = React.lazy(() => import('./subcomponents/ScheduleSingleDayColumn'));
 
 /**
  * Component responsible for generate all structure for Schedule Layout.
  */
 const ScheduleLayout: React.FC = (): JSX.Element => {
 
-    const { summerBreakActive }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const { currentScheduleContent }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const noContentActive = Object.values(currentScheduleContent).every(day => day.length === 0);
 
     const generateAllDaysStructure: JSX.Element[] = STATIC_DAYS.map(day => (
         <ScheduleSingleDayColumn
-            key = {generateID()}
+            key = {day.eng}
             day = {day}
         />
     ));
 
-    const generateSummerOrNotContent = summerBreakActive ? (
-        <ScheduleSummerBreak/>
-    ) : (
+    const generateContentOrNot: JSX.Element = !noContentActive ? (
         <ScheduleLayoutWrapper>
             {generateAllDaysStructure}
         </ScheduleLayoutWrapper>
-    );
+    ) : <ScheduleSummerBreak/>;
 
     return (
         <ScheduleLayoutContainer>
-            {generateSummerOrNotContent}
+            {generateContentOrNot}
         </ScheduleLayoutContainer>
     );
 };

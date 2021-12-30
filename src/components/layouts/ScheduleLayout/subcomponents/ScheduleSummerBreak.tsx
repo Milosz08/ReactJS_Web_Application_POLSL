@@ -22,7 +22,7 @@ import {
     ScheduleSummerBreakMainContainer
 } from '../ScheduleLayout.styles';
 
-import ScheduleSummerBreakContent from './ScheduleSummerBreakContent';
+const ScheduleSummerBreakContent = React.lazy(() => import('./ScheduleSummerBreakContent'));
 
 /**
  * Component responsible for generate schedule headers and footers for
@@ -35,6 +35,7 @@ const ScheduleSummerBreak: React.FC = (): JSX.Element => {
     const generateHeaders = STATIC_DAYS.map(day => (
         <ScheduleSummerBreakSingleDayWrapper
             ifActive = {date.day.toLocaleLowerCase() === day.name.toLocaleLowerCase()}
+            key = {day.eng}
         >
             {day.name}
         </ScheduleSummerBreakSingleDayWrapper>
@@ -42,6 +43,7 @@ const ScheduleSummerBreak: React.FC = (): JSX.Element => {
 
     const generateFooters = STATIC_DAYS.map(day => (
         <ScheduleSingleDayEndingSeparator
+            key = {day.eng}
             ifActive = {date.day.toLocaleLowerCase() === day.name.toLocaleLowerCase()}
             ifNonSchedule
         />

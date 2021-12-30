@@ -32,7 +32,6 @@ export interface ApiInitialTypes {
     };
     calendarContent: CalendarContentTypes[];
     helpersLinks: HelpersLinksContentTypes[];
-    summerBreakActive: boolean;
 }
 
 export const apiInitialState: ApiInitialTypes = {
@@ -56,5 +55,4 @@ export const apiInitialState: ApiInitialTypes = {
     },
     calendarContent: [],
     helpersLinks: [],
-    summerBreakActive: false,
 };
