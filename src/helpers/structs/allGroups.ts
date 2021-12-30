@@ -16,6 +16,7 @@ export interface GroupsStaticTypes {
     NORMAL_GROUPS: string[];
     ENG_GROUPS: string[];
     SK_GROUPS: string[];
+    MERGE_SK_GROUPS: string[];
 }
 
 const GROUPS_STATIC: GroupsStaticTypes = {
@@ -27,6 +28,9 @@ const GROUPS_STATIC: GroupsStaticTypes = {
     ],
     SK_GROUPS: [
         'pon', 'czw', 'pt'
+    ],
+    MERGE_SK_GROUPS: [
+        'pierwsza, pon', 'pierwsza, pt', 'druga, pon', 'druga, czw', 'druga, pt'
     ]
 };
 

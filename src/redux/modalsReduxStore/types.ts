@@ -54,6 +54,10 @@ export enum allModalsInputs {
     PLACE = 'place',
     SHORT = 'shortName',
     DAY = 'day',
+    GROUP = 'group',
+    ROOM = 'room',
+    START_HOUR = 'startHour',
+    END_HOUR = 'endHour',
 }
 
 export enum modalInputHeader {
