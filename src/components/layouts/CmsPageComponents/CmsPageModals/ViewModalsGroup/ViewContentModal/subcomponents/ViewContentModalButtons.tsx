@@ -21,9 +21,11 @@ import { allModals } from '../../../../../../../redux/modalsReduxStore/types';
 import { ApiInitialTypes } from '../../../../../../../redux/apiReduxStore/initialState';
 import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
 
-import { CloseModalContentButton, ViewContentButtonsContainer, ViewContentCheckboxWrapper } from '../ViewContentModal.styles';
-import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
+import { updateSections } from '../../../../../../../redux/apiReduxStore/types';
 import { FooterFormTypes } from '../../../../../../../redux/apiReduxStore/dataTypes';
+import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
+
+import { CloseModalContentButton, ViewContentButtonsContainer, ViewContentCheckboxWrapper } from '../ViewContentModal.styles';
 
 const UniversalCheckboxInput = React.lazy(() => import('../../../../../UniversalCheckboxInput/UniversalCheckboxInput'));
 
@@ -54,6 +56,7 @@ const ViewContentModalButtons: React.FC<PropsProvider> = ({ modalType, dataID })
         dispatcher(ModalsActions.changeModalStateElements(false, modalType, dataID));
         if (!formMessage!.ifClicked) {
             dispatcher(DbNonModalOp.editReadFooterFormMessageIndicator(dataID!, formMessage!, checkboxChecked));
+            dispatcher(DbNonModalOp.updateLastUpdateField(updateSections.USER_MESS));
         }
         setTimeout(() => setCheckboxChecked(true), 2000);
     };

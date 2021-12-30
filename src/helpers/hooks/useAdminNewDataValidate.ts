@@ -24,6 +24,8 @@ import {
     ChangeCredentialsContext, ChangeCredentialsContextTypes
 } from '../../components/layouts/CmsPageComponents/CmsPagePanels/ChangeCredentialsCmsPage/ChangeCredentialsStoreProvider';
 
+import { updateSections } from '../../redux/apiReduxStore/types';
+
 /**
  * Custom hook responsible for validate and send new data about credentials (user/admin/moderator).
  * Connected with redux store and action reducer.
@@ -74,6 +76,7 @@ const useAdminNewDataValidate = (allRef: { [value: string]: React.MutableRefObje
             const vld = new LoginValidator(login.current.value, passF.current.value, ROLES.ADMIN, token.current.value);
             validateDataAndReturnedBoolObject(vld, false);
         }
+        dispatcher(DbNonModalOp.updateLastUpdateField(updateSections.AUTH));
     };
 };
 

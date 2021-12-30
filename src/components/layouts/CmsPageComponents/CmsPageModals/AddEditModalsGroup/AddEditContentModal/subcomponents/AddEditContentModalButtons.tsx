@@ -26,6 +26,7 @@ import { RootState } from '../../../../../../../redux/reduxStore';
 import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
 import { DbModalOp } from '../../../../../../../redux/apiReduxStore/operationsForModals';
 import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
+import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
 import { allModals, allModalsActions } from '../../../../../../../redux/modalsReduxStore/types';
 
 import {
@@ -79,6 +80,7 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
                     dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id, day));
                     removeScheduleSubject();
                 }
+                dispatcher(DbNonModalOp.updateLastUpdateField(modalsInitialState[modalType].updateApiParam));
             }, 1000);
         }, 2000);
     };

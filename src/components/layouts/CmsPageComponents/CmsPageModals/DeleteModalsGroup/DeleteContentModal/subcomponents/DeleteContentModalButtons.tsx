@@ -25,6 +25,7 @@ import { allModals } from '../../../../../../../redux/modalsReduxStore/types';
 import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
 import { DbModalOp } from '../../../../../../../redux/apiReduxStore/operationsForModals';
 import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
+import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
 
 import { DeleteContentButton, DeleteContentButtonsContainer, NotDeleteContentButton } from '../DeleteContentModal.styles';
 
@@ -64,6 +65,7 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
             setTimeout(() => {
                 reset();
                 dispatcher(DbModalOp.deleteSingleElementFromCms(modalsInitialState, modalType, dataID!, day));
+                dispatcher(DbNonModalOp.updateLastUpdateField(modalsInitialState[modalType].updateApiParam));
                 removeScheduleSubject();
             }, 1000);
         }, 2000);
