@@ -43,7 +43,7 @@ const useFilteredSchedule = (weekDay: string): ScheduleContentTypes[] => {
             singleDayOfWeek
                 .filter(prop => {
                     if (prop.group.includes(',')) {
-                        const [ sk, normal ] = prop.group.split(',');
+                        const [ normal, sk ] = prop.group.replaceAll(' ', '').split(',');
                         return sk === skGroup && normal === normalGroup;
                     } else {
                         return prop.group === engGroup || prop.group === normalGroup || prop.group === ALL_GROUPS

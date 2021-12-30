@@ -49,7 +49,7 @@ class ApiReducerUtils {
     public static moveSheduleSubjectsIntoSeparateDays(
         scheduleContent: ScheduleSubjectDays, normal: string, eng: string, sk: string
     ): { [value: string]: CurrentScheduleContentTypes[]; } {
-        const normalAndSkGroup = `${sk},${normal}`;
+        const normalAndSkGroup = `${normal},${sk}`;
         let middlewareObject: { [value: string]: CurrentScheduleContentTypes[] } = {
             monday: [], tuesday: [], wednesday: [], thursday: [], friday: []
         };

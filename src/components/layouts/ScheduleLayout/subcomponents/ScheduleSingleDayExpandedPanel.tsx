@@ -17,15 +17,17 @@ import { Fragment, useState } from 'react';
 
 import { FRONT_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
 import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
+
 import { ScheduleContentTypes, SubjectsContentTypes } from '../../../../redux/apiReduxStore/dataTypes';
 
 import {
     ScheduleExpandedPanelContainer, ScheduleExpandedPanelInfo, ScheduleExpandedPanelInnerRouter,
     ScheduleExpandedPanelPzeAnchor, ScheduleExpandedPanelRoomContainer
 } from '../ScheduleLayout.styles';
+
 import { ExternalIconLink } from '../../SubjectsDetails/subcomponents/SubjectInfoStructure/SubjectInfoStructure.style';
 
-import ScheduleExpandedPanelButton from './ScheduleExpandedPanelButton';
+const ScheduleExpandedPanelButton = React.lazy(() => import('./ScheduleExpandedPanelButton'));
 
 interface PropsProvider {
     tile: ScheduleContentTypes;
