@@ -123,7 +123,7 @@ export const modalsInitialState: ModalsInitialTypes = {
         apiActionsPath: SCHEDULE_SUBJECTS,
         apiReducerObjectKey: SCHEDULE,
         updateApiParam: UP_SCHEDULE,
-        modalInputFields: copyInitialState[CALENDAR_MODAL].normal,
-        modalInputErrorsFields: copyInitialState[CALENDAR_MODAL].errors,
+        modalInputFields: copyInitialState[SCHEDULE_MODAL].normal,
+        modalInputErrorsFields: copyInitialState[SCHEDULE_MODAL].errors,
     }
 };

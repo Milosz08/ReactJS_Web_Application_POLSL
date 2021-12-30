@@ -17,7 +17,7 @@ import moment from 'moment';
 import { allModals } from './types';
 import { LEVELS } from '../../helpers/structs/calendar.config';
 
-const { HELPERS_LINKS_MODAL, CALENDAR_MODAL, SUBJECT_MODAL } = allModals;
+const { HELPERS_LINKS_MODAL, CALENDAR_MODAL, SUBJECT_MODAL, SCHEDULE_MODAL } = allModals;
 
 /**
  * Object that stores all initial states for modals inputs.
@@ -98,6 +98,25 @@ export const initialStateForModalsInputs = {
                     link: false,
                 }
             ]
+        }
+    },
+    [SCHEDULE_MODAL]: {
+        normal: {
+            title: 'Sieci Komputerowe',
+            day: 0,
+            group: 'pierwsza',
+            startHour: '20:45',
+            endHour: '21:15',
+            room: 'b120',
+            type: 'ćwiczenia',
+        },
+        errors: {
+            title: false,
+            group: false,
+            startHour: false,
+            endHour: false,
+            room: false,
+            type: false
         }
     },
 };
