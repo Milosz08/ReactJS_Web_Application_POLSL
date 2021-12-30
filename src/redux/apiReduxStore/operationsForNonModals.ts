@@ -22,8 +22,8 @@ import GROUPS_STATIC from '../../helpers/structs/allGroups';
 import { API_ENDPOINTS } from '../../helpers/structs/appEndpoints';
 import { FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
 
-import { apiGetContentFromDB, covidTypes, searchByType } from './types';
 import { FooterFormTypes } from './dataTypes';
+import { apiGetContentFromDB, apiReducerTypes, covidTypes, searchByType, updateSections } from './types';
 
 import { ApiActionsGet, ApiActionsSort } from './actions';
 
@@ -108,13 +108,15 @@ export class DbNonModalOp {
      * @param elementKey { apiGetContentFromDB } - added element key in store object.
      * @param type { covidTypes } - typeof covid warning block.
      * @param endpoint { API_ENDPOINTS } - api element endpoint.
+     * @param searchBy { searchByType } - type of search element (by default search by ID).
      */
     public static editSingleNonModalElement = (
-        elementToUpdate: object, elementKey: apiGetContentFromDB, type: covidTypes, endpoint: API_ENDPOINTS
+        elementToUpdate: object, elementKey: apiGetContentFromDB, type: covidTypes, endpoint: API_ENDPOINTS,
+        searchBy: searchByType = searchByType.ID
     ) => {
         return async (dispatch: (prop: any) => void) => {
             const { data } = await axiosInstance.put(`${endpoint}/${type}`, elementToUpdate);
-            dispatch(updateReduxStoreElement(data, elementKey, type, searchByType.COVID_TYPE));
+            dispatch(updateReduxStoreElement(data, elementKey, type, '', searchBy));
         };
     };
 
@@ -132,6 +134,20 @@ export class DbNonModalOp {
             await axiosInstance.put(`${API_ENDPOINTS.AUTHENTICATIONS}/${role}`, {
                 _id: data._id, role: Number(role), username, password, token: token || '',
             });
+        };
+    };
+
+    /**
+     * Method responsible for change last update section based data from API.
+     *
+     * @param fieldType { updateSections | string } - type of update section.
+     */
+    public static updateLastUpdateField = (fieldType: updateSections | string) => {
+        return async (dispatch: (prop: any) => void) => {
+            setTimeout(async () => {
+                const { data } = await axiosInstance.get(`${API_ENDPOINTS.LAST_UPDATE}/${fieldType}`);
+                dispatch(updateReduxStoreElement(data, apiReducerTypes.LAST_UPDATES, fieldType, '', searchByType.LAST_UPDATE));
+            }, 4000);
         };
     };
 

@@ -59,6 +59,7 @@ export enum apiReducerTypes {
     HELPERS_LINKS = 'helpersLinks',
     CALENDAR = 'calendarContent',
     SCHEDULE = 'scheduleContent',
+    LAST_UPDATES = 'lastUpdate',
 }
 
 export enum apiGetContentFromDB {
@@ -73,7 +74,8 @@ export enum apiGetContentFromDB {
 
 export enum searchByType {
     ID = '_id',
-    COVID_TYPE = 'type'
+    COVID_TYPE = 'type',
+    LAST_UPDATE = 'updateDateFor',
 }
 
 export default apiTypes;
