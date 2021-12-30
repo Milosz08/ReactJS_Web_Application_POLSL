@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../../redux/reduxStore';
 import { ModalsActions } from '../../../../../../../../redux/modalsReduxStore/actions';
 import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxStore/initialState';
-import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
+import { allModals, allModalsInputs, modalInputHeader } from '../../../../../../../../redux/modalsReduxStore/types';
 
 const UniversalTimeInput = React.lazy(() => import('../../../../../../UniversalTimeInput/UniversalTimeInput'));
 
@@ -44,6 +44,12 @@ const SingleTimeScheduleSubjectElement: React.FC<PropsProvider> = ({ field, disa
     const handleChangeTime = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
         if (!disableComponent) {
             dispatcher(ModalsActions.changeModalSelectedInput(allModals.SCHEDULE_MODAL, field, target.value));
+            dispatcher(ModalsActions.changeModalSelectedInput(
+                allModals.SCHEDULE_MODAL, allModalsInputs.START_HOUR, false, modalInputHeader.ERROR
+            ));
+            dispatcher(ModalsActions.changeModalSelectedInput(
+                allModals.SCHEDULE_MODAL, allModalsInputs.END_HOUR, false, modalInputHeader.ERROR
+            ));
         }
     };
 
