@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /**
- * @details A function that forces a scroll to position X: 0, Y: 0 after each routing (transition to a new address path).
+ * Custom component forces a scroll to position X: 0, Y: 0 after each routing (transition to a new address path).
  */
 const ScrollToTop = (): null => {
 

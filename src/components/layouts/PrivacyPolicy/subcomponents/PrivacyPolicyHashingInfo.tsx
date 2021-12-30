@@ -17,7 +17,7 @@ import { IconFamiliesType } from '../../../../helpers/componentsAndMiddleware/Ic
 
 import { PrivacyPolicyHeaderContainer, PrivacyPolicyTextContent } from '../PrivacyPolicy.styles';
 
-import UniversalHeader from '../../UniversalHeader/UniversalHeader';
+const UniversalHeader = React.lazy(() => import('../../UniversalHeader/UniversalHeader'));
 
 /**
  * Component responsible to generate hashing and app protections info content.

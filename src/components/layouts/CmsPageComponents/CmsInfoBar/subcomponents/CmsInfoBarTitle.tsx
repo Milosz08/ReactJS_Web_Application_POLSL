@@ -16,8 +16,8 @@ import * as React from 'react';
 
 import { CmsInfoBarTitleContainer } from '../CmsInfoBar.styles';
 
-import CmsInfoHamburgerButton from './CmsInfoHamburgerButton';
-import CmsInfoHamburgerMenu from './CmsInfoHamburgerMenu';
+const CmsInfoHamburgerButton = React.lazy(() => import( './CmsInfoHamburgerButton'));
+const CmsInfoHamburgerMenu= React.lazy(() => import('./CmsInfoHamburgerMenu'));
 
 /**
  * Component responsible for generating main title in CMS info bar.

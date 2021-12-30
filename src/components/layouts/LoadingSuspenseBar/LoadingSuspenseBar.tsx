@@ -13,6 +13,7 @@
  */
 
 import * as React from 'react';
+
 import useSuspenseBar from '../../../helpers/hooks/useSuspenseBar';
 
 import { LoadingProgressBar, LoadingSuspenseBarContainer } from './LoadingSuspenseBar.styles';

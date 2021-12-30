@@ -16,9 +16,9 @@ import * as React from 'react';
 
 import { MainFooterLeftSection } from '../Footer.styles';
 
-import FooterLeftInnerLinks from './FooterLeftInnerLinks';
-import FooterLeftOuterLinks from './FooterLeftOuterLinks';
-import DisclaimerFooter from './DisclaimerFooter';
+const FooterLeftInnerLinks = React.lazy(() => import('./FooterLeftInnerLinks'));
+const FooterLeftOuterLinks = React.lazy(() => import('./FooterLeftOuterLinks'));
+const DisclaimerFooter = React.lazy(() => import('./DisclaimerFooter'));
 
 /**
  * Component responsible for generating struct for main footer left content

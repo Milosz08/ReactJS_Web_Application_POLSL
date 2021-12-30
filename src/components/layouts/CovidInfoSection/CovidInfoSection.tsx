@@ -14,8 +14,6 @@
 
 import * as React from 'react';
 
-import generateID from '../../../helpers/functionsAndClasses/generateID';
-
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reduxStore';
 import { ApiInitialTypes } from '../../../redux/apiReduxStore/initialState';
@@ -35,7 +33,7 @@ const CovidInfoSection: React.FC = (): JSX.Element => {
 
     const generateCovidBlocks = covidWarningLevels.map((covidBlock: CovidWarningsTypes) => (
         <CovidSingleInfoBlock
-            key = {generateID()}
+            key = {covidBlock.description}
         >
             <CovidSingleInfoDescription>
                 {covidBlock.description}:

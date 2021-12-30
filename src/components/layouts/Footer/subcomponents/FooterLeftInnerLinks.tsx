@@ -14,10 +14,8 @@
 
 import * as React from 'react';
 
-import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
-import generateID from '../../../../helpers/functionsAndClasses/generateID';
-
 import NAVIGATION_ELEMENTS from '../../../../helpers/structs/navigationElements';
+import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
 
 import { FooterHeadling, FooterLinksContainer, FooterLinksUnorderedList, SingleFooterLinkElement } from '../Footer.styles';
 
@@ -28,7 +26,7 @@ const FooterLeftInnerLinks: React.FC = (): JSX.Element => {
 
     const generateInnerLinks: JSX.Element[] = NAVIGATION_ELEMENTS.SITES.map(site => (
         <SingleFooterLinkElement
-            key = {generateID()}
+            key = {site.title}
         >
             <DelayRouterLink
                 render = {() => site.title}

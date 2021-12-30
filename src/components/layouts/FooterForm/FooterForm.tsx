@@ -16,10 +16,10 @@ import * as React from 'react';
 
 import { FooterFormWrapper } from './FooterForm.styles';
 
-import FooterFormInputs from './subcomponents/FooterFormInputs';
-import FooterFormTextarea from './subcomponents/FooterFormTextarea';
-import FooterFormCheckfield from './subcomponents/FooterFormCheckfield';
-import FooterFormSubmitButton from './subcomponents/FooterFormSubmitButton';
+const FooterFormInputs = React.lazy(() => import('./subcomponents/FooterFormInputs'));
+const FooterFormTextarea = React.lazy(() => import('./subcomponents/FooterFormTextarea'));
+const FooterFormCheckfield = React.lazy(() => import('./subcomponents/FooterFormCheckfield'));
+const FooterFormSubmitButton = React.lazy(() => import('./subcomponents/FooterFormSubmitButton'));
 
 /**
  * Generate footer form struct container.

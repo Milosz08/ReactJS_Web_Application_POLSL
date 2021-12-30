@@ -27,7 +27,7 @@ interface StateProvider {
 }
 
 /**
- *
+ * Custom hook responsible for generating current date in 10 minutes intervals.
  */
 const useDate = (intervalRule = true) => {
 

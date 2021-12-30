@@ -16,7 +16,7 @@ import * as React from 'react';
 
 import { FooterFormContainer, FooterHeadling } from '../Footer.styles';
 
-import FooterForm from '../../FooterForm/FooterForm';
+const FooterForm = React.lazy(() => import('../../FooterForm/FooterForm'));
 
 /**
  * Component responsible for generate footer right content (mainly form).

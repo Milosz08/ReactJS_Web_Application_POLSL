@@ -20,8 +20,8 @@ import { PreferencesInitialTypes } from '../../../../../redux/preferencesReduxSt
 
 import { CmsHamburgerMenuContainer } from '../CmsInfoBar.styles';
 
-import CmsSessionInfo from './CmsSessionInfo';
-import CmsInfoLogoutButton from './CmsInfoLogoutButton';
+const CmsSessionInfo = React.lazy(() => import( './CmsSessionInfo'));
+const CmsInfoLogoutButton = React.lazy(() => import( './CmsInfoLogoutButton'));
 
 /**
  * Component responsible for generating hamburger cms basic session informations menu (only for small devices).

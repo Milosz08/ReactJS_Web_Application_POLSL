@@ -15,7 +15,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- *
+ * Custom hook responsible for check width of browser window dynamically.
  */
 const useResizeListener = () => {
 

@@ -16,9 +16,9 @@ import * as React from 'react';
 
 import { ScheduleFormButtonsContainer } from '../ScheduleForm.styles';
 
-import ScheduleClearButton from './ScheduleClearButton';
-import ScheduleGotoButton from './ScheduleGotoButton';
-import ScheduleSaveButton from './ScheduleSaveButton';
+const ScheduleClearButton = React.lazy(() => import('./ScheduleClearButton'));
+const ScheduleGotoButton = React.lazy(() => import('./ScheduleGotoButton'));
+const ScheduleSaveButton = React.lazy(() => import('./ScheduleSaveButton'));
 
 /**
  * Component responsible for generate all schedule form buttons structure.

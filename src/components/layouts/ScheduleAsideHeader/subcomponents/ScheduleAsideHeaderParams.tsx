@@ -21,7 +21,7 @@ import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore
 import { ScheduleAsideHeaderParamsWrapper } from '../ScheduleAsideHeader.styles';
 
 /**
- *
+ * Component responsible for generating schedule select params.
  */
 const ScheduleAsideHeaderParams: React.FC = (): JSX.Element => {
 

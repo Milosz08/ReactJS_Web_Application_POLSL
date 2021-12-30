@@ -17,11 +17,11 @@ import { useEffect, useState } from 'react';
 import { MODAL_REMAIN_SECONDS } from '../../components/layouts/SessionSequencer/SessionSequencer.config';
 
 /**
+ * Custom hook responsible for show and implements animations in warning auto-logout button.
  *
- *
- * @param modalListener { boolean } -
- * @param initialValue { number } -
- * @param logoutCallback { () => void } -
+ * @param modalListener { boolean } - selected modal listener (open/closed).
+ * @param initialValue { number } - counter initial value.
+ * @param logoutCallback { () => void } - callback function run, when counting is down.
  */
 const useWarningLogout = (modalListener: boolean, initialValue: number, logoutCallback: () => void): [ number, string ] => {
 

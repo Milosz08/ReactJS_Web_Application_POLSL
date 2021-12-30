@@ -16,9 +16,10 @@ import * as React from 'react';
 import DelayLink from 'react-delay-link';
 
 import { ROUTER_INTERVAL_TIME } from '../../../../helpers/hooks/useChangeRoutePath';
-import IconComponent from '../../../../helpers/componentsAndMiddleware/IconComponent';
 
 import { MobileDownNavSingleAnchor, MobileDownNavSingleElementContainer } from '../MobileDownNav.styles';
+
+const IconComponent = React.lazy(() => import('../../../../helpers/componentsAndMiddleware/IconComponent'));
 
 interface PropsProvider {
     pathAttr: {

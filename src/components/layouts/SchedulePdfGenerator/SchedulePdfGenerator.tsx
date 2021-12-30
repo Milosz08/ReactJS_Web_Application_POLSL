@@ -13,14 +13,15 @@
  */
 
 import * as React from 'react';
+
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
 import {
     SchedulePdfGeneratorButtonContainer, SchedulePdfGeneratorContainer, SchedulePdfGeneratorWrapper
 } from './SchedulePdfGenerator.styles';
 
-import UniversalHeader from '../UniversalHeader/UniversalHeader';
-import GeneratePdfButton from './subcomponents/GeneratePdfButton';
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const GeneratePdfButton = React.lazy(() => import('./subcomponents/GeneratePdfButton'));
 
 /**
  * Component responsible for generating create to pdf misc schedule services.

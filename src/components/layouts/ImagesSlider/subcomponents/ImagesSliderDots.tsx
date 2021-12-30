@@ -14,7 +14,6 @@
 
 import * as React from 'react';
 
-import generateID from '../../../../helpers/functionsAndClasses/generateID';
 import { IMAGES_COUNT } from '../ImagesSlider';
 
 import { BannerDotsContainer, BannerSingleDotElement } from '../ImagesSlider.style';
@@ -33,7 +32,7 @@ const ImagesSliderDots: React.FC<PropsProvider> = ({ actualState }): JSX.Element
 
     const generateDots = Array.from({ length: IMAGES_COUNT }).map((_: unknown, idx: number) => (
         <BannerSingleDotElement
-            key = {generateID()}
+            key = {idx}
             ifActive = {(IMAGES_COUNT - 1) - idx === actualState / 100 + 1}
         />
     ));

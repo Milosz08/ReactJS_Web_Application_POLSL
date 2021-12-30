@@ -34,7 +34,6 @@ const UserMessagesDelete: React.FC = (): JSX.Element => {
         allModals.USER_MESSAGES_MODAL, apiReducerTypes.USER_MESSAGES
     );
 
-
     return (
         <>
             {Boolean(matchElm) && <CustomContentContainer>

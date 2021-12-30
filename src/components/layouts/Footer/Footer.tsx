@@ -16,9 +16,9 @@ import * as React from 'react';
 
 import { FooterContainer, MainFooterWrapper } from './Footer.styles';
 
-import MainFooterLeftContent from './subcomponents/MainFooterLeftContent';
-import MainFooterRightContent from './subcomponents/MainFooterRightContent';
-import CopyrightFooterSection from './subcomponents/CopyrightFooter';
+const MainFooterLeftContent = React.lazy(() => import('./subcomponents/MainFooterLeftContent'));
+const MainFooterRightContent = React.lazy(() => import('./subcomponents/MainFooterRightContent'));
+const CopyrightFooterSection = React.lazy(() => import('./subcomponents/CopyrightFooter'));
 
 /**
  * Component responsible for the implementation of the footer (the footer is universal and appears on

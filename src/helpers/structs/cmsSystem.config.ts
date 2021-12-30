@@ -25,21 +25,21 @@ export const RANGS_NAMES: string[] = [
 export const MAX_RISK_NUMBER: number = 21;
 
 /**
- *
+ * Max elements in single page.
  */
 export const CMS_LIST_QUANTITY_VALUES: number[] = [
    5, 10, 15, 20, 25, 50
 ];
 
 /**
- *
+ * All semesters.
  */
 export const SUBJECTS_SEMESTERS: string[] = [
     'pierwszy', 'drugi', 'trzeci', 'czwarty', 'piąty', 'szósty', 'siódmy'
 ];
 
 /**
- *
+ * Classes types and plaform used, when user add new subject in subject modal.
  */
 export const CLASSES_OPTIONS: { TYPES: string[], PLATFORMS: string[] } = {
     TYPES: [

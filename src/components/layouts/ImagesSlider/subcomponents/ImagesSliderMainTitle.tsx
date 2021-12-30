@@ -15,7 +15,8 @@
 import * as React from 'react';
 
 import { MainTitleContainer, MainTitleHeaderFirst, MainTitleHeaderSecond, MainTitleWrapper } from '../ImagesSlider.style';
-import ImagesSliderDots from './ImagesSliderDots';
+
+const ImagesSliderDots = React.lazy(() => import('./ImagesSliderDots'));
 
 interface PropsProvider {
     actualState: number;

@@ -18,9 +18,8 @@ import { FRONT_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
 
 import { MainHeaderContentContainer, MainLogoContainer, MainLogoImage, MainHeaderNavigationRouterLinks } from '../Header.styles';
 
-import MainHeaderRightNavigation from './MainHeaderRightNavigation';
-
 const Hamburger = React.lazy(() => import('../../Hamburger/Hamburger'));
+const MainHeaderRightNavigation = React.lazy(() => import('./MainHeaderRightNavigation'));
 
 interface PropsProvider {
     width: number;

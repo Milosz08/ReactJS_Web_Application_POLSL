@@ -13,9 +13,11 @@
  */
 
 import * as React from 'react';
-import { DisclaimerFooterContainer, DisclaimerTextInfo, SectionSeparator } from '../Footer.styles';
-import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
+
 import { FRONT_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
+import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
+
+import { DisclaimerFooterContainer, DisclaimerTextInfo, SectionSeparator } from '../Footer.styles';
 
 /**
  * Component responsible for generating disclaimer notification about data and CMS content.

@@ -18,7 +18,7 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 
 /**
- *
+ * Custom hook responsible for animation footer form send message.
  */
 const useTitleFooterForm = (): [ React.MutableRefObject<null>, () => void ] => {
 

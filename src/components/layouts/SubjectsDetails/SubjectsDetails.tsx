@@ -15,11 +15,13 @@
 import * as React from 'react';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
+import { arrowDirs } from './subcomponents/NextPrevArrowNavigation';
+
 import { SubjectDetailsWindowContainer, SubjectsDetailsContainer, SubjectsDetailsWrapper } from './SubjectsDetails.styles';
 
-import UniversalHeader from '../UniversalHeader/UniversalHeader';
-import NextPrevArrowNavigation, { arrowDirs } from './subcomponents/NextPrevArrowNavigation';
-import SubjectInfoContent from './subcomponents/SubjectInfoContent';
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const NextPrevArrowNavigation = React.lazy(() => import('./subcomponents/NextPrevArrowNavigation'));
+const SubjectInfoContent = React.lazy(() => import('./subcomponents/SubjectInfoContent'));
 
 /**
  * Component responsible for generate single subject details section.

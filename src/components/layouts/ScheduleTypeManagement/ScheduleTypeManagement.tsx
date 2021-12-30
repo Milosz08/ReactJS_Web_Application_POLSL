@@ -18,9 +18,9 @@ import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconC
 
 import { ScheduleTypeManagementContainer, ScheduleTypeManagementWrapper } from './ScheduleTypeManagement.styles';
 
-import UniversalHeader from '../UniversalHeader/UniversalHeader';
-import ScheduleForm from '../ScheduleForm/ScheduleForm';
-import ScheduleManagementCookiesInfo from './subcomponents/ScheduleManagementCookiesInfo';
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const ScheduleForm = React.lazy(() => import('../ScheduleForm/ScheduleForm'));
+const ScheduleManagementCookiesInfo = React.lazy(() => import('./subcomponents/ScheduleManagementCookiesInfo'));
 
 /**
  * Component responsible for generating other component, created all schedule form preferences.

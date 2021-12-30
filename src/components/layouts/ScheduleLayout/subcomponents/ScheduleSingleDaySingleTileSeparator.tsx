@@ -18,7 +18,7 @@ import {
     ScheduleSingleDayTileSeparatorContainer, ScheduleSingleDayTileSeparatorIconWrapper, ScheduleSingleDayTileSeparatorLine
 } from '../ScheduleLayout.styles';
 
-import IconComponent from '../../../../helpers/componentsAndMiddleware/IconComponent';
+const IconComponent = React.lazy(() => import('../../../../helpers/componentsAndMiddleware/IconComponent'));
 
 interface PropsProvider {
     icon: {

@@ -15,13 +15,12 @@
 import * as React from 'react';
 import { FiExternalLink } from 'react-icons/all';
 
+import NAVIGATION_ELEMENTS from '../../../../helpers/structs/navigationElements';
+import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
-
-import DelayRouterLink from '../../../../helpers/componentsAndMiddleware/DelayRouterLink';
-import generateID from '../../../../helpers/functionsAndClasses/generateID';
-import NAVIGATION_ELEMENTS from '../../../../helpers/structs/navigationElements';
 
 import {
     HamburgerExternalLink, HamburgerListItem, HamburgerMenuContainer, HamburgerMenuLinksContainer,
@@ -38,7 +37,7 @@ const HamburgerMenu: React.FC = (): JSX.Element => {
 
     const generateExternalList = TOP_NAVBAR_ELMS.map(goto => (
         <HamburgerListItem
-            key = {generateID()}
+            key = {goto.title}
         >
             <HamburgerExternalLink
                 href = {goto.link}

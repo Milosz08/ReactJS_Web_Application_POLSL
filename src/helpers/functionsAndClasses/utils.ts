@@ -16,7 +16,7 @@ import CryptoJS, { AES } from 'crypto-js';
 import { decrypt } from 'react-crypt-gsm';
 
 /**
- * Class responsible for storing "pure JS" utils methods.
+ * Utils methods class.
  */
 class Utils {
 

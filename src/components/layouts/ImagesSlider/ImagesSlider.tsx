@@ -13,15 +13,17 @@
  */
 
 import * as React from 'react';
+
 import useSlider from '../../../helpers/hooks/useSlider';
+import useGetWindowWidth from '../../../helpers/hooks/useGetWindowWidth';
+
+import { Directions } from './subcomponents/ImagesSliderButtons';
 
 import { BannerColorGrade, ImageSliderContainer } from './ImagesSlider.style';
 
-import ImagesSliderMainTitle from './subcomponents/ImagesSliderMainTitle';
-import ImagesSliderButtons, { Directions } from './subcomponents/ImagesSliderButtons';
-import ImagesSliderComposition from './subcomponents/ImagesSliderComposition';
-import useGetWindowWidth from '../../../helpers/hooks/useGetWindowWidth';
-
+const ImagesSliderMainTitle = React.lazy(() => import('./subcomponents/ImagesSliderMainTitle'));
+const ImagesSliderButtons = React.lazy(() => import('./subcomponents/ImagesSliderButtons'));
+const ImagesSliderComposition = React.lazy(() => import('./subcomponents/ImagesSliderComposition'));
 
 /**
  * Constant representing the number of photos in the "Public Folder" used by Slider.

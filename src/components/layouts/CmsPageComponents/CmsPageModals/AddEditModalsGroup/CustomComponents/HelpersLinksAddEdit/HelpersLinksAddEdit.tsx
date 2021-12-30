@@ -24,7 +24,7 @@ import { allModals, allModalsInputs } from '../../../../../../../redux/modalsRed
 
 import { AddEditCustomContentContainer } from '../../AddEditContentModal/AddEditContentModal.styles';
 
-import HelpersLinksInputs from './subcomponents/HelpersLinksInputs';
+const HelpersLinksInputs = React.lazy(() => import('./subcomponents/HelpersLinksInputs'));
 
 interface PropsProvider {
     modalData: any;

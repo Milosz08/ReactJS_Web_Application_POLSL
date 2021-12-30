@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { Fragment } from 'react';
+import * as React from 'react';
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
 import SearchingProvider from '../../../context/searchingContext/SearchingProvider';
@@ -26,7 +26,7 @@ const ImagesSlider = React.lazy(() => import('../../layouts/ImagesSlider/ImagesS
 const CovidInfoSection = React.lazy(() => import('../../layouts/CovidInfoSection/CovidInfoSection'));
 const EstimateCounter = React.lazy(() => import('../../layouts/EstimateCounter/EstimateCounter'));
 const CurrentSubjectActive = React.lazy(() => import('../../layouts/CurrentSubjectActive/CurrentSubjectActive'));
-const CalendarIncomingActivites = React.lazy(() => import('../../layouts/CalendarIncomingActivities/CalendarIncomingActivites'));
+const CalendarIncomingActivites = React.lazy(() => import('../../layouts/CalendarIncomingActivities/CalendarIncomingActivities'));
 const Navigation = React.lazy(() => import('../../layouts/NavigationStart/NavigationStart'));
 const SubjectCheckboxes = React.lazy(() => import('../../layouts/SubjectsCheckboxes/SubjectCheckboxes'));
 const SubjectsDetails = React.lazy(() => import('../../layouts/SubjectsDetails/SubjectsDetails'));
@@ -39,7 +39,7 @@ const StartPage = (): JSX.Element => {
     usePageTitle(ROUTING_PATH_NAMES.START_PAGE);
 
     return (
-        <Fragment>
+        <>
             <CookiesNotification/>
             <MobileDownNav id = {0}/>
             <Header ifHeaderHasRedBar = {true}/>
@@ -57,7 +57,7 @@ const StartPage = (): JSX.Element => {
                 <SubjectCheckboxes/>
                 <SubjectsDetails/>
             </SearchingProvider>
-        </Fragment>
+        </>
     );
 }
 

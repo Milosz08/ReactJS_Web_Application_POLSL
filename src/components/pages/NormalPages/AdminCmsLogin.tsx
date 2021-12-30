@@ -13,7 +13,6 @@
  */
 
 import * as React from 'react';
-import { Fragment } from 'react';
 
 import usePageTitle from '../../../helpers/hooks/usePageTitle';
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
@@ -34,13 +33,13 @@ const AdminCmsLogin: React.FC = (): JSX.Element => {
     usePageTitle(ROUTING_PATH_NAMES.CMS_LOGIN_PAGE);
 
     return (
-        <Fragment>
+        <>
             <CookiesNotification/>
             <MobileDownNav/>
             <Header ifHeaderHasRedBar = {false}/>
             <CurrentURLpath ifImportatHeaderActive = {false}/>
             <AdminCmsLoginElements/>
-        </Fragment>
+        </>
     );
 }
 

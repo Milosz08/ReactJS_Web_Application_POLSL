@@ -19,7 +19,7 @@ import { FRONT_ENDPOINTS } from '../../../helpers/structs/appEndpoints';
 
 import { CurrentURLpathContainer, CurrentURLpathSingleElement, CurrentURLpathWrapper } from './CurrentURLpath.styles';
 
-import SingleCurrentURLpath from './subcomponents/SingleCurrentURLpath';
+const SingleCurrentURLpath = React.lazy(() => import('./subcomponents/SingleCurrentURLpath'));
 
 interface PropsProvider {
     ifImportatHeaderActive: boolean;

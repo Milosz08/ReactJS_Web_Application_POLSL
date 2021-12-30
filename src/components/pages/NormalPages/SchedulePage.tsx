@@ -14,7 +14,6 @@
 
 import * as React from 'react';
 import { createContext } from 'react';
-import { Fragment } from 'react';
 
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
@@ -50,7 +49,7 @@ const SchedulePage = (): JSX.Element => {
     usePageTitle(ROUTING_PATH_NAMES.SCHEDULE_PAGE);
 
     return (
-        <Fragment>
+        <>
             <CookiesNotification/>
             <ScheduleSaveModal/>
             <ScheduleClearModal/>
@@ -66,7 +65,7 @@ const SchedulePage = (): JSX.Element => {
                 <ScheduleDateUpdate/>
                 <SchedulePdfGenerator/>
             </ExecuteScrollContext.Provider>
-        </Fragment>
+        </>
     );
 }
 

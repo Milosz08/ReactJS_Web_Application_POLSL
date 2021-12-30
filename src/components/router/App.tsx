@@ -12,7 +12,8 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { Suspense } from 'react';
+import * as React from 'react';
+import { Suspense } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 

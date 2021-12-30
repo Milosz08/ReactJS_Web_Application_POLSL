@@ -15,7 +15,7 @@
 import { useRef, useEffect } from 'react';
 
 /**
- *
+ * Custom hook checked, if it is first content load.
  */
 const useIsMount = () => {
     const isMountRef = useRef(true);

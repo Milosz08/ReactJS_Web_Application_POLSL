@@ -26,7 +26,7 @@ const IncomingActivitiesContent = React.lazy(() => import('./subcomponents/Incom
  * Component responsible for generating all structure for last activities (based on calendar
  * records) main page section.
  */
-const CalendarIncomingActivites: React.FC = (): JSX.Element => {
+const CalendarIncomingActivities: React.FC = (): JSX.Element => {
     return (
         <CalendarIcomingActivitiesContainer>
             <CalendarIcomingActivitiesWrapper>
@@ -42,4 +42,4 @@ const CalendarIncomingActivites: React.FC = (): JSX.Element => {
     );
 };
 
-export default CalendarIncomingActivites;
+export default CalendarIncomingActivities;

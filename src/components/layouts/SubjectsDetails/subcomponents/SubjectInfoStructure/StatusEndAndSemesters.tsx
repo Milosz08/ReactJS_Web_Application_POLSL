@@ -15,8 +15,7 @@
 import * as React from 'react';
 import { useContext } from 'react';
 
-import generateID from '../../../../../helpers/functionsAndClasses/generateID';
-import { AllSemesters } from '../../../../../helpers/structs/allSemesters';
+import { SUBJECTS_SEMESTERS } from '../../../../../helpers/structs/cmsSystem.config';
 
 import { SubjectContext, SubjectContextProvider } from '../SubjectInfoContent';
 
@@ -33,9 +32,9 @@ const StatusEndAndSemesters: React.FC = (): JSX.Element => {
         const toggleOnEndOfString = semester.identity - 1 === subject!.semesters.length - 1 ? '.' : ', ';
         return (
             <span
-                key = {generateID()}
+                key = {semester.identity}
             >
-                {`${AllSemesters[semester.identity - 1]}${toggleOnEndOfString}`}
+                {`${SUBJECTS_SEMESTERS[semester.identity - 1]}${toggleOnEndOfString}`}
             </span>
         )
     });

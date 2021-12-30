@@ -22,7 +22,7 @@ import { PrefActions } from '../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../redux/preferencesReduxStore/initialState';
 
 /**
- *
+ * Custom hook responsible for validate and connect with redux store footer form inputs.
  */
 const useFooterForm = (): [ () => boolean, () => void ] => {
 

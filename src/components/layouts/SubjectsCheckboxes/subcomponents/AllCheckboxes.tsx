@@ -19,11 +19,12 @@ import { useDispatch } from 'react-redux';
 import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { prefFields, searchInputs } from '../../../../redux/preferencesReduxStore/types';
 
+import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
+
 import { SubjectsTilesContainer } from '../SubjectsCheckboxes.styles';
 
-import SingleSubjectElements from './SingleSubjectElements';
-import NotFindContent from '../../NotFindContent/NotFindContent';
-import { SearchingContext, SearchingTypes } from '../../../../context/searchingContext/SearchingProvider';
+const SingleSubjectElements = React.lazy(() => import('./SingleSubjectElements'));
+const NotFindContent = React.lazy(() => import('../../NotFindContent/NotFindContent'));
 
 /**
  * Component responsible for generate all subjects tiles buttons based on redux state.

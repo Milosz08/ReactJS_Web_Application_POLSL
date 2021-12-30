@@ -17,7 +17,7 @@ import STATIC_STRUCTURE from '../../../../helpers/structs/cookiesPolicyContent';
 
 import { PrivacyPolicyHeaderContainer, PrivacyPolicyTextContent } from '../PrivacyPolicy.styles';
 
-import PrivacyPolicyUniversalHeader from './PrivacyPolicyUniversalHeader';
+const PrivacyPolicyUniversalHeader = React.lazy(() => import('./PrivacyPolicyUniversalHeader'));
 
 /**
  * Component responsible for generating privacy policy outer cookies info disclaimer.

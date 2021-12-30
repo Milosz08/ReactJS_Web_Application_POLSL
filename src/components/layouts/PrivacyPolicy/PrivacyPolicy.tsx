@@ -16,12 +16,12 @@ import * as React from 'react';
 
 import { PrivacyPolicyAsideParagraphIcon, PrivacyPolicyContainer, PrivacyPolicyWrapper } from './PrivacyPolicy.styles';
 
-import PrivacyPolicyHeader from './subcomponents/PrivacyPolicyHeader';
-import PrivacyPolicyListStructure from './subcomponents/PrivacyPolicyListStructure';
-import PrivacyPolicyOuterServices from './subcomponents/PrivacyPolicyOuterServices';
-import PrivacyPolicyNonListStructure from './subcomponents/PrivacyPolicyNonListStructure';
-import PrivacyPolicyCookiesTurnOff from './subcomponents/PrivacyPolicyCookiesTurnOff';
-import PrivacyPolicyHashingInfo from './subcomponents/PrivacyPolicyHashingInfo';
+const PrivacyPolicyHeader = React.lazy(() => import('./subcomponents/PrivacyPolicyHeader'));
+const PrivacyPolicyListStructure = React.lazy(() => import('./subcomponents/PrivacyPolicyListStructure'));
+const PrivacyPolicyOuterServices = React.lazy(() => import('./subcomponents/PrivacyPolicyOuterServices'));
+const PrivacyPolicyNonListStructure = React.lazy(() => import('./subcomponents/PrivacyPolicyNonListStructure'));
+const PrivacyPolicyCookiesTurnOff = React.lazy(() => import('./subcomponents/PrivacyPolicyCookiesTurnOff'));
+const PrivacyPolicyHashingInfo = React.lazy(() => import('./subcomponents/PrivacyPolicyHashingInfo'));
 
 /**
  * Component responsible for generating all subcomponents for Privacy Policy page component.

@@ -18,7 +18,7 @@ import useDate from '../../../../helpers/hooks/useDate';
 import { ScheduleAsideHeaderParamsWrapper } from '../ScheduleAsideHeader.styles';
 
 /**
- *
+ * Component responsible for generating schedule actual date indicator element.
  */
 const ScheduleAsideHeaderDate: React.FC = (): JSX.Element => {
 

@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { Fragment } from 'react';
+import * as React from 'react';
 
 import HelpersContent from '../../layouts/HelpersContent/HelpersContent';
 import usePageTitle from '../../../helpers/hooks/usePageTitle';
@@ -32,14 +32,14 @@ const HelpersPage: React.FC = (): JSX.Element => {
     usePageTitle(ROUTING_PATH_NAMES.AISD_PAGE);
 
     return (
-        <Fragment>
+        <>
             <CookiesNotification/>
             <UserLogoutModal/>
             <MobileDownNav id = {4}/>
             <Header ifHeaderHasRedBar = {true}/>
             <CurrentURLpath ifImportatHeaderActive = {true}/>
             <HelpersContent/>
-        </Fragment>
+        </>
     );
 }
 

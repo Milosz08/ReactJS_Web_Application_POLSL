@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import React from 'react';
+import * as React from 'react';
 
 import { InfiniteLoadVectorUse, InifiteLoadVector, LoadingSystemAnimationContainer } from './LoadingSystemAnimation.styles';
 

@@ -13,13 +13,14 @@
  */
 
 import * as React from 'react';
+
 import STATIC_STRUCTURE from '../../../../helpers/structs/cookiesPolicyContent';
 
 import {
     PrivacyPolicyExternalAnchor, PrivacyPolicyExternalAnchorIcon, PrivacyPolicyHeaderContainer, PrivacyPolicyTextContent
 } from '../PrivacyPolicy.styles';
 
-import PrivacyPolicyUniversalHeader from './PrivacyPolicyUniversalHeader';
+const PrivacyPolicyUniversalHeader = React.lazy(() => import('./PrivacyPolicyUniversalHeader'));
 
 /**
  * Component responsible for generating infos how to turn off cookies on this website.

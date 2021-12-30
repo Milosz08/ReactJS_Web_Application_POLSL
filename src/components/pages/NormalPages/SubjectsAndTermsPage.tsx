@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { Fragment } from 'react';
+import * as React from 'react';
 import usePageTitle from '../../../helpers/hooks/usePageTitle';
 
 import SearchingProvider from '../../../context/searchingContext/SearchingProvider';
@@ -36,7 +36,7 @@ const SubjectsAndTermsPage = (): JSX.Element => {
     usePageTitle(ROUTING_PATH_NAMES.SUBJECT_PASS_PAGE);
 
     return (
-        <Fragment>
+        <>
             <CookiesNotification/>
             <MobileDownNav id = {3}/>
             <Header ifHeaderHasRedBar = {true}/>
@@ -50,7 +50,7 @@ const SubjectsAndTermsPage = (): JSX.Element => {
                 <SubjectCheckboxes/>
                 <SubjectsDetails/>
             </SearchingProvider>
-        </Fragment>
+        </>
     );
 }
 

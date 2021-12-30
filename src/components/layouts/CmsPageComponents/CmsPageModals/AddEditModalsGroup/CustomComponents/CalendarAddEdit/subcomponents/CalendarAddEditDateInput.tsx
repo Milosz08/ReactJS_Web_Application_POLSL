@@ -14,6 +14,8 @@
 
 import * as React from 'react';
 
+import useValidateAddEditCmsModal from '../../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../../redux/reduxStore';
 import { ModalsActions } from '../../../../../../../../redux/modalsReduxStore/actions';
@@ -21,7 +23,6 @@ import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxSto
 import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
 
 import { DateCalendarIcon, DateInputContainer, DateInputElement } from '../CalendarAddEdit.styles';
-import useValidateAddEditCmsModal from '../../../../../../../../helpers/hooks/useValidateAddEditCmsModal';
 
 /**
  * Component responsible for generating date picker input for multiple or

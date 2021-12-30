@@ -18,6 +18,7 @@ import { createContext } from 'react';
 import {
     UniversalListNavigateArrowsContainer, UniversalListNavigateContainer, UniversalListNavigateListElementsCounter
 } from './UniversalListNavigate.styles';
+
 import { cmsListIndicators } from '../../../redux/preferencesReduxStore/types';
 import { directions } from './subcomponents/UniversalListNavigatePrevNextButton';
 

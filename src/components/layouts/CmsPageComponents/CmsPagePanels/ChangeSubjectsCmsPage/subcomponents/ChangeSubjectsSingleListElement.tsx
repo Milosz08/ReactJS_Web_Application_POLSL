@@ -14,8 +14,8 @@
 
 import * as React from 'react';
 
-import { AllSemesters } from '../../../../../../helpers/structs/allSemesters';
 import useResizeListener from '../../../../../../helpers/hooks/useResizeListener';
+import { SUBJECTS_SEMESTERS } from '../../../../../../helpers/structs/cmsSystem.config';
 
 import { allModals } from '../../../../../../redux/modalsReduxStore/types';
 import { SubjectsContentTypes } from '../../../../../../redux/apiReduxStore/dataTypes';
@@ -43,7 +43,7 @@ const ChangeSubjectsSingleListElement: React.FC<PropsProvider> = ({ element, ind
 
     const semestersCount = element.semesters.map((semester, idx) => (
         <span key = {semester.name}>
-            {`${idx > 0 ? ', ' : ''}${AllSemesters[semester.identity - 1]}`}
+            {`${idx > 0 ? ', ' : ''}${SUBJECTS_SEMESTERS[semester.identity - 1]}`}
         </span>
     ));
 

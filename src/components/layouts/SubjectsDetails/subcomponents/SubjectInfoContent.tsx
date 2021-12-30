@@ -25,8 +25,8 @@ import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore
 
 import { SubjectInfoContentContainer } from '../SubjectsDetails.styles';
 
-import SingleSubjectInfoContent from './SingleSubjectInfoContent';
-import NotFindContent from '../../NotFindContent/NotFindContent';
+const SingleSubjectInfoContent = React.lazy(() => import('./SingleSubjectInfoContent'));
+const NotFindContent = React.lazy(() => import('../../NotFindContent/NotFindContent'));
 
 export interface SubjectContextProvider {
     subject: SubjectsContentTypes;

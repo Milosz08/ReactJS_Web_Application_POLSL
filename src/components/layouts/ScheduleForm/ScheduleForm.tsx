@@ -14,19 +14,20 @@
 
 import * as React from 'react';
 
-import { groupsTypes } from '../../../redux/preferencesReduxStore/types';
 import GROUPS_STATIC from '../../../helpers/structs/allGroups';
+import useScheduleCookiesOnload from '../../../helpers/hooks/useScheduleCookiesOnload';
+
+import { groupsTypes } from '../../../redux/preferencesReduxStore/types';
 
 import {
     ScheduleBackgroundImage, ScheduleFormContainer, ScheduleFormStyle, ScheduleFormInputsWrapper
 } from './ScheduleForm.styles';
 
-import ScheduleGroupRadio from './subcomponents/ScheduleGroupRadio';
-import ScheduleFormButtons from './subcomponents/ScheduleFormButtons';
-import useScheduleCookiesOnload from '../../../helpers/hooks/useScheduleCookiesOnload';
+const ScheduleGroupRadio = React.lazy(() => import('./subcomponents/ScheduleGroupRadio'));
+const ScheduleFormButtons = React.lazy(() => import('./subcomponents/ScheduleFormButtons'));
 
 /**
- *
+ * Component responsible for generating schedule form (choosing groups and saving preferences).
  */
 const ScheduleForm: React.FC = (): JSX.Element => {
 

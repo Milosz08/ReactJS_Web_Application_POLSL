@@ -13,8 +13,10 @@
  */
 
 import * as React from 'react';
-import { SliderCompositionContainer, SliderSingleImage } from '../ImagesSlider.style';
+
 import { IMAGES_COUNT } from '../ImagesSlider';
+
+import { SliderCompositionContainer, SliderSingleImage } from '../ImagesSlider.style';
 
 interface PropsProvider {
     axiosX: number;

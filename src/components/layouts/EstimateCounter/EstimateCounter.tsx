@@ -21,7 +21,7 @@ import {
 } from './EstimateCounter.styles';
 
 /**
- * A constant representing the day and time of the counting end.
+ * Constant representing the day and time of the counting end.
  */
 const EXP_TIME: number = new Date('2021-10-01T10:00:00').getTime();
 

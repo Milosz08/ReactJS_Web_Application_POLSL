@@ -15,7 +15,6 @@
 import * as React from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/all';
 
-import generateID from '../../../../helpers/functionsAndClasses/generateID';
 import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../../../helpers/structs/footerOptions.config';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,7 +36,7 @@ const FooterFormInputs: React.FC = (): JSX.Element => {
     const { USER_NICKNAME, TYPEOF_MESSAGE } = FOOTER_INPUTS;
 
     const generateAllOptions = FOOTER_OPTIONS.map(option => (
-        <option key = {generateID()} value = {option.value}>
+        <option key = {option.value} value = {option.value}>
             {option.name}
         </option>
     ));

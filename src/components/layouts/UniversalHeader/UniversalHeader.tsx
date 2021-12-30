@@ -19,7 +19,7 @@ import {
     AdditionalHeaderTitle, Separator, CloseButton, CloseButtonTime, UniversalHeaderTitleSection
 } from './UniversalHeader.styles';
 
-import IconComponent from '../../../helpers/componentsAndMiddleware/IconComponent';
+const IconComponent = React.lazy(() => import('../../../helpers/componentsAndMiddleware/IconComponent'));
 
 interface PropsProvider {
     iconP: {

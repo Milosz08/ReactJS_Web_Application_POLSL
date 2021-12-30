@@ -16,8 +16,8 @@ import React from 'react';
 
 import { DevToolsInfoContainer, DevToolsInfoWrapper } from './DevToolsInfo.styles';
 
-import DevToolsLogos from './subcomponents/DevToolsLogos';
-import DevToolsContent from './subcomponents/DevToolsContent';
+const DevToolsLogos = React.lazy(() => import( './subcomponents/DevToolsLogos'));
+const DevToolsContent = React.lazy(() => import( './subcomponents/DevToolsContent'));
 
 /**
  * Component responsible for generating a block of information about the technologies used in the application

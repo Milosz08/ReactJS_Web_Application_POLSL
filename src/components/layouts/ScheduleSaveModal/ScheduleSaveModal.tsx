@@ -27,7 +27,7 @@ import {
     BiCheckDoubleIconComponent, ScheduleSaveModalContainer, ScheduleSaveModalSections, ScheduleSaveModalWrapper
 } from './ScheduleSaveModal.styles';
 
-import ScheduleSaveModalInfo from './subcomponents/ScheduleSaveModalInfo';
+const ScheduleSaveModalInfo = React.lazy(() => import('./subcomponents/ScheduleSaveModalInfo'));
 
 /**
  * Component responsible for showing save modal info preferences.

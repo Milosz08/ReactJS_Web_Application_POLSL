@@ -23,10 +23,10 @@ import {
     ScheduleAsideHeaderContainer, ScheduleAsideHeaderParamsContainer, ScheduleAsideHeaderWrapper
 } from './ScheduleAsideHeader.styles';
 
-import UniversalHeader from '../UniversalHeader/UniversalHeader';
-import ScheduleAsideHeaderParams from './subcomponents/ScheduleAsideHeaderParams';
-import ScheduleAsideHeaderDate from './subcomponents/ScheduleAsideHeaderDate';
-import UniversalSearch from '../UniversalSearch/UniversalSearch';
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const ScheduleAsideHeaderParams = React.lazy(() => import('./subcomponents/ScheduleAsideHeaderParams'));
+const ScheduleAsideHeaderDate = React.lazy(() => import('./subcomponents/ScheduleAsideHeaderDate'));
+const UniversalSearch = React.lazy(() => import('../UniversalSearch/UniversalSearch'));
 
 /**
  * Component responsible for generating all addition schedule info and header components.

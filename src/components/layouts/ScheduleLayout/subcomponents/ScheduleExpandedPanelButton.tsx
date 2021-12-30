@@ -14,6 +14,7 @@
 
 import * as React from 'react';
 import { Dispatch, SetStateAction } from 'react';
+
 import { ScheduleExpandedPanelButtonStyle, ScheduleExpandedPanelIcon } from '../ScheduleLayout.styles';
 
 interface PropsProvider {

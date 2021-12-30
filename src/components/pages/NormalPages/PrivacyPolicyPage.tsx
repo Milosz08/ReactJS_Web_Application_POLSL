@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { Fragment } from 'react';
+import * as React from 'react';
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
 import usePageTitle from '../../../helpers/hooks/usePageTitle';
@@ -30,12 +30,12 @@ const CookiesPolicy: React.FC = (): JSX.Element => {
     usePageTitle(ROUTING_PATH_NAMES.COOKIES_POLICY);
 
     return (
-        <Fragment>
+        <>
             <MobileDownNav/>
             <Header ifHeaderHasRedBar = {false}/>
             <CurrentURLpath ifImportatHeaderActive = {false}/>
             <PrivacyPolicy/>
-        </Fragment>
+        </>
     );
 }
 

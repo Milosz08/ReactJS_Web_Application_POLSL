@@ -23,7 +23,7 @@ import {
     ScheduleSingleDayColumnContainer, ScheduleSingleDayEndingSeparator, ScheduleSingleDayIndicator
 } from '../ScheduleLayout.styles';
 
-import ScheduleSingleDaySingleTile from './ScheduleSingleDaySingleTile';
+const ScheduleSingleDaySingleTile = React.lazy(() => import('./ScheduleSingleDaySingleTile'));
 
 interface PropsProvider {
     day: StaticDaysTypes;

@@ -19,8 +19,8 @@ import {
     SubjectsAndTermsContainer, SubjectsAndTermsInfoContent, SubjectsAndTermsParagraph, SubjectsAndTermsWrapper
 } from './SubjectsAndTerms.styles';
 
-import UniversalHeader from '../UniversalHeader/UniversalHeader';
-import SubjectsAndTermsOuterLinks from './subcomponents/SubjectsAndTermsOuterLinks';
+const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const SubjectsAndTermsOuterLinks = React.lazy(() => import('./subcomponents/SubjectsAndTermsOuterLinks'));
 
 /**
  * Component responsible for generating syllabuses and subjects details info components.

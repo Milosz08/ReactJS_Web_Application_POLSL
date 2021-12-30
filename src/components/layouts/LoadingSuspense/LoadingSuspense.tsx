@@ -12,7 +12,8 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 
 import { InfiniteLoad, InfiniteUse, LoadingSuspenseContainer } from './LoadingSuspense.styles';
 

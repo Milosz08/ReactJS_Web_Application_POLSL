@@ -22,7 +22,7 @@ import {
     CalendarPageLegendBox, CalendarPageLegendSpanElement, CalendarPageLegendUnorderedElement, CalendarPageLegendUnorderedList
 } from '../CalendarPageElements.styles';
 
-import UniversalHeader from '../../UniversalHeader/UniversalHeader';
+const UniversalHeader = React.lazy(() => import('../../UniversalHeader/UniversalHeader'));
 
 /**
  * Component responsible for generating all levels calendar structure info.

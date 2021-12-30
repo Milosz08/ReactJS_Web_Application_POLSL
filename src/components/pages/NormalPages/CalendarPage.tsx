@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import React, { Fragment } from 'react';
+import * as React from 'react';
 
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 import usePageTitle from '../../../helpers/hooks/usePageTitle';
@@ -32,13 +32,13 @@ const CalendarPage = (): JSX.Element => {
     usePageTitle(ROUTING_PATH_NAMES.CALENDAR_PAGE);
 
     return (
-        <Fragment>
+        <>
             <CookiesNotification/>
             <MobileDownNav id = {2}/>
             <Header ifHeaderHasRedBar = {true}/>
             <CurrentURLpath ifImportatHeaderActive = {true}/>
             <CalendarPageElements/>
-        </Fragment>
+        </>
     );
 }
 

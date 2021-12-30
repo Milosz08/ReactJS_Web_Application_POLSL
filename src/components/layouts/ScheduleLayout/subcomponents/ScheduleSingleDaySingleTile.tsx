@@ -24,8 +24,8 @@ import {
     ScheduleSingleDayTileContainer, ScheduleSingleDayTileSubjectHeader, ScheduleSingleDayTileType
 } from '../ScheduleLayout.styles';
 
-import ScheduleSingleDaySingleTileSeparator from './ScheduleSingleDaySingleTileSeparator';
-import ScheduleSingleDayExpandedPanel from './ScheduleSingleDayExpandedPanel';
+const ScheduleSingleDaySingleTileSeparator = React.lazy(() => import('./ScheduleSingleDaySingleTileSeparator'));
+const ScheduleSingleDayExpandedPanel = React.lazy(() => import('./ScheduleSingleDayExpandedPanel'));
 
 interface PropsProvider {
     tile: ScheduleContentTypes;

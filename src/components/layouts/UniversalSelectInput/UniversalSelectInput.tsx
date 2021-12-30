@@ -13,15 +13,18 @@
  */
 
 import * as React from 'react';
+
+import useValidateAddEditCmsModal from '../../../helpers/hooks/useValidateAddEditCmsModal';
+
+import { RootState } from '../../../redux/reduxStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { ModalsActions } from '../../../redux/modalsReduxStore/actions';
+import { ModalsInitialTypes } from '../../../redux/modalsReduxStore/initialState';
+import { allModals, allModalsInputs } from '../../../redux/modalsReduxStore/types';
+
 import {
     UniversalSelectInputArrow, UniversalSelectInputContainer, UniversalSelectInputElement
 } from './UniversalSelectInput.styles';
-import { allModals, allModalsInputs } from '../../../redux/modalsReduxStore/types';
-import { ModalsInitialTypes } from '../../../redux/modalsReduxStore/initialState';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/reduxStore';
-import useValidateAddEditCmsModal from '../../../helpers/hooks/useValidateAddEditCmsModal';
-import { ModalsActions } from '../../../redux/modalsReduxStore/actions';
 
 interface PropsProvider {
     allOptions: string[];

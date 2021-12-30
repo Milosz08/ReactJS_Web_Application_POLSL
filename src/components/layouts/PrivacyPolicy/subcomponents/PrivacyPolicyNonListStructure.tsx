@@ -21,7 +21,7 @@ import {
     PrivacyPolicyUnorderedListElement, PrivacyPolicyHeaderContainer, PrivacyPolicyListContainer
 } from '../PrivacyPolicy.styles';
 
-import PrivacyPolicyUniversalHeader from './PrivacyPolicyUniversalHeader';
+const PrivacyPolicyUniversalHeader = React.lazy(() => import('./PrivacyPolicyUniversalHeader'));
 
 /**
  * Component responsible for generating non-list structure based on static TS file.

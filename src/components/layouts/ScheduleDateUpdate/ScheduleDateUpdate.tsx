@@ -15,9 +15,10 @@
 import * as React from 'react';
 
 import { updateSections } from '../../../redux/apiReduxStore/types';
-import DataLastUpdate from '../DataLastUpdate/DataLastUpdate';
 
 import { ScheduleDateUpdateContainer, ScheduleDateUpdateWrapper } from './ScheduleDateUpdate.styles';
+
+const DataLastUpdate = React.lazy(() => import('../DataLastUpdate/DataLastUpdate'));
 
 /**
  * Component responsible for generating schedule section update date information.

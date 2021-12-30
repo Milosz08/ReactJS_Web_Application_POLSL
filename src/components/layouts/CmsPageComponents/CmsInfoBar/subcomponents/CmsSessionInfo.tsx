@@ -15,13 +15,14 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 
+import { RANGS_NAMES } from '../../../../../helpers/structs/cmsSystem.config';
+import useCountingFromUpToDown from '../../../../../helpers/hooks/useCountingFromUpToDown';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/reduxStore';
 import { SessionInitialTypes } from '../../../../../redux/sessionReduxStore/initialState';
 
 import { CmsHamburgerMenuElement } from '../CmsInfoBar.styles';
-import useCountingFromUpToDown from '../../../../../helpers/hooks/useCountingFromUpToDown';
-import { RANGS_NAMES } from '../../../../../helpers/structs/cmsSystem.config';
 
 /**
  * Component responsible for show basic CMS user session info (auth level, and session estimated time).

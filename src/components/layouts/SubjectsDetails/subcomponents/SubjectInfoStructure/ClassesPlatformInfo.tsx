@@ -15,7 +15,6 @@
 import * as React from 'react';
 import { useContext } from 'react';
 
-import generateID from '../../../../../helpers/functionsAndClasses/generateID';
 import { SubjectContext, SubjectContextProvider } from '../SubjectInfoContent';
 
 import { ClassesPlatformInfoContainer, ClassesPlatformInfoSingleElement } from './SubjectInfoStructure.style';
@@ -31,7 +30,7 @@ const ClassesPlatformInfo: React.FC = () => {
     const classesPlatforms = subject!.classesPlatforms.length !== 1
         ? subject!.classesPlatforms.map(platform => (
             <ClassesPlatformInfoSingleElement
-                key = {generateID()}
+                key = {platform.type}
             >
                 {`${platform.type.charAt(0).toUpperCase() + platform.type.substring(1, platform.type.length)} ${classesIfEnd} się
                 ${platform.place !== 'kontaktowy' ? 'poprzed komunikator ' : 'w sposób '}`}

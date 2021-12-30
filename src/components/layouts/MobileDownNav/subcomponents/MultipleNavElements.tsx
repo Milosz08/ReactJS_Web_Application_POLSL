@@ -15,6 +15,7 @@
 import * as React from 'react';
 import { Dispatch, Fragment, SetStateAction } from 'react';
 
+import useChangeRoutePath from '../../../../helpers/hooks/useChangeRoutePath';
 import MOBILE_NAV_ELMS, { MobileNavElmsProvider } from '../../../../helpers/structs/mobileNavElements';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,8 +23,7 @@ import { RootState } from '../../../../redux/reduxStore';
 import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
-import SingleNavigationElement from './SingleNavigationElement';
-import useChangeRoutePath from '../../../../helpers/hooks/useChangeRoutePath';
+const SingleNavigationElement = React.lazy(() => import('./SingleNavigationElement'));
 
 interface PropsProvider {
     setPosition: Dispatch<SetStateAction<number>>;

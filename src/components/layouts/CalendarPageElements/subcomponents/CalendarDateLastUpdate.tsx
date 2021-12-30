@@ -17,7 +17,7 @@ import { updateSections } from '../../../../redux/apiReduxStore/types';
 
 import { CalendarLastUpdateContainer, CalendarLastUpdateWrapper } from '../CalendarPageElements.styles';
 
-import DataLastUpdate from '../../DataLastUpdate/DataLastUpdate';
+const DataLastUpdate = React.lazy(() => import( '../../DataLastUpdate/DataLastUpdate'));
 
 /**
  * Component responsible for generating calendar last update info.

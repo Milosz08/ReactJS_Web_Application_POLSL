@@ -24,7 +24,7 @@ import { prefFields } from '../../redux/preferencesReduxStore/types';
 export const ROUTER_INTERVAL_TIME = .7;
 
 /**
- *
+ * Custom hook responsible for change route path with custom delay.
  */
 const useChangeRoutePath = (): (gotoPath: FRONT_ENDPOINTS | string) => void => {
 

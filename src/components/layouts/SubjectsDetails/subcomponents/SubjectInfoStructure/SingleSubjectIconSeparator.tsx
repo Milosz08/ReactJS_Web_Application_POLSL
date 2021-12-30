@@ -15,10 +15,11 @@
 import * as React from 'react';
 import { useContext } from 'react';
 
-import IconComponent from '../../../../../helpers/componentsAndMiddleware/IconComponent';
 import { SubjectContext, SubjectContextProvider } from '../SubjectInfoContent';
 
 import { SeparatorIcon, SeparatorLine, SingleSubjectIconSeparatorContainer } from './SubjectInfoStructure.style';
+
+const IconComponent = React.lazy(() => import('../../../../../helpers/componentsAndMiddleware/IconComponent'));
 
 /**
  * Component responsible for generating subject info separator.

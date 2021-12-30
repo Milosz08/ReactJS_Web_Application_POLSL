@@ -16,16 +16,15 @@ import * as React from 'react';
 import { useContext } from 'react';
 
 import { SubjectContext, SubjectContextProvider } from './SubjectInfoContent';
-import generateID from '../../../../helpers/functionsAndClasses/generateID';
 
 import {
     SingleSubjectInfoContentAsideText, SingleSubjectInfoContentContainer, SingleSubjectInfoContentHeader
 } from '../SubjectsDetails.styles';
 
-import SingleSubjectIconSeparator from './SubjectInfoStructure/SingleSubjectIconSeparator';
-import StatusEndAndSemesters from './SubjectInfoStructure/StatusEndAndSemesters';
-import ClassesPlatformInfo from './SubjectInfoStructure/ClassesPlatformInfo';
-import SingleSubjectNavigationButton from './SubjectInfoStructure/SingleSubjectNavigationButton';
+const SingleSubjectIconSeparator = React.lazy(() => import('./SubjectInfoStructure/SingleSubjectIconSeparator'));
+const StatusEndAndSemesters = React.lazy(() => import('./SubjectInfoStructure/StatusEndAndSemesters'));
+const ClassesPlatformInfo = React.lazy(() => import('./SubjectInfoStructure/ClassesPlatformInfo'));
+const SingleSubjectNavigationButton = React.lazy(() => import('./SubjectInfoStructure/SingleSubjectNavigationButton'));
 
 /**
  * Component responsible for generating structure of all information about choose subject.
@@ -36,7 +35,7 @@ const SingleSubjectInfoContent: React.FC = (): JSX.Element => {
     const { subject } = useContext<Partial<SubjectContextProvider>>(SubjectContext);
 
     const multipleDepartment = subject!.departments.length !== 1
-        ? subject!.departments.map(department => <div key = {generateID()}>{department.title} ({department.shortName})</div>)
+        ? subject!.departments.map(department => <div key = {department.title}>{department.title} ({department.shortName})</div>)
         : `${subject!.departments[0].title} (${subject!.departments[0].shortName})`;
 
     return (

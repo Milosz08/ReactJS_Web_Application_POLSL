@@ -15,7 +15,6 @@
 import * as React from 'react';
 
 import { LEVELS } from '../../../../../../helpers/structs/calendar.config';
-import generateID from '../../../../../../helpers/functionsAndClasses/generateID';
 import ConvertTimeUTC from '../../../../../../helpers/functionsAndClasses/convertTimeUTC';
 import useResizeListener from '../../../../../../helpers/hooks/useResizeListener';
 
@@ -50,7 +49,7 @@ const ChangeCalendarSingleListElement: React.FC<PropsProvider> = ({ element, ind
 
     const generateColorCalendarDots = element.items.map(item => (
         <ChangeCalendarSingleColorDotElement
-            key = {generateID()}
+            key = {item.message}
             colorCSS = {item.importantLevel === LOW ? 'green' : item.importantLevel === MEDIUM ? 'orange' : 'red'}
         />
     ));

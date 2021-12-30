@@ -13,10 +13,11 @@
  */
 
 import * as React from 'react';
+import { useContext } from 'react';
+
+import { ExecuteScrollContext, ExecuteScrollContextTypes } from '../../../pages/NormalPages/SchedulePage';
 
 import { ScheduleGotoInputButton } from '../ScheduleForm.styles';
-import { useContext } from 'react';
-import { ExecuteScrollContext, ExecuteScrollContextTypes } from '../../../pages/NormalPages/SchedulePage';
 
 /**
  * Component responsible for generate goto button, which send user directly into schedule section.

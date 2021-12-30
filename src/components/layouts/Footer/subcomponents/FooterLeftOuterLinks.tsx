@@ -15,7 +15,6 @@
 import * as React from 'react';
 import { FiExternalLink } from 'react-icons/all';
 
-import generateID from '../../../../helpers/functionsAndClasses/generateID';
 import NAVIGATION_ELEMENTS from '../../../../helpers/structs/navigationElements';
 
 import {
@@ -30,7 +29,7 @@ const FooterLeftOuterLinks: React.FC = (): JSX.Element => {
 
     const generateOuterLinks: JSX.Element[] = NAVIGATION_ELEMENTS.TOP_NAVBAR_ELMS.map(goto => (
         <SingleFooterLinkElement
-            key = {generateID()}
+            key = {goto.title}
         >
             <FooterExternalLink
                 href = {goto.link}

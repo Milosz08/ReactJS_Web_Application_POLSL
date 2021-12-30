@@ -15,9 +15,11 @@
 import * as React from 'react';
 import { useState } from 'react';
 
-import IconComponent, { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
+import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
 import { PasswordInputFieldContainer, PasswordInputFieldInput, PasswordToggleButton } from './PasswordInputField.styles';
+
+const IconComponent = React.lazy(() => import('../../../helpers/componentsAndMiddleware/IconComponent'));
 
 interface PropsProvider {
     ifError: boolean;
