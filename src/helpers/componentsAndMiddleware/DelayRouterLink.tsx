@@ -25,6 +25,7 @@ import { a_rs } from '../../styles/reset.styles';
 interface PropsProvider {
     render: () => JSX.Element | string;
     pathTo: FRONT_ENDPOINTS | string;
+    callback?: () => void;
 }
 
 /**
@@ -33,19 +34,27 @@ interface PropsProvider {
  *
  * @param render { () => JSX.Element | string } - a child to be rendered. Accepted React component or string.
  * @param pathTo { FRONT_ENDPOINTS } - routing final place.
+ * @param callback { () => void? } - custom callback function work after click delay router button.
  */
-const DelayRouterLink: React.FC<PropsProvider> = ({ render, pathTo }): JSX.Element => {
+const DelayRouterLink: React.FC<PropsProvider> = ({ render, pathTo, callback }): JSX.Element => {
 
     const timeoutRoutePath = useChangeRoutePath();
+
+    const changeRouteHandler = (): void => {
+        timeoutRoutePath(pathTo);
+        if (Boolean(callback)) {
+            callback!();
+        }
+    };
 
     return (
         <DelayLink
             to = {pathTo}
             delay = {(ROUTER_INTERVAL_TIME + .3) * 1000}
             replace = {false}
-            clickAction = {() => timeoutRoutePath(pathTo)}
+            clickAction = {changeRouteHandler}
         >
-            <DelayLinkAnchor href = {pathTo} >
+            <DelayLinkAnchor href = {pathTo}>
                 {render()}
             </DelayLinkAnchor>
         </DelayLink>

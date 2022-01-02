@@ -22,7 +22,10 @@ import { SessActions } from '../../../../../redux/sessionReduxStore/actions';
 import COOKIES_OBJECT from '../../../../../context/cookiesContext/allCookies.config';
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../../context/cookiesContext/CookiesObjectsProvider';
 
-import { CmsLogoutIconWrapper, CmsMainLogoutButton } from '../CmsInfoBar.styles';
+import { CmsLogoutIconWrapper } from '../CmsInfoBar.styles';
+import DelayRouterLink from '../../../../../helpers/componentsAndMiddleware/DelayRouterLink';
+import { FRONT_ENDPOINTS } from '../../../../../helpers/structs/appEndpoints';
+import { ROUTER_INTERVAL_TIME } from '../../../../../helpers/hooks/useChangeRoutePath';
 
 /**
  * Component responsible for generating logout button from the whole CMS system.
@@ -33,22 +36,26 @@ const CmsInfoLogoutButton: React.FC = (): JSX.Element => {
     const dispatcher = useDispatch();
 
     const handleLogoutButton = (): void => {
-        dispatcher(SessActions.changeAdminLoggedStatus(false));
-        dispatcher(SessActions.changeJwtTokenSession(''));
-        removeCookie!(COOKIES_OBJECT.adminSession);
-        removeCookie!(COOKIES_OBJECT.credentialsLevel);
-        removeCookie!(COOKIES_OBJECT.token);
+        setTimeout(() => {
+            dispatcher(SessActions.changeAdminLoggedStatus(false));
+            dispatcher(SessActions.changeJwtTokenSession(''));
+            removeCookie!(COOKIES_OBJECT.adminSession);
+            removeCookie!(COOKIES_OBJECT.credentialsLevel);
+            removeCookie!(COOKIES_OBJECT.token);
+        }, (ROUTER_INTERVAL_TIME + .3) * 1000)
     };
 
     return (
-        <CmsMainLogoutButton
-            onClick = {handleLogoutButton}
-        >
-            <CmsLogoutIconWrapper>
-                <FaPowerOff/>
-            </CmsLogoutIconWrapper>
-            Wyloguj
-        </CmsMainLogoutButton>
+        <DelayRouterLink
+            render = {() => <>
+                <CmsLogoutIconWrapper>
+                    <FaPowerOff/>
+                </CmsLogoutIconWrapper>
+                Wyloguj
+            </>}
+            pathTo = {FRONT_ENDPOINTS.ADMIN_LOGIN}
+            callback = {handleLogoutButton}
+        />
     );
 };
 

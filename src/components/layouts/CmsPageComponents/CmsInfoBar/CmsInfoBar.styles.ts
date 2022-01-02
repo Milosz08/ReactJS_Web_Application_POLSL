@@ -100,6 +100,11 @@ export const CmsHamburgerMenuContainer = styled('div')<{ ifActive: boolean }>`
     flex-direction: column;
     align-items: flex-start;
     margin-top: 20px;
+    div[role = 'link'] {
+        @media only screen and (max-width: 1250px) {
+            margin: 5px 0 5px 3px;
+        }
+    }
 `;
 
 export const CmsHamburgerMenuElement = styled.span`
@@ -113,19 +118,12 @@ export const CmsHamburgerMenuElement = styled.span`
 `;
 
 export const CmsMainInfosContainer = styled.div`
+    div[role = 'link'] {
+        margin-left: 25px;
+        display: inline-block;
+    }
     @media only screen and (max-width: 1250px) {
         display: none;
-    }
-`;
-
-export const CmsMainLogoutButton = styled(button_rs)`
-    display: inline-block;
-    margin-left: 25px;
-    :hover * {
-        color: var(--blackColor);
-    }
-    @media only screen and (max-width: 1250px) {
-        margin: 5px 0 5px 3px;
     }
 `;
 
