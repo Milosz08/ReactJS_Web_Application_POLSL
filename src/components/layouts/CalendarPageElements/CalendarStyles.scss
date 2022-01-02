@@ -53,7 +53,7 @@
         }
     }
     &.react-calendar__tile--now {
-        background-color: var(--orangeColor);
+        box-shadow: inset 0 0 0 3px var(--navyBlueColor);
         abbr {
             color: var(--cleanWhiteColor);
         }
@@ -66,7 +66,7 @@
         cursor: pointer;
     }
     &.react-calendar__tile--now.react-calendar__month-view__days__day--neighboringMonth {
-        background-color: var(--orangeColor);
+        background-color: var(--darkOrangeColor);
     }
     &.react-calendar__tile--hasActive abbr {
         color: var(--cleanWhiteColor);
@@ -96,9 +96,9 @@
             }
         }
         &.MEDIUM {
-            color: var(--orangeColor);
+            color: var(--darkOrangeColor);
             &::after {
-                background-color: var(--orangeColor);
+                background-color: var(--darkOrangeColor);
             }
         }
         &.HIGH {
@@ -122,18 +122,11 @@
             background-color: var(--greenColor);
         }
         &.MEDIUM {
-            background-color: var(--orangeColor);
+            background-color: var(--darkOrangeColor);
         }
         &.HIGH {
             background-color: var(--redColor);
         }
-    }
-}
-
-.react-calendar__month-view__days button.react-calendar__tile--now p.MEDIUM {
-    color: var(--cleanWhiteColor);
-    &::after {
-        background-color: var(--cleanWhiteColor);
     }
 }
 
