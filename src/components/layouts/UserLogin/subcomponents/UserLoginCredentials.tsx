@@ -15,8 +15,9 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+import axiosInstance from '../../../../helpers/misc/request';
 import useMultipleRef from '../../../../helpers/hooks/useMultipleRef';
-import LoginValidator, { ROLES } from '../../../../helpers/functionsAndClasses/LoginValidator';
+import { API_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
 
 import { UniversalCredentialsInput, UniversalLoginForm, UserLoginSubmitButton } from '../UserLogin.styles';
 
@@ -39,20 +40,31 @@ const UserLoginCredentials: React.FC<PropsProvider> = ({ callback, visible }): J
     const [ login, password ] = useMultipleRef(2);
     const [ valid, setValid ] = useState<{ [key: string]: boolean }>({ username: false, password: false });
 
-    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
-        e.preventDefault();
-        const validate = new LoginValidator(login.current.value, password.current.value, ROLES.USER);
-        validate.initialise().then(() => {
-            const validateFields = validate.get__errorFields();
-            const { username: usr, password: psw } = validateFields;
-            if (!usr && !psw) {
-                callback();
-            } else {
-                setValid(validateFields);
-            }
+    const cleanAllFields = () => {
+        if (login.current && password.current) {
             login.current.value = '';
             password.current.value = '';
-        });
+        }
+    };
+
+    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        const sendObject = {
+            username: login.current.value, password: password.current.value, token: ''
+        };
+        axiosInstance.post(`${API_ENDPOINTS.AUTHENTICATIONS}/authenticate/user`, sendObject)
+            .then(res => {
+                if (!res.data.fieldsErrors.username && !res.data.fieldsErrors.password && !res.data.fieldsErrors.token) {
+                    cleanAllFields();
+                    callback();
+                }
+            })
+            .catch(err => {
+                cleanAllFields();
+                console.clear();
+                const { username, password } = err.response.data.fieldsErrors;
+                setValid({ username, password });
+            });
     };
 
     return (

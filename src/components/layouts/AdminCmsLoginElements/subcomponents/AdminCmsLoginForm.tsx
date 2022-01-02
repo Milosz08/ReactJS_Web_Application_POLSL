@@ -13,10 +13,18 @@
  */
 
 import * as React from 'react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+import axiosInstance from '../../../../helpers/misc/request';
 import useMultipleRef from '../../../../helpers/hooks/useMultipleRef';
-import LoginValidator, { ROLES } from '../../../../helpers/functionsAndClasses/LoginValidator';
+import { ROLES } from '../../../../helpers/functionsAndClasses/LoginValidator';
+import { API_ENDPOINTS } from '../../../../helpers/structs/appEndpoints';
+
+import { useDispatch } from 'react-redux';
+import { SessActions } from '../../../../redux/sessionReduxStore/actions';
+
+import COOKIES_OBJECT from '../../../../context/cookiesContext/allCookies.config';
+import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../context/cookiesContext/CookiesObjectsProvider';
 
 import {
     AdminCmsLoginAsideInfoText, AdminCmsLoginButton, AdminCmsLoginElementsFormHeader
@@ -39,37 +47,40 @@ interface PropsProvider {
  */
 const AdminCmsLoginForm: React.FC<PropsProvider> = ({ callback, visible }): JSX.Element => {
 
+    const { setCookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
+
     const [ login, password, token ] = useMultipleRef(3);
     const [ valid, setValid ] = useState<{ [key: string]: boolean }>({ username: false, password: false, token: false });
 
+    const dispatcher = useDispatch();
+
+    const cleanAllFields = () => {
+        if (login.current && password.current && token.current) {
+            login.current.value = '';
+            password.current.value = '';
+            token.current.value = '';
+        }
+    };
+
     const handleSubmitAdminForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const validateA = new LoginValidator(login.current.value, password.current.value, ROLES.ADMIN, token.current.value);
-        validateA.initialise().then(() => {
-            const validateFieldsA = validateA.get__errorFields();
-            const { username: usrA, password: pswA, token: tkA } = validateFieldsA;
-            if (!usrA && !pswA && !tkA) {
-                callback(ROLES.ADMIN);
-            } else {
-                const validateM = new LoginValidator(
-                    login.current.value, password.current.value, ROLES.MODERATOR, token.current.value
-                );
-                validateM.initialise().then(() => {
-                    const validateFieldsM = validateM.get__errorFields();
-                    const { username: usrM, password: pswM, token: tkM } = validateFieldsM;
-                    if (!usrM && !pswM && !tkM) {
-                        callback(ROLES.MODERATOR);
-                    } else {
-                        setValid(validateFieldsM);
-                    }
-                });
-            }
-            if (login.current && password.current && token.current) {
-                login.current.value = '';
-                password.current.value = '';
-                token.current.value = '';
-            }
-        });
+        const sendObject = {
+            username: login.current.value, password: password.current.value, token: token.current.value,
+        };
+        axiosInstance.post(`${API_ENDPOINTS.AUTHENTICATIONS}/authenticate`, sendObject)
+            .then(res => {
+                if (!res.data.fieldsErrors.username && !res.data.fieldsErrors.password && !res.data.fieldsErrors.token) {
+                    cleanAllFields();
+                    setCookie!(COOKIES_OBJECT.token, res.data.jwtToken);
+                    dispatcher(SessActions.changeJwtTokenSession(res.data.jwtToken));
+                    callback(res.data.authLevel);
+                }
+            })
+            .catch(err => {
+                console.clear();
+                cleanAllFields();
+                setValid(err.response.data.fieldsErrors);
+            });
     };
 
     return (
