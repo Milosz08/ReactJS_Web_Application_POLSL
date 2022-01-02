@@ -45,7 +45,7 @@ export class SessActions {
      *
      * @param status { boolean } - logged status.
      */
-    public static changeUserLoggedStatus = (status: boolean) => ({
+    public static changeUserLoggedStatus = (status: boolean): ReturnedToReducer => ({
         type: sessionTypes.CHANGE_USER_LOGGED_STATUS,
         payload: {
             status
@@ -57,7 +57,7 @@ export class SessActions {
      *
      * @param counter { number } - consecutive numbers of the counter.
      */
-    public static increaseSessionCounter = (counter: number) => ({
+    public static increaseSessionCounter = (counter: number): ReturnedToReducer => ({
         type: sessionTypes.INCREASE_SESSION_COUNER,
         payload: {
             counter
@@ -69,11 +69,23 @@ export class SessActions {
      *
      * @param toggleModal { boolean } - decided, if modal is open or closed.
      */
-    public static toggleWarningSessionModal = (toggleModal: boolean) => ({
+    public static toggleWarningSessionModal = (toggleModal: boolean): ReturnedToReducer => ({
         type: sessionTypes.TOGGLE_WARNING_SESSION_MODAL,
         payload: {
             toggleModal
         }
     });
+
+    /**
+     * Method responsible for setting JWT token after successed logged into CMS panel.
+     *
+     * @param jwtToken { sessionTypes } - JWT token.
+     */
+    public static changeJwtTokenSession = (jwtToken: string): ReturnedToReducer => ({
+        type: sessionTypes.CHANGE_JWT_TOKEN,
+        payload: {
+            jwtToken
+        }
+    })
 
 }

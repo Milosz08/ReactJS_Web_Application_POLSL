@@ -52,6 +52,11 @@ const sessionReducer = (state = sessInitialState, action: any) => {
             return { ...state, sessionInfo: { ...state.sessionInfo, ifModalOpen } };
         }
 
+        case sessionTypes.CHANGE_JWT_TOKEN: {
+            const { jwtToken } = action.payload;
+            return { ...state, headers: { Authorization: `Bearer ${jwtToken}` } };
+        }
+
         default:
             return state;
     }

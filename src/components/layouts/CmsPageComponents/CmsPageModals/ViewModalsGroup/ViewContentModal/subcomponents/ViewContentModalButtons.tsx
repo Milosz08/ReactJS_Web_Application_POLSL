@@ -18,8 +18,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../../redux/reduxStore';
 import { allModals } from '../../../../../../../redux/modalsReduxStore/types';
-import { ApiInitialTypes } from '../../../../../../../redux/apiReduxStore/initialState';
 import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actions';
+import { ApiInitialTypes } from '../../../../../../../redux/apiReduxStore/initialState';
+import { SessionInitialTypes } from '../../../../../../../redux/sessionReduxStore/initialState';
 
 import { updateSections } from '../../../../../../../redux/apiReduxStore/types';
 import { FooterFormTypes } from '../../../../../../../redux/apiReduxStore/dataTypes';
@@ -43,6 +44,8 @@ interface PropsProvider {
 const ViewContentModalButtons: React.FC<PropsProvider> = ({ modalType, dataID }): JSX.Element => {
 
     const { footerFormMessages }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const { headers }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
+
     const formMessage: FooterFormTypes | undefined = footerFormMessages.find(el => el._id === dataID);
 
     const dispatcher = useDispatch();
@@ -55,7 +58,7 @@ const ViewContentModalButtons: React.FC<PropsProvider> = ({ modalType, dataID })
     const handleCloseModal = (): void => {
         dispatcher(ModalsActions.changeModalStateElements(false, modalType, dataID));
         if (!formMessage!.ifClicked) {
-            dispatcher(DbNonModalOp.editReadFooterFormMessageIndicator(dataID!, formMessage!, checkboxChecked));
+            dispatcher(DbNonModalOp.editReadFooterFormMessageIndicator(dataID!, formMessage!, checkboxChecked, headers));
             dispatcher(DbNonModalOp.updateLastUpdateField(updateSections.USER_MESS));
         }
         setTimeout(() => setCheckboxChecked(true), 2000);

@@ -27,6 +27,7 @@ import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actio
 import { DbModalOp } from '../../../../../../../redux/apiReduxStore/operationsForModals';
 import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
 import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
+import { SessionInitialTypes } from '../../../../../../../redux/sessionReduxStore/initialState';
 import { allModals, allModalsActions } from '../../../../../../../redux/modalsReduxStore/types';
 
 import {
@@ -54,6 +55,8 @@ interface PropsProvider {
 const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title, mode, id }): JSX.Element => {
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+    const { headers }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
+
     const day = STATIC_DAYS.find(el => el.name === modalsInitialState.scheduleModal.day)!.eng;
 
     const generatedObject = useGenerateDatabaseObjects(modalType);
@@ -75,9 +78,9 @@ const AddEditContentModalButtons: React.FC<PropsProvider> = ({ modalType, title,
             setTimeout(() => {
                 reset();
                 if (mode === allModalsActions.ADD_ELEMENT) {
-                    dispatcher(DbModalOp.addSingleElementFromCms(modalsInitialState, modalType, object, day));
+                    dispatcher(DbModalOp.addSingleElementFromCms(modalsInitialState, modalType, object, headers, day));
                 } else {
-                    dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id, day));
+                    dispatcher(DbModalOp.editSingleElementFromCms(modalsInitialState, modalType, object, id, headers, day));
                     removeScheduleSubject();
                 }
                 dispatcher(DbNonModalOp.updateLastUpdateField(modalsInitialState[modalType].updateApiParam));

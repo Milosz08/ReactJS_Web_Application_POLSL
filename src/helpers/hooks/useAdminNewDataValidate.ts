@@ -15,7 +15,7 @@
 import * as React from 'react';
 import { useContext } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DbNonModalOp } from '../../redux/apiReduxStore/operationsForNonModals';
 
 import LoginValidator, { ROLES } from '../functionsAndClasses/LoginValidator';
@@ -24,7 +24,9 @@ import {
     ChangeCredentialsContext, ChangeCredentialsContextTypes
 } from '../../components/layouts/CmsPageComponents/CmsPagePanels/ChangeCredentialsCmsPage/ChangeCredentialsStoreProvider';
 
+import { RootState } from '../../redux/reduxStore';
 import { updateSections } from '../../redux/apiReduxStore/types';
+import { SessionInitialTypes } from '../../redux/sessionReduxStore/initialState';
 
 /**
  * Custom hook responsible for validate and send new data about credentials (user/admin/moderator).
@@ -33,6 +35,8 @@ import { updateSections } from '../../redux/apiReduxStore/types';
  * @param allRef { { [value: string]: React.MutableRefObject<any> } } - fields referential values.
  */
 const useAdminNewDataValidate = (allRef: { [value: string]: React.MutableRefObject<any> }): () => void => {
+
+    const { headers }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
 
     const { errors: err, roles } = useContext<Partial<ChangeCredentialsContextTypes>>(ChangeCredentialsContext);
     const { login, pass: passF, passRepeat, token, adminPass } = allRef;
@@ -56,11 +60,11 @@ const useAdminNewDataValidate = (allRef: { [value: string]: React.MutableRefObje
             if(ifUser) {
                 dispatcher(DbNonModalOp.updateCredentialsFromCms(ROLES.USER, {
                     username: login.current.value, password: passF.current.value
-                }));
+                }, headers));
             } else {
                 dispatcher(DbNonModalOp.updateCredentialsFromCms(roles!.role, {
                     username: login.current.value, password: passF.current.value, token: token.current.value
-                }));
+                }, headers));
             }
             clearFields();
         } else {

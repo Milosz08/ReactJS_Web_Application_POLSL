@@ -26,6 +26,7 @@ import { ModalsActions } from '../../../../../../../redux/modalsReduxStore/actio
 import { DbModalOp } from '../../../../../../../redux/apiReduxStore/operationsForModals';
 import { ModalsInitialTypes } from '../../../../../../../redux/modalsReduxStore/initialState';
 import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operationsForNonModals';
+import { SessionInitialTypes } from '../../../../../../../redux/sessionReduxStore/initialState';
 
 import { DeleteContentButton, DeleteContentButtonsContainer, NotDeleteContentButton } from '../DeleteContentModal.styles';
 
@@ -49,6 +50,8 @@ interface PropsProvider {
 const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, modalType, dataID, title }): JSX.Element => {
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
+    const { headers }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
+
     const day = STATIC_DAYS.find(el => el.name === modalsInitialState.scheduleModal.day)!.eng;
 
     const removeScheduleSubject = useRemoveScheduleOnChangeSubject(modalType, dataID!);
@@ -64,7 +67,7 @@ const DeleteContentModalButtons: React.FC<PropsProvider> = ({ buttonContent, mod
             handleNotRemoveContentButton();
             setTimeout(() => {
                 reset();
-                dispatcher(DbModalOp.deleteSingleElementFromCms(modalsInitialState, modalType, dataID!, day));
+                dispatcher(DbModalOp.deleteSingleElementFromCms(modalsInitialState, modalType, dataID!, headers, day));
                 dispatcher(DbNonModalOp.updateLastUpdateField(modalsInitialState[modalType].updateApiParam));
                 removeScheduleSubject();
             }, 1000);

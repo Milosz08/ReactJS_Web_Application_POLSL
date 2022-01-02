@@ -19,6 +19,7 @@ import { allModals } from '../../redux/modalsReduxStore/types';
 import { ApiInitialTypes } from '../../redux/apiReduxStore/initialState';
 import { DbModalOp } from '../../redux/apiReduxStore/operationsForModals';
 import { ModalsInitialTypes } from '../../redux/modalsReduxStore/initialState';
+import { SessionInitialTypes } from '../../redux/sessionReduxStore/initialState';
 
 import { STATIC_DAYS } from '../structs/schedule.config';
 
@@ -32,6 +33,7 @@ const useRemoveScheduleOnChangeSubject = (modalType: allModals, dataID: string) 
 
     const modalsInitialState: ModalsInitialTypes = useSelector((state: RootState) => state.modalsReducer);
     const { scheduleContent, subjectsContent }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const { headers }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
 
     const dispatcher = useDispatch();
 
@@ -43,7 +45,7 @@ const useRemoveScheduleOnChangeSubject = (modalType: allModals, dataID: string) 
                 findSubjects.forEach(scheduleRemoveElement => {
                     const findDay = STATIC_DAYS.find(el => el.id === scheduleRemoveElement.day)!.eng;
                     dispatcher(DbModalOp.deleteSingleElementFromCms(
-                        modalsInitialState, allModals.SCHEDULE_MODAL, scheduleRemoveElement._id, findDay
+                        modalsInitialState, allModals.SCHEDULE_MODAL, scheduleRemoveElement._id, headers, findDay
                     ));
                 })
             });

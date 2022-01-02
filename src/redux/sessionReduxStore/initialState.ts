@@ -18,11 +18,14 @@ export interface SessionInitialTypes {
     adminAuthStatus: {
         logged: boolean;
         identity: ROLES;
-    }
+    };
     userLoggedStatus: boolean;
     sessionInfo: {
         adminSessionCounter: number;
         ifModalOpen: boolean;
+    };
+    headers: {
+        Authorization: string;
     }
 }
 
@@ -35,5 +38,8 @@ export const sessInitialState: SessionInitialTypes = {
     sessionInfo: {
         adminSessionCounter: 0,
         ifModalOpen: false,
+    },
+    headers: {
+        Authorization: '',
     }
 } as const;

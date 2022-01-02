@@ -21,6 +21,7 @@ const COOKIES_OBJECT = {
     userSession: '__userSessionStayed',
     credentialsLevel: '__credentialsLevel',
     groupSelection: '__groupSelection',
+    token: '__token',
 } as const;
 
 export default COOKIES_OBJECT;

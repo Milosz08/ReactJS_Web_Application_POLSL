@@ -52,7 +52,7 @@ export class DbNonModalOp {
         return async (dispatch: (prop: any) => void) => {
             const { data } = await axiosInstance.get(endpoint);
             data.forEach((element: typeof data) => {
-                if(elementKey === apiGetContentFromDB.USER_MESSAGES) {
+                if (elementKey === apiGetContentFromDB.USER_MESSAGES) {
                     element.userIdentity = Utils.decrData(element.userIdentity);
                     element.userMessage = Utils.decrData(element.userMessage);
                     element.userChoice = FOOTER_OPTIONS.find(option => option.value === element.userChoice)!.name;
@@ -71,7 +71,7 @@ export class DbNonModalOp {
      * @param elementKey { apiGetContentFromDB } - added element key in store object.
      */
     private static cookiesScheduleHandler(cookie: any, dispatcherCallback: any, elementKey: apiGetContentFromDB) {
-        if(elementKey === apiGetContentFromDB.SCHEDULE) {
+        if (elementKey === apiGetContentFromDB.SCHEDULE) {
             if (Boolean(cookie)) {
                 const [ normal, eng, sk ] = Utils.cookieDecrData(cookie).split(',');
                 dispatcherCallback(filteredScheduleSubjects(normal, eng, sk));
@@ -80,7 +80,7 @@ export class DbNonModalOp {
                 dispatcherCallback(filteredScheduleSubjects(NORMAL_GROUPS[0], ENG_GROUPS[0], SK_GROUPS[0]));
             }
         }
-    }
+    };
 
     /**
      * Method responsible for adding a new element to the redux state, unrelated to the modal.
@@ -88,10 +88,13 @@ export class DbNonModalOp {
      * @param elementToAdd { object } - object element to add.
      * @param elementKey { apiGetContentFromDB } - added element key in store object.
      * @param endpoint { API_ENDPOINTS } - api element endpoint.
+     * @param headers { any } - backend api token necessary to connect with database.
      */
-    public static addSingleNonModalElement = (elementToAdd: object, elementKey: apiGetContentFromDB, endpoint: API_ENDPOINTS) => {
+    public static addSingleNonModalElement = (
+        elementToAdd: object, elementKey: apiGetContentFromDB, endpoint: API_ENDPOINTS, headers: any
+    ) => {
         return async (dispatch: (prop: any) => void) => {
-            const { data } = await axiosInstance.post(endpoint, elementToAdd);
+            const { data } = await axiosInstance.post(endpoint, elementToAdd, { headers });
             if (elementKey === apiGetContentFromDB.USER_MESSAGES) {
                 data.userIdentity = CryptoJS.enc.Utf8.stringify(AES.decrypt(data.userIdentity, this.hashKey));
                 data.userMessage = CryptoJS.enc.Utf8.stringify(AES.decrypt(data.userMessage, this.hashKey));
@@ -108,14 +111,15 @@ export class DbNonModalOp {
      * @param elementKey { apiGetContentFromDB } - added element key in store object.
      * @param type { covidTypes } - typeof covid warning block.
      * @param endpoint { API_ENDPOINTS } - api element endpoint.
+     * @param headers { any } - backend api token necessary to connect with database.
      * @param searchBy { searchByType } - type of search element (by default search by ID).
      */
     public static editSingleNonModalElement = (
         elementToUpdate: object, elementKey: apiGetContentFromDB, type: covidTypes, endpoint: API_ENDPOINTS,
-        searchBy: searchByType = searchByType.ID
+        headers: any, searchBy: searchByType = searchByType.ID
     ) => {
         return async (dispatch: (prop: any) => void) => {
-            const { data } = await axiosInstance.put(`${endpoint}/${type}`, elementToUpdate);
+            const { data } = await axiosInstance.put(`${endpoint}/${type}`, elementToUpdate, { headers });
             dispatch(updateReduxStoreElement(data, elementKey, type, '', searchBy));
         };
     };
@@ -127,13 +131,14 @@ export class DbNonModalOp {
      * @param username { string } - role username.
      * @param password { string } - role password.
      * @param token { string } - role token (not used in user credentials).
+     * @param headers { any } - backend api token necessary to connect with database.
      */
-    public static updateCredentialsFromCms = (role: ROLES, { username, password, token }: { [key: string]: string }) => {
+    public static updateCredentialsFromCms = (role: ROLES, { username, password, token }: { [key: string]: string }, headers: any) => {
         return async () => {
             const { data } = await axiosInstance.get(`${API_ENDPOINTS.AUTHENTICATIONS}/${role}`);
             await axiosInstance.put(`${API_ENDPOINTS.AUTHENTICATIONS}/${role}`, {
                 _id: data._id, role: Number(role), username, password, token: token || '',
-            });
+            }, { headers });
         };
     };
 
@@ -144,10 +149,8 @@ export class DbNonModalOp {
      */
     public static updateLastUpdateField = (fieldType: updateSections | string) => {
         return async (dispatch: (prop: any) => void) => {
-            setTimeout(async () => {
-                const { data } = await axiosInstance.get(`${API_ENDPOINTS.LAST_UPDATE}/${fieldType}`);
-                dispatch(updateReduxStoreElement(data, apiReducerTypes.LAST_UPDATES, fieldType, '', searchByType.LAST_UPDATE));
-            }, 4000);
+            const { data } = await axiosInstance.get(`${API_ENDPOINTS.LAST_UPDATE}/${fieldType}`);
+            dispatch(updateReduxStoreElement(data, apiReducerTypes.LAST_UPDATES, fieldType, '', searchByType.LAST_UPDATE));
         };
     };
 
@@ -157,14 +160,18 @@ export class DbNonModalOp {
      * @param elementID { string } - single footer form object ID.
      * @param formContent { FooterFormTypes } - single footer form object.
      * @param ifClicked { boolean } - flag decided, if message was read.
+     * @param headers { any } - backend api token necessary to connect with database.
      */
-    public static editReadFooterFormMessageIndicator = (elementID: string, formContent: FooterFormTypes, ifClicked: boolean) => {
+    public static editReadFooterFormMessageIndicator = (
+        elementID: string, formContent: FooterFormTypes, ifClicked: boolean, headers: any
+    ) => {
         return async (dispatch: (prop: any) => void) => {
             formContent.ifClicked = ifClicked;
             formContent.userChoice = FOOTER_OPTIONS.find(option => option.name === formContent.userChoice)!.value;
-            await axiosInstance.put(`${API_ENDPOINTS.FOOTER_FORM}/${elementID}`, formContent);
+            await axiosInstance.put(`${API_ENDPOINTS.FOOTER_FORM}/${elementID}`, formContent, { headers });
             formContent.userChoice = FOOTER_OPTIONS.find(option => option.value === formContent.userChoice)!.name;
             dispatch(updateReduxStoreElement(formContent, apiGetContentFromDB.USER_MESSAGES, elementID, ''));
         };
     };
+
 }

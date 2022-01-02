@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reduxStore';
 import { apiGetContentFromDB } from '../../../../redux/apiReduxStore/types';
 import { DbNonModalOp } from '../../../../redux/apiReduxStore/operationsForNonModals';
+import { SessionInitialTypes } from '../../../../redux/sessionReduxStore/initialState';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
 import { FormSubmitAsideText, FormSubmitButton, FormSubmitButtonContainer } from '../FooterForm.styles';
@@ -33,6 +34,8 @@ import { FormSubmitAsideText, FormSubmitButton, FormSubmitButtonContainer } from
 const FooterFormSubmitButton: React.FC = (): JSX.Element => {
 
     const { footerForm }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
+    const { headers }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
+
     const hashKey: string = process.env.REACT_APP_HASH_CODE || '';
 
     const [ validateForm, clearAllInputs ] = useFooterForm();
@@ -48,7 +51,7 @@ const FooterFormSubmitButton: React.FC = (): JSX.Element => {
                 ...footerForm, userChoice,
                 userIdentity: AES.encrypt(userIdentity, hashKey).toString(),
                 userMessage: AES.encrypt(userMessage, hashKey).toString(),
-            }, apiGetContentFromDB.USER_MESSAGES, API_ENDPOINTS.FOOTER_FORM));
+            }, apiGetContentFromDB.USER_MESSAGES, API_ENDPOINTS.FOOTER_FORM, headers));
             handleShowPosMess();
             clearAllInputs();
         }

@@ -17,9 +17,11 @@ import * as React from 'react';
 import { API_ENDPOINTS } from '../../../../../../helpers/structs/appEndpoints';
 import { MAX_RISK_NUMBER } from '../../../../../../helpers/structs/cmsSystem.config';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../../../redux/reduxStore';
 import { CovidWarningsTypes } from '../../../../../../redux/apiReduxStore/dataTypes';
 import { DbNonModalOp } from '../../../../../../redux/apiReduxStore/operationsForNonModals';
+import { SessionInitialTypes } from '../../../../../../redux/sessionReduxStore/initialState';
 import { apiGetContentFromDB, searchByType, updateSections } from '../../../../../../redux/apiReduxStore/types';
 
 import {
@@ -37,14 +39,16 @@ interface PropsProvider {
  */
 const SingleCovidElement: React.FC<PropsProvider> = ({ tile }): JSX.Element => {
 
+    const { headers }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
+
     const { _id, description, type } = tile;
     const dispatcher = useDispatch();
 
     const handleSelectChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+        dispatcher(DbNonModalOp.updateLastUpdateField(updateSections.COVID));
         dispatcher(DbNonModalOp.editSingleNonModalElement({
             _id, description, type, actualRiskNumber: Number(target.value)
-        }, apiGetContentFromDB.COVID, tile.type, API_ENDPOINTS.COVID_WARNINGS, searchByType.COVID_TYPE));
-        dispatcher(DbNonModalOp.updateLastUpdateField(updateSections.COVID));
+        }, apiGetContentFromDB.COVID, tile.type, API_ENDPOINTS.COVID_WARNINGS, headers, searchByType.COVID_TYPE));
     };
 
     const generateSelectOptions = Array.from({ length: MAX_RISK_NUMBER }, (v, s) => s).map(i => (

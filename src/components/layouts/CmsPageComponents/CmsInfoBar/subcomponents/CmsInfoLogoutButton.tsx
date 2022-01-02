@@ -19,8 +19,8 @@ import { FaPowerOff } from 'react-icons/all';
 import { useDispatch } from 'react-redux';
 import { SessActions } from '../../../../../redux/sessionReduxStore/actions';
 
-import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../../context/cookiesContext/CookiesObjectsProvider';
 import COOKIES_OBJECT from '../../../../../context/cookiesContext/allCookies.config';
+import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../../context/cookiesContext/CookiesObjectsProvider';
 
 import { CmsLogoutIconWrapper, CmsMainLogoutButton } from '../CmsInfoBar.styles';
 
@@ -34,8 +34,10 @@ const CmsInfoLogoutButton: React.FC = (): JSX.Element => {
 
     const handleLogoutButton = (): void => {
         dispatcher(SessActions.changeAdminLoggedStatus(false));
+        dispatcher(SessActions.changeJwtTokenSession(''));
         removeCookie!(COOKIES_OBJECT.adminSession);
         removeCookie!(COOKIES_OBJECT.credentialsLevel);
+        removeCookie!(COOKIES_OBJECT.token);
     };
 
     return (

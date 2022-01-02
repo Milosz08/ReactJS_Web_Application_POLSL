@@ -33,6 +33,7 @@ const useInsertSessionAdminCookie = (): null => {
     useEffect(() => {
         if (Boolean(cookie![COOKIES_OBJECT.adminSession]) && isMount) {
             dispatcher(SessActions.changeAdminLoggedStatus(true, Number(cookie![COOKIES_OBJECT.adminSession])));
+            dispatcher(SessActions.changeJwtTokenSession(cookie![COOKIES_OBJECT.token]));
         }
     }, [ cookie, dispatcher, isMount ]);
 
