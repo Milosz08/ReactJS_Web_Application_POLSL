@@ -39,7 +39,7 @@ const IncomingActivitiesContent: React.FC = (): JSX.Element => {
     const { calendarContent }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
     const recentActivities = new SeparatingSingleCalendarTiles(calendarContent).getAllReversedItems();
 
-    const generateRecentActivity: (JSX.Element | null)[] = recentActivities.map((activity, idx) => {
+    const generateRecentActivity: (JSX.Element | null)[] = recentActivities.reverse().map((activity, idx) => {
         const { date } = activity;
         const currDate: Date = new Date();
         const itemDate: Date = new Date(date);
