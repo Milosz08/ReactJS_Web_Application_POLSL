@@ -25,9 +25,6 @@ Modal show/hide and main page slider animations with some rest of minor animatio
 ## Custom CMS (Content Management System)
 I created my own CMS for this application written fully in TypeScript. It was a big challenge for me because I was creating such a system for the first time and it may not be perfect, but it works perfectly for its purposes.
 
-## Incoming updates
-This project is constantly being developed and new features are being added to it.
-
 <hr/>
 
 ## CMS Panel screenshot gallery
