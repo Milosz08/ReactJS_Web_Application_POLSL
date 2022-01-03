@@ -25,24 +25,16 @@ Modal show/hide and main page slider animations with some rest of minor animatio
 ## Custom CMS (Content Management System)
 I created my own CMS for this application written fully in TypeScript. It was a big challenge for me because I was creating such a system for the first time and it may not be perfect, but it works perfectly for its purposes.
 
-## Incoming updates
-This project is constantly being developed and new features are being added to it.
-
 <hr/>
 
-## Screenshot gallery
+## CMS Panel screenshot gallery
 
-> Main Page
 <img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-1.PNG" width="1920">
 
-> Calendar Page
 <img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-2.PNG" width="1920">
 
-> CMS Login Panel
 <img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-3.PNG" width="1920">
 
-> CMS Main Panel
-<img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_POLSL/master/img/screenshot-4.PNG" width="1920">
 
 ## Clone and Installation
 If you want to clone and work with this repository, use the built-in interface in your IDE (for example WebStorm or Visual Studio Code) or use the clone project algorithm with git bash:<br>
