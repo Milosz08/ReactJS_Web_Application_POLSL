@@ -15,7 +15,6 @@
 import * as React from 'react';
 
 import usePageTitle from '../../../helpers/hooks/usePageTitle';
-import useInsertSessionAdminCookie from '../../../helpers/hooks/useInsertSessionAdminCookie';
 
 import ROUTING_PATH_NAMES from '../../../helpers/structs/routingPathNames';
 
@@ -32,7 +31,6 @@ const AdminCmsLayoutElements = React.lazy(() => import('../../layouts/CmsPageCom
  */
 const AdminCmsPage = (): JSX.Element => {
 
-    useInsertSessionAdminCookie();
     usePageTitle(ROUTING_PATH_NAMES.CMS_PANEL_PAGE);
 
     return (

@@ -33,6 +33,8 @@ const useFirstPainfullLoad = (): null => {
     const { cookie } = useContext<Partial<CookiesObjectsTypes>>(CookiesObjectsContext);
     const { adminSession, groupSelection } = COOKIES_OBJECT;
 
+    const isMout = useIsMount();
+    
     const {
         COVID_WARNINGS, LAST_UPDATE: LAST_UPDATE_END, SUBJECTS_ELMS, CALENDAR_RECORDS, HELPERS_LINKS, FOOTER_FORM,
         SCHEDULE_SUBJECTS
@@ -44,8 +46,11 @@ const useFirstPainfullLoad = (): null => {
     const isMount = useIsMount();
     
     useEffect(() => {
-        dispatcher(SessActions.changeAdminLoggedStatus(Boolean(cookie![adminSession])))
-    }, [ adminSession, cookie, dispatcher ]);
+        if(Boolean(cookie![adminSession]) && isMout) {
+            dispatcher(SessActions.changeAdminLoggedStatus(true, cookie![adminSession]));
+            dispatcher(SessActions.changeJwtTokenSession(cookie![COOKIES_OBJECT.token]));
+        }
+    }, [ adminSession, cookie, dispatcher, isMout ]);
 
     useEffect(() => {
         if(isMount) { //Prevent usage dispatcher DB on next re-renders

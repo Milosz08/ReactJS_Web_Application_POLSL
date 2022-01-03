@@ -14,8 +14,6 @@
 
 import * as React from 'react';
 
-import useInsertSessionAdminCookie from '../../../../helpers/hooks/useInsertSessionAdminCookie';
-
 const CookiesNotification = React.lazy(() => import('../../../layouts/CookiesNotification/CookiesNotification'));
 const MobileDownNav = React.lazy(() => import('../../../layouts/MobileDownNav/MobileDownNav'));
 const Header = React.lazy(() => import('../../../layouts/Header/Header'));
@@ -25,8 +23,6 @@ const CurrentURLpath = React.lazy(() => import('../../../layouts/CurrentURLpath/
  * Component responsible for generating common cms panels components structure.
  */
 const CommonComponents: React.FC = (): JSX.Element => {
-
-    useInsertSessionAdminCookie();
 
     return (
         <>

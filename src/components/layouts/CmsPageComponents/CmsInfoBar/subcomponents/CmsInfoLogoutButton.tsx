@@ -16,6 +16,10 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { FaPowerOff } from 'react-icons/all';
 
+import { FRONT_ENDPOINTS } from '../../../../../helpers/structs/appEndpoints';
+import { ROUTER_INTERVAL_TIME } from '../../../../../helpers/hooks/useChangeRoutePath';
+import DelayRouterLink from '../../../../../helpers/componentsAndMiddleware/DelayRouterLink';
+
 import { useDispatch } from 'react-redux';
 import { SessActions } from '../../../../../redux/sessionReduxStore/actions';
 
@@ -23,9 +27,6 @@ import COOKIES_OBJECT from '../../../../../context/cookiesContext/allCookies.con
 import { CookiesObjectsContext, CookiesObjectsTypes } from '../../../../../context/cookiesContext/CookiesObjectsProvider';
 
 import { CmsLogoutIconWrapper } from '../CmsInfoBar.styles';
-import DelayRouterLink from '../../../../../helpers/componentsAndMiddleware/DelayRouterLink';
-import { FRONT_ENDPOINTS } from '../../../../../helpers/structs/appEndpoints';
-import { ROUTER_INTERVAL_TIME } from '../../../../../helpers/hooks/useChangeRoutePath';
 
 /**
  * Component responsible for generating logout button from the whole CMS system.
@@ -40,9 +41,8 @@ const CmsInfoLogoutButton: React.FC = (): JSX.Element => {
             dispatcher(SessActions.changeAdminLoggedStatus(false));
             dispatcher(SessActions.changeJwtTokenSession(''));
             removeCookie!(COOKIES_OBJECT.adminSession);
-            removeCookie!(COOKIES_OBJECT.credentialsLevel);
             removeCookie!(COOKIES_OBJECT.token);
-        }, (ROUTER_INTERVAL_TIME + .3) * 1000)
+        }, (ROUTER_INTERVAL_TIME + .3) * 1000);
     };
 
     return (
