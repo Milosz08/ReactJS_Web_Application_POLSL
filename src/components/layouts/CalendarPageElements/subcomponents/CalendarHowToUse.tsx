@@ -13,36 +13,43 @@
  */
 
 import * as React from 'react';
-import { Fragment } from 'react';
 
 import { IconFamiliesType } from '../../../../helpers/componentsAndMiddleware/IconComponent';
 
-import { CalendarPageUsageBox, CalendarPageWarningBox } from '../CalendarPageElements.styles';
-
 const UniversalHeader = React.lazy(() => import('../../UniversalHeader/UniversalHeader'));
+const UniversalInfoSection = React.lazy(() => import('../../UniversalInfoSection/UniversalInfoSection'));
 
 /**
  * Component responsible for generate used and mobile devices info for calendar usage.
  */
 const CalendarHowToUse: React.FC = (): JSX.Element => (
-    <Fragment>
+    <>
         <UniversalHeader
             iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaQuestion' }}
             content = 'Jak używać kalendarza'
             ifCloseButtonVisible = {false}
             changeIconSize = '1.4rem'
         />
-        <CalendarPageUsageBox>
-            Interaktywny kalendarz z ważnymi datami. Kalendarz posiada możliwość nawigacji przy pomocy
-            strzałek (pojedyncza przenosi o miesiąc, podwójna przenosi o rok). Po kliknięciu w środkowy
-            panel daty kalendarz umożliwia szybki skok do miesiąca/roku/dekady. Kolor żółty na kafelku
-            kalendarza wskazuje aktualny dzień tygodnia.
-        </CalendarPageUsageBox>
-        <CalendarPageWarningBox>
-            Na urządzeniu moblinym kalendarz jest w formie zmimifikowanej. Aby zobaczyć, jakie aktywności
-            kryją się pod poszczególnymi dniami tygodnia, kliknik w kafelek, aby otworzyć Modal.
-        </CalendarPageWarningBox>
-    </Fragment>
+        <UniversalInfoSection
+            leadingColor = 'darkOrangeColor'
+            headerContent = 'Podstawowa konfiguracja'
+            marginTop = {10}
+        >
+            Interaktywny kalendarz z ważnymi datami. Kalendarz posiada możliwość nawigacji przy pomocy strzałek
+            (<strong>pojedyncza</strong> przenosi o <strong>miesiąc</strong>, <strong>podwójna</strong> przenosi
+            o <strong>rok</strong>). Po kliknięciu w środkowy panel daty kalendarz umożliwia szybki skok do miesiąca/roku/dekady.
+            Niebieskie obramowanie kafelka kalendarza wskazuje aktualny dzień tygodnia.
+        </UniversalInfoSection>
+        <UniversalInfoSection
+            leadingColor = 'redColor'
+            headerContent = 'Urządzenia mobilne'
+            marginTop = {30}
+            marginBottom = {50}
+        >
+            Na urządzeniu moblinym kalendarz jest w formie <strong>zmimifikowanej</strong>. Aby zobaczyć, jakie aktywności
+            kryją się pod poszczególnymi dniami tygodnia, <strong>kliknij w kafelek</strong>, aby otworzyć modal.
+        </UniversalInfoSection>
+    </>
 );
 
 export default CalendarHowToUse;

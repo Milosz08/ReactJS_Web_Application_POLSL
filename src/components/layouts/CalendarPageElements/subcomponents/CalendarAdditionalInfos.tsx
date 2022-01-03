@@ -13,16 +13,16 @@
  */
 
 import * as React from 'react';
-import { Fragment } from 'react';
 
 import { CALENDAR_LEVELS } from '../../../../helpers/structs/calendar.config';
 import { IconFamiliesType } from '../../../../helpers/componentsAndMiddleware/IconComponent';
 
 import {
-    CalendarPageLegendBox, CalendarPageLegendSpanElement, CalendarPageLegendUnorderedElement, CalendarPageLegendUnorderedList
+    CalendarPageLegendSpanElement, CalendarPageLegendUnorderedElement, CalendarPageLegendUnorderedList
 } from '../CalendarPageElements.styles';
 
 const UniversalHeader = React.lazy(() => import('../../UniversalHeader/UniversalHeader'));
+const UniversalInfoSection = React.lazy(() => import('../../UniversalInfoSection/UniversalInfoSection'));
 
 /**
  * Component responsible for generating all levels calendar structure info.
@@ -42,19 +42,22 @@ const CalendarAdditionalInfos: React.FC = (): JSX.Element => {
     ));
 
     return (
-        <Fragment>
+        <>
             <UniversalHeader
                 iconP = {{ family: IconFamiliesType.FontAwesomeIcons, name: 'FaInfo' }}
                 content = 'Dodatkowe Informacje'
                 ifCloseButtonVisible = {false}
                 changeIconSize = '1.5rem'
             />
-            <CalendarPageLegendBox>
+            <UniversalInfoSection
+                headerContent = 'Legenda'
+                marginTop = {10}
+            >
                 <CalendarPageLegendUnorderedList>
                     {generateLegendElements}
                 </CalendarPageLegendUnorderedList>
-            </CalendarPageLegendBox>
-        </Fragment>
+            </UniversalInfoSection>
+        </>
     );
 };
 

@@ -15,11 +15,10 @@
 import * as React from 'react';
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
-import {
-    SubjectsAndTermsContainer, SubjectsAndTermsInfoContent, SubjectsAndTermsParagraph, SubjectsAndTermsWrapper
-} from './SubjectsAndTerms.styles';
+import { SubjectsAndTermsContainer, SubjectsAndTermsWrapper } from './SubjectsAndTerms.styles';
 
 const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const UniversalInfoSection = React.lazy(() => import('../UniversalInfoSection/UniversalInfoSection'));
 const SubjectsAndTermsOuterLinks = React.lazy(() => import('./subcomponents/SubjectsAndTermsOuterLinks'));
 
 /**
@@ -34,14 +33,16 @@ const SubjectsAndTerms: React.FC = (): JSX.Element => (
                 ifCloseButtonVisible = {false}
                 changeIconSize = '1.4rem'
             />
-            <SubjectsAndTermsInfoContent>
-                <SubjectsAndTermsParagraph>
-                    Wszystkie karty przedmiotów, w których zawarte są opisy wymaganych umiejętności przed zaliczeniem
-                    przedmiotu, umiejętności nabyte podczas odbywania przedmiotu, oraz umiejętności niezbędne do zdania
-                    przedmiotu, znajdziesz na oficjalnej stronie Wydziału Elektrycznego Politechniki Śląskiej.
-                </SubjectsAndTermsParagraph>
+            <UniversalInfoSection
+                headerContent = 'Zewnętrzne przekierowanie'
+                marginTop = {20}
+                marginBottom = {30}
+            >
+                Wszystkie karty przedmiotów, w których zawarte są opisy wymaganych umiejętności przed zaliczeniem
+                przedmiotu, umiejętności nabyte podczas odbywania przedmiotu, oraz umiejętności niezbędne do zdania
+                przedmiotu, znajdziesz na oficjalnej stronie <strong>Wydziału Elektrycznego Politechniki Śląskiej</strong>.
                 <SubjectsAndTermsOuterLinks/>
-            </SubjectsAndTermsInfoContent>
+            </UniversalInfoSection>
         </SubjectsAndTermsWrapper>
     </SubjectsAndTermsContainer>
 );

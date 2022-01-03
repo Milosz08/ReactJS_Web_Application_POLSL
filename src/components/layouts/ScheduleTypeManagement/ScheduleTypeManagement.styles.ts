@@ -13,12 +13,10 @@
  */
 
 import styled from 'styled-components';
-import { a_rs } from '../../../styles/reset.styles';
 import { FiExternalLink } from 'react-icons/all';
 
-import {
-    BorderWithPseudoElement, StandardContainer, StandardSafetyAreaWrapperWithTopMargin
-} from '../../../styles/mixins.styles';
+import { a_rs } from '../../../styles/reset.styles';
+import { StandardContainer, StandardSafetyAreaWrapperWithTopMargin } from '../../../styles/mixins.styles';
 
 export const ScheduleTypeManagementContainer = styled.section`
     ${StandardContainer()};
@@ -33,19 +31,6 @@ export const ScheduleTypeManagementWrapper = styled.article`
     @media only screen and (max-width: 450px) {
         width: 100%;
     }
-`;
-
-export const ScheduleManagementCookiesInfoContainer = styled.div`
-    ${BorderWithPseudoElement({
-        _color: 'var(--redColor)',
-        _titleBgc: 'var(--cleanWhiteColor)',
-        _content: 'Uwaga',
-        _fontSize: '1.2rem',
-        _fontWeight: 500
-    })};
-    font-size: 1.2rem;
-    color: var(--redColor);
-    font-weight: 400;
 `;
 
 export const ScheduleManagementCookiesInfoAnchor = styled(a_rs)`

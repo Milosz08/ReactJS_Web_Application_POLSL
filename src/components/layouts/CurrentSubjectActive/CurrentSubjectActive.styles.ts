@@ -13,9 +13,10 @@
  */
 
 import styled from 'styled-components';
-import { BorderWithPseudoElement, StandardContainer, StandardSafetyAreaWrapper } from '../../../styles/mixins.styles';
-import { a_rs } from '../../../styles/reset.styles';
 import { BiBlanket } from 'react-icons/all';
+
+import { a_rs } from '../../../styles/reset.styles';
+import { StandardContainer, StandardSafetyAreaWrapper } from '../../../styles/mixins.styles';
 
 export const CurrentSubjectActiveContainer = styled.section`
     ${StandardContainer()};
@@ -206,18 +207,4 @@ export const CurrentSubjectSeparateLine = styled.span`
         width: 80px;
         height: 10px;
     }
-`;
-
-export const CurrentSubjectImportantInfoContainer = styled.div`
-    ${BorderWithPseudoElement({
-        _color: 'var(--redColor)',
-        _titleBgc: 'var(--cleanWhiteColor)',
-        _content: 'Działanie',
-        _fontSize: '1.2rem',
-        _fontWeight: 500
-    })};
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--redColor);
-    margin-top: 50px;
 `;

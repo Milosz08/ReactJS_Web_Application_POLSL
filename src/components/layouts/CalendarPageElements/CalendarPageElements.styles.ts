@@ -16,11 +16,9 @@ import styled from 'styled-components';
 import { FaExclamation } from 'react-icons/all';
 
 import { button_rs, ul_rs } from '../../../styles/reset.styles';
-import { LEVELS } from '../../../helpers/structs/calendar.config';
+import { DefaultButton, StandardContainer, StandardSafetyAreaWrapperWithTopMargin } from '../../../styles/mixins.styles';
 
-import {
-    BorderWithPseudoElement, DefaultButton, StandardContainer, StandardSafetyAreaWrapperWithTopMargin
-} from '../../../styles/mixins.styles';
+import { LEVELS } from '../../../helpers/structs/calendar.config';
 
 export const CalendarPageElementsContainer = styled.section`
     ${StandardContainer()};
@@ -31,52 +29,6 @@ export const CalendarPageElementsWrapper = styled.div`
     @media only screen and (max-width: 1250px) {
         margin-top: 150px;
         width: 100%;
-    }
-`;
-
-export const CalendarPageUsageBox = styled.div`
-    ${BorderWithPseudoElement({
-        _color: 'var(--navyBlueColor)',
-        _titleBgc: 'var(--cleanWhiteColor)',
-        _content: 'Sterowanie',
-        _fontSize: '1.2rem',
-        _fontWeight: 500
-    })};
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--navyBlueColor);
-    margin-top: 30px;
-`;
-
-export const CalendarPageWarningBox = styled.div`
-    ${BorderWithPseudoElement({
-        _color: 'var(--redColor)',
-        _titleBgc: 'var(--cleanWhiteColor)',
-        _content: 'Uwaga',
-        _fontSize: '1.2rem',
-        _fontWeight: 500
-    })};
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--redColor);
-    margin: 30px 10px 50px;
-`;
-
-export const CalendarPageLegendBox = styled.div`
-    ${BorderWithPseudoElement({
-        _color: 'var(--navyBlueColor)',
-        _titleBgc: 'var(--cleanWhiteColor)',
-        _content: 'Legenda',
-        _fontSize: '1.2rem',
-        _fontWeight: 500
-    })};
-    color: var(--darkBlueColor);
-    font-size: 1.2rem;
-    margin-top: 30px;
-    padding: 20px 30px;
-    font-weight: 500;
-    @media only screen and (max-width: 648px) {
-        padding: 10px 40px;
     }
 `;
 
@@ -114,7 +66,7 @@ export const CalendarPageLegendUnorderedElement = styled('li')`
 
 export const CalendarPageModalAndStructureContainer = styled.section`
     position: relative;
-    border: 2px solid var(--darkGrayTint3);
+    border: 1px solid var(--darkGrayTint3);
     border-radius: 10px;
     padding: 10px;
     margin: 20px 0;

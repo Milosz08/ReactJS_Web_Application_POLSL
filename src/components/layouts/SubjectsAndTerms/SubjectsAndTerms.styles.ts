@@ -13,9 +13,10 @@
  */
 
 import styled from 'styled-components';
-import { BorderWithPseudoElement, DefaultButton } from '../../../styles/mixins.styles';
-import { a_rs } from '../../../styles/reset.styles';
 import { AiOutlineFileExcel, AiOutlineFileZip } from 'react-icons/all';
+
+import { a_rs } from '../../../styles/reset.styles';
+import { DefaultButton } from '../../../styles/mixins.styles';
 
 export const SubjectsAndTermsContainer = styled.div`
     display: flex;
@@ -34,17 +35,6 @@ export const SubjectsAndTermsWrapper = styled.div`
         width: 100%;
         margin-top: 150px;
     }
-`;
-
-export const SubjectsAndTermsInfoContent = styled.div`
-    ${BorderWithPseudoElement({
-        _color: 'var(--navyBlueColor)',
-        _titleBgc: 'var(--cleanWhiteColor)',
-        _content: 'Zewnętrzne Przekierowanie',
-        _fontSize: '1.2rem',
-        _fontWeight: 500
-    })};
-    margin: 50px 0;
 `;
 
 export const SubjectsAndTermsParagraph = styled.p`

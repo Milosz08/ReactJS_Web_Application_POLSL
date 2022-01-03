@@ -14,19 +14,23 @@
 
 import * as React from 'react';
 
-import {
-    OuterLinkIcon, ScheduleManagementCookiesInfoAnchor, ScheduleManagementCookiesInfoContainer
-} from '../ScheduleTypeManagement.styles';
+import { OuterLinkIcon, ScheduleManagementCookiesInfoAnchor } from '../ScheduleTypeManagement.styles';
+
+const UniversalInfoSection = React.lazy(() => import('../../UniversalInfoSection/UniversalInfoSection'));
 
 /**
  * Component responsible for generate Cookies turn on info.
  */
 const ScheduleManagementCookiesInfo: React.FC = (): JSX.Element => (
-    <ScheduleManagementCookiesInfoContainer>
-        Po wybraniu właściwych opcji, poniższy plan wygeneruje się automatycznie. Jeśli jednak chcesz zapisać swój wybór nawet po
-        zamknięciu przeglądarki, kliknij w niebieski przycisk po prawej stronie. Aby zapisywanie wyboru zadziałało, twoja
-        przeglądarka musi mieć włączoną obsługę plików Cookies. Jeśli nie wiesz jak włączyć obsługę plików Cookies w twojej
-        przeglądarce, przejdź pod {' '}
+    <UniversalInfoSection
+        leadingColor = 'redColor'
+        headerContent = 'Zapisywanie wybranych preferencji'
+        marginTop = {20}
+    >
+        Po wybraniu właściwych opcji, poniższy plan wygeneruje się <strong>automatycznie</strong>. Jeśli jednak chcesz zapisać
+        swój wybór nawet po zamknięciu przeglądarki, kliknij w niebieski przycisk po prawej stronie. Aby zapisywanie wyboru
+        zadziałało, twoja przeglądarka musi mieć <strong>włączoną obsługę plików Cookies</strong>. Jeśli nie wiesz jak włączyć
+        obsługę plików Cookies w twojej przeglądarce, przejdź pod {' '}
         <ScheduleManagementCookiesInfoAnchor
             href = 'https://jakwylaczyccookie.pl/jak-wylaczyc-pliki-cookies/'
             target = '_blank'
@@ -34,7 +38,7 @@ const ScheduleManagementCookiesInfo: React.FC = (): JSX.Element => (
         >
             ten link<OuterLinkIcon/>
         </ScheduleManagementCookiesInfoAnchor>
-    </ScheduleManagementCookiesInfoContainer>
+    </UniversalInfoSection>
 );
 
 export default ScheduleManagementCookiesInfo;
