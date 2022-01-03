@@ -21,6 +21,7 @@ interface StateProvider {
     dayNmb: number;
     month: string;
     year: number;
+    milis: number;
     time: {
         [value: string]: number;
     }
@@ -32,7 +33,7 @@ interface StateProvider {
 const useDate = (intervalRule = true) => {
 
     const [ date, setDate ] = useState<StateProvider>({
-        day: '', engDay: '', dayNmb: 0, month: '', year: 0, time: { hr: 0, min: 0, sec: 0 }
+        day: '', engDay: '', dayNmb: 0, month: '', year: 0, milis: 0, time: { hr: 0, min: 0, sec: 0 }
     });
 
     useEffect(() => {
@@ -44,6 +45,7 @@ const useDate = (intervalRule = true) => {
                 dayNmb: Number(date.getOneDateElm(DATE_ELEMENTS.DAY)),
                 month: date.getMonthPolishName(),
                 year: Number(date.getOneDateElm(DATE_ELEMENTS.YEAR)),
+                milis: new Date().getTime(),
                 time: {
                     hr: Number(date.getOneDateElm(DATE_ELEMENTS.HOURS)),
                     min: Number(date.getOneDateElm(DATE_ELEMENTS.MINUTES)),

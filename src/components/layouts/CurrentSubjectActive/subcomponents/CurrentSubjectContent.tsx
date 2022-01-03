@@ -47,6 +47,7 @@ const CurrentSubjectContent: React.FC = (): JSX.Element => {
 
     const insertZeros = (time: number): string => time < 10 ? `0${time}` : String(time);
     const currTime: number = Number(`${insertZeros(date.time.hr)}${insertZeros(date.time.min)}${insertZeros(date.time.sec)}`);
+    const timeMilis: number = date.milis;
 
     const duringSubjectIdx = singleDayCurrentSchedule?.findIndex(el => el.hours.start <= currTime && el.hours.end > currTime);
     const weekend = new Date().getDay() === 6 || new Date().getDay() === 0;
@@ -58,7 +59,7 @@ const CurrentSubjectContent: React.FC = (): JSX.Element => {
             <CurrentSubjectAllSubjectsContainer>
                 {duringSubjectIdx !== -1 && !weekend ? <CurrentSubjectAllSubjectWrapper>
                     <CurrentSubjectDuringSubject
-                        counter = {currTime}
+                        timeMilis = {timeMilis}
                     />
                     {singleDayCurrentSchedule?.length - 1 !== duringSubjectIdx && <CurrentSubjectPrevNextSubject/>}
                 </CurrentSubjectAllSubjectWrapper> : <CurrentSubjectNoContent/>}

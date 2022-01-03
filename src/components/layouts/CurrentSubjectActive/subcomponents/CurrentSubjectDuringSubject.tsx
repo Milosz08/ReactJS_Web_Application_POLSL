@@ -16,23 +16,40 @@ import * as React from 'react';
 import { useContext } from 'react';
 
 import {
-    CurrentSubjectDuringSubjectBackground, CurrentSubjectDuringSubjectContainer, CurrentSubjectDuringSubjectInfo,
-    CurrentSubjectDuringSubjectLeft, CurrentSubjectDuringSubjectPlatformAnchor, CurrentSubjectDuringSubjectPlatformIcon,
-    CurrentSubjectDuringSubjectRight, CurrentSubjectDuringSubjectTitle, CurrentSubjectDuringSubjectTitlesContent,
+    CurrentSubjectDuringSubjectBackground,
+    CurrentSubjectDuringSubjectContainer,
+    CurrentSubjectDuringSubjectInfo,
+    CurrentSubjectDuringSubjectLeft,
+    CurrentSubjectDuringSubjectPlatformAnchor,
+    CurrentSubjectDuringSubjectPlatformIcon,
+    CurrentSubjectDuringSubjectRight,
+    CurrentSubjectDuringSubjectTitle,
+    CurrentSubjectDuringSubjectTitlesContent,
     CurrentSubjectSeparateLine
 } from '../CurrentSubjectActive.styles';
 
 import { DuringSubjectContext, DuringSubjectContextTypes } from './CurrentSubjectContent';
+import ConvertTimeUTC, { DATE_ELEMENTS } from '../../../../helpers/functionsAndClasses/convertTimeUTC';
+
+interface PropsProvider {
+    timeMilis: number;
+}
 
 /**
  * Component responsible for generating current during subject (with subject timer).
  */
-const CurrentSubjectDuringSubject: React.FC<{ counter: number }> = ({ counter }): JSX.Element => {
+const CurrentSubjectDuringSubject: React.FC<PropsProvider> = ({ timeMilis }): JSX.Element => {
 
     const { singleDayCurrentSchedule, duringSubjectIdx } = useContext<Partial<DuringSubjectContextTypes>>(DuringSubjectContext);
     const subject = Boolean(singleDayCurrentSchedule) ? singleDayCurrentSchedule![duringSubjectIdx!] : undefined;
 
-    const time: number = (counter - Number(subject?.hours.start)) * 100 / ((Number(subject?.hours.end) - 37) - Number(subject?.hours.start));
+    const date = new ConvertTimeUTC();
+    const { YEAR, MONTH, DAYMONTH } = DATE_ELEMENTS;
+    const generateYear = `${date.getOneDateElm(YEAR)}-${date.getOneDateElm(MONTH)}-${date.getOneDateElm(DAYMONTH)}`;
+
+    const currDateStart = new Date(`${generateYear}T${subject?.hours.startHour}:00`);
+    const currDateEnd = new Date(`${generateYear}T${subject?.hours.endHour}:00`);
+    const createTime = (100 - ((currDateEnd.getTime() - timeMilis) / (currDateEnd.getTime() - currDateStart.getTime()) * 100));
 
     const ifDistanceLearning: string = subject?.classesInfo.place === 'kontaktowy' ? 'w sposób' : 'poprzez komunikator';
     const roomClosely: string = subject?.classesInfo.place === 'kontaktowy' ? `Sala ${subject?.room.toLocaleUpperCase()}` : '';
@@ -63,7 +80,7 @@ const CurrentSubjectDuringSubject: React.FC<{ counter: number }> = ({ counter })
                 </CurrentSubjectDuringSubjectRight>
             </CurrentSubjectDuringSubjectTitlesContent>
             <CurrentSubjectDuringSubjectBackground
-                clockWidth = {time > 99.9 ? 0 : time.toFixed(1)}
+                clockWidth = {createTime.toFixed(2)}
             />
         </CurrentSubjectDuringSubjectContainer>
     );
