@@ -57,7 +57,7 @@ export const CalendarPageLegendUnorderedList = styled(ul_rs)`
 export const CalendarPageLegendUnorderedElement = styled('li')`
     margin: 15px 0;
     @media only screen and (max-width: 648px) {
-        margin: 15px 0;
+        margin: 15px 0 15px 30px;
         display: flex;
         align-items: center;
         font-size: 1.1rem;

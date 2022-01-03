@@ -67,6 +67,7 @@ export const IncomingActivitiesDateInfo = styled('span')<{ colorCSS: string }>`
         left: 50%;
         transform: translate(-50%, 0);
         top: -20px;
+        min-width: 70%;
     }
 `;
 

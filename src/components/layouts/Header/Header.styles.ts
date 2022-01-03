@@ -68,6 +68,10 @@ export const MainHeaderContentContainer = styled('div').attrs(props => ({
     justify-content: center;
     height: 120px;
     background-color: var(--navyBlueColor);
+    @media only screen and (max-width: 500px) {
+        width: 100%;
+        padding: 0 20px;
+    }
 `;
 
 export const MainLogoContainer = styled('div')<{ ifHeaderHasRedBar: boolean }>`
@@ -78,19 +82,25 @@ export const MainLogoContainer = styled('div')<{ ifHeaderHasRedBar: boolean }>`
     height: 100%;
     width: var(--widthVertical);
     padding: 16px 0;
+    div[role = 'link'] {
+        height: 100%;
+        a {
+            display: block;
+            width: auto !important;
+            height: 100%;
+        }
     @media only screen and (max-width: 1250px) {
         margin: 0 30px;
         justify-content: space-between;
     }
     @media only screen and (max-width: 500px) {
-        margin: 0 20px;
-        width: calc(100% - 40px);
+        margin: 0;
     }
 `;
 
 export const MainLogoImage = styled.img`
     height: 100%;
-    width: auto;
+    width: auto !important;
 `;
 
 export const MainHeaderNavigationRouterLinks = styled.div`

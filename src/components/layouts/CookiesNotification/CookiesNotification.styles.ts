@@ -28,6 +28,7 @@ export const CookiesNotificationContainer = styled.section`
 
 export const CookiesNotificationWrapper = styled.div`
     ${ModalContainer({ _width: 800 })};
+    padding: 10px 40px 30px;
 `;
 
 export const CookiesMainSectionContainer = styled.section`
