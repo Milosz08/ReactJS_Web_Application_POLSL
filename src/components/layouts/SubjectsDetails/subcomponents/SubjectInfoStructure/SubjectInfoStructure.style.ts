@@ -62,6 +62,10 @@ export const ClassesPlatformInfoContainer = styled.div`
     font-weight: 500;
     margin: 30px 0;
     line-height: 1.3;
+    @media only screen and (max-width: 600px) {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
 `;
 
 export const ClassesPlatformInfoSingleElement = styled.div`
@@ -80,7 +84,12 @@ export const SingleSubjectNavigationButtonContainer = styled.div`
     justify-content: space-around;
     width: 90%;
     margin-top: 30px;
-    a, span {
+    @media only screen and (min-width: 773px) {
+        a {
+            margin: 0 10px;
+        }
+    }
+    span {
         margin: 0 10px;
     }
     @media only screen and (max-width: 772px) {
@@ -106,11 +115,11 @@ export const PzePlatformLinkAnchor = styled(a_rs)`
     ${DefaultButton({ _fontSize: '1.1rem', _fontWeight: 400, _ifEmpty: false })};
     padding: 10px 20px 12px;
     @media only screen and (max-width: 772px) {
-        margin: 10px;
+        margin: 0 10px 10px;
         width: 100%;
         text-align: center;
     }
-    @media only screen and (max-width: 715px) {
+    @media only screen and (max-width: 772px) {
         font-size: 1rem;
     }
 `;

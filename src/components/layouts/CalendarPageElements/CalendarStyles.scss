@@ -53,10 +53,7 @@
         }
     }
     &.react-calendar__tile--now {
-        box-shadow: inset 0 0 0 3px var(--navyBlueColor);
-        abbr {
-            color: var(--cleanWhiteColor);
-        }
+        box-shadow: inset 0 0 0 2px var(--navyBlueColor);
     }
     &.react-calendar__month-view__days__day--weekend abbr {
         color: var(--redColor);

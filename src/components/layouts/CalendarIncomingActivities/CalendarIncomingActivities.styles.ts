@@ -79,21 +79,23 @@ export const IncomingActivitiesContentMessage = styled.span`
 
 export const IncomingActivitiesIndicator = styled('span')<{ colorCSS: string }>`
     position: absolute;
-    right: -8px;
-    width: 15px;
-    height: 60%;
+    right: -1px;
+    width: 8px;
+    height: 101%;
     top: 50%;
     transform: translate(0, -50%);
-    border-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     background-color: var(--${({ colorCSS }) => (
         colorCSS === LOW ? 'greenColor' : colorCSS === HIGH ? 'redColor' : 'orangeColor'
     )});
     @media only screen and (max-width: 648px) {
+        border-radius: 10px;
         right: 20%;
         transform: translate(-50%, 0);
         width: 30%;
         height: 10px;
-        top: 96%;
+        top: 95%;
     }
 `;
 

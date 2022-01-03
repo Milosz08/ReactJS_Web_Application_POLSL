@@ -82,12 +82,10 @@ export const SubjectTitleContainer = styled.div`
 
 export const SubjectTileActiveElement = styled('span')<{ ifActive: boolean }>`
     position: absolute;
-    width: 0;
-    height: 0;
+    width: 15px;
+    height: 100%;
     right: 0;
-    border-left: 50px solid transparent;
-    border-right: 0 solid transparent;
-    border-bottom: 80px solid var(--navyBlueColor);
+    background-color: var(--navyBlueColor);
     transition: var(--transitionDuration);
     transform: translate(${props => props.ifActive ? 0 : 100}px);
 `;
