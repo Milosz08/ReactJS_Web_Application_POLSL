@@ -34,7 +34,8 @@ const PrivacyPolicyHashingInfo: React.FC = (): JSX.Element => (
             Wrażliwe dane wpisywane do formularzy (hasła, tokeny), dane wysyłane do administratorów i moderatorów
              w formularzach przez Użytkowników oraz wrażliwe dane w bazie danych przechowywane są po
             wcześniejszym zaszyfrowaniu. Aplikacja używa jednego z najbardziej niezawodnych symetrycznych
-            algorytmów kryptograficznych wraz każdorazowo generowanym sekretnym kluczem.
+            algorytmów kryptograficznych wraz każdorazowo generowanym sekretnym kluczem, używając przy tym  środowiska i
+            bibliotek jezyka Java znanego ze swojego dużego bezpieczeństwa i stabilności działania.
         </PrivacyPolicyTextContent>
     </PrivacyPolicyHeaderContainer>
 );

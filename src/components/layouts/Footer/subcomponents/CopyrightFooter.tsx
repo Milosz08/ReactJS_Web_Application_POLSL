@@ -46,7 +46,7 @@ const CopyrightFooterSection: React.FC = (): JSX.Element => {
                     {generateSectionAnchor('https://react-icons.github.io/react-icons', 'React Icons')}
                 </CopyrightFooterSingleSection>
                 <CopyrightFooterSingleSection>
-                    &copy; 2020-{new Date().getFullYear()} by:
+                    &copy; 2020-{new Date().getFullYear()} design and source code by:
                     {generateSectionAnchor('https://miloszgilga.pl/', 'Miłosz Gilga')}
                 </CopyrightFooterSingleSection>
                 <CopyrightFooterSingleSection>
