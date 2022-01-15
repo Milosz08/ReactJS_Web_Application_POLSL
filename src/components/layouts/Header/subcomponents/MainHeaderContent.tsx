@@ -40,7 +40,7 @@ const MainHeaderContent: React.FC<PropsProvider> = ({ width, offset, elmHeight, 
 
     const renderendDelay = (
         <MainLogoImage
-            src = {`${process.env.PUBLIC_URL}/images/logosBaner.png`}
+            src = {`${process.env.PUBLIC_URL}/images/logosBaner.svg`}
             alt = 'banerLogo'
         />
     );
