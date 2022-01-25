@@ -19,10 +19,13 @@ import { RootState } from '../../../redux/reduxStore';
 import { ApiInitialTypes } from '../../../redux/apiReduxStore/initialState';
 import { CovidWarningsTypes } from '../../../redux/apiReduxStore/dataTypes';
 
+import setColorBasedRiskLevel from './CovidColorsHelper';
+
 import {
     CovidInfoBlocksContainer, CovidInfoContainer, CovidMoreInformations, CovidSingleInfoBlock, CovidSingleInfoDescription,
     CovidSingleInfoRiskNumber, SecurityLevel
 } from './CovidInfoSection.styles';
+
 
 /**
  * Component resposible for fetch data from api (covid warnings) and show all data (covid warning 3 blocks).
@@ -30,10 +33,12 @@ import {
 const CovidInfoSection: React.FC = (): JSX.Element => {
 
     const { covidWarningLevels }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+    const { bg, fg } = setColorBasedRiskLevel(covidWarningLevels[0].actualRiskNumber);
 
     const generateCovidBlocks = covidWarningLevels.map((covidBlock: CovidWarningsTypes) => (
         <CovidSingleInfoBlock
             key = {covidBlock.description}
+            $colorValue = {fg}
         >
             <CovidSingleInfoDescription>
                 {covidBlock.description}:
@@ -45,14 +50,19 @@ const CovidInfoSection: React.FC = (): JSX.Element => {
     ));
 
     return (
-        <CovidInfoContainer>
-            <SecurityLevel>
+        <CovidInfoContainer
+            $colorValue = {bg}
+        >
+            <SecurityLevel
+                $colorValue = {fg}
+            >
                 Status zabezpieczeń COVID-19
             </SecurityLevel>
             <CovidMoreInformations
                 href = 'https://covid.polsl.pl/'
                 target = '_blank'
                 rel = 'noreferrer'
+                $colorValue = {fg}
             >
                 więcej informacji
             </CovidMoreInformations>

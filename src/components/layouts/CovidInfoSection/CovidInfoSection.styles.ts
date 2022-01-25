@@ -15,17 +15,18 @@
 import styled, { css } from 'styled-components';
 import { a_rs } from '../../../styles/reset.styles';
 
-const BasicDivAndAnchorStructure = () => css`
+const BasicDivAndAnchorStructure = (_color: string) => css`
     padding: 15px 20px;
-    color: var(--darkNavyBlueColor);
+    color: var(--${_color}Color);
+    font-weight: ${_color === 'white' ? 200 : 500};
 `;
 
-export const CovidInfoContainer = styled.section`
+export const CovidInfoContainer = styled('section')<{ $colorValue: string }>`
     display: flex;
     justify-content: center;
     align-items: center;
     width: var(--widthVertical);
-    background-color: var(--yellowColor);
+    background-color: ${({ $colorValue }) => `var(--${$colorValue}Color)`};
     margin: 0 auto;
     border-radius: 10px;
     transform: translateY(-30px);
@@ -42,8 +43,8 @@ export const CovidInfoContainer = styled.section`
     }
 `;
 
-export const SecurityLevel = styled.div`
-    ${BasicDivAndAnchorStructure()};
+export const SecurityLevel = styled('div')<{ $colorValue: string }>`
+    ${({ $colorValue }) => BasicDivAndAnchorStructure($colorValue)};
     font-size: 2rem;
     font-weight: 500;
     min-width: 300px;
@@ -52,8 +53,8 @@ export const SecurityLevel = styled.div`
     }
 `;
 
-export const CovidMoreInformations = styled(a_rs)`
-    ${BasicDivAndAnchorStructure()};
+export const CovidMoreInformations = styled(a_rs)<{ $colorValue: string }>`
+    ${({ $colorValue }) => BasicDivAndAnchorStructure($colorValue)};
     display: inline-block;
 `;
 
@@ -64,8 +65,8 @@ export const CovidInfoBlocksContainer = styled.div`
     }
 `;
 
-export const CovidSingleInfoBlock = styled.div`
-    ${BasicDivAndAnchorStructure()};
+export const CovidSingleInfoBlock = styled('div')<{ $colorValue: string }>`
+    ${({ $colorValue }) => BasicDivAndAnchorStructure($colorValue)};
     flex-grow: 1;
     display: flex;
     align-items: center;
