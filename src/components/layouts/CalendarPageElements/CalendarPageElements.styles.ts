@@ -35,7 +35,7 @@ export const CalendarPageElementsWrapper = styled.div`
 export const CalendarPageLegendSpanElement = styled('span')<{ colorValue: string }>`
     display: inline;
     color: var(--cleanWhiteColor);
-    background-color: var(--${props => props.colorValue}Color);
+    background-color: var(--${props => props.colorValue});
     border-radius: 5px;
     font-weight: 400;
     margin-right: 6px;
@@ -177,11 +177,11 @@ export const CalendarModalNoActivitiesIcon = styled(FaExclamation)`
     margin-bottom: 20px;
 `;
 
-export const CalendarHourWrapper = styled.span`
+export const CalendarHourWrapper = styled('span')<{ $ifExpired: boolean }>`
     display: block;
-    font-weight: 600;
+    font-weight: ${({ $ifExpired }) => $ifExpired ? 500 : 600};
     padding-top: 10px;
-    color: var(--darkBlueColor);
+    color: var(--${({ $ifExpired }) => $ifExpired ? 'darkGrayTint1' : 'darkBlueColor'});
     text-align: right;
 `;
 

@@ -15,18 +15,23 @@
 export const CALENDAR_LEVELS = [
     {
         name: 'niski',
-        color: 'green',
+        color: 'greenColor',
         colorPolish: 'zielony'
     },
     {
         name: 'średni',
-        color: 'orange',
+        color: 'orangeColor',
         colorPolish: 'żółty'
     },
     {
         name: 'wyskoki',
-        color: 'red',
+        color: 'redColor',
         colorPolish: 'czerwony'
+    },
+    {
+        name: 'przedawniony',
+        color: 'darkGrayTint1',
+        colorPolish: 'szary',
     },
 ];
 

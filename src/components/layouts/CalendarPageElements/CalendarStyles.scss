@@ -104,8 +104,14 @@
                 background-color: var(--redColor);
             }
         }
+        &.EXPIRED {
+            color: var(--darkGrayTint1);
+            &::after {
+                background-color: var(--darkGrayTint1);
+            }
+        }
     }
-    span.LOW, span.MEDIUM, span.HIGH {
+    span.LOW, span.MEDIUM, span.HIGH, span.EXPIRED {
         display: none;
         margin-top: 5px;
         width: 100%;
@@ -123,6 +129,9 @@
         }
         &.HIGH {
             background-color: var(--redColor);
+        }
+        &.EXPIRED {
+            background-color: var(--darkGrayTint1);
         }
     }
 }

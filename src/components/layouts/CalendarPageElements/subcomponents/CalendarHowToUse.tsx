@@ -20,7 +20,7 @@ const UniversalHeader = React.lazy(() => import('../../UniversalHeader/Universal
 const UniversalInfoSection = React.lazy(() => import('../../UniversalInfoSection/UniversalInfoSection'));
 
 /**
- * Component responsible for generate used and mobile devices info for calendar usage.
+ * Component responsible for generate used and mobile devices' info for calendar usage.
  */
 const CalendarHowToUse: React.FC = (): JSX.Element => (
     <>
@@ -38,7 +38,8 @@ const CalendarHowToUse: React.FC = (): JSX.Element => (
             Interaktywny kalendarz z ważnymi datami. Kalendarz posiada możliwość nawigacji przy pomocy strzałek
             (<strong>pojedyncza</strong> przenosi o <strong>miesiąc</strong>, <strong>podwójna</strong> przenosi
             o <strong>rok</strong>). Po kliknięciu w środkowy panel daty kalendarz umożliwia szybki skok do miesiąca/roku/dekady.
-            Niebieskie obramowanie kafelka kalendarza wskazuje aktualny dzień tygodnia.
+            Niebieskie obramowanie kafelka kalendarza wskazuje aktualny dzień tygodnia. Szarym kolorem zaznaczono aktywności
+            które uległy przedawnieniu.
         </UniversalInfoSection>
         <UniversalInfoSection
             leadingColor = 'redColor'

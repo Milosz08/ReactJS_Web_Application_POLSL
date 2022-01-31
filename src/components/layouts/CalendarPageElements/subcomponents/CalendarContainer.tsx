@@ -17,6 +17,7 @@ import { Fragment, useState } from 'react';
 import Calendar from 'react-calendar';
 
 import useResizeListener from '../../../../helpers/hooks/useResizeListener';
+
 import { MAX_WIDTH_CLICK_ACTION } from '../../../../helpers/structs/calendar.config';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,30 +42,41 @@ interface SupplementsTilesProvider {
 const CalendarContainer: React.FC = (): JSX.Element => {
 
     const { calendarContent }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
+
     const [ date, setDate ] = useState<Date>(new Date());
 
     const offsetWidth = useResizeListener();
     const dispatcher = useDispatch();
 
-    const supplementsTiles = ({ date, view }: SupplementsTilesProvider): any => {
-        return calendarContent.map((item: CalendarContentTypes) => (
-            view === 'month' && date.getMonth() === item.month - 1 && date.getDate() === item.day
-            && date.getFullYear() === item.year
-                ? (
-                    item.items.sort((a, b) => (
-                        parseInt(a.start.replace(':', '')) - parseInt(b.start.replace(':', ''))
-                    )).map(prop => (
-                        <Fragment key = {`${prop.message}__${prop.start}`}>
-                            <p className = {prop.importantLevel}>
-                                <span>{prop.message}</span>
-                                <CalendarHourWrapper>{prop.start}</CalendarHourWrapper>
-                            </p>
-                            <span className = {prop.importantLevel}/>
-                        </Fragment>
-                    ))
-                ) : null
-        ));
+    const checkIfExpired = (d: Date, level: string, { day, month, year }: { day: number, month: number, year: number }) => {
+        const timestampTile = new Date(year, month - 1, day + 1).getTime();
+        if(new Date().getTime() > timestampTile) {
+            return 'EXPIRED';
+        }
+        return level;
     };
+
+    const supplementsTiles = ({ date: d, view }: SupplementsTilesProvider): any => (
+        calendarContent.map((item: CalendarContentTypes) => (
+            view === 'month' && d.getMonth() === item.month - 1 && d.getDate() === item.day && d.getFullYear() === item.year ? (
+                item.items.sort((a, b) => (
+                    parseInt(a.start.replace(':', '')) - parseInt(b.start.replace(':', ''))
+                )).map(prop => (
+                    <Fragment key = {`${prop.message}__${prop.start}`}>
+                        <p className = {checkIfExpired(d, prop.importantLevel, item)}>
+                            <span>{prop.message}</span>
+                            <CalendarHourWrapper
+                                $ifExpired = {checkIfExpired(d, prop.importantLevel, item) === 'EXPIRED'}
+                            >
+                                {prop.start}
+                            </CalendarHourWrapper>
+                        </p>
+                        <span className = {checkIfExpired(d, prop.importantLevel, item)}/>
+                    </Fragment>
+                ))
+            ) : null
+        ))
+    );
 
     const handleClickDay = (value: Date) => {
         if (offsetWidth < MAX_WIDTH_CLICK_ACTION) {
