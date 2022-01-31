@@ -33,7 +33,7 @@ import {
 const CovidInfoSection: React.FC = (): JSX.Element => {
 
     const { covidWarningLevels }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
-    const { bg, fg } = setColorBasedRiskLevel(covidWarningLevels[0].actualRiskNumber);
+    const { bg, fg } = setColorBasedRiskLevel(covidWarningLevels[0]?.actualRiskNumber);
 
     const generateCovidBlocks = covidWarningLevels.map((covidBlock: CovidWarningsTypes) => (
         <CovidSingleInfoBlock

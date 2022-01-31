@@ -62,9 +62,6 @@
         background-color: var(--lightGrayTint3);
         cursor: pointer;
     }
-    &.react-calendar__tile--now.react-calendar__month-view__days__day--neighboringMonth {
-        background-color: var(--darkOrangeColor);
-    }
     &.react-calendar__tile--hasActive abbr {
         color: var(--cleanWhiteColor);
     }
@@ -269,7 +266,7 @@
         p {
             display: none;
         }
-        span.LOW, span.MEDIUM, span.HIGH {
+        span.LOW, span.MEDIUM, span.HIGH, span.EXPIRED {
             display: block;
         }
     }
