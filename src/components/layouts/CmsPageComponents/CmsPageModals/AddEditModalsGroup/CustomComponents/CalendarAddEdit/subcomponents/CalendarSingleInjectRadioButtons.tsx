@@ -52,7 +52,7 @@ const CalendarSingleInjectRadioButtons: React.FC<PropsProvider> = ({ itemIdx }):
         <UniversalRadioInput
             key = {idx}
             content = {`${CALENDAR_LEVELS[idx].name} priorytet`}
-            color = {`var(--${CALENDAR_LEVELS[idx].color}Color)`}
+            color = {`var(--${CALENDAR_LEVELS[idx].color})`}
             radioProps = {{
                 id: `${level}${itemIdx}`,
                 name: `radioLevelsModal_${itemIdx}`,
