@@ -47,6 +47,7 @@ export enum prefFields {
     SCHEDULE_CLEAR_MODAL = 'clearScheduleOptionModalOpen',
     CALENDAR_MODAL = 'calendarMobileModalOpen',
     USER_LOGOUT_MODAL = 'userLogoutModalOpen',
+    CALENDAR_EDITING_MODE = 'calendarEditingMode',
 }
 
 export enum groupsTypes {
@@ -66,6 +67,11 @@ export enum cmsListIndicators {
 export enum sortingTypes {
     INCREASE = 'INCREASE',
     DECREASE = 'DECREASE',
+}
+
+export enum calendarEditingMode {
+    LIST = 'LIST',
+    WYSIWYG = 'WYSIWYG',
 }
 
 export default preferencesTypes;

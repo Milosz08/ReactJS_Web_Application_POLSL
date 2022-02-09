@@ -12,7 +12,7 @@
  * governing permissions and limitations under the license.
  */
 
-import { cmsListIndicators, groupsTypes, searchInputs, sortingTypes } from './types';
+import { calendarEditingMode, cmsListIndicators, groupsTypes, searchInputs, sortingTypes } from './types';
 
 import { FOOTER_INPUTS, FOOTER_OPTIONS } from '../../helpers/structs/footerOptions.config';
 import { CMS_LIST_QUANTITY_VALUES } from '../../helpers/structs/cmsSystem.config';
@@ -63,6 +63,7 @@ export interface PreferencesInitialTypes {
         }
     };
     currentOpenScheduleSection: number;
+    calendarEditingMode: calendarEditingMode;
 }
 
 export const PrefInitialState: PreferencesInitialTypes = {
@@ -141,4 +142,5 @@ export const PrefInitialState: PreferencesInitialTypes = {
         }
     },
     currentOpenScheduleSection: 0,
+    calendarEditingMode: calendarEditingMode.LIST,
 };

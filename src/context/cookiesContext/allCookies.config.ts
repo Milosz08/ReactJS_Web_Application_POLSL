@@ -22,6 +22,7 @@ const COOKIES_OBJECT = {
     credentialsLevel: '__credentialsLevel',
     groupSelection: '__groupSelection',
     token: '__token',
+    editorMode: '__editorMode',
 } as const;
 
 export default COOKIES_OBJECT;
