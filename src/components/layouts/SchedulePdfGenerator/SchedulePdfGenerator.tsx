@@ -20,7 +20,7 @@ import {
     SchedulePdfGeneratorButtonContainer, SchedulePdfGeneratorContainer, SchedulePdfGeneratorWrapper
 } from './SchedulePdfGenerator.styles';
 
-const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 const GeneratePdfButton = React.lazy(() => import('./subcomponents/GeneratePdfButton'));
 
 /**

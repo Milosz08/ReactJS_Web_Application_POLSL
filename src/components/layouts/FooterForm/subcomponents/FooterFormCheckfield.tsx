@@ -22,7 +22,7 @@ import { prefFields } from '../../../../redux/preferencesReduxStore/types';
 import { PrefActions } from '../../../../redux/preferencesReduxStore/actions';
 import { PreferencesInitialTypes } from '../../../../redux/preferencesReduxStore/initialState';
 
-const UniversalCheckboxInput = React.lazy(() => import('../../UniversalCheckboxInput/UniversalCheckboxInput'));
+const UniversalCheckboxInput = React.lazy(() => import('../../../reusable/UniversalCheckboxInput/UniversalCheckboxInput'));
 
 /**
  * Component responsible for generating footer form checkfield.

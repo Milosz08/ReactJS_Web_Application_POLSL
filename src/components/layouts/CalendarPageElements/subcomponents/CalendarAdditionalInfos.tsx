@@ -21,8 +21,8 @@ import {
     CalendarPageLegendSpanElement, CalendarPageLegendUnorderedElement, CalendarPageLegendUnorderedList
 } from '../CalendarPageElements.styles';
 
-const UniversalHeader = React.lazy(() => import('../../UniversalHeader/UniversalHeader'));
-const UniversalInfoSection = React.lazy(() => import('../../UniversalInfoSection/UniversalInfoSection'));
+const UniversalHeader = React.lazy(() => import('../../../reusable/UniversalHeader/UniversalHeader'));
+const UniversalInfoSection = React.lazy(() => import('../../../reusable/UniversalInfoSection/UniversalInfoSection'));
 
 /**
  * Component responsible for generating all levels calendar structure info.

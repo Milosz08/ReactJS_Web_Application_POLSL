@@ -21,7 +21,7 @@ import { CommonPaginationContainer, CommonPaginationWrapper } from './subcompone
 import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconComponent';
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
-const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 const CovidCmsPageElements = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/CovidCmsPage/CovidCmsPageElements'));
 
 /**

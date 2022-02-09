@@ -29,7 +29,7 @@ const ScheduleAddEdit = React.lazy(() => import('../../layouts/CmsPageComponents
 const AddEditContentModal = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/AddEditModalsGroup/AddEditContentModal/AddEditContentModal'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
-const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 const ChangeScheduleCmsPage = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/ChangeScheduleCmsPage/ChangeScheduleCmsPage'));
 
 /**

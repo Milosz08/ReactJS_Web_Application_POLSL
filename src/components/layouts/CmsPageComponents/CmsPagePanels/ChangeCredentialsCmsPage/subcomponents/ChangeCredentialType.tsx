@@ -20,7 +20,7 @@ import { ChangeCredentialsContext, ChangeCredentialsContextTypes } from '../Chan
 
 import { ChangeCredentialsTypesContainer } from '../ChangeCredentialsCmsPage.styles';
 
-const UniversalRadioInput = React.lazy(() => import('../../../../UniversalRadioInput/UniversalRadioInput'));
+const UniversalRadioInput = React.lazy(() => import('../../../../../reusable/UniversalRadioInput/UniversalRadioInput'));
 
 /**
  * Component responsible for admin/moderator change credentials radio inputs.

@@ -24,7 +24,7 @@ import { allModals, allModalsInputs } from '../../../../../../../../redux/modals
 
 import { CalendarModalRadioInputsWrapper } from '../CalendarAddEdit.styles';
 
-const UniversalRadioInput = React.lazy(() => import('../../../../../../UniversalRadioInput/UniversalRadioInput'));
+const UniversalRadioInput = React.lazy(() => import('../../../../../../../reusable/UniversalRadioInput/UniversalRadioInput'));
 
 interface PropsProvider {
     itemIdx: number;

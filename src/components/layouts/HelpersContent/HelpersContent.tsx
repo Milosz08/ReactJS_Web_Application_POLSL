@@ -21,7 +21,7 @@ import { SessionInitialTypes } from '../../../redux/sessionReduxStore/initialSta
 
 import { HelpersContentContainer, HelpersContentWrapper } from './HelpersContent.styles';
 
-const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 const AllHelpersTilesContent = React.lazy(() => import('./subcomponents/AllHelpersTilesContent'));
 const LoggedInfoContent = React.lazy(() => import('./subcomponents/LoggedInfoContent'));
 const UserLogin = React.lazy(() => import('../UserLogin/UserLogin'));

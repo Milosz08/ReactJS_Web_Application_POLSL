@@ -26,7 +26,7 @@ import {
     AddEditContentModalContainer, AddEditContentModalWrapper, AddEditModalScrollWrapper
 } from './AddEditContentModal.styles';
 
-const UniversalHeader = React.lazy(() => import('../../../../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../../../../reusable/UniversalHeader/UniversalHeader'));
 const AddEditContentModalButtons = React.lazy(() => import('./subcomponents/AddEditContentModalButtons'));
 
 interface PropsProvider {

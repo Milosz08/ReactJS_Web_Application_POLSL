@@ -20,7 +20,7 @@ import {
     SubjectSingleListElementContainer, SubjectSingleListElementWrapper, SubjectSingleListTitleAndShortWrapper,
 } from '../SubjectsAddEdit.styles';
 
-const UniversalInputForArrays = React.lazy(() => import('../../../../../../UniversalInputWithButton/UniversalInputForArrays'));
+const UniversalInputForArrays = React.lazy(() => import('../../../../../../../reusable/UniversalInputWithButton/UniversalInputForArrays'));
 
 interface PropsProvider {
     tileIdx: number;

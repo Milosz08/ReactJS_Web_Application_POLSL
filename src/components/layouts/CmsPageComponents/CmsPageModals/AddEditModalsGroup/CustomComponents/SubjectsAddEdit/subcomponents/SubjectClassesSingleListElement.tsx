@@ -19,8 +19,8 @@ import { allModals, allModalsInputs } from '../../../../../../../../redux/modals
 
 import { SubjectSingleListElementContainer } from '../SubjectsAddEdit.styles';
 
-const UniversalSelectInputForArrays = React.lazy(() => import('../../../../../../UniversalSelectInput/UniversalSelectInputForArrays'));
-const UniversalInputForArrays = React.lazy(() => import('../../../../../../UniversalInputWithButton/UniversalInputForArrays'));
+const UniversalSelectInputForArrays = React.lazy(() => import('../../../../../../../reusable/UniversalSelectInput/UniversalSelectInputForArrays'));
+const UniversalInputForArrays = React.lazy(() => import('../../../../../../../reusable/UniversalInputWithButton/UniversalInputForArrays'));
 
 interface PropsProvider {
     tileIdx: number;

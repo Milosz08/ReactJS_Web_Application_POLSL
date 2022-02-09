@@ -16,7 +16,7 @@ import * as React from 'react';
 
 import { OuterLinkIcon, ScheduleManagementCookiesInfoAnchor } from '../ScheduleTypeManagement.styles';
 
-const UniversalInfoSection = React.lazy(() => import('../../UniversalInfoSection/UniversalInfoSection'));
+const UniversalInfoSection = React.lazy(() => import('../../../reusable/UniversalInfoSection/UniversalInfoSection'));
 
 /**
  * Component responsible for generate Cookies turn on info.

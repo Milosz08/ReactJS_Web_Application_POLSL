@@ -24,7 +24,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/reduxStore';
 
 const SearchingProvider = React.lazy(() => import('../../../../../context/searchingContext/SearchingProvider'));
-const UniversalSearch = React.lazy(() => import('../../../UniversalSearch/UniversalSearch'));
+const UniversalSearch = React.lazy(() => import('../../../../reusable/UniversalSearch/UniversalSearch'));
 const MultipleElementsList = React.lazy(() => import('../HighOrderComponents/MultipleElementsList'));
 const HelpersLinksSingleListElement = React.lazy(() => import('./subcomponents/HelpersLinksSingleListElement'));
 const HelpersLinksHeader = React.lazy(() => import('./subcomponents/HelpersLinksHeader'));

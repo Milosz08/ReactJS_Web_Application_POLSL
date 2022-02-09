@@ -17,7 +17,7 @@ import { IconFamiliesType } from '../../../../helpers/componentsAndMiddleware/Ic
 
 import { AdminCmsLayoutElementsContainer, AdminCmsLayoutElementsWrapper } from './AdminCmsLayoutElements.styles';
 
-const UniversalHeader = React.lazy(() => import('../../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../../reusable/UniversalHeader/UniversalHeader'));
 const AdminCmsLayout = React.lazy(() => import('./subcomponents/AdminCmsLayout'));
 
 /**

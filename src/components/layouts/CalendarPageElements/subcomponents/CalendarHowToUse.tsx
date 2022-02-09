@@ -16,8 +16,8 @@ import * as React from 'react';
 
 import { IconFamiliesType } from '../../../../helpers/componentsAndMiddleware/IconComponent';
 
-const UniversalHeader = React.lazy(() => import('../../UniversalHeader/UniversalHeader'));
-const UniversalInfoSection = React.lazy(() => import('../../UniversalInfoSection/UniversalInfoSection'));
+const UniversalHeader = React.lazy(() => import('../../../reusable/UniversalHeader/UniversalHeader'));
+const UniversalInfoSection = React.lazy(() => import('../../../reusable/UniversalInfoSection/UniversalInfoSection'));
 
 /**
  * Component responsible for generate used and mobile devices' info for calendar usage.

@@ -27,7 +27,7 @@ import {
     CalendarModalTimeInputWrapper, CalendarTextinputArea, CalendarTextinputAreaCharsCounter, CalendarTextinputAreaContainer
 } from '../CalendarAddEdit.styles';
 
-const UniversalTimeInput = React.lazy(() => import('../../../../../../UniversalTimeInput/UniversalTimeInput'));
+const UniversalTimeInput = React.lazy(() => import('../../../../../../../reusable/UniversalTimeInput/UniversalTimeInput'));
 const CalendarSingleInjectRadioButtons = React.lazy(() => import('./CalendarSingleInjectRadioButtons'));
 
 interface PropsProvider {

@@ -19,7 +19,7 @@ import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconC
 import { NavigationStartContainer, NavigationStartWrapper } from './NavigationStart.styles';
 
 const NavigationStartElements = React.lazy(() => import('./subcomponents/NavigationStartElements'));
-const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 
 /**
  * Component generating a list of links, depending on the parameter in props, a list is generated without

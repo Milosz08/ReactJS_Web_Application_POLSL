@@ -20,7 +20,7 @@ import { ModalsActions } from '../../../../../../../../redux/modalsReduxStore/ac
 import { ModalsInitialTypes } from '../../../../../../../../redux/modalsReduxStore/initialState';
 import { allModals, allModalsInputs, modalInputHeader } from '../../../../../../../../redux/modalsReduxStore/types';
 
-const UniversalTimeInput = React.lazy(() => import('../../../../../../UniversalTimeInput/UniversalTimeInput'));
+const UniversalTimeInput = React.lazy(() => import('../../../../../../../reusable/UniversalTimeInput/UniversalTimeInput'));
 
 interface PropsProvider {
     field: allModalsInputs;

@@ -17,8 +17,8 @@ import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconC
 
 import { SubjectsAndTermsContainer, SubjectsAndTermsWrapper } from './SubjectsAndTerms.styles';
 
-const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
-const UniversalInfoSection = React.lazy(() => import('../UniversalInfoSection/UniversalInfoSection'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
+const UniversalInfoSection = React.lazy(() => import('../../reusable/UniversalInfoSection/UniversalInfoSection'));
 const SubjectsAndTermsOuterLinks = React.lazy(() => import('./subcomponents/SubjectsAndTermsOuterLinks'));
 
 /**

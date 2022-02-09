@@ -25,7 +25,7 @@ import { allModals, allModalsInputs } from '../../../../../../../../redux/modals
 
 import { SingleSemesterElementWrapper } from '../SubjectsAddEdit.styles';
 
-const UniversalCheckboxInput = React.lazy(() => import('../../../../../../UniversalCheckboxInput/UniversalCheckboxInput'));
+const UniversalCheckboxInput = React.lazy(() => import('../../../../../../../reusable/UniversalCheckboxInput/UniversalCheckboxInput'));
 
 interface PropsProvider {
     idx: number;

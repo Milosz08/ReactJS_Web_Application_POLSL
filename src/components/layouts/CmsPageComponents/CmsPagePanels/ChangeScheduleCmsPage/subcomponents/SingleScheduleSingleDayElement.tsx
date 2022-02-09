@@ -26,7 +26,7 @@ import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../../..
 
 import { SingleScheduleSingleDayElementContainer } from '../ChangeScheduleCmsPage.styles';
 
-const UniversalSearch = React.lazy(() => import('../../../../UniversalSearch/UniversalSearch'));
+const UniversalSearch = React.lazy(() => import('../../../../../reusable/UniversalSearch/UniversalSearch'));
 const MultipleElementsList = React.lazy(() => import('../../HighOrderComponents/MultipleElementsList'));
 const ChangeScheduleSingleListElement = React.lazy(() => import('./ChangeScheduleSingleListElement'));
 const ChangeScheduleHeader = React.lazy(() => import('./ChangeScheduleHeader'));

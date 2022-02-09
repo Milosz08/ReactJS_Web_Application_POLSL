@@ -19,7 +19,7 @@ import {
     CalendarIcomingActivitiesContainer, CalendarIcomingActivitiesWrapper
 } from './CalendarIncomingActivities.styles';
 
-const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 const IncomingActivitiesContent = React.lazy(() => import('./subcomponents/IncomingActivitiesContent'));
 
 /**

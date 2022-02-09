@@ -14,7 +14,7 @@
 
 import * as React from 'react';
 
-const UniversalInfoSection = React.lazy(() => import('../../UniversalInfoSection/UniversalInfoSection'));
+const UniversalInfoSection = React.lazy(() => import('../../../reusable/UniversalInfoSection/UniversalInfoSection'));
 
 /**
  * Component responsible for generating static info element.

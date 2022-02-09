@@ -17,7 +17,7 @@ import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconC
 
 import { CurrentSubjectActiveContainer, CurrentSubjectActiveWrapper } from './CurrentSubjectActive.styles';
 
-const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 const CurrentSubjectContent = React.lazy(() => import('./subcomponents/CurrentSubjectContent'));
 const CurrentSubjectImportantInfo = React.lazy(() => import('./subcomponents/CurrentSubjectImportantInfo'));
 

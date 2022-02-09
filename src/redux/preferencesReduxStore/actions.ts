@@ -15,7 +15,7 @@
 import preferencesTypes, { cmsListIndicators, prefFields } from './types';
 
 import { arrowDirs } from '../../components/layouts/SubjectsDetails/subcomponents/NextPrevArrowNavigation';
-import { directions } from '../../components/layouts/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
+import { directions } from '../../components/reusable/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
 
 export interface ReturnedToReducer {
     type: preferencesTypes;

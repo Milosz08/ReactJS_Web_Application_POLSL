@@ -21,7 +21,7 @@ import { allModals, allModalsInputs } from '../../../../../../../../redux/modals
 
 import { ScheduleSelectSubjectTitleContainer } from '../ScheduleAddEdit.styles';
 
-const UniversalSelectInput = React.lazy(() => import('../../../../../../UniversalSelectInput/UniversalSelectInput'));
+const UniversalSelectInput = React.lazy(() => import('../../../../../../../reusable/UniversalSelectInput/UniversalSelectInput'));
 
 /**
  * Component responsible for generating subject select box in schedule subjects modal.

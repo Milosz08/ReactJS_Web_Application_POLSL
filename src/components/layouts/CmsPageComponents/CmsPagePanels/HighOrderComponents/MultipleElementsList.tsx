@@ -28,7 +28,7 @@ import { cmsListIndicators, prefFields, searchInputs } from '../../../../../redu
 import { CmsUnorderedList } from './HighOrderComponents.styles';
 
 const EmptyContent = React.lazy(() => import('./EmptyContent'));
-const UniversalListNavigate = React.lazy(() => import('../../../UniversalListNavigate/UniversalListNavigate'));
+const UniversalListNavigate = React.lazy(() => import('../../../../reusable/UniversalListNavigate/UniversalListNavigate'));
 const NotFindContent = React.lazy(() => import('../../../NotFindContent/NotFindContent'));
 const CmsAddNewContentButton = React.lazy(() => import('../../CmsAddNewContentButton/CmsAddNewContentButton'));
 

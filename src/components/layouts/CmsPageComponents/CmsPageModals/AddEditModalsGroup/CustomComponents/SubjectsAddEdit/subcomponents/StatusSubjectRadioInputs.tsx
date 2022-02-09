@@ -23,7 +23,7 @@ import { allModals, allModalsInputs } from '../../../../../../../../redux/modals
 
 import { StatusElementsWrapper } from '../SubjectsAddEdit.styles';
 
-const UniversalRadioInput = React.lazy(() => import('../../../../../../UniversalRadioInput/UniversalRadioInput'));
+const UniversalRadioInput = React.lazy(() => import('../../../../../../../reusable/UniversalRadioInput/UniversalRadioInput'));
 
 /**
  * Component responsible for generating subcomponents provides change subject state.

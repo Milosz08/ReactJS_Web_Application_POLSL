@@ -18,7 +18,7 @@ import { IconFamiliesType } from '../../../../helpers/componentsAndMiddleware/Ic
 
 import { CalendarPageModalAndStructureContainer } from '../CalendarPageElements.styles';
 
-const UniversalHeader = React.lazy(() => import('../../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../../reusable/UniversalHeader/UniversalHeader'));
 const CalendarModal = React.lazy(() => import('./CalendarModal'));
 const CalendarContainer = React.lazy(() => import('./CalendarContainer'));
 

@@ -17,7 +17,7 @@ import * as React from 'react';
 import { HelperSingleLinkModalElement, TitleAndIconContainer } from '../HelpersLinksAddEdit.styles';
 import { allModals, allModalsInputs } from '../../../../../../../../redux/modalsReduxStore/types';
 
-const UniversalInputWithButton = React.lazy(() => import('../../../../../../UniversalInputWithButton/UniversalInputWithButton'));
+const UniversalInputWithButton = React.lazy(() => import('../../../../../../../reusable/UniversalInputWithButton/UniversalInputWithButton'));
 const IconPickerComponent = React.lazy(() => import('../../../HighOrderComponents/IconPickerComponent'));
 
 /**

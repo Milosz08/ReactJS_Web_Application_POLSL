@@ -23,7 +23,7 @@ import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../../re
 import { CmsPageContainer } from '../HighOrderComponents/HighOrderComponents.styles';
 
 const SearchingProvider = React.lazy(() => import('../../../../../context/searchingContext/SearchingProvider'));
-const UniversalSearch = React.lazy(() => import('../../../UniversalSearch/UniversalSearch'));
+const UniversalSearch = React.lazy(() => import('../../../../reusable/UniversalSearch/UniversalSearch'));
 const MultipleElementsList = React.lazy(() => import('../HighOrderComponents/MultipleElementsList'));
 const MessageManagementSingleListElement = React.lazy(() => import('./subcomponents/MessageManagementSingleListElement'));
 const MessageManagementHeader = React.lazy(() => import('./subcomponents/MessageManagementHeader'));

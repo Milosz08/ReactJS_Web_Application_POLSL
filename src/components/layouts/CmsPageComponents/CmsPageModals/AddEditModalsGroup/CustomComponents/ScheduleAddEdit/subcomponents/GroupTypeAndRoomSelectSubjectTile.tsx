@@ -26,8 +26,8 @@ import { allModals, allModalsInputs } from '../../../../../../../../redux/modals
 import { DisabledBackgroundElement, ScheduleGroupTypeAndRoomContainer } from '../ScheduleAddEdit.styles';
 import { ALL_GROUPS } from '../../../../../../../../helpers/structs/schedule.config';
 
-const UniversalSelectInput = React.lazy(() => import('../../../../../../UniversalSelectInput/UniversalSelectInput'));
-const UniversalInput = React.lazy(() => import('../../../../../../UniversalInputWithButton/UniversalInput'));
+const UniversalSelectInput = React.lazy(() => import('../../../../../../../reusable/UniversalSelectInput/UniversalSelectInput'));
+const UniversalInput = React.lazy(() => import('../../../../../../../reusable/UniversalInputWithButton/UniversalInput'));
 const StartAndEndTimeSubjectTile = React.lazy(() => import('./StartAndEndTimeSubjectTile'));
 
 interface PropsProvider {

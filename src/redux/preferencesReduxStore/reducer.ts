@@ -16,7 +16,7 @@ import preferencesTypes, { sortingTypes } from './types';
 import { PrefInitialState } from './initialState';
 
 import { arrowDirs } from '../../components/layouts/SubjectsDetails/subcomponents/NextPrevArrowNavigation';
-import { directions } from '../../components/layouts/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
+import { directions } from '../../components/reusable/UniversalListNavigate/subcomponents/UniversalListNavigatePrevNextButton';
 
 /**
  * The reducer function responsible for managing state for the ReduxPreferences tree.

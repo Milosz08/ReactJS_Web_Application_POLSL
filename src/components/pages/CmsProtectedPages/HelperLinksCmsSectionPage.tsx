@@ -29,7 +29,7 @@ const CustomContentForHelpersLinksAddEdit = React.lazy(() => import('../../layou
 const CustomContentForHelpersLinksDelete = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/DeleteModalsGroup/CustomComponents/HelpersLinksDelete'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
-const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 const HelpersLinksCmsPage = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/HelpersLinksCmsPage/HelpersLinksCmsPage'));
 
 /**

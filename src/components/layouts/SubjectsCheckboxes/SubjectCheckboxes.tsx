@@ -20,8 +20,8 @@ import { IconFamiliesType } from '../../../helpers/componentsAndMiddleware/IconC
 
 import { SubjectsCheckboxesContainer, SubjectsCheckboxesWrapper } from './SubjectsCheckboxes.styles';
 
-const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
-const UniversalSearch = React.lazy(() => import('../UniversalSearch/UniversalSearch'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
+const UniversalSearch = React.lazy(() => import('../../reusable/UniversalSearch/UniversalSearch'));
 const AllCheckboxes = React.lazy(() => import('./subcomponents/AllCheckboxes'));
 const DataLastUpdate = React.lazy(() => import('../DataLastUpdate/DataLastUpdate'));
 

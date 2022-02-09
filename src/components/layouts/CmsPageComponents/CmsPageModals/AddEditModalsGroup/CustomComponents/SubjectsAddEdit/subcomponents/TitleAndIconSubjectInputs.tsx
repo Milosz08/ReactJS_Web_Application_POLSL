@@ -20,7 +20,7 @@ import { TitleAndIconContainer } from '../../HelpersLinksAddEdit/HelpersLinksAdd
 import { SubjectSingleModalAutoGrowElement } from '../SubjectsAddEdit.styles';
 
 const IconPickerComponent = React.lazy(() => import('../../../HighOrderComponents/IconPickerComponent'));
-const UniversalInputWithButton = React.lazy(() => import('../../../../../../UniversalInputWithButton/UniversalInputWithButton'));
+const UniversalInputWithButton = React.lazy(() => import('../../../../../../../reusable/UniversalInputWithButton/UniversalInputWithButton'));
 
 /**
  * Component responsible for inserting title and custom icon into new/editable subject element.

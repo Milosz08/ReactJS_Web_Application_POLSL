@@ -27,7 +27,7 @@ import { CookiesNotificationContainer, CookiesNotificationWrapper } from './Cook
 
 import CookiesSectionContainer from './subcomponents/CookiesSectionContainer';
 import CookiesButtonsContainer from './subcomponents/CookiesButtonsContainer';
-const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 
 /**
  * Component responsible for displaying the notification about the use of cookies by the application. The

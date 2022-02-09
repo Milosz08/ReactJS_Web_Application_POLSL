@@ -19,7 +19,7 @@ import { arrowDirs } from './subcomponents/NextPrevArrowNavigation';
 
 import { SubjectDetailsWindowContainer, SubjectsDetailsContainer, SubjectsDetailsWrapper } from './SubjectsDetails.styles';
 
-const UniversalHeader = React.lazy(() => import('../UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 const NextPrevArrowNavigation = React.lazy(() => import('./subcomponents/NextPrevArrowNavigation'));
 const SubjectInfoContent = React.lazy(() => import('./subcomponents/SubjectInfoContent'));
 
