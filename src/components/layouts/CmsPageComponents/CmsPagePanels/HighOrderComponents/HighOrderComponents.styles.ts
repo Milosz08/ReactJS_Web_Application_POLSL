@@ -17,8 +17,7 @@ import { button_rs, ul_rs } from '../../../../../styles/reset.styles';
 import { ImFilesEmpty } from 'react-icons/all';
 
 export const CmsPageContainer = styled.section`
-    width: calc(100% - 60px);
-    margin: 0 30px;
+    width: 100%;
     @media only screen and (max-width: 500px) {
         width: 100%;
         margin: 0;
