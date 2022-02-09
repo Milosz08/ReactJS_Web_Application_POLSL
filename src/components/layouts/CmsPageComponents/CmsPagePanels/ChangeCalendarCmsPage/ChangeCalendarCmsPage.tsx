@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2021, by Miłosz Gilga <https://miloszgilga.pl>
+ * Copyright (c) 2022, by Miłosz Gilga <https://miloszgilga.pl>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
@@ -13,52 +13,29 @@
  */
 
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
-import { allModals } from '../../../../../redux/modalsReduxStore/types';
-import { sortAvailables, sortInputTypes } from '../../../../../redux/apiReduxStore/types';
-import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../../redux/preferencesReduxStore/types';
+import { RootState } from '../../../../../redux/reduxStore';
+import { PreferencesInitialTypes } from '../../../../../redux/preferencesReduxStore/initialState';
+import { calendarEditingMode } from '../../../../../redux/preferencesReduxStore/types';
 
 import { CmsPageContainer } from '../HighOrderComponents/HighOrderComponents.styles';
-import { PreferencesInitialTypes } from '../../../../../redux/preferencesReduxStore/initialState';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../../redux/reduxStore';
 
-const SearchingProvider = React.lazy(() => import('../../../../../context/searchingContext/SearchingProvider'));
-const UniversalSearch = React.lazy(() => import('../../../UniversalSearch/UniversalSearch'));
-const MultipleElementsList = React.lazy(() => import('../HighOrderComponents/MultipleElementsList'));
-const ChangeCalendarSingleListElement = React.lazy(() => import('./subcomponents/ChangeCalendarSingleListElement'));
-const ChangeCalendarHeader = React.lazy(() => import('./subcomponents/ChangeCalendarHeader'));
+const ChangeEditingFieldStyleInfo = React.lazy(() => import('./subcomponents/ChangeEditingFieldStyleInfo'));
+const ListEditorMode = React.lazy(() => import('./subcomponents/ListEditorMode'));
+const WysiwygEditorMode = React.lazy(() => import('./subcomponents/WysiwygEditorMode'));
 
 /**
  * Component responsible for generating calendar page basic structure of high order components.
  */
 const ChangeCalendarCmsPage: React.FC = (): JSX.Element => {
 
-    const { currentActivePage }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
+    const { calendarEditingMode: mode }: PreferencesInitialTypes = useSelector((state: RootState) => state.preferencesReducer);
 
     return (
         <CmsPageContainer>
-            <SearchingProvider
-                sortType = {sortInputTypes.CMS_CALENDAR_SEARCH}
-                arrayType = {sortAvailables.CALENDAR}
-                sortByType = 'dateString'
-                ifReversed = {currentActivePage[cmsListIndicators.CALENDAR].sortingMode === sortingTypes.DECREASE}
-            >
-                <UniversalSearch
-                    type = {searchInputs.CMS_CALENDAR}
-                    placeholder = 'Format: dd/mm/yyyy'
-                />
-                <MultipleElementsList
-                    inputType = {searchInputs.CMS_CALENDAR}
-                    cmsListIndicator = {cmsListIndicators.CALENDAR}
-                    modalType = {allModals.CALENDAR_MODAL}
-                    buttonNewContent = 'wpis'
-                    components = {{
-                        ListRender: ChangeCalendarSingleListElement,
-                        HeaderRender: ChangeCalendarHeader
-                    }}
-                />
-            </SearchingProvider>
+            <ChangeEditingFieldStyleInfo/>
+            {mode === calendarEditingMode.LIST ? <ListEditorMode/> : <WysiwygEditorMode/>}
         </CmsPageContainer>
     );
 };
