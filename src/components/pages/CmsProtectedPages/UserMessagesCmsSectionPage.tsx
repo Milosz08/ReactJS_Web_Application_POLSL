@@ -29,7 +29,7 @@ const UserMessagesDelete = React.lazy(() => import('../../layouts/CmsPageCompone
 const UserMessagesView = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPageModals/ViewModalsGroup/CustomComponents/UserMessagesView'));
 
 const CommonComponents = React.lazy(() => import('./subcomponents/CommonComponents'));
-const UniversalHeader = React.lazy(() => import('../../layouts/UniversalHeader/UniversalHeader'));
+const UniversalHeader = React.lazy(() => import('../../reusable/UniversalHeader/UniversalHeader'));
 const MessagesManagementCmsPage = React.lazy(() => import('../../layouts/CmsPageComponents/CmsPagePanels/MessageManagementCmsPage/MessagesManagementCmsPage'));
 
 /**

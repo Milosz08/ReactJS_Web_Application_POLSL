@@ -28,7 +28,7 @@ import { DbNonModalOp } from '../../../../../../../redux/apiReduxStore/operation
 
 import { CloseModalContentButton, ViewContentButtonsContainer, ViewContentCheckboxWrapper } from '../ViewContentModal.styles';
 
-const UniversalCheckboxInput = React.lazy(() => import('../../../../../UniversalCheckboxInput/UniversalCheckboxInput'));
+const UniversalCheckboxInput = React.lazy(() => import('../../../../../../reusable/UniversalCheckboxInput/UniversalCheckboxInput'));
 
 interface PropsProvider {
     modalType: allModals;
