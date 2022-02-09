@@ -21,7 +21,7 @@ export const UniversalInfoSectionContainer = styled('section')<{ $marginTop: num
     border-radius: 10px;
     overflow: hidden;
     padding: 20px 30px 30px;
-    margin-top: ${({ $marginTop }) => $marginTop || 50}px;
+    margin-top: ${({ $marginTop }) => Boolean($marginTop || $marginTop === 0) ? $marginTop : 50}px;
     margin-bottom: ${({ $marginBottom }) => $marginBottom || 0}px;
 `;
 

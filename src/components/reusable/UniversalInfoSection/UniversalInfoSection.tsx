@@ -39,7 +39,7 @@ const UniversalInfoSection: React.FC<PropsProvider> = ({
     children, leadingColor, headerContent, marginTop, marginBottom
 }): JSX.Element => (
     <UniversalInfoSectionContainer
-        $marginTop = {marginTop}
+        $marginTop = {marginTop || 0}
         $marginBottom = {marginBottom}
     >
         <UniversalInfoSectionHeader
