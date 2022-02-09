@@ -16,6 +16,7 @@ import * as React from 'react';
 
 import { API_ENDPOINTS } from '../../../../../../helpers/structs/appEndpoints';
 import { MAX_RISK_NUMBER } from '../../../../../../helpers/structs/cmsSystem.config';
+import setColorBasedRiskLevel from '../../../../CovidInfoSection/CovidColorsHelper';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../redux/reduxStore';
@@ -42,6 +43,8 @@ const SingleCovidElement: React.FC<PropsProvider> = ({ tile }): JSX.Element => {
     const { headers }: SessionInitialTypes = useSelector((state: RootState) => state.sessionReducer);
 
     const { _id, description, type } = tile;
+    const tileColors = setColorBasedRiskLevel(tile.actualRiskNumber);
+
     const dispatcher = useDispatch();
 
     const handleSelectChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
@@ -59,7 +62,9 @@ const SingleCovidElement: React.FC<PropsProvider> = ({ tile }): JSX.Element => {
 
     return (
         <SingleCovidSectionElement>
-            <SingleCovidSectionWrapper>
+            <SingleCovidSectionWrapper
+                $tileColor = {tileColors}
+            >
                 <SingleCovidSectionHeader>
                     {tile.description}
                 </SingleCovidSectionHeader>

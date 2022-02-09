@@ -13,7 +13,6 @@
  */
 
 import styled from 'styled-components';
-import { BorderWithPseudoElement } from '../../../../../styles/mixins.styles';
 
 export const CovidCmsPageElementsContainer = styled.section`
     display: flex;
@@ -33,11 +32,12 @@ export const SingleCovidSectionElement = styled.div`
     }
 `;
 
-export const SingleCovidSectionWrapper = styled.div`
+export const SingleCovidSectionWrapper = styled('div')<{ $tileColor: { bg: string, fg: string } }>`
     display: flex;
     align-items: center;
     border: 8px solid #ffffff;
-    background: var(--yellowColor);
+    background-color: var(--${({ $tileColor }) => $tileColor.bg}Color);
+    color: var(--${({ $tileColor }) => $tileColor.fg}Color);
     border-radius: 16px;
     height: 100%;
     padding: 20px;
@@ -63,18 +63,4 @@ export const SingleCovidSelect = styled.select`
     :focus {
         border-color: var(--navyBlueColor);
     }
-`;
-
-export const UsageInfoContainer = styled.div`
-    width: calc(100% - 30px);
-    ${BorderWithPseudoElement({
-        _color: 'var(--redColor)',
-        _titleBgc: 'var(--cleanWhiteColor)',
-        _content: 'Modyfikacja zagrożeń Covid',
-        _fontSize: '1.2rem',
-        _fontWeight: 500
-    })};
-    color: var(--redColor);
-    font-size: 1.2rem;
-    margin: 40px 0;
 `;
