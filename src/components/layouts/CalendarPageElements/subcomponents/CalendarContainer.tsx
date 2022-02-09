@@ -29,67 +29,74 @@ import { CalendarContentTypes } from '../../../../redux/apiReduxStore/dataTypes'
 
 import './../CalendarStyles.scss';
 
-import { CalendarHourWrapper } from '../CalendarPageElements.styles';
+const CalendarTileContent = React.lazy(() => import('./CalendarTileContent'));
+const CalendarEditingTileButtons = React.lazy(() => import('../../CmsPageComponents/CmsPagePanels/ChangeCalendarCmsPage/subcomponents/CalendarEditingTileButtons'));
+const CalendarAddNewContentTileButton = React.lazy(() => import('../../CmsPageComponents/CmsPagePanels/ChangeCalendarCmsPage/subcomponents/CalendarAddNewContentTileButton'));
 
-interface SupplementsTilesProvider {
-    date: Date;
-    view: string;
+interface PropsProvider {
+    editingMode?: boolean;
 }
 
 /**
  * Component responsible for generating calendar structure and filled data from redux store.
  */
-const CalendarContainer: React.FC = (): JSX.Element => {
+const CalendarContainer: React.FC<PropsProvider> = ({ editingMode }): JSX.Element => {
 
     const { calendarContent }: ApiInitialTypes = useSelector((state: RootState) => state.apiReducer);
 
     const [ date, setDate ] = useState<Date>(new Date());
+    const [ activeMonth, setActiveMonth ] = useState<number>(date.getMonth());
 
     const offsetWidth = useResizeListener();
     const dispatcher = useDispatch();
 
-    const checkIfExpired = (d: Date, level: string, { day, month, year }: { day: number, month: number, year: number }) => {
-        const timestampTile = new Date(year, month - 1, day + 1).getTime();
-        if(new Date().getTime() > timestampTile) {
-            return 'EXPIRED';
-        }
-        return level;
-    };
+    const generateCalendarSingleTileElements = (item: CalendarContentTypes, date: Date): JSX.Element[] => (
+        item.items.sort((a, b) => parseInt(a.start.replace(':', '')) - parseInt(b.start.replace(':', ''))).map(prop => (
+            <CalendarTileContent
+                key = {prop.message}
+                date = {date}
+                item = {item}
+                tileProp = {prop}
+            />
+        ))
+    );
 
-    const supplementsTiles = ({ date: d, view }: SupplementsTilesProvider): any => (
+    const findSingleElement = (d: Date, view: string): boolean => (
+        calendarContent.filter((item: CalendarContentTypes) => (
+            view === 'month' && d.getMonth() === item.month - 1 && d.getDate() === item.day && d.getFullYear() === item.year
+        )).length === 0
+    );
+
+    const generateCalendarMediaElements = (d: Date, view: string): (JSX.Element[] | null)[] => (
         calendarContent.map((item: CalendarContentTypes) => (
             view === 'month' && d.getMonth() === item.month - 1 && d.getDate() === item.day && d.getFullYear() === item.year ? (
-                item.items.sort((a, b) => (
-                    parseInt(a.start.replace(':', '')) - parseInt(b.start.replace(':', ''))
-                )).map(prop => (
-                    <Fragment key = {`${prop.message}__${prop.start}`}>
-                        <p className = {checkIfExpired(d, prop.importantLevel, item)}>
-                            <span>{prop.message}</span>
-                            <CalendarHourWrapper
-                                $ifExpired = {checkIfExpired(d, prop.importantLevel, item) === 'EXPIRED'}
-                            >
-                                {prop.start}
-                            </CalendarHourWrapper>
-                        </p>
-                        <span className = {checkIfExpired(d, prop.importantLevel, item)}/>
-                    </Fragment>
-                ))
+                generateCalendarSingleTileElements(item, d)
             ) : null
         ))
     );
 
+    const generateOutputCalendarSingleTileElements = ({ date: d, view }: { date: Date, view: string }): JSX.Element => (
+        <>
+            {generateCalendarMediaElements(d, view)}
+            {editingMode && d.getMonth() === activeMonth ? findSingleElement(d, view) ?
+                <CalendarAddNewContentTileButton date = {d} /> : <CalendarEditingTileButtons date = {d} /> : null
+            }
+        </>
+    );
+
     const handleClickDay = (value: Date) => {
-        if (offsetWidth < MAX_WIDTH_CLICK_ACTION) {
+        if (offsetWidth < MAX_WIDTH_CLICK_ACTION && value.getMonth() === new Date().getMonth() && !editingMode) {
             dispatcher(PrefActions.changeRootPrefField(prefFields.CALENDAR_MODAL, { toggleState: true, dateInfo: value }));
         }
     };
 
     return (
         <Calendar
-            tileContent = {supplementsTiles}
+            tileContent = {generateOutputCalendarSingleTileElements}
             value = {date}
             onChange = {setDate}
             onClickDay = {(value: Date) => handleClickDay(value)}
+            onActiveStartDateChange = {({ activeStartDate }) => setActiveMonth(activeStartDate.getMonth())}
             locale = 'pl-PL'
             prevLabel = {<span/>}
             prev2Label = {<Fragment><span/><span/></Fragment>}
