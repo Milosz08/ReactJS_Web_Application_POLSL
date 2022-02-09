@@ -85,7 +85,7 @@ const CalendarContainer: React.FC<PropsProvider> = ({ editingMode }): JSX.Elemen
     );
 
     const handleClickDay = (value: Date) => {
-        if (offsetWidth < MAX_WIDTH_CLICK_ACTION && value.getMonth() === new Date().getMonth() && !editingMode) {
+        if (offsetWidth < MAX_WIDTH_CLICK_ACTION && !editingMode && value.getMonth() === activeMonth) {
             dispatcher(PrefActions.changeRootPrefField(prefFields.CALENDAR_MODAL, { toggleState: true, dateInfo: value }));
         }
     };
