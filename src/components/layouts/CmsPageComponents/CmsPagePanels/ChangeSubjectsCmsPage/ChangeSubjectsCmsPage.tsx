@@ -13,18 +13,19 @@
  */
 
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
-import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../../redux/preferencesReduxStore/types';
+import { RootState } from '../../../../../redux/reduxStore';
+import { allModals } from '../../../../../redux/modalsReduxStore/types';
 import { sortAvailables, sortInputTypes } from '../../../../../redux/apiReduxStore/types';
+import { PreferencesInitialTypes } from '../../../../../redux/preferencesReduxStore/initialState';
+import { cmsListIndicators, searchInputs, sortingTypes } from '../../../../../redux/preferencesReduxStore/types';
 
 import { CmsPageContainer } from '../HighOrderComponents/HighOrderComponents.styles';
-import { allModals } from '../../../../../redux/modalsReduxStore/types';
-import { PreferencesInitialTypes } from '../../../../../redux/preferencesReduxStore/initialState';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../../redux/reduxStore';
 
+const ChangeSubjectContentInfo = React.lazy(() => import('./subcomponents/ChangeSubjectContentInfo'));
 const SearchingProvider = React.lazy(() => import('../../../../../context/searchingContext/SearchingProvider'));
-const UniversalSearch = React.lazy(() => import('../../../UniversalSearch/UniversalSearch'));
+const UniversalSearch = React.lazy(() => import('../../../../reusable/UniversalSearch/UniversalSearch'));
 const MultipleElementsList = React.lazy(() => import('../HighOrderComponents/MultipleElementsList'));
 const ChangeSubjectsSingleListElement = React.lazy(() => import('./subcomponents/ChangeSubjectsSingleListElement'));
 const ChangeSubjectsHeader = React.lazy(() => import('./subcomponents/ChangeSubjectsHeader'));
@@ -38,6 +39,7 @@ const ChangeSubjectsCmsPage: React.FC = (): JSX.Element => {
 
     return (
         <CmsPageContainer>
+            <ChangeSubjectContentInfo/>
             <SearchingProvider
                 sortType = {sortInputTypes.CMS_SUBJECT_SEARCH}
                 arrayType = {sortAvailables.SUBJECTS}
